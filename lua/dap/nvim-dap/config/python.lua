@@ -1,6 +1,6 @@
 local venv = os.getenv('VIRTUAL_ENV')
 local command = nil
-if get_os_name() == 'Windows' then
+if getSysName() == 'Windows' then
     command = string.format('%s', venv)
 else
     command = string.format('%s/bin/python', venv)

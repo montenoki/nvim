@@ -24,16 +24,6 @@ function _G.keymap(mode, lhs, rhs, opts)
     vim.keymap.set(mode, lhs, rhs, vim.tbl_extend('force', default_opts, opts))
 end
 
-function _G.get_os_name()
-    Separator = package.config:sub(1, 1)
-
-    local os_name = nil
-    if string.match(Separator, '\\') then
-        os_name = 'Windows'
-    elseif string.match(Separator, '/') then
-        os_name = 'Unixes'
-    else
-        os_name = 'Others'
-    end
-    return os_name
+function _G.getSysName()
+    return vim.loop.os_uname().sysname
 end
