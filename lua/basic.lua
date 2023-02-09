@@ -47,7 +47,7 @@ local powershell_options = {
     shellquote = '',
     shellxquote = '',
 }
-if getSysName() == 'Windows' then
+if getSysName() == 'Windows' or getSysName() == 'Windows_NT' then
     for option, value in pairs(powershell_options) do
         vim.o[option] = value
     end
