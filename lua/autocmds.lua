@@ -1,6 +1,6 @@
 local myAutoGroup = vim.api.nvim_create_augroup('myAutoGroup', {
-    clear = true,
-})
+        clear = true,
+    })
 
 local autocmd = vim.api.nvim_create_autocmd
 
@@ -26,7 +26,7 @@ autocmd('BufWritePost', {
     group = myAutoGroup,
     callback = function()
         local plugins_path
-        if getSysName() == 'Windows' then
+        if getSysName() == 'Windows' or getSysName() == 'Windows_NT' then
             plugins_path = 'lua\\plugins.lua'
         else
             plugins_path = 'lua/plugins.lua'

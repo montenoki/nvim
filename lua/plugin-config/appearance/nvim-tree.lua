@@ -9,35 +9,34 @@ local nvim_tree = requirePlugin('nvim-tree')
 
 -- キーバインド導入
 local list_keys = {
-    { key = uTree.edit, action = 'edit' },
-    { key = uTree.system_open, action = 'system_open' },
-    { key = uTree.preview, action = 'preview' },
-    { key = uTree.tabnew, action = 'tabnew' },
-    { key = uTree.vsplit, action = 'vsplit' },
-    { key = uTree.split, action = 'split' },
-
+    { key = uTree.edit,               action = 'edit' },
+    { key = uTree.system_open,        action = 'system_open' },
+    { key = uTree.preview,            action = 'preview' },
+    { key = uTree.tabnew,             action = 'tabnew' },
+    { key = uTree.vsplit,             action = 'vsplit' },
+    { key = uTree.split,              action = 'split' },
     { key = uTree.toggle_git_ignored, action = 'toggle_git_ignored' },
-    { key = uTree.toggle_dotfiles, action = 'toggle_dotfiles' }, -- Hide (dotfiles)
-    { key = uTree.toggle_custom, action = 'toggle_custom' },
-    { key = uTree.toggle_file_info, action = 'toggle_file_info' },
-    { key = uTree.toggle_help, action = 'toggle_help' },
+    { key = uTree.toggle_dotfiles,    action = 'toggle_dotfiles' }, -- Hide (dotfiles)
+    { key = uTree.toggle_custom,      action = 'toggle_custom' },
+    { key = uTree.toggle_file_info,   action = 'toggle_file_info' },
+    { key = uTree.toggle_help,        action = 'toggle_help' },
 
-    { key = uTree.refresh, action = 'refresh' },
+    { key = uTree.refresh,            action = 'refresh' },
 
-    { key = uTree.file_filter, action = 'live_filter' },
-    { key = uTree.clear_filter, action = 'clear_live_filter' },
+    { key = uTree.file_filter,        action = 'live_filter' },
+    { key = uTree.clear_filter,       action = 'clear_live_filter' },
 
-    { key = uTree.cd, action = 'cd' },
-    { key = uTree.dir_up, action = 'dir_up' },
+    { key = uTree.cd,                 action = 'cd' },
+    { key = uTree.dir_up,             action = 'dir_up' },
 
-    { key = uTree.create, action = 'create' },
-    { key = uTree.remove, action = 'remove' },
-    { key = uTree.rename, action = 'rename' },
-    { key = uTree.cut, action = 'cut' },
-    { key = uTree.copy, action = 'copy' },
-    { key = uTree.paste, action = 'paste' },
-    { key = uTree.copy_name, action = 'copy_name' },
-    { key = uTree.copy_path, action = 'copy_path' },
+    { key = uTree.create,             action = 'create' },
+    { key = uTree.remove,             action = 'remove' },
+    { key = uTree.rename,             action = 'rename' },
+    { key = uTree.cut,                action = 'cut' },
+    { key = uTree.copy,               action = 'copy' },
+    { key = uTree.paste,              action = 'paste' },
+    { key = uTree.copy_name,          action = 'copy_name' },
+    { key = uTree.copy_path,          action = 'copy_path' },
     { key = uTree.copy_absolute_path, action = 'copy_absolute_path' },
 }
 
@@ -89,7 +88,7 @@ nvim_tree.setup({
         -- ファイルを開く時の action
         open_file = {
             resize_window = true,
-            quit_on_open = false,
+            quit_on_open = true,
         },
     },
     system_open = {

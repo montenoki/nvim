@@ -189,13 +189,6 @@ packer.startup({
             end,
         })
 
-        use({
-            'SmiteshP/nvim-navic',
-            requires = 'neovim/nvim-lspconfig',
-            config = function()
-                require('plugin-config.code-appearance.navic')
-            end,
-        })
         -- -- cool movement
         -- use({
         --     'edluffy/specs.nvim',
