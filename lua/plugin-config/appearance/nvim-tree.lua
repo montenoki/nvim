@@ -47,7 +47,7 @@ end
 -- On/Off
 keymap('n', uTree.toggle, ':NvimTreeToggle<CR>')
 nvim_tree.setup({
-    open_on_setup = true,
+    -- open_on_setup = true,
     -- デフォルトのnetrwを無効化
     disable_netrw = true,
     -- git 状態表示 off
