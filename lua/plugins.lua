@@ -114,7 +114,7 @@ packer.startup({
                 { 'nvim-treesitter/nvim-treesitter-textobjects' },
             },
             config = function()
-                require('plugin-config.code-appearance.nvim-treesitter')
+                require('plugin-config.appearance.nvim-treesitter')
             end,
         })
 
@@ -123,7 +123,7 @@ packer.startup({
             'kevinhwang91/nvim-ufo',
             requires = 'kevinhwang91/promise-async',
             config = function()
-                require('plugin-config.code-appearance.ufo')
+                require('plugin-config.appearance.ufo')
             end,
         })
         use({
@@ -140,7 +140,7 @@ packer.startup({
                 'nvim-lua/plenary.nvim',
             },
             config = function()
-                require('plugin-config.code-appearance.todo-comments')
+                require('plugin-config.appearance.todo-comments')
             end,
         })
 
@@ -148,7 +148,7 @@ packer.startup({
         use({
             'lewis6991/gitsigns.nvim',
             config = function()
-                require('plugin-config.code-appearance.gitsigns')
+                require('plugin-config.appearance.gitsigns')
                 require('scrollbar.handlers.gitsigns').setup()
             end,
         })
@@ -157,7 +157,7 @@ packer.startup({
         use({
             'nvim-treesitter/nvim-treesitter-context',
             config = function()
-                require('plugin-config.code-appearance.nvim-treesitter-context')
+                require('plugin-config.appearance.nvim-treesitter-context')
             end,
         })
 
@@ -165,7 +165,7 @@ packer.startup({
         use({
             'norcalli/nvim-colorizer.lua',
             config = function()
-                require('plugin-config.code-appearance.colorizer')
+                require('plugin-config.appearance.colorizer')
             end,
         })
 
@@ -174,7 +174,7 @@ packer.startup({
             'mvllow/modes.nvim',
             tag = 'v0.2.0',
             config = function()
-                require('plugin-config.code-appearance.modes')
+                require('plugin-config.appearance.modes')
             end,
         })
 
@@ -193,16 +193,16 @@ packer.startup({
         -- use({
         --     'edluffy/specs.nvim',
         --     config = function()
-        --         require('plugin-config.code-appearance.specs')
+        --         require('plugin-config.appearance.specs')
         --     end,
         -- })
 
-        ---------------------- 画面表示 -----------------------
+        ---------------------- interface -----------------------
         -- 開始画面
         use({
             'glepnir/dashboard-nvim',
             config = function()
-                require('plugin-config.appearance.dashboard')
+                require('plugin-config.interface.dashboard')
             end,
         })
 
@@ -211,7 +211,7 @@ packer.startup({
             'nvim-tree/nvim-tree.lua',
             requires = 'nvim-tree/nvim-web-devicons',
             config = function()
-                require('plugin-config.appearance.nvim-tree')
+                require('plugin-config.interface.nvim-tree')
             end,
             tag = 'nightly',
         })
@@ -221,7 +221,7 @@ packer.startup({
             'akinsho/bufferline.nvim',
             requires = { 'kyazdani42/nvim-web-devicons', 'moll/vim-bbye' },
             config = function()
-                require('plugin-config.appearance.bufferline')
+                require('plugin-config.interface.bufferline')
             end,
         })
 
@@ -229,7 +229,7 @@ packer.startup({
         use({
             'rcarriga/nvim-notify',
             config = function()
-                require('plugin-config.appearance.nvim-notify')
+                require('plugin-config.interface.nvim-notify')
             end,
         })
 
@@ -238,7 +238,7 @@ packer.startup({
             'nvim-lualine/lualine.nvim',
             requires = { 'kyazdani42/nvim-web-devicons', 'arkav/lualine-lsp-progress' },
             config = function()
-                require('plugin-config.appearance.lualine')
+                require('plugin-config.interface.lualine')
             end,
         })
 
@@ -246,7 +246,7 @@ packer.startup({
         use({
             'akinsho/toggleterm.nvim',
             config = function()
-                require('plugin-config.appearance.toggleterm')
+                require('plugin-config.interface.toggleterm')
             end,
         })
 
@@ -254,7 +254,7 @@ packer.startup({
         use({
             'j-hui/fidget.nvim',
             config = function()
-                require('plugin-config.appearance.fidget')
+                require('plugin-config.interface.fidget')
             end,
         })
 
@@ -262,7 +262,7 @@ packer.startup({
         use({
             'folke/zen-mode.nvim',
             config = function()
-                require('plugin-config.appearance.zen-mode')
+                require('plugin-config.interface.zen-mode')
             end,
         })
 
@@ -270,7 +270,7 @@ packer.startup({
         use({
             'petertriho/nvim-scrollbar',
             config = function()
-                require('plugin-config.appearance.scrollbar')
+                require('plugin-config.interface.scrollbar')
             end,
         })
 
@@ -279,7 +279,7 @@ packer.startup({
             'folke/trouble.nvim',
             requires = 'nvim-tree/nvim-web-devicons',
             config = function()
-                require('plugin-config.appearance.trouble')
+                require('plugin-config.interface.trouble')
             end,
         })
 
