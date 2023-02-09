@@ -25,7 +25,7 @@ local function get_python_interperter()
         end
     end
     if venv == nil then
-        print('venv not found!')
+        vim.notify('Not in a Virtualenv.')
     elseif in_cwd_flg == true then
         python_interperter_path = cwd .. step_char .. venv .. python_exec_dir
     else
