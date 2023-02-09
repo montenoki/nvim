@@ -6,13 +6,13 @@ local paccker_bootstrap
 if fn.empty(fn.glob(install_path)) > 0 then
     vim.notify('Installing Packer.nvim... Please wait...')
     paccker_bootstrap = fn.system({
-        'git',
-        'clone',
-        '--depth',
-        '1',
-        'https://github.com/wbthomason/packer.nvim',
-        install_path,
-    })
+            'git',
+            'clone',
+            '--depth',
+            '1',
+            'https://github.com/wbthomason/packer.nvim',
+            install_path,
+        })
     local rtp_addition = vim.fn.stdpath('data') .. '/site/pack/*/start/*'
     if not string.find(vim.o.runtimepath, rtp_addition) then
         vim.o.runtimepath = rtp_addition .. ',' .. vim.o.runtimepath
@@ -353,7 +353,12 @@ packer.startup({
         use('folke/neodev.nvim')
 
         -- Python
-        use('mfussenegger/nvim-dap-python')
+        use({
+            'mfussenegger/nvim-dap-python',
+            -- config = function()
+            --     require('dap-python').setup()
+            -- end,
+        })
 
         -- JSON
         use('b0o/schemastore.nvim')
