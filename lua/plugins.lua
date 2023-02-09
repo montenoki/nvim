@@ -161,7 +161,7 @@ packer.startup({
             end,
         })
 
-        -- Color code #ff0149
+        -- Color code display like: #ff0149
         use({
             'norcalli/nvim-colorizer.lua',
             config = function()
@@ -189,6 +189,13 @@ packer.startup({
             end,
         })
 
+        use({
+            'SmiteshP/nvim-navic',
+            requires = 'neovim/nvim-lspconfig',
+            config = function()
+                require('plugin-config.code-appearance.navic')
+            end,
+        })
         -- -- cool movement
         -- use({
         --     'edluffy/specs.nvim',
