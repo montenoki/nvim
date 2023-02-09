@@ -17,7 +17,6 @@ require('dap.nvim-dap.ui')
 vt.setup({
     commented = true,
 })
-dap.set_log_level('TRACE')
 
 require('dap.nvim-dap.config.python')
 

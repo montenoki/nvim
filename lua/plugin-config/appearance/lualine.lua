@@ -10,7 +10,7 @@ lualine.setup({
         -- https://github.com/ryanoasis/powerline-extra-symbols
         section_separators = { left = ' ', right = '' },
     },
-    extensions = { 'nvim-tree', 'toggleterm' },
+    extensions = { 'nvim-tree', 'toggleterm', 'nvim-dap-ui' },
     sections = {
         lualine_c = { 'filename' },
         lualine_x = {
