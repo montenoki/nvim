@@ -39,7 +39,7 @@ local opts = {
 
 return {
     on_setup = function(server)
-        require('neodev').setup()
+        require('neodev').setup({ library = { plugins = { 'nvim-dap-ui' }, types = true } })
         server.setup(opts)
     end,
 }
