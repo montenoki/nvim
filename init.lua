@@ -1,5 +1,5 @@
 -- speed up
-require('impatient')
+-- require('impatient')
 -- グローバル
 require('utils.global')
 -- 基本設定
