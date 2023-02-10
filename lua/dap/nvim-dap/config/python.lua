@@ -55,7 +55,7 @@ dap.configurations.python = {
     {
         type = 'python',
         request = 'launch',
-        name = 'Launch file',
+        name = 'Launch Current file',
 
         program = '${file}',
         pythonPath = python_interperter_path,

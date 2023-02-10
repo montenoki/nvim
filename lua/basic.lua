@@ -135,7 +135,7 @@ vim.opt.foldtext = 'v:lua.require("utils.simple_fold").sinple_fold()'
 
 -- Fold
 vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
-vim.o.foldcolumn = '1'
+vim.o.foldcolumn = '5'
 vim.o.foldnestmax = '1'
 vim.o.foldlevel = 99
 vim.o.foldlevelstart = 99

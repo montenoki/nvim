@@ -121,15 +121,17 @@ packer.startup({
         -- 代码折叠
         use({
             'kevinhwang91/nvim-ufo',
-            requires = 'kevinhwang91/promise-async',
+            requires = {
+                'kevinhwang91/promise-async',
+                {
+                    'luukvbaal/statuscol.nvim',
+                    config = function()
+                        require('statuscol').setup({ foldfunc = 'builtin', setopt = true })
+                    end,
+                },
+            },
             config = function()
                 require('plugin-config.appearance.ufo')
-            end,
-        })
-        use({
-            'luukvbaal/statuscol.nvim',
-            config = function()
-                require('statuscol').setup({ foldfunc = 'builtin', setopt = true })
             end,
         })
 
@@ -284,14 +286,14 @@ packer.startup({
         })
 
         -- Which-key
-        -- use({
-        --     'folke/which-key.nvim',
-        --     config = function()
-        --         vim.o.timeout = true
-        --         vim.o.timeoutlen = 300
-        --         require('plugin-config.whichkey')
-        --     end,
-        -- })
+        use({
+            'folke/which-key.nvim',
+            config = function()
+                vim.o.timeout = true
+                vim.o.timeoutlen = 300
+                require('plugin-config.whichkey')
+            end,
+        })
 
         ---------------------- 検索機能 -----------------------
         -- telescope ファイル検索
