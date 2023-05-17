@@ -6,7 +6,7 @@ end
 require('nvim-treesitter.install').prefer_git = true
 treesitter.setup({
     -- 構文解析器
-    ensure_installed = { 'vim', 'lua', 'python' },
+    ensure_installed = { 'vim', 'lua', 'python', 'query' },
     -- 構文の強調表示ON
     highlight = {
         enable = true,
