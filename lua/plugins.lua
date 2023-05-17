@@ -49,7 +49,10 @@ packer.startup({
                 require('nvim-treesitter.install').update({ with_sync = true })
             end,
         })
-        use('nvim-treesitter/nvim-treesitter-refactor')
+        use({
+            'nvim-treesitter/nvim-treesitter-refactor',
+            requires = 'nvim-treesitter/nvim-treesitter'
+        })
         use('nvim-treesitter/nvim-treesitter-textobjects')
 
         -- ------------------------- 依存 ------------------------
