@@ -37,50 +37,24 @@ packer.startup({
             use('lewis6991/impatient.nvim')
         end
 
-        ----- colorschemes -----
-        ------------------------
+        --------------------- colorschemes --------------------
         use('Mofiqul/dracula.nvim')
 
-        ----- nvim-treesitter -----
-        ---------------------------
-
-        use('nvim-treesitter/nvim-treesitter-refactor')
-        use('nvim-treesitter/nvim-treesitter-textobjects')
+        --------------------- CODE表示 ----------------------
+        -- 構文解析
         use({
             'nvim-treesitter/nvim-treesitter',
             run = function()
                 require('nvim-treesitter.install').update({ with_sync = true })
             end,
-            -- requires = {
-            --     { '' },
-            --     {  },
-            -- },
+            requires = {
+                { 'nvim-treesitter/nvim-treesitter-refactor' },
+                { 'nvim-treesitter/nvim-treesitter-textobjects' },
+            },
             config = function()
                 require('plugin-config.appearance.nvim-treesitter')
             end,
         })
-
-        ----- LSP -----
-        ---------------
-
-        -- -- Installer
-        -- use({ 'williamboman/mason.nvim' })
-        -- use({ 'williamboman/mason-lspconfig.nvim' })
-
-        -- use({ 'neovim/nvim-lspconfig' })
-
-        -- use('mhartington/formatter.nvim')
-        -- use({ 'jose-elias-alvarez/null-ls.nvim', requires = 'nvim-lua/plenary.nvim' })
-
-
-        -- -- code action
-        -- use({
-        --     'ThePrimeagen/refactoring.nvim',
-        --     requires = {
-        --         { 'nvim-lua/plenary.nvim' },
-        --         { 'nvim-treesitter/nvim-treesitter' },
-        --     },
-        -- })
 
         -- ------------------------- 依存 ------------------------
 
@@ -93,7 +67,25 @@ packer.startup({
         -- use('MunifTanjim/nui.nvim')
 
         -- use('tami5/lspsaga.nvim')
+        -- --------------------- LSP --------------------
+        -- -- Installer
+        -- use({ 'williamboman/mason.nvim' })
+        -- use({ 'williamboman/mason-lspconfig.nvim' })
+        -- -- Lspconfig
+        -- use({ 'neovim/nvim-lspconfig' })
 
+        -- -- フォーマット
+        -- use('mhartington/formatter.nvim')
+        -- use({ 'jose-elias-alvarez/null-ls.nvim', requires = 'nvim-lua/plenary.nvim' })
+
+        -- -- -- code action
+        -- -- use({
+        -- --     'ThePrimeagen/refactoring.nvim',
+        -- --     requires = {
+        -- --         { 'nvim-lua/plenary.nvim' },
+        -- --         { 'nvim-treesitter/nvim-treesitter' },
+        -- --     },
+        -- -- })
 
         -- ------------------ 自動補完 ------------------
         -- -- エンジン
@@ -128,8 +120,6 @@ packer.startup({
 
         -- -- Lua
         -- use({ 'jbyuki/one-small-step-for-vimkind' })
-
-        -- --------------------- CODE表示 ----------------------
 
 
 
