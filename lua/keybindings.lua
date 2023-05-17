@@ -108,6 +108,8 @@ keymap(visual_mode, 'p', '"_dP')
 ----- Plugin Keybindings -----
 ------------------------------
 
+local pluginKeys = {}
+
 -- Terminal
 -- Open Terminal: float
 keymap('n', '<leader>tt', '<Cmd>lua floatterm_toggle()<CR>')
@@ -117,3 +119,126 @@ keymap({ 'n', 'i' }, '<A-\\>', '<Cmd>lua bottonterm_toggle()<CR>')
 keymap('n', '<leader>tg', '<Cmd>lua lazygit_toggle()<CR>')
 -- Exit
 keymap('t', '<Esc>', '<C-\\><C-n>')
+
+
+
+-- LSP
+local lsp = uConfig.lsp
+pluginKeys.mapLSP = function(mapbuf)
+    -- rename
+    mapbuf('n', lsp.rename, '<cmd>lua vim.lsp.buf.rename()<CR>')
+    -- code action
+    mapbuf('n', lsp.code_action, '<cmd>lua vim.lsp.buf.code_action()<CR>')
+    -- format
+    if vim.fn.has('nvim-0.8') == 1 then
+        mapbuf('n', lsp.format, '<cmd>lua vim.lsp.buf.format { auync = true } <CR>')
+    else
+        mapbuf('n', lsp.format, '<cmd>lua vim.lsp.buf.formatting()<CR>')
+    end
+    -- go series
+    mapbuf('n', lsp.definition, function()
+        require('telescope.builtin').lsp_definitions({ initial_mode = 'normal' })
+    end)
+    mapbuf(
+        'n',
+        lsp.references,
+        "<cmd>lua require'telescope.builtin'.lsp_references(require('telescope.themes').get_ivy())<CR>"
+    )
+    mapbuf('n', lsp.hover, '<cmd>lua vim.lsp.buf.hover()<CR>')
+
+    mapbuf('n', lsp.open_flow, '<cmd>lua vim.diagnostic.open_float()<CR>')
+    mapbuf('n', lsp.goto_next, '<cmd>lua vim.diagnostic.goto_next()<CR>')
+    mapbuf('n', lsp.goto_prev, '<cmd>lua vim.diagnostic.goto_prev()<CR>')
+end
+
+-- DAP
+-- nvim-dap
+local dap = uConfig.dap
+pluginKeys.mapDAP = function()
+    -- start
+    map('n', dap.toggle, ':lua require("dapui").toggle()<CR>', opt)
+    map('n', dap.run, ":lua require('osv').run_this()<CR>", opt)
+    -- set breakpoint
+    map('n', dap.breakpoint_toggle, ":lua require('dap').toggle_breakpoint()<CR>", opt)
+    map('n', dap.breakpoint_clear, ":lua require('dap').clear_breakpoints()<CR>", opt)
+    -- continue
+    map('n', dap.continue, ":lua require('dap').continue()<CR>", opt)
+    --  stepOver, stepOut, stepInto
+    map('n', dap.step_into, ":lua require'dap'.step_into()<CR>", opt)
+    map('n', dap.step_over, ":lua require'dap'.step_over()<CR>", opt)
+    map('n', dap.step_out, ":lua require'dap'.step_out()<CR>", opt)
+    map('n', dap.restart, ":lua require'dap.restart()<CR>", opt)
+
+    map('n', dap.open_info, ":lua require'dapui'.eval()<CR>", opt)
+    -- Stop
+    map(
+        'n',
+        dap.stop,
+        ":lua require'dap'.close()<CR>"
+        .. ":lua require'dap'.terminate()<CR>"
+        .. ":lua require'dap.repl'.close()<CR>"
+        .. ":lua require'dapui'.close()<CR>"
+        .. ":lua require('dap').clear_breakpoints()<CR>"
+        .. '<C-w>o<CR>',
+        opt
+    )
+end
+
+-- gitsigns
+pluginKeys.gitsigns_on_attach = function(bufnr)
+    local gs = package.loaded.gitsigns
+
+    local function map(mode, l, r, opts)
+        opts = opts or {}
+        opts.buffer = bufnr
+        vim.keymap.set(mode, l, r, opts)
+    end
+
+    -- Navigation
+    map('n', '<leader>gj', function()
+        if vim.wo.diff then
+            return ']c'
+        end
+        vim.schedule(function()
+            gs.next_hunk()
+        end)
+        return '<Ignore>'
+    end, {
+        expr = true,
+    })
+
+    map('n', '<leader>gk', function()
+        if vim.wo.diff then
+            return '[c'
+        end
+        vim.schedule(function()
+            gs.prev_hunk()
+        end)
+        return '<Ignore>'
+    end, {
+        expr = true,
+    })
+
+    map({ 'n', 'v' }, '<leader>gs', ':Gitsigns stage_hunk<CR>')
+    map('n', '<leader>gS', gs.stage_buffer)
+    map('n', '<leader>gu', gs.undo_stage_hunk)
+    map({ 'n', 'v' }, '<leader>gr', ':Gitsigns reset_hunk<CR>')
+    map('n', '<leader>gR', gs.reset_buffer)
+    map('n', '<leader>gp', gs.preview_hunk)
+    map('n', '<leader>gb', function()
+        gs.blame_line({
+            full = true,
+        })
+    end)
+    map('n', '<leader>gd', gs.diffthis)
+    map('n', '<leader>gD', function()
+        gs.diffthis('~')
+    end)
+    -- toggle
+    map('n', '<leader>gtd', gs.toggle_deleted)
+    map('n', '<leader>gtb', gs.toggle_current_line_blame)
+    -- Text object
+    map({ 'o', 'x' }, 'ig', ':<C-U>Gitsigns select_hunk<CR>')
+end
+
+return pluginKeys
