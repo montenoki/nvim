@@ -54,7 +54,7 @@ packer.startup({
                 { 'nvim-treesitter/nvim-treesitter-textobjects' },
             },
             config = function()
-                require('plugin-config.nvim-treesitter')
+                require('plugin-config.appearance.nvim-treesitter')
             end,
         })
 
