@@ -1,5 +1,5 @@
 local M = {
-    lite_mode = false,
+    lite_mode = true,
 
     config_path = vim.fn.stdpath('config'), 
     

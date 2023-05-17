@@ -21,7 +21,6 @@ if fn.empty(fn.glob(install_path)) > 0 then
         vim.o.runtimepath = rtp_addition .. ',' .. vim.o.runtimepath
     end
     vim.notify('Installation Done')
-    vim.cmd("q!")
 end
 
 local packer = requirePlugin('packer')
@@ -48,12 +47,14 @@ packer.startup({
             run = function()
                 require('nvim-treesitter.install').update({ with_sync = true })
             end,
+            requires = {
+                { 'nvim-treesitter/nvim-treesitter-refactor' },
+                { 'nvim-treesitter/nvim-treesitter-textobjects' },
+            },
+            config = function()
+                require('plugin-config.appearance.nvim-treesitter')
+            end,
         })
-        use({
-            'nvim-treesitter/nvim-treesitter-refactor',
-            requires = 'nvim-treesitter/nvim-treesitter'
-        })
-        use('nvim-treesitter/nvim-treesitter-textobjects')
 
         -- ------------------------- 依存 ------------------------
 
