@@ -38,8 +38,8 @@ keymap(c_mode, keys.c_next_item, '<C-n>', opts_remap)
 keymap(c_mode, keys.c_prev_item, '<C-n>', opts_remap)
 
 
------ Neovim Settings -----
----------------------------
+----- Neovim Keybinds Settings -----
+------------------------------------
 
 -- swap g_ and $
 keymap(n_v_mode, '$', 'g_')
@@ -65,4 +65,10 @@ keymap(visual_block_mode, 'K', ":move '<-2<CR>gv-gv", opt)
 keymap(visual_block_mode, 'J', ":move '>+1<CR>gv-gv", opt)
 
 -- turn off 'Ctrl+z'
+keymap({ 'n', 'i', 'v' }, '<C-z>', '')
+
+-- do not copy after paste in visual mode
+keymap(visual_mode, 'p', '"_dP')
+
+
 
