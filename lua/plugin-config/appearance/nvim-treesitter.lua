@@ -2,11 +2,14 @@ local treesitter = requirePlugin('nvim-treesitter.configs')
 if treesitter == nil then
     return
 end
+local uConfig = require('uConfig')
+local treesitter_langs = uConfig.treesitter_langs
+local lite_mode = uConfig.lite_mode
 
 require('nvim-treesitter.install').prefer_git = true
+
 treesitter.setup({
-    -- 構文解析器
-    ensure_installed = { 'vim', 'lua', 'python', 'query' },
+    ensure_installed = treesitter_langs,
     -- 構文の強調表示ON
     highlight = {
         enable = true,
