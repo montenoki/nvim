@@ -6,4 +6,6 @@ require('colorscheme')
 
 require('keybindings')
 
+require('plugins')
+
 require('autocmds')

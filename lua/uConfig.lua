@@ -1,7 +1,11 @@
 local M = {
     lite_mode = true,
 
-    config_path = vim.fn.stdpath('config'),
+    config_path = vim.fn.stdpath('config'), 
+    
+    enable_magic_search = true,
+
+    enable_impatient = false,
 
     keys = {
 
@@ -92,7 +96,7 @@ local M = {
         -- im-select
     },
 
-    enable_magic_search = true,
+
 
     nvimTree = {
 
