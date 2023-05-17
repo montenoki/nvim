@@ -12,9 +12,12 @@ vim.o.sidescrolloff = 4
 vim.wo.colorcolumn = '80,120'
 
 -- Listchars
-vim.o.list = True
--- TODO: tty support_
--- vim.o.listchars = 'eol:d,space:.trail:.,tab:>'
+if lite_mode then
+    vim.o.list = false
+else
+    vim.o.list = True
+    vim.o.listchars = 'eol:↲,space:·,trail:●,tab:→→'
+end
 
 -- Row Number
 vim.wo.number = true
