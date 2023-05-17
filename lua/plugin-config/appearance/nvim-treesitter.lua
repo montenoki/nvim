@@ -12,12 +12,12 @@ treesitter.setup({
     ensure_installed = treesitter_langs,
     -- 構文の強調表示ON
     highlight = {
-        enable = true,
+        enable = not lite_mode,
         additional_vim_regex_highlighting = false,
     },
     -- 漸進式選択
     incremental_selection = {
-        enable = true,
+        enable = not lite_mode,
         keymaps = {
             init_selection = '<CR>',
             node_incremental = '<CR>',
@@ -27,18 +27,9 @@ treesitter.setup({
     },
     -- 自動indent (=)
     indent = {
-        enable = true,
+        enable = not lite_mode,
     },
 
-    -- nvim-treesitter/nvim-treesitter-refactor
-    refactor = {
-        highlight_definitions = {
-            enable = true,
-            -- Set to false if you have an `updatetime` of ~100.
-            clear_on_cursor_move = true,
-        },
-        highlight_current_scope = { enable = false },
-    },
     textobjects = {
         select = {
             enable = true,

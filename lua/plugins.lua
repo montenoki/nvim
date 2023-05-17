@@ -48,7 +48,6 @@ packer.startup({
                 require('nvim-treesitter.install').update({ with_sync = true })
             end,
             requires = {
-                { 'nvim-treesitter/nvim-treesitter-refactor' },
                 { 'nvim-treesitter/nvim-treesitter-textobjects' },
             },
             config = function()
