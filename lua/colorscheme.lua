@@ -1,7 +1,7 @@
 local colorscheme
 
 if lite_mode then
-    colorscheme = 'dracula'
+    colorscheme = 'solarized8'
 else
     vim.o.background = 'dark'
     colorscheme = 'dracula' 
