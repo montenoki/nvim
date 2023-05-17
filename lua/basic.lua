@@ -44,10 +44,7 @@ vim.wo.wrap = true
 vim.o.whichwrap = '<,>,[,]'
 
 -- color
-if lite_mode then
-    vim.o.termguicolors = false
-    vim.opt.termguicolors = false
-else
+if not lite_mode then
     vim.o.termguicolors = true
     vim.opt.termguicolors = true
 end

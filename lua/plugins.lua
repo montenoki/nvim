@@ -40,7 +40,6 @@ packer.startup({
         --------------------- colorschemes --------------------
         use('Mofiqul/dracula.nvim')
         use('lifepillar/vim-solarized8.nvim')
-        use('nightsense/carbonized')
 
         -- ------------------------- 依存 ------------------------
 
