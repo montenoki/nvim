@@ -1,10 +1,9 @@
-vim.o.background = 'dark'
-
 local colorscheme
 
-if not lite_mode then
+if lite_mode then
     colorscheme = 'dracula'
 else
+    vim.o.background = 'dark'
     colorscheme = 'dracula' 
 end
 
