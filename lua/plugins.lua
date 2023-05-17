@@ -21,6 +21,7 @@ if fn.empty(fn.glob(install_path)) > 0 then
         vim.o.runtimepath = rtp_addition .. ',' .. vim.o.runtimepath
     end
     vim.notify('Installation Done')
+    vim.cmd("q!")
 end
 
 local packer = requirePlugin('packer')
