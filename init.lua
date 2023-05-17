@@ -9,3 +9,5 @@ require('keybindings')
 require('plugins')
 
 require('autocmds')
+
+require('plugin-config.appearance.nvim-treesitter')
