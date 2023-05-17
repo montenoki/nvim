@@ -7,6 +7,8 @@ local M = {
 
     enable_impatient = false,
 
+    treesitter_languages = { 'vim', 'lua', 'python', 'query' },
+
     keys = {
 
         leader_key = ' ',
