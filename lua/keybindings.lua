@@ -1,5 +1,3 @@
--- Modes
-
 local uConfig = require('uConfig')
 local lite_mode = uConfig.lite_mode
 local keys = uConfig.keys
@@ -38,6 +36,42 @@ keymap(c_mode, keys.c_next_item, '<C-n>', opts_remap)
 keymap(c_mode, keys.c_prev_item, '<C-n>', opts_remap)
 
 
+-- windows
+if keys.s_windows ~= nil and keys.s_windows.enable then
+    local skey = keys.s_windows
+    keymap('n', 's', '') -- Turn off 's'
+
+    keymap('n', skey.split_vertically, ':vsp<CR>')
+    keymap('n', skey.split_horizontally, ':sp<CR>')
+    keymap('n', skey.close, '<C-w>c')
+    keymap('n', skey.close_others, '<C-w>o')
+
+    -- Move Focus
+    keymap('n', skey.jump_left, '<C-w>h')
+    keymap('n', skey.jump_down, '<C-w>j')
+    keymap('n', skey.jump_up, '<C-w>k')
+    keymap('n', skey.jump_right, '<C-w>l')
+
+    -- Window Size
+    keymap('n', skey.width_decrease, ':vertical resize -10<CR>')
+    keymap('n', skey.width_increase, ':vertical resize +10<CR>')
+    keymap('n', skey.height_decrease, ':vertical resize -10<CR>')
+    keymap('n', skey.height_increase, ':vertical resize +10<CR>')
+    keymap('n', skey.size_equal, '<C-w>=')
+end
+
+-- Tabs
+if keys.s_tab ~= nil then
+    local tkey = keys.s_tab
+    keymap('n', tkey.split, '<CMD>tab split<CR>')
+    keymap('n', tkey.close, '<CMD>tabclose<CR>')
+    keymap('n', tkey.next, '<CMD>tabnext<CR>')
+    keymap('n', tkey.prev, '<CMD>tabprev<CR>')
+    keymap('n', tkey.first, '<CMD>tabfirst<CR>')
+    keymap('n', tkey.last, '<CMD>tablast<CR>')
+end
+
+
 ----- Neovim Keybinds Settings -----
 ------------------------------------
 
@@ -71,4 +105,15 @@ keymap({ 'n', 'i', 'v' }, '<C-z>', '')
 keymap(visual_mode, 'p', '"_dP')
 
 
+----- Plugin Keybindings -----
+------------------------------
 
+-- Terminal
+-- Open Terminal: float
+keymap('n', '<leader>tt', '<Cmd>lua floatterm_toggle()<CR>')
+-- Open Terminal: botton
+keymap({ 'n', 'i' }, '<A-\\>', '<Cmd>lua bottonterm_toggle()<CR>')
+-- Open Terminal: lazygit
+keymap('n', '<leader>tg', '<Cmd>lua lazygit_toggle()<CR>')
+-- Exit
+keymap('t', '<Esc>', '<C-\\><C-n>')
