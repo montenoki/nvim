@@ -44,15 +44,17 @@ packer.startup({
         ----- nvim-treesitter -----
         ---------------------------
 
+        use('nvim-treesitter/nvim-treesitter-refactor')
+        use('nvim-treesitter/nvim-treesitter-textobjects')
         use({
             'nvim-treesitter/nvim-treesitter',
             run = function()
                 require('nvim-treesitter.install').update({ with_sync = true })
             end,
-            requires = {
-                { 'nvim-treesitter/nvim-treesitter-refactor' },
-                { 'nvim-treesitter/nvim-treesitter-textobjects' },
-            },
+            -- requires = {
+            --     { '' },
+            --     {  },
+            -- },
             config = function()
                 require('plugin-config.appearance.nvim-treesitter')
             end,

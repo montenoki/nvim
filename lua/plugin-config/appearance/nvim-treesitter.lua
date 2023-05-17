@@ -1,4 +1,4 @@
-local treesitter = requirePlugin('nvim-treesitter')
+local treesitter = requirePlugin('nvim-treesitter.configs')
 if treesitter == nil then
     return
 end
