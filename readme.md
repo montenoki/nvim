@@ -16,6 +16,8 @@ brew install gitui
 brew install rg
 brew install fd
 ```
+## Arch OS
+require xclip
 
 TODO:
 - nvim-tree预览时使用telescope

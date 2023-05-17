@@ -1,4 +1,6 @@
 local M = {
+    lite_mode = true,
+
     config_path = vim.fn.stdpath('config'),
 
     keys = {
