@@ -5,20 +5,25 @@ if todo == nil then
     return
 end
 
+local keywords_setting
+
+if lite_mode then 
+    keywords_setting = {
+        TODO = { icon = '? ', color = 'info' },
+        NOTE = { icon = '::', color = 'hint', alt = { 'INFO' } },
+        WARN = { icon = '! ', color = 'warning', alt = { 'WARNING', 'XXX' } },
+        FIX = { icon = '! ', color = 'error', alt = { 'FIXME', 'BUG', 'FIXIT', 'ISSUE' } },
+    }
+else
+    keywords_setting = {
+        TODO = { icon = ' ', color = 'info' },
+        NOTE = { icon = ' ', color = 'hint', alt = { 'INFO' } },
+        WARN = { icon = ' ', color = 'warning', alt = { 'WARNING', 'XXX' } },
+        FIX = { icon = ' ', color = 'error', alt = { 'FIXME', 'BUG', 'FIXIT', 'ISSUE' } },
+    }
+
 todo.setup({
-    keywords = {
-        if lite_mode then
-            TODO = { icon = '? ', color = 'info' },
-            NOTE = { icon = '::', color = 'hint', alt = { 'INFO' } },
-            WARN = { icon = '! ', color = 'warning', alt = { 'WARNING', 'XXX' } },
-            FIX = { icon = '! ', color = 'error', alt = { 'FIXME', 'BUG', 'FIXIT', 'ISSUE' } },
-        else
-            TODO = { icon = ' ', color = 'info' },
-            NOTE = { icon = ' ', color = 'hint', alt = { 'INFO' } },
-            WARN = { icon = ' ', color = 'warning', alt = { 'WARNING', 'XXX' } },
-            FIX = { icon = ' ', color = 'error', alt = { 'FIXME', 'BUG', 'FIXIT', 'ISSUE' } },
-        end
-        },
+    keywords = keywords_setting
     search = {
         command = 'rg',
         args = {
