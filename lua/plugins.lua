@@ -47,7 +47,7 @@ packer.startup({
         ----- Code Appearance  -----
         ----------------------------
 
-        -- highlighting
+        -- Highlighting
         use({
             'nvim-treesitter/nvim-treesitter',
             run = function()
@@ -66,6 +66,17 @@ packer.startup({
             "nvim-treesitter/nvim-treesitter-refactor",
             after = "nvim-treesitter",
             requires = "nvim-treesitter/nvim-treesitter",
+        })
+
+        -- To-do Comments.nvim
+        use({
+            'folke/todo-comments.nvim',
+            requires = {
+                'nvim-lua/plenary.nvim',
+            },
+            config = function()
+                require('plugin-config.appearance.todo-comments')
+            end,
         })
 
 
@@ -153,16 +164,7 @@ packer.startup({
         --     end,
         -- })
 
-        -- -- todo-comments.nvim
-        -- use({
-        --     'folke/todo-comments.nvim',
-        --     requires = {
-        --         'nvim-lua/plenary.nvim',
-        --     },
-        --     config = function()
-        --         require('plugin-config.appearance.todo-comments')
-        --     end,
-        -- })
+
 
         -- -- git
         -- use({
