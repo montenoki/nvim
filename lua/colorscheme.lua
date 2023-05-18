@@ -1,14 +1,13 @@
 uConfig = require('uConfig')
 lite_mode = uConfig.lite_mode
 
-
-vim.o.background = 'dark'
 local colorscheme
 
 if lite_mode then
-    -- colorscheme = 'PaperColor'
-    colorscheme = 'solarized8'
+    vim.o.background = 'light'
+    colorscheme = 'dim'
 else
+    vim.o.background = 'dark'
     colorscheme = 'dracula'
 end
 

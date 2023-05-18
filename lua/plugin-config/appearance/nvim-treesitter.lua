@@ -12,12 +12,12 @@ treesitter.setup({
     ensure_installed = treesitter_langs,
     -- 構文の強調表示ON
     highlight = {
-        enable = not lite_mode,
+        enable = true,
         additional_vim_regex_highlighting = false,
     },
     -- 漸進式選択
     incremental_selection = {
-        enable = not lite_mode,
+        enable = true,
         keymaps = {
             init_selection = '<CR>',
             node_incremental = '<CR>',
@@ -27,7 +27,7 @@ treesitter.setup({
     },
     -- 自動indent (=)
     indent = {
-        enable = not lite_mode,
+        enable = true,
     },
 
     textobjects = {
