@@ -24,7 +24,7 @@ else
 end
 
 todo.setup({
-    keywords = keywords_setting
+    keywords = keywords_setting,
     search = {
         command = 'rg',
         args = {
