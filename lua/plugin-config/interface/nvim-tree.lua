@@ -154,7 +154,7 @@ nvim_tree.setup({
             icons = { corner = '└ ', edge = '│ ', none = '  ' },
         },
         icons = {
-            webdev_colors = true,
+            webdev_colors = not lite_mode,
             git_placement = 'after',
             glyphs = icons,
         },
