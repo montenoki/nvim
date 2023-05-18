@@ -90,7 +90,7 @@ treesitter.setup({
         },
 
         swap = {
-            enable = false,
+            enable = true,
             swap_next = {
                 [keys.swap_next] = '@parameter.inner',
             },
