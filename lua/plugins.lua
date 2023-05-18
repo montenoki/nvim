@@ -37,24 +37,37 @@ packer.startup({
             use('lewis6991/impatient.nvim')
         end
 
-        --------------------- colorschemes --------------------
+        ----- Color Schemes -----
+        -------------------------
+
         use('Mofiqul/dracula.nvim')
         use('jeffkreeftmeijer/vim-dim')
 
-        --------------------- CODE表示 ----------------------
-        -- 構文解析
+
+        ----- Code Appearance  -----
+        ----------------------------
+
+        -- highlighting
         use({
             'nvim-treesitter/nvim-treesitter',
             run = function()
                 require('nvim-treesitter.install').update({ with_sync = true })
             end,
-            requires = {
-                { 'nvim-treesitter/nvim-treesitter-textobjects' },
-            },
             config = function()
                 require('plugin-config.appearance.nvim-treesitter')
             end,
         })
+        use({
+            "nvim-treesitter/nvim-treesitter-textobjects",
+            after = "nvim-treesitter",
+            requires = "nvim-treesitter/nvim-treesitter",
+        })
+        use({
+            "nvim-treesitter/nvim-treesitter-refactor",
+            after = "nvim-treesitter",
+            requires = "nvim-treesitter/nvim-treesitter",
+        })
+
 
         -- ------------------------- 依存 ------------------------
 
