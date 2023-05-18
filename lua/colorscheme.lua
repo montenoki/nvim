@@ -6,7 +6,8 @@ vim.o.background = 'dark'
 local colorscheme
 
 if lite_mode then
-    colorscheme = 'PaperColor'
+    -- colorscheme = 'PaperColor'
+    colorscheme = 'solarized8'
 else
     colorscheme = 'dracula'
 end

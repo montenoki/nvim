@@ -40,6 +40,7 @@ packer.startup({
         --------------------- colorschemes --------------------
         use('Mofiqul/dracula.nvim')
         use('NLKNguyen/papercolor-theme')
+        use('lifepillar/vim-solarized8')
 
         --------------------- CODE表示 ----------------------
         -- 構文解析
