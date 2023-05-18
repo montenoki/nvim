@@ -21,6 +21,7 @@ else
         WARN = { icon = ' ', color = 'warning', alt = { 'WARNING', 'XXX' } },
         FIX = { icon = ' ', color = 'error', alt = { 'FIXME', 'BUG', 'FIXIT', 'ISSUE' } },
     }
+end
 
 todo.setup({
     keywords = keywords_setting
