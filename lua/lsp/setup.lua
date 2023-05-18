@@ -39,7 +39,7 @@ mason_config.setup({
 })
 
 local servers = {
-    sumneko_lua = require('lsp.config.lua'),
+    lua_ls = require('lsp.config.lua'),
     pyright = require('lsp.config.pyright'),
 }
 
