@@ -41,6 +41,9 @@ packer.startup({
         use('Mofiqul/dracula.nvim')
         use('NLKNguyen/papercolor-theme')
         use('lifepillar/vim-solarized8')
+        use('noahfrederick/vim-noctu')
+        use('sstallion/vim-wtf')
+        use('jeffkreeftmeijer/vim-dim')
 
         --------------------- CODE表示 ----------------------
         -- 構文解析
