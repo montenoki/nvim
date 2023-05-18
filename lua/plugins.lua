@@ -80,6 +80,14 @@ packer.startup({
         })
 
 
+        ----- LSP -----
+        ---------------
+
+
+        use({ 'williamboman/mason.nvim' })
+        use({ 'williamboman/mason-lspconfig.nvim' })
+        use({ 'neovim/nvim-lspconfig' })
+
         -- ------------------------- 依存 ------------------------
 
         -- use('nvim-lua/popup.nvim')
@@ -91,12 +99,7 @@ packer.startup({
         -- use('MunifTanjim/nui.nvim')
 
         -- use('tami5/lspsaga.nvim')
-        -- --------------------- LSP --------------------
-        -- -- Installer
-        -- use({ 'williamboman/mason.nvim' })
-        -- use({ 'williamboman/mason-lspconfig.nvim' })
-        -- -- Lspconfig
-        -- use({ 'neovim/nvim-lspconfig' })
+
 
         -- -- フォーマット
         -- use('mhartington/formatter.nvim')

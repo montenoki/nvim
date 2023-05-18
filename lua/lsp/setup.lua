@@ -1,4 +1,20 @@
-require('lsp.ui')
+local uConfig = require('uConfig')
+local lite_mode = uConfig.lite_mode
+local icons
+
+if lite_mode then
+    icons = {
+        package_installed = 'v',
+        package_pending = '->',
+        package_uninstalled = 'x',
+    }
+else
+    icons = {
+        package_installed = '✓',
+        package_pending = '➜',
+        package_uninstalled = '✗',
+    }
+end
 
 local mason = requirePlugin('mason')
 if mason == nil then
@@ -6,11 +22,7 @@ if mason == nil then
 end
 mason.setup({
     ui = {
-        icons = {
-            package_installed = '✓',
-            package_pending = '➜',
-            package_uninstalled = '✗',
-        },
+        icons = icons
     },
 })
 
@@ -18,9 +30,10 @@ local mason_config = requirePlugin('mason-lspconfig')
 if mason_config == nil then
     return
 end
+
 mason_config.setup({
     ensure_installed = {
-        'sumneko_lua',
+        'lua_ls',
         'pyright',
     },
 })
