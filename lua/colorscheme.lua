@@ -2,15 +2,18 @@ uConfig = require('uConfig')
 lite_mode = uConfig.lite_mode
 
 
+vim.o.background = 'dark'
+local colorscheme
 
-if not lite_mode then
-    vim.o.background = 'dark'
-    local colorscheme = 'dracula'
+if lite_mode then
+    colorscheme = 'PaperColor'
+else
+    colorscheme = 'dracula'
+end
 
-    local status_ok, _ = pcall(vim.cmd, 'colorscheme ' .. colorscheme)
-    if not status_ok then
-        vim.notify('colorscheme: ' .. colorscheme .. ' Not Found!')
-        return
-    end
+local status_ok, _ = pcall(vim.cmd, 'colorscheme ' .. colorscheme)
 
+if not status_ok then
+    vim.notify('colorscheme: ' .. colorscheme .. ' Not Found!')
+    return
 end

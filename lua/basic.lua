@@ -45,6 +45,8 @@ vim.o.whichwrap = '<,>,[,]'
 
 -- color
 if not lite_mode then
+    vim.cmd("set t_Co=16")
+else
     vim.o.termguicolors = true
     vim.opt.termguicolors = true
 end
