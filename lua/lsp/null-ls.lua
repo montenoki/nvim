@@ -35,7 +35,7 @@ null_ls.setup({
         -- }),
         --
         -- code actions ---------------------
-        code_actions.gitsigns,
+        -- code_actions.gitsigns,
         -- code_actions.refactoring,
     },
     -- #{m}: message
