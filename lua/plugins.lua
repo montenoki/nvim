@@ -88,6 +88,9 @@ packer.startup({
         use({ 'williamboman/mason-lspconfig.nvim' })
         use({ 'neovim/nvim-lspconfig' })
 
+        -- -- Lua
+        use('folke/neodev.nvim')
+
         -- ------------------------- 依存 ------------------------
 
         -- use('nvim-lua/popup.nvim')
@@ -374,8 +377,7 @@ packer.startup({
         -- })
 
         -- --------------- Lang ----------------
-        -- -- Lua
-        -- use('folke/neodev.nvim')
+
 
         -- -- Python
         -- use({
