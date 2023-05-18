@@ -7,7 +7,7 @@ local M = {
 
     enable_impatient = false,
 
-    treesitter_languages = { 'vim', 'lua', 'python', 'query' },
+
 
     keys = {
 
@@ -98,7 +98,17 @@ local M = {
         -- im-select
     },
 
+    nvimtreesitter = {
+        -- https://github.com/nvim-treesitter/nvim-treesitter#supported-languages
+        languages = { 'vim', 'lua', 'python', 'query' },
 
+        keys ={
+            init_selection = '<CR>',
+            node_incremental = '<CR>',
+            scope_incremental = '<TAB>',
+            node_decremental = '<BS>',
+        },
+    },
 
     nvimTree = {
 

@@ -3,26 +3,29 @@ if treesitter == nil then
     return
 end
 local uConfig = require('uConfig')
-local treesitter_langs = uConfig.treesitter_languages
 local lite_mode = uConfig.lite_mode
+local langs = uConfig.nvimtreesitter.languages
+local keys = uConfig.nvimtreesitter.keys
 
 require('nvim-treesitter.install').prefer_git = true
 
 treesitter.setup({
-    ensure_installed = treesitter_langs,
-    -- 構文の強調表示ON
+    ensure_installed = langs,
+    sync_install =false
+
     highlight = {
         enable = true,
         additional_vim_regex_highlighting = false,
     },
-    -- 漸進式選択
+
+    -- Incremental selection
     incremental_selection = {
         enable = true,
         keymaps = {
-            init_selection = '<CR>',
-            node_incremental = '<CR>',
-            node_decremental = '<BS>',
-            scope_incremental = '<TAB>',
+            init_selection = keys.init_selection,
+            node_incremental = keys.node_incremental,
+            node_decremental = keys.node_decremental,
+            scope_incremental = keys.scope_incremental,
         },
     },
     -- 自動indent (=)
@@ -30,10 +33,20 @@ treesitter.setup({
         enable = true,
     },
 
+    -- nvim-treesitter/nvim-treesitter-refactor
+    refactor = {
+        highlight_definitions = {
+            enable = true,
+            -- Set to false if you have an `updatetime` of ~100.
+            clear_on_cursor_move = true,
+        },
+        highlight_current_scope = { enable = false },
+    },
+
+    -- nvim-treesitter/nvim-treesitter-textobjects
     textobjects = {
         select = {
             enable = true,
-
             -- Automatically jump forward to textobj, similar to targets.vim
             lookahead = true,
 
