@@ -113,6 +113,14 @@ packer.startup({
             tag = 'nightly',
         })
 
+        -- Status Bar
+        use({
+            'nvim-lualine/lualine.nvim',
+            requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+            config = function()
+                require('plugin-config.interface.lualine')
+            end,
+        })
         
         -- ------------------------- 依存 ------------------------
         
@@ -266,13 +274,7 @@ packer.startup({
         -- })
 
         -- -- ステータスバー表示
-        -- use({
-        --     'nvim-lualine/lualine.nvim',
-        --     requires = { 'kyazdani42/nvim-web-devicons', 'arkav/lualine-lsp-progress' },
-        --     config = function()
-        --         require('plugin-config.interface.lualine')
-        --     end,
-        -- })
+
 
         -- -- Terminal表示
         -- use({
