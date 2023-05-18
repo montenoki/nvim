@@ -7,7 +7,7 @@ end
 
 local nvim_tree = requirePlugin('nvim-tree')
 
--- キーバインド導入
+-- Keybindings
 local list_keys = {
     { key = uTree.edit,               action = 'edit' },
     { key = uTree.system_open,        action = 'system_open' },
@@ -45,9 +45,9 @@ if nvim_tree == nil then
 end
 -- On/Off
 keymap('n', uTree.toggle, ':NvimTreeToggle<CR>')
+
 nvim_tree.setup({
-    -- open_on_setup = true,
-    -- デフォルトのnetrwを無効化
+    open_on_setup = true,
     disable_netrw = true,
     -- git 状態表示 off
     git = {
@@ -55,37 +55,30 @@ nvim_tree.setup({
         enable = true,
         ignore = true,
     },
-    -- project plugin と連携
+    -- project plugin
     update_cwd = false,
     update_focused_file = {
         enable = true,
         update_cwd = false,
     },
-    -- dot ファイルと node_modules フォルダー非表示
+
     filters = {
         dotfiles = false,
         custom = {},
     },
     view = {
-        -- 幅
         width = 40,
-        -- 左右
         side = 'left',
-        -- ルートフォルダー非表示
         hide_root_folder = false,
-        -- キーバインド導入
         mappings = {
             custom_only = true,
             list = list_keys,
         },
-        -- 行番号非表示
         number = false,
         relativenumber = false,
-        -- アイコン表示
         signcolumn = 'yes',
     },
     actions = {
-        -- ファイルを開く時の action
         open_file = {
             resize_window = true,
             quit_on_open = true,

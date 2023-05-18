@@ -15,7 +15,7 @@ vim.wo.colorcolumn = '80,120'
 if lite_mode then
     vim.o.list = false
 else
-    vim.o.list = True
+    vim.o.list = true
     vim.o.listchars = 'eol:↲,space:·,trail:●,tab:→→'
 end
 

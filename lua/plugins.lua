@@ -83,15 +83,35 @@ packer.startup({
         ----- LSP -----
         ---------------
 
-
         use({ 'williamboman/mason.nvim' })
         use({ 'williamboman/mason-lspconfig.nvim' })
         use({ 'neovim/nvim-lspconfig' })
         use({ 'jose-elias-alvarez/null-ls.nvim', requires = 'nvim-lua/plenary.nvim' })
 
+        -- -- Refactoring
+        -- use({
+        --     'ThePrimeagen/refactoring.nvim',
+        --     requires = {
+        --         { 'nvim-lua/plenary.nvim' },
+        --         { 'nvim-treesitter/nvim-treesitter' },
+        --     },
+        -- })
+
         -- -- Lua
         use('folke/neodev.nvim')
 
+        ----- Interface -----
+        ---------------------
+
+        -- File Explorer
+        use({
+            'nvim-tree/nvim-tree.lua',
+            requires = 'nvim-tree/nvim-web-devicons',
+            config = function()
+                require('plugin-config.interface.nvim-tree')
+            end,
+            tag = 'nightly',
+        })
 
         
         -- ------------------------- 依存 ------------------------
@@ -107,17 +127,7 @@ packer.startup({
         -- use('tami5/lspsaga.nvim')
         
 
-        -- -- フォーマット
-        -- use('mhartington/formatter.nvim')
 
-        -- -- -- code action
-        -- -- use({
-        -- --     'ThePrimeagen/refactoring.nvim',
-        -- --     requires = {
-        -- --         { 'nvim-lua/plenary.nvim' },
-        -- --         { 'nvim-treesitter/nvim-treesitter' },
-        -- --     },
-        -- -- })
 
         -- ------------------ 自動補完 ------------------
         -- -- エンジン
@@ -236,15 +246,7 @@ packer.startup({
         --     end,
         -- })
 
-        -- -- File Explorer
-        -- use({
-        --     'nvim-tree/nvim-tree.lua',
-        --     requires = 'nvim-tree/nvim-web-devicons',
-        --     config = function()
-        --         require('plugin-config.interface.nvim-tree')
-        --     end,
-        --     tag = 'nightly',
-        -- })
+
 
         -- -- タブ表示
         -- use({

@@ -13,9 +13,9 @@ null_ls.setup({
         -- lua
         formatting.stylua,
         -- Python
+        formatting.isort,
         formatting.black.with({ extra_args = { '--fast' } }),
         diagnostics.flake8.with({ extra_args = { '--max-line-length=120', '--ignore=F401,E226,W292,E122,E402' } }),
-        formatting.isort,
         -- rust
         -- formatting.rustfmt,
         -----------------------------------------------------
