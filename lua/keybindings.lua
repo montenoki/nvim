@@ -126,32 +126,38 @@ keymap('t', '<Esc>', '<C-\\><C-n>')
 -- LSP
 local lsp = uConfig.lsp
 pluginKeys.mapLSP = function(mapbuf)
-    -- rename
-    mapbuf('n', lsp.rename, '<cmd>lua vim.lsp.buf.rename()<CR>')
-    -- code action
-    mapbuf('n', lsp.code_action, '<cmd>lua vim.lsp.buf.code_action()<CR>')
-    -- format
-    if vim.fn.has('nvim-0.8') == 1 then
-        mapbuf('n', lsp.format, '<cmd>lua vim.lsp.buf.format { auync = true } <CR>')
-    else
-        mapbuf('n', lsp.format, '<cmd>lua vim.lsp.buf.formatting()<CR>')
-    end
-    -- go series
-    mapbuf('n', lsp.definition, function()
-        require('telescope.builtin').lsp_definitions({ initial_mode = 'normal' })
-    end)
-    mapbuf(
-        'n',
-        lsp.references,
-        "<cmd>lua require'telescope.builtin'.lsp_references(require('telescope.themes').get_ivy())<CR>"
-    )
-    mapbuf('n', lsp.hover, '<cmd>lua vim.lsp.buf.hover()<CR>')
+    mapbuf('n', lsp.declaration, vim.lsp.buf.declaration)
+    mapbuf('n', lsp.references, vim.lsp.buf.references)
+    -- TODO:
+    -- mapbuf('n', lsp.definition, function()
+    --     require('telescope.builtin').lsp_definitions({ initial_mode = 'normal' })
+    -- end)
+    -- mapbuf('n', lsp.references,
+    --     require('telescope.builtin').lsp_references(require('telescope.themes').get_ivy())"
+    -- )
+    mapbuf('n', lsp.definition, vim.lsp.buf.definition)
+    mapbuf('n', lsp.hover, vim.lsp.buf.hover)
 
+    mapbuf('n', lsp.implementation, vim.lsp.buf.implementation)
+    mapbuf('n', lsp.signature_help, vim.lsp.buf.signature_help)
+    
+    mapbuf('n', lsp.code_action, vim.lsp.buf.code_action)
+    mapbuf('n', lsp.format, function()
+        vim.lsp.buf.format { async = true }
+    end)
+    mapbuf('n', lsp.rename, vim.lsp.buf.rename)
+    mapbuf('n', lsp.type_definition, vim.lsp.buf.type_definition)
+    
     mapbuf('n', lsp.open_float, vim.diagnostic.open_float)
     mapbuf('n', lsp.goto_next, vim.diagnostic.goto_next)
     mapbuf('n', lsp.goto_prev, vim.diagnostic.goto_prev)
     mapbuf('n', lsp.setloclist, vim.diagnostic.setloclist)
-
+    
+    mapbuf('n', lsp.add_workspace_folder, vim.lsp.buf.add_workspace_folder)
+    mapbuf('n', lsp.remove_workspace_folder, vim.lsp.buf.remove_workspace_folder)
+    mapbuf('n', lsp.list_workspace_folders, function()
+        print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+    end)
 end
 
 -- DAP

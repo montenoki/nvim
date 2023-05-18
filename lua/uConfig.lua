@@ -257,24 +257,28 @@ local M = {
     },
 
     lsp = {
-        rename = '<leader>rn',
+        declaration = 'gD',
+        references = 'gr',
+        definition = 'gd',
+        hover = 'gh',
+
+        implementation = 'gi',
+        signature_help = 'gI',
+        
         code_action = '<leader>ca',
         format = '<leader>f',
-        definition = 'gd',
-        references = 'gr',
-        hover = 'gh',
+        rename = '<leader>rn',
+        type_definition = '<leader>D',
+
         -- diagnostic
-        open_float = 'gp',
+        open_float = 'gP',
         goto_next = 'gJ', -- ]d
         goto_prev = 'gK', -- [d 
-        setloclist = 'gP',
-        -- typescript
-        ts_organize = 'gs',
-        ts_rename_file = 'gR',
-        ts_add_missing_import = 'gi',
-        ts_remove_unused = 'gu',
-        ts_fix_all = 'gf',
-        ts_goto_source = 'gD',
+        setloclist = 'gp',
+
+        add_workspace_folder = '<leader>wa',
+        remove_workspace_folder = '<leader>wr',
+        list_workspace_folders = '<leader>wl',
     },
     dap = {
         toggle = '<leader>dd',
