@@ -18,8 +18,8 @@ if lite_mode then
         bookmark = "B:",
         modified = "M:",
         folder = {
-            arrow_closed = "",
-            arrow_open = "",
+            arrow_closed = "> ",
+            arrow_open = "v ",
             default = "= ",
             open = "=:",
             empty = "= ",
