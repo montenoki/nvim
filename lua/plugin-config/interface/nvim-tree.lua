@@ -12,9 +12,57 @@ local lite_mode = uConfig.lite_mode
 local icons
 
 if lite_mode then
-    icons = nil
+    icons = {
+        default = "- ",
+        symlink = "- ",
+        bookmark = "B:",
+        modified = "M:",
+        folder = {
+            arrow_closed = "",
+            arrow_open = "",
+            default = "= ",
+            open = "=:",
+            empty = "= ",
+            empty_open = "=:",
+            symlink = "= ",
+            symlink_open = "=:",
+        },
+        git = {
+            unstaged = "[x]",
+            staged = "[v]",
+            unmerged = "[?]",
+            renamed = "[>]",
+            untracked = "[*]",
+            deleted = "[-]",
+            ignored = "[o]",
+        },
+    }
 else
-    icons = { webdev_colors = true, git_placement = 'after' }
+    icons = {
+        default = "",
+        symlink = "",
+        bookmark = "",
+        modified = "●",
+        folder = {
+            arrow_closed = "",
+            arrow_open = "",
+            default = "",
+            open = "",
+            empty = "",
+            empty_open = "",
+            symlink = "",
+            symlink_open = "",
+        },
+        git = {
+            unstaged = "✗",
+            staged = "✓",
+            unmerged = "",
+            renamed = "➜",
+            untracked = "★",
+            deleted = "",
+            ignored = "◌",
+        },
+    }
 end
 
 -- Keybindings
@@ -105,6 +153,9 @@ nvim_tree.setup({
             enable = true,
             icons = { corner = '└ ', edge = '│ ', none = '  ' },
         },
-        icons = icons,
+        icons = {
+            webdev_colors = true,
+            git_placement = 'after',
+            glyphs = icons,
     },
 })
