@@ -147,7 +147,7 @@ pluginKeys.mapLSP = function(mapbuf)
     )
     mapbuf('n', lsp.hover, '<cmd>lua vim.lsp.buf.hover()<CR>')
 
-    mapbuf('n', lsp.open_flow, '<cmd>lua vim.diagnostic.open_float()<CR>')
+    mapbuf('n', lsp.open_float, vim.diagnostic.open_float)
     mapbuf('n', lsp.goto_next, '<cmd>lua vim.diagnostic.goto_next()<CR>')
     mapbuf('n', lsp.goto_prev, '<cmd>lua vim.diagnostic.goto_prev()<CR>')
 end

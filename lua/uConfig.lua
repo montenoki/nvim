@@ -264,7 +264,7 @@ local M = {
         references = 'gr',
         hover = 'gh',
         -- diagnostic
-        open_flow = 'gp',
+        open_float = 'gp',
         goto_next = 'gJ',
         goto_prev = 'gK',
         -- typescript
