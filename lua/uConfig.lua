@@ -107,6 +107,8 @@ local M = {
             node_incremental = '<CR>',
             scope_incremental = '<TAB>',
             node_decremental = '<BS>',
+            swap_next = '<leader>a',
+            swap_prev = '<leader>A',
         },
     },
 
