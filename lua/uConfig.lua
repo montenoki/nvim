@@ -265,8 +265,9 @@ local M = {
         hover = 'gh',
         -- diagnostic
         open_float = 'gp',
-        goto_next = 'gJ',
-        goto_prev = 'gK',
+        goto_next = 'gJ', -- ]d
+        goto_prev = 'gK', -- [d 
+        setloclist = 'gP'
         -- typescript
         ts_organize = 'gs',
         ts_rename_file = 'gR',
