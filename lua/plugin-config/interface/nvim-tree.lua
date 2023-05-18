@@ -157,5 +157,6 @@ nvim_tree.setup({
             webdev_colors = true,
             git_placement = 'after',
             glyphs = icons,
+        },
     },
 })
