@@ -3,7 +3,7 @@ if treesitter == nil then
     return
 end
 local uConfig = require('uConfig')
-local treesitter_langs = uConfig.treesitter_langs
+local treesitter_langs = uConfig.treesitter_languages
 local lite_mode = uConfig.lite_mode
 
 require('nvim-treesitter.install').prefer_git = true
