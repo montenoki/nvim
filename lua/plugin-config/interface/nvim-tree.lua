@@ -6,6 +6,16 @@ if uTree == nil or not uTree.enable then
 end
 
 local nvim_tree = requirePlugin('nvim-tree')
+local uConfig = require('uConfig')
+local lite_mode = uConfig.lite_mode
+
+local icons
+
+if lite_mode then
+    icons = nil
+else
+    icons = { webdev_colors = true, git_placement = 'after' }
+end
 
 -- Keybindings
 local list_keys = {
@@ -95,6 +105,6 @@ nvim_tree.setup({
             enable = true,
             icons = { corner = '└ ', edge = '│ ', none = '  ' },
         },
-        icons = { webdev_colors = true, git_placement = 'after' },
+        icons = icons,
     },
 })

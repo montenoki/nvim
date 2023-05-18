@@ -127,6 +127,10 @@ vim.opt.clipboard = 'unnamedplus'
 -- TODO: findout whats going on
 vim.opt.foldtext = 'v:lua.require("utils.simple_fold").simple_fold()'
 
+-- disable netrw at the very start of your init.lua (strongly advised)
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 -- Fold
 -- TODO: tty support
 -- vim.o.fillchars = [[]]
