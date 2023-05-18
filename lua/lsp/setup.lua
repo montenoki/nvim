@@ -89,3 +89,5 @@ for name, config in pairs(servers) do
         lspconfig[name].setup({})
     end
 end
+
+require("lsp.null-ls")

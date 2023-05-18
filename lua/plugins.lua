@@ -87,26 +87,28 @@ packer.startup({
         use({ 'williamboman/mason.nvim' })
         use({ 'williamboman/mason-lspconfig.nvim' })
         use({ 'neovim/nvim-lspconfig' })
+        use({ 'jose-elias-alvarez/null-ls.nvim', requires = 'nvim-lua/plenary.nvim' })
 
         -- -- Lua
         use('folke/neodev.nvim')
 
+
+        
         -- ------------------------- 依存 ------------------------
-
+        
         -- use('nvim-lua/popup.nvim')
-
+        
         -- use('tpope/vim-repeat')
-
+        
         -- use('nvim-lua/plenary.nvim')
-
+        
         -- use('MunifTanjim/nui.nvim')
-
+        
         -- use('tami5/lspsaga.nvim')
-
+        
 
         -- -- フォーマット
         -- use('mhartington/formatter.nvim')
-        -- use({ 'jose-elias-alvarez/null-ls.nvim', requires = 'nvim-lua/plenary.nvim' })
 
         -- -- -- code action
         -- -- use({

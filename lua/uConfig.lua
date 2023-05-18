@@ -89,7 +89,8 @@ local M = {
             close = 'zz',
         },
 
-        format = '<leader>f',
+        -- FIX:
+        -- format = '<leader>f',
 
         terminal_to_normal = '<Esc>',
         -- TODO
@@ -280,6 +281,7 @@ local M = {
         remove_workspace_folder = '<leader>wr',
         list_workspace_folders = '<leader>wl',
     },
+
     dap = {
         toggle = '<leader>dd',
 
