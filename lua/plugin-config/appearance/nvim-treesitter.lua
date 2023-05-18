@@ -11,7 +11,7 @@ require('nvim-treesitter.install').prefer_git = true
 
 treesitter.setup({
     ensure_installed = langs,
-    sync_install =false
+    sync_install =false,
 
     highlight = {
         enable = true,
