@@ -90,7 +90,11 @@ packer.startup({
         -- Fold
         use({
             'kevinhwang91/nvim-ufo',
-            requires = {'kevinhwang91/promise-async'},
+            requires = {'kevinhwang91/promise-async',
+            {"luukvbaal/statuscol.nvim", config=function()
+                require('plugin-config.appearance.statuscol')
+            end,},
+        },
             config = function()
                 require('plugin-config.appearance.ufo')
             end,

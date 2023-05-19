@@ -133,9 +133,8 @@ vim.g.loaded_netrwPlugin = 1
 
 -- Fold
 -- TODO: tty support
--- vim.o.fillchars = [[]]
-vim.o.foldcolumn = '0'
+vim.o.foldcolumn = '1'
 vim.o.foldlevel = 99
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
--- vim.o.foldnestmax = '1'
+vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
