@@ -109,10 +109,12 @@ packer.startup({
         use('onsails/lspkind-nvim')
         -- Source
         use('hrsh7th/cmp-nvim-lsp')
+        use('hrsh7th/cmp-nvim-lsp-signature-help')
         use('hrsh7th/cmp-buffer')
         use('hrsh7th/cmp-path')
         use('hrsh7th/cmp-cmdline')
-        use('hrsh7th/cmp-nvim-lsp-signature-help')
+        use('dmitmel/cmp-cmdline-history')
+        use('hrsh7th/cmp-emoji')
         -- 自分のsnippet
         use('montenoki/vim-snippets')
 
