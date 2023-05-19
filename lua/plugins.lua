@@ -106,6 +106,7 @@ packer.startup({
         use('hrsh7th/nvim-cmp')
         use('SirVer/ultisnips')
         use('quangnguyen30192/cmp-nvim-ultisnips')
+        use('onsails/lspkind-nvim')
         -- Source
         use('hrsh7th/cmp-nvim-lsp')
         use('hrsh7th/cmp-buffer')
