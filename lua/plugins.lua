@@ -103,9 +103,17 @@ packer.startup({
         ----- Snippets -----
         --------------------
         -- Engine
-        use('hrsh7th/nvim-cmp')
+        use({'hrsh7th/nvim-cmp',
+        requires = {
+            "quangnguyen30192/cmp-nvim-ultisnips",
+            config = function()
+                require("cmp_nvim_ultisnips").setup{}
+            end,
+            requires = { "nvim-treesitter/nvim-treesitter" },
+            },
+        })
 
-        use('SirVer/ultisnips')
+        -- use('SirVer/ultisnips')
         use('quangnguyen30192/cmp-nvim-ultisnips')
         -- Source
         use('hrsh7th/cmp-nvim-lsp')
