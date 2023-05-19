@@ -58,7 +58,6 @@ vim.o.showtabline = 2
 
 vim.o.showmode = false
 
-
 ----- Tab -----
 ---------------
 
@@ -82,13 +81,11 @@ vim.o.autoindent = true
 vim.bo.autoindent = true
 vim.o.smartindent = true
 
-
 ----- Reaction Times -----
 --------------------------
 
 vim.o.timeoutlen = 2000
 vim.o.updatetime = 50
-
 
 ----- Search -----
 ------------------
@@ -98,7 +95,6 @@ vim.o.ignorecase = true
 vim.o.smartcase = true
 
 vim.o.incsearch = true
-
 
 ----- Others -----
 ------------------
@@ -137,4 +133,8 @@ vim.o.foldcolumn = '1'
 vim.o.foldlevel = 99
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
-vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+if lite_mode then
+    vim.o.fillchars = [[eob: ,fold: ,foldopen:- ,foldsep: ,foldclose:+]]
+else
+    vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+end
