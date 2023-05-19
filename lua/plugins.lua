@@ -87,7 +87,14 @@ packer.startup({
             end,
         })
 
-
+        -- Fold
+        use({
+            'kevinhwang91/nvim-ufo',
+            requires = {'kevinhwang91/promise-async'},
+            config = function()
+                require('plugin-config.appearance.ufo')
+            end,
+        })
 
         ----- LSP -----
         ---------------
@@ -206,22 +213,7 @@ packer.startup({
 
 
 
-        -- -- 代码折叠
-        -- use({
-        --     'kevinhwang91/nvim-ufo',
-        --     requires = {
-        --         'kevinhwang91/promise-async',
-        --         {
-        --             'luukvbaal/statuscol.nvim',
-        --             config = function()
-        --                 require('statuscol').setup({ foldfunc = 'builtin', setopt = true })
-        --             end,
-        --         },
-        --     },
-        --     config = function()
-        --         require('plugin-config.appearance.ufo')
-        --     end,
-        -- })
+
 
 
 

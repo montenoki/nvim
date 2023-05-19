@@ -7,7 +7,7 @@ end
 
 local done_mark
 if uConfig.lite_mode then
-    done_mark = 'v'
+    done_mark = 'Done'
 else
     done_mark = '✔'
 end
