@@ -14,4 +14,4 @@ require('lsp.setup')
 
 require('cmp.setup')
 
-require('dap.setup')
+-- require('dap.setup')

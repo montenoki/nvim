@@ -8,8 +8,8 @@ local enable_impatient = uConfig.enable_impatient
 -- Packer: Auto install
 if fn.empty(fn.glob(install_path)) > 0 then
     vim.notify('Installing Packer.nvim... Please wait...')
-    packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim',
-                                  install_path})
+    packer_bootstrap =
+        fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
     local rtp_addition = vim.fn.stdpath('data') .. '/site/pack/*/start/*'
     if not string.find(vim.o.runtimepath, rtp_addition) then
         vim.o.runtimepath = rtp_addition .. ',' .. vim.o.runtimepath
@@ -45,31 +45,31 @@ packer.startup({
             'nvim-treesitter/nvim-treesitter',
             run = function()
                 require('nvim-treesitter.install').update({
-                    with_sync = true
+                    with_sync = true,
                 })
             end,
             config = function()
                 require('plugin-config.appearance.nvim-treesitter')
-            end
+            end,
         })
         use({
-            "nvim-treesitter/nvim-treesitter-textobjects",
-            after = "nvim-treesitter",
-            requires = "nvim-treesitter/nvim-treesitter"
+            'nvim-treesitter/nvim-treesitter-textobjects',
+            after = 'nvim-treesitter',
+            requires = 'nvim-treesitter/nvim-treesitter',
         })
         use({
-            "nvim-treesitter/nvim-treesitter-refactor",
-            after = "nvim-treesitter",
-            requires = "nvim-treesitter/nvim-treesitter"
+            'nvim-treesitter/nvim-treesitter-refactor',
+            after = 'nvim-treesitter',
+            requires = 'nvim-treesitter/nvim-treesitter',
         })
 
         -- To-do Comments.nvim
         use({
             'folke/todo-comments.nvim',
-            requires = {'nvim-lua/plenary.nvim'},
+            requires = { 'nvim-lua/plenary.nvim' },
             config = function()
                 require('plugin-config.appearance.todo-comments')
-            end
+            end,
         })
 
         -- Indent-blankline
@@ -77,33 +77,36 @@ packer.startup({
             'lukas-reineke/indent-blankline.nvim',
             config = function()
                 require('plugin-config.appearance.indent-blankline')
-            end
+            end,
         })
 
         -- Fold
         -- TODO: set keybindings
         use({
             'kevinhwang91/nvim-ufo',
-            requires = {'kevinhwang91/promise-async', {
-                "luukvbaal/statuscol.nvim",
-                config = function()
-                    require('plugin-config.appearance.statuscol')
-                end
-            }},
+            requires = {
+                'kevinhwang91/promise-async',
+                {
+                    'luukvbaal/statuscol.nvim',
+                    config = function()
+                        require('plugin-config.appearance.statuscol')
+                    end,
+                },
+            },
             config = function()
                 require('plugin-config.appearance.ufo')
-            end
+            end,
         })
 
         ----- LSP -----
         ---------------
 
-        use({'williamboman/mason.nvim'})
-        use({'williamboman/mason-lspconfig.nvim'})
-        use({'neovim/nvim-lspconfig'})
+        use({ 'williamboman/mason.nvim' })
+        use({ 'williamboman/mason-lspconfig.nvim' })
+        use({ 'neovim/nvim-lspconfig' })
         use({
             'jose-elias-alvarez/null-ls.nvim',
-            requires = 'nvim-lua/plenary.nvim'
+            requires = 'nvim-lua/plenary.nvim',
         })
 
         -- TODO:
@@ -148,7 +151,7 @@ packer.startup({
             config = function()
                 require('plugin-config.interface.nvim-tree')
             end,
-            tag = 'nightly'
+            tag = 'nightly',
         })
 
         -- Status Bar
@@ -156,11 +159,11 @@ packer.startup({
             'nvim-lualine/lualine.nvim',
             requires = {
                 'kyazdani42/nvim-web-devicons',
-                opt = true
+                opt = true,
             },
             config = function()
                 require('plugin-config.interface.lualine')
-            end
+            end,
         })
 
         -- Status for nvim-lsp progress
@@ -168,7 +171,7 @@ packer.startup({
             'j-hui/fidget.nvim',
             config = function()
                 require('plugin-config.interface.fidget')
-            end
+            end,
         })
 
         ----- Editor -----
@@ -179,7 +182,7 @@ packer.startup({
             'numToStr/Comment.nvim',
             config = function()
                 require('plugin-config.editor.comment')
-            end
+            end,
         })
 
         -- surround
@@ -187,17 +190,42 @@ packer.startup({
             'kylechui/nvim-surround',
             config = function()
                 require('plugin-config.editor.nvim-surround')
-            end
+            end,
         })
 
         ----- DAP -----
         ---------------
         use({
             'rcarriga/nvim-dap-ui',
-            requires = {'mfussenegger/nvim-dap'},
-            after = 'nvim-dap'
+            requires = { 'mfussenegger/nvim-dap' },
+            after = 'nvim-dap',
         })
         use('theHamsta/nvim-dap-virtual-text')
+
+        ----- Search Tools -----
+        ------------------------
+
+        use({
+            'nvim-telescope/telescope.nvim',
+            tag = '0.1.1',
+            requires = {
+                'nvim-lua/plenary.nvim',
+            },
+            config = function()
+                require('plugin-config.search.telescope')
+            end,
+        })
+        use('LinArcX/telescope-env.nvim')
+        use('nvim-telescope/telescope-ui-select.nvim')
+
+        -- Diagnostics 表示
+        use({
+            'folke/trouble.nvim',
+            requires = 'nvim-tree/nvim-web-devicons',
+            config = function()
+                require('plugin-config.interface.trouble')
+            end,
+        })
 
         -- ------------------------- 依存 ------------------------
 
@@ -317,15 +345,6 @@ packer.startup({
         --     end,
         -- })
 
-        -- -- Diagnostics 表示
-        -- use({
-        --     'folke/trouble.nvim',
-        --     requires = 'nvim-tree/nvim-web-devicons',
-        --     config = function()
-        --         require('plugin-config.interface.trouble')
-        --     end,
-        -- })
-
         -- -- Which-key
         -- use({
         --     'folke/which-key.nvim',
@@ -337,18 +356,6 @@ packer.startup({
         -- })
 
         -- ---------------------- 検索機能 -----------------------
-        -- -- telescope ファイル検索
-        -- use({
-        --     'nvim-telescope/telescope.nvim',
-        --     requires = {
-        --         'nvim-lua/plenary.nvim',
-        --         'LinArcX/telescope-env.nvim',
-        --         'nvim-telescope/telescope-ui-select.nvim',
-        --     },
-        --     config = function()
-        --         require('plugin-config.search.telescope')
-        --     end,
-        -- })
 
         -- -- project
         -- use({
@@ -384,9 +391,9 @@ packer.startup({
         display = {
             open_fn = function()
                 return require('packer.util').float({
-                    border = 'single'
+                    border = 'single',
                 })
-            end
-        }
-    }
+            end,
+        },
+    },
 })

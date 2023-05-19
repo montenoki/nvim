@@ -18,6 +18,7 @@ brew install fd
 ```
 ## Arch OS
 require xclip
+sudo pacman -S ripgrep
 
 TODO:
 - nvim-tree预览时使用telescope

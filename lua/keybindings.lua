@@ -17,7 +17,6 @@ local command_mode = 'c'
 local n_v_mode = { 'n', 'v' }
 local c_mode = { 'c' }
 
-
 ----- Neovim Keybindings -----
 ------------------------------
 
@@ -34,7 +33,6 @@ keymap(n_v_mode, keys.n_v_scroll_down_large, '8<C-e>')
 
 keymap(c_mode, keys.c_next_item, '<C-n>', opts_remap)
 keymap(c_mode, keys.c_prev_item, '<C-n>', opts_remap)
-
 
 -- windows
 if keys.s_windows ~= nil and keys.s_windows.enable then
@@ -71,7 +69,6 @@ if keys.s_tab ~= nil then
     keymap('n', tkey.last, '<CMD>tablast<CR>')
 end
 
-
 ----- Neovim Keybinds Settings -----
 ------------------------------------
 
@@ -81,9 +78,9 @@ keymap(n_v_mode, 'g_', '$')
 
 -- magic search
 if uConfig.enable_magic_search then
-    keymap(n_v_mode, '/', '/\\v', { remap = false, silent =false })
+    keymap(n_v_mode, '/', '/\\v', { remap = false, silent = false })
 else
-    keymap(n_v_mode, '/', '/', { remap = false, silent =false })
+    keymap(n_v_mode, '/', '/', { remap = false, silent = false })
 end
 
 -- wrap line movement
@@ -104,7 +101,6 @@ keymap({ 'n', 'i', 'v' }, '<C-z>', '')
 -- do not copy after paste in visual mode
 keymap(visual_mode, 'p', '"_dP')
 
-
 ----- Plugin Keybindings -----
 ------------------------------
 -- TODO:
@@ -120,8 +116,6 @@ keymap({ 'n', 'i' }, '<A-\\>', '<Cmd>lua bottonterm_toggle()<CR>')
 keymap('n', '<leader>tg', '<Cmd>lua lazygit_toggle()<CR>')
 -- Exit
 keymap('t', '<Esc>', '<C-\\><C-n>')
-
-
 
 -- LSP
 local lsp = uConfig.lsp
@@ -140,19 +134,14 @@ pluginKeys.mapLSP = function(mapbuf)
 
     mapbuf('n', lsp.implementation, vim.lsp.buf.implementation)
     mapbuf('n', lsp.signature_help, vim.lsp.buf.signature_help)
-    
+
     mapbuf('n', lsp.code_action, vim.lsp.buf.code_action)
     mapbuf('n', lsp.format, function()
-        vim.lsp.buf.format { async = true }
+        vim.lsp.buf.format({ async = true })
     end)
     mapbuf('n', lsp.rename, vim.lsp.buf.rename)
     mapbuf('n', lsp.type_definition, vim.lsp.buf.type_definition)
-    
-    mapbuf('n', lsp.open_float, vim.diagnostic.open_float)
-    mapbuf('n', lsp.goto_next, vim.diagnostic.goto_next)
-    mapbuf('n', lsp.goto_prev, vim.diagnostic.goto_prev)
-    mapbuf('n', lsp.setloclist, vim.diagnostic.setloclist)
-    
+
     mapbuf('n', lsp.add_workspace_folder, vim.lsp.buf.add_workspace_folder)
     mapbuf('n', lsp.remove_workspace_folder, vim.lsp.buf.remove_workspace_folder)
     mapbuf('n', lsp.list_workspace_folders, function()
@@ -184,11 +173,11 @@ pluginKeys.mapDAP = function()
         'n',
         dap.stop,
         ":lua require'dap'.close()<CR>"
-        .. ":lua require'dap'.terminate()<CR>"
-        .. ":lua require'dap.repl'.close()<CR>"
-        .. ":lua require'dapui'.close()<CR>"
-        .. ":lua require('dap').clear_breakpoints()<CR>"
-        .. '<C-w>o<CR>',
+            .. ":lua require'dap'.terminate()<CR>"
+            .. ":lua require'dap.repl'.close()<CR>"
+            .. ":lua require'dapui'.close()<CR>"
+            .. ":lua require('dap').clear_breakpoints()<CR>"
+            .. '<C-w>o<CR>',
         opt
     )
 end

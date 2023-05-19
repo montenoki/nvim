@@ -1,3 +1,4 @@
+-- TODO:
 local uConfig = require('uConfig')
 local uTelescope = uConfig.telescope
 
@@ -10,7 +11,7 @@ if telescope == nil then
     return
 end
 
-local actions = require('telescope.actions')
+-- local actions = require('telescope.actions')
 local trouble = require('trouble.providers.telescope')
 
 telescope.setup({
@@ -49,5 +50,5 @@ keymap('n', uTelescope.find_files, ':Telescope find_files<CR>')
 keymap('n', uTelescope.live_grep, ':Telescope live_grep<CR>')
 
 pcall(telescope.load_extension, 'env')
-pcall(telescope.load_extension, 'ui-select')
-pcall(telescope.load_extension, 'projects')
+-- pcall(telescope.load_extension, 'ui-select')
+-- pcall(telescope.load_extension, 'projects')

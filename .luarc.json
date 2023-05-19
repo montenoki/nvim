@@ -1,0 +1,24 @@
+{
+    "workspace.library": [
+        "/home/ten/.local/share/nvim/site/pack/packer/start/neodev.nvim/types/stable",
+        "/usr/share/nvim/runtime/lua",
+        "/home/ten/.config/nvim",
+        "/etc/xdg/nvim",
+        "/home/ten/.local/share/nvim/site",
+        "/home/ten/.local/share/nvim/site/pack/packer/start/dracula.nvim",
+        "/home/ten/.local/share/nvim/site/pack/packer/start/mason-lspconfig.nvim",
+        "/home/ten/.local/share/nvim/site/pack/packer/start/mason.nvim",
+        "/home/ten/.local/share/nvim/site/pack/packer/start/neodev.nvim",
+        "/home/ten/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
+        "/home/ten/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
+        "/home/ten/.local/share/nvim/site/pack/packer/start/packer.nvim",
+        "/home/ten/.local/share/nvim/site/pack/packer/start/plenary.nvim",
+        "/home/ten/.local/share/nvim/site/pack/packer/start/todo-comments.nvim",
+        "/home/ten/.local/share/nvim/site/pack/packer/start/vim-dim",
+        "/usr/share/nvim/runtime",
+        "/usr/lib/nvim",
+        "/home/ten/.config/nvim/lua",
+        "${3rd}/luassert/library",
+        "${3rd}/luv/library"
+    ]
+}
