@@ -153,13 +153,13 @@ packer.startup({
             end,
         })
 
-        -- -- Indent-blankline
-        -- use({
-        --     'lukas-reineke/indent-blankline.nvim',
-        --     config = function()
-        --         require('plugin-config.editor.indent-blankline')
-        --     end,
-        -- })
+        -- Indent-blankline
+        use({
+            'lukas-reineke/indent-blankline.nvim',
+            config = function()
+                require('plugin-config.editor.indent-blankline')
+            end,
+        })
 
         -- -- surround
         -- use({
