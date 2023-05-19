@@ -103,18 +103,10 @@ packer.startup({
         ----- Snippets -----
         --------------------
         -- Engine
-        use({'hrsh7th/nvim-cmp',
-        requires = {
-            "quangnguyen30192/cmp-nvim-ultisnips",
-            config = function()
-                require("cmp_nvim_ultisnips").setup{}
-            end,
-            requires = { "nvim-treesitter/nvim-treesitter" },
-            },
-        })
+        use('hrsh7th/nvim-cmp')
 
-        -- use('SirVer/ultisnips')
-        use('quangnguyen30192/cmp-nvim-ultisnips')
+        use('SirVer/ultisnips')
+        -- use('quangnguyen30192/cmp-nvim-ultisnips')
         -- Source
         use('hrsh7th/cmp-nvim-lsp')
         use('hrsh7th/cmp-buffer')
@@ -122,7 +114,7 @@ packer.startup({
         use('hrsh7th/cmp-cmdline')
         use('hrsh7th/cmp-nvim-lsp-signature-help')
         -- 自分のsnippet
-        -- use('montenoki/vim-snippets')
+        use('montenoki/vim-snippets')
 
 
         ----- Interface -----
