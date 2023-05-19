@@ -10,6 +10,7 @@ if uConfig.lite_mode then
     done_mark = 'v'
 else
     done_mark = '✔'
+end
 
 fidget.setup({
     text = {
