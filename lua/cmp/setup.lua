@@ -61,7 +61,7 @@ cmp.setup({
         }
     ),
     -- 使用lspkind-nvim显示类型图标
-    formatting = require('cmp.lspkind').formatting,
+    -- formatting = require('cmp.lspkind').formatting,
 })
 
 -- -- Use buffer source for `/`.
