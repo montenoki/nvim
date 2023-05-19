@@ -13,3 +13,5 @@ require('autocmds')
 require('lsp.setup')
 
 require('cmp.setup')
+
+require('dap.setup')

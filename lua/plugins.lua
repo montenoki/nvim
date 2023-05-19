@@ -8,14 +8,8 @@ local enable_impatient = uConfig.enable_impatient
 -- Packer: Auto install
 if fn.empty(fn.glob(install_path)) > 0 then
     vim.notify('Installing Packer.nvim... Please wait...')
-    packer_bootstrap = fn.system({
-            'git',
-            'clone',
-            '--depth',
-            '1',
-            'https://github.com/wbthomason/packer.nvim',
-            install_path,
-        })
+    packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim',
+                                  install_path})
     local rtp_addition = vim.fn.stdpath('data') .. '/site/pack/*/start/*'
     if not string.find(vim.o.runtimepath, rtp_addition) then
         vim.o.runtimepath = rtp_addition .. ',' .. vim.o.runtimepath
@@ -43,7 +37,6 @@ packer.startup({
         use('Mofiqul/dracula.nvim')
         use('jeffkreeftmeijer/vim-dim')
 
-
         ----- Code Appearance  -----
         ----------------------------
 
@@ -51,32 +44,32 @@ packer.startup({
         use({
             'nvim-treesitter/nvim-treesitter',
             run = function()
-                require('nvim-treesitter.install').update({ with_sync = true })
+                require('nvim-treesitter.install').update({
+                    with_sync = true
+                })
             end,
             config = function()
                 require('plugin-config.appearance.nvim-treesitter')
-            end,
+            end
         })
         use({
             "nvim-treesitter/nvim-treesitter-textobjects",
             after = "nvim-treesitter",
-            requires = "nvim-treesitter/nvim-treesitter",
+            requires = "nvim-treesitter/nvim-treesitter"
         })
         use({
             "nvim-treesitter/nvim-treesitter-refactor",
             after = "nvim-treesitter",
-            requires = "nvim-treesitter/nvim-treesitter",
+            requires = "nvim-treesitter/nvim-treesitter"
         })
 
         -- To-do Comments.nvim
         use({
             'folke/todo-comments.nvim',
-            requires = {
-                'nvim-lua/plenary.nvim',
-            },
+            requires = {'nvim-lua/plenary.nvim'},
             config = function()
                 require('plugin-config.appearance.todo-comments')
-            end,
+            end
         })
 
         -- Indent-blankline
@@ -84,29 +77,34 @@ packer.startup({
             'lukas-reineke/indent-blankline.nvim',
             config = function()
                 require('plugin-config.appearance.indent-blankline')
-            end,
+            end
         })
 
         -- Fold
+        -- TODO: set keybindings
         use({
             'kevinhwang91/nvim-ufo',
-            requires = {'kevinhwang91/promise-async',
-            {"luukvbaal/statuscol.nvim", config=function()
-                require('plugin-config.appearance.statuscol')
-            end,},
-        },
+            requires = {'kevinhwang91/promise-async', {
+                "luukvbaal/statuscol.nvim",
+                config = function()
+                    require('plugin-config.appearance.statuscol')
+                end
+            }},
             config = function()
                 require('plugin-config.appearance.ufo')
-            end,
+            end
         })
 
         ----- LSP -----
         ---------------
 
-        use({ 'williamboman/mason.nvim' })
-        use({ 'williamboman/mason-lspconfig.nvim' })
-        use({ 'neovim/nvim-lspconfig' })
-        use({ 'jose-elias-alvarez/null-ls.nvim', requires = 'nvim-lua/plenary.nvim' })
+        use({'williamboman/mason.nvim'})
+        use({'williamboman/mason-lspconfig.nvim'})
+        use({'neovim/nvim-lspconfig'})
+        use({
+            'jose-elias-alvarez/null-ls.nvim',
+            requires = 'nvim-lua/plenary.nvim'
+        })
 
         -- TODO:
         -- -- Refactoring
@@ -123,6 +121,7 @@ packer.startup({
 
         ----- Snippets -----
         --------------------
+
         -- Engine
         use('hrsh7th/nvim-cmp')
         use('SirVer/ultisnips')
@@ -139,7 +138,6 @@ packer.startup({
         -- 自分のsnippet
         use('montenoki/vim-snippets')
 
-
         ----- Interface -----
         ---------------------
 
@@ -150,16 +148,19 @@ packer.startup({
             config = function()
                 require('plugin-config.interface.nvim-tree')
             end,
-            tag = 'nightly',
+            tag = 'nightly'
         })
 
         -- Status Bar
         use({
             'nvim-lualine/lualine.nvim',
-            requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+            requires = {
+                'kyazdani42/nvim-web-devicons',
+                opt = true
+            },
             config = function()
                 require('plugin-config.interface.lualine')
-            end,
+            end
         })
 
         -- Status for nvim-lsp progress
@@ -167,7 +168,7 @@ packer.startup({
             'j-hui/fidget.nvim',
             config = function()
                 require('plugin-config.interface.fidget')
-            end,
+            end
         })
 
         ----- Editor -----
@@ -178,7 +179,7 @@ packer.startup({
             'numToStr/Comment.nvim',
             config = function()
                 require('plugin-config.editor.comment')
-            end,
+            end
         })
 
         -- surround
@@ -186,40 +187,32 @@ packer.startup({
             'kylechui/nvim-surround',
             config = function()
                 require('plugin-config.editor.nvim-surround')
-            end,
+            end
         })
 
-        
+        ----- DAP -----
+        ---------------
+        use({
+            'rcarriga/nvim-dap-ui',
+            requires = {'mfussenegger/nvim-dap'},
+            after = 'nvim-dap'
+        })
+        use('theHamsta/nvim-dap-virtual-text')
+
         -- ------------------------- 依存 ------------------------
-        
+
         -- use('nvim-lua/popup.nvim')
-        
+
         -- use('tpope/vim-repeat')
-        
+
         -- use('nvim-lua/plenary.nvim')
-        
+
         -- use('MunifTanjim/nui.nvim')
-        
+
         -- use('tami5/lspsaga.nvim')
-        
-
-
-
-
-
-        -- --------------------- DAP --------------------
-        -- use('mfussenegger/nvim-dap')
-        -- use('theHamsta/nvim-dap-virtual-text')
-        -- use('rcarriga/nvim-dap-ui')
 
         -- -- Lua
         -- use({ 'jbyuki/one-small-step-for-vimkind' })
-
-
-
-
-
-
 
         -- -- git
         -- use({
@@ -283,8 +276,6 @@ packer.startup({
         --     end,
         -- })
 
-
-
         -- -- タブ表示
         -- use({
         --     'akinsho/bufferline.nvim',
@@ -302,7 +293,6 @@ packer.startup({
         --     end,
         -- })
 
-
         -- -- Terminal表示
         -- use({
         --     'akinsho/toggleterm.nvim',
@@ -310,8 +300,6 @@ packer.startup({
         --         require('plugin-config.interface.toggleterm')
         --     end,
         -- })
-
-
 
         -- -- zen-mode全画面
         -- use({
@@ -370,10 +358,7 @@ packer.startup({
         --     end,
         -- })
 
-
-
         -- --------------- Lang ----------------
-
 
         -- -- Python
         -- use({
@@ -398,8 +383,10 @@ packer.startup({
         max_jobs = 10,
         display = {
             open_fn = function()
-                return require('packer.util').float({ border = 'single' })
-            end,
-        },
-    },
+                return require('packer.util').float({
+                    border = 'single'
+                })
+            end
+        }
+    }
 })

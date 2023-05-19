@@ -1,16 +1,10 @@
 local M = {
     lite_mode = true,
-
-    config_path = vim.fn.stdpath('config'), 
-    
+    config_path = vim.fn.stdpath('config'),
     enable_magic_search = true,
-
     enable_impatient = false,
 
-
-
     keys = {
-
         leader_key = ' ',
 
         -- : 模式
@@ -19,7 +13,7 @@ local M = {
 
         -- normal 模式
         n_save = '<leader>w', -- :w
-        n_save_quit = '<leader>wq', --:wq
+        n_save_quit = '<leader>wq', -- :wq
         n_save_all = '<leader>wa', -- :wa
         -- n_save_all_quit = "<leader>qa", -- :wqa
         n_force_quit = '<leader>q', -- :qa!
@@ -46,7 +40,6 @@ local M = {
         snip_prev_choice = '<C-k>',
 
         s_windows = {
-
             enable = true,
 
             -- 窗口开关
@@ -72,7 +65,7 @@ local M = {
             width_increase = 's.',
             height_decrease = 'sj',
             height_increase = 'sk',
-            size_equal = 's=',
+            size_equal = 's='
         },
 
         s_tab = {
@@ -81,18 +74,15 @@ local M = {
             next = 'tl',
             first = 'tj',
             last = 'tk',
-            close = 'tc',
+            close = 'tc'
         },
 
         fold = {
             open = 'Z',
-            close = 'zz',
+            close = 'zz'
         },
 
-        -- FIX:
-        -- format = '<leader>f',
-
-        terminal_to_normal = '<Esc>',
+        terminal_to_normal = '<Esc>'
         -- TODO
 
         -- proxy
@@ -101,16 +91,16 @@ local M = {
 
     nvimtreesitter = {
         -- https://github.com/nvim-treesitter/nvim-treesitter#supported-languages
-        languages = { 'vim', 'lua', 'python', 'query' },
+        languages = {'vim', 'lua', 'python', 'query'},
 
-        keys ={
+        keys = {
             init_selection = '<CR>',
             node_incremental = '<CR>',
             scope_incremental = '<TAB>',
             node_decremental = '<BS>',
             swap_next = '<leader>a',
-            swap_prev = '<leader>A',
-        },
+            swap_prev = '<leader>A'
+        }
     },
 
     nvimTree = {
@@ -119,7 +109,7 @@ local M = {
         toggle = '<A-m>',
 
         -- Open file
-        edit = { '<CR>', '<2-LeftMouse>' },
+        edit = {'<CR>', '<2-LeftMouse>'},
         system_open = 'o',
         preview = '<Tab>',
         tabnew = 't',
@@ -154,7 +144,7 @@ local M = {
         paste = 'p',
         copy_name = 'y',
         copy_path = 'Y',
-        copy_absolute_path = 'gy',
+        copy_absolute_path = 'gy'
     },
 
     bufferLine = {
@@ -165,7 +155,7 @@ local M = {
         next = '<C-l>',
         close = '<leader>bc',
         close_others = '<leader>bo',
-        close_pick = '<leader>bp',
+        close_pick = '<leader>bp'
     },
 
     trouble = {
@@ -176,7 +166,7 @@ local M = {
         document = '<leader>xd',
         loclist = '<leader>xl',
         quickfix = '<leader>xq',
-        references = 'gR',
+        references = 'gR'
     },
 
     telescope = {
@@ -196,7 +186,7 @@ local M = {
         close = '<esc>',
         -- 预览窗口上下滚动
         preview_scrolling_up = '<C-u>',
-        preview_scrolling_down = '<C-d>',
+        preview_scrolling_down = '<C-d>'
     },
 
     mkdnflow = {
@@ -207,7 +197,7 @@ local M = {
         prev_heading = 'gk',
         go_back = '<C-o>',
         follow_link = 'gd',
-        toggle_item = 'tt',
+        toggle_item = 'tt'
     },
 
     comment = {
@@ -215,13 +205,13 @@ local M = {
         -- Normal 模式快捷键
         toggler = {
             line = 'gcc', -- 行注释
-            block = 'gbc', -- 块注释
+            block = 'gbc' -- 块注释
         },
         -- Visual 模式
         opleader = {
             line = 'gc',
-            bock = 'gb',
-        },
+            bock = 'gb'
+        }
     },
 
     ufo = {
@@ -230,7 +220,7 @@ local M = {
         closeAllFolds = 'zM',
         openFoldsExceptKinds = 'zr',
         closeFoldWith = 'zm',
-        peekFoldedLinesUnderCursor = 'zh',
+        peekFoldedLinesUnderCursor = 'zh'
     },
     toggleterm = {
         enable = true,
@@ -240,7 +230,7 @@ local M = {
         -- <leader>tb 右侧命令行窗口
         float_toggle = '<leader>tt',
         -- <leader>tc 下方命令行窗口
-        botton_toggle = '<A-\\>',
+        botton_toggle = '<A-\\>'
     },
 
     venn = {
@@ -249,12 +239,12 @@ local M = {
         -- venn.nvim: enable or disable keymappings
         toggle = '<leader>v',
         -- draw a box by pressing "f" with visual selection
-        draw_box = 'f',
+        draw_box = 'f'
     },
 
     zen = {
         enable = true,
-        toggle = '<leader>z',
+        toggle = '<leader>z'
     },
 
     lsp = {
@@ -265,7 +255,7 @@ local M = {
 
         implementation = 'gi',
         signature_help = 'gI',
-        
+
         code_action = '<leader>ca',
         format = '<leader>f',
         rename = '<leader>rn',
@@ -279,7 +269,7 @@ local M = {
 
         add_workspace_folder = '<leader>wa',
         remove_workspace_folder = '<leader>wr',
-        list_workspace_folders = '<leader>wl',
+        list_workspace_folders = '<leader>wl'
     },
 
     dap = {
@@ -296,8 +286,8 @@ local M = {
         restart = '<F6>',
         stop = '<F12>',
 
-        open_info = '<F2>',
-    },
+        open_info = '<F2>'
+    }
 }
 
 return M
