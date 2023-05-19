@@ -88,6 +88,7 @@ packer.startup({
         use({ 'neovim/nvim-lspconfig' })
         use({ 'jose-elias-alvarez/null-ls.nvim', requires = 'nvim-lua/plenary.nvim' })
 
+        -- TODO:
         -- -- Refactoring
         -- use({
         --     'ThePrimeagen/refactoring.nvim',
@@ -140,6 +141,41 @@ packer.startup({
                 require('plugin-config.interface.lualine')
             end,
         })
+
+        ----- Editor -----
+        ------------------
+
+        -- Comment Toggle
+        use({
+            'numToStr/Comment.nvim',
+            config = function()
+                require('plugin-config.editor.comment')
+            end,
+        })
+
+        -- -- Indent-blankline
+        -- use({
+        --     'lukas-reineke/indent-blankline.nvim',
+        --     config = function()
+        --         require('plugin-config.editor.indent-blankline')
+        --     end,
+        -- })
+
+        -- -- surround
+        -- use({
+        --     'kylechui/nvim-surround',
+        --     config = function()
+        --         require('plugin-config.editor.nvim-surround')
+        --     end,
+        -- })
+
+        -- -- nvim-autopairs
+        -- use({
+        --     'windwp/nvim-autopairs',
+        --     config = function()
+        --         require('plugin-config.editor.nvim-autopairs')
+        --     end,
+        -- })
         
         -- ------------------------- 依存 ------------------------
         
@@ -344,38 +380,7 @@ packer.startup({
         --     end,
         -- })
 
-        -- ---------------------- 編集機能 -----------------------
-        -- -- Comment Toggle
-        -- use({
-        --     'numToStr/Comment.nvim',
-        --     config = function()
-        --         require('plugin-config.editor.comment')
-        --     end,
-        -- })
 
-        -- -- Indent-blankline
-        -- use({
-        --     'lukas-reineke/indent-blankline.nvim',
-        --     config = function()
-        --         require('plugin-config.editor.indent-blankline')
-        --     end,
-        -- })
-
-        -- -- surround
-        -- use({
-        --     'kylechui/nvim-surround',
-        --     config = function()
-        --         require('plugin-config.editor.nvim-surround')
-        --     end,
-        -- })
-
-        -- -- nvim-autopairs
-        -- use({
-        --     'windwp/nvim-autopairs',
-        --     config = function()
-        --         require('plugin-config.editor.nvim-autopairs')
-        --     end,
-        -- })
 
         -- --------------- Lang ----------------
 
