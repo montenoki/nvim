@@ -6,7 +6,7 @@ end
 ident_blankline.setup({
     -- blank line
     space_char_blankline = ' ',
-    -- treesitter 連携
+    -- treesitter
     show_current_context = true,
     show_current_context_start = true,
     context_patterns = {

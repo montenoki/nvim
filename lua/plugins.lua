@@ -79,6 +79,15 @@ packer.startup({
             end,
         })
 
+        -- Indent-blankline
+        use({
+            'lukas-reineke/indent-blankline.nvim',
+            config = function()
+                require('plugin-config.appearance.indent-blankline')
+            end,
+        })
+
+
 
         ----- LSP -----
         ---------------
@@ -142,6 +151,14 @@ packer.startup({
             end,
         })
 
+        -- Status for nvim-lsp progress
+        use({
+            'j-hui/fidget.nvim',
+            config = function()
+                require('plugin-config.interface.fidget')
+            end,
+        })
+
         ----- Editor -----
         ------------------
 
@@ -153,29 +170,14 @@ packer.startup({
             end,
         })
 
-        -- Indent-blankline
+        -- surround
         use({
-            'lukas-reineke/indent-blankline.nvim',
+            'kylechui/nvim-surround',
             config = function()
-                require('plugin-config.editor.indent-blankline')
+                require('plugin-config.editor.nvim-surround')
             end,
         })
 
-        -- -- surround
-        -- use({
-        --     'kylechui/nvim-surround',
-        --     config = function()
-        --         require('plugin-config.editor.nvim-surround')
-        --     end,
-        -- })
-
-        -- -- nvim-autopairs
-        -- use({
-        --     'windwp/nvim-autopairs',
-        --     config = function()
-        --         require('plugin-config.editor.nvim-autopairs')
-        --     end,
-        -- })
         
         -- ------------------------- 依存 ------------------------
         
@@ -304,8 +306,6 @@ packer.startup({
         --     end,
         -- })
 
-        -- -- ステータスバー表示
-
 
         -- -- Terminal表示
         -- use({
@@ -315,13 +315,7 @@ packer.startup({
         --     end,
         -- })
 
-        -- -- status表示
-        -- use({
-        --     'j-hui/fidget.nvim',
-        --     config = function()
-        --         require('plugin-config.interface.fidget')
-        --     end,
-        -- })
+
 
         -- -- zen-mode全画面
         -- use({
