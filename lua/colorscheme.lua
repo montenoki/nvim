@@ -1,9 +1,8 @@
-uConfig = require('uConfig')
-lite_mode = uConfig.lite_mode
+local uConfig = require('uConfig')
 
 local colorscheme
 
-if lite_mode then
+if uConfig.lite_mode then
     vim.o.background = 'light'
     colorscheme = 'dim'
 else
@@ -15,5 +14,5 @@ local status_ok, _ = pcall(vim.cmd, 'colorscheme ' .. colorscheme)
 
 if not status_ok then
     vim.notify('colorscheme: ' .. colorscheme .. ' Not Found!')
-    return
+    return nil
 end

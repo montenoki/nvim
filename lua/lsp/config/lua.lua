@@ -20,6 +20,7 @@ local opts = {
             diagnostics = {
                 -- Get the language server to recognize the `vim` global
                 globals = { 'vim' },
+                disable = { 'param-type-mismatch' },
             },
             workspace = {
                 -- Make the server aware of Neovim runtime files

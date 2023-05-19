@@ -1,5 +1,4 @@
 local uConfig = require('uConfig')
-local lite_mode = uConfig.lite_mode
 
 ----- Display Settings -----
 ----------------------------
@@ -12,7 +11,7 @@ vim.o.sidescrolloff = 4
 vim.wo.colorcolumn = '80,120'
 
 -- Listchars
-if lite_mode then
+if uConfig.lite_mode then
     vim.o.list = false
 else
     vim.o.list = true
@@ -44,7 +43,7 @@ vim.wo.wrap = true
 vim.o.whichwrap = '<,>,[,]'
 
 -- color
-if not lite_mode then
+if not uConfig.lite_mode then
     vim.o.termguicolors = true
     vim.opt.termguicolors = true
 end
@@ -131,6 +130,6 @@ vim.o.foldcolumn = '1'
 vim.o.foldlevel = 99
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
-if not lite_mode then
+if not uConfig.lite_mode then
     vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 end

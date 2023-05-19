@@ -1,6 +1,6 @@
 local myAutoGroup = vim.api.nvim_create_augroup('myAutoGroup', {
-        clear = true,
-    })
+    clear = true,
+})
 
 local autocmd = vim.api.nvim_create_autocmd
 
@@ -9,7 +9,6 @@ autocmd('TermOpen', {
     group = myAutoGroup,
     command = 'startinsert',
 })
-
 
 -- Highlight on yank
 autocmd('TextYankPost', {
@@ -48,7 +47,6 @@ autocmd({ 'BufRead' }, {
         vim.cmd('silent! loadview')
     end,
 })
-
 
 -- Auto update plugins when modify lua/plugins.lua
 autocmd('BufWritePost', {

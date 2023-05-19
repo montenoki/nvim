@@ -7,37 +7,10 @@ local M = {
     keys = {
         leader_key = ' ',
 
-        -- : 模式
-        c_next_item = '<C-j>',
-        c_prev_item = '<C-k>',
-
-        -- normal 模式
-        n_save = '<leader>w', -- :w
-        n_save_quit = '<leader>wq', -- :wq
-        n_save_all = '<leader>wa', -- :wa
-        -- n_save_all_quit = "<leader>qa", -- :wqa
-        n_force_quit = '<leader>q', -- :qa!
-
-        n_v_scroll_down_small = '<C-j>',
-        n_v_scroll_up_small = '<C-k>',
-
-        n_v_scroll_down_large = '<C-d>',
-        n_v_scroll_up_large = '<C-u>',
-
-        -- cmp 快捷键
-        cmp_complete = '<A-.>',
-        cmp_abort = '<A-,>',
-        cmp_confirm = '<CR>',
-        cmp_scroll_doc_up = '<C-u>',
-        cmp_scroll_doc_down = '<C-d>',
-        cmp_select_prev_item = '<S-tab>',
-        cmp_select_next_item = '<Tab>',
-
-        -- luasnip
-        snip_jump_next = '<C-l>',
-        snip_jump_prev = '<C-h>',
-        snip_next_choice = '<C-j>',
-        snip_prev_choice = '<C-k>',
+        n_v_scroll_up_with_cursor = '<C-k>',
+        n_v_scroll_down_with_cursor = '<C-j>',
+        n_v_scroll_up_without_cursor = 'K',
+        n_v_scroll_down_without_cursor = 'J',
 
         s_windows = {
             enable = true,
@@ -54,19 +27,28 @@ local M = {
             jump_up = '<A-k>',
             jump_down = '<A-j>',
 
-            -- <leader> + hjkl 窗口之间跳转
-            -- jump_left = "<leader>h",
-            -- jump_right = "<leader>j",
-            -- jump_up = "<leader>k",
-            -- jump_down = "<leader>l",
-
             -- 窗口比例控制
-            width_decrease = 's,',
-            width_increase = 's.',
+            width_decrease = 's-',
+            width_increase = 's=',
             height_decrease = 'sj',
             height_increase = 'sk',
-            size_equal = 's=',
+            size_equal = 'ss',
         },
+
+        -- cmp 快捷键
+        cmp_complete = '<A-.>',
+        cmp_abort = '<A-,>',
+        cmp_confirm = '<CR>',
+        cmp_scroll_doc_up = '<C-k>',
+        cmp_scroll_doc_down = '<C-j>',
+        cmp_select_prev_item = '<S-tab>',
+        cmp_select_next_item = '<Tab>',
+
+        -- luasnip
+        snip_jump_next = '<C-l>',
+        snip_jump_prev = '<C-h>',
+        snip_next_choice = '<C-j>',
+        snip_prev_choice = '<C-k>',
 
         s_tab = {
             split = 'ts',
@@ -250,19 +232,10 @@ local M = {
         definition = 'gd',
         hover = 'gh',
 
-        implementation = 'gi',
-        signature_help = 'gI',
-
         code_action = '<leader>ca',
         format = '<leader>f',
         rename = '<leader>rn',
-        type_definition = '<leader>D',
-
-        -- diagnostic
-        open_float = 'gP',
-        goto_next = 'gJ', -- ]d
-        goto_prev = 'gK', -- [d
-        setloclist = 'gp',
+        type_definition = '<leader>d',
 
         add_workspace_folder = '<leader>wa',
         remove_workspace_folder = '<leader>wr',
