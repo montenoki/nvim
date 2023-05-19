@@ -7,6 +7,12 @@ if cmp == nil then
 end
 
 local uConfig = require('uConfig')
+local formatter
+if uConfig.lite_mode then
+    formatter = nil
+else
+    formatter = require('cmp.lspkind').formatting
+end
 
 local cmp_ultisnips_mappings = require('cmp_nvim_ultisnips.mappings')
 local mapping = {
@@ -51,10 +57,10 @@ cmp.setup({
     -- 来源
     sources = cmp.config.sources(
         {
-            -- { name = 'nvim_lsp', group_index = 1 },
-            -- { name = 'ultisnips', group_index = 1 },
+            { name = 'nvim_lsp', group_index = 1 },
+            { name = 'ultisnips', group_index = 1 },
             { name = 'vim-snippets', group_index = 1 },
-            -- { name = 'nvim_lsp_signature_help', group_index = 1 }
+            { name = 'nvim_lsp_signature_help', group_index = 1 }
         },
         {
             { name = 'buffer', group_index = 2 },
@@ -62,7 +68,7 @@ cmp.setup({
         }
     ),
     -- 使用lspkind-nvim显示类型图标
-    -- formatting = require('cmp.lspkind').formatting,
+    formatting = formatter,
 })
 
 -- Use buffer source for `/`.
@@ -83,6 +89,7 @@ cmp.setup.cmdline(':', {
     } }),
 })
 
+-- TODO:
 -- cmp.setup.filetype({ 'markdown', 'help' }, {
 --     sources = {
 --         {
