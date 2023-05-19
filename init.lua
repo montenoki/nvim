@@ -11,3 +11,5 @@ require('plugins')
 require('autocmds')
 
 require('lsp.setup')
+
+require('cmp.setup')

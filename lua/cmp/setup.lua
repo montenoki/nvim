@@ -49,47 +49,50 @@ cmp.setup({
     -- 快捷键
     mapping = mapping,
     -- 来源
-    sources = {
-        { name = 'ultisnips', group_index = 1 },
-        { name = 'nvim_lsp', group_index = 1 },
-        { name = 'nvim_lsp_signature_help', group_index = 1 },
-        { name = 'buffer', group_index = 2 },
-        { name = 'path', group_index = 2 },
-    },
-
+    sources = cmp.config.sources(
+        {
+            { name = 'nvim_lsp', group_index = 1 },
+            { name = 'ultisnips', group_index = 1 },
+            { name = 'nvim_lsp_signature_help', group_index = 1 }
+        },
+        {
+            { name = 'buffer', group_index = 2 },
+            { name = 'path', group_index = 2 }
+        }
+    ),
     -- 使用lspkind-nvim显示类型图标
     formatting = require('cmp.lspkind').formatting,
 })
 
--- Use buffer source for `/`.
-cmp.setup.cmdline('/', {
-    mapping = cmp.mapping.preset.cmdline(),
-    sources = { {
-        name = 'buffer',
-    } },
-})
+-- -- Use buffer source for `/`.
+-- cmp.setup.cmdline('/', {
+--     mapping = cmp.mapping.preset.cmdline(),
+--     sources = { {
+--         name = 'buffer',
+--     } },
+-- })
 
--- Use cmdline & path source for ':'.
-cmp.setup.cmdline(':', {
-    mapping = cmp.mapping.preset.cmdline(),
-    sources = cmp.config.sources({ {
-        name = 'path',
-    } }, { {
-        name = 'cmdline',
-    } }),
-})
+-- -- Use cmdline & path source for ':'.
+-- cmp.setup.cmdline(':', {
+--     mapping = cmp.mapping.preset.cmdline(),
+--     sources = cmp.config.sources({ {
+--         name = 'path',
+--     } }, { {
+--         name = 'cmdline',
+--     } }),
+-- })
 
-cmp.setup.filetype({ 'markdown', 'help' }, {
-    sources = {
-        {
-            name = 'luasnip',
-        },
-        {
-            name = 'buffer',
-        },
-        {
-            name = 'path',
-        },
-    },
-})
---
+-- cmp.setup.filetype({ 'markdown', 'help' }, {
+--     sources = {
+--         {
+--             name = 'luasnip',
+--         },
+--         {
+--             name = 'buffer',
+--         },
+--         {
+--             name = 'path',
+--         },
+--     },
+-- })
+

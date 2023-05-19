@@ -100,6 +100,23 @@ packer.startup({
         -- -- Lua
         use('folke/neodev.nvim')
 
+        ----- Snippets -----
+        --------------------
+        -- Engine
+        use('hrsh7th/nvim-cmp')
+
+        use('SirVer/ultisnips')
+        use('quangnguyen30192/cmp-nvim-ultisnips')
+        -- Source
+        use('hrsh7th/cmp-nvim-lsp')
+        -- use('hrsh7th/cmp-buffer')
+        -- use('hrsh7th/cmp-path')
+        -- use('hrsh7th/cmp-cmdline')
+        -- use('hrsh7th/cmp-nvim-lsp-signature-help')
+        -- 自分のsnippet
+        -- use('montenoki/vim-snippets')
+
+
         ----- Interface -----
         ---------------------
 
@@ -137,31 +154,7 @@ packer.startup({
 
 
 
-        -- ------------------ 自動補完 ------------------
-        -- -- エンジン
-        -- use({
-        --     'hrsh7th/nvim-cmp',
-        --     requires = {
-        --         'quangnguyen30192/cmp-nvim-ultisnips',
-        --         config = function()
-        --             require('cmp_nvim_ultisnips').setup()
-        --         end,
-        --         { 'nvim-treesitter/nvim-treesitter' },
-        --         { 'onsails/lspkind-nvim' },
-        --     },
-        -- })
 
-        -- use('SirVer/ultisnips')
-
-        -- -- ソース
-        -- use('hrsh7th/cmp-nvim-lsp')
-        -- use('hrsh7th/cmp-buffer')
-        -- use('hrsh7th/cmp-path')
-        -- use('hrsh7th/cmp-cmdline')
-        -- use('hrsh7th/cmp-nvim-lsp-signature-help')
-
-        -- -- 自分のsnippet
-        -- use('montenoki/vim-snippets')
 
         -- --------------------- DAP --------------------
         -- use('mfussenegger/nvim-dap')
