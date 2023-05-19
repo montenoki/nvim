@@ -109,7 +109,7 @@ packer.startup({
         use('quangnguyen30192/cmp-nvim-ultisnips')
         -- Source
         use('hrsh7th/cmp-nvim-lsp')
-        -- use('hrsh7th/cmp-buffer')
+        use('hrsh7th/cmp-buffer')
         use('hrsh7th/cmp-path')
         use('hrsh7th/cmp-cmdline')
         use('hrsh7th/cmp-nvim-lsp-signature-help')
