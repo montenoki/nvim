@@ -134,7 +134,7 @@ vim.o.foldlevel = 99
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
 if lite_mode then
-    vim.o.fillchars = [[eob: ,fold: ,foldopen:- ,foldsep: ,foldclose:+]]
+    vim.o.fillchars = [[eob: ,fold: ,foldopen:'-' ,foldsep: ,foldclose:'+' ]]
 else
     vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 end
