@@ -81,7 +81,7 @@ cmp.setup.cmdline(':', {
         {{ name = 'cmdline'}},
         {{ name = 'cmdline_history'}},
 
-    ),
+    )
 })
 
 -- TODO:
