@@ -19,9 +19,8 @@ else
         dos = 'CRLF', -- e70f
         mac = 'CR', -- e711
     }
-    separators = { left = ' ', right = '' } 
+    separators = { left = ' ', right = '' }
 end
-
 
 lualine.setup({
     options = {

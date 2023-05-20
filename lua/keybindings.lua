@@ -1,7 +1,6 @@
 local uConfig = require('uConfig')
 local keys = uConfig.keys
 
-local map = vim.api.nvim_set_keymap
 local opt = { noremap = true, silent = true }
 
 -- local opts_remap = { remap = true, silent = true }
@@ -102,27 +101,26 @@ end
 ----- Plugin Keybindings -----
 ------------------------------
 
-local lsp = uConfig.lsp
 pluginKeys.mapLSP = function(mapbuf)
-    mapbuf('n', lsp.declaration, vim.lsp.buf.declaration)
-    mapbuf('n', lsp.definition, function()
+    mapbuf('n', keys.lsp.declaration, vim.lsp.buf.declaration)
+    mapbuf('n', keys.lsp.definition, function()
         require('telescope.builtin').lsp_definitions({ initial_mode = 'normal' })
     end)
-    mapbuf('n', lsp.references, function()
+    mapbuf('n', keys.lsp.references, function()
         require('telescope.builtin').lsp_references(require('telescope.themes').get_ivy())
     end)
-    mapbuf('n', lsp.hover, vim.lsp.buf.hover)
+    mapbuf('n', keys.lsp.hover, vim.lsp.buf.hover)
 
-    mapbuf('n', lsp.code_action, vim.lsp.buf.code_action)
-    mapbuf('n', lsp.format, function()
+    mapbuf('n', keys.lsp.code_action, vim.lsp.buf.code_action)
+    mapbuf('n', keys.lsp.format, function()
         vim.lsp.buf.format({ async = true })
     end)
-    mapbuf('n', lsp.rename, vim.lsp.buf.rename)
-    mapbuf('n', lsp.type_definition, vim.lsp.buf.type_definition)
+    mapbuf('n', keys.lsp.rename, vim.lsp.buf.rename)
+    mapbuf('n', keys.lsp.type_definition, vim.lsp.buf.type_definition)
 
-    mapbuf('n', lsp.add_workspace_folder, vim.lsp.buf.add_workspace_folder)
-    mapbuf('n', lsp.remove_workspace_folder, vim.lsp.buf.remove_workspace_folder)
-    mapbuf('n', lsp.list_workspace_folders, function()
+    mapbuf('n', keys.lsp.add_workspace_folder, vim.lsp.buf.add_workspace_folder)
+    mapbuf('n', keys.lsp.remove_workspace_folder, vim.lsp.buf.remove_workspace_folder)
+    mapbuf('n', keys.lsp.list_workspace_folders, function()
         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end)
 end

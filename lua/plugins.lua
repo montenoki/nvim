@@ -182,7 +182,7 @@ packer.startup({
             end,
         })
 
-        -- surround
+        -- Surround
         use({
             'kylechui/nvim-surround',
             config = function()

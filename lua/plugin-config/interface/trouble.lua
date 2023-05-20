@@ -1,9 +1,5 @@
 local uConfig = require('uConfig')
-local uTrouble = uConfig.trouble
-
-if uTrouble == nil or not uTrouble.enable then
-    return
-end
+local keys = uConfig.keys.trouble
 
 local trouble = requirePlugin('trouble')
 if trouble == nil then
@@ -20,7 +16,8 @@ trouble.setup({
     fold_closed = '', -- icon used for closed folds
     group = true, -- group results by file
     padding = true, -- add an extra new line on top of the list
-    action_keys = { -- key mappings for actions in the trouble list
+    action_keys = {
+        -- key mappings for actions in the trouble list
         -- map to {} to remove a mapping, for example:
         -- close = {},
         close = 'q', -- close the list
@@ -59,14 +56,4 @@ trouble.setup({
 })
 
 -- Lua
-vim.keymap.set('n', uTrouble.toggle, '<cmd>TroubleToggle<cr>', { silent = true, noremap = true })
-vim.keymap.set(
-    'n',
-    uTrouble.workspace,
-    '<cmd>TroubleToggle workspace_diagnostics<cr>',
-    { silent = true, noremap = true }
-)
-vim.keymap.set('n', uTrouble.document, '<cmd>TroubleToggle document_diagnostics<cr>', { silent = true, noremap = true })
-vim.keymap.set('n', uTrouble.loclist, '<cmd>TroubleToggle loclist<cr>', { silent = true, noremap = true })
-vim.keymap.set('n', uTrouble.quickfix, '<cmd>TroubleToggle quickfix<cr>', { silent = true, noremap = true })
-vim.keymap.set('n', uTrouble.references, '<cmd>TroubleToggle lsp_references<cr>', { silent = true, noremap = true })
+vim.keymap.set('n', keys.toggle, '<cmd>TroubleToggle<cr>', { silent = true, noremap = true })

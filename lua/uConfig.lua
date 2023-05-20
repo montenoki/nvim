@@ -59,9 +59,91 @@ local M = {
             closeAllFolds = 'zM',
             openFoldsExceptKinds = 'zr',
             closeFoldWith = 'zm',
-            peekFoldedLinesUnderCursor = 'zh',
+            -- TODO: wait coc
+            -- peekFoldedLinesUnderCursor = 'zh',
         },
 
+        lsp = {
+            declaration = 'gD',
+            references = 'gr',
+            definition = 'gd',
+            hover = 'gh',
+
+            code_action = '<leader>ca',
+            format = '<leader>f',
+            rename = '<leader>rn',
+            type_definition = '<leader>d',
+
+            add_workspace_folder = '<leader>wa',
+            remove_workspace_folder = '<leader>wr',
+            list_workspace_folders = '<leader>wl',
+        },
+
+        nvimTree = {
+            toggle = '<A-m>',
+
+            -- Open file
+            edit = { '<CR>', '<2-LeftMouse>' },
+            system_open = 'o',
+            preview = '<Tab>',
+            tabnew = 't',
+            -- Open file at split window
+            vsplit = 'v',
+            split = 'h',
+
+            -- ignore ファイル表示・非表示
+            toggle_git_ignored = 'i',
+            -- dot ファイル表示・非表示
+            toggle_dotfiles = '.',
+            toggle_custom = 'u',
+            toggle_file_info = 'I',
+            toggle_help = '?',
+
+            refresh = 'R',
+
+            file_filter = 'f',
+            clear_filter = 'f',
+
+            -- 进入下一级
+            cd = ']',
+            -- 进入上一级
+            dir_up = '[',
+
+            -- 文件操作
+            create = 'a',
+            remove = 'd',
+            rename = 'r',
+            cut = 'x',
+            copy = 'c',
+            paste = 'p',
+            copy_name = 'y',
+            copy_path = 'Y',
+            copy_absolute_path = 'gy',
+        },
+
+        telescope = {
+            find_files = '<C-p>',
+            live_grep = '<C-f>',
+
+            -- 上下移动
+            move_selection_next = '<tab>',
+            move_selection_previous = '<S-tab>',
+            -- 历史记录
+            cycle_history_next = '<C-n>',
+            cycle_history_prev = '<C-p>',
+            -- 关闭窗口
+            close = '<esc>',
+            -- 预览窗口上下滚动
+            preview_scrolling_up = '<C-k>',
+            preview_scrolling_down = '<C-j>',
+            -- split open
+            open_horizontal = '<C-h>',
+            open_vertical = '<C-v>',
+        },
+
+        trouble = {
+            toggle = '<A-p>',
+        },
         -- s_tab = {
         --     split = 'ts',
         --     prev = 'th',
@@ -84,49 +166,6 @@ local M = {
         -- im-select
     },
 
-    nvimTree = {
-        enable = true,
-        toggle = '<A-m>',
-
-        -- Open file
-        edit = { '<CR>', '<2-LeftMouse>' },
-        system_open = 'o',
-        preview = '<Tab>',
-        tabnew = 't',
-        -- Open file at split window
-        vsplit = 'v',
-        split = 'h',
-
-        -- ignore ファイル表示・非表示
-        toggle_git_ignored = 'i',
-        -- dot ファイル表示・非表示
-        toggle_dotfiles = '.',
-        toggle_custom = 'u',
-        toggle_file_info = 'I',
-        toggle_help = '?',
-
-        refresh = 'R',
-
-        file_filter = 'f',
-        clear_filter = 'f',
-
-        -- 进入下一级
-        cd = ']',
-        -- 进入上一级
-        dir_up = '[',
-
-        -- 文件操作
-        create = 'a',
-        remove = 'd',
-        rename = 'r',
-        cut = 'x',
-        copy = 'c',
-        paste = 'p',
-        copy_name = 'y',
-        copy_path = 'Y',
-        copy_absolute_path = 'gy',
-    },
-
     bufferLine = {
         enable = true,
 
@@ -135,36 +174,6 @@ local M = {
         close = '<leader>bc',
         close_others = '<leader>bo',
         close_pick = '<leader>bp',
-    },
-
-    trouble = {
-        enable = true,
-
-        toggle = '<leader>xx',
-        workspace = '<leader>xw',
-        document = '<leader>xd',
-        loclist = '<leader>xl',
-        quickfix = '<leader>xq',
-        references = 'gR',
-    },
-
-    telescope = {
-        enable = true,
-
-        find_files = '<C-p>',
-        live_grep = '<C-f>',
-
-        -- 上下移动
-        move_selection_next = '<tab>',
-        move_selection_previous = '<S-tab>',
-        -- 历史记录
-        cycle_history_next = '<C-n>',
-        cycle_history_prev = '<C-p>',
-        -- 关闭窗口
-        close = '<esc>',
-        -- 预览窗口上下滚动
-        preview_scrolling_up = '<C-u>',
-        preview_scrolling_down = '<C-d>',
     },
 
     mkdnflow = {
@@ -215,22 +224,6 @@ local M = {
     zen = {
         enable = true,
         toggle = '<leader>z',
-    },
-
-    lsp = {
-        declaration = 'gD',
-        references = 'gr',
-        definition = 'gd',
-        hover = 'gh',
-
-        code_action = '<leader>ca',
-        format = '<leader>f',
-        rename = '<leader>rn',
-        type_definition = '<leader>d',
-
-        add_workspace_folder = '<leader>wa',
-        remove_workspace_folder = '<leader>wr',
-        list_workspace_folders = '<leader>wl',
     },
 
     dap = {
