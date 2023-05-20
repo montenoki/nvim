@@ -30,52 +30,22 @@ local M = {
             -- 窗口比例控制
             width_decrease = 's-',
             width_increase = 's=',
-            height_decrease = 'sj',
-            height_increase = 'sk',
+            height_decrease = 's_',
+            height_increase = 's+',
             size_equal = 'ss',
         },
 
-        -- cmp 快捷键
-        cmp_complete = '<A-.>',
-        cmp_abort = '<A-,>',
-        cmp_confirm = '<CR>',
-        cmp_scroll_doc_up = '<C-k>',
-        cmp_scroll_doc_down = '<C-j>',
-        cmp_select_prev_item = '<S-tab>',
-        cmp_select_next_item = '<Tab>',
-
-        -- luasnip
-        snip_jump_next = '<C-l>',
-        snip_jump_prev = '<C-h>',
-        snip_next_choice = '<C-j>',
-        snip_prev_choice = '<C-k>',
-
-        s_tab = {
-            split = 'ts',
-            prev = 'th',
-            next = 'tl',
-            first = 'tj',
-            last = 'tk',
-            close = 'tc',
+        cmp = {
+            complete = '<A-.>',
+            abort = '<A-,>',
+            confirm = '<CR>',
+            scroll_doc_up = '<C-k>',
+            scroll_doc_down = '<C-j>',
+            select_prev_item = '<S-tab>',
+            select_next_item = '<Tab>',
         },
 
-        fold = {
-            open = 'Z',
-            close = 'zz',
-        },
-
-        terminal_to_normal = '<Esc>',
-        -- TODO
-
-        -- proxy
-        -- im-select
-    },
-
-    nvimtreesitter = {
-        -- https://github.com/nvim-treesitter/nvim-treesitter#supported-languages
-        languages = { 'vim', 'lua', 'python', 'query' },
-
-        keys = {
+        treesitter = {
             init_selection = '<CR>',
             node_incremental = '<CR>',
             scope_incremental = '<TAB>',
@@ -83,6 +53,35 @@ local M = {
             swap_next = '<leader>a',
             swap_prev = '<leader>A',
         },
+
+        ufo = {
+            openAllFolds = 'zR',
+            closeAllFolds = 'zM',
+            openFoldsExceptKinds = 'zr',
+            closeFoldWith = 'zm',
+            peekFoldedLinesUnderCursor = 'zh',
+        },
+
+        -- s_tab = {
+        --     split = 'ts',
+        --     prev = 'th',
+        --     next = 'tl',
+        --     first = 'tj',
+        --     last = 'tk',
+        --     close = 'tc',
+        -- },
+
+        -- TODO:
+        -- fold = {
+        --     open = 'Z',
+        --     close = 'zz',
+        -- },
+
+        terminal_to_normal = '<Esc>',
+        -- TODO:
+
+        -- proxy
+        -- im-select
     },
 
     nvimTree = {
@@ -193,14 +192,6 @@ local M = {
         },
     },
 
-    ufo = {
-        enable = true,
-        openAllFolds = 'zR',
-        closeAllFolds = 'zM',
-        openFoldsExceptKinds = 'zr',
-        closeFoldWith = 'zm',
-        peekFoldedLinesUnderCursor = 'zh',
-    },
     toggleterm = {
         enable = true,
 

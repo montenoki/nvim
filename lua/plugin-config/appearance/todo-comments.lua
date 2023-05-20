@@ -7,7 +7,7 @@ end
 
 local keywords_setting
 
-if lite_mode then 
+if lite_mode then
     keywords_setting = {
         TODO = { icon = '=>', color = 'info' },
         NOTE = { icon = ':>', color = 'hint', alt = { 'INFO' } },

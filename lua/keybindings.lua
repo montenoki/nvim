@@ -61,8 +61,8 @@ vim.g.maplocalleader = keys.leader_key
 keymap(n_v_mode, keys.n_v_scroll_up_with_cursor, '4k')
 keymap(n_v_mode, keys.n_v_scroll_down_with_cursor, '4j')
 
-keymap(n_v_mode, keys.n_v_scroll_up_without_cursor, '4<C-y>')
-keymap(n_v_mode, keys.n_v_scroll_down_without_cursor, '4<C-e>')
+keymap(normal_mode, keys.n_v_scroll_up_without_cursor, '4<C-y>')
+keymap(normal_mode, keys.n_v_scroll_down_without_cursor, '4<C-e>')
 
 -- windows
 if keys.s_windows ~= nil and keys.s_windows.enable then
@@ -83,8 +83,8 @@ if keys.s_windows ~= nil and keys.s_windows.enable then
     -- Window Size
     keymap('n', skey.width_decrease, ':vertical resize -10<CR>')
     keymap('n', skey.width_increase, ':vertical resize +10<CR>')
-    keymap('n', skey.height_decrease, ':vertical resize -10<CR>')
-    keymap('n', skey.height_increase, ':vertical resize +10<CR>')
+    keymap('n', skey.height_decrease, ':horizontal resize -10<CR>')
+    keymap('n', skey.height_increase, ':horizontal resize +10<CR>')
     keymap('n', skey.size_equal, '<C-w>=')
 end
 

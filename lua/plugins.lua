@@ -2,7 +2,6 @@ local fn = vim.fn
 local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 local packer_bootstrap
 local uConfig = require('uConfig')
-local lite_mode = uConfig.lite_mode
 local enable_impatient = uConfig.enable_impatient
 
 -- Packer: Auto install
@@ -27,9 +26,7 @@ packer.startup({
         use('wbthomason/packer.nvim')
 
         -- Speed up loading Lua modules in Neovim to improve startup time.
-        if enable_impatient then
-            use('lewis6991/impatient.nvim')
-        end
+        use('lewis6991/impatient.nvim')
 
         ----- Color Schemes -----
         -------------------------
