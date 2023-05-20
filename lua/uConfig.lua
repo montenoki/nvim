@@ -79,6 +79,20 @@ local M = {
             list_workspace_folders = '<leader>wl',
         },
 
+        dap = {
+            toggle = '<A-d>',
+
+            run = '<S-F5>',
+            breakpoint_toggle = '<F8>',
+            breakpoint_clear = '<S-F8>',
+
+            step_into = '<F11>',
+            step_out = '<S-F11>',
+            restart = '<F6>',
+            stop = '<F12>',
+
+            open_info = '<F2>',
+        },
         nvimTree = {
             toggle = '<A-m>',
 
@@ -144,6 +158,11 @@ local M = {
         trouble = {
             toggle = '<A-p>',
         },
+
+        zen = {
+            toggle = '<A-z>',
+        },
+
         -- s_tab = {
         --     split = 'ts',
         --     prev = 'th',
@@ -219,28 +238,6 @@ local M = {
         toggle = '<leader>v',
         -- draw a box by pressing "f" with visual selection
         draw_box = 'f',
-    },
-
-    zen = {
-        enable = true,
-        toggle = '<leader>z',
-    },
-
-    dap = {
-        toggle = '<leader>dd',
-
-        run = '<S-F5>',
-        breakpoint_toggle = '<F8>',
-        breakpoint_clear = '<S-F8>',
-
-        continue = '<F5>',
-        step_over = '<F10>',
-        step_into = '<F11>',
-        step_out = '<S-F11>',
-        restart = '<F6>',
-        stop = '<F12>',
-
-        open_info = '<F2>',
     },
 }
 

@@ -95,6 +95,22 @@ packer.startup({
             end,
         })
 
+        use({
+            'SmiteshP/nvim-navic',
+            requires = 'neovim/nvim-lspconfig',
+            config = function()
+                require('plugin-config.appearance.navic')
+            end,
+        })
+
+        -- Sticky Scroll
+        use({
+            'nvim-treesitter/nvim-treesitter-context',
+            config = function()
+                require('plugin-config.appearance.nvim-treesitter-context')
+            end,
+        })
+
         ----- LSP -----
         ---------------
 
@@ -171,6 +187,14 @@ packer.startup({
             end,
         })
 
+        -- zen-mode
+        use({
+            'folke/zen-mode.nvim',
+            config = function()
+                require('plugin-config.interface.zen-mode')
+            end,
+        })
+
         ----- Editor -----
         ------------------
 
@@ -192,10 +216,12 @@ packer.startup({
 
         ----- DAP -----
         ---------------
+        use('mfussenegger/nvim-dap')
         use({
             'rcarriga/nvim-dap-ui',
-            requires = { 'mfussenegger/nvim-dap' },
-            after = 'nvim-dap',
+            config = function()
+                require('dapui').setup()
+            end,
         })
         use('theHamsta/nvim-dap-virtual-text')
 
@@ -245,14 +271,6 @@ packer.startup({
         --     config = function()
         --         require('plugin-config.appearance.gitsigns')
         --         require('scrollbar.handlers.gitsigns').setup()
-        --     end,
-        -- })
-
-        -- -- Sticky Scroll
-        -- use({
-        --     'nvim-treesitter/nvim-treesitter-context',
-        --     config = function()
-        --         require('plugin-config.appearance.nvim-treesitter-context')
         --     end,
         -- })
 
@@ -323,14 +341,6 @@ packer.startup({
         --     'akinsho/toggleterm.nvim',
         --     config = function()
         --         require('plugin-config.interface.toggleterm')
-        --     end,
-        -- })
-
-        -- -- zen-mode全画面
-        -- use({
-        --     'folke/zen-mode.nvim',
-        --     config = function()
-        --         require('plugin-config.interface.zen-mode')
         --     end,
         -- })
 

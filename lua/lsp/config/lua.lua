@@ -8,6 +8,7 @@ local common = require('lsp.common-config')
 local opts = {
     capabilities = common.capabilities,
     on_attach = function(client, bufnr)
+        common.BreadcrumbsAttach(client, bufnr)
         common.keyAttach(bufnr)
     end,
     settings = {

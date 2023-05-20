@@ -137,7 +137,7 @@ nvim_tree.setup({
     actions = {
         open_file = {
             resize_window = true,
-            quit_on_open = true,
+            quit_on_open = false,
         },
     },
     system_open = {

@@ -1,8 +1,8 @@
 local uConfig = require('uConfig')
 local keys = uConfig.keys
 
+local map = vim.api.nvim_set_keymap
 local opt = { noremap = true, silent = true }
-
 -- local opts_remap = { remap = true, silent = true }
 local opts_expr = { expr = true, silent = true }
 
@@ -140,36 +140,36 @@ end
 --
 -- -- DAP
 -- -- nvim-dap
--- local dap = uConfig.dap
--- pluginKeys.mapDAP = function()
---     -- start
---     map('n', dap.toggle, ':lua require("dapui").toggle()<CR>', opt)
---     map('n', dap.run, ":lua require('osv').run_this()<CR>", opt)
---     -- set breakpoint
---     map('n', dap.breakpoint_toggle, ":lua require('dap').toggle_breakpoint()<CR>", opt)
---     map('n', dap.breakpoint_clear, ":lua require('dap').clear_breakpoints()<CR>", opt)
---     -- continue
---     map('n', dap.continue, ":lua require('dap').continue()<CR>", opt)
---     --  stepOver, stepOut, stepInto
---     map('n', dap.step_into, ":lua require'dap'.step_into()<CR>", opt)
---     map('n', dap.step_over, ":lua require'dap'.step_over()<CR>", opt)
---     map('n', dap.step_out, ":lua require'dap'.step_out()<CR>", opt)
---     map('n', dap.restart, ":lua require'dap.restart()<CR>", opt)
---
---     map('n', dap.open_info, ":lua require'dapui'.eval()<CR>", opt)
---     -- Stop
---     map(
---         'n',
---         dap.stop,
---         ":lua require'dap'.close()<CR>"
---             .. ":lua require'dap'.terminate()<CR>"
---             .. ":lua require'dap.repl'.close()<CR>"
---             .. ":lua require'dapui'.close()<CR>"
---             .. ":lua require('dap').clear_breakpoints()<CR>"
---             .. '<C-w>o<CR>',
---         opt
---     )
--- end
+local dap = uConfig.keys.dap
+pluginKeys.mapDAP = function()
+    -- start
+    keymap('n', dap.toggle, '<Cmd>lua require("dapui").toggle()<CR>')
+    keymap('n', dap.run, ":lua require('osv').run_this()<CR>")
+    -- set breakpoint
+    keymap('n', dap.breakpoint_toggle, ":lua require('dap').toggle_breakpoint()<CR>")
+    keymap('n', dap.breakpoint_clear, ":lua require('dap').clear_breakpoints()<CR>")
+    -- continue
+    keymap('n', dap.continue, ":lua require('dap').continue()<CR>")
+    --  stepOver, stepOut, stepInto
+    keymap('n', dap.step_into, ":lua require'dap'.step_into()<CR>")
+    keymap('n', dap.step_over, ":lua require'dap'.step_over()<CR>")
+    keymap('n', dap.step_out, ":lua require'dap'.step_out()<CR>")
+    keymap('n', dap.restart, ":lua require'dap.restart()<CR>")
+
+    keymap('n', dap.open_info, ":lua require'dapui'.eval()<CR>")
+    -- Stop
+    keymap(
+        'n',
+        dap.stop,
+        ":lua require'dap'.close()<CR>"
+            .. ":lua require'dap'.terminate()<CR>"
+            .. ":lua require'dap.repl'.close()<CR>"
+            .. ":lua require'dapui'.close()<CR>"
+            .. ":lua require('dap').clear_breakpoints()<CR>"
+            .. '<C-w>o<CR>',
+        opt
+    )
+end
 
 -- -- gitsigns
 -- pluginKeys.gitsigns_on_attach = function(bufnr)

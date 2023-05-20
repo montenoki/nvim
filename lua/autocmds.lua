@@ -30,15 +30,6 @@ autocmd('BufEnter', {
     end,
 })
 
--- Auto nohl
-autocmd('cursorhold', {
-    group = myAutoGroup,
-    pattern = '*',
-    callback = function()
-        vim.cmd('nohl')
-    end,
-})
-
 -- Auto save views
 autocmd('BufWrite', {
     group = myAutoGroup,

@@ -3,6 +3,7 @@ local opts = {
     capabilities = common.capabilities,
     on_attach = function(client, bufnr)
         common.keyAttach(bufnr)
+        common.BreadcrumbsAttach(client, bufnr)
     end,
 }
 return {

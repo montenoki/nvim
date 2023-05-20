@@ -12,8 +12,6 @@ if vt == nil then
     return
 end
 
-require('dap.nvim-dap.ui')
-
 vt.setup({
     commented = true,
 })
