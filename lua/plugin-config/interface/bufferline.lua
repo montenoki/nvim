@@ -1,3 +1,4 @@
+-- TODO: tty support
 local uConfig = require('uConfig')
 local uBufferLine = uConfig.bufferLine
 

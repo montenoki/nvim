@@ -63,6 +63,8 @@ keymap(n_v_mode, keys.n_v_scroll_down_with_cursor, '4j')
 keymap(normal_mode, keys.n_v_scroll_up_without_cursor, '4<C-y>')
 keymap(normal_mode, keys.n_v_scroll_down_without_cursor, '4<C-e>')
 
+keymap(normal_mode, '<CR>', 'viw<C-1>', opt)
+
 -- windows
 if keys.s_windows ~= nil and keys.s_windows.enable then
     local skey = keys.s_windows
@@ -156,7 +158,7 @@ pluginKeys.mapDAP = function()
     keymap('n', dap.step_out, ":lua require'dap'.step_out()<CR>")
     keymap('n', dap.restart, ":lua require'dap.restart()<CR>")
 
-    keymap('n', dap.open_info, ":lua require'dapui'.eval()<CR>")
+    keymap('n', dap.open_info, ":lua require'dapui'.eval()<cr>")
     -- Stop
     keymap(
         'n',

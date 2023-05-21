@@ -46,7 +46,7 @@ local M = {
         },
 
         treesitter = {
-            init_selection = '<CR>',
+            init_selection = '<C-1>',
             node_incremental = '<CR>',
             scope_incremental = '<TAB>',
             node_decremental = '<BS>',
@@ -159,6 +159,9 @@ local M = {
             toggle = '<A-p>',
         },
 
+        which_key = {
+            toggle = '<A-?>',
+        },
         zen = {
             toggle = '<A-z>',
         },

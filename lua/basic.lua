@@ -83,6 +83,7 @@ vim.o.smartindent = true
 ----- Reaction Times -----
 --------------------------
 
+vim.o.timeout = true
 vim.o.timeoutlen = 2000
 vim.o.updatetime = 50
 

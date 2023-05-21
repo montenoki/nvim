@@ -54,14 +54,21 @@ packer.startup({
         })
 
         --TODO:
-        -- --.Tabs Bar
-        -- use({
-        --     'akinsho/bufferline.nvim',
-        --     requires = { 'kyazdani42/nvim-web-devicons', 'moll/vim-bbye' },
-        --     config = function()
-        --         require('plugin-config.interface.bufferline')
-        --     end,
-        -- })
+        --.Tabs Bar
+        use({
+            'akinsho/bufferline.nvim',
+            requires = { 'kyazdani42/nvim-web-devicons', 'moll/vim-bbye' },
+            config = function()
+                require('plugin-config.interface.bufferline')
+            end,
+        })
+
+        use({
+            'simrat39/symbols-outline.nvim',
+            config = function()
+                require('plugin-config.interface.symbols-outline')
+            end,
+        })
 
         -- Status for nvim-lsp progress
         use({
@@ -92,6 +99,22 @@ packer.startup({
             'petertriho/nvim-scrollbar',
             config = function()
                 require('plugin-config.interface.scrollbar')
+            end,
+        })
+
+        -- terminal表示
+        use({
+            'akinsho/toggleterm.nvim',
+            config = function()
+                require('plugin-config.interface.toggleterm')
+            end,
+        })
+
+        -- Which-key
+        use({
+            'folke/which-key.nvim',
+            config = function()
+                require('plugin-config.interface.whichkey')
             end,
         })
 
@@ -301,31 +324,8 @@ packer.startup({
             end,
         })
 
-        -- ------------------------- 依存 ------------------------
-
-        -- use('nvim-lua/popup.nvim')
-
-        -- use('tpope/vim-repeat')
-
-        -- use('nvim-lua/plenary.nvim')
-
-        -- use('MunifTanjim/nui.nvim')
-
-        -- use('tami5/lspsaga.nvim')
-
         -- -- Lua
-        -- use({ 'jbyuki/one-small-step-for-vimkind' })
 
-        -- -- serch highlight
-        -- use({
-        --     'kevinhwang91/nvim-hlslens',
-        --     config = function()
-        --         -- require('hlslens').setup() is not required
-        --         require('scrollbar.handlers.search').setup({
-        --             -- hlslens config overrides
-        --         })
-        --     end,
-        -- })
         -- ---------------------- interface -----------------------
         -- -- 開始画面
         -- use({
@@ -335,27 +335,12 @@ packer.startup({
         --     end,
         -- })
 
-        -- -- terminal表示
-        -- use({
-        --     'akinsho/toggleterm.nvim',
-        --     config = function()
-        --         require('plugin-config.interface.toggleterm')
-        --     end,
-        -- })
-
-        -- -- Which-key
-        -- use({
-        --     'folke/which-key.nvim',
-        --     config = function()
-        --         vim.o.timeout = true
-        --         vim.o.timeoutlen = 300
-        --         require('plugin-config.whichkey')
-        --     end,
-        -- })
-
         -- ---------------------- 検索機能 -----------------------
 
         -- --------------- Lang ----------------
+
+        -- nvim lua
+        -- use({ 'jbyuki/one-small-step-for-vimkind' })
 
         -- -- Python
         -- use({
@@ -385,6 +370,17 @@ packer.startup({
         --     tag = 'v0.2.0',
         --     config = function()
         --         require('plugin-config.appearance.modes')
+        --     end,
+        -- })
+
+        -- -- serch highlight
+        -- use({
+        --     'kevinhwang91/nvim-hlslens',
+        --     config = function()
+        --         -- require('hlslens').setup() is not required
+        --         require('scrollbar.handlers.search').setup({
+        --             -- hlslens config overrides
+        --         })
         --     end,
         -- })
 

@@ -22,3 +22,5 @@ sudo pacman -S ripgrep
 
 TODO:
 - nvim-tree预览时使用telescope
+- 自动保存session的autocmd
+- telescope todo list
