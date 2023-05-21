@@ -163,6 +163,10 @@ local M = {
             toggle = '<A-z>',
         },
 
+        gitsigns = {
+            diffthis = '<leader>d',
+        },
+
         -- s_tab = {
         --     split = 'ts',
         --     prev = 'th',
@@ -170,12 +174,6 @@ local M = {
         --     first = 'tj',
         --     last = 'tk',
         --     close = 'tc',
-        -- },
-
-        -- TODO:
-        -- fold = {
-        --     open = 'Z',
-        --     close = 'zz',
         -- },
 
         terminal_to_normal = '<Esc>',

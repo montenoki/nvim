@@ -28,6 +28,73 @@ packer.startup({
         -- Speed up loading Lua modules in Neovim to improve startup time.
         use('lewis6991/impatient.nvim')
 
+        ----- Interface -----
+        ---------------------
+
+        -- File Explorer
+        use({
+            'nvim-tree/nvim-tree.lua',
+            requires = 'nvim-tree/nvim-web-devicons',
+            config = function()
+                require('plugin-config.interface.nvim-tree')
+            end,
+            tag = 'nightly',
+        })
+
+        -- Status Bar
+        use({
+            'nvim-lualine/lualine.nvim',
+            requires = {
+                'kyazdani42/nvim-web-devicons',
+                opt = true,
+            },
+            config = function()
+                require('plugin-config.interface.lualine')
+            end,
+        })
+
+        --TODO:
+        -- --.Tabs Bar
+        -- use({
+        --     'akinsho/bufferline.nvim',
+        --     requires = { 'kyazdani42/nvim-web-devicons', 'moll/vim-bbye' },
+        --     config = function()
+        --         require('plugin-config.interface.bufferline')
+        --     end,
+        -- })
+
+        -- Status for nvim-lsp progress
+        use({
+            'j-hui/fidget.nvim',
+            config = function()
+                require('plugin-config.interface.fidget')
+            end,
+        })
+
+        -- zen-mode
+        use({
+            'folke/zen-mode.nvim',
+            config = function()
+                require('plugin-config.interface.zen-mode')
+            end,
+        })
+
+        -- Notice表示
+        use({
+            'rcarriga/nvim-notify',
+            config = function()
+                require('plugin-config.interface.nvim-notify')
+            end,
+        })
+
+        -- Scroll Bar
+        use({
+            'petertriho/nvim-scrollbar',
+            config = function()
+                require('plugin-config.interface.scrollbar')
+            end,
+        })
+
         ----- Color Schemes -----
         -------------------------
 
@@ -111,6 +178,23 @@ packer.startup({
             end,
         })
 
+        -- Color code display like: #ff0149
+        use({
+            'norcalli/nvim-colorizer.lua',
+            config = function()
+                require('plugin-config.appearance.colorizer')
+            end,
+        })
+
+        -- git
+        use({
+            'lewis6991/gitsigns.nvim',
+            config = function()
+                require('plugin-config.appearance.gitsigns')
+                require('scrollbar.handlers.gitsigns').setup()
+            end,
+        })
+
         ----- LSP -----
         ---------------
 
@@ -153,47 +237,6 @@ packer.startup({
         use('hrsh7th/cmp-emoji')
         -- 自分のsnippet
         use('montenoki/vim-snippets')
-
-        ----- Interface -----
-        ---------------------
-
-        -- File Explorer
-        use({
-            'nvim-tree/nvim-tree.lua',
-            requires = 'nvim-tree/nvim-web-devicons',
-            config = function()
-                require('plugin-config.interface.nvim-tree')
-            end,
-            tag = 'nightly',
-        })
-
-        -- Status Bar
-        use({
-            'nvim-lualine/lualine.nvim',
-            requires = {
-                'kyazdani42/nvim-web-devicons',
-                opt = true,
-            },
-            config = function()
-                require('plugin-config.interface.lualine')
-            end,
-        })
-
-        -- Status for nvim-lsp progress
-        use({
-            'j-hui/fidget.nvim',
-            config = function()
-                require('plugin-config.interface.fidget')
-            end,
-        })
-
-        -- zen-mode
-        use({
-            'folke/zen-mode.nvim',
-            config = function()
-                require('plugin-config.interface.zen-mode')
-            end,
-        })
 
         ----- Editor -----
         ------------------
@@ -241,6 +284,14 @@ packer.startup({
         use('LinArcX/telescope-env.nvim')
         use('nvim-telescope/telescope-ui-select.nvim')
 
+        -- project
+        use({
+            'ahmedkhalf/project.nvim',
+            config = function()
+                require('plugin-config.search.project')
+            end,
+        })
+
         -- Diagnostics 表示
         use({
             'folke/trouble.nvim',
@@ -265,32 +316,6 @@ packer.startup({
         -- -- Lua
         -- use({ 'jbyuki/one-small-step-for-vimkind' })
 
-        -- -- git
-        -- use({
-        --     'lewis6991/gitsigns.nvim',
-        --     config = function()
-        --         require('plugin-config.appearance.gitsigns')
-        --         require('scrollbar.handlers.gitsigns').setup()
-        --     end,
-        -- })
-
-        -- -- Color code display like: #ff0149
-        -- use({
-        --     'norcalli/nvim-colorizer.lua',
-        --     config = function()
-        --         require('plugin-config.appearance.colorizer')
-        --     end,
-        -- })
-
-        -- -- Mode color
-        -- use({
-        --     'mvllow/modes.nvim',
-        --     tag = 'v0.2.0',
-        --     config = function()
-        --         require('plugin-config.appearance.modes')
-        --     end,
-        -- })
-
         -- -- serch highlight
         -- use({
         --     'kevinhwang91/nvim-hlslens',
@@ -301,15 +326,6 @@ packer.startup({
         --         })
         --     end,
         -- })
-
-        -- -- -- cool movement
-        -- -- use({
-        -- --     'edluffy/specs.nvim',
-        -- --     config = function()
-        -- --         require('plugin-config.appearance.specs')
-        -- --     end,
-        -- -- })
-
         -- ---------------------- interface -----------------------
         -- -- 開始画面
         -- use({
@@ -319,36 +335,11 @@ packer.startup({
         --     end,
         -- })
 
-        -- -- タブ表示
-        -- use({
-        --     'akinsho/bufferline.nvim',
-        --     requires = { 'kyazdani42/nvim-web-devicons', 'moll/vim-bbye' },
-        --     config = function()
-        --         require('plugin-config.interface.bufferline')
-        --     end,
-        -- })
-
-        -- -- Notice表示
-        -- use({
-        --     'rcarriga/nvim-notify',
-        --     config = function()
-        --         require('plugin-config.interface.nvim-notify')
-        --     end,
-        -- })
-
-        -- -- Terminal表示
+        -- -- terminal表示
         -- use({
         --     'akinsho/toggleterm.nvim',
         --     config = function()
         --         require('plugin-config.interface.toggleterm')
-        --     end,
-        -- })
-
-        -- -- Scroll Bar
-        -- use({
-        --     'petertriho/nvim-scrollbar',
-        --     config = function()
-        --         require('plugin-config.interface.scrollbar')
         --     end,
         -- })
 
@@ -363,14 +354,6 @@ packer.startup({
         -- })
 
         -- ---------------------- 検索機能 -----------------------
-
-        -- -- project
-        -- use({
-        --     'ahmedkhalf/project.nvim',
-        --     config = function()
-        --         require('plugin-config.search.project')
-        --     end,
-        -- })
 
         -- --------------- Lang ----------------
 
@@ -387,6 +370,23 @@ packer.startup({
 
         -- -- Rust
         -- use('simrat39/rust-tools.nvim')
+
+        -- -- -- cool movement
+        -- -- use({
+        -- --     'edluffy/specs.nvim',
+        -- --     config = function()
+        -- --         require('plugin-config.appearance.specs')
+        -- --     end,
+        -- -- })
+
+        -- -- Mode color
+        -- use({
+        --     'mvllow/modes.nvim',
+        --     tag = 'v0.2.0',
+        --     config = function()
+        --         require('plugin-config.appearance.modes')
+        --     end,
+        -- })
 
         --------------- END ----------------
         if packer_bootstrap then
