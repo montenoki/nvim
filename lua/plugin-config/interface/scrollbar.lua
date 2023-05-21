@@ -1,4 +1,11 @@
 local uConfig = require('uConfig')
+local cursor_icon
+if uConfig.lite_mode then
+    cursor_icon = '<'
+else
+    cursor_icon = '•'
+end
+
 require('scrollbar').setup({
     show = true,
     show_in_active_only = true,
@@ -13,77 +20,71 @@ require('scrollbar').setup({
         color = nil,
         color_nr = nil, -- cterm
         highlight = 'CursorColumn',
-        hide_if_all_visible = true, -- Hides handle if all lines are visible
+        hide_if_all_visible = true -- Hides handle if all lines are visible
     },
     marks = {
         Cursor = {
-            text = function()
-                if uConfig.lite_mode then
-                    return '<'
-                else
-                    return '•'
-                end
-            end,
+            text = cursor_icon,
             priority = 0,
             gui = nil,
             color = nil,
             cterm = nil,
             color_nr = nil, -- cterm
-            highlight = 'Normal',
+            highlight = 'Normal'
         },
         Search = {
-            text = { '-', '=' },
+            text = {'-', '='},
             priority = 1,
             gui = nil,
             color = nil,
             cterm = nil,
             color_nr = nil, -- cterm
-            highlight = 'Search',
+            highlight = 'Search'
         },
         Error = {
-            text = { '-', '=' },
+            text = {'-', '='},
             priority = 2,
             gui = nil,
             color = nil,
             cterm = nil,
             color_nr = nil, -- cterm
-            highlight = 'DiagnosticVirtualTextError',
+            highlight = 'DiagnosticVirtualTextError'
         },
         Warn = {
-            text = { '-', '=' },
+            text = {'-', '='},
             priority = 3,
             gui = nil,
             color = nil,
             cterm = nil,
             color_nr = nil, -- cterm
-            highlight = 'DiagnosticVirtualTextWarn',
+            highlight = 'DiagnosticVirtualTextWarn'
         },
         Info = {
-            text = { '-', '=' },
+            text = {'-', '='},
             priority = 4,
             gui = nil,
             color = nil,
             cterm = nil,
             color_nr = nil, -- cterm
-            highlight = 'DiagnosticVirtualTextInfo',
+            highlight = 'DiagnosticVirtualTextInfo'
         },
         Hint = {
-            text = { '-', '=' },
+            text = {'-', '='},
             priority = 5,
             gui = nil,
             color = nil,
             cterm = nil,
             color_nr = nil, -- cterm
-            highlight = 'DiagnosticVirtualTextHint',
+            highlight = 'DiagnosticVirtualTextHint'
         },
         Misc = {
-            text = { '-', '=' },
+            text = {'-', '='},
             priority = 6,
             gui = nil,
             color = nil,
             cterm = nil,
             color_nr = nil, -- cterm
-            highlight = 'Normal',
+            highlight = 'Normal'
         },
         GitAdd = {
             text = '┆',
@@ -92,7 +93,7 @@ require('scrollbar').setup({
             color = nil,
             cterm = nil,
             color_nr = nil, -- cterm
-            highlight = 'GitSignsAdd',
+            highlight = 'GitSignsAdd'
         },
         GitChange = {
             text = '┆',
@@ -101,7 +102,7 @@ require('scrollbar').setup({
             color = nil,
             cterm = nil,
             color_nr = nil, -- cterm
-            highlight = 'GitSignsChange',
+            highlight = 'GitSignsChange'
         },
         GitDelete = {
             text = '▁',
@@ -110,34 +111,15 @@ require('scrollbar').setup({
             color = nil,
             cterm = nil,
             color_nr = nil, -- cterm
-            highlight = 'GitSignsDelete',
-        },
+            highlight = 'GitSignsDelete'
+        }
     },
-    excluded_buftypes = {
-        'terminal',
-    },
-    excluded_filetypes = {
-        'prompt',
-        'TelescopePrompt',
-        'noice',
-    },
+    excluded_buftypes = {'terminal'},
+    excluded_filetypes = {'prompt', 'TelescopePrompt', 'noice'},
     autocmd = {
-        render = {
-            'BufWinEnter',
-            'TabEnter',
-            'TermEnter',
-            'WinEnter',
-            'CmdwinLeave',
-            'TextChanged',
-            'VimResized',
-            'WinScrolled',
-        },
-        clear = {
-            'BufWinLeave',
-            'TabLeave',
-            'TermLeave',
-            'WinLeave',
-        },
+        render = {'BufWinEnter', 'TabEnter', 'TermEnter', 'WinEnter', 'CmdwinLeave', 'TextChanged', 'VimResized',
+                  'WinScrolled'},
+        clear = {'BufWinLeave', 'TabLeave', 'TermLeave', 'WinLeave'}
     },
     handlers = {
         cursor = true,
@@ -145,6 +127,6 @@ require('scrollbar').setup({
         gitsigns = false, -- Requires gitsigns
         handle = true,
         search = false, -- Requires hlslens
-        ale = false, -- Requires ALE
-    },
+        ale = false -- Requires ALE
+    }
 })
