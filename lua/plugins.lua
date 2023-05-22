@@ -1,8 +1,6 @@
 local fn = vim.fn
 local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 local packer_bootstrap
-local uConfig = require('uConfig')
-local enable_impatient = uConfig.enable_impatient
 
 -- Packer: Auto install
 if fn.empty(fn.glob(install_path)) > 0 then
@@ -57,7 +55,8 @@ packer.startup({
         --.Tabs Bar
         use({
             'akinsho/bufferline.nvim',
-            requires = { 'kyazdani42/nvim-web-devicons', 'moll/vim-bbye' },
+            ag = '*',
+            requires = { 'kyazdani42/nvim-web-devicons' },
             config = function()
                 require('plugin-config.interface.bufferline')
             end,
@@ -108,6 +107,17 @@ packer.startup({
             config = function()
                 require('plugin-config.interface.toggleterm')
             end,
+        })
+
+        ---------------------- interface -----------------------
+        -- 開始画面
+        use({
+            'glepnir/dashboard-nvim',
+            event = 'VimEnter',
+            config = function()
+                require('plugin-config.interface.dashboard')
+            end,
+            requires = { 'nvim-tree/nvim-web-devicons' },
         })
 
         -- Which-key
@@ -168,7 +178,6 @@ packer.startup({
         })
 
         -- Fold
-        -- TODO: set keybindings
         use({
             'kevinhwang91/nvim-ufo',
             requires = {
@@ -279,6 +288,13 @@ packer.startup({
                 require('plugin-config.editor.nvim-surround')
             end,
         })
+        -- nvim-autopairs
+        use({
+            'windwp/nvim-autopairs',
+            config = function()
+                require('plugin-config.editor.nvim-autopairs')
+            end,
+        })
 
         ----- DAP -----
         ---------------
@@ -305,7 +321,7 @@ packer.startup({
             end,
         })
         use('LinArcX/telescope-env.nvim')
-        use('nvim-telescope/telescope-ui-select.nvim')
+        use('LinArcX/telescope-command-palette.nvim')
 
         -- project
         use({
@@ -324,16 +340,15 @@ packer.startup({
             end,
         })
 
-        -- -- Lua
+        use({
+            'phaazon/hop.nvim',
+            branch = 'v2',
+            config = function()
+                require('plugin-config.search.hop')
+            end,
+        })
 
-        -- ---------------------- interface -----------------------
-        -- -- 開始画面
-        -- use({
-        --     'glepnir/dashboard-nvim',
-        --     config = function()
-        --         require('plugin-config.interface.dashboard')
-        --     end,
-        -- })
+        -- -- Lua
 
         -- ---------------------- 検索機能 -----------------------
 

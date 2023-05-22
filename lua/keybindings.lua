@@ -89,16 +89,16 @@ if keys.s_windows ~= nil and keys.s_windows.enable then
     keymap('n', skey.size_equal, '<C-w>=')
 end
 
--- Tabs
-if keys.s_tab ~= nil then
-    local tkey = keys.s_tab
-    keymap('n', tkey.split, '<CMD>tab split<CR>')
-    keymap('n', tkey.close, '<CMD>tabclose<CR>')
-    keymap('n', tkey.next, '<CMD>tabnext<CR>')
-    keymap('n', tkey.prev, '<CMD>tabprev<CR>')
-    keymap('n', tkey.first, '<CMD>tabfirst<CR>')
-    keymap('n', tkey.last, '<CMD>tablast<CR>')
-end
+-- -- Tabs
+-- if keys.s_tab ~= nil then
+--     local tkey = keys.s_tab
+--     keymap('n', tkey.split, '<CMD>tab split<CR>')
+--     keymap('n', tkey.close, '<CMD>tabclose<CR>')
+--     keymap('n', tkey.next, '<CMD>tabnext<CR>')
+--     keymap('n', tkey.prev, '<CMD>tabprev<CR>')
+--     keymap('n', tkey.first, '<CMD>tabfirst<CR>')
+--     keymap('n', tkey.last, '<CMD>tablast<CR>')
+-- end
 
 ----- Plugin Keybindings -----
 ------------------------------
@@ -109,7 +109,7 @@ pluginKeys.mapLSP = function(mapbuf)
         require('telescope.builtin').lsp_definitions({ initial_mode = 'normal' })
     end)
     mapbuf('n', keys.lsp.references, function()
-        require('telescope.builtin').lsp_references(require('telescope.themes').get_ivy())
+        require('telescope.builtin').lsp_references(require('telescope.themes').get_dropdown())
     end)
     mapbuf('n', keys.lsp.hover, vim.lsp.buf.hover)
 
@@ -127,6 +127,11 @@ pluginKeys.mapLSP = function(mapbuf)
     end)
 end
 
+-- Dashboard
+keymap(normal_mode, keys.dashboard.toggle, '<Cmd>Dashboard<CR>')
+
+-- which-key
+keymap(normal_mode, keys.which_key.toggle, '<Cmd>WhichKey<CR>')
 -- TODO:
 -- -- Terminal
 -- -- Open Terminal: float

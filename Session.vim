@@ -13,13 +13,140 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +16 lua/plugin-config/interface/fidget.lua
-badd +32 lua/plugin-config/appearance/gitsigns.lua
-badd +169 lua/keybindings.lua
+badd +29 lua/plugin-config/interface/bufferline.lua
+badd +1 lua/plugin-config/search/telescope.lua
+badd +142 lua/uConfig.lua
+badd +58 lua/plugins.lua
+badd +0 NvimTree_1
 argglobal
 %argdel
-$argadd .
-edit lua/plugin-config/appearance/gitsigns.lua
+tabnew +setlocal\ bufhidden=wipe
+tabrewind
+edit NvimTree_1
+let s:save_splitbelow = &splitbelow
+let s:save_splitright = &splitright
+set splitbelow splitright
+wincmd _ | wincmd |
+vsplit
+wincmd _ | wincmd |
+vsplit
+2wincmd h
+wincmd w
+wincmd w
+let &splitbelow = s:save_splitbelow
+let &splitright = s:save_splitright
+wincmd t
+let s:save_winminheight = &winminheight
+let s:save_winminwidth = &winminwidth
+set winminheight=0
+set winheight=1
+set winminwidth=0
+set winwidth=1
+exe 'vert 1resize ' . ((&columns * 40 + 124) / 248)
+exe 'vert 2resize ' . ((&columns * 103 + 124) / 248)
+exe 'vert 3resize ' . ((&columns * 103 + 124) / 248)
+argglobal
+balt lua/plugin-config/interface/bufferline.lua
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=99
+setlocal fml=1
+setlocal fdn=20
+setlocal nofen
+silent! normal! zE
+let &fdl = &fdl
+let s:l = 1 - ((0 * winheight(0) + 21) / 42)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 1
+normal! 0
+lcd ~/.config/nvim
+wincmd w
+argglobal
+if bufexists(fnamemodify("~/.config/nvim/lua/plugin-config/interface/bufferline.lua", ":p")) | buffer ~/.config/nvim/lua/plugin-config/interface/bufferline.lua | else | edit ~/.config/nvim/lua/plugin-config/interface/bufferline.lua | endif
+if &buftype ==# 'terminal'
+  silent file ~/.config/nvim/lua/plugin-config/interface/bufferline.lua
+endif
+balt ~/.config/nvim/lua/uConfig.lua
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=99
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+7,9fold
+17,22fold
+16,23fold
+29,32fold
+27,34fold
+13,35fold
+12,36fold
+let &fdl = &fdl
+let s:l = 1 - ((0 * winheight(0) + 21) / 42)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 1
+normal! 0
+lcd ~/.config/nvim
+wincmd w
+argglobal
+if bufexists(fnamemodify("~/.config/nvim/lua/uConfig.lua", ":p")) | buffer ~/.config/nvim/lua/uConfig.lua | else | edit ~/.config/nvim/lua/uConfig.lua | endif
+if &buftype ==# 'terminal'
+  silent file ~/.config/nvim/lua/uConfig.lua
+endif
+balt ~/.config/nvim/lua/plugin-config/interface/bufferline.lua
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=99
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+15,36fold
+38,46fold
+48,55fold
+57,64fold
+66,80fold
+82,95fold
+96,136fold
+137,143fold
+145,164fold
+166,168fold
+170,172fold
+173,175fold
+177,179fold
+180,182fold
+7,198fold
+200,209fold
+214,217fold
+219,222fold
+211,223fold
+225,234fold
+236,243fold
+1,244fold
+let &fdl = &fdl
+let s:l = 1 - ((0 * winheight(0) + 21) / 42)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 1
+normal! 0
+lcd ~/.config/nvim
+wincmd w
+exe 'vert 1resize ' . ((&columns * 40 + 124) / 248)
+exe 'vert 2resize ' . ((&columns * 103 + 124) / 248)
+exe 'vert 3resize ' . ((&columns * 103 + 124) / 248)
+tabnext
+edit ~/.config/nvim/lua/plugin-config/interface/bufferline.lua
 let s:save_splitbelow = &splitbelow
 let s:save_splitright = &splitright
 set splitbelow splitright
@@ -36,9 +163,10 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
-wincmd =
+exe 'vert 1resize ' . ((&columns * 123 + 124) / 248)
+exe 'vert 2resize ' . ((&columns * 124 + 124) / 248)
 argglobal
-balt lua/keybindings.lua
+balt ~/.config/nvim/lua/plugins.lua
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -48,30 +176,29 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-3,5fold
-9,16fold
-24,27fold
-30,35fold
-36,38fold
-43,50fold
-51,53fold
-7,55fold
+6,8fold
+16,21fold
+15,22fold
+28,31fold
+26,33fold
+12,34fold
+11,35fold
 let &fdl = &fdl
-let s:l = 32 - ((19 * winheight(0) + 20) / 41)
+let s:l = 29 - ((28 * winheight(0) + 21) / 42)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 32
-normal! 032|
+keepjumps 29
+normal! 016|
 lcd ~/.config/nvim
 wincmd w
 argglobal
-if bufexists(fnamemodify("~/.config/nvim/lua/keybindings.lua", ":p")) | buffer ~/.config/nvim/lua/keybindings.lua | else | edit ~/.config/nvim/lua/keybindings.lua | endif
+if bufexists(fnamemodify("~/.config/nvim/lua/plugins.lua", ":p")) | buffer ~/.config/nvim/lua/plugins.lua | else | edit ~/.config/nvim/lua/plugins.lua | endif
 if &buftype ==# 'terminal'
-  silent file ~/.config/nvim/lua/keybindings.lua
+  silent file ~/.config/nvim/lua/plugins.lua
 endif
-balt ~/.config/nvim/lua/plugin-config/appearance/gitsigns.lua
-setlocal fdm=manual
+balt ~/.config/nvim/lua/plugin-config/interface/bufferline.lua
+setlocal fdm=diff
 setlocal fde=0
 setlocal fmr={{{,}}}
 setlocal fdi=#
@@ -79,27 +206,17 @@ setlocal fdl=99
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-silent! normal! zE
-28,32fold
-67,88fold
-91,99fold
-106,108fold
-109,111fold
-115,117fold
-123,125fold
-104,126fold
-144,172fold
-let &fdl = &fdl
-let s:l = 170 - ((21 * winheight(0) + 20) / 41)
+let s:l = 61 - ((36 * winheight(0) + 21) / 42)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 170
-normal! 011|
+keepjumps 61
+normal! 013|
 lcd ~/.config/nvim
 wincmd w
-wincmd =
-tabnext 1
+exe 'vert 1resize ' . ((&columns * 123 + 124) / 248)
+exe 'vert 2resize ' . ((&columns * 124 + 124) / 248)
+tabnext 2
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
 endif
@@ -114,7 +231,6 @@ if filereadable(s:sx)
 endif
 let &g:so = s:so_save | let &g:siso = s:siso_save
 set hlsearch
-nohlsearch
 doautoall SessionLoadPost
 unlet SessionLoad
 " vim: set ft=vim :

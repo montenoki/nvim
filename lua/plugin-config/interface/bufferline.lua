@@ -1,10 +1,5 @@
--- TODO: tty support
 local uConfig = require('uConfig')
-local uBufferLine = uConfig.bufferLine
-
-if uBufferLine == nil or not uBufferLine.enable then
-    return
-end
+local keys = uConfig.keys.bufferLine
 
 local bufferline = requirePlugin('bufferline')
 if bufferline == nil then
@@ -30,8 +25,13 @@ bufferline.setup({
         diagnostics_indicator = function(count, level, diagnostics_dict, context)
             local s = ' '
             for e, n in pairs(diagnostics_dict) do
-                local sym = e == 'error' and ' ' or (e == 'warning' and ' ' or '')
-                s = s .. n .. sym
+                if uConfig.lite_mode then
+                    local sym = e == 'error' and 'e ' or (e == 'warning' and 'w ' or 'i')
+                    s = s .. n .. sym
+                else
+                    local sym = e == 'error' and ' ' or (e == 'warning' and ' ' or '')
+                    s = s .. n .. sym
+                end
             end
             return s
         end,
@@ -39,9 +39,7 @@ bufferline.setup({
 })
 
 ------------ bufferline
-keymap('n', uBufferLine.prev, ':BufferLineCyclePrev<CR>')
-keymap('n', uBufferLine.next, ':BufferLineCycleNext<CR>')
+keymap('n', keys.next, ':BufferLineCycleNext<CR>')
+keymap('n', keys.prev, ':BufferLineCyclePrev<CR>')
 
-keymap('n', uBufferLine.close, ':Bdelete!<CR>') --"moll/vim-bbye"
-keymap('n', uBufferLine.close_others, ':BufferLineCloseRight<CR>:BufferLineCloseLeft<CR>')
-keymap('n', uBufferLine.close_pick, ':BufferLinePickClose<CR>')
+keymap('n', keys.pick, ':BufferLinePick<CR>')

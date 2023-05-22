@@ -134,6 +134,13 @@ local M = {
             copy_path = 'Y',
             copy_absolute_path = 'gy',
         },
+        bufferLine = {
+            enable = true,
+
+            prev = '<C-H>',
+            next = '<C-L>',
+            pick = '<leader>b',
+        },
 
         telescope = {
             find_files = '<C-p>',
@@ -150,9 +157,10 @@ local M = {
             -- 预览窗口上下滚动
             preview_scrolling_up = '<C-k>',
             preview_scrolling_down = '<C-j>',
-            -- split open
+
+            open = '<CR>',
             open_horizontal = '<C-h>',
-            open_vertical = '<C-v>',
+            open_vertical = '<S-SPACE>',
         },
 
         trouble = {
@@ -160,14 +168,17 @@ local M = {
         },
 
         which_key = {
-            toggle = '<A-?>',
+            toggle = '<A-/>',
         },
         zen = {
             toggle = '<A-z>',
         },
 
         gitsigns = {
-            diffthis = '<leader>d',
+            diffthis = '<A-g>',
+        },
+        dashboard = {
+            toggle = '<A-b>',
         },
 
         -- s_tab = {
@@ -184,16 +195,6 @@ local M = {
 
         -- proxy
         -- im-select
-    },
-
-    bufferLine = {
-        enable = true,
-
-        prev = '<C-h>',
-        next = '<C-l>',
-        close = '<leader>bc',
-        close_others = '<leader>bo',
-        close_pick = '<leader>bp',
     },
 
     mkdnflow = {
