@@ -16,6 +16,7 @@ null_ls.setup({
         formatting.isort,
         formatting.black.with({ extra_args = { '--fast' } }),
         diagnostics.flake8.with({ extra_args = { '--max-line-length=120', '--ignore=F401,E226,W292,E122,E402' } }),
+        diagnostics.markdownlint,
         -- rust
         -- formatting.rustfmt,
         -----------------------------------------------------
@@ -26,7 +27,6 @@ null_ls.setup({
         -- cargo install taplo-cli
         -- formatting.taplo,
         -----------------------------------------------------
-        -- diagnostics.markdownlint,
         -- markdownlint-cli2
         -- diagnostics.markdownlint.with({
         --   prefer_local = "node_modules/.bin",

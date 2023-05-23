@@ -66,15 +66,17 @@ end
 mason_config.setup({
     ensure_installed = {
         'lua_ls',
+        'marksman',
         -- TODO:
-        -- 'pyright',
+        'pyright',
     },
 })
 
 local servers = {
     lua_ls = require('lsp.config.lua'),
+    marksman = require('lsp.config.markdown'),
     -- TODO:
-    -- pyright = require('lsp.config.pyright'),
+    pyright = require('lsp.config.pyright'),
 }
 
 local lspconfig = requirePlugin('lspconfig')

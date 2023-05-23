@@ -5,6 +5,6 @@ end
 
 notify.setup({
     stages = 'static',
-    timeout = 10000,
+    timeout = 1000,
 })
 vim.notify = notify
