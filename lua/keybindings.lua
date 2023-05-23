@@ -127,6 +127,10 @@ pluginKeys.mapLSP = function(mapbuf)
     end)
 end
 
+-- Symbols Outline
+
+keymap({ 'n', 'i' }, keys.symbols_outline.toggle, ':SymbolsOutline<CR>')
+
 -- Dashboard
 keymap(normal_mode, keys.dashboard.toggle, '<Cmd>Dashboard<CR>')
 

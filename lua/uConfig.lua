@@ -3,7 +3,6 @@ local M = {
     config_path = vim.fn.stdpath('config'),
     enable_magic_search = true,
     enable_impatient = false,
-
     keys = {
         leader_key = ' ',
 
@@ -134,6 +133,9 @@ local M = {
             copy_path = 'Y',
             copy_absolute_path = 'gy',
         },
+        symbols_outline = {
+            toggle = '<A-o>',
+        },
         bufferLine = {
             enable = true,
 
@@ -197,7 +199,6 @@ local M = {
         -- proxy
         -- im-select
     },
-
     mkdnflow = {
         enable = true,
         next_link = 'gn',
@@ -208,7 +209,6 @@ local M = {
         follow_link = 'gd',
         toggle_item = 'tt',
     },
-
     comment = {
         enable = true,
         -- Normal 模式快捷键
@@ -222,7 +222,6 @@ local M = {
             bock = 'gb',
         },
     },
-
     toggleterm = {
         enable = true,
 
@@ -231,7 +230,6 @@ local M = {
         float_toggle = '<A-t>',
         botton_toggle = '<A-\\>',
     },
-
     venn = {
         -- toggle keymappings for venn using <leader>v
         enable = true,
