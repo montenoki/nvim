@@ -70,6 +70,8 @@ M.float_toggle = function()
     xterm:toggle()
 end
 
-vim.keymap.set({ 'n', 't' }, uToggleTerm.lazygit_toggle, M.lazygit_toggle)
-vim.keymap.set({ 'n', 't' }, uToggleTerm.float_toggle, M.float_toggle)
-vim.keymap.set({ 'n', 't' }, uToggleTerm.botton_toggle, M.botton_toggle)
+local mode = { 'n', 'i', 't' }
+vim.keymap.set(mode, uToggleTerm.lazygit_toggle, M.lazygit_toggle)
+vim.keymap.set(mode, uToggleTerm.float_toggle, M.float_toggle)
+vim.keymap.set(mode, uToggleTerm.botton_toggle, M.botton_toggle)
+vim.keymap.set('t', uToggleTerm.term_quit, '<C-\\><C-n>')

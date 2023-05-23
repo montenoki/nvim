@@ -1,20 +1,15 @@
+local snippets_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/vim-snippets/'
 local dashboard = requirePlugin('dashboard')
 if dashboard == nil then
     return
 end
 local func_list = {
-    { icon = '  ', desc = 'Projects         ', action = 'Telescope projects' },
-    { icon = '  ', desc = 'Recently files   ', action = 'Telescope oldfiles' },
-    { icon = ' ', desc = 'Command Palette', action = 'Telescope command_palette' },
-    { icon = '  ', desc = 'Edit keybindings ', action = 'edit ~/.config/nvim/lua/keybindings.lua' },
-    {
-        icon = '  ',
-        desc = 'Edit Projects    ',
-        action = 'edit ~/.local/share/nvim/project_nvim/project_history',
-    },
-    { icon = '  ', desc = 'Show ENV         ', action = 'Telescope env' },
-    { icon = '  ', desc = 'Find file        ', action = 'Telescope find_files' },
-    { icon = '  ', desc = 'Find text        ', action = 'Telescope live_grep' },
+    { icon = '  ', desc = 'Projects          ', action = 'Telescope projects' },
+    { icon = '  ', desc = 'Recently files    ', action = 'Telescope oldfiles' },
+    { icon = '  ', desc = 'TODO list         ', action = 'TodoTrouble' },
+    { icon = '  ', desc = 'User Settings', action = 'edit ~/.config/nvim/lua/uConfig.lua' },
+    { icon = '  ', desc = 'Show ENV          ', action = 'Telescope env' },
+    { icon = '  ', desc = 'Edit User Snippets', action = 'edit ' .. snippets_path },
 }
 dashboard.setup({
     theme = 'doom', --  theme is doom and hyper default is hyper
@@ -24,7 +19,7 @@ dashboard.setup({
     config = {
         week_header = { enable = true },
         center = func_list,
-        footer = { 'https://www.data4cs.co.jp' },
+        footer = { '[ Machine intelligence is the last invention that humanity will ever need to make. ]' },
     }, --  config used for theme
     hide = {
         statusline = true, -- hide statusline default is true

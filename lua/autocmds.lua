@@ -4,12 +4,6 @@ local myAutoGroup = vim.api.nvim_create_augroup('myAutoGroup', {
 
 local autocmd = vim.api.nvim_create_autocmd
 
--- Terminal Start in insert mode
-autocmd('TermOpen', {
-    group = myAutoGroup,
-    command = 'startinsert',
-})
-
 -- Highlight on yank
 autocmd('TextYankPost', {
     callback = function()

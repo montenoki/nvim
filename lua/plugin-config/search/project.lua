@@ -7,6 +7,7 @@ end
 vim.g.nvim_tree_respect_buf_cwd = 1
 
 project.setup({
-    detection_methods = { 'pattern' },
+    detection_methods = { 'lsp', 'pattern' },
     patterns = { '.git', '_darcs', '.hg', '.bzr', '.svn', 'Makefile', 'package.json', '.sln', '.vim' },
+    silent_chdir = false,
 })

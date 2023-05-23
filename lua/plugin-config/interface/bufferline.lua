@@ -9,8 +9,8 @@ end
 -- https://github.com/akinsho/bufferline.nvim#configuration
 bufferline.setup({
     options = {
-        close_command = 'Bdelete! %d',
-        right_mouse_command = 'Bdelete! %d',
+        close_command = 'bdelete! %d',
+        right_mouse_command = 'bdelete! %d',
         offsets = {
             {
                 filetype = 'NvimTree',
@@ -43,3 +43,4 @@ keymap('n', keys.next, ':BufferLineCycleNext<CR>')
 keymap('n', keys.prev, ':BufferLineCyclePrev<CR>')
 
 keymap('n', keys.pick, ':BufferLinePick<CR>')
+keymap('n', keys.pick_close, ':BufferLinePickClose<CR>')

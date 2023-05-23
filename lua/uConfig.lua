@@ -139,7 +139,8 @@ local M = {
 
             prev = '<C-H>',
             next = '<C-L>',
-            pick = '<leader>b',
+            pick = '<A-i>',
+            pick_close = '<A-I>',
         },
 
         telescope = {
@@ -175,7 +176,7 @@ local M = {
         },
 
         gitsigns = {
-            diffthis = '<A-g>',
+            diffthis = '<A-G>',
         },
         dashboard = {
             toggle = '<A-b>',
@@ -225,11 +226,9 @@ local M = {
     toggleterm = {
         enable = true,
 
-        -- <leader>ta 浮动命令行窗口
-        lazygit_toggle = '<leader>tg',
-        -- <leader>tb 右侧命令行窗口
-        float_toggle = '<leader>tt',
-        -- <leader>tc 下方命令行窗口
+        term_quit = '<Esc>',
+        lazygit_toggle = '<A-g>',
+        float_toggle = '<A-t>',
         botton_toggle = '<A-\\>',
     },
 

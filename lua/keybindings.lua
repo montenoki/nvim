@@ -132,19 +132,7 @@ keymap(normal_mode, keys.dashboard.toggle, '<Cmd>Dashboard<CR>')
 
 -- which-key
 keymap(normal_mode, keys.which_key.toggle, '<Cmd>WhichKey<CR>')
--- TODO:
--- -- Terminal
--- -- Open Terminal: float
--- keymap('n', '<leader>tt', '<Cmd>lua floatterm_toggle()<CR>')
--- -- Open Terminal: botton
--- keymap({ 'n', 'i' }, '<A-\\>', '<Cmd>lua bottonterm_toggle()<CR>')
--- -- Open Terminal: lazygit
--- keymap('n', '<leader>tg', '<Cmd>lua lazygit_toggle()<CR>')
--- -- Exit
--- keymap('t', '<Esc>', '<C-\\><C-n>')
---
--- -- LSP
---
+
 -- -- DAP
 -- -- nvim-dap
 local dap = uConfig.keys.dap
