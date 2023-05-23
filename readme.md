@@ -12,13 +12,14 @@ scoop install gitui
 ```bash
 git clone https://github.com/montenoki/nvim ~/.config/nvim
 git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-brew install gitui
+brew install lazygit
 brew install rg
 brew install fd
 ```
 ## Arch OS
-require xclip
-sudo pacman -S ripgrep
+```
+sudo pacman -S ripgrep fd lazygit
+```
 
 TODO:
 - nvim-tree预览时使用telescope
