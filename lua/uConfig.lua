@@ -148,7 +148,7 @@ local M = {
         telescope = {
             find_files = '<C-p>',
             live_grep = '<C-f>',
-            command_palette = '<A-b>',
+            command_palette = '<A-p>',
 
             -- 上下移动
             move_selection_next = '<tab>',
@@ -168,18 +168,21 @@ local M = {
         },
 
         trouble = {
-            toggle = '<A-p>',
+            toggle = '<A-P>',
         },
 
         which_key = {
             toggle = '<A-/>',
+        },
+        hop = {
+            toggle = '\\',
         },
         zen = {
             toggle = '<A-z>',
         },
 
         gitsigns = {
-            diffthis = '<A-f>',
+            diffthis = '<A-G>',
         },
 
         -- s_tab = {

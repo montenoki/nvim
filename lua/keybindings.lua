@@ -131,9 +131,10 @@ end
 
 keymap({ 'n', 'i' }, keys.symbols_outline.toggle, ':SymbolsOutline<CR>')
 
-
 -- which-key
 keymap(normal_mode, keys.which_key.toggle, '<Cmd>WhichKey<CR>')
+-- hop
+keymap(n_v_mode, keys.hop.toggle, ':HopAnywhere<CR>')
 
 -- -- DAP
 -- -- nvim-dap
