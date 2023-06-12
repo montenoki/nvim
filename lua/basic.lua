@@ -134,3 +134,6 @@ vim.o.foldenable = true
 if not uConfig.lite_mode then
     vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 end
+
+-- Session
+vim.o.sessionoptions = 'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions'

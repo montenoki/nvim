@@ -1,5 +1,5 @@
 -- TODO:
-local py_snippets_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/vim-snippets/UltiSnips/python.snippets'
+local snippets_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/vim-snippets/UltiSnips/'
 local uConfig = require('uConfig')
 local keys = uConfig.keys.telescope
 
@@ -49,6 +49,12 @@ telescope.setup({
         },
         command_palette = {
             {
+                'Open',
+                { 'Projects', ':Telescope projects' },
+                { 'Recent Files', 'Telescope recent_files pick' },
+                { 'Sessions', 'Telescope session-lens search_session' },
+            },
+            {
                 'Vim',
                 { 'reload vimrc', ':source $MYVIMRC' },
                 { 'check health', ':checkhealth' },
@@ -61,8 +67,11 @@ telescope.setup({
             },
             {
                 'Edit Snipets',
-                { 'Python Snipets', 'vsp ' .. py_snippets_path },
+                { 'Python Snipets', 'vsp ' .. snippets_path .. 'python.snippets' },
             },
+        },
+        xray23 = {
+            sessionDir = vim.fn.stdpath('data') .. 'sessions',
         },
     },
 })
@@ -70,6 +79,8 @@ telescope.setup({
 telescope.load_extension('env')
 telescope.load_extension('projects')
 telescope.load_extension('command_palette')
+telescope.load_extension('recent_files')
+telescope.load_extension('session-lens')
 
 -- ファイル検索
 keymap('n', keys.find_files, ':Telescope find_files<CR>')

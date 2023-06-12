@@ -131,8 +131,6 @@ end
 
 keymap({ 'n', 'i' }, keys.symbols_outline.toggle, ':SymbolsOutline<CR>')
 
--- Dashboard
-keymap(normal_mode, keys.dashboard.toggle, '<Cmd>Dashboard<CR>')
 
 -- which-key
 keymap(normal_mode, keys.which_key.toggle, '<Cmd>WhichKey<CR>')

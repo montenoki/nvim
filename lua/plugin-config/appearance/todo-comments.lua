@@ -16,10 +16,10 @@ if lite_mode then
     }
 else
     keywords_setting = {
-        TODO = { icon = ' ', color = 'info' },
-        NOTE = { icon = ' ', color = 'hint', alt = { 'INFO' } },
-        WARN = { icon = ' ', color = 'warning', alt = { 'WARNING', 'XXX' } },
-        FIX = { icon = ' ', color = 'error', alt = { 'FIXME', 'BUG', 'FIXIT', 'ISSUE' } },
+        TODO = { icon = '', color = 'info' },
+        NOTE = { icon = '', color = 'hint', alt = { 'INFO' } },
+        WARN = { icon = '', color = 'warning', alt = { 'WARNING', 'XXX' } },
+        FIX = { icon = '󰈸', color = 'error', alt = { 'FIXME', 'BUG', 'FIXIT', 'ISSUE' } },
     }
 end
 

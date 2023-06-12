@@ -29,6 +29,14 @@ packer.startup({
         ----- Interface -----
         ---------------------
 
+        -- Session manager
+        use({
+            'rmagatti/auto-session',
+            config = function()
+                require('plugin-config.interface.auto-session')
+            end,
+        })
+
         -- File Explorer
         use({
             'nvim-tree/nvim-tree.lua',
@@ -75,6 +83,7 @@ packer.startup({
             config = function()
                 require('plugin-config.interface.fidget')
             end,
+            tag = 'legacy',
         })
 
         -- zen-mode
@@ -111,15 +120,6 @@ packer.startup({
         })
 
         ---------------------- interface -----------------------
-        -- 開始画面
-        use({
-            'glepnir/dashboard-nvim',
-            event = 'VimEnter',
-            config = function()
-                require('plugin-config.interface.dashboard')
-            end,
-            requires = { 'nvim-tree/nvim-web-devicons' },
-        })
 
         -- Which-key
         use({
@@ -323,6 +323,8 @@ packer.startup({
         })
         use('LinArcX/telescope-env.nvim')
         use('LinArcX/telescope-command-palette.nvim')
+        use('smartpde/telescope-recent-files')
+        use('rmagatti/session-lens')
 
         -- project
         use({
