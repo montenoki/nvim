@@ -14,9 +14,11 @@ null_ls.setup({
         formatting.stylua,
         -- Python
         formatting.isort,
+
         formatting.black.with({ extra_args = { '--fast' } }),
         diagnostics.flake8.with({ extra_args = { '--max-line-length=120', '--ignore=F401,E226,W292,E122,E402' } }),
         diagnostics.markdownlint,
+        null_ls.builtins.formatting.shfmt,
         -- rust
         -- formatting.rustfmt,
         -----------------------------------------------------
