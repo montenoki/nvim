@@ -146,6 +146,7 @@ local M = {
         telescope = {
             find_files = '<C-p>',
             live_grep = '<C-f>',
+            command_palette = '<C-P>',
 
             -- 上下移动
             move_selection_next = '<tab>',
