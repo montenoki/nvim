@@ -1,8 +1,9 @@
+local uConfig = require('uConfig')
 local lualine = requirePlugin('lualine')
-if lualine == nil then
+if lualine == nil or not uConfig.enable.lualine then
     return
 end
-local uConfig = require('uConfig')
+
 local symbols
 local separators
 
@@ -26,7 +27,6 @@ lualine.setup({
     options = {
         theme = 'auto',
         component_separators = { left = '', right = '' },
-        -- https://github.com/ryanoasis/powerline-extra-symbols
         section_separators = separators,
     },
     extensions = { 'nvim-tree', 'toggleterm', 'nvim-dap-ui' },

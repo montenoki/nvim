@@ -2,13 +2,14 @@ local uConfig = require('uConfig')
 local keys = uConfig.keys.bufferLine
 
 local bufferline = requirePlugin('bufferline')
-if bufferline == nil then
+if bufferline == nil or not uConfig.enable.bufferline then
     return
 end
 
 -- https://github.com/akinsho/bufferline.nvim#configuration
 bufferline.setup({
     options = {
+        mode = 'tabs',
         close_command = 'bdelete! %d',
         right_mouse_command = 'bdelete! %d',
         offsets = {

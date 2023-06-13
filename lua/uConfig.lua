@@ -10,6 +10,8 @@ local M = {
 
         auto_session = true,
         nvim_tree = true,
+        lualine = true,
+        bufferline = true,
 
         nvim_navic = true,
     },
