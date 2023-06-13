@@ -1,10 +1,11 @@
-local autosession = requirePlugin('auto-session')
+local auto_session = requirePlugin('auto-session')
+local uConfig = require('uConfig')
 
-if autosession == nil then
+if auto_session == nil or not uConfig.enable.auto_session then
     return
 end
 
-autosession.setup({
+auto_session.setup({
     log_level = 'error',
     cwd_change_handling = {
         restore_upcoming_session = true, -- already the default, no need to specify like this, only here as an example

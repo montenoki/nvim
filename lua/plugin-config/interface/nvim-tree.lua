@@ -1,16 +1,15 @@
 local uConfig = require('uConfig')
-local lite_mode = uConfig.enable.lite_mode
 local keys = uConfig.keys.nvimTree
-
-if keys == nil then
-    return
-end
 
 local nvim_tree = requirePlugin('nvim-tree')
 
+if nvim_tree == nil or not uConfig.enable.nvim_tree then
+    return
+end
+
 local icons
 
-if lite_mode then
+if uConfig.enable.lite_mode then
     icons = {
         default = '- ',
         symlink = '- ',
@@ -40,8 +39,8 @@ else
     icons = {
         default = '',
         symlink = '',
-        bookmark = '',
-        modified = '●',
+        bookmark = '',
+        modified = '',
         folder = {
             arrow_closed = '',
             arrow_open = '',
@@ -49,17 +48,17 @@ else
             open = '',
             empty = '',
             empty_open = '',
-            symlink = '',
+            symlink = '',
             symlink_open = '',
         },
         git = {
             unstaged = '✗',
             staged = '✓',
             unmerged = '',
-            renamed = '➜',
-            untracked = '★',
-            deleted = '',
-            ignored = '◌',
+            renamed = '',
+            untracked = '◌',
+            deleted = '󱂧',
+            ignored = '',
         },
     }
 end
@@ -97,17 +96,12 @@ local list_keys = {
     { key = keys.copy_absolute_path, action = 'copy_absolute_path' },
 }
 
-if nvim_tree == nil then
-    return
-end
 -- On/Off
-keymap('n', keys.toggle, ':NvimTreeToggle<CR>')
+keymap('n', keys.toggle, '<cmd>NvimTreeToggle<CR>')
 
 nvim_tree.setup({
     disable_netrw = true,
-    -- git 状態表示 off
     git = {
-        -- TODO
         enable = true,
         ignore = true,
     },
@@ -137,12 +131,12 @@ nvim_tree.setup({
     },
     actions = {
         open_file = {
-            resize_window = true,
-            quit_on_open = false,
+            resize_window = false,
+            quit_on_open = true,
         },
     },
     system_open = {
-        --TODO mac
+        --TODO: mac
         cmd = 'open',
         -- TODO windows
         --cmd="wsl-open",
@@ -153,7 +147,7 @@ nvim_tree.setup({
             icons = { corner = '└ ', edge = '│ ', none = '  ' },
         },
         icons = {
-            webdev_colors = not lite_mode,
+            webdev_colors = not uConfig.enable.lite_mode,
             git_placement = 'after',
             glyphs = icons,
         },

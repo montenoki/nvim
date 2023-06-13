@@ -23,10 +23,7 @@ packer.startup({
     function(use)
         use('wbthomason/packer.nvim')
 
-        -- Speed up loading Lua modules in Neovim to improve startup time.
-        use('lewis6991/impatient.nvim')
-
-        ----- Interface -----
+        ----- Interface ----
         ---------------------
 
         -- Session manager

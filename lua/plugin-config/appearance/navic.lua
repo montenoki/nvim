@@ -1,6 +1,6 @@
 local uConfig = require('uConfig')
 local navic = requirePlugin('nvim-navic')
-if navic == nil then
+if navic == nil or not uConfig.enable.nvim_navic then
     return
 end
 
@@ -36,32 +36,32 @@ if uConfig.enable.lite_mode then
     }
 else
     icons = {
-        File = '󰈙 ',
-        Module = ' ',
-        Namespace = '󰌗 ',
-        Package = ' ',
-        Class = '󰌗 ',
-        Method = '󰆧 ',
-        Property = ' ',
-        Field = ' ',
-        Constructor = ' ',
-        Enum = '󰕘',
-        Interface = '󰕘',
+        File = ' ',
+        Module = '󰆧 ',
+        Namespace = ' ',
+        Package = '󰏗 ',
+        Class = '𝓒 ',
+        Method = 'ƒ ',
+        Property = ' ',
+        Field = '󰽐 ',
+        Constructor = ' ',
+        Enum = ' ',
+        Interface = ' ',
         Function = '󰊕 ',
-        Variable = '󰆧 ',
+        Variable = '󰫧 ',
         Constant = '󰏿 ',
-        String = '󰀬 ',
-        Number = '󰎠 ',
+        String = '𝓐 ',
+        Number = ' ',
         Boolean = '◩ ',
-        Array = '󰅪 ',
-        Object = '󰅩 ',
-        Key = '󰌋 ',
+        Array = ' ',
+        Object = '⦿ ',
+        Key = ' ',
         Null = '󰟢 ',
-        EnumMember = ' ',
-        Struct = '󰌗 ',
-        Event = ' ',
-        Operator = '󰆕 ',
-        TypeParameter = '󰊄 ',
+        EnumMember = ' ',
+        Struct = ' ',
+        Event = ' ',
+        Operator = ' ',
+        TypeParameter = ' ',
     }
 end
 navic.setup({

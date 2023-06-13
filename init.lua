@@ -4,9 +4,9 @@ require('basic')
 
 require('colorscheme')
 
-require('keybindings')
-
 require('plugins')
+
+require('keybindings')
 
 require('autocmds')
 

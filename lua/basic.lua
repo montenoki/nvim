@@ -21,6 +21,8 @@ end
 vim.wo.number = true
 if uConfig.enable.relativenumber then
     vim.wo.relativenumber = true
+else
+    vim.wo.relativenumber = false
 end
 
 vim.o.hlsearch = true
@@ -140,3 +142,6 @@ end
 
 -- Session
 vim.o.sessionoptions = 'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions'
+
+-- Speed up loading Lua modules in Neovim to improve startup time.
+vim.loader.enable()

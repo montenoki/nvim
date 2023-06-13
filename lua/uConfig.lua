@@ -5,8 +5,13 @@ local M = {
         magic_search = true,
         code_ruler = true,
         listchars = true,
-        relativenumber = true,
+        relativenumber = false,
         mouse = true,
+
+        auto_session = true,
+        nvim_tree = true,
+
+        nvim_navic = true,
     },
     setting = {
         tab_width = 4,
