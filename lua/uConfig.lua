@@ -3,7 +3,6 @@ local M = {
     config_path = vim.fn.stdpath('config'),
     enable_magic_search = true,
     enable_impatient = false,
-
     keys = {
         leader_key = ' ',
 
@@ -134,6 +133,9 @@ local M = {
             copy_path = 'Y',
             copy_absolute_path = 'gy',
         },
+        symbols_outline = {
+            toggle = '<A-o>',
+        },
         bufferLine = {
             enable = true,
 
@@ -146,6 +148,7 @@ local M = {
         telescope = {
             find_files = '<C-p>',
             live_grep = '<C-f>',
+            command_palette = '<A-p>',
 
             -- 上下移动
             move_selection_next = '<tab>',
@@ -165,11 +168,14 @@ local M = {
         },
 
         trouble = {
-            toggle = '<A-p>',
+            toggle = '<A-P>',
         },
 
         which_key = {
             toggle = '<A-/>',
+        },
+        hop = {
+            toggle = '\\',
         },
         zen = {
             toggle = '<A-z>',
@@ -177,9 +183,6 @@ local M = {
 
         gitsigns = {
             diffthis = '<A-G>',
-        },
-        dashboard = {
-            toggle = '<A-b>',
         },
 
         -- s_tab = {
@@ -197,7 +200,6 @@ local M = {
         -- proxy
         -- im-select
     },
-
     mkdnflow = {
         enable = true,
         next_link = 'gn',
@@ -208,7 +210,6 @@ local M = {
         follow_link = 'gd',
         toggle_item = 'tt',
     },
-
     comment = {
         enable = true,
         -- Normal 模式快捷键
@@ -222,7 +223,6 @@ local M = {
             bock = 'gb',
         },
     },
-
     toggleterm = {
         enable = true,
 
@@ -231,7 +231,6 @@ local M = {
         float_toggle = '<A-t>',
         botton_toggle = '<A-\\>',
     },
-
     venn = {
         -- toggle keymappings for venn using <leader>v
         enable = true,

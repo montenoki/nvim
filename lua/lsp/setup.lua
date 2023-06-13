@@ -64,6 +64,7 @@ end
 
 mason_config.setup({
     ensure_installed = {
+        'bashls',
         'lua_ls',
         'marksman',
         'rust_analyzer',
@@ -74,6 +75,7 @@ mason_config.setup({
 local servers = {
     lua_ls = require('lsp.config.lua'),
     marksman = require('lsp.config.markdown'),
+    bashls = require('lsp.config.bash'),
     -- TODO:
     pyright = require('lsp.config.pyright'),
     rust_analyzer = require('lsp.config.rust'),

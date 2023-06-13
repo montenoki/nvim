@@ -7,7 +7,3 @@ hop.setup({
     multi_windows = true,
     keys = 'asdghjkl;qwertyuiopzxcvbnm',
 })
-
-vim.keymap.set('', '\\', function()
-    hop.hint_anywhere()
-end, { remap = true })
