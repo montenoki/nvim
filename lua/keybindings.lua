@@ -129,13 +129,13 @@ end
 
 -- Symbols Outline
 
-keymap({ 'n', 'i' }, keys.symbols_outline.toggle, ':SymbolsOutline<CR>')
+keymap({ 'n', 'i' }, keys.symbols_outline.toggle, '<cmd>SymbolsOutline<CR>')
 
 -- which-key
-keymap(normal_mode, keys.which_key.toggle, '<Cmd>WhichKey<CR>')
+keymap(normal_mode, keys.which_key.toggle, '<cmd>WhichKey<CR>')
 
 -- hop
-keymap(n_v_mode, keys.hop.toggle, ':HopAnywhere<CR>')
+keymap('', keys.hop.toggle, '<cmd>HopAnywhere<CR>')
 
 -- -- DAP
 -- -- nvim-dap
