@@ -6,7 +6,8 @@ local function get_python_interperter()
     local step_char
     local venv_names = { '.venv', 'venv' }
     local in_cwd_flg = false
-    if getSysName() == 'Windows' or getSysName() == 'Windows_NT' then
+    local os_name = getSysName()
+    if os_name == 'Windows' or os_name == 'Windows_NT' then
         python_exec_dir = '\\Scripts\\python.exe'
         step_char = '\\'
     else

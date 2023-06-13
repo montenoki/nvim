@@ -6,7 +6,7 @@ local uConfig = require('uConfig')
 local symbols
 local separators
 
-if uConfig.lite_mode then
+if uConfig.enable.lite_mode then
     symbols = {
         unix = 'LF', -- e712
         dos = 'CRLF', -- e70f

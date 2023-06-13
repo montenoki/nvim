@@ -7,46 +7,46 @@ local uConfig = require('uConfig')
 vim.o.scrolloff = 4
 vim.o.sidescrolloff = 4
 
--- Code Ruler
-vim.wo.colorcolumn = '80,120'
-
--- Listchars
-if uConfig.lite_mode then
-    vim.o.list = false
-else
-    vim.o.list = true
-    vim.o.listchars = 'eol:↲,space:·,trail:●,tab:→→'
+if uConfig.enable.code_ruler then
+    vim.wo.colorcolumn = '80,120'
 end
 
--- Row Number
-vim.wo.number = true
-vim.wo.relativenumber = true
+if uConfig.enable.lite_mode == false and uConfig.enable.listchars then
+    vim.o.list = true
+    vim.o.listchars = 'eol:↲,space:·,trail:●,tab:→→'
+else
+    vim.o.list = false
+end
 
--- Highlight
+vim.wo.number = true
+if uConfig.enable.relativenumber then
+    vim.wo.relativenumber = true
+end
+
 vim.o.hlsearch = true
 vim.wo.cursorline = true
 
--- utf-8
 vim.g.encoding = 'UTF-8'
 vim.o.fileencoding = 'utf-8'
 
--- Icon column
 vim.wo.signcolumn = 'yes'
 
--- CMD line height
 vim.o.cmdheight = 2
 
--- wrap line
 vim.wo.wrap = true
 
--- move to next line when use -> at end of line
-vim.o.whichwrap = '<,>,[,]'
+vim.o.showmode = false
 
--- color
-if not uConfig.lite_mode then
+if uConfig.enable.lite_mode then
+    vim.o.termguicolors = false
+    vim.opt.termguicolors = false
+else
     vim.o.termguicolors = true
     vim.opt.termguicolors = true
 end
+
+-- move to next line when use -> at end of line
+vim.o.whichwrap = '<,>,[,]'
 
 -- Autocomplete
 vim.o.pumheight = 5
@@ -55,20 +55,19 @@ vim.o.wildmenu = true
 -- Tabline
 vim.o.showtabline = 2
 
-vim.o.showmode = false
-
 ----- Tab -----
 ---------------
+local tab_width = uConfig.setting.tab_width
 
 -- Tab Width
-vim.o.tabstop = 4
-vim.bo.tabstop = 4
-vim.o.softtabstop = 4
+vim.o.tabstop = tab_width
+vim.bo.tabstop = tab_width
+vim.o.softtabstop = tab_width
 vim.o.shiftround = true
 
 -- >> <<
-vim.o.shiftwidth = 4
-vim.bo.shiftwidth = 4
+vim.o.shiftwidth = tab_width
+vim.bo.shiftwidth = tab_width
 
 -- Turn Tab to Space
 vim.o.expandtab = true
@@ -84,8 +83,8 @@ vim.o.smartindent = true
 --------------------------
 
 vim.o.timeout = true
-vim.o.timeoutlen = 2000
-vim.o.updatetime = 50
+vim.o.timeoutlen = uConfig.setting.timeoutlen
+vim.o.updatetime = uConfig.setting.updatetime
 
 ----- Search -----
 ------------------
@@ -103,7 +102,11 @@ vim.bo.autoread = true
 
 vim.o.hidden = true
 
--- vim.o.mouse = 'a'
+if uConfig.enable.mouse then
+    vim.o.mouse = 'a'
+else
+    vim.o.mouse = ''
+end
 
 vim.o.backup = false
 vim.o.writebackup = false
@@ -127,11 +130,11 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 -- Fold
+vim.o.foldenable = true
 vim.o.foldcolumn = '1'
 vim.o.foldlevel = 99
 vim.o.foldlevelstart = 99
-vim.o.foldenable = true
-if not uConfig.lite_mode then
+if not uConfig.enable.lite_mode then
     vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 end
 

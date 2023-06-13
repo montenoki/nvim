@@ -47,7 +47,8 @@ autocmd('BufWritePost', {
     group = myAutoGroup,
     callback = function()
         local plugins_path
-        if getSysName() == 'Windows' or getSysName() == 'Windows_NT' then
+        local os_name = getSysName()
+        if os_name == 'Windows' or os_name == 'Windows_NT' then
             plugins_path = 'lua\\plugins.lua'
         else
             plugins_path = 'lua/plugins.lua'

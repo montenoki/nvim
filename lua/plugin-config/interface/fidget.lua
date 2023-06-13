@@ -8,7 +8,7 @@ end
 local done_mark
 local anime
 
-if uConfig.lite_mode then
+if uConfig.enable.lite_mode then
     done_mark = 'Done'
     anime = 'bouncing_bar'
 else

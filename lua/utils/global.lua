@@ -25,6 +25,6 @@ function _G.keymap(mode, lhs, rhs, opts)
 end
 
 function _G.getSysName()
-    -- Unixes/Windows/Darwin
+    -- Linux/Windows NT/Darwin
     return vim.loop.os_uname().sysname
 end

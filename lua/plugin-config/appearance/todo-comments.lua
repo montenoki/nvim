@@ -1,6 +1,6 @@
 local todo = requirePlugin('todo-comments')
 local uConfig = require('uConfig')
-local lite_mode = uConfig.lite_mode
+local lite_mode = uConfig.enable.lite_mode
 if todo == nil then
     return
 end

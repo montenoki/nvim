@@ -9,10 +9,10 @@ end
 local handler = function(virtText, lnum, endLnum, width, truncate)
     local newVirtText = {}
     local suffix
-    if uConfig.lite_mode then
-        suffix = (' <- %d ......'):format(endLnum - lnum)
+    if uConfig.enable.lite_mode then
+        suffix = (' <- %d ...'):format(endLnum - lnum)
     else
-        suffix = ('  %d ......'):format(endLnum - lnum)
+        suffix = (' %d ...'):format(endLnum - lnum)
     end
     local sufWidth = vim.fn.strdisplaywidth(suffix)
     local targetWidth = width - sufWidth

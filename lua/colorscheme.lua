@@ -2,7 +2,7 @@ local uConfig = require('uConfig')
 
 local colorscheme
 
-if uConfig.lite_mode then
+if uConfig.enable.lite_mode then
     vim.o.background = 'light'
     colorscheme = 'dim'
 else

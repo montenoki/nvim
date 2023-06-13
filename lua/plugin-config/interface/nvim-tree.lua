@@ -1,5 +1,5 @@
 local uConfig = require('uConfig')
-local lite_mode = uConfig.lite_mode
+local lite_mode = uConfig.enable.lite_mode
 local keys = uConfig.keys.nvimTree
 
 if keys == nil then

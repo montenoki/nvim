@@ -25,7 +25,7 @@ keymap(n_v_mode, '$', 'g_')
 keymap(n_v_mode, 'g_', '$')
 
 -- magic search
-if uConfig.enable_magic_search then
+if uConfig.enable.magic_search then
     keymap(n_v_mode, '/', '/\\v', { remap = false, silent = false })
 else
     keymap(n_v_mode, '/', '/', { remap = false, silent = false })

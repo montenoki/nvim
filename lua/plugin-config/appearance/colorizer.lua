@@ -1,5 +1,5 @@
 local uConfig = require('uConfig')
-if uConfig.lite_mode then
+if uConfig.enable.lite_mode then
     return
 else
     require('colorizer').setup()

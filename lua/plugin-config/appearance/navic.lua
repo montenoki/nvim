@@ -5,7 +5,7 @@ if navic == nil then
 end
 
 local icons
-if uConfig.lite_mode then
+if uConfig.enable.lite_mode then
     icons = {
         File = '',
         Module = '',

@@ -1,5 +1,5 @@
 local uConfig = require('uConfig')
-local lite_mode = uConfig.lite_mode
+local lite_mode = uConfig.enable.lite_mode
 local icons
 
 if lite_mode then

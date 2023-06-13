@@ -8,7 +8,7 @@ end
 
 local uConfig = require('uConfig')
 local formatter
-if uConfig.lite_mode then
+if uConfig.enable.lite_mode then
     formatter = nil
 else
     formatter = require('cmp.lspkind').formatting

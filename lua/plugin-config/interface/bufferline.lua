@@ -25,7 +25,7 @@ bufferline.setup({
         diagnostics_indicator = function(count, level, diagnostics_dict, context)
             local s = ' '
             for e, n in pairs(diagnostics_dict) do
-                if uConfig.lite_mode then
+                if uConfig.enable.lite_mode then
                     local sym = e == 'error' and 'e ' or (e == 'warning' and 'w ' or 'i')
                     s = s .. n .. sym
                 else

@@ -1,8 +1,18 @@
 local M = {
-    lite_mode = false,
     config_path = vim.fn.stdpath('config'),
-    enable_magic_search = true,
-    enable_impatient = false,
+    enable = {
+        lite_mode = false,
+        magic_search = true,
+        code_ruler = true,
+        listchars = true,
+        relativenumber = true,
+        mouse = true,
+    },
+    setting = {
+        tab_width = 4,
+        timeoutlen = 2000,
+        updatetime = 50,
+    },
     keys = {
         leader_key = ' ',
 
@@ -214,7 +224,7 @@ local M = {
         enable = true,
         -- Normal 模式快捷键
         toggler = {
-            line = 'gcc',  -- 行注释
+            line = 'gcc', -- 行注释
             block = 'gbc', -- 块注释
         },
         -- Visual 模式
