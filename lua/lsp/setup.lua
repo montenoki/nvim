@@ -25,10 +25,10 @@ vim.diagnostic.config({
     show_header = false,
     severity_sort = true,
     float = {
-        source = "always",
-        border = "rounded",
-        style = "minimal",
-        header = "",
+        source = 'always',
+        border = 'rounded',
+        style = 'minimal',
+        header = '',
         -- prefix = " ",
         -- max_width = 100,
         -- width = 60,
@@ -38,15 +38,14 @@ vim.diagnostic.config({
 
 local signs
 if lite_mode then
-    signs = { Error = "E:", Warn = "W:", Hint = "!:", Info = "i:" }
+    signs = { Error = 'E:', Warn = 'W:', Hint = '!:', Info = 'i:' }
 else
-    signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+    signs = { Error = ' ', Warn = ' ', Hint = ' ', Info = ' ' }
 end
 for type, icon in pairs(signs) do
-    local hl = "DiagnosticSign" .. type
+    local hl = 'DiagnosticSign' .. type
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
-
 
 local mason = requirePlugin('mason')
 if mason == nil then
@@ -54,7 +53,7 @@ if mason == nil then
 end
 mason.setup({
     ui = {
-        icons = icons
+        icons = icons,
     },
 })
 
@@ -67,7 +66,7 @@ mason_config.setup({
     ensure_installed = {
         'lua_ls',
         'marksman',
-        -- TODO:
+        'rust_analyzer',
         'pyright',
     },
 })
@@ -77,6 +76,7 @@ local servers = {
     marksman = require('lsp.config.markdown'),
     -- TODO:
     pyright = require('lsp.config.pyright'),
+    rust_analyzer = require('lsp.config.rust'),
 }
 
 local lspconfig = requirePlugin('lspconfig')
@@ -92,4 +92,4 @@ for name, config in pairs(servers) do
     end
 end
 
-require("lsp.null-ls")
+require('lsp.null-ls')

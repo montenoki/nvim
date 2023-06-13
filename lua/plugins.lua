@@ -359,6 +359,7 @@ packer.startup({
         -- use({ 'jbyuki/one-small-step-for-vimkind' })
 
         -- -- Python
+        use({ 'luk400/vim-jukit' })
         -- use({
         --     'mfussenegger/nvim-dap-python',
         --     -- config = function()
@@ -369,8 +370,8 @@ packer.startup({
         -- -- JSON
         -- use('b0o/schemastore.nvim')
 
-        -- -- Rust
-        -- use('simrat39/rust-tools.nvim')
+        -- Rust
+        use('simrat39/rust-tools.nvim')
 
         -- -- -- cool movement
         -- -- use({
