@@ -1,5 +1,4 @@
 -- TODO:
-local snippets_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/vim-snippets/UltiSnips/'
 local uConfig = require('uConfig')
 local keys = uConfig.keys.telescope
 
@@ -67,7 +66,14 @@ telescope.setup({
             },
             {
                 'Edit Snipets',
-                { 'Python Snipets', 'vsp ' .. snippets_path .. 'python.snippets' },
+                {
+                    'Python Snipets',
+                    ':edit '
+                        .. vim.fn.stdpath('data')
+                        .. '/site/pack/packer/start/vim-snippets/UltiSnips/'
+                        .. 'python.snippets'
+                        .. '<CR>',
+                },
             },
         },
         xray23 = {

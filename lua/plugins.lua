@@ -361,7 +361,6 @@ packer.startup({
         -- use({ 'jbyuki/one-small-step-for-vimkind' })
 
         -- -- Python
-        use({ 'luk400/vim-jukit' })
         -- use({
         --     'mfussenegger/nvim-dap-python',
         --     -- config = function()

@@ -40,7 +40,7 @@ local signs
 if lite_mode then
     signs = { Error = 'E:', Warn = 'W:', Hint = '!:', Info = 'i:' }
 else
-    signs = { Error = ' ', Warn = ' ', Hint = ' ', Info = ' ' }
+    signs = { Error = ' ', Warn = ' ', Hint = ' ', Info = ' ' }
 end
 for type, icon in pairs(signs) do
     local hl = 'DiagnosticSign' .. type
