@@ -13,6 +13,7 @@ local M = {
         lualine = true,
         bufferline = true,
         symbols_outline = true,
+        fidget = true,
 
         nvim_navic = true,
     },

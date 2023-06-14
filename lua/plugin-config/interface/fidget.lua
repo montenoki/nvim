@@ -1,7 +1,7 @@
 local fidget = requirePlugin('fidget')
 local uConfig = require('uConfig')
 
-if fidget == nil then
+if fidget == nil or not uConfig.enable.fidget then
     return
 end
 
