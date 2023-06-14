@@ -12,6 +12,7 @@ local M = {
         nvim_tree = true,
         lualine = true,
         bufferline = true,
+        symbols_outline = true,
 
         nvim_navic = true,
     },
@@ -49,6 +50,23 @@ local M = {
             height_decrease = 's_',
             height_increase = 's+',
             size_equal = 'ss',
+        },
+
+        new_tab = '<A-b>',
+
+        symbols_outline = {
+            toggle = '<A-o>',
+            close = { '<ESC>', 'q' },
+            goto_location = '<CR>',
+            focus_location = '<TAB>',
+            hover_symbol = 'h',
+            rename_symbol = '<leader>rn',
+            code_actions = '<leader>ca',
+            fold = 'zc',
+            unfold = 'zo',
+            fold_all = 'zM',
+            unfold_all = 'zR',
+            fold_reset = 'R',
         },
 
         cmp = {
@@ -149,9 +167,6 @@ local M = {
             copy_name = 'y',
             copy_path = 'Y',
             copy_absolute_path = 'gy',
-        },
-        symbols_outline = {
-            toggle = '<A-o>',
         },
         bufferLine = {
             enable = true,

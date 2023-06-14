@@ -97,7 +97,7 @@ local list_keys = {
 }
 
 -- On/Off
-keymap('n', keys.toggle, '<cmd>NvimTreeToggle<CR>')
+keymap('n', keys.toggle, '<CMD>NvimTreeToggle<CR>')
 
 nvim_tree.setup({
     disable_netrw = true,

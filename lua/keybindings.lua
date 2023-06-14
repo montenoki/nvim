@@ -89,7 +89,9 @@ if keys.s_windows ~= nil and keys.s_windows.enable then
     keymap('n', skey.size_equal, '<C-w>=')
 end
 
--- -- Tabs
+-- Tabs
+keymap(normal_mode, keys.new_tab, '<CMD>tabnew<CR>')
+
 -- if keys.s_tab ~= nil then
 --     local tkey = keys.s_tab
 --     keymap('n', tkey.split, '<CMD>tab split<CR>')
@@ -126,10 +128,6 @@ pluginKeys.mapLSP = function(mapbuf)
         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end)
 end
-
--- Symbols Outline
-
-keymap({ 'n', 'i' }, keys.symbols_outline.toggle, '<cmd>SymbolsOutline<CR>')
 
 -- which-key
 keymap(normal_mode, keys.which_key.toggle, '<cmd>WhichKey<CR>')

@@ -56,8 +56,7 @@ packer.startup({
             end,
         })
 
-        --TODO:
-        --.Tabs Bar
+        -- Tabs Bar
         use({
             'akinsho/bufferline.nvim',
             ag = '*',
@@ -67,12 +66,15 @@ packer.startup({
             end,
         })
 
+        -- Outliner
         use({
             'simrat39/symbols-outline.nvim',
             config = function()
                 require('plugin-config.interface.symbols-outline')
             end,
         })
+
+        -- HACK: save point
 
         -- Status for nvim-lsp progress
         use({
