@@ -121,13 +121,15 @@ packer.startup({
         ----- Color Schemes -----
         -------------------------
 
-        -- HACK: save point
+        -- TODO: 8bit主题未完成
         use('Mofiqul/dracula.nvim')
+        use('EdenEast/nightfox.nvim')
         use('montenoki/16-colors')
 
         ----- Code Appearance  -----
         ----------------------------
 
+        -- TODO:
         -- Highlighting
         use({
             'nvim-treesitter/nvim-treesitter',
@@ -151,6 +153,7 @@ packer.startup({
             requires = 'nvim-treesitter/nvim-treesitter',
         })
 
+        -- TODO:
         -- To-do Comments.nvim
         use({
             'folke/todo-comments.nvim',
@@ -160,6 +163,7 @@ packer.startup({
             end,
         })
 
+        -- TODO:
         -- Indent-blankline
         use({
             'lukas-reineke/indent-blankline.nvim',
@@ -168,6 +172,7 @@ packer.startup({
             end,
         })
 
+        -- TODO:
         -- Fold
         use({
             'kevinhwang91/nvim-ufo',
@@ -193,6 +198,7 @@ packer.startup({
             end,
         })
 
+        -- TODO:
         -- Sticky Scroll
         use({
             'nvim-treesitter/nvim-treesitter-context',
@@ -201,6 +207,7 @@ packer.startup({
             end,
         })
 
+        -- TODO:
         -- Color code display like: #ff0149
         use({
             'norcalli/nvim-colorizer.lua',
@@ -209,6 +216,7 @@ packer.startup({
             end,
         })
 
+        -- TODO:
         -- git
         use({
             'lewis6991/gitsigns.nvim',
@@ -264,6 +272,7 @@ packer.startup({
         ----- Editor -----
         ------------------
 
+        -- TODO:
         -- Comment Toggle
         use({
             'numToStr/Comment.nvim',
@@ -272,6 +281,7 @@ packer.startup({
             end,
         })
 
+        -- TODO:
         -- Surround
         use({
             'kylechui/nvim-surround',
@@ -279,6 +289,7 @@ packer.startup({
                 require('plugin-config.editor.nvim-surround')
             end,
         })
+        -- TODO:
         -- nvim-autopairs
         use({
             'windwp/nvim-autopairs',
@@ -289,6 +300,7 @@ packer.startup({
 
         ----- DAP -----
         ---------------
+        -- TODO:
         use('mfussenegger/nvim-dap')
         use({
             'rcarriga/nvim-dap-ui',
@@ -301,6 +313,7 @@ packer.startup({
         ----- Search Tools -----
         ------------------------
 
+        -- TODO:
         use({
             'nvim-telescope/telescope.nvim',
             tag = '0.1.1',
@@ -316,6 +329,7 @@ packer.startup({
         use('smartpde/telescope-recent-files')
         use('rmagatti/session-lens')
 
+        -- TODO:
         -- project
         use({
             'ahmedkhalf/project.nvim',
@@ -324,6 +338,7 @@ packer.startup({
             end,
         })
 
+        -- TODO:
         -- Diagnostics 表示
         use({
             'folke/trouble.nvim',
@@ -333,6 +348,7 @@ packer.startup({
             end,
         })
 
+        -- TODO:
         use({
             'phaazon/hop.nvim',
             branch = 'v2',

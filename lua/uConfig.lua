@@ -1,7 +1,7 @@
 local M = {
     config_path = vim.fn.stdpath('config'),
     enable = {
-        lite_mode = true,
+        lite_mode = false,
         magic_search = true,
         code_ruler = true,
         listchars = true,
