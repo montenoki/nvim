@@ -123,8 +123,7 @@ packer.startup({
 
         -- HACK: save point
         use('Mofiqul/dracula.nvim')
-        use('montenoki/vim-dim')
-        use('echasnovski/mini.nvim')
+        use('montenoki/16-colors')
 
         ----- Code Appearance  -----
         ----------------------------

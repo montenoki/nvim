@@ -69,6 +69,7 @@ mason_config.setup({
         'marksman',
         'rust_analyzer',
         'pyright',
+        'vimls',
     },
 })
 
@@ -79,6 +80,7 @@ local servers = {
     -- TODO:
     pyright = require('lsp.config.pyright'),
     rust_analyzer = require('lsp.config.rust'),
+    vimls = require('lsp.config.vim'),
 }
 
 local lspconfig = requirePlugin('lspconfig')
