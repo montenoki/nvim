@@ -1,7 +1,7 @@
 local M = {
     config_path = vim.fn.stdpath('config'),
     enable = {
-        lite_mode = false,
+        lite_mode = true,
         magic_search = true,
         code_ruler = true,
         listchars = true,
@@ -17,12 +17,13 @@ local M = {
         notify = true,
         -- Need lazygit
         toggleterm = true,
+        which_key = true,
 
         nvim_navic = true,
     },
     setting = {
         tab_width = 4,
-        timeoutlen = 2000,
+        timeoutlen = 300,
         updatetime = 50,
     },
     keys = {

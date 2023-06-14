@@ -110,7 +110,6 @@ packer.startup({
 
         ---------------------- interface -----------------------
 
-        -- HACK: save point
         -- Which-key
         use({
             'folke/which-key.nvim',
@@ -122,8 +121,10 @@ packer.startup({
         ----- Color Schemes -----
         -------------------------
 
+        -- HACK: save point
         use('Mofiqul/dracula.nvim')
-        use('jeffkreeftmeijer/vim-dim')
+        use('montenoki/vim-dim')
+        use('echasnovski/mini.nvim')
 
         ----- Code Appearance  -----
         ----------------------------

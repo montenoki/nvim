@@ -129,9 +129,6 @@ pluginKeys.mapLSP = function(mapbuf)
     end)
 end
 
--- which-key
-keymap(normal_mode, keys.which_key.toggle, '<cmd>WhichKey<CR>')
-
 -- hop
 keymap('', keys.hop.toggle, '<cmd>HopAnywhere<CR>')
 
