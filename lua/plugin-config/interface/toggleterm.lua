@@ -1,13 +1,8 @@
--- TODO:
 local uConfig = require('uConfig')
-local uToggleTerm = uConfig.toggleterm
-
-if uToggleTerm == nil or not uToggleTerm.enable then
-    return
-end
-
 local toggleterm = requirePlugin('toggleterm')
-if toggleterm == nil then
+local keys = uConfig.keys.toggleterm
+
+if toggleterm == nil or not uConfig.enable.toggleterm then
     return
 end
 
@@ -19,6 +14,7 @@ toggleterm.setup({
             return vim.o.columns * 0.3
         end
     end,
+    open_mapping = '<c-\\>',
     insert_mappings = true,
     start_in_insert = true,
     terminal_mappings = true,
@@ -35,9 +31,10 @@ local lazygit = Terminal:new({
     },
     on_open = function(term)
         vim.cmd('startinsert!')
+        local opt = { noremap = true, silent = true }
         -- q / <leader>tg 关闭 terminal
-        vim.api.nvim_buf_set_keymap(term.bufnr, 'n', 'q', '<cmd>close<CR>', { noremap = true, silent = true })
-        vim.api.nvim_buf_set_keymap(term.bufnr, 'n', '<leader>tg', '<cmd>close<CR>', { noremap = true, silent = true })
+        vim.api.nvim_buf_set_keymap(term.bufnr, 'n', 'q', '<CMD>close<CR>', opt)
+        vim.api.nvim_buf_set_keymap(term.bufnr, 'n', '<A-g>', '<CMD>close<CR>', opt)
         -- ESC 键取消，留给lazygit
         if vim.fn.mapcheck('<Esc>', 't') ~= '' then
             vim.api.nvim_del_keymap('t', '<Esc>')
@@ -45,33 +42,30 @@ local lazygit = Terminal:new({
     end,
     on_close = function(_)
         -- 添加回来
-        vim.api.nvim_set_keymap('t', '<Esc>', '<C-\\><C-n>', {
-            noremap = true,
-            silent = true,
-        })
+        local opt = { noremap = true, silent = true }
+        vim.api.nvim_set_keymap('t', '<Esc>', '<C-\\><C-n>', opt)
     end,
 })
 
-local xterm = Terminal:new({})
+local terms = {}
 
-local M = {}
+function _G.term_toggle(style)
+    local number = vim.v.count
+    if terms[number] == nil then
+        terms[number] = Terminal:new({})
+    end
+    terms[number].direction = style
+    terms[number].id = number
+    terms[number]:toggle()
+end
 
-M.lazygit_toggle = function()
+function _G.lazygit_toggle()
     lazygit:toggle()
 end
 
-M.botton_toggle = function()
-    xterm.direction = 'horizontal'
-    xterm:toggle()
-end
-
-M.float_toggle = function()
-    xterm.direction = 'float'
-    xterm:toggle()
-end
-
 local mode = { 'n', 'i', 't' }
-vim.keymap.set(mode, uToggleTerm.lazygit_toggle, M.lazygit_toggle)
-vim.keymap.set(mode, uToggleTerm.float_toggle, M.float_toggle)
-vim.keymap.set(mode, uToggleTerm.botton_toggle, M.botton_toggle)
-vim.keymap.set('t', uToggleTerm.term_quit, '<C-\\><C-n>')
+
+keymap(mode, keys.lazygit_toggle, '<CMD>lua lazygit_toggle()<CR>')
+keymap(mode, keys.float_toggle, '<CMD>lua term_toggle([[float]])<CR>')
+keymap(mode, keys.botton_toggle, '<CMD>lua term_toggle([[horizontal]])<CR>')
+keymap('t', keys.term_quit, '<C-\\><C-n>')

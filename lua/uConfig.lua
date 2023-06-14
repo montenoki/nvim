@@ -14,6 +14,9 @@ local M = {
         bufferline = true,
         symbols_outline = true,
         fidget = true,
+        notify = true,
+        -- Need lazygit
+        toggleterm = true,
 
         nvim_navic = true,
     },
@@ -68,6 +71,13 @@ local M = {
             fold_all = 'zM',
             unfold_all = 'zR',
             fold_reset = 'R',
+        },
+
+        toggleterm = {
+            term_quit = '<Esc>',
+            lazygit_toggle = '<A-g>',
+            float_toggle = '<A-t>',
+            botton_toggle = '<A-\\>',
         },
 
         cmp = {
@@ -255,14 +265,6 @@ local M = {
             line = 'gc',
             bock = 'gb',
         },
-    },
-    toggleterm = {
-        enable = true,
-
-        term_quit = '<Esc>',
-        lazygit_toggle = '<A-g>',
-        float_toggle = '<A-t>',
-        botton_toggle = '<A-\\>',
     },
     venn = {
         -- toggle keymappings for venn using <leader>v

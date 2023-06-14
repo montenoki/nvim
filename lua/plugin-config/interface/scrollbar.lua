@@ -1,4 +1,9 @@
 local uConfig = require('uConfig')
+local scrollbar = requirePlugin('scrollbar')
+if scrollbar == nil or not uConfig.enable.scrollbar then
+    return
+end
+
 local cursor_icon
 if uConfig.enable.lite_mode then
     cursor_icon = '<'
@@ -6,7 +11,7 @@ else
     cursor_icon = '•'
 end
 
-require('scrollbar').setup({
+scrollbar.setup({
     show = true,
     show_in_active_only = true,
     set_highlights = true,
@@ -115,7 +120,7 @@ require('scrollbar').setup({
         },
     },
     excluded_buftypes = { 'terminal' },
-    excluded_filetypes = { 'prompt', 'TelescopePrompt', 'noice' },
+    excluded_filetypes = { 'cmp_docs', 'cmp_menu', 'noice', 'prompt', 'TelescopePrompt' },
     autocmd = {
         render = {
             'BufWinEnter',

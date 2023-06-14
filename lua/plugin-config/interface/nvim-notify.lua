@@ -1,5 +1,6 @@
 local notify = requirePlugin('notify')
-if notify == nil then
+local uConfig = require('uConfig')
+if notify == nil or not uConfig.enable.notify then
     return
 end
 

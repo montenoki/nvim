@@ -74,8 +74,6 @@ packer.startup({
             end,
         })
 
-        -- HACK: save point
-
         -- Status for nvim-lsp progress
         use({
             'j-hui/fidget.nvim',
@@ -83,14 +81,6 @@ packer.startup({
                 require('plugin-config.interface.fidget')
             end,
             tag = 'legacy',
-        })
-
-        -- zen-mode
-        use({
-            'folke/zen-mode.nvim',
-            config = function()
-                require('plugin-config.interface.zen-mode')
-            end,
         })
 
         -- Notice表示
@@ -120,6 +110,7 @@ packer.startup({
 
         ---------------------- interface -----------------------
 
+        -- HACK: save point
         -- Which-key
         use({
             'folke/which-key.nvim',
