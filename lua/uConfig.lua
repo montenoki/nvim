@@ -18,6 +18,7 @@ local M = {
         -- Need lazygit
         toggleterm = true,
         which_key = true,
+        todo_comments = true,
 
         nvim_navic = true,
     },
