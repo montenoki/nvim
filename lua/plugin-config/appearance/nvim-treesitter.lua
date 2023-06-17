@@ -4,12 +4,12 @@ if treesitter == nil then
 end
 local uConfig = require('uConfig')
 local keys = uConfig.keys.treesitter
-local lang_support = uConfig.language_support
+local lang_support = uConfig.language_support.treesitter
 
 require('nvim-treesitter.install').prefer_git = true
 
 treesitter.setup({
-    ensure_installed = lang_support.treesitter_ensure,
+    ensure_installed = lang_support.ensure_installed,
     sync_install = false,
 
     highlight = {

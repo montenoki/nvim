@@ -124,6 +124,15 @@ packer.startup({
                 require('plugin-config.interface.trouble')
             end,
         })
+
+        -- Marks
+        use({
+            'chentoast/marks.nvim',
+            config=function ()
+                require('plugin-config.interface.marks')
+            end
+        })
+
         ----- Color Schemes -----
         -------------------------
 

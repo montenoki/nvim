@@ -20,6 +20,7 @@ local M = {
         toggleterm = true,
         which_key = true,
         trouble = true,
+        marks = true,
 
         todo_comments = true,
         indent_blankline = true,
@@ -43,7 +44,26 @@ local M = {
         updatetime = 50,
     },
     language_support = {
-        treesitter_ensure = { 'vim', 'lua', 'python', 'query' },
+        treesitter = { ensure_installed = { 'vim', 'lua', 'python', 'query' } },
+        mason = {
+            ensure_installed = {
+                'bashls',
+                'lua_ls',
+                'marksman',
+                'rust_analyzer',
+                'pyright',
+                'vimls',
+            },
+            servers = {
+                lua_ls = require('lsp.config.lua'),
+                marksman = require('lsp.config.markdown'),
+                bashls = require('lsp.config.bash'),
+                -- TODO:
+                pyright = require('lsp.config.pyright'),
+                rust_analyzer = require('lsp.config.rust'),
+                vimls = require('lsp.config.vim'),
+            }
+        },
     },
     keys = {
         leader_key = ' ',
@@ -239,7 +259,7 @@ local M = {
         },
         comment_toggle = {
             toggler = {
-                line = 'gcc', -- 行注释
+                line = 'gcc',  -- 行注释
                 block = 'gbc', -- 块注释
             },
             opleader = {

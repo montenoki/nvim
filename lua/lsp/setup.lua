@@ -1,22 +1,26 @@
 local uConfig = require('uConfig')
-local lite_mode = uConfig.enable.lite_mode
-local icons
+local language_support = uConfig.language_support.mason
 
-if lite_mode then
-    icons = {
+local mason_icons
+local signs
+
+-- lite_mode settings
+if uConfig.enable.lite_mode then
+    mason_icons = {
         package_installed = 'v',
         package_pending = '->',
         package_uninstalled = 'x',
     }
+    signs = { Error = 'E:', Warn = 'W:', Hint = '!:', Info = 'i:' }
 else
-    icons = {
+    mason_icons = {
         package_installed = '✓',
         package_pending = '➜',
         package_uninstalled = '✗',
     }
+    signs = { Error = ' ', Warn = ' ', Hint = ' ', Info = ' ' }
 end
 
--- 自定义图标
 vim.diagnostic.config({
     virtual_text = true,
     signs = true,
@@ -36,59 +40,30 @@ vim.diagnostic.config({
     },
 })
 
-local signs
-if lite_mode then
-    signs = { Error = 'E:', Warn = 'W:', Hint = '!:', Info = 'i:' }
-else
-    signs = { Error = ' ', Warn = ' ', Hint = ' ', Info = ' ' }
-end
 for type, icon in pairs(signs) do
     local hl = 'DiagnosticSign' .. type
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
 local mason = requirePlugin('mason')
-if mason == nil then
+local mason_config = requirePlugin('mason-lspconfig')
+local lspconfig = requirePlugin('lspconfig')
+
+if mason == nil or mason_config == nil or lspconfig == nil then
     return
 end
+
 mason.setup({
     ui = {
-        icons = icons,
+        icons = mason_icons,
     },
 })
-
-local mason_config = requirePlugin('mason-lspconfig')
-if mason_config == nil then
-    return
-end
 
 mason_config.setup({
-    ensure_installed = {
-        'bashls',
-        'lua_ls',
-        'marksman',
-        'rust_analyzer',
-        'pyright',
-        'vimls',
-    },
+    ensure_installed = language_support.ensure_installed,
 })
 
-local servers = {
-    lua_ls = require('lsp.config.lua'),
-    marksman = require('lsp.config.markdown'),
-    bashls = require('lsp.config.bash'),
-    -- TODO:
-    pyright = require('lsp.config.pyright'),
-    rust_analyzer = require('lsp.config.rust'),
-    vimls = require('lsp.config.vim'),
-}
-
-local lspconfig = requirePlugin('lspconfig')
-if lspconfig == nil then
-    return
-end
-
-for name, config in pairs(servers) do
+for name, config in pairs(language_support.servers) do
     if config ~= nil and type(config) == 'table' then
         config.on_setup(lspconfig[name])
     else

@@ -10,7 +10,7 @@ local icon
 
 if uConfig.enable.lite_mode then
     icon = {
-        add = 'A|',
+        add = '+|',
         change = 'C|',
         delete = 'D_',
         top_delete = 'D/',
@@ -19,12 +19,12 @@ if uConfig.enable.lite_mode then
     }
 else
     icon = {
-        add = '|',
+        add = '+|',
         change = '|',
         delete = '󰆴|',
         top_delete = '󰆴',
-        change_delete = '󰆴',
-        untracked = '|',
+        change_delete = '󰆴+',
+        untracked = 'U|',
     }
 end
 
