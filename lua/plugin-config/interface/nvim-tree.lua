@@ -118,7 +118,7 @@ nvim_tree.setup({
         custom = {},
     },
     view = {
-        width = 40,
+        width = 50,
         side = 'left',
         hide_root_folder = false,
         mappings = {
@@ -138,7 +138,7 @@ nvim_tree.setup({
                 relative = 'editor',
                 border = 'rounded',
                 width = 50,
-                height = 80,
+                height = 30,
                 row = 1,
                 col = 1,
             },

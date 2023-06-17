@@ -1,5 +1,7 @@
 local surround = requirePlugin('nvim-surround')
-if surround == nil then
+local uConfig = require('uConfig')
+
+if surround == nil or not uConfig.enable.surround then
     return
 end
 

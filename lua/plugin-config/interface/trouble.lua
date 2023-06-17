@@ -1,10 +1,10 @@
-local uConfig = require('uConfig')
-local keys = uConfig.keys.trouble
-
 local trouble = requirePlugin('trouble')
-if trouble == nil then
+local uConfig = require('uConfig')
+
+if trouble == nil or not uConfig.enable.trouble then
     return
 end
+local keys = uConfig.keys.trouble
 
 trouble.setup({
     position = 'bottom', -- position of the list can be: bottom, top, left, right
@@ -56,4 +56,4 @@ trouble.setup({
 })
 
 -- Lua
-vim.keymap.set('n', keys.toggle, '<cmd>TroubleToggle<cr>', { silent = true, noremap = true })
+vim.keymap.set('n', keys.toggle, '<CMD>TroubleToggle<CR>', { silent = true, noremap = true })

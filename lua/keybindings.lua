@@ -129,9 +129,6 @@ pluginKeys.mapLSP = function(mapbuf)
     end)
 end
 
--- hop
-keymap('', keys.hop.toggle, '<cmd>HopAnywhere<CR>')
-
 -- -- DAP
 -- -- nvim-dap
 local dap = uConfig.keys.dap
@@ -163,21 +160,6 @@ pluginKeys.mapDAP = function()
             .. '<C-w>o<CR>',
         opt
     )
-end
-
--- gitsigns
-pluginKeys.gitsigns_on_attach = function(bufnr)
-    local gs = package.loaded.gitsigns
-
-    local function map(mode, l, r, opts)
-        opts = opts or {}
-        opts.buffer = bufnr
-        vim.keymap.set(mode, l, r, opts)
-    end
-
-    map('n', uConfig.keys.gitsigns.diffthis, function()
-        gs.diffthis('~')
-    end)
 end
 
 return pluginKeys

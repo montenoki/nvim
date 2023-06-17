@@ -116,6 +116,14 @@ packer.startup({
             end,
         })
 
+        -- Diagnostics
+        use({
+            'folke/trouble.nvim',
+            requires = 'nvim-tree/nvim-web-devicons',
+            config = function()
+                require('plugin-config.interface.trouble')
+            end,
+        })
         ----- Color Schemes -----
         -------------------------
 
@@ -209,7 +217,7 @@ packer.startup({
             end,
         })
 
-        -- git
+        -- gitsigns
         use({
             'lewis6991/gitsigns.nvim',
             config = function()
@@ -218,7 +226,71 @@ packer.startup({
             end,
         })
 
+        ----- Editor -----
+        ------------------
+
+        -- Comment Toggle
+        use({
+            'numToStr/Comment.nvim',
+            config = function()
+                require('plugin-config.editor.comment')
+            end,
+        })
+
+        -- Surround
+        use({
+            'kylechui/nvim-surround',
+            config = function()
+                require('plugin-config.editor.nvim-surround')
+            end,
+        })
+
+        -- nvim-autopairs
+        use({
+            'windwp/nvim-autopairs',
+            config = function()
+                require('plugin-config.editor.nvim-autopairs')
+            end,
+        })
+
+        ----- Search Tools -----
+        ------------------------
+
+        -- Telescope
+        use({
+            'nvim-telescope/telescope.nvim',
+            tag = '0.1.1',
+            requires = {
+                'nvim-lua/plenary.nvim',
+            },
+            config = function()
+                require('plugin-config.search.telescope')
+            end,
+        })
+        use('LinArcX/telescope-env.nvim')
+        use('LinArcX/telescope-command-palette.nvim')
+        use('smartpde/telescope-recent-files')
+        use('rmagatti/session-lens')
+
+        -- Project
+        use({
+            'ahmedkhalf/project.nvim',
+            config = function()
+                require('plugin-config.search.project')
+            end,
+        })
+
+        -- HOP
+        use({
+            'phaazon/hop.nvim',
+            branch = 'v2',
+            config = function()
+                require('plugin-config.search.hop')
+            end,
+        })
+
         ----- LSP -----
+        -- TODO
         ---------------
 
         use({ 'williamboman/mason.nvim' })
@@ -239,10 +311,8 @@ packer.startup({
         --     },
         -- })
 
-        -- -- Lua
-        use('folke/neodev.nvim')
-
         ----- Snippets -----
+        -- TODO
         --------------------
 
         -- Engine
@@ -261,34 +331,6 @@ packer.startup({
         -- 自分のsnippet
         use('montenoki/vim-snippets')
 
-        ----- Editor -----
-        ------------------
-
-        -- TODO:
-        -- Comment Toggle
-        use({
-            'numToStr/Comment.nvim',
-            config = function()
-                require('plugin-config.editor.comment')
-            end,
-        })
-
-        -- TODO:
-        -- Surround
-        use({
-            'kylechui/nvim-surround',
-            config = function()
-                require('plugin-config.editor.nvim-surround')
-            end,
-        })
-        -- TODO:
-        -- nvim-autopairs
-        use({
-            'windwp/nvim-autopairs',
-            config = function()
-                require('plugin-config.editor.nvim-autopairs')
-            end,
-        })
 
         ----- DAP -----
         ---------------
@@ -302,54 +344,17 @@ packer.startup({
         })
         use('theHamsta/nvim-dap-virtual-text')
 
-        ----- Search Tools -----
-        ------------------------
 
-        -- TODO:
-        use({
-            'nvim-telescope/telescope.nvim',
-            tag = '0.1.1',
-            requires = {
-                'nvim-lua/plenary.nvim',
-            },
-            config = function()
-                require('plugin-config.search.telescope')
-            end,
-        })
-        use('LinArcX/telescope-env.nvim')
-        use('LinArcX/telescope-command-palette.nvim')
-        use('smartpde/telescope-recent-files')
-        use('rmagatti/session-lens')
+        ---------  Language Support -----------
+        ---------------------------------------
 
-        -- TODO:
-        -- project
-        use({
-            'ahmedkhalf/project.nvim',
-            config = function()
-                require('plugin-config.search.project')
-            end,
-        })
+        -- Lua
+        use('folke/neodev.nvim')
 
-        -- TODO:
-        -- Diagnostics 表示
-        use({
-            'folke/trouble.nvim',
-            requires = 'nvim-tree/nvim-web-devicons',
-            config = function()
-                require('plugin-config.interface.trouble')
-            end,
-        })
+        -- Rust
+        use('simrat39/rust-tools.nvim')
 
-        -- TODO:
-        use({
-            'phaazon/hop.nvim',
-            branch = 'v2',
-            config = function()
-                require('plugin-config.search.hop')
-            end,
-        })
 
-        -- -- Lua
 
         -- ---------------------- 検索機能 -----------------------
 
@@ -368,9 +373,6 @@ packer.startup({
 
         -- -- JSON
         -- use('b0o/schemastore.nvim')
-
-        -- Rust
-        use('simrat39/rust-tools.nvim')
 
         -- -- -- cool movement
         -- -- use({

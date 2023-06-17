@@ -31,7 +31,7 @@ vim.wo.cursorline = true
 vim.g.encoding = 'UTF-8'
 vim.o.fileencoding = 'utf-8'
 
-vim.wo.signcolumn = 'yes'
+vim.wo.signcolumn = 'auto'
 
 vim.o.cmdheight = 2
 

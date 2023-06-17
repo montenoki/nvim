@@ -1,6 +1,6 @@
--- https://github.com/windwp/nvim-autopairs
 local autopairs = requirePlugin('nvim-autopairs')
-if autopairs == nil then
+local uConfig = require('uConfig')
+if autopairs == nil or not uConfig.enable.autopairs then
     return
 end
 

@@ -1,26 +1,22 @@
 local uConfig = require('uConfig')
-local uComment = uConfig.comment
-
-if uComment == nil or not uComment.enable then
-    return
-end
-
 local comment = requirePlugin('Comment')
-if comment == nil then
+if comment == nil or not uConfig.enable.comment_toggle then
     return
 end
+
+local keys = uConfig.keys.comment_toggle
 
 local opts = {
     mappings = {
         extra = false,
     },
     toggler = {
-        line = uComment.toggler.line,
-        block = uComment.toggler.block,
+        line = keys.toggler.line,
+        block = keys.toggler.block,
     },
     opleader = {
-        line = uComment.opleader.line,
-        bock = uComment.opleader.block,
+        line = keys.opleader.line,
+        bock = keys.opleader.block,
     },
 }
 

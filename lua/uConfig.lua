@@ -15,9 +15,12 @@ local M = {
         symbols_outline = true,
         fidget = true,
         notify = true,
+        scrollbar = true,
         -- NOTE Need lazygit
         toggleterm = true,
         which_key = true,
+        trouble = true,
+
         todo_comments = true,
         indent_blankline = true,
         ufo = true,
@@ -26,6 +29,13 @@ local M = {
         colorizer = true,
         gitsigns = true,
 
+        comment_toggle = true,
+        surround = true,
+        autopairs = true,
+
+        telescope = true,
+        project = true,
+        hop = true,
     },
     setting = {
         tab_width = 4,
@@ -76,8 +86,8 @@ local M = {
             hover_symbol = 'h',
             rename_symbol = '<leader>rn',
             code_actions = '<leader>ca',
-            fold = 'zc',
-            unfold = 'zo',
+            fold = 'c',
+            unfold = 'o',
             fold_all = 'zM',
             unfold_all = 'zR',
             fold_reset = 'R',
@@ -227,6 +237,16 @@ local M = {
         which_key = {
             toggle = '<A-/>',
         },
+        comment_toggle = {
+            toggler = {
+                line = 'gcc', -- 行注释
+                block = 'gbc', -- 块注释
+            },
+            opleader = {
+                line = 'gc',
+                bock = 'gb',
+            },
+        },
         hop = {
             toggle = '\\',
         },
@@ -262,19 +282,6 @@ local M = {
         go_back = '<C-o>',
         follow_link = 'gd',
         toggle_item = 'tt',
-    },
-    comment = {
-        enable = true,
-        -- Normal 模式快捷键
-        toggler = {
-            line = 'gcc', -- 行注释
-            block = 'gbc', -- 块注释
-        },
-        -- Visual 模式
-        opleader = {
-            line = 'gc',
-            bock = 'gb',
-        },
     },
     venn = {
         -- toggle keymappings for venn using <leader>v

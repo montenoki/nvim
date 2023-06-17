@@ -28,6 +28,20 @@ else
     }
 end
 
+local gitsigns_on_attach = function(bufnr)
+    local gs = package.loaded.gitsigns
+
+    local function map(mode, l, r, opts)
+        opts = opts or {}
+        opts.buffer = bufnr
+        vim.keymap.set(mode, l, r, opts)
+    end
+
+    map('n', uConfig.keys.gitsigns.diffthis, function()
+        gs.diffthis('~')
+    end)
+end
+
 gitsigns.setup({
     signs = {
         add = {
@@ -102,5 +116,5 @@ gitsigns.setup({
     yadm = {
         enable = false,
     },
-    on_attach = require('keybindings').gitsigns_on_attach,
+    on_attach = gitsigns_on_attach,
 })

@@ -1,11 +1,10 @@
--- TODO:
 local uConfig = require('uConfig')
-local keys = uConfig.keys.telescope
-
 local telescope = requirePlugin('telescope')
-if telescope == nil then
+if telescope == nil or not uConfig.enable.telescope then
     return
 end
+
+local keys = uConfig.keys.telescope
 
 telescope.setup({
     defaults = {
@@ -49,31 +48,36 @@ telescope.setup({
         command_palette = {
             {
                 'Open',
-                { 'Projects', ':Telescope projects' },
+                { 'Projects',     ':Telescope projects' },
                 { 'Recent Files', 'Telescope recent_files pick' },
-                { 'Sessions', 'Telescope session-lens search_session' },
+                { 'Sessions',     'Telescope session-lens search_session' },
+            },
+            {
+                'JumpTo',
+                { 'TODO list', ':TodoTelescope' },
+                { 'Buffers',   'Telescope buffers' },
+                { 'Marks',     'Telescope marks' },
+            },
+            {
+                'History',
+                { 'Jumplist',        'Telescope jumplist' },
+                { 'Command History', 'Telescope command_history' },
+                { 'Search History',  'Telescope search_history' },
             },
             {
                 'Vim',
-                { 'reload vimrc', ':source $MYVIMRC' },
-                { 'check health', ':checkhealth' },
-                { 'jumps (Alt-j)', ":lua require('telescope.builtin').jumplist()" },
-                { 'command history', ":lua require('telescope.builtin').command_history()" },
-                { 'registers (A-e)', ":lua require('telescope.builtin').registers()" },
-                { 'colorshceme', ":lua require('telescope.builtin').colorscheme()", 1 },
-                { 'search history (C-h)', ":lua require('telescope.builtin').search_history()" },
+                { 'Check Health',  ':checkhealth' },
+                { 'reload vimrc',  ':source $MYVIMRC' },
+                { 'Registers',     'Telescope registers' },
+                { 'Colorscheme',   'Telescope colorscheme' },
                 { 'spell checker', ':set spell!' },
             },
             {
-                'Edit Snipets',
-                {
-                    'Python Snipets',
-                    ':edit '
-                        .. vim.fn.stdpath('data')
-                        .. '/site/pack/packer/start/vim-snippets/UltiSnips/'
-                        .. 'python.snippets'
-                        .. '<CR>',
-                },
+                'Checker',
+                { 'Check ENV',  'Telescope env' },
+                { 'Highlights', 'Telescope highlights' },
+                { 'Keymaps',    'Telescope keymaps' },
+                { 'Symbols',    'Telescope symbols' },
             },
         },
         xray23 = {
@@ -88,9 +92,6 @@ telescope.load_extension('command_palette')
 telescope.load_extension('recent_files')
 telescope.load_extension('session-lens')
 
--- ファイル検索
-keymap('n', keys.find_files, ':Telescope find_files<CR>')
--- グローバル検索
-keymap('n', keys.live_grep, ':Telescope live_grep<CR>')
--- コマンドパレット
-keymap('n', keys.command_palette, ':Telescope command_palette<CR>')
+keymap('n', keys.find_files, '<CMD>Telescope find_files<CR>')
+keymap('n', keys.live_grep, '<CMD>Telescope live_grep<CR>')
+keymap('n', keys.command_palette, '<CMD>Telescope command_palette<CR>')

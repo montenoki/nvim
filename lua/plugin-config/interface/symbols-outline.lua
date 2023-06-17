@@ -1,9 +1,11 @@
 local uConfig = require('uConfig')
-local keys = uConfig.keys.symbols_outline
 local symbolsOutline = requirePlugin('symbols-outline')
+
 if symbolsOutline == nil or not uConfig.enable.symbols_outline then
     return
 end
+
+local keys = uConfig.keys.symbols_outline
 
 local symbols
 local fold_markers
@@ -91,12 +93,11 @@ symbolsOutline.setup({
     fold_markers = fold_markers,
     wrap = false,
     keymaps = {
-        -- These keymaps can be a string or a table for multiple keys
         close = keys.close,
         goto_location = keys.goto_location,
         focus_location = keys.focus_location,
         hover_symbol = keys.hover_symbol,
-        toggle_preview = '',
+        -- toggle_preview = '',
         rename_symbol = keys.rename_symbol,
         code_actions = keys.code_actions,
         fold = keys.fold,
