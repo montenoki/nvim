@@ -128,9 +128,9 @@ packer.startup({
         -- Marks
         use({
             'chentoast/marks.nvim',
-            config=function ()
+            config = function()
                 require('plugin-config.interface.marks')
-            end
+            end,
         })
 
         ----- Color Schemes -----
@@ -262,6 +262,18 @@ packer.startup({
             end,
         })
 
+        -- Refactoring
+        use({
+            'ThePrimeagen/refactoring.nvim',
+            requires = {
+                { 'nvim-lua/plenary.nvim' },
+                { 'nvim-treesitter/nvim-treesitter' },
+            },
+            config = function ()
+                require('plugin-config.editor.refactoring')
+            end
+        })
+
         ----- Search Tools -----
         ------------------------
 
@@ -289,36 +301,19 @@ packer.startup({
             end,
         })
 
-        -- HOP
-        use({
-            'phaazon/hop.nvim',
-            branch = 'v2',
-            config = function()
-                require('plugin-config.search.hop')
-            end,
-        })
-
         ----- LSP -----
-        -- TODO
         ---------------
 
         use({ 'williamboman/mason.nvim' })
         use({ 'williamboman/mason-lspconfig.nvim' })
-        use({ 'neovim/nvim-lspconfig' })
         use({
-            'jose-elias-alvarez/null-ls.nvim',
-            requires = 'nvim-lua/plenary.nvim',
+            'jay-babu/mason-null-ls.nvim',
+            requires = {
+                'jose-elias-alvarez/null-ls.nvim',
+                requires = 'nvim-lua/plenary.nvim',
+            },
         })
-
-        -- TODO:
-        -- -- Refactoring
-        -- use({
-        --     'ThePrimeagen/refactoring.nvim',
-        --     requires = {
-        --         { 'nvim-lua/plenary.nvim' },
-        --         { 'nvim-treesitter/nvim-treesitter' },
-        --     },
-        -- })
+        use({ 'neovim/nvim-lspconfig' })
 
         ----- Snippets -----
         -- TODO
@@ -326,9 +321,10 @@ packer.startup({
 
         -- Engine
         use('hrsh7th/nvim-cmp')
+        use('onsails/lspkind-nvim')
         use('SirVer/ultisnips')
         use('quangnguyen30192/cmp-nvim-ultisnips')
-        use('onsails/lspkind-nvim')
+
         -- Source
         use('hrsh7th/cmp-nvim-lsp')
         use('hrsh7th/cmp-nvim-lsp-signature-help')
@@ -337,9 +333,8 @@ packer.startup({
         use('hrsh7th/cmp-cmdline')
         use('dmitmel/cmp-cmdline-history')
         use('hrsh7th/cmp-emoji')
-        -- 自分のsnippet
+        -- My snippet
         use('montenoki/vim-snippets')
-
 
         ----- DAP -----
         ---------------
@@ -353,7 +348,6 @@ packer.startup({
         })
         use('theHamsta/nvim-dap-virtual-text')
 
-
         ---------  Language Support -----------
         ---------------------------------------
 
@@ -362,8 +356,6 @@ packer.startup({
 
         -- Rust
         use('simrat39/rust-tools.nvim')
-
-
 
         -- ---------------------- 検索機能 -----------------------
 
@@ -400,7 +392,7 @@ packer.startup({
         --     end,
         -- })
 
-        -- -- serch highlight
+        -- -- search highlight
         -- use({
         --     'kevinhwang91/nvim-hlslens',
         --     config = function()

@@ -1,37 +1,37 @@
--- https://github.com/neovim/nvim-lspconfig/wiki/Autocompletion
--- https://github.com/hrsh7th/nvim-cmp
--- https://github.com/onsails/lspkind-nvim
 local cmp = requirePlugin('cmp')
+local uConfig = require('uConfig')
+local keys = uConfig.keys.cmp
+
 if cmp == nil then
     return
 end
 
-local uConfig = require('uConfig')
 local formatter
 if uConfig.enable.lite_mode then
     formatter = nil
 else
     formatter = require('cmp.lspkind').formatting
 end
+
 local cmp_ultisnips_mappings = require('cmp_nvim_ultisnips.mappings')
 local mapping = {
-    [uConfig.keys.cmp.complete] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-    [uConfig.keys.cmp.abort] = cmp.mapping({
+    [keys.show] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+    [keys.abort] = cmp.mapping({
         i = cmp.mapping.abort(),
         c = cmp.mapping.close(),
     }),
 
-    [uConfig.keys.cmp.confirm] = cmp.mapping.confirm({
+    [keys.confirm] = cmp.mapping.confirm({
         select = false,
         behavior = cmp.ConfirmBehavior.Replace,
     }),
-    [uConfig.keys.cmp.scroll_doc_up] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-    [uConfig.keys.cmp.scroll_doc_down] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+    [keys.scroll_doc_up] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+    [keys.scroll_doc_down] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
 
-    [uConfig.keys.cmp.select_next_item] = cmp.mapping(function(fallback)
+    [keys.select_next_item] = cmp.mapping(function(fallback)
         cmp_ultisnips_mappings.compose({ 'select_next_item', 'jump_forwards' })(fallback)
     end, { 'i', 's', 'c' }),
-    [uConfig.keys.cmp.select_prev_item] = cmp.mapping(function(fallback)
+    [keys.select_prev_item] = cmp.mapping(function(fallback)
         cmp_ultisnips_mappings.compose({ 'select_prev_item', 'jump_backwards' })(fallback)
     end, { 'i', 's', 'c' }),
 }
@@ -47,29 +47,31 @@ cmp.setup({
         documentation = cmp.config.window.bordered(),
     },
     mapping = mapping,
-    sources = cmp.config.sources({
-        { name = 'nvim_lsp', group_index = 1 },
-        { name = 'ultisnips', group_index = 1 },
-        { name = 'vim-snippets', group_index = 1 },
-        { name = 'nvim_lsp_signature_help', group_index = 1 },
-    }, {
-        { name = 'buffer', group_index = 2 },
-        { name = 'path', group_index = 2 },
-    }, {
-        { name = 'emoji', group_index = 3 },
-    }),
+    sources = cmp.config.sources(
+    {
+        { name = 'nvim_lsp'},
+        { name = 'ultisnips'},
+        { name = 'vim-snippets'},
+        { name = 'nvim_lsp_signature_help'},
+    },
+    {
+        { name = 'buffer'},
+        { name = 'path'},
+    },
+    {
+        { name = 'emoji'},
+    }
+    ),
     formatting = formatter,
 })
 
--- Use buffer source for `/`.
-cmp.setup.cmdline('/', {
+cmp.setup.cmdline({ '/', '?', '/\v' }, {
     mapping = cmp.mapping.preset.cmdline(),
     sources = { {
         name = 'buffer',
     } },
 })
 
--- Use cmdline & path source for ':'.
 cmp.setup.cmdline(':', {
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({ { name = 'path' } }, { { name = 'cmdline' } }, { { name = 'cmdline_history' } }),

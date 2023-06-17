@@ -1,3 +1,4 @@
+-- FIX last char in line is hidden
 local uConfig = require('uConfig')
 local scrollbar = requirePlugin('scrollbar')
 if scrollbar == nil or not uConfig.enable.scrollbar then

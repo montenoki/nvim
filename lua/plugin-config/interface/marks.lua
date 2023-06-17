@@ -31,10 +31,73 @@ marks.setup({
     -- across multiple buffers. default sign is '!@#$%^&*()' (from 0 to 9), and
     -- default virt_text is "".
     bookmark_0 = {
-        sign = '⚑',
-        virt_text = 'hello world',
+        sign = '',
+        virt_text = 'Bookmark 0',
         -- explicitly prompt for a virtual line annotation when setting a bookmark from this group.
         -- defaults to false.
-        annotate = false,
+        annotate = true,
+    },
+    bookmark_1 = {
+        sign = '',
+        virt_text = 'Bookmark 1',
+        -- explicitly prompt for a virtual line annotation when setting a bookmark from this group.
+        -- defaults to false.
+        annotate = true,
+    },
+    bookmark_2 = {
+        sign = '',
+        virt_text = 'Bookmark 2',
+        -- explicitly prompt for a virtual line annotation when setting a bookmark from this group.
+        -- defaults to false.
+        annotate = true,
+    },
+    bookmark_3 = {
+        sign = '',
+        virt_text = 'Bookmark 3',
+        -- explicitly prompt for a virtual line annotation when setting a bookmark from this group.
+        -- defaults to false.
+        annotate = true,
+    },
+    bookmark_4 = {
+        sign = '',
+        virt_text = 'Bookmark 4',
+        -- explicitly prompt for a virtual line annotation when setting a bookmark from this group.
+        -- defaults to false.
+        annotate = true,
+    },
+    bookmark_5 = {
+        sign = '',
+        virt_text = 'Bookmark 5',
+        -- explicitly prompt for a virtual line annotation when setting a bookmark from this group.
+        -- defaults to false.
+        annotate = true,
+    },
+    bookmark_6 = {
+        sign = '',
+        virt_text = 'Bookmark 6',
+        -- explicitly prompt for a virtual line annotation when setting a bookmark from this group.
+        -- defaults to false.
+        annotate = true,
+    },
+    bookmark_7 = {
+        sign = '',
+        virt_text = 'Bookmark 7',
+        -- explicitly prompt for a virtual line annotation when setting a bookmark from this group.
+        -- defaults to false.
+        annotate = true,
+    },
+    bookmark_8 = {
+        sign = '',
+        virt_text = 'Bookmark 8',
+        -- explicitly prompt for a virtual line annotation when setting a bookmark from this group.
+        -- defaults to false.
+        annotate = true,
+    },
+    bookmark_9 = {
+        sign = '',
+        virt_text = 'Bookmark 9',
+        -- explicitly prompt for a virtual line annotation when setting a bookmark from this group.
+        -- defaults to false.
+        annotate = true,
     },
 })

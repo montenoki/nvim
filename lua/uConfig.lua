@@ -33,6 +33,7 @@ local M = {
         comment_toggle = true,
         surround = true,
         autopairs = true,
+        refactoring = true,
 
         telescope = true,
         project = true,
@@ -40,12 +41,15 @@ local M = {
     },
     setting = {
         tab_width = 4,
-        timeoutlen = 300,
+        timeoutlen = 2000,
         updatetime = 50,
     },
     language_support = {
         treesitter = { ensure_installed = { 'vim', 'lua', 'python', 'query' } },
-        mason = {
+        lsp = {
+            -- mason
+            -- Server List:
+            -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
             ensure_installed = {
                 'bashls',
                 'lua_ls',
@@ -58,11 +62,43 @@ local M = {
                 lua_ls = require('lsp.config.lua'),
                 marksman = require('lsp.config.markdown'),
                 bashls = require('lsp.config.bash'),
-                -- TODO:
                 pyright = require('lsp.config.pyright'),
                 rust_analyzer = require('lsp.config.rust'),
                 vimls = require('lsp.config.vim'),
-            }
+            },
+
+            -- null_ls
+            -- Built-in List:
+            -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md
+            formatting = {
+                'stylua',
+                'black',
+                'isort',
+                'shfmt',
+                'rustfmt',
+            },
+            diagnostics = {
+                'flake8',
+                'markdownlint',
+                'actionlint',
+                'checkmake',
+                'cmake_lint',
+                'chktex',
+                'clang_check',
+                'codespell',
+            },
+            code_actions = { 'gitsigns' },
+            extra_args = {
+                black = {
+                    extra_args = { '--fast' },
+                },
+                flake8 = {
+                    extra_args = {
+                        '--max-line-length=120',
+                        '--ignore=F401,E226,W292,E122,E402',
+                    },
+                },
+            },
         },
     },
     keys = {
@@ -121,7 +157,7 @@ local M = {
         },
 
         cmp = {
-            complete = '<A-.>',
+            show = '<A-.>',
             abort = '<A-,>',
             confirm = '<CR>',
             scroll_doc_up = '<C-k>',
@@ -144,7 +180,7 @@ local M = {
             closeAllFolds = 'zM',
             openFoldsExceptKinds = 'zr',
             closeFoldWith = 'zm',
-            -- TODO: wait coc
+            -- TODO
             -- peekFoldedLinesUnderCursor = 'zh',
         },
 
@@ -232,6 +268,7 @@ local M = {
             find_files = '<C-p>',
             live_grep = '<C-f>',
             command_palette = '<A-p>',
+            spell_suggest = '<A-s>',
 
             -- 上下移动
             move_selection_next = '<tab>',
@@ -259,7 +296,7 @@ local M = {
         },
         comment_toggle = {
             toggler = {
-                line = 'gcc',  -- 行注释
+                line = 'gcc', -- 行注释
                 block = 'gbc', -- 块注释
             },
             opleader = {

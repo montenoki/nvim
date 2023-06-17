@@ -70,7 +70,7 @@ telescope.setup({
                 { 'reload vimrc',  ':source $MYVIMRC' },
                 { 'Registers',     'Telescope registers' },
                 { 'Colorscheme',   'Telescope colorscheme' },
-                { 'spell checker', ':set spell!' },
+                { 'spell checer', ':set spell!' },
             },
             {
                 'Checker',
@@ -78,6 +78,8 @@ telescope.setup({
                 { 'Highlights', 'Telescope highlights' },
                 { 'Keymaps',    'Telescope keymaps' },
                 { 'Symbols',    'Telescope symbols' },
+                { 'LSP Info', 'LspInfo'},
+                { 'Null-ls Info', 'NullLsInfo'},
             },
         },
         xray23 = {
@@ -95,3 +97,4 @@ telescope.load_extension('session-lens')
 keymap('n', keys.find_files, '<CMD>Telescope find_files<CR>')
 keymap('n', keys.live_grep, '<CMD>Telescope live_grep<CR>')
 keymap('n', keys.command_palette, '<CMD>Telescope command_palette<CR>')
+keymap('n', keys.spell_suggest, '<CMD>Telescope spell_suggest')
