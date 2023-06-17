@@ -23,16 +23,31 @@ local mapping = {
 
     [keys.confirm] = cmp.mapping.confirm({
         select = false,
-        behavior = cmp.ConfirmBehavior.Replace,
+        behavior = cmp.ConfirmBehavior.Insert,
     }),
     [keys.scroll_doc_up] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
     [keys.scroll_doc_down] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
 
-    [keys.select_next_item] = cmp.mapping(function(fallback)
-        cmp_ultisnips_mappings.compose({ 'select_next_item', 'jump_forwards' })(fallback)
+    [keys.select_next_item] = function(fallback)
+        if cmp.visible() then
+            cmp.select_next_item()
+        else
+            fallback()
+        end
+    end,
+    [keys.select_prev_item] = function(fallback)
+        if cmp.visible() then
+            cmp.select_prev_item()
+        else
+            fallback()
+        end
+    end,
+
+    [keys.jump_forwards] = cmp.mapping(function(fallback)
+        cmp_ultisnips_mappings.jump_forwards(fallback)
     end, { 'i', 's', 'c' }),
-    [keys.select_prev_item] = cmp.mapping(function(fallback)
-        cmp_ultisnips_mappings.compose({ 'select_prev_item', 'jump_backwards' })(fallback)
+    [keys.jump_backwards] = cmp.mapping(function(fallback)
+        cmp_ultisnips_mappings.jump_backwards(fallback)
     end, { 'i', 's', 'c' }),
 }
 
@@ -47,29 +62,30 @@ cmp.setup({
         documentation = cmp.config.window.bordered(),
     },
     mapping = mapping,
-    sources = cmp.config.sources(
-    {
-        { name = 'nvim_lsp'},
-        { name = 'ultisnips'},
-        { name = 'vim-snippets'},
-        { name = 'nvim_lsp_signature_help'},
-    },
-    {
-        { name = 'buffer'},
-        { name = 'path'},
-    },
-    {
-        { name = 'emoji'},
-    }
-    ),
+    sources = cmp.config.sources({
+        { name = 'nvim_lsp' },
+        { name = 'ultisnips' },
+        { name = 'vim-snippets' },
+        { name = 'nvim_lsp_signature_help' },
+    }, {
+        {
+            name = 'buffer',
+            option = {
+                get_bufnrs = function()
+                    return vim.api.nvim_list_bufs()
+                end,
+            },
+        },
+        { name = 'path' },
+    }, {
+        { name = 'emoji' },
+    }),
     formatting = formatter,
 })
 
 cmp.setup.cmdline({ '/', '?', '/\v' }, {
     mapping = cmp.mapping.preset.cmdline(),
-    sources = { {
-        name = 'buffer',
-    } },
+    sources = { { name = 'buffer' } },
 })
 
 cmp.setup.cmdline(':', {
@@ -77,17 +93,3 @@ cmp.setup.cmdline(':', {
     sources = cmp.config.sources({ { name = 'path' } }, { { name = 'cmdline' } }, { { name = 'cmdline_history' } }),
 })
 
--- TODO:
--- cmp.setup.filetype({ 'markdown', 'help' }, {
---     sources = {
---         {
---             name = 'luasnip',
---         },
---         {
---             name = 'buffer',
---         },
---         {
---             name = 'path',
---         },
---     },
--- })

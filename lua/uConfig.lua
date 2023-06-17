@@ -41,7 +41,7 @@ local M = {
     },
     setting = {
         tab_width = 4,
-        timeoutlen = 2000,
+        timeoutlen = 500,
         updatetime = 50,
     },
     language_support = {
@@ -164,6 +164,8 @@ local M = {
             scroll_doc_down = '<C-j>',
             select_prev_item = '<S-tab>',
             select_next_item = '<Tab>',
+            jump_forwards = '<A-]>',
+            jump_backwards = '<A-[>',
         },
 
         treesitter = {

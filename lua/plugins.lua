@@ -269,9 +269,9 @@ packer.startup({
                 { 'nvim-lua/plenary.nvim' },
                 { 'nvim-treesitter/nvim-treesitter' },
             },
-            config = function ()
+            config = function()
                 require('plugin-config.editor.refactoring')
-            end
+            end,
         })
 
         ----- Search Tools -----
@@ -316,7 +316,6 @@ packer.startup({
         use({ 'neovim/nvim-lspconfig' })
 
         ----- Snippets -----
-        -- TODO
         --------------------
 
         -- Engine
@@ -338,21 +337,35 @@ packer.startup({
 
         ----- DAP -----
         ---------------
-        -- TODO:
         use('mfussenegger/nvim-dap')
         use({
             'rcarriga/nvim-dap-ui',
             config = function()
-                require('dapui').setup()
+                require('dapui').setup({})
             end,
         })
         use('theHamsta/nvim-dap-virtual-text')
+
+        -- -- Python
+        -- use({
+        --     'mfussenegger/nvim-dap-python',
+        --     -- config = function()
+        --     --     require('dap-python').setup()
+        --     -- end,
+        -- })
 
         ---------  Language Support -----------
         ---------------------------------------
 
         -- Lua
-        use('folke/neodev.nvim')
+        use({
+            'folke/neodev.nvim',
+            config = function()
+                require('neodev').setup({
+                    library = { plugins = { 'nvim-dap-ui' }, types = true },
+                })
+            end,
+        })
 
         -- Rust
         use('simrat39/rust-tools.nvim')
@@ -363,14 +376,6 @@ packer.startup({
 
         -- nvim lua
         -- use({ 'jbyuki/one-small-step-for-vimkind' })
-
-        -- -- Python
-        -- use({
-        --     'mfussenegger/nvim-dap-python',
-        --     -- config = function()
-        --     --     require('dap-python').setup()
-        --     -- end,
-        -- })
 
         -- -- JSON
         -- use('b0o/schemastore.nvim')
