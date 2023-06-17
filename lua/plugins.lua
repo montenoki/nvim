@@ -108,8 +108,6 @@ packer.startup({
             end,
         })
 
-        ---------------------- interface -----------------------
-
         -- Which-key
         use({
             'folke/which-key.nvim',
@@ -129,7 +127,6 @@ packer.startup({
         ----- Code Appearance  -----
         ----------------------------
 
-        -- TODO:
         -- Highlighting
         use({
             'nvim-treesitter/nvim-treesitter',
@@ -153,7 +150,6 @@ packer.startup({
             requires = 'nvim-treesitter/nvim-treesitter',
         })
 
-        -- TODO:
         -- To-do Comments.nvim
         use({
             'folke/todo-comments.nvim',
@@ -163,7 +159,6 @@ packer.startup({
             end,
         })
 
-        -- TODO:
         -- Indent-blankline
         use({
             'lukas-reineke/indent-blankline.nvim',
@@ -172,7 +167,6 @@ packer.startup({
             end,
         })
 
-        -- TODO:
         -- Fold
         use({
             'kevinhwang91/nvim-ufo',
@@ -190,6 +184,7 @@ packer.startup({
             end,
         })
 
+        -- Breadcrumb Bar
         use({
             'SmiteshP/nvim-navic',
             requires = 'neovim/nvim-lspconfig',
@@ -198,7 +193,6 @@ packer.startup({
             end,
         })
 
-        -- TODO:
         -- Sticky Scroll
         use({
             'nvim-treesitter/nvim-treesitter-context',
@@ -207,8 +201,7 @@ packer.startup({
             end,
         })
 
-        -- TODO:
-        -- Color code display like: #ff0149
+        -- Color code display like: #00ffff
         use({
             'norcalli/nvim-colorizer.lua',
             config = function()
@@ -216,7 +209,6 @@ packer.startup({
             end,
         })
 
-        -- TODO:
         -- git
         use({
             'lewis6991/gitsigns.nvim',

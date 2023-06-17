@@ -1,10 +1,12 @@
 local uConfig = require('uConfig')
-local keys = uConfig.keys.ufo
-
 local ufo = requirePlugin('ufo')
-if ufo == nil then
+
+if ufo == nil or not uConfig.enable.ufo then
     return
 end
+
+local keys = uConfig.keys.ufo
+
 
 local handler = function(virtText, lnum, endLnum, width, truncate)
     local newVirtText = {}
@@ -60,7 +62,8 @@ ufo.setup({
             scrollD = '<C-d>',
         },
     },
-    provider_selector = function(bufnr, filetype, buftype)
+---@diagnostic disable-next-line: unused-local
+    provider_selector = function(_bufnr_, filetype, _buftype_)
         return ftMap[filetype]
     end,
 })

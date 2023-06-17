@@ -1,7 +1,7 @@
 local uConfig = require('uConfig')
--- if uConfig.enable.lite_mode then
---     return
--- else
---     require('colorizer').setup()
--- end
-require('colorizer').setup()
+local colorizer = requirePlugin('colorizer')
+
+if colorizer == nil or uConfig.enable.lite_mode or not uConfig.enable.colorizer then
+    return
+end
+colorizer.setup()

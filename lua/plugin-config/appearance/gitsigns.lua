@@ -1,17 +1,71 @@
 -- https://github.com/lewis6991/gitsigns.nvim
 local gitsigns = requirePlugin('gitsigns')
-if gitsigns == nil then
+local uConfig = require('uConfig')
+
+if gitsigns == nil or not uConfig.enable.gitsigns then
     return
+end
+
+local icon
+
+if uConfig.enable.lite_mode then
+    icon = {
+        add = 'A|',
+        change = 'C|',
+        delete = 'D_',
+        top_delete = 'D/',
+        change_delete = 'D~',
+        untracked = 'U|',
+    }
+else
+    icon = {
+        add = '|',
+        change = '|',
+        delete = '󰆴|',
+        top_delete = '󰆴',
+        change_delete = '󰆴',
+        untracked = '|',
+    }
 end
 
 gitsigns.setup({
     signs = {
-        add = { hl = 'GitSignsAdd', text = 'A|', numhl = 'GitSignsAddNr', linehl = 'GitSignsAddLn' },
-        change = { hl = 'GitSignsChange', text = 'C|', numhl = 'GitSignsChangeNr', linehl = 'GitSignsChangeLn' },
-        delete = { hl = 'GitSignsDelete', text = 'D_', numhl = 'GitSignsDeleteNr', linehl = 'GitSignsDeleteLn' },
-        topdelete = { hl = 'GitSignsDelete', text = 'D‾', numhl = 'GitSignsDeleteNr', linehl = 'GitSignsDeleteLn' },
-        changedelete = { hl = 'GitSignsChange', text = 'D~', numhl = 'GitSignsChangeNr', linehl = 'GitSignsChangeLn' },
-        untracked = { hl = 'GitSignsChange', text = 'U|', numhl = 'GitSignsChangeNr', linehl = 'GitSignsChangeLn' },
+        add = {
+            hl = 'GitSignsAdd',
+            text = icon.add,
+            numhl = 'GitSignsAddNr',
+            linehl = 'GitSignsAddLn',
+        },
+        change = {
+            hl = 'GitSignsChange',
+            text = icon.change,
+            numhl = 'GitSignsChangeNr',
+            linehl = 'GitSignsChangeLn',
+        },
+        delete = {
+            hl = 'GitSignsDelete',
+            text = icon.delete,
+            numhl = 'GitSignsDeleteNr',
+            linehl = 'GitSignsDeleteLn',
+        },
+        topdelete = {
+            hl = 'GitSignsDelete',
+            text = icon.top_delete,
+            numhl = 'GitSignsDeleteNr',
+            linehl = 'GitSignsDeleteLn',
+        },
+        changedelete = {
+            hl = 'GitSignsChange',
+            text = icon.change_delete,
+            numhl = 'GitSignsChangeNr',
+            linehl = 'GitSignsChangeLn',
+        },
+        untracked = {
+            hl = 'GitSignsChange',
+            text = icon.untracked,
+            numhl = 'GitSignsChangeNr',
+            linehl = 'GitSignsChangeLn',
+        },
     },
     signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
     numhl = false, -- Toggle with `:Gitsigns toggle_numhl`

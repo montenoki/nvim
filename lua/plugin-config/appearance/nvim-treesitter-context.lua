@@ -1,6 +1,7 @@
 local context = requirePlugin('treesitter-context')
+local uConfig = require('uConfig')
 
-if context == nil then
+if context == nil or not uConfig.enable.treesitter_context then
     return
 end
 

@@ -15,17 +15,25 @@ local M = {
         symbols_outline = true,
         fidget = true,
         notify = true,
-        -- Need lazygit
+        -- NOTE Need lazygit
         toggleterm = true,
         which_key = true,
         todo_comments = true,
-
+        indent_blankline = true,
+        ufo = true,
         nvim_navic = true,
+        treesitter_context = true,
+        colorizer = true,
+        gitsigns = true,
+
     },
     setting = {
         tab_width = 4,
         timeoutlen = 300,
         updatetime = 50,
+    },
+    language_support = {
+        treesitter_ensure = { 'vim', 'lua', 'python', 'query' },
     },
     keys = {
         leader_key = ' ',
@@ -97,8 +105,8 @@ local M = {
             node_incremental = '<CR>',
             scope_incremental = '<TAB>',
             node_decremental = '<BS>',
-            swap_next = '<leader>a',
-            swap_prev = '<leader>A',
+            swap_next = '<leader>l',
+            swap_prev = '<leader>h',
         },
 
         ufo = {
@@ -163,7 +171,7 @@ local M = {
             refresh = 'R',
 
             file_filter = 'f',
-            clear_filter = 'f',
+            clear_filter = 'F',
 
             -- 进入下一级
             cd = ']',

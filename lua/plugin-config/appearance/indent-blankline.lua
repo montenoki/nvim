@@ -1,5 +1,7 @@
+local uConfig = require('uConfig')
 local ident_blankline = requirePlugin('indent_blankline')
-if ident_blankline == nil then
+
+if ident_blankline == nil or not uConfig.enable.indent_blankline then
     return
 end
 

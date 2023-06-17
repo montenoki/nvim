@@ -122,12 +122,27 @@ nvim_tree.setup({
         side = 'left',
         hide_root_folder = false,
         mappings = {
+            -- TODO migrating to on_attach
+            -- https://github.com/nvim-tree/nvim-tree.lua/wiki/Migrating-To-on_attach
             custom_only = true,
             list = list_keys,
         },
+        preserve_window_proportions = true,
         number = false,
         relativenumber = false,
         signcolumn = 'yes',
+        float = {
+            enable = true,
+            quit_on_focus_loss = true,
+            open_win_config = {
+                relative = 'editor',
+                border = 'rounded',
+                width = 50,
+                height = 80,
+                row = 1,
+                col = 1,
+            },
+        },
     },
     actions = {
         open_file = {

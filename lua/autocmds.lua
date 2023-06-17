@@ -24,23 +24,6 @@ autocmd('BufEnter', {
     end,
 })
 
--- Auto save views
-autocmd('BufWrite', {
-    group = myAutoGroup,
-    pattern = { '*.lua', '*.py', '*.sh' },
-    callback = function()
-        vim.lsp.buf.format()
-        vim.cmd('mkview')
-    end,
-})
-
-autocmd({ 'BufRead' }, {
-    group = myAutoGroup,
-    pattern = { '*.lua', '*.py', '*.sh' },
-    callback = function()
-        vim.cmd('silent! loadview')
-    end,
-})
 
 -- Auto update plugins when modify lua/plugins.lua
 autocmd('BufWritePost', {
