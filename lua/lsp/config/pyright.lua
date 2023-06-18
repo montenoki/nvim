@@ -9,7 +9,7 @@ local function check_debugpy_exsit()
     end
     local path = vim.env.HOME .. executable_path
     if vim.fn.empty(vim.fn.glob(path)) > 0 then
-        vim.notify("No Python adapter for Dap found.", 'warning')
+        vim.notify("No Python adapter for Dap found.\n", vim.log.levels.WARN)
     end
 end
 local opts = {
