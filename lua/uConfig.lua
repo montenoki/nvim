@@ -50,21 +50,13 @@ local M = {
             -- mason
             -- Server List:
             -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-            ensure_installed = {
+            lsp_servers = {
                 'bashls',
                 'lua_ls',
                 'marksman',
                 'rust_analyzer',
                 'pyright',
                 'vimls',
-            },
-            servers = {
-                lua_ls = require('lsp.config.lua'),
-                marksman = require('lsp.config.markdown'),
-                bashls = require('lsp.config.bash'),
-                pyright = require('lsp.config.pyright'),
-                rust_analyzer = require('lsp.config.rust'),
-                vimls = require('lsp.config.vim'),
             },
 
             -- null_ls

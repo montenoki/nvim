@@ -65,10 +65,15 @@ mason.setup({
 })
 
 mason_config.setup({
-    ensure_installed = language_support.ensure_installed,
+    ensure_installed = language_support.lsp_servers,
 })
 
-for name, config in pairs(language_support.servers) do
+local lsp_server_configs = {}
+for _, name in pairs(language_support.lsp_servers) do
+    lsp_server_configs[name] = require('lsp.config.' .. name)
+end
+
+for name, config in pairs(lsp_server_configs) do
     if config ~= nil and type(config) == 'table' then
         config.on_setup(lspconfig[name])
     else
