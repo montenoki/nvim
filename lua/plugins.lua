@@ -346,11 +346,11 @@ packer.startup({
         })
         use('theHamsta/nvim-dap-virtual-text')
 
-        -- Python
-        use({ 'mfussenegger/nvim-dap-python' })
-
         ---------  Language Support -----------
         ---------------------------------------
+
+        -- Python
+        use({ 'mfussenegger/nvim-dap-python' })
 
         -- Lua
         use({
@@ -364,6 +364,9 @@ packer.startup({
 
         -- Rust
         use('simrat39/rust-tools.nvim')
+
+        -- R
+        use('jalvesaq/Nvim-R')
 
         -- ---------------------- 検索機能 -----------------------
 

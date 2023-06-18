@@ -45,7 +45,7 @@ local M = {
         updatetime = 50,
     },
     language_support = {
-        treesitter = { ensure_installed = { 'vim', 'lua', 'python', 'query' } },
+        treesitter = { ensure_installed = { 'vim', 'lua', 'python', 'query', 'r' } },
         lsp = {
             -- mason
             -- Server List:
