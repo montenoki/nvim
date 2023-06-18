@@ -129,37 +129,4 @@ pluginKeys.mapLSP = function(mapbuf)
     end)
 end
 
--- -- DAP
--- -- nvim-dap
-local dap = uConfig.keys.dap
-pluginKeys.mapDAP = function()
-    -- start
-    keymap('n', dap.toggle, '<Cmd>lua require("dapui").toggle()<CR>')
-    keymap('n', dap.run, ":lua require('osv').run_this()<CR>")
-    -- set breakpoint
-    keymap('n', dap.breakpoint_toggle, ":lua require('dap').toggle_breakpoint()<CR>")
-    keymap('n', dap.breakpoint_clear, ":lua require('dap').clear_breakpoints()<CR>")
-    -- continue
-    keymap('n', dap.continue, ":lua require('dap').continue()<CR>")
-    --  stepOver, stepOut, stepInto
-    keymap('n', dap.step_into, ":lua require'dap'.step_into()<CR>")
-    keymap('n', dap.step_over, ":lua require'dap'.step_over()<CR>")
-    keymap('n', dap.step_out, ":lua require'dap'.step_out()<CR>")
-    keymap('n', dap.restart, ":lua require'dap.restart()<CR>")
-
-    keymap('n', dap.open_info, ":lua require'dapui'.eval()<cr>")
-    -- Stop
-    keymap(
-        'n',
-        dap.stop,
-        ":lua require'dap'.close()<CR>"
-            .. ":lua require'dap'.terminate()<CR>"
-            .. ":lua require'dap.repl'.close()<CR>"
-            .. ":lua require'dapui'.close()<CR>"
-            .. ":lua require('dap').clear_breakpoints()<CR>"
-            .. '<C-w>o<CR>',
-        opt
-    )
-end
-
 return pluginKeys

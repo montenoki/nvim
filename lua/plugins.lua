@@ -341,18 +341,13 @@ packer.startup({
         use({
             'rcarriga/nvim-dap-ui',
             config = function()
-                require('dapui').setup({})
+                require('dap.dapui')
             end,
         })
         use('theHamsta/nvim-dap-virtual-text')
 
-        -- -- Python
-        -- use({
-        --     'mfussenegger/nvim-dap-python',
-        --     -- config = function()
-        --     --     require('dap-python').setup()
-        --     -- end,
-        -- })
+        -- Python
+        use({ 'mfussenegger/nvim-dap-python' })
 
         ---------  Language Support -----------
         ---------------------------------------
