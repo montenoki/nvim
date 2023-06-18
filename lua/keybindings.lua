@@ -56,7 +56,7 @@ keymap(visual_mode, 'p', '"_dP')
 vim.g.mapleader = keys.leader_key
 vim.g.maplocalleader = keys.leader_key
 
--- scoll
+-- scroll
 keymap(n_v_mode, keys.n_v_scroll_up_with_cursor, '4k')
 keymap(n_v_mode, keys.n_v_scroll_down_with_cursor, '4j')
 

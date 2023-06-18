@@ -3,12 +3,9 @@
 --   installation_path = vim.fn.stdpath("data") .. "/dapinstall/",
 -- })
 local dap = requirePlugin('dap')
-if dap == nil then
-    return
-end
-
 local vt = requirePlugin('nvim-dap-virtual-text')
-if vt == nil then
+
+if dap == nil or vt == nil then
     return
 end
 
@@ -19,3 +16,4 @@ vt.setup({
 require('dap.nvim-dap.config.python')
 
 require('keybindings').mapDAP()
+require('dap.nvim-dap.ui')
