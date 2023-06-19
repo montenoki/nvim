@@ -57,6 +57,7 @@ local M = {
                 'rust_analyzer',
                 'pyright',
                 'vimls',
+                'r_language_server'
             },
 
             -- null_ls

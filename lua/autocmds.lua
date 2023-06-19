@@ -4,6 +4,8 @@ local myAutoGroup = vim.api.nvim_create_augroup('myAutoGroup', {
 
 local autocmd = vim.api.nvim_create_autocmd
 
+-- autocmd VimLeave * if exists("g:SendCmdToR") && string(g:SendCmdToR) != "function('SendCmdToR_fake')" | call RQuit("nosave") | endif
+
 -- Highlight on yank
 autocmd('TextYankPost', {
     callback = function()
