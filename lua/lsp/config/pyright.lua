@@ -3,7 +3,7 @@ local function check_debugpy_exsit()
     local executable_path
     local os_name = getSysName()
     if os_name == 'Windows' or os_name == 'Windows_NT' then
-        executable_path = '\\.virtualenvs\\Scripts\\python.exe'
+        executable_path = '\\.virtualenvs\\debugpy\\Scripts\\python.exe'
     else
         executable_path = '/.virtualenvs/debugpy/bin/python'
     end
