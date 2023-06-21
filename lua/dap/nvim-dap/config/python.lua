@@ -1,6 +1,6 @@
 local executable_path
 if getSysName() == 'Windows' or getSysName() == 'Windows_NT' then
-    executable_path = '\\.virtualenvs\\Scripts\\python.exe'
+    executable_path = '\\.virtualenvs\\debugpy\\Scripts\\python.exe'
 else
     executable_path = '/.virtualenvs/debugpy/bin/python'
 end
