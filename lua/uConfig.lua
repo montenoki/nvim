@@ -16,7 +16,6 @@ local M = {
         fidget = true,
         notify = true,
         scrollbar = true,
-        -- NOTE Need lazygit
         toggleterm = true,
         which_key = true,
         trouble = true,
@@ -144,7 +143,7 @@ local M = {
 
         toggleterm = {
             term_quit = '<Esc>',
-            lazygit_toggle = '<A-g>',
+            gitui_toggle = '<A-g>',
             float_toggle = '<A-t>',
             botton_toggle = '<A-\\>',
         },
@@ -324,24 +323,6 @@ local M = {
 
         -- proxy
         -- im-select
-    },
-    mkdnflow = {
-        enable = true,
-        next_link = 'gn',
-        prev_link = 'gp',
-        next_heading = 'gj',
-        prev_heading = 'gk',
-        go_back = '<C-o>',
-        follow_link = 'gd',
-        toggle_item = 'tt',
-    },
-    venn = {
-        -- toggle keymappings for venn using <leader>v
-        enable = true,
-        -- venn.nvim: enable or disable keymappings
-        toggle = '<leader>v',
-        -- draw a box by pressing "f" with visual selection
-        draw_box = 'f',
     },
 }
 

@@ -22,8 +22,8 @@ toggleterm.setup({
 
 local Terminal = require('toggleterm.terminal').Terminal
 
-local lazygit = Terminal:new({
-    cmd = 'lazygit',
+local gitui = Terminal:new({
+    cmd = 'gitui',
     dir = 'git_dir',
     direction = 'float',
     float_opts = {
@@ -35,7 +35,7 @@ local lazygit = Terminal:new({
         -- q / <leader>tg 关闭 terminal
         vim.api.nvim_buf_set_keymap(term.bufnr, 'n', 'q', '<CMD>close<CR>', opt)
         vim.api.nvim_buf_set_keymap(term.bufnr, 'n', '<A-g>', '<CMD>close<CR>', opt)
-        -- ESC 键取消，留给lazygit
+        -- ESC 键取消，留给gitui
         if vim.fn.mapcheck('<Esc>', 't') ~= '' then
             vim.api.nvim_del_keymap('t', '<Esc>')
         end
@@ -59,13 +59,13 @@ function _G.term_toggle(style)
     terms[number]:toggle()
 end
 
-function _G.lazygit_toggle()
-    lazygit:toggle()
+function _G.gitui_toggle()
+    gitui:toggle()
 end
 
 local mode = { 'n', 'i', 't' }
 
-keymap(mode, keys.lazygit_toggle, '<CMD>lua lazygit_toggle()<CR>')
+keymap(mode, keys.gitui_toggle, '<CMD>lua gitui_toggle()<CR>')
 keymap(mode, keys.float_toggle, '<CMD>lua term_toggle([[float]])<CR>')
 keymap(mode, keys.botton_toggle, '<CMD>lua term_toggle([[horizontal]])<CR>')
 keymap('t', keys.term_quit, '<C-\\><C-n>')

@@ -140,6 +140,16 @@ if not uConfig.enable.lite_mode then
     vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 end
 
+-- Python Provider
+local executable_path
+if getSysName() == 'Windows' or getSysName() == 'Windows_NT' then
+    executable_path = '\\.virtualenvs\\neovim\\Scripts\\python.exe'
+else
+    executable_path = '/.virtualenvs/neovim/bin/python'
+end
+local path = vim.env.HOME .. executable_path
+vim.g.python3_host_prog = path
+
 -- Session
 vim.o.sessionoptions = 'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions'
 
