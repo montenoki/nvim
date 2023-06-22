@@ -144,7 +144,7 @@ local M = {
 
         toggleterm = {
             term_quit = '<Esc>',
-            lazygit_toggle = '<A-g>',
+            gitui_toggle = '<A-g>',
             float_toggle = '<A-t>',
             botton_toggle = '<A-\\>',
         },
