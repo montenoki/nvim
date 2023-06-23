@@ -58,6 +58,7 @@ local M = {
                 'pyright',
                 'vimls',
                 'r_language_server',
+                'jsonls',
             },
 
             -- null_ls
@@ -66,9 +67,10 @@ local M = {
             formatting = {
                 'stylua',
                 'black',
-                'isort',
                 'shfmt',
                 'rustfmt',
+                'dprint',
+                'isort',
             },
             diagnostics = {
                 'flake8',
@@ -80,7 +82,9 @@ local M = {
                 'clang_check',
                 'codespell',
             },
-            code_actions = { 'gitsigns' },
+            code_actions = {
+                'gitsigns',
+            },
             extra_args = {
                 black = {
                     extra_args = { '--fast' },
