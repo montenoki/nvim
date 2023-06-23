@@ -33,6 +33,7 @@ local M = {
         surround = true,
         autopairs = true,
         refactoring = true,
+        winshift = true,
 
         telescope = true,
         project = true,
