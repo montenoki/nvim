@@ -36,7 +36,7 @@ local M = {
 
         telescope = true,
         project = true,
-        hop = true,
+        leap = true,
     },
     setting = {
         tab_width = 4,
@@ -56,7 +56,7 @@ local M = {
                 'rust_analyzer',
                 'pyright',
                 'vimls',
-                'r_language_server'
+                'r_language_server',
             },
 
             -- null_ls
@@ -298,11 +298,8 @@ local M = {
                 bock = 'gb',
             },
         },
-        hop = {
+        leap = {
             toggle = '\\',
-        },
-        zen = {
-            toggle = '<A-z>',
         },
 
         gitsigns = {
