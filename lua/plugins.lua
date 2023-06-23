@@ -274,6 +274,14 @@ packer.startup({
             end,
         })
 
+        -- winshift
+        use({
+            'sindrets/winshift.nvim',
+            config = function()
+                require('plugin-config.editor.winshift')
+            end,
+        })
+
         ----- Search Tools -----
         ------------------------
 

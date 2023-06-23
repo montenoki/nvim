@@ -1,7 +1,6 @@
 local uConfig = require('uConfig')
 local keys = uConfig.keys
 
-local map = vim.api.nvim_set_keymap
 local opt = { noremap = true, silent = true }
 -- local opts_remap = { remap = true, silent = true }
 local opts_expr = { expr = true, silent = true }
@@ -75,7 +74,7 @@ if keys.s_windows ~= nil and keys.s_windows.enable then
     keymap('n', skey.close, '<C-w>c')
     keymap('n', skey.close_others, '<C-w>o')
 
-    -- Move Focus
+    -- Jump Focus
     keymap('n', skey.jump_left, '<C-w>h')
     keymap('n', skey.jump_down, '<C-w>j')
     keymap('n', skey.jump_up, '<C-w>k')
