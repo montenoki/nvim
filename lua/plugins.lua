@@ -301,6 +301,15 @@ packer.startup({
             end,
         })
 
+        -- Leap
+        use({
+            'ggandor/leap.nvim',
+            config = function()
+                require('plugin-config.search.leap')
+            end,
+            requires = { 'tpope/vim-repeat' },
+        })
+
         ----- LSP -----
         ---------------
 
