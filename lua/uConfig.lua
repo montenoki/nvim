@@ -55,7 +55,7 @@ local M = {
                 'lua_ls',
                 'marksman',
                 'rust_analyzer',
-                'pyright',
+                'pylsp',
                 'vimls',
                 'r_language_server',
                 'jsonls',

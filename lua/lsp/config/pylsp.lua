@@ -9,7 +9,7 @@ local function check_debugpy_exsit()
     end
     local path = vim.env.HOME .. executable_path
     if vim.fn.empty(vim.fn.glob(path)) > 0 then
-        vim.notify("No Python adapter for Dap found.\n", vim.log.levels.WARN)
+        vim.notify('No Python adapter for Dap found.\n', vim.log.levels.WARN)
     end
 end
 local opts = {
@@ -19,6 +19,18 @@ local opts = {
         common.keyAttach(bufnr)
         common.BreadcrumbsAttach(client, bufnr)
     end,
+    settings = {
+        pylsp = {
+            plugins = {
+                pycodestyle = {
+                    enabled = false,
+                    ignore = { 'W391' },
+                    maxLineLength = 120,
+                },
+                pyflakes = { enabled = false },
+            },
+        },
+    },
 }
 return {
     on_setup = function(server)
