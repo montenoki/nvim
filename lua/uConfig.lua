@@ -45,7 +45,7 @@ local M = {
         updatetime = 50,
     },
     language_support = {
-        treesitter = { ensure_installed = { 'vim', 'lua', 'python', 'query', 'r' } },
+        treesitter = { ensure_installed = { 'vim', 'lua', 'python', 'query', 'r', 'c' } },
         lsp = {
             -- mason
             -- Server List:
@@ -58,6 +58,7 @@ local M = {
                 'pylsp',
                 'vimls',
                 'r_language_server',
+                'clangd',
                 'jsonls',
             },
 
@@ -68,6 +69,7 @@ local M = {
                 'stylua',
                 'black',
                 'shfmt',
+                'clang_format',
                 'rustfmt',
                 'dprint',
                 'isort',
