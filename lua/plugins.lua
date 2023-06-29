@@ -235,6 +235,23 @@ packer.startup({
             end,
         })
 
+        -- lspsaga
+        use({
+            'glepnir/lspsaga.nvim',
+            opt = true,
+            branch = 'main',
+            event = 'BufReadPost',
+            config = function()
+                require('lspsaga').setup({})
+            end,
+            requires = {
+                { 'nvim-tree/nvim-web-devicons' },
+                --Please make sure you install markdown and markdown_inline parser
+                { 'nvim-treesitter/nvim-treesitter' },
+            },
+            after = 'nvim-lspconfig'
+        })
+
         ----- Editor -----
         ------------------
 

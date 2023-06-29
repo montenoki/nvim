@@ -20,6 +20,7 @@ local M = {
         which_key = true,
         trouble = true,
         marks = true,
+        translate = true,
 
         todo_comments = true,
         indent_blankline = true,
@@ -45,7 +46,7 @@ local M = {
         updatetime = 50,
     },
     language_support = {
-        treesitter = { ensure_installed = { 'vim', 'lua', 'python', 'query', 'r', 'c' } },
+        treesitter = { ensure_installed = { 'vim', 'lua', 'python', 'query', 'r', 'c', 'markdown', 'markdown_inline' } },
         lsp = {
             -- mason
             -- Server List:
