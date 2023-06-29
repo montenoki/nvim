@@ -4,16 +4,27 @@
 
 <details closed>
 <summary>Make sure install all.</summary>
+
 - unzip
+
 - wget
+
 - curl
+
 - gzip
+
 - tar
+
 - fd
+
 - ripgrep
+
 - git
+
 - python
+
 - gitui
+
 </details>
 
 ## Installation
