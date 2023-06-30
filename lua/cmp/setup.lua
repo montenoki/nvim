@@ -52,6 +52,7 @@ local mapping = {
 }
 
 cmp.setup({
+    preselect = cmp.PreselectMode.None,
     snippet = {
         expand = function(args)
             vim.fn['UltiSnips#Anon'](args.body)
@@ -92,4 +93,3 @@ cmp.setup.cmdline(':', {
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({ { name = 'path' } }, { { name = 'cmdline' } }, { { name = 'cmdline_history' } }),
 })
-
