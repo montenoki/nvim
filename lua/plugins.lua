@@ -166,6 +166,12 @@ packer.startup({
             after = 'nvim-treesitter',
             requires = 'nvim-treesitter/nvim-treesitter',
         })
+        use({
+            'fei6409/log-highlight.nvim',
+            config = function()
+                require('log-highlight').setup({})
+            end,
+        })
 
         -- To-do Comments.nvim
         use({
@@ -249,7 +255,7 @@ packer.startup({
                 --Please make sure you install markdown and markdown_inline parser
                 { 'nvim-treesitter/nvim-treesitter' },
             },
-            after = 'nvim-lspconfig'
+            after = 'nvim-lspconfig',
         })
 
         ----- Editor -----
