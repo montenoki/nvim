@@ -385,6 +385,7 @@ packer.startup({
             end,
         })
         use('theHamsta/nvim-dap-virtual-text')
+        use({ 'jbyuki/one-small-step-for-vimkind' })
 
         ---------  Language Support -----------
         ---------------------------------------
@@ -413,7 +414,6 @@ packer.startup({
         -- --------------- Lang ----------------
 
         -- nvim lua
-        -- use({ 'jbyuki/one-small-step-for-vimkind' })
 
         -- -- JSON
         -- use('b0o/schemastore.nvim')

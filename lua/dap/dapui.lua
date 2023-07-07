@@ -39,20 +39,12 @@ dapui.setup({
         {
             elements = {
                 {
-                    id = 'scopes',
-                    size = 0.25,
-                },
-                {
-                    id = 'breakpoints',
-                    size = 0.25,
-                },
-                {
                     id = 'stacks',
-                    size = 0.25,
+                    size = 0.5,
                 },
                 {
                     id = 'watches',
-                    size = 0.25,
+                    size = 0.5,
                 },
             },
             position = 'left',
@@ -71,6 +63,20 @@ dapui.setup({
             },
             position = 'bottom',
             size = 10,
+        },
+        {
+            elements = {
+                {
+                    id = 'scopes',
+                    size = 0.5,
+                },
+                {
+                    id = 'breakpoints',
+                    size = 0.5,
+                },
+            },
+            position = 'right',
+            size = 40,
         },
     },
     mappings = {

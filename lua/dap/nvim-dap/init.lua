@@ -17,7 +17,7 @@ vt.setup({
 })
 
 keymap('n', keys.toggle, '<CMD>lua require("dapui").toggle()<CR>')
-keymap('n', keys.run, "<CMD>lua require('osv').run_this()<CR>")
+keymap('n', keys.run, "<CMD>lua require('dap').run()<CR>")
 keymap('n', keys.breakpoint_toggle, "<CMD>lua require('dap').toggle_breakpoint()<CR>")
 keymap('n', keys.breakpoint_clear, "<CMD>lua require('dap').clear_breakpoints()<CR>")
 -- continue
@@ -44,3 +44,4 @@ keymap(
 
 require('dap.nvim-dap.ui')
 require('dap.nvim-dap.config.python')
+require('dap.nvim-dap.config.lua')

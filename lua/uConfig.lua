@@ -209,10 +209,11 @@ local M = {
         dap = {
             toggle = '<A-d>',
 
-            run = '<F5>',
+            run = '<S-F5>',
             breakpoint_toggle = '<F8>',
             breakpoint_clear = '<S-F8>',
 
+            continue = '<F5>',
             step_into = '<F11>',
             step_out = '<S-F11>',
             restart = '<F6>',
