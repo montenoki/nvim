@@ -194,6 +194,7 @@ local M = {
             references = 'gr',
             definition = 'gd',
             hover = 'gh',
+            show_buf_diagnostics = 'gp',
 
             code_action = '<leader>ca',
             format = '<leader>f',
@@ -208,7 +209,7 @@ local M = {
         dap = {
             toggle = '<A-d>',
 
-            run = '<S-F5>',
+            run = '<F5>',
             breakpoint_toggle = '<F8>',
             breakpoint_clear = '<S-F8>',
 

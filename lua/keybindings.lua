@@ -113,6 +113,7 @@ pluginKeys.mapLSP = function(mapbuf)
         require('telescope.builtin').lsp_references(require('telescope.themes').get_dropdown())
     end)
     mapbuf('n', keys.lsp.hover, '<CMD>Lspsaga hover_doc<CR>')
+    mapbuf('n', keys.lsp.show_buf_diagnostics, '<CMD>Lspsaga show_buf_diagnostics<CR>')
 
     mapbuf('n', keys.lsp.code_action, '<CMD>Lspsaga code_action<CR>')
     mapbuf('n', keys.lsp.format, function()
