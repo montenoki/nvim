@@ -7,8 +7,8 @@ if uConfig.enable.lite_mode then
     colorscheme = '16-colors'
 else
     vim.o.background = 'dark'
-    -- colorscheme = 'dracula'
-    colorscheme = 'nightfox'
+    colorscheme = 'dracula'
+    -- colorscheme = 'nightfox'
 end
 
 local status_ok, _ = pcall(vim.cmd, 'colorscheme ' .. colorscheme)

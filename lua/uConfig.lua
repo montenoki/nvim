@@ -5,7 +5,7 @@ local M = {
         magic_search = true,
         code_ruler = true,
         listchars = true,
-        relativenumber = false,
+        relativenumber = true,
         mouse = true,
 
         auto_session = true,
@@ -46,7 +46,9 @@ local M = {
         updatetime = 50,
     },
     language_support = {
-        treesitter = { ensure_installed = { 'vim', 'lua', 'python', 'query', 'r', 'c', 'markdown', 'markdown_inline' } },
+        treesitter = {
+            ensure_installed = { 'vim', 'lua', 'python', 'query', 'r', 'c', 'toml', 'markdown', 'markdown_inline' },
+        },
         lsp = {
             -- mason
             -- Server List:
@@ -61,6 +63,7 @@ local M = {
                 'r_language_server',
                 'clangd',
                 'jsonls',
+                'taplo',
             },
 
             -- null_ls
