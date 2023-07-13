@@ -153,9 +153,6 @@ vim.g.python3_host_prog = path
 -- Session
 vim.o.sessionoptions = 'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions'
 
--- Speed up loading Lua modules in Neovim to improve startup time.
-vim.loader.enable()
-
 -- Powershell Setting for Windows
 local powershell_options = {
     shell = vim.fn.executable('pwsh') == 1 and 'pwsh' or 'powershell',

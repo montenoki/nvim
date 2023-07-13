@@ -22,6 +22,7 @@ end
 packer.startup({
     function(use)
         use('wbthomason/packer.nvim')
+        use('nathom/filetype.nvim')
 
         ----- Interface ----
         ---------------------
@@ -139,7 +140,6 @@ packer.startup({
         -- TODO: 8bit主题未完成
         use('Mofiqul/dracula.nvim')
         use('EdenEast/nightfox.nvim')
-        use('montenoki/16-colors')
 
         ----- Code Appearance  -----
         ----------------------------
@@ -358,20 +358,28 @@ packer.startup({
         ----- Snippets -----
         --------------------
 
+        use({ 'hrsh7th/cmp-nvim-lsp' })
+        use({ 'onsails/lspkind-nvim' })
+        use({ 'quangnguyen30192/cmp-nvim-ultisnips' })
         -- Engine
-        use('hrsh7th/nvim-cmp')
-        use('onsails/lspkind-nvim')
-        use('SirVer/ultisnips')
-        use('quangnguyen30192/cmp-nvim-ultisnips')
+        use({
+            'hrsh7th/nvim-cmp',
+            module = { 'cmp' },
+            requires = {
+                { 'hrsh7th/cmp-nvim-lsp-signature-help', event = { 'InsertEnter' } },
+                { 'hrsh7th/cmp-buffer', event = { 'InsertEnter', 'CmdLineEnter *' } },
+                { 'hrsh7th/cmp-path', event = { 'InsertEnter' } },
+                { 'hrsh7th/cmp-cmdline', event = { 'CmdLineEnter *' } },
+                { 'dmitmel/cmp-cmdline-history', event = { 'CmdLineEnter *' } },
+                { 'hrsh7th/cmp-emoji', event = { 'InsertEnter' } },
+                { 'SirVer/ultisnips', event = { 'InsertEnter' } },
+            },
+            config = function()
+                require('cmp.setup')
+            end,
+            wants = { 'cmp-nvim-lsp', 'lspkind-nvim', 'cmp-nvim-ultisnips' },
+        })
 
-        -- Source
-        use('hrsh7th/cmp-nvim-lsp')
-        use('hrsh7th/cmp-nvim-lsp-signature-help')
-        use('hrsh7th/cmp-buffer')
-        use('hrsh7th/cmp-path')
-        use('hrsh7th/cmp-cmdline')
-        use('dmitmel/cmp-cmdline-history')
-        use('hrsh7th/cmp-emoji')
         -- My snippet
         use('montenoki/vim-snippets')
 
