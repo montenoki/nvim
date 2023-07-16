@@ -89,7 +89,6 @@ local M = {
                 'codespell',
             },
             code_actions = {
-                'gitsigns',
             },
             extra_args = {
                 black = {

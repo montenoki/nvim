@@ -451,7 +451,7 @@ local function init()
 end
 
 if packer_bootstrap then
-    require("lua.plugins").sync()
+    require('lua.plugins').sync()
 end
 
 return setmetatable({}, {
