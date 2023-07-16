@@ -53,8 +53,8 @@ local function init()
     end
     packer.reset()
     packer.use({
+
         { 'wbthomason/packer.nvim' },
-        { 'nathom/filetype.nvim' },
 
         ----- Interface ----
         ---------------------
