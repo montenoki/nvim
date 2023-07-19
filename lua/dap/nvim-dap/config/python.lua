@@ -19,3 +19,15 @@ dap_python.setup(path)
 dap.listeners.after.event_initialized['dapui_config'] = function()
     dapui.open()
 end
+
+-- dap.configurations.python = {
+--     {
+--         type = 'python',
+--         request = 'launch',
+--         name = 'launch file in project root',
+--         program="${file}",
+--         pythonPath = "python",
+--         cwd="/"
+--
+--     },
+-- }
