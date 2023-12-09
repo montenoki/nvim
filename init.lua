@@ -2,17 +2,14 @@
 vim.loader.enable()
 
 require('utils.global')
-
 require('basic')
 
-require('colorscheme')
-
-require('plugins')
-
-require('keybindings')
-
-require('autocmds')
-
-require('lsp.setup')
-
-require('dap.setup')
+if not vim.g.vscode then
+    require('colorscheme')
+    require('keybindings')
+    require('autocmds')
+    require('lsp.setup')
+    -- VSCode extension
+    require('plugins')
+    require('dap.setup')
+end
