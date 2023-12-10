@@ -30,10 +30,6 @@ else
     keymap(n_v_mode, '/', '/', { remap = false, silent = false })
 end
 
--- wrap line movement
-keymap(normal_mode, 'j', "v:count == 0 ? 'gj' : 'j'", opts_expr)
-keymap(normal_mode, 'k', "v:count == 0 ? 'gk' : 'k'", opts_expr)
-
 -- visual mode indent
 keymap(visual_mode, '<', '<gv')
 keymap(visual_mode, '>', '>gv')
