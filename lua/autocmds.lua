@@ -1,49 +1,117 @@
-local myAutoGroup = vim.api.nvim_create_augroup('myAutoGroup', {
-    clear = true,
+local function augroup(name)
+  return vim.api.nvim_create_augroup("auto_group_" .. name, { clear = true })
+end
+
+-- Check if we need to reload the file when it changed
+vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
+  group = augroup("checktime"),
+  command = "checktime",
 })
-
-local autocmd = vim.api.nvim_create_autocmd
-
--- autocmd VimLeave * if exists("g:SendCmdToR") && string(g:SendCmdToR) != "function('SendCmdToR_fake')" | call RQuit("nosave") | endif
-
 -- Highlight on yank
-autocmd('TextYankPost', {
-    callback = function()
-        vim.highlight.on_yank()
-    end,
-    group = myAutoGroup,
-    pattern = '*',
+vim.api.nvim_create_autocmd("TextYankPost", {
+  group = augroup("highlight_yank"),
+  callback = function()
+    vim.highlight.on_yank()
+  end,
 })
-
 -- add new line with 'o' do not continue comments
-autocmd('BufEnter', {
-    group = myAutoGroup,
-    pattern = '*',
-    callback = function()
-        vim.opt.formatoptions = vim.opt.formatoptions
-            - 'o' -- O and o, don't continue comments
-            + 'r' -- But do continue when pressing enter.
-    end,
+vim.api.nvim_create_autocmd('BufEnter', {
+  group = augroup("dont_continue_comments"),
+  pattern = '*',
+  callback = function()
+    vim.opt.formatoptions = vim.opt.formatoptions
+        - 'o' -- O and o, don't continue comments
+        + 'r' -- But do continue when pressing enter.
+  end,
 })
-
+-- resize splits if window got resized
+vim.api.nvim_create_autocmd({ "VimResized" }, {
+  group = augroup("resize_splits"),
+  callback = function()
+    local current_tab = vim.fn.tabpagenr()
+    vim.cmd("tabdo wincmd =")
+    vim.cmd("tabnext " .. current_tab)
+  end,
+})
+-- go to last loc when opening a buffer
+vim.api.nvim_create_autocmd("BufReadPost", {
+  group = augroup("last_loc"),
+  callback = function(event)
+    local exclude = { "gitcommit" }
+    local buf = event.buf
+    if vim.tbl_contains(exclude, vim.bo[buf].filetype) or vim.b[buf].lazyvim_last_loc then
+      return
+    end
+    vim.b[buf].lazyvim_last_loc = true
+    local mark = vim.api.nvim_buf_get_mark(buf, '"')
+    local lcount = vim.api.nvim_buf_line_count(buf)
+    if mark[1] > 0 and mark[1] <= lcount then
+      pcall(vim.api.nvim_win_set_cursor, 0, mark)
+    end
+  end,
+})
+-- close some filetypes with <q>
+vim.api.nvim_create_autocmd("FileType", {
+  group = augroup("close_with_q"),
+  pattern = {
+    "PlenaryTestPopup",
+    "help",
+    "lspinfo",
+    "man",
+    "notify",
+    "qf",
+    "query",
+    "spectre_panel",
+    "startuptime",
+    "tsplayground",
+    "neotest-output",
+    "checkhealth",
+    "neotest-summary",
+    "neotest-output-panel",
+  },
+  callback = function(event)
+    vim.bo[event.buf].buflisted = false
+    vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
+  end,
+})
+-- wrap and check for spell in text filetypes
+vim.api.nvim_create_autocmd("FileType", {
+  group = augroup("wrap_spell"),
+  pattern = { "gitcommit", "markdown" },
+  callback = function()
+    vim.opt_local.wrap = true
+    vim.opt_local.spell = true
+  end,
+})
+-- Auto create dir when saving a file, in case some intermediate directory does not exist
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+  group = augroup("auto_create_dir"),
+  callback = function(event)
+    if event.match:match("^%w%w+://") then
+      return
+    end
+    local file = vim.loop.fs_realpath(event.match) or event.match
+    vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
+  end,
+})
 
 -- Auto update plugins when modify lua/plugins.lua
-autocmd('BufWritePost', {
-    group = myAutoGroup,
-    callback = function()
-        local plugins_path
-        local os_name = getSysName()
-        if os_name == 'Windows' or os_name == 'Windows_NT' then
-            plugins_path = 'lua\\plugins.lua'
-        else
-            plugins_path = 'lua/plugins.lua'
-        end
-        if vim.fn.expand('<afile>') == plugins_path then
-            vim.api.nvim_command('source ' .. plugins_path)
-            vim.api.nvim_command('PackerSync')
-        end
-    end,
-})
+-- autocmd('BufWritePost', {
+--     group = myAutoGroup,
+--     callback = function()
+--         local plugins_path
+--         local os_name = getSysName()
+--         if os_name == 'Windows' or os_name == 'Windows_NT' then
+--             plugins_path = 'lua\\plugins.lua'
+--         else
+--             plugins_path = 'lua/plugins.lua'
+--         end
+--         if vim.fn.expand('<afile>') == plugins_path then
+--             vim.api.nvim_command('source ' .. plugins_path)
+--             vim.api.nvim_command('PackerSync')
+--         end
+--     end,
+-- })
 
 -- 自动切换输入法，需要安装 im-select
 -- https://github.com/daipeihust/im-select
