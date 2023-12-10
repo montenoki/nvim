@@ -1,12 +1,3 @@
-local vim = vim
-local lite_flg_path = vim.fn.stdpath('config') .. '/lite_mode.flg'
-
-if vim.fn.empty(vim.fn.glob(lite_flg_path)) > 0 then
-    vim.g.lite_mode = false
-else
-    vim.g.lite_mode = true
-end
-
 function _G.requirePlugin(name)
     local status_ok, plugin = pcall(require, name)
     if not status_ok then
