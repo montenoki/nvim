@@ -12,5 +12,5 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup(
-  { 'Mofiqul/dracula.nvim' }
+  { 'Mofiqul/dracula.nvim', lazy = true }
 )

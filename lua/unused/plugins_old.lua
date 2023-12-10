@@ -398,12 +398,12 @@ local function init()
             module = { 'cmp' },
             requires = {
                 { 'hrsh7th/cmp-nvim-lsp-signature-help', event = { 'InsertEnter' } },
-                { 'hrsh7th/cmp-buffer', event = { 'InsertEnter', 'CmdLineEnter *' } },
-                { 'hrsh7th/cmp-path', event = { 'InsertEnter' } },
-                { 'hrsh7th/cmp-cmdline', event = { 'CmdLineEnter *' } },
-                { 'dmitmel/cmp-cmdline-history', event = { 'CmdLineEnter *' } },
-                { 'hrsh7th/cmp-emoji', event = { 'InsertEnter' } },
-                { 'SirVer/ultisnips', event = { 'InsertEnter' } },
+                { 'hrsh7th/cmp-buffer',                  event = { 'InsertEnter', 'CmdLineEnter *' } },
+                { 'hrsh7th/cmp-path',                    event = { 'InsertEnter' } },
+                { 'hrsh7th/cmp-cmdline',                 event = { 'CmdLineEnter *' } },
+                { 'dmitmel/cmp-cmdline-history',         event = { 'CmdLineEnter *' } },
+                { 'hrsh7th/cmp-emoji',                   event = { 'InsertEnter' } },
+                { 'SirVer/ultisnips',                    event = { 'InsertEnter' } },
             },
             config = function()
                 require('cmp.setup')

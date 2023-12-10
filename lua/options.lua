@@ -80,10 +80,10 @@ end
 
 -- HACK: causes freezes on <= 0.9, so only enable on >= 0.10 for now
 if vim.fn.has("nvim-0.10") == 1 then
-  vim.opt.foldmethod = "expr"
+  opt.foldmethod = "expr"
   -- vim.opt.foldexpr = "v:lua.require'lazyvim.util'.ui.foldexpr()" -- todo: check this
 else
-  vim.opt.foldmethod = "indent"
+  opt.foldmethod = "indent"
 end
 
 -- vim.o.formatexpr = "v:lua.require'lazyvim.util'.format.formatexpr()" -- todo: check this

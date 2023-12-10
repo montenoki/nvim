@@ -5,7 +5,7 @@ if vim.fn.empty(vim.fn.glob(lite_flg_path)) == 0 then
 end
 
 vim.g.mapleader = " "
--- vim.g.maplocalleader = "\\"
+-- vim.g.maplocalleader = "\\" -- todo: check this
 
 vim.g.encoding = "UTF-8"
 
