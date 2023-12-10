@@ -19,10 +19,6 @@ local pluginKeys = {}
 ----- Neovim Keybinds Settings -----
 ------------------------------------
 
--- swap g_ and $
-keymap(n_v_mode, '$', 'g_')
-keymap(n_v_mode, 'g_', '$')
-
 -- magic search
 if uConfig.enable.magic_search then
     keymap(n_v_mode, '/', '/\\v', { remap = false, silent = false })
@@ -30,27 +26,11 @@ else
     keymap(n_v_mode, '/', '/', { remap = false, silent = false })
 end
 
--- visual mode indent
-keymap(visual_mode, '<', '<gv')
-keymap(visual_mode, '>', '>gv')
 
--- move select line
-keymap(visual_block_mode, 'K', ":move '<-2<CR>gv-gv", opt)
-keymap(visual_block_mode, 'J', ":move '>+1<CR>gv-gv", opt)
 
--- turn off 'Ctrl+z'
-keymap({ 'n', 'i', 'v' }, '<C-z>', '')
-
--- do not copy after paste in visual mode
-keymap(visual_mode, 'p', '"_dP')
 
 ----- Neovim Keybindings -----
 ------------------------------
-
--- Leader Key
-vim.g.mapleader = keys.leader_key
-vim.g.maplocalleader = keys.leader_key
-
 -- scroll
 keymap(n_v_mode, keys.n_v_scroll_up_with_cursor, '4k')
 keymap(n_v_mode, keys.n_v_scroll_down_with_cursor, '4j')
@@ -59,30 +39,6 @@ keymap(normal_mode, keys.n_v_scroll_up_without_cursor, '4<C-y>')
 keymap(normal_mode, keys.n_v_scroll_down_without_cursor, '4<C-e>')
 
 keymap(normal_mode, '<CR>', 'viw<C-1>', opt)
-
--- windows
-if keys.s_windows ~= nil and keys.s_windows.enable then
-    local skey = keys.s_windows
-    keymap('n', 's', '') -- Turn off 's'
-
-    keymap('n', skey.split_vertically, ':vsp<CR>')
-    keymap('n', skey.split_horizontally, ':sp<CR>')
-    keymap('n', skey.close, '<C-w>c')
-    keymap('n', skey.close_others, '<C-w>o')
-
-    -- Jump Focus
-    keymap('n', skey.jump_left, '<C-w>h')
-    keymap('n', skey.jump_down, '<C-w>j')
-    keymap('n', skey.jump_up, '<C-w>k')
-    keymap('n', skey.jump_right, '<C-w>l')
-
-    -- Window Size
-    keymap('n', skey.width_decrease, ':vertical resize -10<CR>')
-    keymap('n', skey.width_increase, ':vertical resize +10<CR>')
-    keymap('n', skey.height_decrease, ':horizontal resize -10<CR>')
-    keymap('n', skey.height_increase, ':horizontal resize +10<CR>')
-    keymap('n', skey.size_equal, '<C-w>=')
-end
 
 -- Tabs
 keymap(normal_mode, keys.new_tab, '<CMD>tabnew<CR>')
