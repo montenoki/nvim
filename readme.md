@@ -2,6 +2,8 @@
 
 ## Requirements
 
+packer -> lazyvim.nvim
+
 <details closed>
 <summary>Make sure install all.</summary>
 
