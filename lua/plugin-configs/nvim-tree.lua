@@ -96,9 +96,6 @@ local list_keys = {
   { key = keys.copy_absolute_path, action = 'copy_absolute_path' },
 }
 
--- On/Off
-vim.keymap.set('n', keys.toggle, '<CMD>NvimTreeToggle<CR>')
-
 nvim_tree.setup({
   disable_netrw = true,
   git = {
