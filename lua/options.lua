@@ -46,6 +46,7 @@ opt.splitkeep = 'screen'
 opt.splitright = true -- Put new windows right of current
 opt.tabstop = tab_width -- Number of spaces tabs count for
 opt.termguicolors = true -- True color support
+opt.timeout = true -- Enable timeout
 opt.timeoutlen = 500
 opt.undofile = true
 opt.undolevels = 10000

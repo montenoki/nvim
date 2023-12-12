@@ -1,21 +1,21 @@
 -- Speed up loading Lua modules in Neovim to improve startup time.
 vim.loader.enable()
-require("global")
-require("options")
+require('global')
+require('options')
 
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
+    'git',
+    'clone',
+    '--filter=blob:none',
+    'https://github.com/folke/lazy.nvim.git',
+    '--branch=stable', -- latest stable release
     lazypath,
   })
 end
 vim.opt.rtp:prepend(lazypath)
-require("lazy").setup({ { import = "plugins" } })
+require('lazy').setup({ { import = 'plugins' } })
 
-require("colorscheme")
-require("keymaps")
+require('colorscheme')
+require('keymaps')
