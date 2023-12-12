@@ -2,34 +2,17 @@ local M = {}
 
 local indent_normal = {
   char = '│',
-  tab_char = "▏",
+  tab_char = '▏',
 }
 local indent_lite = {
   char = '|',
   tab_char = '|',
 }
 
-local bufferline_normal = {
-  buffer_close_icon = '󰅖',
-  modified_icon = '●',
-  close_icon = '',
-  left_trunc_marker = '',
-  right_trunc_marker = '',
-  show_buffer_icons = true,
-}
-local bufferline_lite = {
-  buffer_close_icon = 'x',
-  modified_icon = 'o',
-  close_icon = 'x',
-  left_trunc_marker = '<-',
-  right_trunc_marker = '->',
-  show_buffer_icons = false,
-}
-
 local diagnostics_normal = {
   Error = ' ',
   Warn = ' ',
-  Hint = ' ',
+  Hint = ' ',
   Info = ' ',
 }
 local diagnostics_lite = {
@@ -75,6 +58,34 @@ local lualine_lite = {
   section_separators = { left = '', right = '' },
 }
 
+local bufferline_normal = {
+  buffer_close_icon = '󰅖',
+  modified_icon = '●',
+  close_icon = '',
+  left_trunc_marker = '',
+  right_trunc_marker = '',
+  show_buffer_icons = true,
+}
+local bufferline_lite = {
+  buffer_close_icon = 'x',
+  modified_icon = 'o',
+  close_icon = 'x',
+  left_trunc_marker = '<-',
+  right_trunc_marker = '->',
+  show_buffer_icons = false,
+}
+
+local mason_normal = {
+  package_installed = '✓',
+  package_pending = '➜',
+  package_uninstalled = '✗',
+}
+local mason_lite = {
+  package_installed = 'v',
+  package_pending = '>',
+  package_uninstalled = 'x',
+}
+
 if vim.g.lite_mode then
   M.bufferline = bufferline_lite
   M.diagnostics = diagnostics_lite
@@ -83,6 +94,7 @@ if vim.g.lite_mode then
   M.clock = clock_lite
   M.bug = bug_lite
   M.indent = indent_lite
+  M.mason = mason_lite
 else
   M.bufferline = bufferline_normal
   M.diagnostics = diagnostics_normal
@@ -91,6 +103,7 @@ else
   M.clock = clock_normal
   M.bug = bug_normal
   M.indent = indent_normal
+  M.mason = mason_normal
 end
 
 return M

@@ -15,13 +15,30 @@ function M.get()
     M._keys =  {
       { "<leader>cl", "<cmd>LspInfo<cr>", desc = "Lsp Info" },
       { "gd", function() require("telescope.builtin").lsp_definitions({ reuse_win = true }) end, desc = "Goto Definition", has = "definition" },
-      { "gr", "<cmd>Telescope lsp_references<cr>", desc = "References" },
+      { "gr", function() require('telescope.builtin').lsp_references(require('telescope.themes').get_dropdown()) end, desc = "References" },
       { "gD", vim.lsp.buf.declaration, desc = "Goto Declaration" },
       { "gI", function() require("telescope.builtin").lsp_implementations({ reuse_win = true }) end, desc = "Goto Implementation" },
       { "gy", function() require("telescope.builtin").lsp_type_definitions({ reuse_win = true }) end, desc = "Goto T[y]pe Definition" },
-      { "K", vim.lsp.buf.hover, desc = "Hover" },
-      { "gK", vim.lsp.buf.signature_help, desc = "Signature Help", has = "signatureHelp" },
-      { "<c-k>", vim.lsp.buf.signature_help, mode = "i", desc = "Signature Help", has = "signatureHelp" },
+      { "gh", vim.lsp.buf.hover, desc = "Hover" },
+      { "gH", vim.lsp.buf.signature_help, desc = "Signature Help", has = "signatureHelp" },
+      { "gt", vim.lsp.buf.type_definition, desc = "Type definition" },
+      { 
+        "gp",
+        function()
+          local opts = {
+            focusable = false,
+            close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+            border = 'rounded',
+            source = 'always',
+            prefix = ' ',
+            scope = 'cursor',
+          }
+          vim.diagnostic.open_float(nil, opts)
+        end,
+        desc = "Popup diagnostic info"
+      },
+      { "<leader>f", function () vim.lsp.buf.format({ async=true }) end, desc = "Format"},
+      -- { "<c-k>", vim.lsp.buf.signature_help, mode = "i", desc = "Signature Help", has = "signatureHelp" },
       { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },
       {
         "<leader>cA",
@@ -39,27 +56,27 @@ function M.get()
         has = "codeAction",
       }
     }
-  if require("lazyvim.util").has("inc-rename.nvim") then
+  if require('lazyvim.util').has('inc-rename.nvim') then
     M._keys[#M._keys + 1] = {
-      "<leader>cr",
+      '<leader>rn',
       function()
-        local inc_rename = require("inc_rename")
-        return ":" .. inc_rename.config.cmd_name .. " " .. vim.fn.expand("<cword>")
+        local inc_rename = require('inc_rename')
+        return ':' .. inc_rename.config.cmd_name .. ' ' .. vim.fn.expand('<cword>')
       end,
       expr = true,
-      desc = "Rename",
-      has = "rename",
+      desc = 'Rename',
+      has = 'rename',
     }
   else
-    M._keys[#M._keys + 1] = { "<leader>cr", vim.lsp.buf.rename, desc = "Rename", has = "rename" }
+    M._keys[#M._keys + 1] = { '<leader>rn', vim.lsp.buf.rename, desc = 'Rename', has = 'rename' }
   end
   return M._keys
 end
 
 ---@param method string
 function M.has(buffer, method)
-  method = method:find("/") and method or "textDocument/" .. method
-  local clients = require("lazyvim.util").lsp.get_clients({ bufnr = buffer })
+  method = method:find('/') and method or 'textDocument/' .. method
+  local clients = require('lazyvim.util').lsp.get_clients({ bufnr = buffer })
   for _, client in ipairs(clients) do
     if client.supports_method(method) then
       return true
@@ -70,13 +87,13 @@ end
 
 ---@return (LazyKeys|{has?:string})[]
 function M.resolve(buffer)
-  local Keys = require("lazy.core.handler.keys")
+  local Keys = require('lazy.core.handler.keys')
   if not Keys.resolve then
     return {}
   end
   local spec = M.get()
-  local opts = require("lazyvim.util").opts("nvim-lspconfig")
-  local clients = require("lazyvim.util").lsp.get_clients({ bufnr = buffer })
+  local opts = require('lazyvim.util').opts('nvim-lspconfig')
+  local clients = require('lazyvim.util').lsp.get_clients({ bufnr = buffer })
   for _, client in ipairs(clients) do
     local maps = opts.servers[client.name] and opts.servers[client.name].keys or {}
     vim.list_extend(spec, maps)
@@ -85,7 +102,7 @@ function M.resolve(buffer)
 end
 
 function M.on_attach(_, buffer)
-  local Keys = require("lazy.core.handler.keys")
+  local Keys = require('lazy.core.handler.keys')
   local keymaps = M.resolve(buffer)
 
   for _, keys in pairs(keymaps) do
@@ -94,7 +111,7 @@ function M.on_attach(_, buffer)
       opts.has = nil
       opts.silent = opts.silent ~= false
       opts.buffer = buffer
-      vim.keymap.set(keys.mode or "n", keys.lhs, keys.rhs, opts)
+      vim.keymap.set(keys.mode or 'n', keys.lhs, keys.rhs, opts)
     end
   end
 end

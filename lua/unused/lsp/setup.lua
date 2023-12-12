@@ -28,16 +28,7 @@ vim.diagnostic.config({
     underline = true,
     show_header = false,
     severity_sort = true,
-    float = {
-        source = 'always',
-        border = 'rounded',
-        style = 'minimal',
-        header = '',
-        -- prefix = " ",
-        -- max_width = 100,
-        -- width = 60,
-        -- height = 20,
-    },
+
 })
 
 for type, icon in pairs(diagnostic_signs) do

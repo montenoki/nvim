@@ -1,4 +1,12 @@
 local Util = require('util')
+local Icon = require('icons')
+local language_support = require('lang')
+
+local lsp_servers = {}
+for _, name in pairs(language_support.lsp_servers) do
+  lsp_servers[name] = require('plugins.lsp.config.' .. name)
+end
+
 return {
   -- lspconfig
   {
@@ -16,13 +24,21 @@ return {
       diagnostics = {
         underline = true,
         update_in_insert = false,
+        signs = true,
+        show_header = false,
         virtual_text = {
-          spacing = 4,
+          spacing = 2,
           source = 'if_many',
-          prefix = '●',
+          prefix = '→',
           -- this will set set the prefix to a function that returns the diagnostics icon based on the severity
           -- this only works on a recent 0.10.0 build. Will be set to "●" when not supported
           -- prefix = "icons",
+        },
+        float = {
+          source = 'always',
+          border = 'rounded',
+          style = 'minimal',
+          header = '',
         },
         severity_sort = true,
       },
@@ -30,9 +46,9 @@ return {
       -- Be aware that you also will need to properly configure your LSP server to
       -- provide the inlay hints.
       inlay_hints = {
-        enabled = false,
+        enabled = true,
       },
-      -- add any global capabilities here
+      -- TODO[2023/12/12]:add any global capabilities here
       capabilities = {},
       -- options for vim.lsp.buf.format
       -- `bufnr` and `filter` is handled by the LazyVim formatter,
@@ -43,25 +59,7 @@ return {
       },
       -- LSP Server Settings
       ---@type lspconfig.options
-      servers = {
-        lua_ls = {
-          -- mason = false, -- set to false if you don't want this server to be installed with mason
-          -- Use this to add any additional keymaps
-          -- for specific lsp servers
-          ---@type LazyKeysSpec[]
-          -- keys = {},
-          settings = {
-            Lua = {
-              workspace = {
-                checkThirdParty = false,
-              },
-              completion = {
-                callSnippet = 'Replace',
-              },
-            },
-          },
-        },
-      },
+      servers = lsp_servers,
       -- you can do any additional lsp server setup here
       -- return true if you don't want this server to be setup with lspconfig
       ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
@@ -109,7 +107,7 @@ return {
       end
 
       -- diagnostics
-      for name, icon in pairs(require('lazyvim.config').icons.diagnostics) do
+      for name, icon in pairs(Icon.diagnostics) do
         name = 'DiagnosticSign' .. name
         vim.fn.sign_define(name, { text = icon, texthl = name, numhl = '' })
       end
@@ -205,9 +203,9 @@ return {
     keys = { { '<leader>cm', '<cmd>Mason<cr>', desc = 'Mason' } },
     build = ':MasonUpdate',
     opts = {
-      ensure_installed = require('lang').mason_servers,
+      ensure_installed = language_support.mason_ensure_installed,
+      ui = { icons = Icon.mason },
     },
-    ---@param opts MasonSettings | {ensure_installed: string[]}
     config = function(_, opts)
       require('mason').setup(opts)
       local mr = require('mason-registry')
