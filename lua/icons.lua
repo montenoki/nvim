@@ -54,7 +54,7 @@ local bug_normal = '  '
 local bug_lite = 'Bug'
 
 local clock_normal = ' '
-local clock_lite = 'Now:'
+local clock_lite = ''
 
 local lualine_normal = {
   symbols = {

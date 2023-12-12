@@ -84,7 +84,6 @@ return {
           { filetype = 'dapui_scopes', text = 'Debug Mode', highlight = 'Directory', text_align = 'left' },
           { filetype = 'Outline', text = 'Outline', highlight = 'Directory', text_align = 'left' },
         },
-        -- LSP連携
         diagnostics = 'nvim_lsp',
         diagnostics_indicator = function(_, _, diag)
           local ret = (diag.error and Icon.diagnostics.Error .. diag.error .. ' ' or '')
