@@ -19,10 +19,3 @@ require("lazy").setup({ { import = "plugins" } })
 
 require("colorscheme")
 require("keymaps")
-
-local str = "This is some text containing the word tiger."
-if string.find(str, "tiger") then
-  print ("The word tiger was found.")
-else
-  print ("The word tiger was not found.")
-end
