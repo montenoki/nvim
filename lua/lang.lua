@@ -42,23 +42,7 @@ M.lsp_servers = {
     },
   },
 }
-
-M.mason_ensure_installed = {
-  -- 'stylua',
-  -- 'shfmt',
-  -- 'lua_ls',
-  -- 'lua-language-server',
-  -- 'bash-language-server',
-  -- 'bashls',
-  -- 'lua_ls',
-  -- 'marksman',
-  -- 'rust_analyzer',
-  -- 'pylsp',
-  -- 'vimls',
-  -- 'r_language_server',
-  -- 'clangd',
-  -- 'jsonls',
-  -- 'taplo',
-}
+M.mason_ensure_installed = {}
+M.ts_ensure_installed = { 'vim', 'lua', 'python', 'query', 'r', 'c', 'toml', 'markdown', 'markdown_inline' }
 
 return M

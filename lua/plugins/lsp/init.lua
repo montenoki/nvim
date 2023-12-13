@@ -3,7 +3,6 @@ local Icon = require('icons')
 local language_support = require('lang')
 
 local lsp_servers = language_support.lsp_servers
-
 return {
   -- lspconfig
   {

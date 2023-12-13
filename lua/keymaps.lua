@@ -42,6 +42,8 @@ map('n', '<leader>wd', '<C-W>c', { desc = 'Delete window', remap = true })
 map('n', '<leader>-', '<C-W>s', { desc = 'Split window below', remap = true })
 map('n', '<leader>|', '<C-W>v', { desc = 'Split window right', remap = true })
 
+map('n', '<cr>', 'viw<c-1>', { desc = 'Init Increment selection', remap = true })
+
 -- -- Clear search, diff update and redraw
 -- -- taken from runtime/lua/_editor.lua
 -- map(
