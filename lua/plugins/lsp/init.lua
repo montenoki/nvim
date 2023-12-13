@@ -2,10 +2,7 @@ local Util = require('util')
 local Icon = require('icons')
 local language_support = require('lang')
 
-local lsp_servers = {}
-for _, name in pairs(language_support.lsp_servers) do
-  lsp_servers[name] = require('plugins.lsp.config.' .. name)
-end
+local lsp_servers = language_support.lsp_servers
 
 return {
   -- lspconfig

@@ -13,6 +13,7 @@ function M.get()
   end
     -- stylua: ignore
     M._keys =  {
+      -- TODO[2023/12/13]: Config this after telescope is fixed.
       { "<leader>cl", "<cmd>LspInfo<cr>", desc = "Lsp Info" },
       { "gd", function() require("telescope.builtin").lsp_definitions({ reuse_win = true }) end, desc = "Goto Definition", has = "definition" },
       { "gr", function() require('telescope.builtin').lsp_references(require('telescope.themes').get_dropdown()) end, desc = "References" },
