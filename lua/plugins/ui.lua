@@ -60,13 +60,10 @@ return {
     opts = {
       options = {
         mode = 'tabs',
-        -- TODO[2023/12/12]: change this when mini.bufremove is fixed.
-        close_command = 'bdelete! %d',
-        right_mouse_command = 'bdelete! %d',
         -- stylua: ignore
-        -- close_command = function(n) require("mini.bufremove").delete(n, false) end,
+        close_command = function(n) require("mini.bufremove").delete(n, false) end,
         -- stylua: ignore
-        -- right_mouse_command = function(n) require("mini.bufremove").delete(n, false) end,
+        right_mouse_command = function(n) require("mini.bufremove").delete(n, false) end,
 
         buffer_close_icon = Icon.bufferline.buffer_close_icon,
         modified_icon = Icon.bufferline.modified_icon,
@@ -134,7 +131,6 @@ return {
           component_separators = Icon.lualine.component_separators,
           section_separators = Icon.lualine.section_separators,
         },
-        -- TODO[2023/12/12]: Check this later.
         extensions = { 'neo-tree', 'lazy', 'toggleterm', 'nvim-dap-ui' },
         sections = {
           lualine_a = { 'mode' },
@@ -142,22 +138,21 @@ return {
             'branch',
             {
               'diff',
-              -- TODO[2023/12/12]: Config this after gitsigns is fixed.
-              -- symbols = {
-              --   added = Icon.git.added,
-              --   modified = Icon.git.modified,
-              --   removed = Icon.git.removed,
-              -- },
-              -- source = function()
-              --   local gitsigns = vim.b.gitsigns_status_dict
-              --   if gitsigns then
-              --     return {
-              --       added = gitsigns.added,
-              --       modified = gitsigns.changed,
-              --       removed = gitsigns.removed,
-              --     }
-              --   end
-              -- end,
+              symbols = {
+                added = Icon.git.added,
+                modified = Icon.git.modified,
+                removed = Icon.git.removed,
+              },
+              source = function()
+                local gitsigns = vim.b.gitsigns_status_dict
+                if gitsigns then
+                  return {
+                    added = gitsigns.added,
+                    modified = gitsigns.changed,
+                    removed = gitsigns.removed,
+                  }
+                end
+              end,
             },
           },
           lualine_c = {
@@ -301,27 +296,25 @@ return {
           ['cmp.entry.get_documentation'] = true,
         },
       },
-      -- TODO[2023/12/12]: check this later.
-      -- routes = {
-      -- {
-      --   filter = {
-      --     event = 'msg_show',
-      --     any = {
-      --       { find = '%d+L, %d+B' },
-      --       { find = '; after #%d+' },
-      --       { find = '; before #%d+' },
-      --     },
-      --   },
-      --   view = 'mini',
-      -- },
-      -- },
+      routes = {
+      {
+        filter = {
+          event = 'msg_show',
+          any = {
+            { find = '%d+L, %d+B' },
+            { find = '; after #%d+' },
+            { find = '; before #%d+' },
+          },
+        },
+        view = 'mini',
+      },
+      },
       presets = {
         bottom_search = true,
         command_palette = true,
         long_message_to_split = true,
         inc_rename = true,
-        -- TODO[2023/12/12]: config this after lsp is fixed.
-        -- lsp_doc_border = true,
+        lsp_doc_border = true,
       },
     },
     -- stylua: ignore
