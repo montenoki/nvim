@@ -283,12 +283,10 @@ return {
           enabled = true,
           -- Lsp Progress is formatted using the builtins for lsp_progress. See config.format.builtin
           -- See the section on formatting for more details on how to customize.
-          --- @type NoiceFormat|string
-          format = "lsp_progress",
-          --- @type NoiceFormat|string
-          format_done = "lsp_progress_done",
+          format = 'lsp_progress',
+          format_done = 'lsp_progress_done',
           throttle = 1000 / 30, -- frequency to update lsp progress message
-          view = "mini",
+          view = 'mini',
         },
         override = {
           ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
@@ -297,17 +295,17 @@ return {
         },
       },
       routes = {
-      {
-        filter = {
-          event = 'msg_show',
-          any = {
-            { find = '%d+L, %d+B' },
-            { find = '; after #%d+' },
-            { find = '; before #%d+' },
+        {
+          filter = {
+            event = 'msg_show',
+            any = {
+              { find = '%d+L, %d+B' },
+              { find = '; after #%d+' },
+              { find = '; before #%d+' },
+            },
           },
+          view = 'mini',
         },
-        view = 'mini',
-      },
       },
       presets = {
         bottom_search = true,
@@ -327,5 +325,32 @@ return {
       { "<c-f>", function() if not require("noice.lsp").scroll(4) then return "<c-f>" end end, silent = true, expr = true, desc = "Scroll forward", mode = {"i", "n", "s"} },
       { "<c-b>", function() if not require("noice.lsp").scroll(-4) then return "<c-b>" end end, silent = true, expr = true, desc = "Scroll backward", mode = {"i", "n", "s"}},
     },
+  },
+
+  -- Color code display like: #00ffff
+  {
+    'norcalli/nvim-colorizer.lua',
+    enabled = true,
+    event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' }, -- LazyFile
+    keys = {
+      {
+        '<leader>uc',
+        '<CMD>ColorizerToggle<CR>',
+        desc = 'Toggle Colorizer',
+      },
+    },
+  },
+
+  -- TODO[2023/12/7]: config this later
+  -- Scroll Bar
+  {
+    'petertriho/nvim-scrollbar',
+    event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' }, -- LazyFile
+    opts = {
+      show_in_active_only = true,
+      handle = {
+        blend = 25,
+      },
+    }
   },
 }

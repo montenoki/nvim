@@ -37,8 +37,7 @@ map('v', '<A-j>', ":m '>+1<cr>gv=gv", { desc = 'Move down' })
 map('v', '<A-k>', ":m '<-2<cr>gv=gv", { desc = 'Move up' })
 
 -- windows
-map('n', '<leader>ww', '<C-W>p', { desc = 'Other window', remap = true })
-map('n', '<leader>wd', '<C-W>c', { desc = 'Delete window', remap = true })
+map('n', '<leader>wc', '<C-W>c', { desc = 'Close window', remap = true })
 map('n', '<leader>-', '<C-W>s', { desc = 'Split window below', remap = true })
 map('n', '<leader>|', '<C-W>v', { desc = 'Split window right', remap = true })
 

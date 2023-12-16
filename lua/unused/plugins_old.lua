@@ -67,68 +67,13 @@ local function init()
       end,
     },
 
-    -- File Explorer
-    {
-      'nvim-tree/nvim-tree.lua',
-      requires = 'nvim-tree/nvim-web-devicons',
-      config = function()
-        require('plugin-config.interface.nvim-tree')
-      end,
-      tag = 'nightly',
-    },
 
-    -- Status Bar
-    {
-      'nvim-lualine/lualine.nvim',
-      requires = {
-        'kyazdani42/nvim-web-devicons',
-        opt = true,
-      },
-      config = function()
-        require('plugin-config.interface.lualine')
-      end,
-    },
-
-    -- Tabs Bar
-    {
-      'akinsho/bufferline.nvim',
-      ag = '*',
-      requires = { 'kyazdani42/nvim-web-devicons' },
-      config = function()
-        require('plugin-config.interface.bufferline')
-      end,
-    },
 
     -- Outliner
     {
       'simrat39/symbols-outline.nvim',
       config = function()
         require('plugin-config.interface.symbols-outline')
-      end,
-    },
-
-    -- Status for nvim-lsp progress
-    {
-      'j-hui/fidget.nvim',
-      config = function()
-        require('plugin-config.interface.fidget')
-      end,
-      tag = 'legacy',
-    },
-
-    -- Notice表示
-    {
-      'rcarriga/nvim-notify',
-      config = function()
-        require('plugin-config.interface.nvim-notify')
-      end,
-    },
-
-    -- Scroll Bar
-    {
-      'petertriho/nvim-scrollbar',
-      config = function()
-        require('plugin-config.interface.scrollbar')
       end,
     },
 
@@ -213,13 +158,7 @@ local function init()
       end,
     },
 
-    -- Indent-blankline
-    {
-      'lukas-reineke/indent-blankline.nvim',
-      config = function()
-        require('plugin-config.appearance.indent-blankline')
-      end,
-    },
+ 
 
     -- Fold
     {
@@ -235,31 +174,6 @@ local function init()
       },
       config = function()
         require('plugin-config.appearance.ufo')
-      end,
-    },
-
-    -- Breadcrumb Bar
-    {
-      'SmiteshP/nvim-navic',
-      requires = 'neovim/nvim-lspconfig',
-      config = function()
-        require('plugin-config.appearance.navic')
-      end,
-    },
-
-    -- Sticky Scroll
-    {
-      'nvim-treesitter/nvim-treesitter-context',
-      config = function()
-        require('plugin-config.appearance.nvim-treesitter-context')
-      end,
-    },
-
-    -- Color code display like: #00ffff
-    {
-      'norcalli/nvim-colorizer.lua',
-      config = function()
-        require('plugin-config.appearance.colorizer')
       end,
     },
 

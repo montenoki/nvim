@@ -1,4 +1,4 @@
-local language_support = require('lang')
+local language_support = require('language')
 return {
   -- Treesitter is a new parser generator tool that we can
   -- use in Neovim to power faster and more accurate
@@ -50,7 +50,6 @@ return {
       { '<CR>', desc = 'Increment selection', mode = 'x' },
       { '<BS>', desc = 'Decrement selection', mode = 'x' },
     },
-    ---@type TSConfig
     ---@diagnostic disable-next-line: missing-fields
     opts = {
       highlight = { enable = true },
@@ -118,7 +117,6 @@ return {
         },
       },
     },
-    ---@param opts TSConfig
     config = function(_, opts)
       if type(opts.ensure_installed) == 'table' then
         ---@type table<string, boolean>
@@ -157,5 +155,15 @@ return {
         desc = 'Toggle Treesitter Context',
       },
     },
+  },
+
+  -- bracket pair colorizer
+  {
+    'HiPhish/rainbow-delimiters.nvim',
+    event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' }, -- LazyFile
+    enabled = true,
+    config = function()
+      require('rainbow-delimiters.setup').setup()
+    end,
   },
 }

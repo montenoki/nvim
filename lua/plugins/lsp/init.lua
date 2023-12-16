@@ -1,9 +1,28 @@
 local Util = require('util')
 local Icon = require('icons')
-local language_support = require('lang')
+local language_support = require('language')
 
 local lsp_servers = language_support.lsp_servers
 return {
+  -- Breadcrumb Bar
+  {
+    'SmiteshP/nvim-navic',
+    event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' }, -- LazyFile
+    dependencies = { 'neovim/nvim-lspconfig' },
+    init = function()
+      vim.o.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
+    end,
+    opts = {
+      icons = Icon.navic,
+      lsp = {
+        auto_attach = false,
+        preference = nil,
+      },
+      highlight = true,
+      separator = Icon.navic.separator,
+      click = true,
+    },
+  },
   -- lspconfig
   {
     'neovim/nvim-lspconfig',
@@ -88,6 +107,13 @@ return {
       -- setup keymaps
       Util.lsp.on_attach(function(client, buffer)
         require('plugins.lsp.keymaps').on_attach(client, buffer)
+      end)
+
+      -- setup navic
+      Util.lsp.on_attach(function(client, buffer)
+        if client.server_capabilities.documentSymbolProvider then
+          require('nvim-navic').attach(client, buffer)
+        end
       end)
 
       local register_capability = vim.lsp.handlers['client/registerCapability']

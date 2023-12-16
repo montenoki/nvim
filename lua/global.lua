@@ -16,7 +16,7 @@ vim.g.loaded_netrwPlugin = 1
 local executable_path
 local os_name = vim.loop.os_uname().sysname
 
-if string.find(os_name, "Windows") then
+if string.find(os_name, 'Windows') then
   executable_path = '\\.virtualenvs\\neovim\\Scripts\\python.exe'
 else
   executable_path = '/.virtualenvs/neovim/bin/python'

@@ -86,6 +86,65 @@ local mason_lite = {
   package_uninstalled = 'x',
 }
 
+local navic_normal = {
+  File = ' ',
+  Module = '󰆧 ',
+  Namespace = ' ',
+  Package = '󰏗 ',
+  Class = '𝓒 ',
+  Method = 'ƒ ',
+  Property = ' ',
+  Field = '󰽐 ',
+  Constructor = ' ',
+  Enum = ' ',
+  Interface = ' ',
+  Function = '󰊕 ',
+  Variable = '󰫧 ',
+  Constant = '󰏿 ',
+  String = '𝓐 ',
+  Number = ' ',
+  Boolean = '◩ ',
+  Array = ' ',
+  Object = '⦿ ',
+  Key = ' ',
+  Null = '󰟢 ',
+  EnumMember = ' ',
+  Struct = ' ',
+  Event = ' ',
+  Operator = ' ',
+  TypeParameter = ' ',
+  separator = '> ',
+}
+local navic_lite = {
+  File = '',
+  Module = '',
+  Namespace = '',
+  Package = '',
+  Class = '',
+  Method = '',
+  Property = '',
+  Field = '',
+  Constructor = '',
+  Enum = '',
+  Interface = '',
+  Function = '',
+  Variable = '',
+  Constant = '',
+  String = '',
+  Number = '',
+  Boolean = '',
+  Array = '',
+  Object = '',
+  Key = '',
+  Null = '',
+  EnumMember = '',
+  Struct = '',
+  Event = '',
+  Operator = '',
+  TypeParameter = '',
+  separator = '',
+}
+
 if vim.g.lite_mode then
   M.bufferline = bufferline_lite
   M.diagnostics = diagnostics_lite
@@ -95,6 +154,7 @@ if vim.g.lite_mode then
   M.bug = bug_lite
   M.indent = indent_lite
   M.mason = mason_lite
+  M.navic = navic_lite
 else
   M.bufferline = bufferline_normal
   M.diagnostics = diagnostics_normal
@@ -104,6 +164,7 @@ else
   M.bug = bug_normal
   M.indent = indent_normal
   M.mason = mason_normal
+  M.navic = navic_normal
 end
 
 return M

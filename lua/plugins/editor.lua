@@ -1,5 +1,5 @@
 local Util = require('util')
-
+if true then return {} end
 return {
   -- file explorer
   {
@@ -92,18 +92,6 @@ return {
         end,
       })
     end,
-  },
-
-  -- search/replace in multiple files
-  {
-    'nvim-pack/nvim-spectre',
-    build = false,
-    cmd = 'Spectre',
-    opts = { open_cmd = 'noswapfile vnew' },
-    -- stylua: ignore
-    keys = {
-      { "<leader>sr", function() require("spectre").open() end, desc = "Replace in files (Spectre)" },
-    },
   },
 
   -- Fuzzy finder.
@@ -430,7 +418,7 @@ return {
         desc = 'Delete Buffer',
       },
       -- stylua: ignore
-      { "<leader>bD", function() require("mini.bufremove").delete(0, true) end, desc = "Delete Buffer (Force)" },
+      -- { "<leader>bD", function() require("mini.bufremove").delete(0, true) end, desc = "Delete Buffer (Force)" },
     },
   },
 

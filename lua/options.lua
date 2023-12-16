@@ -3,7 +3,7 @@ local tab_width = 2
 
 opt.autowrite = true           -- Enable auto write
 opt.clipboard = 'unnamedplus'  -- Sync with system clipboard
-opt.colorcolumn = '80,120'     -- Line length marker
+opt.colorcolumn = '81'     -- Line length marker
 opt.completeopt = 'menu,menuone,noselect,noinsert'
 opt.conceallevel = 3           -- ? Hide * markup for bold and italic
 opt.confirm = true             -- Confirm to save changes before exiting modified buffer
@@ -65,6 +65,7 @@ opt.fillchars = {
   diff = '╱',
   eob = ' ',
 }
+vim.opt.virtualedit = "onemore"  -- fix the problem that cant see last char when scrollbar on.
 
 if vim.fn.has('nvim-0.10') == 1 then
   opt.smoothscroll = true
