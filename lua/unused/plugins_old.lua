@@ -86,13 +86,6 @@ local function init()
       end,
     },
 
-    -- Which-key
-    {
-      'folke/which-key.nvim',
-      config = function()
-        require('plugin-config.interface.whichkey')
-      end,
-    },
 
     -- Diagnostics
     {
@@ -111,11 +104,6 @@ local function init()
       end,
     },
 
-    ----- Color Schemes -----
-    -------------------------
-
-    { 'Mofiqul/dracula.nvim' },
-    { 'EdenEast/nightfox.nvim' },
 
     ----- Code Appearance  -----
     ----------------------------
@@ -141,12 +129,6 @@ local function init()
       'nvim-treesitter/nvim-treesitter-refactor',
       after = 'nvim-treesitter',
       requires = 'nvim-treesitter/nvim-treesitter',
-    },
-    {
-      'fei6409/log-highlight.nvim',
-      config = function()
-        require('log-highlight').setup({})
-      end,
     },
 
     -- To-do Comments.nvim
