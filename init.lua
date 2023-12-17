@@ -2,6 +2,7 @@
 vim.loader.enable()
 require('global')
 require('options')
+require('autocmds')
 
 -- Check if the lazy.nvim plugin is installed
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'

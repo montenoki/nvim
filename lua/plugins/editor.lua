@@ -1,5 +1,39 @@
 local Util = require('util')
-if true then return {} end
+if true then
+  return {
+    -- move cursor between windows
+    {
+      'ggandor/leap.nvim',
+      enabled = true,
+      lazy = false,
+      keys = {
+        { '\\', mode = { 'n', 'x', 'o' }, desc = 'Leap from windows' },
+      },
+      config = function(_, opts)
+        local leap = require('leap')
+        for k, v in pairs(opts) do
+          leap.opts[k] = v
+        end
+        vim.keymap.set({ 'n', 'v' }, '\\', function()
+          leap.leap({
+            target_windows = vim.tbl_filter(function(win)
+              return vim.api.nvim_win_get_config(win).focusable
+            end, vim.api.nvim_tabpage_list_wins(0)),
+          })
+        end)
+      end,
+    },
+
+    -- move windows
+    {
+      'sindrets/winshift.nvim',
+      lazy = true,
+      keys = {
+        {'<leader>wm', '<cmd>WinShift<cr>', desc = 'Move window'},
+      }
+    }
+  }
+end
 return {
   -- file explorer
   {

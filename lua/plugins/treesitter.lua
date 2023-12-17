@@ -138,7 +138,7 @@ return {
     'nvim-treesitter/nvim-treesitter-context',
     event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' }, -- LazyFile
     enabled = true,
-    opts = { mode = 'cursor', max_lines = 3 },
+    opts = { mode = 'cursor', max_lines = 2 },
     keys = {
       {
         '<leader>ut',

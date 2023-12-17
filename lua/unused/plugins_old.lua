@@ -206,30 +206,6 @@ local function init()
     ----- Editor -----
     ------------------
 
-    -- Comment Toggle
-    {
-      'numToStr/Comment.nvim',
-      config = function()
-        require('plugin-config.editor.comment')
-      end,
-    },
-
-    -- Surround
-    {
-      'kylechui/nvim-surround',
-      config = function()
-        require('plugin-config.editor.nvim-surround')
-      end,
-    },
-
-    -- nvim-autopairs
-    {
-      'windwp/nvim-autopairs',
-      config = function()
-        require('plugin-config.editor.nvim-autopairs')
-      end,
-    },
-
     -- Refactoring
     {
       'ThePrimeagen/refactoring.nvim',
@@ -242,13 +218,6 @@ local function init()
       end,
     },
 
-    -- winshift
-    {
-      'sindrets/winshift.nvim',
-      config = function()
-        require('plugin-config.editor.winshift')
-      end,
-    },
 
     ----- Search Tools -----
     ------------------------
@@ -277,14 +246,7 @@ local function init()
       end,
     },
 
-    -- Leap
-    {
-      'ggandor/leap.nvim',
-      config = function()
-        require('plugin-config.search.leap')
-      end,
-      requires = { 'tpope/vim-repeat' },
-    },
+
 
     ----- LSP -----
     ---------------

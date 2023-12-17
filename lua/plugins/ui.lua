@@ -159,17 +159,13 @@ return {
             Util.lualine.root_dir(),
             { 'filetype', icon_only = true, separator = '', padding = { left = 1, right = 0 } },
             { Util.lualine.pretty_path() },
-            {
-              'diagnostics',
-              symbols = {
-                error = Icon.diagnostics.Error,
-                warn = Icon.diagnostics.Warn,
-                info = Icon.diagnostics.Info,
-                hint = Icon.diagnostics.Hint,
-              },
-            },
           },
           lualine_x = {
+            {
+              'macro-recording',
+              fmt = Util.lualine.show_macro_recording,
+              color = Util.ui.fg('Error'),
+            },
             -- stylua: ignore
             {
               function() return require("noice").api.status.command.get() end,
@@ -185,9 +181,18 @@ return {
             -- },
           },
           lualine_y = {
-            { 'fileformat', symbols = Icon.lualine.symbols },
+            {
+              'diagnostics',
+              symbols = {
+                error = Icon.diagnostics.Error,
+                warn = Icon.diagnostics.Warn,
+                info = Icon.diagnostics.Info,
+                hint = Icon.diagnostics.Hint,
+              },
+            },
           },
           lualine_z = {
+            { 'fileformat', symbols = Icon.lualine.symbols },
             function()
               return Icon.clock .. os.date('%R')
             end,
@@ -351,6 +356,6 @@ return {
       handle = {
         blend = 25,
       },
-    }
+    },
   },
 }
