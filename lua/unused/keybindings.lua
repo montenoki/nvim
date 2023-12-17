@@ -19,26 +19,9 @@ local pluginKeys = {}
 ----- Neovim Keybinds Settings -----
 ------------------------------------
 
--- magic search
-if uConfig.enable.magic_search then
-    keymap(n_v_mode, '/', '/\\v', { remap = false, silent = false })
-else
-    keymap(n_v_mode, '/', '/', { remap = false, silent = false })
-end
-
-
-
 
 ----- Neovim Keybindings -----
 ------------------------------
--- scroll
-keymap(n_v_mode, keys.n_v_scroll_up_with_cursor, '4k')
-keymap(n_v_mode, keys.n_v_scroll_down_with_cursor, '4j')
-
-keymap(normal_mode, keys.n_v_scroll_up_without_cursor, '4<C-y>')
-keymap(normal_mode, keys.n_v_scroll_down_without_cursor, '4<C-e>')
-
-keymap(normal_mode, '<CR>', 'viw<C-1>', opt)
 
 -- Tabs
 keymap(normal_mode, keys.new_tab, '<CMD>tabnew<CR>')

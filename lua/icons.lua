@@ -145,6 +145,23 @@ local navic_lite = {
   separator = '',
 }
 
+local gitsigns_normal = {
+  add = { text = '+▎' },
+  change = { text = '▎' },
+  delete = { text = '' },
+  topdelete = { text = '' },
+  changedelete = { text = '▎' },
+  untracked = { text = 'U▎' },
+}
+local gitsigns_lite = {
+  add = { text = '+|' },
+  change = { text = 'C|' },
+  delete = { text = '>' },
+  topdelete = { text = '>' },
+  changedelete = { text = '>' },
+  untracked = { text = 'U|' },
+}
+
 if vim.g.lite_mode then
   M.bufferline = bufferline_lite
   M.diagnostics = diagnostics_lite
@@ -155,6 +172,7 @@ if vim.g.lite_mode then
   M.indent = indent_lite
   M.mason = mason_lite
   M.navic = navic_lite
+  M.gitsigns = gitsigns_lite
 else
   M.bufferline = bufferline_normal
   M.diagnostics = diagnostics_normal
@@ -165,6 +183,7 @@ else
   M.indent = indent_normal
   M.mason = mason_normal
   M.navic = navic_normal
+  M.gitsigns = gitsigns_normal
 end
 
 return M
