@@ -23,14 +23,32 @@ local diagnostics_lite = {
 }
 
 local git_normal = {
+  -- Change type
   added = ' ',
   modified = ' ',
   removed = ' ',
+  deleted = '✖', -- this can only be used in the git_status source
+  renamed = '', -- this can only be used in the git_status source
+  -- Status type
+  untracked = '◌',
+  ignored = '',
+  unstaged = '󰄱',
+  staged = '',
+  conflict = '',
+  unmerged = '',
 }
 local git_lite = {
-  added = 'A',
-  modified = 'M',
-  removed = 'D',
+  added = '[+]',
+  modified = '[M]',
+  removed = '[x]',
+  deleted = '[x]',
+  renamed = '[rn]',
+  untracked = '[ ]',
+  ignored = '[.]',
+  unstaged = '[ ]',
+  staged = '[v]',
+  conflict = '[!]',
+  unmerged = '[!]',
 }
 
 local bug_normal = '  '
@@ -50,9 +68,9 @@ local lualine_normal = {
 }
 local lualine_lite = {
   symbols = {
-    unix = 'LF', -- e712
+    unix = 'LF',  -- e712
     dos = 'CRLF', -- e70f
-    mac = 'CR', -- e711
+    mac = 'CR',   -- e711
   },
   component_separators = { left = '', right = '' },
   section_separators = { left = '', right = '' },
@@ -162,6 +180,46 @@ local gitsigns_lite = {
   untracked = { text = 'U|' },
 }
 
+local neotree_normal = {
+  expander_collapsed = '',
+  expander_expanded = '',
+  folder_closed = '󰉋',
+  folder_open = '󰝰',
+  folder_empty = '󰉖',
+  indent_marker = '│',
+  last_indent_marker = '└',
+}
+local neotree_lite = {
+  expander_collapsed = '+',
+  expander_expanded = '-',
+  folder_closed = '= ',
+  folder_open = '=:',
+  folder_empty = '= ',
+  indent_marker = '|',
+  last_indent_marker = 'L',
+}
+
+local telescope_normal = {
+  prompt_prefix = ' ',
+  selection_caret = ' ',
+}
+local telescope_lite = {
+  prompt_prefix = '>',
+  selection_caret = '>',
+}
+local todo_comments_normal = {
+  TODO = '',
+  NOTE = '',
+  WARN = '',
+  FIX = '󰈸',
+}
+local todo_comments_lite = {
+  TODO = 'v',
+  NOTE = ':',
+  WARN = '!',
+  FIX = 'x',
+}
+
 if vim.g.lite_mode then
   M.bufferline = bufferline_lite
   M.diagnostics = diagnostics_lite
@@ -173,6 +231,9 @@ if vim.g.lite_mode then
   M.mason = mason_lite
   M.navic = navic_lite
   M.gitsigns = gitsigns_lite
+  M.neotree = neotree_lite
+  M.telescope = telescope_lite
+  M.todo_comments = todo_comments_lite
 else
   M.bufferline = bufferline_normal
   M.diagnostics = diagnostics_normal
@@ -184,6 +245,9 @@ else
   M.mason = mason_normal
   M.navic = navic_normal
   M.gitsigns = gitsigns_normal
+  M.neotree = neotree_normal
+  M.telescope = telescope_normal
+  M.todo_comments = todo_comments_normal
 end
 
 return M

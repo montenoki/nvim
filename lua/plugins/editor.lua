@@ -1,69 +1,5 @@
 local Util = require('util')
 local Icon = require('icons')
-if true then
-  return {
-    -- move cursor between windows
-    {
-      'ggandor/leap.nvim',
-      enabled = true,
-      lazy = false,
-      keys = {
-        { '\\', mode = { 'n', 'x', 'o' }, desc = 'Leap from windows' },
-      },
-      config = function(_, opts)
-        local leap = require('leap')
-        for k, v in pairs(opts) do
-          leap.opts[k] = v
-        end
-        vim.keymap.set({ 'n', 'v' }, '\\', function()
-          leap.leap({
-            target_windows = vim.tbl_filter(function(win)
-              return vim.api.nvim_win_get_config(win).focusable
-            end, vim.api.nvim_tabpage_list_wins(0)),
-          })
-        end)
-      end,
-    },
-
-    -- move windows
-    {
-      'sindrets/winshift.nvim',
-      lazy = true,
-      keys = {
-        { '<leader>wm', '<cmd>WinShift<cr>', desc = 'Move window' },
-      },
-    },
-    -- git signs highlights text that has changed since the list
-    -- git commit, and also lets you interactively stage & unstage
-    -- hunks in a commit.
-    {
-      'lewis6991/gitsigns.nvim',
-      event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' }, -- LazyFile
-      opts = {
-        signs = Icon.gitsigns,
-        on_attach = function(buffer)
-          local gs = package.loaded.gitsigns
-          local function map(mode, l, r, desc)
-            vim.keymap.set(mode, l, r, { buffer = buffer, desc = desc })
-          end
-        -- stylua: ignore start
-        map("n", "]h", gs.next_hunk, "Next Hunk")
-        map("n", "[h", gs.prev_hunk, "Prev Hunk")
-        map({ "n", "v" }, "<leader>ghs", ":Gitsigns stage_hunk<CR>", "Stage Hunk")
-        map({ "n", "v" }, "<leader>ghr", ":Gitsigns reset_hunk<CR>", "Reset Hunk")
-        map("n", "<leader>ghS", gs.stage_buffer, "Stage Buffer")
-        map("n", "<leader>ghu", gs.undo_stage_hunk, "Undo Stage Hunk")
-        map("n", "<leader>ghR", gs.reset_buffer, "Reset Buffer")
-        map("n", "<leader>ghp", gs.preview_hunk, "Preview Hunk")
-        map("n", "<leader>ghb", function() gs.blame_line({ full = true }) end, "Blame Line")
-        map("n", "<leader>ghd", gs.diffthis, "Diff This")
-        map("n", "<leader>ghD", function() gs.diffthis("~") end, "Diff This ~")
-        map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
-        end,
-      },
-    },
-  }
-end
 return {
   -- file explorer
   {
@@ -72,34 +8,18 @@ return {
     cmd = 'Neotree',
     keys = {
       {
-        '<leader>fe',
+        '<leader>e',
         function()
           require('neo-tree.command').execute({ toggle = true, dir = Util.root() })
         end,
         desc = 'Explorer NeoTree (root dir)',
       },
       {
-        '<leader>fE',
-        function()
-          require('neo-tree.command').execute({ toggle = true, dir = vim.loop.cwd() })
-        end,
-        desc = 'Explorer NeoTree (cwd)',
-      },
-      { '<leader>e', '<leader>fe', desc = 'Explorer NeoTree (root dir)', remap = true },
-      { '<leader>E', '<leader>fE', desc = 'Explorer NeoTree (cwd)', remap = true },
-      {
         '<leader>ge',
         function()
           require('neo-tree.command').execute({ source = 'git_status', toggle = true })
         end,
         desc = 'Git explorer',
-      },
-      {
-        '<leader>be',
-        function()
-          require('neo-tree.command').execute({ source = 'buffers', toggle = true })
-        end,
-        desc = 'Buffer explorer',
       },
     },
     deactivate = function()
@@ -123,15 +43,28 @@ return {
       },
       window = {
         mappings = {
-          ['<space>'] = 'none',
+          ['<space>'] = 'toggle_node',
+          ['<tab>'] = { 'toggle_preview', config = { use_float = true, use_image_nvim = true } }, --TODO[2023/12/17] config this later: image_nvim?
+          ['v'] = 'open_vsplit',
+          ['h'] = 'open_split',
         },
       },
       default_component_configs = {
         indent = {
           with_expanders = true, -- if nil and file nesting is enabled, will enable expanders
-          expander_collapsed = '',
-          expander_expanded = '',
+          indent_marker = Icon.neotree.indent_marker,
+          last_indent_marker = Icon.neotree.last_indent_marker,
+          expander_collapsed = Icon.neotree.expander_collapsed,
+          expander_expanded = Icon.neotree.expander_expanded,
           expander_highlight = 'NeoTreeExpander',
+        },
+        icon = {
+          folder_closed = Icon.neotree.folder_closed,
+          folder_open = Icon.neotree.folder_open,
+          folder_empty = Icon.neotree.folder_empty,
+        },
+        git_status = {
+          symbols = Icon.git,
         },
       },
     },
@@ -143,7 +76,7 @@ return {
       local events = require('neo-tree.events')
       opts.event_handlers = opts.event_handlers or {}
       vim.list_extend(opts.event_handlers, {
-        { event = events.FILE_MOVED, handler = on_move },
+        { event = events.FILE_MOVED,   handler = on_move },
         { event = events.FILE_RENAMED, handler = on_move },
       })
       require('neo-tree').setup(opts)
@@ -167,75 +100,88 @@ return {
     cmd = 'Telescope',
     version = false, -- telescope did only one release, so use HEAD for now
     dependencies = {
+      'nvim-lua/plenary.nvim',
+      'LinArcX/telescope-env.nvim',
+      'LinArcX/telescope-command-palette.nvim',
+      'smartpde/telescope-recent-files',
+      -- 'rmagatti/session-lens', -- TODO[2023/12/17]: config this after session-lens is fixed
       {
         'nvim-telescope/telescope-fzf-native.nvim',
         build = 'make',
         enabled = vim.fn.executable('make') == 1,
         config = function()
+          local telescope = require('telescope')
           Util.on_load('telescope.nvim', function()
-            require('telescope').load_extension('fzf')
+            telescope.load_extension('fzf')
+            telescope.load_extension('env')
+            telescope.load_extension('command_palette')
+            -- TODO[2023/12/17]: config this after project is fixed
+            -- telescope.load_extension('project')
+            telescope.load_extension('recent_files')
+            -- TODO[2023/12/17]: config this after session-lens is fixed
+            -- telescope.load_extension('session-lens')
           end)
         end,
       },
     },
     keys = {
+      -- {
+      --   '<leader>,',
+      --   '<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>',
+      --   desc = 'Switch Buffer',
+      -- },
       {
-        '<leader>,',
-        '<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>',
-        desc = 'Switch Buffer',
+        '<leader>/',
+        Util.telescope('live_grep'),
+        desc = 'Grep (root dir)',
       },
-      { '<leader>/', Util.telescope('live_grep'), desc = 'Grep (root dir)' },
-      { '<leader>:', '<cmd>Telescope command_history<cr>', desc = 'Command History' },
-      { '<leader><space>', Util.telescope('files'), desc = 'Find Files (root dir)' },
-      -- find
-      { '<leader>fb', '<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>', desc = 'Buffers' },
-      { '<leader>fc', Util.telescope.config_files(), desc = 'Find Config File' },
-      { '<leader>ff', Util.telescope('files'), desc = 'Find Files (root dir)' },
-      { '<leader>fF', Util.telescope('files', { cwd = false }), desc = 'Find Files (cwd)' },
-      { '<leader>fr', '<cmd>Telescope oldfiles<cr>', desc = 'Recent' },
-      { '<leader>fR', Util.telescope('oldfiles', { cwd = vim.loop.cwd() }), desc = 'Recent (cwd)' },
+      {
+        '<leader>?',
+        Util.telescope('files'),
+        desc = 'Find Files (root dir)',
+      },
+      {
+        '<leader>:',
+        '<cmd>Telescope commands<cr>',
+        desc = 'Commands',
+      },
+      {
+        '<leader>;',
+        '<cmd>Telescope command_history<cr>',
+        desc = "Command History",
+      },
       -- git
-      { '<leader>gc', '<cmd>Telescope git_commits<CR>', desc = 'commits' },
-      { '<leader>gs', '<cmd>Telescope git_status<CR>', desc = 'status' },
+      { '<leader>sc', '<cmd>Telescope git_commits<CR>', desc = 'commits' },
+      { '<leader>ss', '<cmd>Telescope git_status<CR>',  desc = 'status' },
       -- search
-      { '<leader>s"', '<cmd>Telescope registers<cr>', desc = 'Registers' },
-      { '<leader>sa', '<cmd>Telescope autocommands<cr>', desc = 'Auto Commands' },
-      { '<leader>sb', '<cmd>Telescope current_buffer_fuzzy_find<cr>', desc = 'Buffer' },
-      { '<leader>sc', '<cmd>Telescope command_history<cr>', desc = 'Command History' },
-      { '<leader>sC', '<cmd>Telescope commands<cr>', desc = 'Commands' },
-      { '<leader>sd', '<cmd>Telescope diagnostics bufnr=0<cr>', desc = 'Document diagnostics' },
-      { '<leader>sD', '<cmd>Telescope diagnostics<cr>', desc = 'Workspace diagnostics' },
-      { '<leader>sg', Util.telescope('live_grep'), desc = 'Grep (root dir)' },
-      { '<leader>sG', Util.telescope('live_grep', { cwd = false }), desc = 'Grep (cwd)' },
-      { '<leader>sh', '<cmd>Telescope help_tags<cr>', desc = 'Help Pages' },
-      { '<leader>sH', '<cmd>Telescope highlights<cr>', desc = 'Search Highlight Groups' },
-      { '<leader>sk', '<cmd>Telescope keymaps<cr>', desc = 'Key Maps' },
-      { '<leader>sM', '<cmd>Telescope man_pages<cr>', desc = 'Man Pages' },
-      { '<leader>sm', '<cmd>Telescope marks<cr>', desc = 'Jump to Mark' },
-      { '<leader>so', '<cmd>Telescope vim_options<cr>', desc = 'Options' },
-      { '<leader>sR', '<cmd>Telescope resume<cr>', desc = 'Resume' },
-      { '<leader>sw', Util.telescope('grep_string', { word_match = '-w' }), desc = 'Word (root dir)' },
-      { '<leader>sW', Util.telescope('grep_string', { cwd = false, word_match = '-w' }), desc = 'Word (cwd)' },
-      { '<leader>sw', Util.telescope('grep_string'), mode = 'v', desc = 'Selection (root dir)' },
-      { '<leader>sW', Util.telescope('grep_string', { cwd = false }), mode = 'v', desc = 'Selection (cwd)' },
-      { '<leader>uC', Util.telescope('colorscheme', { enable_preview = true }), desc = 'Colorscheme with preview' },
+      { '<leader>s"', '<cmd>Telescope registers<cr>',   desc = 'Registers' },
       {
-        '<leader>ss',
-        function()
-          require('telescope.builtin').lsp_document_symbols({
-            symbols = require('lazyvim.config').get_kind_filter(),
-          })
-        end,
-        desc = 'Goto Symbol',
+        '<leader>sa',
+        '<cmd>Telescope autocommands<cr>',
+        desc = 'Auto Commands',
       },
       {
-        '<leader>sS',
-        function()
-          require('telescope.builtin').lsp_dynamic_workspace_symbols({
-            symbols = require('lazyvim.config').get_kind_filter(),
-          })
-        end,
-        desc = 'Goto Symbol (Workspace)',
+        '<leader>sd',
+        '<cmd>Telescope diagnostics bufnr=0<cr>',
+        desc = 'Document diagnostics',
+      },
+      {
+        '<leader>sD',
+        '<cmd>Telescope diagnostics<cr>',
+        desc = 'Workspace diagnostics',
+      },
+      {
+        '<leader>sh',
+        '<cmd>Telescope highlights<cr>',
+        desc = 'Search Highlight Groups',
+      },
+      { '<leader>sk', '<cmd>Telescope keymaps<cr>',     desc = 'Key Maps' },
+      { '<leader>sm', '<cmd>Telescope marks<cr>',       desc = 'Jump to Mark' },
+      { '<leader>so', '<cmd>Telescope vim_options<cr>', desc = 'Options' },
+      {
+        '<leader>uC',
+        Util.telescope('colorscheme', { enable_preview = true }),
+        desc = 'Colorscheme with preview',
       },
     },
     opts = function()
@@ -260,8 +206,8 @@ return {
 
       return {
         defaults = {
-          prompt_prefix = ' ',
-          selection_caret = ' ',
+          prompt_prefix = Icon.telescope.prompt_prefix,
+          selection_caret = Icon.telescope.selection_caret,
           -- open files in the first window that is an actual file.
           -- use the current window if no other window is available.
           get_selection_window = function()
@@ -277,14 +223,19 @@ return {
           end,
           mappings = {
             i = {
-              ['<c-t>'] = open_with_trouble,
-              ['<a-t>'] = open_selected_with_trouble,
-              ['<a-i>'] = find_files_no_ignore,
-              ['<a-h>'] = find_files_with_hidden,
-              ['<C-Down>'] = actions.cycle_history_next,
-              ['<C-Up>'] = actions.cycle_history_prev,
-              ['<C-f>'] = actions.preview_scrolling_down,
-              ['<C-b>'] = actions.preview_scrolling_up,
+              -- TODO[2023/12/17]: config this after trouble is fixed.
+              -- ['<c-t>'] = open_with_trouble,
+              -- ['<a-t>'] = open_selected_with_trouble,
+              ['<C-j>'] = actions.move_selection_next,
+              ['<C-k>'] = actions.move_selection_previous,
+              ['<S-tab>'] = actions.cycle_history_next,
+              ['<tab>'] = actions.cycle_history_prev,
+              ['<C-v>'] = actions.select_vertical,
+              ['<C-h>'] = actions.select_horizontal,
+              ['<A-h>'] = actions.preview_scrolling_left,
+              ['<A-l>'] = actions.preview_scrolling_right,
+              ['<A-j>'] = actions.preview_scrolling_down,
+              ['<A-k>'] = actions.preview_scrolling_up,
             },
             n = {
               ['q'] = actions.close,
@@ -294,56 +245,59 @@ return {
       }
     end,
   },
-
-  -- Flash enhances the built-in search functionality by showing labels
-  -- at the end of each match, letting you quickly jump to a specific
-  -- location.
+  -- move cursor between windows
   {
-    'folke/flash.nvim',
-    event = 'VeryLazy',
-    vscode = true,
-    ---@type Flash.Config
-    opts = {},
-    -- stylua: ignore
+    'ggandor/leap.nvim',
+    enabled = true,
+    lazy = false,
     keys = {
-      { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
-      { "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
-      { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
-      { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-      { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+      { '\\', mode = { 'n', 'x', 'o' }, desc = 'Leap from windows' },
     },
+    config = function(_, opts)
+      local leap = require('leap')
+      for k, v in pairs(opts) do
+        leap.opts[k] = v
+      end
+      vim.keymap.set({ 'n', 'v' }, '\\', function()
+        leap.leap({
+          target_windows = vim.tbl_filter(function(win)
+            return vim.api.nvim_win_get_config(win).focusable
+          end, vim.api.nvim_tabpage_list_wins(0)),
+        })
+      end)
+    end,
   },
 
-  -- Flash Telescope config
+  -- move windows
   {
-    'nvim-telescope/telescope.nvim',
-    optional = true,
-    opts = function(_, opts)
-      if not Util.has('flash.nvim') then
-        return
-      end
-      local function flash(prompt_bufnr)
-        require('flash').jump({
-          pattern = '^',
-          label = { after = { 0, 0 } },
-          search = {
-            mode = 'search',
-            exclude = {
-              function(win)
-                return vim.bo[vim.api.nvim_win_get_buf(win)].filetype ~= 'TelescopeResults'
-              end,
-            },
-          },
-          action = function(match)
-            local picker = require('telescope.actions.state').get_current_picker(prompt_bufnr)
-            picker:set_selection(match.pos[1] - 1)
-          end,
-        })
-      end
-      opts.defaults = vim.tbl_deep_extend('force', opts.defaults or {}, {
-        mappings = { n = { s = flash }, i = { ['<c-s>'] = flash } },
-      })
-    end,
+    'sindrets/winshift.nvim',
+    lazy = true,
+    keys = {
+      { '<leader>wm', '<cmd>WinShift<cr>', desc = 'Move window' },
+    },
+  },
+  -- git signs highlights text that has changed since the list
+  -- git commit, and also lets you interactively stage & unstage
+  -- hunks in a commit.
+  {
+    'lewis6991/gitsigns.nvim',
+    event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' }, -- LazyFile
+    opts = {
+      signs = Icon.gitsigns,
+      on_attach = function(buffer)
+        local gs = package.loaded.gitsigns
+        local function map(mode, l, r, desc)
+          vim.keymap.set(mode, l, r, { buffer = buffer, desc = desc })
+        end
+        -- stylua: ignore start
+        map("n", "]h", gs.next_hunk, "Next Hunk")
+        map("n", "[h", gs.prev_hunk, "Prev Hunk")
+        map("n", "<leader>hp", gs.preview_hunk, "Preview Hunk")
+        map("n", "<leader>hb", function() gs.blame_line({ full = true }) end, "Blame Line")
+        map("n", "<leader>hD", gs.diffthis, "Diff This")
+        map("n", "<leader>hd", function() gs.diffthis("~") end, "Diff This ~")
+      end,
+    },
   },
 
   -- which-key helps you remember key bindings by showing a popup
@@ -378,7 +332,6 @@ return {
       wk.register(opts.defaults)
     end,
   },
-
   -- Automatically highlights other instances of the word under your cursor.
   -- This works with LSP, Treesitter, and regexp matching to find the other
   -- instances.
@@ -418,33 +371,11 @@ return {
       { '[[', desc = 'Prev Reference' },
     },
   },
-
   -- buffer remove
   {
     'echasnovski/mini.bufremove',
 
-    keys = {
-      {
-        '<leader>bd',
-        function()
-          local bd = require('mini.bufremove').delete
-          if vim.bo.modified then
-            local choice = vim.fn.confirm(('Save changes to %q?'):format(vim.fn.bufname()), '&Yes\n&No\n&Cancel')
-            if choice == 1 then -- Yes
-              vim.cmd.write()
-              bd(0)
-            elseif choice == 2 then -- No
-              bd(0, true)
-            end
-          else
-            bd(0)
-          end
-        end,
-        desc = 'Delete Buffer',
-      },
-      -- stylua: ignore
-      -- { "<leader>bD", function() require("mini.bufremove").delete(0, true) end, desc = "Delete Buffer (Force)" },
-    },
+    keys = {},
   },
 
   -- better diagnostics list and others
@@ -453,10 +384,10 @@ return {
     cmd = { 'TroubleToggle', 'Trouble' },
     opts = { use_diagnostic_signs = true },
     keys = {
-      { '<leader>xx', '<cmd>TroubleToggle document_diagnostics<cr>', desc = 'Document Diagnostics (Trouble)' },
+      { '<leader>xx', '<cmd>TroubleToggle document_diagnostics<cr>',  desc = 'Document Diagnostics (Trouble)' },
       { '<leader>xX', '<cmd>TroubleToggle workspace_diagnostics<cr>', desc = 'Workspace Diagnostics (Trouble)' },
-      { '<leader>xL', '<cmd>TroubleToggle loclist<cr>', desc = 'Location List (Trouble)' },
-      { '<leader>xQ', '<cmd>TroubleToggle quickfix<cr>', desc = 'Quickfix List (Trouble)' },
+      { '<leader>xl', '<cmd>TroubleToggle loclist<cr>',               desc = 'Location List (Trouble)' },
+      { '<leader>xq', '<cmd>TroubleToggle quickfix<cr>',              desc = 'Quickfix List (Trouble)' },
       {
         '[q',
         function()
@@ -487,7 +418,6 @@ return {
       },
     },
   },
-
   -- Finds and lists all of the TODO, HACK, BUG, etc comment
   -- in your project and loads them into a browsable list.
   {
@@ -495,14 +425,39 @@ return {
     cmd = { 'TodoTrouble', 'TodoTelescope' },
     event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' }, -- LazyFile
     config = true,
+    opts = {
+      keywords = {
+        TODO = { icon = Icon.todo_comments.TODO, color = 'info' },
+        NOTE = { icon = Icon.todo_comments.NOTE, color = 'hint', alt = { 'INFO', 'NOTE' } },
+        WARN = { icon = Icon.todo_comments.WARN, color = 'warning', alt = { 'WARNING', 'XXX' } },
+        FIX = { icon = Icon.todo_comments.FIX, color = 'error', alt = { 'FIXME', 'BUG', 'FIXIT', 'ISSUE' } },
+      },
+      highlight = {
+        pattern = [[.*<(KEYWORDS)]],
+      },
+      search = {
+        command = 'rg',
+        args = {
+          '--color=never',
+          '--no-heading',
+          '--with-filename',
+          '--line-number',
+          '--column',
+        },
+        -- regex that will be used to match keywords.
+        -- don't replace the (KEYWORDS) placeholder
+        -- pattern = [[\b(KEYWORDS):]], -- ripgrep regex
+        pattern = [[\b(KEYWORDS)\b]], -- match without the extra colon. You'll likely get false positives
+      },
+    },
     -- stylua: ignore
     keys = {
-      { "]t", function() require("todo-comments").jump_next() end, desc = "Next todo comment" },
-      { "[t", function() require("todo-comments").jump_prev() end, desc = "Previous todo comment" },
-      { "<leader>xt", "<cmd>TodoTrouble<cr>", desc = "Todo (Trouble)" },
-      { "<leader>xT", "<cmd>TodoTrouble keywords=TODO,FIX,FIXME<cr>", desc = "Todo/Fix/Fixme (Trouble)" },
-      { "<leader>st", "<cmd>TodoTelescope<cr>", desc = "Todo" },
-      { "<leader>sT", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>", desc = "Todo/Fix/Fixme" },
+      { "]t",         function() require("todo-comments").jump_next() end, desc = "Next todo comment" },
+      { "[t",         function() require("todo-comments").jump_prev() end, desc = "Previous todo comment" },
+      { "<leader>xt", "<cmd>TodoTrouble<cr>",                              desc = "Todo (Trouble)" },
+      { "<leader>xT", "<cmd>TodoTrouble keywords=TODO,FIX,FIXME<cr>",      desc = "Todo/Fix/Fixme (Trouble)" },
+      { "<leader>st", "<cmd>TodoTelescope<cr>",                            desc = "Todo" },
+      { "<leader>sT", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>",    desc = "Todo/Fix/Fixme" },
     },
   },
 }

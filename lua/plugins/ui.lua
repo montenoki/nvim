@@ -356,6 +356,9 @@ return {
       handle = {
         blend = 25,
       },
+      handlers = {
+        gitsigns = true,
+      }
     },
   },
 }
