@@ -54,12 +54,11 @@ return {
     'akinsho/bufferline.nvim',
     event = 'VeryLazy',
     keys = {
-      { '<LEADER>t', '<CMD>BufferLinePick<CR>', desc = 'Pick tab' },
-      { '<LEADER>T', '<CMD>BufferLinePickClose<CR>', desc = 'Pick close tab' },
+      { '<LEADER>b', '<CMD>BufferLinePick<CR>',      desc = 'Pick tab' },
+      { '<LEADER>B', '<CMD>BufferLinePickClose<CR>', desc = 'Pick close tab' },
     },
     opts = {
       options = {
-        mode = 'tabs',
         -- stylua: ignore
         close_command = function(n) require("mini.bufremove").delete(n, false) end,
         -- stylua: ignore
@@ -77,14 +76,14 @@ return {
         },
 
         offsets = {
-          { filetype = 'neo-tree', text = 'File Explorer', highlight = 'Directory', text_align = 'left' },
-          { filetype = 'dapui_scopes', text = 'Debug Mode', highlight = 'Directory', text_align = 'left' },
-          { filetype = 'Outline', text = 'Outline', highlight = 'Directory', text_align = 'left' },
+          { filetype = 'neo-tree',     text = 'File Explorer', highlight = 'Directory', text_align = 'left' },
+          { filetype = 'dapui_scopes', text = 'Debug Mode',    highlight = 'Directory', text_align = 'left' },
+          { filetype = 'Outline',      text = 'Outline',       highlight = 'Directory', text_align = 'left' },
         },
         diagnostics = 'nvim_lsp',
         diagnostics_indicator = function(_, _, diag)
           local ret = (diag.error and Icon.diagnostics.Error .. diag.error .. ' ' or '')
-            .. (diag.warning and Icon.diagnostics.Warn .. diag.warning or '')
+              .. (diag.warning and Icon.diagnostics.Warn .. diag.warning or '')
           return vim.trim(ret)
         end,
       },
@@ -157,8 +156,9 @@ return {
           },
           lualine_c = {
             Util.lualine.root_dir(),
-            { 'filetype', icon_only = true, separator = '', padding = { left = 1, right = 0 } },
+            { 'filetype',                icon_only = true, separator = '', padding = { left = 1, right = 0 } },
             { Util.lualine.pretty_path() },
+            require('auto-session.lib').current_session_name
           },
           lualine_x = {
             {
@@ -233,7 +233,7 @@ return {
   -- the highlighting.
   {
     'echasnovski/mini.indentscope',
-    version = false, -- wait till new 0.7.0 release to put it back on semver
+    version = false,                                        -- wait till new 0.7.0 release to put it back on semver
     event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' }, -- LazyFile
     opts = {
       symbol = Icon.indent.char,
@@ -276,7 +276,7 @@ return {
   { 'nvim-tree/nvim-web-devicons', lazy = true },
 
   -- ui components
-  { 'MunifTanjim/nui.nvim', lazy = true },
+  { 'MunifTanjim/nui.nvim',        lazy = true },
 
   -- Highly experimental plugin that completely replaces the UI for messages, cmdline and the popupmenu.
   {
@@ -322,13 +322,13 @@ return {
     },
     -- stylua: ignore
     keys = {
-      { "<S-Enter>", function() require("noice").redirect(vim.fn.getcmdline()) end, mode = "c", desc = "Redirect Cmdline" },
-      { "<leader>snl", function() require("noice").cmd("last") end, desc = "Noice Last Message" },
-      { "<leader>snh", function() require("noice").cmd("history") end, desc = "Noice History" },
-      { "<leader>sna", function() require("noice").cmd("all") end, desc = "Noice All" },
-      { "<leader>snd", function() require("noice").cmd("dismiss") end, desc = "Dismiss All" },
-      { "<c-f>", function() if not require("noice.lsp").scroll(4) then return "<c-f>" end end, silent = true, expr = true, desc = "Scroll forward", mode = {"i", "n", "s"} },
-      { "<c-b>", function() if not require("noice.lsp").scroll(-4) then return "<c-b>" end end, silent = true, expr = true, desc = "Scroll backward", mode = {"i", "n", "s"}},
+      { "<S-Enter>",   function() require("noice").redirect(vim.fn.getcmdline()) end,                 mode = "c",                 desc = "Redirect Cmdline" },
+      { "<leader>snl", function() require("noice").cmd("last") end,                                   desc = "Noice Last Message" },
+      { "<leader>snh", function() require("noice").cmd("history") end,                                desc = "Noice History" },
+      { "<leader>sna", function() require("noice").cmd("all") end,                                    desc = "Noice All" },
+      { "<leader>snd", function() require("noice").cmd("dismiss") end,                                desc = "Dismiss All" },
+      { "<c-f>",       function() if not require("noice.lsp").scroll(4) then return "<c-f>" end end,  silent = true,              expr = true,              desc = "Scroll forward",  mode = { "i", "n", "s" } },
+      { "<c-b>",       function() if not require("noice.lsp").scroll(-4) then return "<c-b>" end end, silent = true,              expr = true,              desc = "Scroll backward", mode = { "i", "n", "s" } },
     },
   },
 
@@ -340,7 +340,17 @@ return {
     keys = {
       {
         '<leader>uc',
-        '<CMD>ColorizerToggle<CR>',
+        function()
+          local Util = require('util')
+          local colorizer = require('colorizer')
+          if colorizer.is_buffer_attached(0) then
+            colorizer.detach_from_buffer(0)
+            Util.warn('Disabled Colorizer', { title = 'Option' })
+          else
+            colorizer.attach_to_buffer(0)
+            Util.info('Enabled Colorizer', { title = 'Option' })
+          end
+        end,
         desc = 'Toggle Colorizer',
       },
     },

@@ -30,8 +30,9 @@ opt.pumblend = 10         -- Popup blend
 opt.pumheight = 5         -- Maximum number of entries in a popup
 opt.relativenumber = true -- Relative line numbers
 opt.scrolloff = 4         -- Lines of context
-opt.sessionoptions =
-{ 'blank', 'buffers', 'curdir', 'winpos', 'tabpages', 'winsize', 'help', 'globals', 'skiprtp', 'folds' }
+opt.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+-- opt.sessionoptions =
+-- { 'blank', 'buffers', 'curdir', 'winpos', 'tabpages', 'winsize', 'help', 'globals', 'skiprtp', 'folds' }
 opt.shiftround = true      -- Round indent
 opt.shiftwidth = tab_width -- Size of an indent
 opt.shortmess:append({ W = true, I = true, c = true, C = true })

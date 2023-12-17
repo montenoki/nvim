@@ -104,7 +104,8 @@ return {
       'LinArcX/telescope-env.nvim',
       'LinArcX/telescope-command-palette.nvim',
       'smartpde/telescope-recent-files',
-      -- 'rmagatti/session-lens', -- TODO[2023/12/17]: config this after session-lens is fixed
+      'rmagatti/session-lens',
+      "nvim-telescope/telescope-project.nvim",
       {
         'nvim-telescope/telescope-fzf-native.nvim',
         build = 'make',
@@ -112,14 +113,12 @@ return {
         config = function()
           local telescope = require('telescope')
           Util.on_load('telescope.nvim', function()
+            telescope.load_extension('session-lens')
+            telescope.load_extension('project')
             telescope.load_extension('fzf')
             telescope.load_extension('env')
             telescope.load_extension('command_palette')
-            -- TODO[2023/12/17]: config this after project is fixed
-            -- telescope.load_extension('project')
             telescope.load_extension('recent_files')
-            -- TODO[2023/12/17]: config this after session-lens is fixed
-            -- telescope.load_extension('session-lens')
           end)
         end,
       },
@@ -305,6 +304,9 @@ return {
   {
     'folke/which-key.nvim',
     event = 'VeryLazy',
+    keys = {
+      { "<leader>k", '<cmd>WhichKey<cr>' },
+    },
     opts = {
       plugins = { spelling = true },
       defaults = {
@@ -460,4 +462,58 @@ return {
       { "<leader>sT", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>",    desc = "Todo/Fix/Fixme" },
     },
   },
+
+  -- project
+  {
+    "ahmedkhalf/project.nvim",
+    opts = {
+      manual_mode = true,
+      detection_methods = { 'lsp', 'pattern' },
+      patterns = { '.git', '_darcs', '.hg', '.bzr', '.svn', 'Makefile', 'package.json', '.sln', '.vim' },
+      silent_chdir = true,
+    },
+    event = "VeryLazy",
+    config = function(_, opts)
+      require("project_nvim").setup(opts)
+      Util.on_load("telescope.nvim", function()
+        require("telescope").load_extension("projects")
+      end)
+    end,
+    keys = {
+      { "<leader>sp", "<Cmd>Telescope projects<CR>", desc = "Projects" },
+    },
+  },
+
+  -- Session manager
+  -- TODO[2023/12/17]: fix
+  -- https://github.com/nvim-neo-tree/neo-tree.nvim/issues/400
+  {
+    'rmagatti/auto-session',
+    opts = {
+      log_level = vim.log.levels.ERROR,
+      auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
+      auto_session_use_git_branch = false,
+
+      auto_session_enable_last_session = false,
+
+      -- ⚠️ This will only work if Telescope.nvim is installed
+      -- The following are already the default values, no need to provide them if these are already the settings you want.
+      session_lens = {
+        -- If load_on_setup is set to false, one needs to eventually call `require("auto-session").setup_session_lens()` if they want to use session-lens.
+        buftypes_to_ignore = {}, -- list of buffer types what should not be deleted from current session
+        load_on_setup = true,
+        theme_conf = { border = true },
+        previewer = false,
+      },
+
+      cwd_change_handling = {
+        restore_upcoming_session = true,
+        pre_cwd_changed_hook = nil,
+        post_cwd_changed_hook = function()
+          require('lualine').refresh()
+        end,
+      },
+    },
+  },
+
 }

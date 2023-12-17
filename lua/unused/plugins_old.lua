@@ -59,13 +59,6 @@ local function init()
     ----- Interface ----
     ---------------------
 
-    -- Session manager
-    {
-      'rmagatti/auto-session',
-      config = function()
-        require('plugin-config.interface.auto-session')
-      end,
-    },
 
 
 

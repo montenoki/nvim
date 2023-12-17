@@ -1,11 +1,12 @@
 local map = vim.keymap.set
+local Util = require('util')
 
 -- better up/down for wrapped lines
-map({ 'n', 'x' }, '<down>', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-map({ 'n', 'x' }, '<up>', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+map({ 'n', 'x' }, '<down>', "v:count == 0 ? 'gj' : 'j'", { desc = "Down ignore wrapped", expr = true, silent = true })
+map({ 'n', 'x' }, '<up>', "v:count == 0 ? 'gk' : 'k'", { desc = "Up ignore wrapped", expr = true, silent = true })
 -- swap g_ and $
-map({ 'n', 'v' }, '$', 'g_')
-map({ 'n', 'v' }, 'g_', '$')
+map({ 'n', 'v' }, '$', 'g_', { desc = 'Goto last non-blank char' })
+map({ 'n', 'v' }, 'g_', '$', { desc = 'Goto the end of line' })
 -- better indenting
 map('v', '<', '<gv')
 map('v', '>', '>gv')
@@ -36,6 +37,11 @@ map('i', '<A-k>', '<esc><cmd>m .-2<cr>==gi', { desc = 'Move up' })
 map('v', '<A-j>', ":m '>+1<cr>gv=gv", { desc = 'Move down' })
 map('v', '<A-k>', ":m '<-2<cr>gv=gv", { desc = 'Move up' })
 
+-- Move buffer
+map("n", "[b", "<cmd>bnext<cr>", { desc = "Next Tab" })
+map("n", "]b", "<cmd>bprevious<cr>", { desc = "Previous Tab" })
+
+
 -- windows
 map('n', '<leader>wc', '<C-W>c', { desc = 'Close window', remap = true })
 map('n', '<leader>-', '<C-W>s', { desc = 'Split window below', remap = true })
@@ -43,85 +49,57 @@ map('n', '<leader>|', '<C-W>v', { desc = 'Split window right', remap = true })
 
 map('n', '<cr>', 'viw<c-1>', { desc = 'Init Increment selection', remap = true })
 
--- -- Clear search, diff update and redraw
--- -- taken from runtime/lua/_editor.lua
--- map(
---   "n",
---   "<leader>ur",
---   "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>",
---   { desc = "Redraw / clear hlsearch / diff update" }
--- )
 
--- -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
--- map("n", "n", "'Nn'[v:searchforward].'zv'", { expr = true, desc = "Next search result" })
--- map("x", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
--- map("o", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
--- map("n", "N", "'nN'[v:searchforward].'zv'", { expr = true, desc = "Prev search result" })
--- map("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
--- map("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
+-- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
+map("n", "n", "'Nn'[v:searchforward].'zv'", { expr = true, desc = "Next search result" })
+map("x", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
+map("o", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
+map("n", "N", "'nN'[v:searchforward].'zv'", { expr = true, desc = "Prev search result" })
+map("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
+map("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
 
--- -- Add undo break-points
--- map("i", ",", ",<c-g>u")
--- map("i", ".", ".<c-g>u")
--- map("i", ";", ";<c-g>u")
+-- Add undo break-points
+map("i", ",", ",<c-g>u")
+map("i", ".", ".<c-g>u")
+map("i", ";", ";<c-g>u")
 
--- -- save file
--- map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
+-- diagnostic
+local diagnostic_goto = function(next, severity)
+  local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
+  severity = severity and vim.diagnostic.severity[severity] or nil
+  return function()
+    go({ severity = severity })
+  end
+end
+map("n", "<leader>xd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
+map("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
+map("n", "[d", diagnostic_goto(false), { desc = "Prev Diagnostic" })
+map("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
+map("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
+map("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
+map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 
--- --keywordprg
--- map("n", "<leader>K", "<cmd>norm! K<cr>", { desc = "Keywordprg" })
-
--- -- lazy
--- map("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
-
--- -- new file
--- map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
-
--- map("n", "<leader>xl", "<cmd>lopen<cr>", { desc = "Location List" })
--- map("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Quickfix List" })
-
--- map("n", "[q", vim.cmd.cprev, { desc = "Previous quickfix" })
--- map("n", "]q", vim.cmd.cnext, { desc = "Next quickfix" })
-
--- -- formatting
--- map({ "n", "v" }, "<leader>cf", function()
---   Util.format({ force = true })
--- end, { desc = "Format" })
-
--- -- diagnostic
--- local diagnostic_goto = function(next, severity)
---   local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
---   severity = severity and vim.diagnostic.severity[severity] or nil
---   return function()
---     go({ severity = severity })
---   end
--- end
--- map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
--- map("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
--- map("n", "[d", diagnostic_goto(false), { desc = "Prev Diagnostic" })
--- map("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
--- map("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
--- map("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
--- map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
-
--- -- stylua: ignore start
-
--- -- toggle options
--- map("n", "<leader>uf", function() Util.format.toggle() end, { desc = "Toggle auto format (global)" })
--- map("n", "<leader>uF", function() Util.format.toggle(true) end, { desc = "Toggle auto format (buffer)" })
--- map("n", "<leader>us", function() Util.toggle("spell") end, { desc = "Toggle Spelling" })
--- map("n", "<leader>uw", function() Util.toggle("wrap") end, { desc = "Toggle Word Wrap" })
--- map("n", "<leader>uL", function() Util.toggle("relativenumber") end, { desc = "Toggle Relative Line Numbers" })
--- map("n", "<leader>ul", function() Util.toggle.number() end, { desc = "Toggle Line Numbers" })
--- map("n", "<leader>ud", function() Util.toggle.diagnostics() end, { desc = "Toggle Diagnostics" })
--- local conceallevel = vim.o.conceallevel > 0 and vim.o.conceallevel or 3
--- map("n", "<leader>uc", function() Util.toggle("conceallevel", false, { 0, conceallevel }) end,
---   { desc = "Toggle Conceal" })
--- if vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint then
---   map("n", "<leader>uh", function() Util.toggle.inlay_hints() end, { desc = "Toggle Inlay Hints" })
--- end
--- map("n", "<leader>uT", function() if vim.b.ts_highlight then vim.treesitter.stop() else vim.treesitter.start() end end,
---   { desc = "Toggle Treesitter Highlight" })
+-- stylua: ignore start
+-- toggle options
+map("n", "<leader>us", function() Util.toggle("spell") end, { desc = "Toggle Spelling" })
+map("n", "<leader>uL", function() Util.toggle("relativenumber") end, { desc = "Toggle Relative Line Numbers" })
+map("n", "<leader>ul", function() Util.toggle.number() end, { desc = "Toggle Line Numbers" })
+map("n", "<leader>ud", function() Util.toggle.diagnostics() end, { desc = "Toggle Diagnostics" })
+local conceallevel = vim.o.conceallevel > 0 and vim.o.conceallevel or 3
+map("n", "<leader>uS", function() Util.toggle("conceallevel", false, { 0, conceallevel }) end,
+  { desc = "Toggle Conceal" })
+if vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint then
+  map("n", "<leader>uh", function() Util.toggle.inlay_hints() end, { desc = "Toggle Inlay Hints" })
+end
+map("n", "<leader>uT", function()
+  if vim.b.ts_highlight then
+    vim.treesitter.stop()
+            Util.warn('Disabled Treesitter Highlight', { title = 'Option' })
+  else
+    vim.treesitter.start()
+            Util.info('Enabled Treesitter Highlight', { title = 'Option' })
+  end
+end, { desc = "Toggle Treesitter Highlight" })
 
 -- -- lazygit
 -- map("n", "<leader>gg",
@@ -130,14 +108,8 @@ map('n', '<cr>', 'viw<c-1>', { desc = 'Init Increment selection', remap = true }
 -- map("n", "<leader>gG", function() Util.terminal({ "lazygit" }, { esc_esc = false, ctrl_hjkl = false }) end,
 --   { desc = "Lazygit (cwd)" })
 
--- -- quit
--- map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit all" })
-
 -- -- highlights under cursor
 -- map("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
-
--- -- LazyVim Changelog
--- map("n", "<leader>L", function() Util.news.changelog() end, { desc = "LazyVim Changelog" })
 
 -- -- floating terminal
 -- local lazyterm = function() Util.terminal(nil, { cwd = Util.root() }) end
@@ -155,18 +127,3 @@ map('n', '<cr>', 'viw<c-1>', { desc = 'Init Increment selection', remap = true }
 -- map("t", "<C-/>", "<cmd>close<cr>", { desc = "Hide Terminal" })
 -- map("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })
 
--- -- tabs
--- map("n", "<leader><tab>l", "<cmd>tablast<cr>", { desc = "Last Tab" })
--- map("n", "<leader><tab>f", "<cmd>tabfirst<cr>", { desc = "First Tab" })
--- map("n", "<leader><tab><tab>", "<cmd>tabnew<cr>", { desc = "New Tab" })
--- map("n", "<leader><tab>]", "<cmd>tabnext<cr>", { desc = "Next Tab" })
--- map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
--- map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
-
--- -- buffers
--- map("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
--- map("n", "<S-l>", "<cmd>bnext<cr>", { desc = "Next buffer" })
--- map("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
--- map("n", "]b", "<cmd>bnext<cr>", { desc = "Next buffer" })
--- map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
--- map("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
