@@ -27,6 +27,7 @@ packer -> lazyvim.nvim
 
 - gitui
 
+
 </details>
 
 ## Installation
