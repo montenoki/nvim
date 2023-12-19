@@ -259,6 +259,7 @@ return {
   -- The default key bindings to find files will use Telescope's
   -- `find_files` or `git_files` depending on whether the
   -- directory is a git repo.
+  -- TODO[2023/12/20]: Config this later
   {
     'nvim-telescope/telescope.nvim',
     cmd = 'Telescope',
@@ -387,8 +388,8 @@ return {
           mappings = {
             i = {
               -- TODO[2023/12/17]: config this after trouble is fixed.
-              -- ['<c-t>'] = open_with_trouble,
-              -- ['<a-t>'] = open_selected_with_trouble,
+              ['<c-t>'] = open_with_trouble,
+              ['<a-t>'] = open_selected_with_trouble,
               ['<C-j>'] = actions.move_selection_next,
               ['<C-k>'] = actions.move_selection_previous,
               ['<S-tab>'] = actions.cycle_history_next,
@@ -474,6 +475,7 @@ return {
     opts = {
       plugins = { spelling = true },
       defaults = {
+        -- TODO[2023/12/19]: fix this
         mode = { 'n', 'v' },
         ['g'] = { name = '+goto' },
         ['gs'] = { name = '+surround' },
@@ -538,11 +540,7 @@ return {
     },
   },
   -- buffer remove
-  {
-    'echasnovski/mini.bufremove',
-
-    keys = {},
-  },
+  { 'echasnovski/mini.bufremove' },
 
   -- better diagnostics list and others
   {
@@ -584,6 +582,7 @@ return {
       },
     },
   },
+
   -- Finds and lists all of the TODO, HACK, BUG, etc comment
   -- in your project and loads them into a browsable list.
   {
@@ -679,4 +678,73 @@ return {
       },
     },
   },
+
+  -- Terminal trigger
+  {
+    'akinsho/toggleterm.nvim',
+    version = '*',
+    lazy = false,
+    opts = {
+      size = function(term)
+        if term.direction == 'horizontal' then
+          return 15
+        elseif term.direction == 'vertical' then
+          return vim.o.columns * 0.3
+        end
+      end,
+      open_mapping = '<c-\\>',
+      insert_mappings = true,
+      start_in_insert = true,
+      terminal_mappings = true,
+    },
+    init = function()
+local Terminal = require('toggleterm.terminal').Terminal
+      local gitui = Terminal:new({
+        cmd = 'gitui',
+        dir = 'git_dir',
+        direction = 'float',
+        float_opts = {
+          border = 'double',
+        },
+        on_open = function(term)
+          vim.cmd('startinsert!')
+          local opt = { noremap = true, silent = true }
+          -- q / <leader>tg 关闭 terminal
+          vim.api.nvim_buf_set_keymap(term.bufnr, 'n', 'q', '<CMD>close<CR>', opt)
+          vim.api.nvim_buf_set_keymap(term.bufnr, 'n', '<A-g>', '<CMD>close<CR>', opt)
+          -- ESC 键取消，留给gitui
+          if vim.fn.mapcheck('<Esc>', 't') ~= '' then
+            vim.api.nvim_del_keymap('t', '<Esc>')
+          end
+        end,
+        on_close = function(_)
+          -- 添加回来
+          local opt = { noremap = true, silent = true }
+          vim.api.nvim_set_keymap('t', '<Esc>', '<C-\\><C-n>', opt)
+        end,
+      })
+      local terms = {}
+
+      function _G.term_toggle(style)
+        local number = vim.v.count
+        if terms[number] == nil then
+          terms[number] = Terminal:new({})
+        end
+        terms[number].direction = style
+        terms[number].id = number
+        terms[number]:toggle()
+      end
+
+      function _G.gitui_toggle()
+        gitui:toggle()
+      end
+
+      vim.keymap.set({ 'n', 't' }, '<leader>gg', '<CMD>lua gitui_toggle()<CR>', { desc = 'Toggle GitUI' })
+      vim.keymap.set({ 'n', 't' }, '<leader>tt', '<CMD>lua term_toggle([[horizontal]])<CR>',
+        { desc = 'Toggle Terimal Bottom' })
+      vim.keymap.set({ 'n', 't' }, '<leader>tf', '<CMD>lua term_toggle([[float]])<CR>',
+        { desc = 'Toggle Terimal float' })
+      vim.keymap.set('t', '<ESC>', '<C-\\><C-n>', { desc = 'Quit Terminal' })
+    end,
+  }
 }

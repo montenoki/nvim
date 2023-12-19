@@ -9,7 +9,7 @@ local function has_words_before()
   unpack = unpack or table.unpack
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
   local char = vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col)
-  return col ~= 0 and (char:match("%s") == nil and char:match("%p") == nil)
+  return col ~= 0 and char:match("%s") == nil
 end
 return {
   -- auto completion
