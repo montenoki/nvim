@@ -94,14 +94,10 @@ local list_keys = {
 }
 
 nvim_tree.setup({
-  disable_netrw = true,
   git = {
     enable = true,
     ignore = true,
   },
-  -- project plugin
-  sync_root_with_cwd = true,
-  respect_buf_cwd = true,
   update_focused_file = {
     enable = true,
     update_root = true,

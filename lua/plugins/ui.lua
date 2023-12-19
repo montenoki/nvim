@@ -133,7 +133,11 @@ return {
         },
         extensions = { 'neo-tree', 'lazy', 'toggleterm', 'nvim-dap-ui' },
         sections = {
-          lualine_a = { 'mode' },
+          lualine_a = {
+            function()
+              return Icon.lualine.nvim
+            end,
+            'mode' },
           lualine_b = {
             'branch',
             {
@@ -193,6 +197,8 @@ return {
             },
           },
           lualine_z = {
+            "filesize",
+            "progress",
             { 'fileformat', symbols = Icon.lualine.symbols },
             function()
               return Icon.clock .. os.date('%R')

@@ -58,6 +58,7 @@ local clock_normal = ' '
 local clock_lite = ''
 
 local lualine_normal = {
+  nvim = '',
   symbols = {
     unix = '', -- e712
     dos = '', -- e70f
@@ -67,6 +68,7 @@ local lualine_normal = {
   section_separators = { left = '', right = '' },
 }
 local lualine_lite = {
+  nvim = 'NeoVim',
   symbols = {
     unix = 'LF',  -- e712
     dos = 'CRLF', -- e70f
@@ -188,6 +190,11 @@ local neotree_normal = {
   folder_empty = '󰉖',
   indent_marker = '│',
   last_indent_marker = '└',
+  symlink = '',
+  symlink_file = '',
+  bookmark = '',
+  file = '',
+  symlink_arrow = '➔',
 }
 local neotree_lite = {
   expander_collapsed = '+',
@@ -197,6 +204,11 @@ local neotree_lite = {
   folder_empty = '= ',
   indent_marker = '|',
   last_indent_marker = 'L',
+  symlink = '',
+  symlink_file = '',
+  bookmark = '',
+  file = '',
+  symlink_arrow = '>',
 }
 
 local telescope_normal = {
