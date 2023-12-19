@@ -1,4 +1,156 @@
+local Icons = require('icons')
+local function t(keys)
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(keys, true, true, true), "m", true)
+end
+local function can_execute(arg)
+  return vim.fn[arg]() == 1
+end
+local function has_words_before()
+  unpack = unpack or table.unpack
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  local char = vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col)
+  return col ~= 0 and (char:match("%s") == nil and char:match("%p") == nil)
+end
 return {
+  -- auto completion
+  {
+    "hrsh7th/nvim-cmp",
+    version = false, -- last release is way too old
+    event = { "InsertEnter", "CmdlineEnter" },
+    dependencies = {
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-nvim-lsp-signature-help",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
+      'hrsh7th/cmp-cmdline',
+      'dmitmel/cmp-cmdline-history',
+      'SirVer/ultisnips',
+      "quangnguyen30192/cmp-nvim-ultisnips",
+      { 'montenoki/vim-snippets' },
+    },
+    opts = function()
+      vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
+      local cmp = require("cmp")
+      local defaults = require("cmp.config.default")()
+      return {
+        completion = {
+          completeopt = "menu,menuone,noselect",
+        },
+        preselect = cmp.PreselectMode.None,
+        snippet = {
+          expand = function(args) vim.fn['UltiSnips#Anon'](args.body) end,
+        },
+        window = {
+          completion = cmp.config.window.bordered(),
+          documentation = cmp.config.window.bordered(),
+        },
+        sources = cmp.config.sources({
+          { name = "nvim_lsp" },
+          { name = 'ultisnips' },
+          { name = 'cmdline' },
+          { name = 'cmdline_history' },
+          { name = "path" },
+          {
+            name = "buffer",
+            option = { get_bufnrs = function() return vim.api.nvim_list_bufs() end }
+          },
+        }),
+        formatting = {
+          format = function(_, item)
+            local icons = Icons.cmp
+            if icons[item.kind] then
+              item.kind = icons[item.kind] .. item.kind
+            end
+            return item
+          end,
+        },
+        experimental = { ghost_text = { hl_group = "CmpGhostText" } },
+        sorting = defaults.sorting,
+        mapping = {
+          -- TODO[2023/12/19]: fix: noice config - Calculator display.
+          ["<tab>"] = {
+            i = function(fallback)
+              if has_words_before() then
+                if cmp.visible() then
+                  cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+                elseif can_execute("UltiSnips#CanJumpForwards") then
+                  t("<Plug>(cmpu-jump-forwards)")
+                else
+                  cmp.complete()
+                end
+              else
+                fallback()
+              end
+            end,
+            c = function()
+              if cmp.visible() then
+                cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
+              else
+                cmp.complete()
+              end
+            end,
+          },
+          ["<S-tab>"] = {
+            i = function(fallback)
+              if cmp.visible() then
+                cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+              elseif can_execute("UltiSnips#CanJumpBackwards") then
+                t("<Plug>(cmpu-jump-backwards)")
+              else
+                fallback()
+              end
+            end,
+            c = function(fallback)
+              if cmp.visible() then
+                cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
+              else
+                fallback()
+              end
+            end,
+          },
+          ['<CR>'] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = false }),
+          ['<C-.>'] = {
+            i = function()
+              if cmp.visible() then
+                cmp.abort()
+              else
+                cmp.complete()
+              end
+            end
+          },
+          ["<esc>"] = function(fallback)
+            if cmp.visible() then
+              cmp.abort()
+            else
+              fallback()
+            end
+          end,
+          ["<A-h>"] = cmp.mapping.scroll_docs(-4),
+          ["<A-l>"] = cmp.mapping.scroll_docs(4),
+        },
+      }
+    end,
+    ---@param opts cmp.ConfigSchema
+    config = function(_, opts)
+      local cmp = require('cmp')
+      for i, source in ipairs(opts.sources) do
+        source.group_index = source.group_index or i
+      end
+      cmp.setup(opts)
+      cmp.setup.cmdline({ '/', '?' }, {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = {
+          { name = 'buffer', opts = { keyword_pattern = [=[[^[:blank:]].*]=] } }
+        }
+      })
+      cmp.setup.cmdline(':',
+        {
+          mapping = cmp.mapping.preset.cmdline(),
+          sources = cmp.config.sources({ { name = 'cmdline' }, { name = 'cmdline_history' }, { name = 'path' } }),
+        })
+    end,
+  },
+
   -- Fast and feature-rich surround actions. For text that includes
   -- surrounding characters like brackets or quotes, this allows you
   -- to select the text inside, change or modify the surrounding characters,
@@ -10,8 +162,8 @@ return {
       local plugin = require('lazy.core.config').spec.plugins['mini.surround']
       local opts = require('lazy.core.plugin').values(plugin, 'opts', false)
       local mappings = {
-        { opts.mappings.add, desc = 'Add surrounding', mode = { 'n', 'v' } },
-        { opts.mappings.delete, desc = 'Delete surrounding' },
+        { opts.mappings.add,     desc = 'Add surrounding',    mode = { 'n', 'v' } },
+        { opts.mappings.delete,  desc = 'Delete surrounding' },
         { opts.mappings.replace, desc = 'Replace surrounding' },
       }
       mappings = vim.tbl_filter(function(m)
@@ -21,8 +173,8 @@ return {
     end,
     opts = {
       mappings = {
-        add = 'ys', -- Add surrounding in Normal and Visual modes
-        delete = 'ds', -- Delete surrounding
+        add = 'ys',     -- Add surrounding in Normal and Visual modes
+        delete = 'ds',  -- Delete surrounding
         replace = 'cs', -- Replace surrounding
       },
     },
@@ -53,7 +205,7 @@ return {
   {
     'numToStr/Comment.nvim',
     lazy = false,
-    opts ={},
+    opts = {},
   },
 
   -- Better text-objects

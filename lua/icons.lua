@@ -220,6 +220,89 @@ local todo_comments_lite = {
   FIX = 'x',
 }
 
+local cmp_normal = {
+  Array         = " ",
+  Boolean       = "󰨙 ",
+  Class         = " ",
+  Codeium       = "󰘦 ",
+  Color         = " ",
+  Control       = " ",
+  Collapsed     = " ",
+  Constant      = "󰏿 ",
+  Constructor   = " ",
+  Copilot       = " ",
+  Enum          = " ",
+  EnumMember    = " ",
+  Event         = " ",
+  Field         = " ",
+  File          = " ",
+  Folder        = " ",
+  Function      = "󰊕 ",
+  Interface     = " ",
+  Key           = " ",
+  Keyword       = " ",
+  Method        = "󰊕 ",
+  Module        = " ",
+  Namespace     = "󰦮 ",
+  Null          = " ",
+  Number        = "󰎠 ",
+  Object        = " ",
+  Operator      = " ",
+  Package       = " ",
+  Property      = " ",
+  Reference     = " ",
+  Snippet       = " ",
+  String        = " ",
+  Struct        = "󰆼 ",
+  TabNine       = "󰏚 ",
+  Text          = " ",
+  TypeParameter = " ",
+  Unit          = " ",
+  Value         = " ",
+  Variable      = "󰀫 ",
+}
+local cmp_lite = {
+  Array         = "",
+  Boolean       = "",
+  Class         = "",
+  Codeium       = "",
+  Color         = "",
+  Control       = "",
+  Collapsed     = "",
+  Constant      = "",
+  Constructor   = "",
+  Copilot       = "",
+  Enum          = "",
+  EnumMember    = "",
+  Event         = "",
+  Field         = "",
+  File          = "",
+  Folder        = "",
+  Function      = "",
+  Interface     = "",
+  Key           = "",
+  Keyword       = "",
+  Method        = "",
+  Module        = "",
+  Namespace     = "",
+  Null          = "",
+  Number        = "",
+  Object        = "",
+  Operator      = "",
+  Package       = "",
+  Property      = "",
+  Reference     = "",
+  Snippet       = "",
+  String        = "",
+  Struct        = "",
+  TabNine       = "",
+  Text          = "",
+  TypeParameter = "",
+  Unit          = "",
+  Value         = "",
+  Variable      = "",
+}
+
 if vim.g.lite_mode then
   M.bufferline = bufferline_lite
   M.diagnostics = diagnostics_lite
@@ -234,6 +317,7 @@ if vim.g.lite_mode then
   M.neotree = neotree_lite
   M.telescope = telescope_lite
   M.todo_comments = todo_comments_lite
+  M.cmp = cmp_lite
 else
   M.bufferline = bufferline_normal
   M.diagnostics = diagnostics_normal
@@ -248,6 +332,7 @@ else
   M.neotree = neotree_normal
   M.telescope = telescope_normal
   M.todo_comments = todo_comments_normal
+  M.cmp = cmp_normal
 end
 
 return M

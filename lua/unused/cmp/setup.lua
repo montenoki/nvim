@@ -14,17 +14,14 @@ else
 end
 
 local cmp_ultisnips_mappings = require('cmp_nvim_ultisnips.mappings')
-local mapping = {
+locdfee
+l mapping = {
     [keys.show] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
     [keys.abort] = cmp.mapping({
         i = cmp.mapping.abort(),
         c = cmp.mapping.close(),
     }),
 
-    [keys.confirm] = cmp.mapping.confirm({
-        select = false,
-        behavior = cmp.ConfirmBehavior.Insert,
-    }),
     [keys.scroll_doc_up] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
     [keys.scroll_doc_down] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
 
