@@ -70,24 +70,6 @@ local function init()
       end,
     },
 
-    -- terminal表示
-    {
-      'akinsho/toggleterm.nvim',
-      tag = '*',
-      config = function()
-        require('plugin-config.interface.toggleterm')
-      end,
-    },
-
-
-    -- Diagnostics
-    {
-      'folke/trouble.nvim',
-      requires = 'nvim-tree/nvim-web-devicons',
-      config = function()
-        require('plugin-config.interface.trouble')
-      end,
-    },
 
     -- Marks
     {

@@ -315,6 +315,13 @@ local cmp_lite = {
   Variable      = "",
 }
 
+local ufo_normal = {
+  suffix = ' %d ...'
+}
+local ufo_lite = {
+  suffix = ' <- %d ...'
+}
+
 if vim.g.lite_mode then
   M.bufferline = bufferline_lite
   M.diagnostics = diagnostics_lite
@@ -330,6 +337,7 @@ if vim.g.lite_mode then
   M.telescope = telescope_lite
   M.todo_comments = todo_comments_lite
   M.cmp = cmp_lite
+  M.ufo = ufo_lite
 else
   M.bufferline = bufferline_normal
   M.diagnostics = diagnostics_normal
@@ -345,6 +353,7 @@ else
   M.telescope = telescope_normal
   M.todo_comments = todo_comments_normal
   M.cmp = cmp_normal
+  M.ufo = ufo_normal
 end
 
 return M

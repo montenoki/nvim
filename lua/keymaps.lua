@@ -37,9 +37,11 @@ map('i', '<A-k>', '<esc><cmd>m .-2<cr>==gi', { desc = 'Move up' })
 map('v', '<A-j>', ":m '>+1<cr>gv=gv", { desc = 'Move down' })
 map('v', '<A-k>', ":m '<-2<cr>gv=gv", { desc = 'Move up' })
 
--- Move buffer
-map("n", "[b", "<cmd>bnext<cr>", { desc = "Next Tab" })
-map("n", "]b", "<cmd>bprevious<cr>", { desc = "Previous Tab" })
+-- Move Tab
+map('n', '<leader>nt', '<cmd>tabnew<cr>', {desc = "New Tab"})
+map('n', '<C-t>', '<cmd>tabnew<cr>', {desc = "New Tab"})
+map("n", "<C-]>", "<cmd>tabnext<cr>", { desc = "Next Tab" })
+map("n", "<C-[>", "<cmd>tabprev<cr>", { desc = "Previous Tab" })
 
 
 -- windows
