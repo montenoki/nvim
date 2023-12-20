@@ -12,6 +12,20 @@ local function has_words_before()
   return col ~= 0 and char:match("%s") == nil
 end
 return {
+  {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    build = ":Copilot auth",
+    opts = {
+      suggestion = { enabled = false },
+      panel = { enabled = false },
+      filetypes = {
+        markdown = true,
+        help = true,
+      },
+    },
+
+  },
   -- auto completion
   {
     "hrsh7th/nvim-cmp",
@@ -26,7 +40,23 @@ return {
       'dmitmel/cmp-cmdline-history',
       'SirVer/ultisnips',
       "quangnguyen30192/cmp-nvim-ultisnips",
-      { 'montenoki/vim-snippets' },
+      'montenoki/vim-snippets',
+      {
+        "zbirenbaum/copilot-cmp",
+        dependencies = "copilot.lua",
+        opts = {},
+        config = function(_, opts)
+          local copilot_cmp = require("copilot_cmp")
+          copilot_cmp.setup(opts)
+          -- attach cmp source whenever copilot attaches
+          -- fixes lazy-loading issues with the copilot cmp source
+          require("util").lsp.on_attach(function(client)
+            if client.name == "copilot" then
+              copilot_cmp._on_insert_enter({})
+            end
+          end)
+        end,
+      },
     },
     opts = function()
       vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
@@ -46,6 +76,7 @@ return {
         },
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
+          { name = 'copilot',        priority = 100 },
           { name = 'ultisnips' },
           { name = 'cmdline' },
           { name = 'cmdline_history' },
@@ -150,6 +181,26 @@ return {
         })
     end,
   },
+
+  {
+    "zbirenbaum/copilot-cmp",
+    dependencies = "copilot.lua",
+    opts = {},
+    config = function(_, opts)
+      local copilot_cmp = require("copilot_cmp")
+      copilot_cmp.setup(opts)
+      -- attach cmp source whenever copilot attaches
+      -- fixes lazy-loading issues with the copilot cmp source
+      require("util").lsp.on_attach(function(client)
+        if client.name == "copilot" then
+          copilot_cmp._on_insert_enter({})
+        end
+      end)
+    end,
+  },
+
+
+
 
   -- Fast and feature-rich surround actions. For text that includes
   -- surrounding characters like brackets or quotes, this allows you

@@ -107,6 +107,7 @@ return {
   -- statusline
   {
     'nvim-lualine/lualine.nvim',
+    -- optional = true,
     event = 'VeryLazy',
     init = function()
       vim.g.lualine_laststatus = vim.o.laststatus
@@ -180,11 +181,41 @@ return {
             },
             -- TODO[2023/12/12]: config this after dap is fixed.
             -- stylua: ignore
-            -- {
-            --   function() return Icon.bug .. require("dap").status() end,
-            --   cond = function () return package.loaded["dap"] and require("dap").status() ~= "" end,
-            --   color = Util.ui.fg("Debug"),
-            -- },
+            {
+              function() return Icon.bug .. require("dap").status() end,
+              cond = function () return package.loaded["dap"] and require("dap").status() ~= "" end,
+              color = Util.ui.fg("Debug"),
+            },
+            {
+              function()
+                local icon = Icon.cmp.Copilot
+                local status = require("copilot.api").status.data
+                return icon .. (status.message or "")
+              end,
+              cond = function()
+                if not package.loaded["copilot"] then
+                  return
+                end
+                local ok, clients = pcall(require("util").lsp.get_clients, { name = "copilot", bufnr = 0 })
+                if not ok then
+                  return false
+                end
+                return ok and #clients > 0
+              end,
+              color = function()
+                if not package.loaded["copilot"] then
+                  return
+                end
+                local status = require("copilot.api").status.data
+                local colors = {
+                  [""] = Util.ui.fg("Special"),
+                  ["Normal"] = Util.ui.fg("Special"),
+                  ["Warning"] = Util.ui.fg("DiagnosticError"),
+                  ["InProgress"] = Util.ui.fg("DiagnosticWarn"),
+                }
+                return colors[status.status] or colors[""]
+              end,
+            },
           },
           lualine_y = {
             {
