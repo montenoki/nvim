@@ -6,9 +6,10 @@ return {
     'nvim-tree/nvim-tree.lua',
     version = '*',
     lazy = false,
-    dependencies = { 'nvim-tree/nvim-web-devicons',
+    dependencies = {
+      'nvim-tree/nvim-web-devicons',
       {
-        "JMarkin/nvim-tree.lua-float-preview",
+        'JMarkin/nvim-tree.lua-float-preview',
         lazy = true,
         -- default
         opts = {
@@ -18,28 +19,28 @@ return {
           scroll_lines = 20,
           -- window config
           window = {
-            style = "minimal",
-            relative = "win",
-            border = "rounded",
+            style = 'minimal',
+            relative = 'win',
+            border = 'rounded',
             wrap = false,
           },
           mapping = {
             -- scroll down float buffer
-            down = { "<A-l>" },
+            down = { '<A-l>' },
             -- scroll up float buffer
-            up = { "<A-h>" },
+            up = { '<A-h>' },
             -- enable/disable float windows
-            toggle = { "<tab>" },
+            toggle = { '<tab>' },
           },
           -- hooks if return false preview doesn't shown
           hooks = {
             pre_open = function(path)
               -- if file > 5 MB or not text -> not preview
-              local size = require("float-preview.utils").get_size(path)
-              if type(size) ~= "number" then
+              local size = require('float-preview.utils').get_size(path)
+              if type(size) ~= 'number' then
                 return false
               end
-              local is_text = require("float-preview.utils").is_text(path)
+              local is_text = require('float-preview.utils').is_text(path)
               return size < 5 and is_text
             end,
             post_open = function(bufnr)
@@ -128,7 +129,7 @@ return {
           end
           -- default mappings
           -- api.config.mappings.default_on_attach(bufnr)
-          local FloatPreview = require("float-preview")
+          local FloatPreview = require('float-preview')
           FloatPreview.attach_nvimtree(bufnr)
           -- custom mappings
           vim.keymap.set('n', '<CR>', api.node.open.edit, opts('Edit'))
@@ -409,28 +410,6 @@ return {
       }
     end,
   },
-  -- move cursor between windows
-  {
-    'ggandor/leap.nvim',
-    enabled = true,
-    lazy = false,
-    keys = {
-      { '\\', mode = { 'n', 'x', 'o' }, desc = 'Leap from windows' },
-    },
-    config = function(_, opts)
-      local leap = require('leap')
-      for k, v in pairs(opts) do
-        leap.opts[k] = v
-      end
-      vim.keymap.set({ 'n', 'v' }, '\\', function()
-        leap.leap({
-          target_windows = vim.tbl_filter(function(win)
-            return vim.api.nvim_win_get_config(win).focusable
-          end, vim.api.nvim_tabpage_list_wins(0)),
-        })
-      end)
-    end,
-  },
 
   -- move windows
   {
@@ -472,9 +451,8 @@ return {
     keys = {
       { '<leader>k', '<cmd>WhichKey<cr>' },
     },
-    opts = {
-      plugins = { spelling = true },
-      defaults = {
+    opts = function()
+      local defaults = {
         -- TODO[2023/12/19]: fix this
         mode = { 'n', 'v' },
         ['g'] = { name = '+goto' },
@@ -492,8 +470,15 @@ return {
         ['<leader>u'] = { name = '+ui' },
         ['<leader>w'] = { name = '+windows' },
         ['<leader>x'] = { name = '+diagnostics/quickfix' },
-      },
-    },
+      }
+      if require('util').has('noice.nvim') then
+        defaults['<LEADER>sn'] = { name = '+noice' }
+      end
+      return {
+        defaluts = defaults,
+        plugins = { spelling = true },
+      }
+    end,
     config = function(_, opts)
       local wk = require('which-key')
       wk.setup(opts)
@@ -698,7 +683,7 @@ return {
       terminal_mappings = true,
     },
     init = function()
-local Terminal = require('toggleterm.terminal').Terminal
+      local Terminal = require('toggleterm.terminal').Terminal
       local gitui = Terminal:new({
         cmd = 'gitui',
         dir = 'git_dir',
@@ -712,7 +697,7 @@ local Terminal = require('toggleterm.terminal').Terminal
           -- q / <leader>tg 关闭 terminal
           vim.api.nvim_buf_set_keymap(term.bufnr, 'n', 'q', '<CMD>close<CR>', opt)
           vim.api.nvim_buf_set_keymap(term.bufnr, 'n', '<A-g>', '<CMD>close<CR>', opt)
-          -- ESC 键取消，留给gitui
+          -- ESC ���取消，留给gitui
           if vim.fn.mapcheck('<Esc>', 't') ~= '' then
             vim.api.nvim_del_keymap('t', '<Esc>')
           end
@@ -740,11 +725,19 @@ local Terminal = require('toggleterm.terminal').Terminal
       end
 
       vim.keymap.set({ 'n', 't' }, '<leader>gg', '<CMD>lua gitui_toggle()<CR>', { desc = 'Toggle GitUI' })
-      vim.keymap.set({ 'n', 't' }, '<leader>tt', '<CMD>lua term_toggle([[horizontal]])<CR>',
-        { desc = 'Toggle Terimal Bottom' })
-      vim.keymap.set({ 'n', 't' }, '<leader>tf', '<CMD>lua term_toggle([[float]])<CR>',
-        { desc = 'Toggle Terimal float' })
+      vim.keymap.set(
+        { 'n', 't' },
+        '<leader>tt',
+        '<CMD>lua term_toggle([[horizontal]])<CR>',
+        { desc = 'Toggle Terimal Bottom' }
+      )
+      vim.keymap.set(
+        { 'n', 't' },
+        '<leader>tf',
+        '<CMD>lua term_toggle([[float]])<CR>',
+        { desc = 'Toggle Terimal float' }
+      )
       vim.keymap.set('t', '<ESC>', '<C-\\><C-n>', { desc = 'Quit Terminal' })
     end,
-  }
+  },
 }

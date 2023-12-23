@@ -19,8 +19,11 @@ if not vim.loop.fs_stat(lazypath) then
 end
 -- Add the path to lazy.nvim to the runtimepath
 vim.opt.rtp:prepend(lazypath)
--- Setup the lazy.nvim plugin with the 'plugins' configuration
-require('lazy').setup({ { import = 'plugins' } })
 
-require('colorscheme')
+if vim.g.vscode == nil then
+  require('lazy').setup({ { import = 'plugins' } })
+  require('colorscheme')
+else
+  require('lazy').setup({ { import = 'vscode' } })
+end
 require('keymaps')

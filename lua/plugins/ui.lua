@@ -6,10 +6,10 @@ return {
     'rcarriga/nvim-notify',
     keys = {
       -- stylua: ignore
-      -- { '<leader>un', function() require('notify').dismiss({ silent = true, pending = true }) end, desc = 'Dismiss all Notifications' },
+      { '<LEADER>un', function() require('notify').dismiss({ silent = true, pending = true }) end, desc = 'Dismiss all Notifications' },
     },
     opts = {
-      timeout = 4000,
+      timeout = 5000,
       max_height = function()
         return math.floor(vim.o.lines * 0.75)
       end,
@@ -30,7 +30,7 @@ return {
     end,
   },
 
-  -- better vim.ui
+  -- Better vim.ui
   {
     'stevearc/dressing.nvim',
     lazy = true,
@@ -54,15 +54,13 @@ return {
     'akinsho/bufferline.nvim',
     event = 'VeryLazy',
     keys = {
-      { '<LEADER>b', '<CMD>BufferLinePick<CR>',      desc = 'Pick tab' },
-      { '<LEADER>B', '<CMD>BufferLinePickClose<CR>', desc = 'Pick close tab' },
+      { '<LEADER>tp', '<CMD>BufferLinePick<CR>',      desc = 'Pick tab' },
+      { '<LEADER>tc', '<CMD>BufferLinePickClose<CR>', desc = 'Pick close tab' },
     },
     opts = {
       options = {
-        -- stylua: ignore
         mode = 'tabs',
         close_command = function(n) require("mini.bufremove").delete(n, false) end,
-        -- stylua: ignore
         right_mouse_command = function(n) require("mini.bufremove").delete(n, false) end,
 
         buffer_close_icon = Icon.bufferline.buffer_close_icon,
@@ -75,7 +73,6 @@ return {
           icon = '|', -- this should be omitted if indicator style is not 'icon'
           style = 'icon',
         },
-
         offsets = {
           { filetype = 'NvimTree',     text = 'File Explorer', highlight = 'Directory', text_align = 'left' },
           { filetype = 'dapui_scopes', text = 'Debug Mode',    highlight = 'Directory', text_align = 'left' },
@@ -94,25 +91,19 @@ return {
       -- Fix bufferline when restoring a session
       vim.api.nvim_create_autocmd('BufAdd', {
         group = vim.api.nvim_create_augroup('reload_bufferline', { clear = true }),
-        callback = function()
-          vim.schedule(function()
-            ---@diagnostic disable-next-line: undefined-global
-            pcall(nvim_bufferline)
-          end)
-        end,
+        callback = function() vim.schedule(function() pcall(nvim_bufferline) end) end,
       })
     end,
   },
 
-  -- statusline
+  -- Statusline
   {
     'nvim-lualine/lualine.nvim',
-    -- optional = true,
     event = 'VeryLazy',
     init = function()
       vim.g.lualine_laststatus = vim.o.laststatus
       if vim.fn.argc(-1) > 0 then
-        -- set an empty statusline till lualine loads
+        -- Set an empty statusline till lualine loads
         vim.o.statusline = ' '
       else
         -- hide the statusline on the starter page
@@ -125,7 +116,6 @@ return {
       lualine_require.require = require
 
       vim.o.laststatus = vim.g.lualine_laststatus
-
       return {
         options = {
           globalstatus = true,
@@ -133,7 +123,7 @@ return {
           component_separators = Icon.lualine.component_separators,
           section_separators = Icon.lualine.section_separators,
         },
-        extensions = { 'neo-tree', 'lazy', 'toggleterm', 'nvim-dap-ui' },
+        extensions = { 'nvim-tree', 'mason', 'quickfix', 'symbols-outline', 'lazy', 'toggleterm', 'nvim-dap-ui' },
         sections = {
           lualine_a = {
             function()
@@ -150,6 +140,7 @@ return {
                 removed = Icon.git.removed,
               },
               source = function()
+                ---@diagnostic disable-next-line: undefined-field
                 local gitsigns = vim.b.gitsigns_status_dict
                 if gitsigns then
                   return {
@@ -175,17 +166,19 @@ return {
             },
             -- stylua: ignore
             {
+              ---@diagnostic disable-next-line: undefined-field
               function() return require("noice").api.status.command.get() end,
+              ---@diagnostic disable-next-line: undefined-field
               cond = function() return package.loaded["noice"] and require("noice").api.status.command.has() end,
               color = Util.ui.fg("Comment"),
             },
             -- TODO[2023/12/12]: config this after dap is fixed.
-            -- stylua: ignore
-            {
-              function() return Icon.bug .. require("dap").status() end,
-              cond = function () return package.loaded["dap"] and require("dap").status() ~= "" end,
-              color = Util.ui.fg("Debug"),
-            },
+            -- -- stylua: ignore
+            -- {
+            --   function() return Icon.bug .. require("dap").status() end,
+            --   cond = function() return package.loaded["dap"] and require("dap").status() ~= "" end,
+            --   color = Util.ui.fg("Debug"),
+            -- },
             {
               function()
                 local icon = Icon.cmp.Copilot
@@ -230,6 +223,7 @@ return {
           },
           lualine_z = {
             "filesize",
+            "location",
             "progress",
             { 'fileformat', symbols = Icon.lualine.symbols },
             function()
@@ -241,7 +235,7 @@ return {
     end,
   },
 
-  -- indent guides for Neovim
+  -- Indent guides for Neovim
   {
     'lukas-reineke/indent-blankline.nvim',
     event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' }, -- LazyFile
@@ -280,54 +274,35 @@ return {
     },
     init = function()
       vim.api.nvim_create_autocmd('FileType', {
-        pattern = {
-          'help',
-          'alpha',
-          'dashboard',
-          'neo-tree',
-          'Trouble',
-          'trouble',
-          'lazy',
-          'mason',
-          'notify',
-          'toggleterm',
-          'lazyterm',
-        },
+        pattern = { 'help', 'alpha', 'dashboard', 'nvim-tree', 'Trouble', 'trouble', 'lazy', 'mason', 'notify', 'toggleterm', 'lazyterm' },
         callback = function()
+          ---@diagnostic disable-next-line: inject-field
           vim.b.miniindentscope_disable = true
         end,
       })
     end,
   },
 
-  -- Displays a popup with possible key bindings of the command you started typing
-  {
-    'folke/which-key.nvim',
-    -- TODO[2023/12/12]: config this after noice and which-key is fixed.
-    -- opts = function(_, opts)
-    --   if require('lazyvim.util').has('noice.nvim') then
-    --     opts.defaults['<leader>sn'] = { name = '+noice' }
-    --   end
-    -- end,
-  },
-
-  -- icons
+  -- Dev icons
   { 'nvim-tree/nvim-web-devicons', lazy = true },
 
-  -- ui components
+  -- UI components
   { 'MunifTanjim/nui.nvim',        lazy = true },
 
   -- Highly experimental plugin that completely replaces the UI for messages, cmdline and the popupmenu.
   {
     'folke/noice.nvim',
     event = 'VeryLazy',
+    dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
     opts = {
       lsp = {
         progress = {
           enabled = true,
           -- Lsp Progress is formatted using the builtins for lsp_progress. See config.format.builtin
           -- See the section on formatting for more details on how to customize.
+          --- @type NoiceFormat|string
           format = 'lsp_progress',
+          --- @type NoiceFormat|string
           format_done = 'lsp_progress_done',
           throttle = 1000 / 30, -- frequency to update lsp progress message
           view = 'mini',
@@ -358,16 +333,53 @@ return {
         inc_rename = true,
         lsp_doc_border = true,
       },
+      cmdline = {
+        format = {
+          cmdline = { icon = Icon.noice.cmdline },
+          search_down = { icon = Icon.noice.search_down },
+          search_up = { icon = Icon.noice.search_up },
+          filter = { icon = Icon.noice.filter },
+          lua = { icon = Icon.noice.lua },
+          help = { icon = Icon.noice.help },
+        },
+      },
+      format = {
+        level = {
+          icons = {
+            error = Icon.diagnostics.Error,
+            warn = Icon.diagnostics.Warn,
+            info = Icon.diagnostics.Info,
+          },
+        },
+      },
+      popupmenu = {
+        kind_icons = vim.g.lite_mode and false or {},
+      },
+      inc_rename = {
+        cmdline = {
+          format = {
+            IncRename = { icon = Icon.noice.IncRename },
+          },
+        },
+      },
     },
     -- stylua: ignore
     keys = {
-      { "<S-Enter>",   function() require("noice").redirect(vim.fn.getcmdline()) end,                 mode = "c",                 desc = "Redirect Cmdline" },
-      { "<leader>snl", function() require("noice").cmd("last") end,                                   desc = "Noice Last Message" },
-      { "<leader>snh", function() require("noice").cmd("history") end,                                desc = "Noice History" },
-      { "<leader>sna", function() require("noice").cmd("all") end,                                    desc = "Noice All" },
-      { "<leader>snd", function() require("noice").cmd("dismiss") end,                                desc = "Dismiss All" },
-      { "<c-f>",       function() if not require("noice.lsp").scroll(4) then return "<c-f>" end end,  silent = true,              expr = true,              desc = "Scroll forward",  mode = { "i", "n", "s" } },
-      { "<c-b>",       function() if not require("noice.lsp").scroll(-4) then return "<c-b>" end end, silent = true,              expr = true,              desc = "Scroll backward", mode = { "i", "n", "s" } },
+      { "<S-Enter>",   function() require("noice").redirect(vim.fn.getcmdline()) end, mode = "c",                 desc = "Redirect Cmdline" },
+      { "<LEADER>snl", function() require("noice").cmd("last") end,                   desc = "Noice Last Message" },
+      { "<LEADER>snh", function() require("noice").cmd("history") end,                desc = "Noice History" },
+      { "<LEADER>sna", function() require("noice").cmd("all") end,                    desc = "Noice All" },
+      { "<LEADER>snd", function() require("noice").cmd("dismiss") end,                desc = "Dismiss All Noice" },
+      -- TODO[2023/12/23]: config this later. scroll
+      {
+        "<C-d>",
+        function() if not require("noice.lsp").scroll(4) then return "<C-f>" end end,
+        silent = true, expr = true, desc = "Scroll forward", mode = { "i", "n", "s" },
+      },
+      { "<C-u>",
+        function() if not require("noice.lsp").scroll(-4) then return "<C-b>" end end,
+        silent = true, expr = true, desc = "Scroll backward", mode = { "i", "n", "s" },
+      },
     },
   },
 
@@ -378,9 +390,8 @@ return {
     event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' }, -- LazyFile
     keys = {
       {
-        '<leader>uc',
+        '<LEADER>uc',
         function()
-          local Util = require('util')
           local colorizer = require('colorizer')
           if colorizer.is_buffer_attached(0) then
             colorizer.detach_from_buffer(0)
@@ -412,6 +423,7 @@ return {
   },
 
   -- TODO[2023/12/20]: config this later
+  -- Better Fold
   {
     'kevinhwang91/nvim-ufo',
     dependencies = {
@@ -472,6 +484,7 @@ return {
         git = '',
       }
 
+      ---@diagnostic disable-next-line: missing-fields
       ufo.setup({
         fold_virt_text_handler = handler,
         open_fold_hl_timeout = 150,
@@ -483,6 +496,7 @@ return {
             winblend = 0,
           },
           mappings = {
+            -- TODO[2023/12/23]: config this later.
             scrollU = '<C-u>',
             scrollD = '<C-d>',
           },
@@ -496,6 +510,13 @@ return {
       vim.keymap.set('n', 'zR', ufo.openAllFolds, { desc = "Open All Folds" })
       vim.keymap.set('n', 'zM', ufo.closeAllFolds, { desc = "Close All Folds" })
       vim.keymap.set('n', 'zr', ufo.openFoldsExceptKinds, { desc = "Open Folds" })
+      vim.keymap.set('n', 'K',
+        function()
+          local winid = require('ufo').peekFoldedLinesUnderCursor()
+          if not winid then vim.lsp.buf.hover() end
+        end,
+        { desc = "Peek Folded Lines" }
+      )
       -- vim.keymap.set('n', 'zm', ufo.closeFoldWith)
     end
 

@@ -1,6 +1,6 @@
 local Util = require("lazyvim.util")
 
----@class lazyvim.util.lsp
+---@class util.lsp
 local M = {}
 
 ---@alias lsp.Client.filter {id?: number, bufnr?: number, name?: string, method?: string, filter?:fun(client: lsp.Client):boolean}

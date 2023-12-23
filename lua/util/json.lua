@@ -1,7 +1,7 @@
 local Config = require("lazyvim.config")
-local Util = require("lazyvim.util")
+local Util = require("util")
 
----@class lazyvim.util.json
+---@class util.json
 local M = {}
 
 ---@param value any

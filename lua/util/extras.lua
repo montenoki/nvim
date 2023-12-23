@@ -3,7 +3,7 @@ local Float = require("lazy.view.float")
 local LazyConfig = require("lazy.core.config")
 local Plugin = require("lazy.core.plugin")
 local Text = require("lazy.view.text")
-local Util = require("lazyvim.util")
+local Util = require("util")
 
 ---@class LazyExtraSource
 ---@field name string
@@ -21,7 +21,7 @@ local Util = require("lazyvim.util")
 ---@field plugins string[]
 ---@field optional string[]
 
----@class lazyvim.util.extras
+---@class util.extras
 local M = {}
 
 ---@type LazyExtraSource[]

@@ -1,7 +1,7 @@
 local Plugin = require("lazy.core.plugin")
-local Util = require("lazyvim.util")
+local Util = require("util")
 
----@class lazyvim.util.plugin
+---@class util.plugin
 local M = {}
 
 M.use_lazy_file = true

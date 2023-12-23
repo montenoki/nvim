@@ -1,10 +1,10 @@
-local Util = require("lazyvim.util")
+local Util = require("util")
 
----@class lazyvim.util.telescope.opts
+---@class util.telescope.opts
 ---@field cwd? string|boolean
 ---@field show_untracked? boolean
 
----@class lazyvim.util.telescope
+---@class util.telescope
 ---@overload fun(builtin:string, opts?:lazyvim.util.telescope.opts)
 local M = setmetatable({}, {
   __call = function(m, ...)

@@ -22,6 +22,41 @@ local diagnostics_lite = {
   Info = 'I',
 }
 
+local fillchars_normal = {
+  foldopen = '',
+  foldclose = '',
+  fold = ' ',
+  foldsep = ' ',
+  diff = '╱',
+  eob = ' ',
+}
+local fillchars_lite = {
+  foldopen = 'v',
+  foldclose = '>',
+  fold = ' ',
+  foldsep = ' ',
+  diff = '╱',
+  eob = ' ',
+}
+
+local listchars_normal = {
+  eol = '↲',
+  tab = '▸ ',
+  trail = '·',
+  extends = '❯',
+  precedes = '❮',
+  -- space = "␣",
+  nbsp = '␣',
+}
+local listchars_lite = {
+  eol = '',
+  tab = '',
+  trail = '',
+  extends = '',
+  precedes = '',
+  space = "",
+  nbsp = '',
+}
 local git_normal = {
   -- Change type
   added = ' ',
@@ -322,6 +357,25 @@ local ufo_lite = {
   suffix = ' <- %d ...'
 }
 
+local noice_normal = {
+  cmdline = '󰞷',
+  search_down = '🔍⌄',
+  search_up = '🔍⌃',
+  filter = '󰈲',
+  lua = '☾',
+  help = '󰋖',
+  IncRename = '⟳'
+}
+local noice_lite = {
+  cmdline = '>',
+  search_down = 'Search:',
+  search_up = 'Search:',
+  filter = '$:',
+  lua = 'Lua:',
+  help = '?',
+  IncRename = ''
+}
+
 if vim.g.lite_mode then
   M.bufferline = bufferline_lite
   M.diagnostics = diagnostics_lite
@@ -338,6 +392,9 @@ if vim.g.lite_mode then
   M.todo_comments = todo_comments_lite
   M.cmp = cmp_lite
   M.ufo = ufo_lite
+  M.fillchars = fillchars_lite
+  M.listchars = listchars_lite
+  M.noice = noice_lite
 else
   M.bufferline = bufferline_normal
   M.diagnostics = diagnostics_normal
@@ -354,6 +411,9 @@ else
   M.todo_comments = todo_comments_normal
   M.cmp = cmp_normal
   M.ufo = ufo_normal
+  M.fillchars = fillchars_normal
+  M.listchars = listchars_normal
+  M.noice = noice_normal
 end
 
 return M

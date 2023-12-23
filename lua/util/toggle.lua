@@ -1,6 +1,6 @@
-local Util = require("lazyvim.util")
+local Util = require("util")
 
----@class lazyvim.util.toggle
+---@class util.toggle
 local M = {}
 
 ---@param silent boolean?

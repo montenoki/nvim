@@ -1,7 +1,7 @@
 local Config = require("lazyvim.config")
-local Util = require("lazyvim.util")
+local Util = require("util")
 
----@class lazyvim.util.news
+---@class util.news
 local M = {}
 
 function M.hash(file)

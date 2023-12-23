@@ -7,6 +7,7 @@ vim.api.nvim_create_autocmd({ 'FocusGained', 'TermClose', 'TermLeave' }, {
   group = augroup('checktime'),
   command = 'checktime',
 })
+
 -- Highlight on yank
 vim.api.nvim_create_autocmd('TextYankPost', {
   group = augroup('highlight_yank'),
@@ -14,7 +15,8 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank()
   end,
 })
--- add new line with 'o' do not continue comments
+
+-- Add new line with 'o' do not continue comments
 vim.api.nvim_create_autocmd('BufEnter', {
   group = augroup('dont_continue_comments'),
   pattern = '*',
@@ -24,7 +26,8 @@ vim.api.nvim_create_autocmd('BufEnter', {
       + 'r' -- But do continue when pressing enter.
   end,
 })
--- resize splits if window got resized
+
+-- Resize splits if window got resized
 vim.api.nvim_create_autocmd({ 'VimResized' }, {
   group = augroup('resize_splits'),
   callback = function()
@@ -33,7 +36,8 @@ vim.api.nvim_create_autocmd({ 'VimResized' }, {
     vim.cmd('tabnext ' .. current_tab)
   end,
 })
--- go to last loc when opening a buffer
+
+-- Go to last loc when opening a buffer
 vim.api.nvim_create_autocmd('BufReadPost', {
   group = augroup('last_loc'),
   callback = function(event)
@@ -50,7 +54,8 @@ vim.api.nvim_create_autocmd('BufReadPost', {
     end
   end,
 })
--- close some filetypes with <q>
+
+-- Close some filetypes with <q>
 vim.api.nvim_create_autocmd('FileType', {
   group = augroup('close_with_q'),
   pattern = {
@@ -71,10 +76,11 @@ vim.api.nvim_create_autocmd('FileType', {
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
-    vim.keymap.set('n', 'q', '<cmd>close<cr>', { buffer = event.buf, silent = true })
+    vim.keymap.set('n', 'q', '<CMD>close<CR>', { buffer = event.buf, silent = true })
   end,
 })
--- wrap and check for spell in text filetypes
+
+-- Wrap and check for spell in text filetypes
 vim.api.nvim_create_autocmd('FileType', {
   group = augroup('wrap_spell'),
   pattern = { 'gitcommit', 'markdown' },
@@ -83,6 +89,7 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.opt_local.spell = true
   end,
 })
+
 -- Auto create dir when saving a file, in case some intermediate directory does not exist
 vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
   group = augroup('auto_create_dir'),
@@ -104,7 +111,6 @@ vim.api.nvim_create_autocmd('RecordingEnter', {
     })
   end,
 })
-
 vim.api.nvim_create_autocmd('RecordingLeave', {
   group = augroup('record_action'),
   callback = function()

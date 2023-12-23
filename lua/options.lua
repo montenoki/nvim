@@ -1,9 +1,10 @@
+local Icons = require('icons')
 local opt = vim.opt
 local tab_width = 2
 
 opt.autowrite = true           -- Enable auto write
 opt.clipboard = 'unnamedplus'  -- Sync with system clipboard
-opt.colorcolumn = '81'     -- Line length marker
+opt.colorcolumn = '81'         -- Line length marker
 opt.completeopt = 'menu,menuone,noselect,noinsert'
 opt.conceallevel = 3           -- ? Hide * markup for bold and italic
 opt.confirm = true             -- Confirm to save changes before exiting modified buffer
@@ -16,23 +17,14 @@ opt.ignorecase = true          -- Ignore case
 opt.inccommand = 'nosplit'     -- ? preview incremental substitute
 opt.laststatus = 3             -- global statusline
 opt.list = true                -- Show some invisible characters (tabs...
-opt.listchars = {
-  eol = '↲',
-  tab = '→ ',
-  trail = '·',
-  extends = '❯',
-  precedes = '❮',
-  -- space = "␣",
-}
-opt.mouse = 'a'           -- Enable mouse mode
-opt.number = true         -- Print line number
-opt.pumblend = 10         -- Popup blend
-opt.pumheight = 5         -- Maximum number of entries in a popup
-opt.relativenumber = true -- Relative line numbers
-opt.scrolloff = 4         -- Lines of context
-opt.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
--- opt.sessionoptions =
--- { 'blank', 'buffers', 'curdir', 'winpos', 'tabpages', 'winsize', 'help', 'globals', 'skiprtp', 'folds' }
+opt.listchars = Icons.listchars
+opt.mouse = 'a'            -- Enable mouse mode
+opt.number = true          -- Print line number
+opt.pumblend = 10          -- Popup blend
+opt.pumheight = 5          -- Maximum number of entries in a popup
+opt.relativenumber = true  -- Relative line numbers
+opt.scrolloff = 4          -- Lines of context
+opt.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 opt.shiftround = true      -- Round indent
 opt.shiftwidth = tab_width -- Size of an indent
 opt.shortmess:append({ W = true, I = true, c = true, C = true })
@@ -57,23 +49,18 @@ opt.whichwrap = '<,>,[,]'          -- Use arrow key to move next line when curso
 opt.wildmode = 'longest:full,full' -- Command-line completion mode
 opt.winminwidth = 5                -- Minimum window width
 opt.wrap = true                    -- Disable line wrap
-opt.fillchars = {
-  foldopen = '',
-  foldclose = '',
-  -- fold = "⸱",
-  fold = ' ',
-  foldsep = ' ',
-  diff = '╱',
-  eob = ' ',
-}
-vim.opt.virtualedit = "onemore"  -- fix the problem that cant see last char when scrollbar on.
+opt.fillchars = Icons.fillchars
+vim.opt.virtualedit = "onemore"    -- fix the problem that cant see last char when scrollbar on.
 
 if vim.fn.has('nvim-0.10') == 1 then
   opt.smoothscroll = true
 end
 
 -- Folding
+opt.foldcolumn = '1'
+opt.foldenable = true
 opt.foldlevel = 99
+opt.foldlevelstart = 99
 opt.foldtext = "v:lua.require'util'.ui.foldtext()" -- todo: check this
 -- opt.foldtext = 'v:lua.require("utils.simple_fold").simple_fold()'
 

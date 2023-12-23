@@ -1,19 +1,19 @@
 local LazyUtil = require("lazy.core.util")
 
----@class lazyvim.util: LazyUtilCore
----@field ui lazyvim.util.ui
----@field lsp lazyvim.util.lsp
----@field root lazyvim.util.root
----@field telescope lazyvim.util.telescope
----@field terminal lazyvim.util.terminal
----@field toggle lazyvim.util.toggle
----@field format lazyvim.util.format
----@field plugin lazyvim.util.plugin
----@field extras lazyvim.util.extras
----@field inject lazyvim.util.inject
----@field news lazyvim.util.news
----@field json lazyvim.util.json
----@field lualine lazyvim.util.lualine
+---@class util: LazyUtilCore
+---@field ui util.ui
+---@field lsp util.lsp
+---@field root util.root
+---@field telescope util.telescope
+---@field terminal util.terminal
+---@field toggle util.toggle
+---@field format util.format
+---@field plugin util.plugin
+---@field extras util.extras
+---@field inject util.inject
+---@field news util.news
+---@field json util.json
+---@field lualine util.lualine
 local M = {}
 
 ---@type table<string, string|string[]>
