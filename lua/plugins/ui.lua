@@ -1,5 +1,6 @@
 local Util = require('util')
 local Icon = require('icons')
+local keybinds = require('keymaps')
 return {
   -- Better `vim.notify()`
   {
@@ -370,15 +371,21 @@ return {
       { "<LEADER>snh", function() require("noice").cmd("history") end,                desc = "Noice History" },
       { "<LEADER>sna", function() require("noice").cmd("all") end,                    desc = "Noice All" },
       { "<LEADER>snd", function() require("noice").cmd("dismiss") end,                desc = "Dismiss All Noice" },
-      -- TODO[2023/12/23]: config this later. scroll
       {
-        "<C-d>",
+        keybinds.scroll_down,
         function() if not require("noice.lsp").scroll(4) then return "<C-f>" end end,
-        silent = true, expr = true, desc = "Scroll forward", mode = { "i", "n", "s" },
+        silent = true,
+        expr = true,
+        desc = "Scroll forward",
+        mode = { "i", "n", "s" },
       },
-      { "<C-u>",
+      {
+        keybinds.scroll_up,
         function() if not require("noice.lsp").scroll(-4) then return "<C-b>" end end,
-        silent = true, expr = true, desc = "Scroll backward", mode = { "i", "n", "s" },
+        silent = true,
+        expr = true,
+        desc = "Scroll backward",
+        mode = { "i", "n", "s" },
       },
     },
   },
@@ -496,9 +503,8 @@ return {
             winblend = 0,
           },
           mappings = {
-            -- TODO[2023/12/23]: config this later.
-            scrollU = '<C-u>',
-            scrollD = '<C-d>',
+            scrollU = keybinds.scroll_up,
+            scrollD = keybinds.scroll_down,
           },
         },
         ---@diagnostic disable-next-line: unused-local
@@ -510,6 +516,7 @@ return {
       vim.keymap.set('n', 'zR', ufo.openAllFolds, { desc = "Open All Folds" })
       vim.keymap.set('n', 'zM', ufo.closeAllFolds, { desc = "Close All Folds" })
       vim.keymap.set('n', 'zr', ufo.openFoldsExceptKinds, { desc = "Open Folds" })
+      -- vim.keymap.set('n', 'zm', ufo.closeFoldWith, { desc = "Close Fold With" })
       vim.keymap.set('n', 'K',
         function()
           local winid = require('ufo').peekFoldedLinesUnderCursor()
@@ -517,8 +524,6 @@ return {
         end,
         { desc = "Peek Folded Lines" }
       )
-      -- vim.keymap.set('n', 'zm', ufo.closeFoldWith)
     end
-
   },
 }

@@ -94,7 +94,7 @@ return {
           -- mapping query_strings to modes.
           selection_modes = {
             ['@parameter.outer'] = 'v', -- charwise
-            ['@function.outer'] = 'V', -- linewise
+            ['@function.outer'] = 'V',  -- linewise
             ['@class.outer'] = '<c-v>', -- blockwise
           },
           -- If you set this to `true` (default is `false`) then any textobject is
@@ -157,15 +157,17 @@ return {
     },
   },
 
-  -- bracket pair colorizer
+  -- Bracket pair colorizer
   {
     'HiPhish/rainbow-delimiters.nvim',
     event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' }, -- LazyFile
     enabled = true,
     config = function()
-      require('rainbow-delimiters.setup').setup()
+      require('rainbow-delimiters.setup').setup({})
     end,
   },
+
+  -- Logfile highlighter
   {
     'fei6409/log-highlight.nvim',
     config = function()

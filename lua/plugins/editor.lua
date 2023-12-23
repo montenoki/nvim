@@ -1,4 +1,5 @@
 local Util = require('util')
+local keybinds = require('keymaps')
 local Icon = require('icons')
 return {
   -- file explorer
@@ -26,11 +27,11 @@ return {
           },
           mapping = {
             -- scroll down float buffer
-            down = { '<A-l>' },
+            down = { keybinds.scroll_down },
             -- scroll up float buffer
-            up = { '<A-h>' },
+            up = { keybinds.scroll_up },
             -- enable/disable float windows
-            toggle = { '<tab>' },
+            toggle = { '<TAB>' },
           },
           -- hooks if return false preview doesn't shown
           hooks = {
@@ -43,7 +44,7 @@ return {
               local is_text = require('float-preview.utils').is_text(path)
               return size < 5 and is_text
             end,
-            post_open = function(bufnr)
+            post_open = function(_)
               return true
             end,
           },
@@ -51,8 +52,7 @@ return {
       },
     },
     keys = {
-      { '<leader>e',  '<cmd>NvimTreeToggle<cr>',   desc = 'Explorer' },
-      { '<leader>ge', '<cmd>NvimTreeFindFile<cr>', desc = 'Explorer Find File' },
+      { '<LEADER>e', '<CMD>NvimTreeFindFileToggle<CR>', desc = 'Explorer Find File' },
     },
     config = function()
       require('nvim-tree').setup({
@@ -79,6 +79,7 @@ return {
           icons = {
             web_devicons = { folder = { enable = true } },
             symlink_arrow = Icon.neotree.symlink_arrow,
+            git_placement = 'after',
             glyphs = {
               default = Icon.neotree.file,
               symlink = Icon.neotree.symlink_file,
@@ -121,14 +122,20 @@ return {
           },
         },
         modified = { enable = true },
-        actions = { open_file = { quit_on_open = true } },
+        actions = {
+          open_file = {
+            quit_on_open = true,
+            resize_window = true,
+            window_picker = {
+              chars = "FJDKSLA;"
+            },
+          }
+        },
         on_attach = function(bufnr)
           local api = require('nvim-tree.api')
           local function opts(desc)
             return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
           end
-          -- default mappings
-          -- api.config.mappings.default_on_attach(bufnr)
           local FloatPreview = require('float-preview')
           FloatPreview.attach_nvimtree(bufnr)
           -- custom mappings
@@ -161,96 +168,6 @@ return {
           vim.keymap.set('n', 'y', api.fs.copy.filename, opts('Copy Name'))
           vim.keymap.set('n', 'Y', api.fs.copy.relative_path, opts('Copy Path'))
           vim.keymap.set('n', 'gy', api.fs.copy.absolute_path, opts('Copy Abs Path'))
-        end,
-      })
-    end,
-  },
-
-  {
-    'nvim-neo-tree/neo-tree.nvim',
-    enabled = false,
-    branch = 'v3.x',
-    cmd = 'Neotree',
-    keys = {
-      {
-        '<leader>e',
-        function()
-          require('neo-tree.command').execute({ toggle = true, dir = Util.root() })
-        end,
-        desc = 'Explorer NeoTree (root dir)',
-      },
-      {
-        '<leader>ge',
-        function()
-          require('neo-tree.command').execute({ source = 'git_status', toggle = true })
-        end,
-        desc = 'Git explorer',
-      },
-    },
-    deactivate = function()
-      vim.cmd([[Neotree close]])
-    end,
-    init = function()
-      if vim.fn.argc(-1) == 1 then
-        local stat = vim.loop.fs_stat(vim.fn.argv(0))
-        if stat and stat.type == 'directory' then
-          require('neo-tree')
-        end
-      end
-    end,
-    opts = {
-      sources = { 'filesystem', 'buffers', 'git_status', 'document_symbols' },
-      open_files_do_not_replace_types = { 'terminal', 'Trouble', 'trouble', 'qf', 'Outline' },
-      filesystem = {
-        bind_to_cwd = false,
-        follow_current_file = { enabled = true },
-        use_libuv_file_watcher = true,
-      },
-      window = {
-        mappings = {
-          ['<space>'] = 'toggle_node',
-          ['<tab>'] = { 'toggle_preview', config = { use_float = true, use_image_nvim = true } }, --TODO[2023/12/17] config this later: image_nvim?
-          ['v'] = 'open_vsplit',
-          ['h'] = 'open_split',
-        },
-      },
-      default_component_configs = {
-        indent = {
-          with_expanders = true, -- if nil and file nesting is enabled, will enable expanders
-          indent_marker = Icon.neotree.indent_marker,
-          last_indent_marker = Icon.neotree.last_indent_marker,
-          expander_collapsed = Icon.neotree.expander_collapsed,
-          expander_expanded = Icon.neotree.expander_expanded,
-          expander_highlight = 'NeoTreeExpander',
-        },
-        icon = {
-          folder_closed = Icon.neotree.folder_closed,
-          folder_open = Icon.neotree.folder_open,
-          folder_empty = Icon.neotree.folder_empty,
-        },
-        git_status = {
-          symbols = Icon.git,
-        },
-      },
-    },
-    config = function(_, opts)
-      local function on_move(data)
-        Util.lsp.on_rename(data.source, data.destination)
-      end
-
-      local events = require('neo-tree.events')
-      opts.event_handlers = opts.event_handlers or {}
-      vim.list_extend(opts.event_handlers, {
-        { event = events.FILE_MOVED,   handler = on_move },
-        { event = events.FILE_RENAMED, handler = on_move },
-      })
-      require('neo-tree').setup(opts)
-      vim.api.nvim_create_autocmd('TermClose', {
-        pattern = '*lazygit',
-        callback = function()
-          if package.loaded['neo-tree.sources.git_status'] then
-            require('neo-tree.sources.git_status').refresh()
-          end
         end,
       })
     end,
@@ -416,7 +333,7 @@ return {
     'sindrets/winshift.nvim',
     lazy = true,
     keys = {
-      { '<leader>wm', '<cmd>WinShift<cr>', desc = 'Move window' },
+      { '<LEADER>wm', '<CMD>WinShift<CR>', desc = 'Move window' },
     },
   },
   -- git signs highlights text that has changed since the list
@@ -435,10 +352,10 @@ return {
         -- stylua: ignore start
         map("n", "]h", gs.next_hunk, "Next Hunk")
         map("n", "[h", gs.prev_hunk, "Prev Hunk")
-        map("n", "<leader>hp", gs.preview_hunk, "Preview Hunk")
-        map("n", "<leader>hb", function() gs.blame_line({ full = true }) end, "Blame Line")
-        map("n", "<leader>hD", gs.diffthis, "Diff This")
-        map("n", "<leader>hd", function() gs.diffthis("~") end, "Diff This ~")
+        map("n", "<LEADER>hp", gs.preview_hunk, "Preview Hunk")
+        map("n", "<LEADER>hb", function() gs.blame_line({ full = true }) end, "Blame Line")
+        map("n", "<LEADER>hD", gs.diffthis, "Diff This")
+        map("n", "<LEADER>hd", function() gs.diffthis("~") end, "Diff This ~")
       end,
     },
   },
@@ -449,7 +366,7 @@ return {
     'folke/which-key.nvim',
     event = 'VeryLazy',
     keys = {
-      { '<leader>k', '<cmd>WhichKey<cr>' },
+      { '<LEADER>k', '<CMD>WhichKey<CR>' },
     },
     opts = function()
       local defaults = {
@@ -485,6 +402,7 @@ return {
       wk.register(opts.defaults)
     end,
   },
+
   -- Automatically highlights other instances of the word under your cursor.
   -- This works with LSP, Treesitter, and regexp matching to find the other
   -- instances.
@@ -533,10 +451,10 @@ return {
     cmd = { 'TroubleToggle', 'Trouble' },
     opts = { use_diagnostic_signs = true },
     keys = {
-      { '<leader>xx', '<cmd>TroubleToggle document_diagnostics<cr>',  desc = 'Document Diagnostics (Trouble)' },
-      { '<leader>xX', '<cmd>TroubleToggle workspace_diagnostics<cr>', desc = 'Workspace Diagnostics (Trouble)' },
-      { '<leader>xl', '<cmd>TroubleToggle loclist<cr>',               desc = 'Location List (Trouble)' },
-      { '<leader>xq', '<cmd>TroubleToggle quickfix<cr>',              desc = 'Quickfix List (Trouble)' },
+      { '<LEADER>xx', '<CMD>TroubleToggle document_diagnostics<CR>',  desc = 'Document Diagnostics (Trouble)' },
+      { '<LEADER>xX', '<CMD>TroubleToggle workspace_diagnostics<CR>', desc = 'Workspace Diagnostics (Trouble)' },
+      { '<LEADER>xl', '<CMD>TroubleToggle loclist<CR>',               desc = 'Location List (Trouble)' },
+      { '<LEADER>xq', '<CMD>TroubleToggle quickfix<CR>',              desc = 'Quickfix List (Trouble)' },
       {
         '[q',
         function()
@@ -604,10 +522,10 @@ return {
     keys = {
       { "]t",         function() require("todo-comments").jump_next() end, desc = "Next todo comment" },
       { "[t",         function() require("todo-comments").jump_prev() end, desc = "Previous todo comment" },
-      { "<leader>xt", "<cmd>TodoTrouble<cr>",                              desc = "Todo (Trouble)" },
-      { "<leader>xT", "<cmd>TodoTrouble keywords=TODO,FIX,FIXME<cr>",      desc = "Todo/Fix/Fixme (Trouble)" },
-      { "<leader>st", "<cmd>TodoTelescope<cr>",                            desc = "Todo" },
-      { "<leader>sT", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>",    desc = "Todo/Fix/Fixme" },
+      { "<LEADER>xt", "<CMD>TodoTrouble<CR>",                              desc = "Todo (Trouble)" },
+      { "<LEADER>xT", "<CMD>TodoTrouble keywords=TODO,FIX,FIXME<CR>",      desc = "Todo/Fix/Fixme (Trouble)" },
+      { "<LEADER>st", "<CMD>TodoTelescope<CR>",                            desc = "Todo" },
+      { "<LEADER>sT", "<CMD>TodoTelescope keywords=TODO,FIX,FIXME<CR>",    desc = "Todo/Fix/Fixme" },
     },
   },
 
@@ -628,7 +546,7 @@ return {
       end)
     end,
     keys = {
-      { '<leader>sp', '<Cmd>Telescope projects<CR>', desc = 'Projects' },
+      { '<LEADER>sp', '<CMD>Telescope projects<CR>', desc = 'Projects' },
     },
   },
 
@@ -666,6 +584,7 @@ return {
 
   -- Terminal trigger
   {
+    -- TODO[2023/12/24] fix this later
     'akinsho/toggleterm.nvim',
     version = '*',
     lazy = false,

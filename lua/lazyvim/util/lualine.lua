@@ -1,6 +1,7 @@
 local Util = require("lazyvim.util")
 
----@class lazyvim.util.lualine
+---@class util.lualine
+---@field show_macro_recording fun()
 local M = {}
 
 function M.cmp_source(name, icon)
