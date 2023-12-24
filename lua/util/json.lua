@@ -1,4 +1,4 @@
-local Config = require("lazyvim.config")
+local Config = require("config")
 local Util = require("util")
 
 ---@class util.json

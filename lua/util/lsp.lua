@@ -1,4 +1,4 @@
-local Util = require("lazyvim.util")
+local Util = require("util")
 
 ---@class util.lsp
 local M = {}
@@ -94,7 +94,7 @@ function M.formatter(opts)
       ---@param client lsp.Client
       local ret = vim.tbl_filter(function(client)
         return client.supports_method("textDocument/formatting")
-          or client.supports_method("textDocument/rangeFormatting")
+            or client.supports_method("textDocument/rangeFormatting")
       end, clients)
       ---@param client lsp.Client
       return vim.tbl_map(function(client)
@@ -105,11 +105,12 @@ function M.formatter(opts)
   return Util.merge(ret, opts) --[[@as LazyFormatter]]
 end
 
+---@diagnostic disable-next-line: duplicate-doc-alias
 ---@alias lsp.Client.format {timeout_ms?: number, format_options?: table} | lsp.Client.filter
 
 ---@param opts? lsp.Client.format
 function M.format(opts)
-  opts = vim.tbl_deep_extend("force", {}, opts or {}, require("lazyvim.util").opts("nvim-lspconfig").format or {})
+  opts = vim.tbl_deep_extend("force", {}, opts or {}, require("util").opts("nvim-lspconfig").format or {})
   local ok, conform = pcall(require, "conform")
   -- use conform for formatting with LSP when available,
   -- since it has better format diffing

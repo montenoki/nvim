@@ -384,6 +384,12 @@ local lsp_lite = {
   diag_prefix = '>',
   virtual_text_prefix = '..'
 }
+local misc_normal = {
+  dots = '󰇘',
+}
+local misc_lite = {
+  dots = '..',
+}
 
 if vim.g.lite_mode then
   M.bufferline = bufferline_lite
@@ -405,6 +411,7 @@ if vim.g.lite_mode then
   M.listchars = listchars_lite
   M.noice = noice_lite
   M.lsp = lsp_lite
+  M.misc = misc_lite
 else
   M.bufferline = bufferline_normal
   M.diagnostics = diagnostics_normal
@@ -425,6 +432,7 @@ else
   M.listchars = listchars_normal
   M.noice = noice_normal
   M.lsp = lsp_normal
+  M.misc = misc_normal
 end
 
 return M

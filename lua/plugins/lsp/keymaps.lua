@@ -70,7 +70,7 @@ function M.get()
       has = "codeAction",
     }
   }
-  if require('lazyvim.util').has('inc-rename.nvim') then
+  if require('util').has('inc-rename.nvim') then
     M._keys[#M._keys + 1] = {
       '<LEADER>rn',
       function()
@@ -90,7 +90,7 @@ end
 ---@param method string
 function M.has(buffer, method)
   method = method:find('/') and method or 'textDocument/' .. method
-  local clients = require('lazyvim.util').lsp.get_clients({ bufnr = buffer })
+  local clients = require('util').lsp.get_clients({ bufnr = buffer })
   for _, client in ipairs(clients) do
     if client.supports_method(method) then
       return true
@@ -106,8 +106,8 @@ function M.resolve(buffer)
     return {}
   end
   local spec = M.get()
-  local opts = require('lazyvim.util').opts('nvim-lspconfig')
-  local clients = require('lazyvim.util').lsp.get_clients({ bufnr = buffer })
+  local opts = require('util').opts('nvim-lspconfig')
+  local clients = require('util').lsp.get_clients({ bufnr = buffer })
   for _, client in ipairs(clients) do
     local maps = opts.servers[client.name] and opts.servers[client.name].keys or {}
     vim.list_extend(spec, maps)

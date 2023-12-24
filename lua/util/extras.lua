@@ -1,4 +1,4 @@
-local Config = require("lazyvim.config")
+local Config = require("config")
 local Float = require("lazy.view.float")
 local LazyConfig = require("lazy.core.config")
 local Plugin = require("lazy.core.plugin")

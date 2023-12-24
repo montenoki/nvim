@@ -5,7 +5,7 @@ local Util = require("util")
 ---@field show_untracked? boolean
 
 ---@class util.telescope
----@overload fun(builtin:string, opts?:lazyvim.util.telescope.opts)
+---@overload fun(builtin:string, opts?:util.telescope.opts)
 local M = setmetatable({}, {
   __call = function(m, ...)
     return m.telescope(...)
@@ -16,13 +16,13 @@ local M = setmetatable({}, {
 -- cwd will default to lazyvim.util.get_root
 -- for `files`, git_files or find_files will be chosen depending on .git
 ---@param builtin string
----@param opts? lazyvim.util.telescope.opts
+---@param opts? util.telescope.opts
 function M.telescope(builtin, opts)
   local params = { builtin = builtin, opts = opts }
   return function()
     builtin = params.builtin
     opts = params.opts
-    opts = vim.tbl_deep_extend("force", { cwd = Util.root() }, opts or {}) --[[@as lazyvim.util.telescope.opts]]
+    opts = vim.tbl_deep_extend("force", { cwd = Util.root() }, opts or {})
     if builtin == "files" then
       if vim.loop.fs_stat((opts.cwd or vim.loop.cwd()) .. "/.git") then
         opts.show_untracked = true

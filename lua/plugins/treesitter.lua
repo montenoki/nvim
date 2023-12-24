@@ -143,7 +143,7 @@ return {
       {
         '<leader>ut',
         function()
-          local Util = require('lazyvim.util')
+          local Util = require('util')
           local tsc = require('treesitter-context')
           tsc.toggle()
           if Util.inject.get_upvalue(tsc.toggle, 'enabled') then
