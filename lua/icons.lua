@@ -351,7 +351,7 @@ local cmp_lite = {
 }
 
 local ufo_normal = {
-  suffix = ' %d ...'
+  suffix = '  %d ...'
 }
 local ufo_lite = {
   suffix = ' <- %d ...'
@@ -375,6 +375,15 @@ local noice_lite = {
   help = '?',
   IncRename = ''
 }
+local lsp_normal = {
+  diag_prefix = '󰣑',
+  virtual_text_prefix = '●'
+}
+
+local lsp_lite = {
+  diag_prefix = '>',
+  virtual_text_prefix = '..'
+}
 
 if vim.g.lite_mode then
   M.bufferline = bufferline_lite
@@ -395,6 +404,7 @@ if vim.g.lite_mode then
   M.fillchars = fillchars_lite
   M.listchars = listchars_lite
   M.noice = noice_lite
+  M.lsp = lsp_lite
 else
   M.bufferline = bufferline_normal
   M.diagnostics = diagnostics_normal
@@ -414,6 +424,7 @@ else
   M.fillchars = fillchars_normal
   M.listchars = listchars_normal
   M.noice = noice_normal
+  M.lsp = lsp_normal
 end
 
 return M

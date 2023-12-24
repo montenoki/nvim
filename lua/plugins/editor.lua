@@ -2,7 +2,7 @@ local Util = require('util')
 local keybinds = require('keymaps')
 local Icon = require('icons')
 return {
-  -- file explorer
+  -- File explorer
   {
     'nvim-tree/nvim-tree.lua',
     version = '*',
@@ -207,84 +207,67 @@ return {
       },
     },
     keys = {
-      -- {
-      --   '<leader>,',
-      --   '<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>',
-      --   desc = 'Switch Buffer',
-      -- },
       {
-        '<leader>/',
+        '<LEADER>,',
+        '<CMD>Telescope buffers sort_mru=true sort_lastused=true<CR>',
+        desc = 'Switch Buffer',
+      },
+      {
+        '<LEADER>/',
         Util.telescope('live_grep'),
         desc = 'Grep (root dir)',
       },
       {
-        '<leader>?',
+        '<LEADER>?',
         Util.telescope('files'),
         desc = 'Find Files (root dir)',
       },
       {
-        '<leader>:',
-        '<cmd>Telescope commands<cr>',
+        '<LEADER>:',
+        '<CMD>Telescope commands<CR>',
         desc = 'Commands',
       },
       {
-        '<leader>;',
-        '<cmd>Telescope command_history<cr>',
+        '<LEADER>;',
+        '<CMD>Telescope command_history<CR>',
         desc = 'Command History',
       },
       -- git
-      { '<leader>sc', '<cmd>Telescope git_commits<CR>', desc = 'commits' },
-      { '<leader>ss', '<cmd>Telescope git_status<CR>',  desc = 'status' },
+      { '<LEADER>sc', '<CMD>Telescope git_commits<CR>', desc = 'commits' },
+      { '<LEADER>ss', '<CMD>Telescope git_status<CR>',  desc = 'status' },
       -- search
-      { '<leader>s"', '<cmd>Telescope registers<cr>',   desc = 'Registers' },
+      { '<LEADER>s"', '<CMD>Telescope registers<CR>',   desc = 'Registers' },
       {
-        '<leader>sa',
-        '<cmd>Telescope autocommands<cr>',
+        '<LEADER>sa',
+        '<CMD>Telescope autocommands<CR>',
         desc = 'Auto Commands',
       },
       {
-        '<leader>sd',
-        '<cmd>Telescope diagnostics bufnr=0<cr>',
+        '<LEADER>sd',
+        '<CMD>Telescope diagnostics bufnr=0<CR>',
         desc = 'Document diagnostics',
       },
       {
-        '<leader>sD',
-        '<cmd>Telescope diagnostics<cr>',
+        '<LEADER>sD',
+        '<CMD>Telescope diagnostics<CR>',
         desc = 'Workspace diagnostics',
       },
       {
-        '<leader>sh',
-        '<cmd>Telescope highlights<cr>',
+        '<LEADER>sh',
+        '<CMD>Telescope highlights<CR>',
         desc = 'Search Highlight Groups',
       },
-      { '<leader>sk', '<cmd>Telescope keymaps<cr>',     desc = 'Key Maps' },
-      { '<leader>sm', '<cmd>Telescope marks<cr>',       desc = 'Jump to Mark' },
-      { '<leader>so', '<cmd>Telescope vim_options<cr>', desc = 'Options' },
+      { '<LEADER>sk', '<CMD>Telescope keymaps<CR>',     desc = 'Key Maps' },
+      { '<LEADER>sm', '<CMD>Telescope marks<CR>',       desc = 'Jump to Mark' },
+      { '<LEADER>so', '<CMD>Telescope vim_options<CR>', desc = 'Options' },
       {
-        '<leader>uC',
+        '<LEADER>uC',
         Util.telescope('colorscheme', { enable_preview = true }),
         desc = 'Colorscheme with preview',
       },
     },
     opts = function()
       local actions = require('telescope.actions')
-
-      local open_with_trouble = function(...)
-        return require('trouble.providers.telescope').open_with_trouble(...)
-      end
-      local open_selected_with_trouble = function(...)
-        return require('trouble.providers.telescope').open_selected_with_trouble(...)
-      end
-      local find_files_no_ignore = function()
-        local action_state = require('telescope.actions.state')
-        local line = action_state.get_current_line()
-        Util.telescope('find_files', { no_ignore = true, default_text = line })()
-      end
-      local find_files_with_hidden = function()
-        local action_state = require('telescope.actions.state')
-        local line = action_state.get_current_line()
-        Util.telescope('find_files', { hidden = true, default_text = line })()
-      end
 
       return {
         defaults = {
@@ -305,19 +288,17 @@ return {
           end,
           mappings = {
             i = {
-              -- TODO[2023/12/17]: config this after trouble is fixed.
-              ['<c-t>'] = open_with_trouble,
-              ['<a-t>'] = open_selected_with_trouble,
+              ['<C-t>'] = actions.select_tab,
               ['<C-j>'] = actions.move_selection_next,
               ['<C-k>'] = actions.move_selection_previous,
-              ['<S-tab>'] = actions.cycle_history_next,
-              ['<tab>'] = actions.cycle_history_prev,
+              ['<S-TAB>'] = actions.cycle_history_next,
+              ['<TAB>'] = actions.cycle_history_prev,
               ['<C-v>'] = actions.select_vertical,
               ['<C-h>'] = actions.select_horizontal,
-              ['<A-h>'] = actions.preview_scrolling_left,
-              ['<A-l>'] = actions.preview_scrolling_right,
-              ['<A-j>'] = actions.preview_scrolling_down,
-              ['<A-k>'] = actions.preview_scrolling_up,
+              [keybinds.scroll_left] = actions.preview_scrolling_left,
+              [keybinds.scroll_right] = actions.preview_scrolling_right,
+              [keybinds.scroll_down] = actions.preview_scrolling_down,
+              [keybinds.scroll_up] = actions.preview_scrolling_up,
             },
             n = {
               ['q'] = actions.close,
@@ -368,38 +349,9 @@ return {
     keys = {
       { '<LEADER>k', '<CMD>WhichKey<CR>' },
     },
-    opts = function()
-      local defaults = {
-        -- TODO[2023/12/19]: fix this
-        mode = { 'n', 'v' },
-        ['g'] = { name = '+goto' },
-        ['gs'] = { name = '+surround' },
-        [']'] = { name = '+next' },
-        ['['] = { name = '+prev' },
-        ['<leader><tab>'] = { name = '+tabs' },
-        ['<leader>b'] = { name = '+buffer' },
-        ['<leader>c'] = { name = '+code' },
-        ['<leader>f'] = { name = '+file/find' },
-        ['<leader>g'] = { name = '+git' },
-        ['<leader>gh'] = { name = '+hunks' },
-        ['<leader>q'] = { name = '+quit/session' },
-        ['<leader>s'] = { name = '+search' },
-        ['<leader>u'] = { name = '+ui' },
-        ['<leader>w'] = { name = '+windows' },
-        ['<leader>x'] = { name = '+diagnostics/quickfix' },
-      }
-      if require('util').has('noice.nvim') then
-        defaults['<LEADER>sn'] = { name = '+noice' }
-      end
-      return {
-        defaluts = defaults,
-        plugins = { spelling = true },
-      }
-    end,
     config = function(_, opts)
       local wk = require('which-key')
       wk.setup(opts)
-      wk.register(opts.defaults)
     end,
   },
 
@@ -551,8 +503,6 @@ return {
   },
 
   -- Session manager
-  -- TODO[2023/12/17]: fix
-  -- https://github.com/nvim-neo-tree/neo-tree.nvim/issues/400
   {
     'rmagatti/auto-session',
     opts = {
@@ -584,7 +534,6 @@ return {
 
   -- Terminal trigger
   {
-    -- TODO[2023/12/24] fix this later
     'akinsho/toggleterm.nvim',
     version = '*',
     lazy = false,
@@ -643,16 +592,16 @@ return {
         gitui:toggle()
       end
 
-      vim.keymap.set({ 'n', 't' }, '<leader>gg', '<CMD>lua gitui_toggle()<CR>', { desc = 'Toggle GitUI' })
+      vim.keymap.set({ 'n', 't' }, 'tg', '<CMD>lua gitui_toggle()<CR>', { desc = 'Toggle GitUI' })
       vim.keymap.set(
         { 'n', 't' },
-        '<leader>tt',
+        'tt',
         '<CMD>lua term_toggle([[horizontal]])<CR>',
         { desc = 'Toggle Terimal Bottom' }
       )
       vim.keymap.set(
         { 'n', 't' },
-        '<leader>tf',
+        'tf',
         '<CMD>lua term_toggle([[float]])<CR>',
         { desc = 'Toggle Terimal float' }
       )

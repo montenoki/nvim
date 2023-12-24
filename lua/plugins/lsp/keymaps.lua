@@ -11,53 +11,68 @@ function M.get()
   if M._keys then
     return M._keys
   end
-    -- stylua: ignore
-    M._keys =  {
-      { "gd", function() require("telescope.builtin").lsp_definitions({ reuse_win = true }) end, desc = "Goto Definition", has = "definition" },
-      { "gr", function() require('telescope.builtin').lsp_references(require('telescope.themes').get_dropdown()) end, desc = "References" },
-      { "gD", vim.lsp.buf.declaration, desc = "Goto Declaration" },
-      { "gI", function() require("telescope.builtin").lsp_implementations({ reuse_win = true }) end, desc = "Goto Implementation" },
-      { "gy", function() require("telescope.builtin").lsp_type_definitions({ reuse_win = true }) end, desc = "Goto T[y]pe Definition" },
-      { "gh", vim.lsp.buf.hover, desc = "Hover" },
-      { "gH", vim.lsp.buf.signature_help, desc = "Signature Help", has = "signatureHelp" },
-      { "gt", vim.lsp.buf.type_definition, desc = "Type definition" },
-      { 
-        "gp",
-        function()
-          local opts = {
-            focusable = false,
-            close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-            border = 'rounded',
-            source = 'always',
-            prefix = ' ',
-            scope = 'cursor',
-          }
-          vim.diagnostic.open_float(nil, opts)
-        end,
-        desc = "Popup diagnostic info"
-      },
-      { "<leader>f", function () vim.lsp.buf.format({ async=true }) end, desc = "Format"},
-      -- { "<c-k>", vim.lsp.buf.signature_help, mode = "i", desc = "Signature Help", has = "signatureHelp" },
-      { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },
-      {
-        "<leader>cA",
-        function()
-          vim.lsp.buf.code_action({
-            context = {
-              only = {
-                "source",
-              },
-              diagnostics = {},
+  M._keys = {
+    {
+      "gd",
+      function() require("telescope.builtin").lsp_definitions({ reuse_win = true }) end,
+      desc = "Goto Definition",
+      has = "definition"
+    },
+    {
+      "gr",
+      function() require('telescope.builtin').lsp_references(require('telescope.themes').get_dropdown()) end,
+      desc = "References"
+    },
+    { "gD", vim.lsp.buf.declaration,     desc = "Goto Declaration" },
+    {
+      "gI",
+      function() require("telescope.builtin").lsp_implementations({ reuse_win = true }) end,
+      desc = "Goto Implementation"
+    },
+    {
+      "gy",
+      function() require("telescope.builtin").lsp_type_definitions({ reuse_win = true }) end,
+      desc = "Goto T[y]pe Definition"
+    },
+    { "gh", vim.lsp.buf.hover,           desc = "Hover" },
+    { "gH", vim.lsp.buf.signature_help,  desc = "Signature Help",  has = "signatureHelp" },
+    { "gt", vim.lsp.buf.type_definition, desc = "Type definition" },
+    {
+      "gp",
+      function()
+        local opts = {
+          focusable = false,
+          close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+          border = 'rounded',
+          source = 'always',
+          prefix = ' ',
+          scope = 'cursor',
+        }
+        vim.diagnostic.open_float(nil, opts)
+      end,
+      desc = "Popup diagnostic info"
+    },
+    { "<LEADER>f",  function() vim.lsp.buf.format({ async = true }) end, desc = "Format" },
+    { "<LEADER>ca", vim.lsp.buf.code_action,                             desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },
+    {
+      "<LEADER>cA",
+      function()
+        vim.lsp.buf.code_action({
+          context = {
+            only = {
+              "source",
             },
-          })
-        end,
-        desc = "Source Action",
-        has = "codeAction",
-      }
+            diagnostics = {},
+          },
+        })
+      end,
+      desc = "Source Action",
+      has = "codeAction",
     }
+  }
   if require('lazyvim.util').has('inc-rename.nvim') then
     M._keys[#M._keys + 1] = {
-      '<leader>rn',
+      '<LEADER>rn',
       function()
         local inc_rename = require('inc_rename')
         return ':' .. inc_rename.config.cmd_name .. ' ' .. vim.fn.expand('<cword>')
@@ -67,7 +82,7 @@ function M.get()
       has = 'rename',
     }
   else
-    M._keys[#M._keys + 1] = { '<leader>rn', vim.lsp.buf.rename, desc = 'Rename', has = 'rename' }
+    M._keys[#M._keys + 1] = { '<LEADER>rn', vim.lsp.buf.rename, desc = 'Rename', has = 'rename' }
   end
   return M._keys
 end
@@ -107,8 +122,11 @@ function M.on_attach(_, buffer)
   for _, keys in pairs(keymaps) do
     if not keys.has or M.has(buffer, keys.has) then
       local opts = Keys.opts(keys)
+      ---@diagnostic disable-next-line: inject-field
       opts.has = nil
+      ---@diagnostic disable-next-line: inject-field
       opts.silent = opts.silent ~= false
+      ---@diagnostic disable-next-line: inject-field
       opts.buffer = buffer
       vim.keymap.set(keys.mode or 'n', keys.lhs, keys.rhs, opts)
     end

@@ -1,4 +1,5 @@
 plugin/packer_compiled.lua
 .DS_Store
 lazy-lock.json
-lite_mode.flg
+flg/enable/lite_mode.flg
+flg/enable/copilot.flg

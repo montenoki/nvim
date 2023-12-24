@@ -24,6 +24,7 @@ return {
       'montenoki/vim-snippets',
       {
         'zbirenbaum/copilot-cmp',
+        enabled = vim.g.copilot and true or false,
         dependencies = 'copilot.lua',
         opts = {},
         config = function(_, opts)
@@ -43,6 +44,23 @@ return {
       vim.api.nvim_set_hl(0, 'CmpGhostText', { link = 'Comment', default = true })
       local cmp = require('cmp')
       local defaults = require('cmp.config.default')()
+      local sources = {
+        { name = 'ultisnips', priority = 100 },
+        { name = 'nvim_lsp',  priority = 90 },
+        {
+          name = 'buffer',
+          option = {
+            get_bufnrs = function()
+              return vim.api.nvim_list_bufs()
+            end,
+          },
+          priority = 70,
+        },
+        { name = 'path', priority = 40 },
+      }
+      if vim.g.copilot then
+        table.insert(sources, { name = 'copilot', priority = 50 })
+      end
       return {
         completion = {
           completeopt = 'menu,menuone,noselect',
@@ -57,23 +75,7 @@ return {
           completion = cmp.config.window.bordered(),
           documentation = cmp.config.window.bordered(),
         },
-        sources = cmp.config.sources({
-          { name = 'ultisnips', priority = 100 },
-          { name = 'nvim_lsp',  priority = 90 },
-          { name = 'copilot',   priority = 80 },
-          {
-            name = 'buffer',
-            option = {
-              get_bufnrs = function()
-                return vim.api.nvim_list_bufs()
-              end,
-            },
-            priority = 70,
-          },
-          { name = 'cmdline_history', priority = 60 },
-          { name = 'cmdline',         priority = 50 },
-          { name = 'path',            priority = 40 },
-        }),
+        sources = cmp.config.sources(sources),
         formatting = {
           format = function(_, item)
             local icons = Icons.cmp
@@ -172,10 +174,11 @@ return {
   -- AI completion
   {
     'zbirenbaum/copilot.lua',
+    enabled = vim.g.copilot and true or false,
     cmd = 'Copilot',
     build = ':Copilot auth',
     opts = {
-      suggestion = { enabled = false },
+      suggestion = { enabled = true },
       panel = { enabled = false },
       filetypes = {
         markdown = true,
@@ -183,23 +186,4 @@ return {
       },
     },
   },
-
-  {
-    'zbirenbaum/copilot-cmp',
-    dependencies = 'copilot.lua',
-    opts = {},
-    config = function(_, opts)
-      local copilot_cmp = require('copilot_cmp')
-      copilot_cmp.setup(opts)
-      -- attach cmp source whenever copilot attaches
-      -- fixes lazy-loading issues with the copilot cmp source
-      require('util').lsp.on_attach(function(client)
-        if client.name == 'copilot' then
-          copilot_cmp._on_insert_enter({})
-        end
-      end)
-    end,
-  },
-
-
 }

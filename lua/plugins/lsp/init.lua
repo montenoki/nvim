@@ -30,7 +30,7 @@ return {
       lazy_update_context = true,
     },
   },
-  -- lspconfig
+  -- Lsp configure
   {
     'neovim/nvim-lspconfig',
     event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' }, -- LazyFile
@@ -51,7 +51,7 @@ return {
         virtual_text = {
           spacing = 2,
           source = 'if_many',
-          prefix = '→',
+          prefix = Icon.lsp.diag_prefix,
           -- this will set set the prefix to a function that returns the diagnostics icon based on the severity
           -- this only works on a recent 0.10.0 build. Will be set to "●" when not supported
           -- prefix = "icons",
@@ -106,7 +106,9 @@ return {
       Util.format.register(Util.lsp.formatter())
 
       -- deprectaed options
+      ---@diagnostic disable-next-line: undefined-field
       if opts.autoformat ~= nil then
+        ---@diagnostic disable-next-line: undefined-field
         vim.g.autoformat = opts.autoformat
         Util.deprecate('nvim-lspconfig.opts.autoformat', 'vim.g.autoformat')
       end
@@ -118,6 +120,7 @@ return {
 
       local register_capability = vim.lsp.handlers['client/registerCapability']
 
+      ---@diagnostic disable-next-line: duplicate-set-field
       vim.lsp.handlers['client/registerCapability'] = function(err, res, ctx)
         local ret = register_capability(err, res, ctx)
         local client_id = ctx.client_id
@@ -143,7 +146,7 @@ return {
       end
 
       if type(opts.diagnostics.virtual_text) == 'table' and opts.diagnostics.virtual_text.prefix == 'icons' then
-        opts.diagnostics.virtual_text.prefix = vim.fn.has('nvim-0.10.0') == 0 and '●'
+        opts.diagnostics.virtual_text.prefix = vim.fn.has('nvim-0.10.0') == 0 and Icon.lsp.virtual_text_prefix
           or function(diagnostic)
             local icons = require('lazyvim.config').icons.diagnostics
             for d, icon in pairs(icons) do
@@ -219,7 +222,6 @@ return {
 
   -- cmdline tools and lsp servers
   {
-
     'williamboman/mason.nvim',
     cmd = 'Mason',
     build = ':MasonUpdate',

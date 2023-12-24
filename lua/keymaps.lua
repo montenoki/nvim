@@ -107,6 +107,8 @@ map("n", "<LEADER>ui", vim.show_pos, { desc = "Inspect Pos" })
 
 local M = {}
 -- TODO[2023/12/23] configure this later.
+M.scroll_right = '<C-r>'
+M.scroll_left = '<C-l>'
 M.scroll_up = '<C-u>'
 M.scroll_down = '<C-d>'
 return M
