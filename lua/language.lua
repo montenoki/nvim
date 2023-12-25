@@ -18,11 +18,6 @@ M.lsp_servers = {
       },
     },
   },
-  pylyzer = {
-    python = {
-      chechOnType = true,
-    },
-  },
   pyright = {
     python = {
       analysis = {

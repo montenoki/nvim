@@ -24,6 +24,7 @@ if vim.g.vscode == nil then
   require('lazy').setup({ { import = 'plugins' } })
   require('colorscheme')
 else
+  require('vscode')
   require('lazy').setup({ { import = 'plugins.coding' } })
 end
 require('keymaps')
