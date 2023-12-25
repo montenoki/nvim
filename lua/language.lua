@@ -28,11 +28,28 @@ M.lsp_servers = {
     },
   },
   ruff_lsp = {
-    init_options = {
-      settings = {
-        -- Any extra CLI arguments for `ruff` go here.
-        args = {},
-      },
+    keys = {
+      "<LEADER>co",
+      function()
+        vim.lsp.buf.code_action({
+          apply = true,
+          context = {
+            only = { "source.organizeImports" },
+            diagnostics = {},
+          },
+        })
+      end,
+      desc = "Organize Imports",
+    },
+    setup = {
+      ruff_lsp = function()
+        require("util").lsp.on_attach(function(client, _)
+          if client.name == "ruff_lsp" then
+            -- Disable hover in favor of Pyright
+            client.server_capabilities.hoverProvider = false
+          end
+        end)
+      end,
     },
   },
 }
@@ -82,6 +99,7 @@ M.ts_ensure_installed = {
   "markdown_inline",
   "matlab",
   "mermaid",
+  "ninja",
   "objc",
   "pascal",
   "passwd",
@@ -113,6 +131,6 @@ M.ts_ensure_installed = {
   "vue",
   "xml",
   "yaml",
-  }
+}
 
 return M
