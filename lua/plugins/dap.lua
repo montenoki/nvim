@@ -1,3 +1,4 @@
+local Icon = require('icons')
 ---@param config {args?:string[]|fun():string[]?}
 local function get_args(config)
   local args = type(config.args) == 'function' and (config.args() or {})
@@ -24,7 +25,24 @@ return {
         { "<LEADER>du", function() require("dapui").toggle({ }) end, desc = "Dap UI" },
         { "<LEADER>de", function() require("dapui").eval() end, desc = "Eval", mode = {"n", "v"} },
       },
-      opts = {},
+      opts = {
+        controls = {
+          element = 'repl',
+          enabled = vim.g.lite_mode and false or true,
+          icons = {
+            disconnect = '',
+            pause = '',
+            play = '',
+            run_last = '',
+            step_back = '',
+            step_into = '',
+            step_out = '',
+            step_over = '',
+            terminate = '',
+          },
+        },
+        icons = Icon.dap.icons,
+      },
       config = function(_, opts)
         -- setup dap config by VsCode launch.json file
         -- require("dap.ext.vscode").load_launchjs()
@@ -89,11 +107,15 @@ return {
         dap.adapters.nlua = function(callback, conf)
           local adapter = {
             type = "server",
+            ---@diagnostic disable-next-line: undefined-field
             host = conf.host or "127.0.0.1",
+            ---@diagnostic disable-next-line: undefined-field
             port = conf.port or 8086,
           }
+            ---@diagnostic disable-next-line: undefined-field
           if conf.start_neovim then
             local dap_run = dap.run
+            ---@diagnostic disable-next-line: duplicate-set-field
             dap.run = function(c)
               adapter.port = c.port
               adapter.host = c.host
@@ -143,7 +165,6 @@ return {
   },
 
   config = function()
-    local Icon = require('icons')
     vim.api.nvim_set_hl(
       0,
       'DapStoppedLine',

@@ -69,18 +69,34 @@ return {
     },
   },
   {
-    "mfussenegger/nvim-dap",
+    'mfussenegger/nvim-dap',
     optional = true,
     dependencies = {
-      "mfussenegger/nvim-dap-python",
+      'mfussenegger/nvim-dap-python',
       -- stylua: ignore
       keys = {
         { "<LEADER>dPt", function() require('dap-python').test_method() end, desc = "Debug Method", ft = "python" },
         { "<LEADER>dPc", function() require('dap-python').test_class() end,  desc = "Debug Class",  ft = "python" },
       },
       config = function()
-        local path = require("mason-registry").get_package("debugpy"):get_install_path()
-        require("dap-python").setup(path .. "/venv/bin/python")
+        -- local path = require("mason-registry").get_package("debugpy"):get_install_path()
+        -- require("dap-python").setup(path .. "/venv/bin/python")
+        local os = vim.loop.os_uname().sysname
+        local executable_path = string.find(os, 'Windows')
+            and '\\.virtualenvs\\debugpy\\Scripts\\python.exe'
+          or '/.virtualenvs/debugpy/bin/python'
+        local path = vim.env.HOME .. executable_path
+        require('dap-python').setup(path)
+        require('dap').configurations.python = {
+          {
+            type = 'python',
+            request = 'launch',
+            name = 'launch file in project root',
+            program = '${file}',
+            pythonPath = 'python',
+            cwd = '/',
+          },
+        }
       end,
     },
   },

@@ -397,6 +397,11 @@ local dap_normal = {
   BreakpointCondition = ' ',
   BreakpointRejected = { ' ', 'DiagnosticError' },
   LogPoint = '.>',
+  icons = {
+    collapsed = '',
+    current_frame = '',
+    expanded = '',
+  },
 }
 
 local dap_lite = {
@@ -405,6 +410,11 @@ local dap_lite = {
   BreakpointCondition = '?:',
   BreakpointRejected = { 'E:', 'DiagnosticError' },
   LogPoint = '.>',
+  icons = {
+    collapsed = '>',
+    current_frame = '>',
+    expanded = 'V',
+  },
 }
 if vim.g.lite_mode then
   M.bufferline = bufferline_lite
