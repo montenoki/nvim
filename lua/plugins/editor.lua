@@ -628,7 +628,7 @@ return {
           goto_location = "<CR>",
           focus_location = "<TAB>",
           hover_symbol = "h",
-          rename_symbol = "<LEADER>rn",
+          rename_symbol = "<LEADER>r",
           code_actions = "<LEADER>ca",
           fold = "c",
           unfold = "o",

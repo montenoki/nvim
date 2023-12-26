@@ -1,4 +1,3 @@
-local language_support = require('language')
 return {
   -- Treesitter is a new parser generator tool that we can
   -- use in Neovim to power faster and more accurate
@@ -8,13 +7,9 @@ return {
     version = false, -- last release is way too old and doesn't work on Windows
     build = ':TSUpdate',
 
-    event = { 'BufReadPost', 'BufNewFile', 'BufWritePre', 'VeryLazy' }, -- LazyFile
+    -- LazyFile
+    event = { 'BufReadPost', 'BufNewFile', 'BufWritePre', 'VeryLazy' },
     init = function(plugin)
-      -- PERF: add nvim-treesitter queries to the rtp and it's custom query predicates early
-      -- This is needed because a bunch of plugins no longer `require("nvim-treesitter")`, which
-      -- no longer trigger the **nvim-treeitter** module to be loaded in time.
-      -- Luckily, the only thins that those plugins need are the custom queries, which we make available
-      -- during startup.
       require('lazy.core.loader').add_to_rtp(plugin)
       require('nvim-treesitter.query_predicates')
     end,
@@ -24,13 +19,13 @@ return {
         config = function()
           -- When in diff mode, we want to use the default
           -- vim text objects c & C instead of the treesitter ones.
-          local move = require('nvim-treesitter.textobjects.move') ---@type table<string,fun(...)>
+          local move = require('nvim-treesitter.textobjects.move')
           local configs = require('nvim-treesitter.configs')
           for name, fn in pairs(move) do
             if name:find('goto') == 1 then
               move[name] = function(q, ...)
                 if vim.wo.diff then
-                  local config = configs.get_module('textobjects.move')[name] ---@type table<string,string>
+                  local config = configs.get_module('textobjects.move')[name]
                   for key, query in pairs(config or {}) do
                     if q == query and key:find('[%]%[][cC]') then
                       vim.cmd('normal! ' .. key)
@@ -54,11 +49,25 @@ return {
     opts = {
       highlight = { enable = true },
       indent = { enable = true },
-      ensure_installed = language_support.ts_ensure_installed,
+      ensure_installed = {
+        "arduino", "bash", "c", "c_sharp", "cmake", "comment", "cpp", "css",
+        "csv", "cuda", "diff", "dockerfile", "dot", "fish", "git_config",
+        "git_rebase", "gitattributes", "gitcommit", "gitignore", "go", "html",
+        "htmldjango", "http", "hurl", "ini", "java", "javascript", "jsdoc",
+        "json", "json5", "JSON", "jsonnet", "julia", "kconfig", "latex", "lua",
+        "luadoc", "lua", "luau", "make", "markdown", "markdown_inline",
+        "matlab", "mermaid", "ninja", "objc", "pascal", "passwd", "pem", "perl",
+        "php", "phpdoc", "psv", "purescript", "python", "r", "regex", "ruby",
+        "rust", "scala", "scfg", "scheme", "sql", "ssh_config", "swift",
+        "systemtap", "todotxt", "toml", "tsv", "tsx", "typescript", "vim",
+        "vimdoc", "vue", "xml", "yaml",
+      },
+
       incremental_selection = {
         enable = true,
         keymaps = {
-          init_selection = '<C-1>', -- a least frequently used key for call it later.
+          -- a least frequently used key for call it later.
+          init_selection = '<C-1>',
           node_incremental = '<CR>',
           node_decremental = '<BS>',
           scope_incremental = '<TAB>',

@@ -21,7 +21,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 if vim.g.vscode == nil then
-  require('lazy').setup({ { import = 'plugins' } })
+  require('lazy').setup({ { import = 'plugins' }, { import = 'lang' } })
   require('colorscheme')
 else
   require('vscode')

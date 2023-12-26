@@ -1,8 +1,6 @@
 local Util = require('util')
 local Icon = require('icons')
-local language_support = require('language')
 
-local lsp_servers = language_support.lsp_servers
 return {
   -- Breadcrumb Bar
   {
@@ -30,12 +28,18 @@ return {
       lazy_update_context = true,
     },
   },
+
   -- Lsp configure
   {
     'neovim/nvim-lspconfig',
     event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' }, -- LazyFile
     dependencies = {
-      { 'folke/neoconf.nvim', cmd = 'Neoconf', config = false, dependencies = { 'nvim-lspconfig' } },
+      {
+        'folke/neoconf.nvim',
+        cmd = 'Neoconf',
+        config = false,
+        dependencies = { 'nvim-lspconfig' },
+      },
       { 'folke/neodev.nvim', opts = {} },
       'mason.nvim',
       'williamboman/mason-lspconfig.nvim',
@@ -72,34 +76,39 @@ return {
       },
       -- TODO[2023/12/12]:add any global capabilities here
       capabilities = {},
-      -- options for vim.lsp.buf.format
-      -- `bufnr` and `filter` is handled by the LazyVim formatter,
-      -- but can be also overridden when specified
       format = {
         formatting_options = nil,
         timeout_ms = nil,
       },
       -- LSP Server Settings
       ---@type lspconfig.options
-      servers = lsp_servers,
-      -- you can do any additional lsp server setup here
+      ---@diagnostic disable-next-line: missing-fields
+      servers = {
+        lua_ls = {
+          ---@type LazyKeysSpec[]
+          settings = {
+            Lua = {
+              workspace = {
+                checkThirdParty = false,
+              },
+              completion = {
+                callSnippet = 'Replace',
+              },
+            },
+          },
+        },
+      }, -- you can do any additional lsp server setup here
       -- return true if you don't want this server to be setup with lspconfig
       ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
-      setup = {
-        -- example to setup with typescript.nvim
-        -- tsserver = function(_, opts)
-        --   require("typescript").setup({ server = opts })
-        --   return true
-        -- end,
-        -- Specify * to use this function as a fallback for any server
-        -- ["*"] = function(server, opts) end,
-      },
+      setup = {},
     },
     ---@param opts PluginLspOpts
     config = function(_, opts)
       if Util.has('neoconf.nvim') then
         local plugin = require('lazy.core.config').spec.plugins['neoconf.nvim']
-        require('neoconf').setup(require('lazy.core.plugin').values(plugin, 'opts', false))
+        require('neoconf').setup(
+          require('lazy.core.plugin').values(plugin, 'opts', false)
+        )
       end
 
       -- setup autoformat
@@ -145,8 +154,12 @@ return {
         end)
       end
 
-      if type(opts.diagnostics.virtual_text) == 'table' and opts.diagnostics.virtual_text.prefix == 'icons' then
-        opts.diagnostics.virtual_text.prefix = vim.fn.has('nvim-0.10.0') == 0 and Icon.lsp.virtual_text_prefix
+      if
+        type(opts.diagnostics.virtual_text) == 'table'
+        and opts.diagnostics.virtual_text.prefix == 'icons'
+      then
+        opts.diagnostics.virtual_text.prefix = vim.fn.has('nvim-0.10.0') == 0
+            and Icon.lsp.virtual_text_prefix
           or function(diagnostic)
             local icons = require('lazyvim.config').icons.diagnostics
             for d, icon in pairs(icons) do
@@ -190,7 +203,9 @@ return {
       local have_mason, mlsp = pcall(require, 'mason-lspconfig')
       local all_mslp_servers = {}
       if have_mason then
-        all_mslp_servers = vim.tbl_keys(require('mason-lspconfig.mappings.server').lspconfig_to_package)
+        all_mslp_servers = vim.tbl_keys(
+          require('mason-lspconfig.mappings.server').lspconfig_to_package
+        )
       end
 
       local ensure_installed = {} ---@type string[]
@@ -198,7 +213,10 @@ return {
         if server_opts then
           server_opts = server_opts == true and {} or server_opts
           -- run manual setup if mason=false or if this is a server that cannot be installed with mason-lspconfig
-          if server_opts.mason == false or not vim.tbl_contains(all_mslp_servers, server) then
+          if
+            server_opts.mason == false
+            or not vim.tbl_contains(all_mslp_servers, server)
+          then
             setup(server)
           else
             ensure_installed[#ensure_installed + 1] = server
@@ -211,7 +229,8 @@ return {
       end
 
       if Util.lsp.get_config('denols') and Util.lsp.get_config('tsserver') then
-        local is_deno = require('lspconfig.util').root_pattern('deno.json', 'deno.jsonc')
+        local is_deno =
+          require('lspconfig.util').root_pattern('deno.json', 'deno.jsonc')
         Util.lsp.disable('tsserver', is_deno)
         Util.lsp.disable('denols', function(root_dir)
           return not is_deno(root_dir)
@@ -226,7 +245,7 @@ return {
     cmd = 'Mason',
     build = ':MasonUpdate',
     opts = {
-      ensure_installed = language_support.mason_ensure_installed,
+      ensure_installed = {},
       ui = { icons = Icon.mason },
     },
     config = function(_, opts)

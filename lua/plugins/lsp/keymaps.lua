@@ -52,7 +52,7 @@ function M.get()
       end,
       desc = "Popup diagnostic info"
     },
-    { "<LEADER>f",  function() vim.lsp.buf.format({ async = true }) end, desc = "Format" },
+    -- { "<LEADER>f",  function() vim.lsp.buf.format({ async = true }) end, desc = "Format" },
     { "<LEADER>ca", vim.lsp.buf.code_action,                             desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },
     {
       "<LEADER>cA",
@@ -72,7 +72,7 @@ function M.get()
   }
   if require('util').has('inc-rename.nvim') then
     M._keys[#M._keys + 1] = {
-      '<LEADER>rn',
+      '<LEADER>r',
       function()
         local inc_rename = require('inc_rename')
         return ':' .. inc_rename.config.cmd_name .. ' ' .. vim.fn.expand('<cword>')
@@ -82,7 +82,7 @@ function M.get()
       has = 'rename',
     }
   else
-    M._keys[#M._keys + 1] = { '<LEADER>rn', vim.lsp.buf.rename, desc = 'Rename', has = 'rename' }
+    M._keys[#M._keys + 1] = { '<LEADER>r', vim.lsp.buf.rename, desc = 'Rename', has = 'rename' }
   end
   return M._keys
 end
