@@ -99,6 +99,8 @@ return {
         ---@type table<string, conform.FormatterUnit[]>
         formatters_by_ft = {
           lua = { 'stylua' },
+          toml = { 'taplo' },
+          sh = { 'shfmt' },
         },
         -- The options you set here will be merged with the builtin formatters.
         -- You can also define any custom formatters here.

@@ -55,14 +55,18 @@ return {
     'akinsho/bufferline.nvim',
     event = 'VeryLazy',
     keys = {
-      { '<LEADER>tp', '<CMD>BufferLinePick<CR>',      desc = 'Pick tab' },
+      { '<LEADER>tp', '<CMD>BufferLinePick<CR>', desc = 'Pick tab' },
       { '<LEADER>tc', '<CMD>BufferLinePickClose<CR>', desc = 'Pick close tab' },
     },
     opts = {
       options = {
         mode = 'tabs',
-        close_command = function(n) require("mini.bufremove").delete(n, false) end,
-        right_mouse_command = function(n) require("mini.bufremove").delete(n, false) end,
+        close_command = function(n)
+          require('mini.bufremove').delete(n, false)
+        end,
+        right_mouse_command = function(n)
+          require('mini.bufremove').delete(n, false)
+        end,
 
         buffer_close_icon = Icon.bufferline.buffer_close_icon,
         modified_icon = Icon.bufferline.modified_icon,
@@ -75,14 +79,31 @@ return {
           style = 'icon',
         },
         offsets = {
-          { filetype = 'NvimTree',     text = 'File Explorer', highlight = 'Directory', text_align = 'left' },
-          { filetype = 'dapui_scopes', text = 'Debug Mode',    highlight = 'Directory', text_align = 'left' },
-          { filetype = 'Outline',      text = 'Outline',       highlight = 'Directory', text_align = 'left' },
+          {
+            filetype = 'NvimTree',
+            text = 'File Explorer',
+            highlight = 'Directory',
+            text_align = 'left',
+          },
+          {
+            filetype = 'dapui_scopes',
+            text = 'Debug Mode',
+            highlight = 'Directory',
+            text_align = 'left',
+          },
+          {
+            filetype = 'Outline',
+            text = 'Outline',
+            highlight = 'Directory',
+            text_align = 'left',
+          },
         },
         diagnostics = 'nvim_lsp',
         diagnostics_indicator = function(_, _, diag)
-          local ret = (diag.error and Icon.diagnostics.Error .. diag.error .. ' ' or '')
-              .. (diag.warning and Icon.diagnostics.Warn .. diag.warning or '')
+          local ret = (
+            diag.error and Icon.diagnostics.Error .. diag.error .. ' ' or ''
+          )
+            .. (diag.warning and Icon.diagnostics.Warn .. diag.warning or '')
           return vim.trim(ret)
         end,
       },
@@ -91,8 +112,15 @@ return {
       require('bufferline').setup(opts)
       -- Fix bufferline when restoring a session
       vim.api.nvim_create_autocmd('BufAdd', {
-        group = vim.api.nvim_create_augroup('reload_bufferline', { clear = true }),
-        callback = function() vim.schedule(function() pcall(nvim_bufferline) end) end,
+        group = vim.api.nvim_create_augroup(
+          'reload_bufferline',
+          { clear = true }
+        ),
+        callback = function()
+          vim.schedule(function()
+            pcall(nvim_bufferline)
+          end)
+        end,
       })
     end,
   },
@@ -120,17 +148,24 @@ return {
       return {
         options = {
           globalstatus = true,
-          disabled_filetypes = { statusline = { 'dashboard', 'alpha', 'starter' } },
+          disabled_filetypes = {
+            statusline = { 'dashboard', 'alpha', 'starter' },
+          },
           component_separators = Icon.lualine.component_separators,
           section_separators = Icon.lualine.section_separators,
         },
-        extensions = { 'nvim-tree', 'mason', 'quickfix', 'symbols-outline', 'lazy', 'toggleterm', 'nvim-dap-ui' },
+        -- stylua: ignore
+        extensions = {
+          'nvim-tree', 'mason', 'quickfix', 'symbols-outline',
+          'lazy', 'toggleterm', 'nvim-dap-ui',
+        },
         sections = {
           lualine_a = {
             function()
               return Icon.lualine.nvim
             end,
-            'mode' },
+            'mode',
+          },
           lualine_b = {
             'branch',
             {
@@ -155,23 +190,29 @@ return {
           },
           lualine_c = {
             Util.lualine.root_dir(),
-            { 'filetype',                icon_only = true, separator = '', padding = { left = 1, right = 0 } },
+            {
+              'filetype',
+              icon_only = true,
+              separator = '',
+              padding = { left = 1, right = 0 },
+            },
             { Util.lualine.pretty_path() },
-            require('auto-session.lib').current_session_name
+            require('auto-session.lib').current_session_name,
           },
           lualine_x = {
             {
               'macro-recording',
+              ---@diagnostic disable-next-line: undefined-field
               fmt = Util.lualine.show_macro_recording,
               color = Util.ui.fg('Error'),
             },
             -- stylua: ignore
             {
               ---@diagnostic disable-next-line: undefined-field
-              function() return require("noice").api.status.command.get() end,
+              function() return require('noice').api.status.command.get() end,
               ---@diagnostic disable-next-line: undefined-field
-              cond = function() return package.loaded["noice"] and require("noice").api.status.command.has() end,
-              color = Util.ui.fg("Comment"),
+              cond = function() return package.loaded['noice'] and require('noice').api.status.command.has() end,
+              color = Util.ui.fg('Comment'),
             },
             -- TODO[2023/12/12]: config this after dap is fixed.
             -- -- stylua: ignore
@@ -183,31 +224,34 @@ return {
             {
               function()
                 local icon = Icon.cmp.Copilot
-                local status = require("copilot.api").status.data
-                return icon .. (status.message or "")
+                local status = require('copilot.api').status.data
+                return icon .. (status.message or '')
               end,
               cond = function()
-                if not package.loaded["copilot"] then
+                if not package.loaded['copilot'] then
                   return
                 end
-                local ok, clients = pcall(require("util").lsp.get_clients, { name = "copilot", bufnr = 0 })
+                local ok, clients = pcall(
+                  require('util').lsp.get_clients,
+                  { name = 'copilot', bufnr = 0 }
+                )
                 if not ok then
                   return false
                 end
                 return ok and #clients > 0
               end,
               color = function()
-                if not package.loaded["copilot"] then
+                if not package.loaded['copilot'] then
                   return
                 end
-                local status = require("copilot.api").status.data
+                local status = require('copilot.api').status.data
                 local colors = {
-                  [""] = Util.ui.fg("Special"),
-                  ["Normal"] = Util.ui.fg("Special"),
-                  ["Warning"] = Util.ui.fg("DiagnosticError"),
-                  ["InProgress"] = Util.ui.fg("DiagnosticWarn"),
+                  [''] = Util.ui.fg('Special'),
+                  ['Normal'] = Util.ui.fg('Special'),
+                  ['Warning'] = Util.ui.fg('DiagnosticError'),
+                  ['InProgress'] = Util.ui.fg('DiagnosticWarn'),
                 }
-                return colors[status.status] or colors[""]
+                return colors[status.status] or colors['']
               end,
             },
           },
@@ -223,9 +267,9 @@ return {
             },
           },
           lualine_z = {
-            "filesize",
-            "location",
-            "progress",
+            'filesize',
+            'location',
+            'progress',
             { 'fileformat', symbols = Icon.lualine.symbols },
             function()
               return Icon.clock .. os.date('%R')
@@ -244,18 +288,10 @@ return {
       indent = Icon.indent,
       scope = { enabled = false },
       exclude = {
+        -- stylua: ignore
         filetypes = {
-          'help',
-          'alpha',
-          'dashboard',
-          'neo-tree',
-          'Trouble',
-          'trouble',
-          'lazy',
-          'mason',
-          'notify',
-          'toggleterm',
-          'lazyterm',
+          'help', 'alpha', 'dashboard', 'neo-tree', 'Trouble', 'trouble',
+          'lazy', 'mason', 'notify', 'toggleterm', 'lazyterm',
         },
       },
     },
@@ -267,7 +303,7 @@ return {
   -- the highlighting.
   {
     'echasnovski/mini.indentscope',
-    version = false,                                        -- wait till new 0.7.0 release to put it back on semver
+    version = false, -- wait till new 0.7.0 release to put it back on semver
     event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' }, -- LazyFile
     opts = {
       symbol = Icon.indent.char,
@@ -275,7 +311,11 @@ return {
     },
     init = function()
       vim.api.nvim_create_autocmd('FileType', {
-        pattern = { 'help', 'alpha', 'dashboard', 'nvim-tree', 'Trouble', 'trouble', 'lazy', 'mason', 'notify', 'toggleterm', 'lazyterm' },
+        -- stylua: ignore
+        pattern = {
+          'help', 'alpha', 'dashboard', 'nvim-tree', 'Trouble', 'trouble',
+          'lazy', 'mason', 'notify', 'toggleterm', 'lazyterm',
+        },
         callback = function()
           ---@diagnostic disable-next-line: inject-field
           vim.b.miniindentscope_disable = true
@@ -288,13 +328,13 @@ return {
   { 'nvim-tree/nvim-web-devicons', lazy = true },
 
   -- UI components
-  { 'MunifTanjim/nui.nvim',        lazy = true },
+  { 'MunifTanjim/nui.nvim', lazy = true },
 
   -- Highly experimental plugin that completely replaces the UI for messages, cmdline and the popupmenu.
   {
     'folke/noice.nvim',
     event = 'VeryLazy',
-    dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
+    dependencies = { 'MunifTanjim/nui.nvim', 'rcarriga/nvim-notify' },
     opts = {
       lsp = {
         progress = {
@@ -425,7 +465,7 @@ return {
       },
       handlers = {
         gitsigns = true,
-      }
+      },
     },
   },
 
@@ -439,18 +479,22 @@ return {
         'luukvbaal/statuscol.nvim',
         config = function()
           local builtin = require('statuscol.builtin')
-          require("statuscol").setup({
+          require('statuscol').setup({
             relculright = true,
-            segments = { {
-              text = { builtin.foldfunc },
-              click = "v:lua.ScFa"
-            }, {
-              text = { "%s" },
-              click = "v:lua.ScSa"
-            }, {
-              text = { builtin.lnumfunc, " " },
-              click = "v:lua.ScLa"
-            } }
+            segments = {
+              {
+                text = { builtin.foldfunc },
+                click = 'v:lua.ScFa',
+              },
+              {
+                text = { '%s' },
+                click = 'v:lua.ScSa',
+              },
+              {
+                text = { builtin.lnumfunc, ' ' },
+                click = 'v:lua.ScLa',
+              },
+            },
           })
         end,
       },
@@ -513,17 +557,21 @@ return {
         end,
       })
 
-      vim.keymap.set('n', 'zR', ufo.openAllFolds, { desc = "Open All Folds" })
-      vim.keymap.set('n', 'zM', ufo.closeAllFolds, { desc = "Close All Folds" })
-      vim.keymap.set('n', 'zr', ufo.openFoldsExceptKinds, { desc = "Open Folds" })
-      -- vim.keymap.set('n', 'zm', ufo.closeFoldWith, { desc = "Close Fold With" })
-      vim.keymap.set('n', 'K',
-        function()
-          local winid = require('ufo').peekFoldedLinesUnderCursor()
-          if not winid then vim.lsp.buf.hover() end
-        end,
-        { desc = "Peek Folded Lines" }
+      vim.keymap.set('n', 'zR', ufo.openAllFolds, { desc = 'Open All Folds' })
+      vim.keymap.set('n', 'zM', ufo.closeAllFolds, { desc = 'Close All Folds' })
+      vim.keymap.set(
+        'n',
+        'zr',
+        ufo.openFoldsExceptKinds,
+        { desc = 'Open Folds' }
       )
-    end
+      -- vim.keymap.set('n', 'zm', ufo.closeFoldWith, { desc = "Close Fold With" })
+      vim.keymap.set('n', 'K', function()
+        local winid = require('ufo').peekFoldedLinesUnderCursor()
+        if not winid then
+          vim.lsp.buf.hover()
+        end
+      end, { desc = 'Peek Folded Lines' })
+    end,
   },
 }

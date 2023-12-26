@@ -8,7 +8,6 @@ end
 opt.showmode = true
 vim.notify(vim.api.nvim_get_mode().mode)
 
-
 -- vim.api.nvim_create_autocmd({ 'ModeChanged' }, {
 --   group = augroup('test'),
 --   command = 'lua vim.notify(vim.api.nvim_get_mode().mode)',

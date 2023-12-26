@@ -1,7 +1,7 @@
 {
-    "workspace.checkThirdParty": false,
-    "diagnostics.globals": [
-        "vim",
-        "vscode"
-    ]
+  "workspace.checkThirdParty": false,
+  "diagnostics.globals": [
+    "vim",
+    "vscode"
+  ]
 }

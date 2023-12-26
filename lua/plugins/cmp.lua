@@ -1,7 +1,11 @@
 local Icons = require('icons')
 local keybinds = require('keymaps')
 local function t(keys)
-  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(keys, true, true, true), 'm', true)
+  vim.api.nvim_feedkeys(
+    vim.api.nvim_replace_termcodes(keys, true, true, true),
+    'm',
+    true
+  )
 end
 local function can_execute(arg)
   return vim.fn[arg]() == 1
@@ -41,12 +45,16 @@ return {
       },
     },
     opts = function()
-      vim.api.nvim_set_hl(0, 'CmpGhostText', { link = 'Comment', default = true })
+      vim.api.nvim_set_hl(
+        0,
+        'CmpGhostText',
+        { link = 'Comment', default = true }
+      )
       local cmp = require('cmp')
       local defaults = require('cmp.config.default')()
       local sources = {
         { name = 'ultisnips', priority = 100 },
-        { name = 'nvim_lsp',  priority = 90 },
+        { name = 'nvim_lsp', priority = 90 },
         {
           name = 'buffer',
           option = {
@@ -125,7 +133,10 @@ return {
               end
             end,
           },
-          ['<CR>'] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = false }),
+          ['<CR>'] = cmp.mapping.confirm({
+            behavior = cmp.ConfirmBehavior.Insert,
+            select = false,
+          }),
           ['<C-.>'] = {
             i = function()
               if cmp.visible() then
@@ -157,15 +168,18 @@ return {
       cmp.setup.cmdline({ '/', '?' }, {
         mapping = cmp.mapping.preset.cmdline(),
         sources = {
-          { name = 'buffer', opts = { keyword_pattern = [=[[^[:blank:]].*]=] } },
+          {
+            name = 'buffer',
+            opts = { keyword_pattern = [=[[^[:blank:]].*]=] },
+          },
         },
       })
       cmp.setup.cmdline(':', {
         mapping = cmp.mapping.preset.cmdline(),
         sources = cmp.config.sources({
           { name = 'cmdline_history', priority = 100 },
-          { name = 'cmdline',         priority = 90 },
-          { name = 'path',            priority = 80 },
+          { name = 'cmdline', priority = 90 },
+          { name = 'path', priority = 80 },
         }),
       })
     end,

@@ -52,7 +52,11 @@ return {
       },
     },
     keys = {
-      { '<LEADER>e', '<CMD>NvimTreeFindFileToggle<CR>', desc = 'Explorer Find File' },
+      {
+        '<LEADER>e',
+        '<CMD>NvimTreeFindFileToggle<CR>',
+        desc = 'Explorer Find File',
+      },
     },
     config = function()
       require('nvim-tree').setup({
@@ -127,14 +131,20 @@ return {
             quit_on_open = true,
             resize_window = true,
             window_picker = {
-              chars = "FJDKSLA;"
+              chars = 'FJDKSLA;',
             },
-          }
+          },
         },
         on_attach = function(bufnr)
           local api = require('nvim-tree.api')
           local function opts(desc)
-            return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+            return {
+              desc = 'nvim-tree: ' .. desc,
+              buffer = bufnr,
+              noremap = true,
+              silent = true,
+              nowait = true,
+            }
           end
           local FloatPreview = require('float-preview')
           FloatPreview.attach_nvimtree(bufnr)
@@ -143,19 +153,54 @@ return {
           vim.keymap.set('n', 'o', api.node.run.system, opts('System Open'))
           -- vim.keymap.set('n', '<tab>', api.node.open.preview, opts('Preview'))
           vim.keymap.set('n', 't', api.node.open.tab, opts('Open in New Tab'))
-          vim.keymap.set('n', 'v', api.node.open.vertical, opts('Open in VSplit'))
-          vim.keymap.set('n', 'h', api.node.open.horizontal, opts('Open in Split'))
+          vim.keymap.set(
+            'n',
+            'v',
+            api.node.open.vertical,
+            opts('Open in VSplit')
+          )
+          vim.keymap.set(
+            'n',
+            'h',
+            api.node.open.horizontal,
+            opts('Open in Split')
+          )
           --
-          vim.keymap.set('n', 'I', api.tree.toggle_gitignore_filter, opts('Toggle Git Ignored'))
-          vim.keymap.set('n', '.', api.tree.toggle_hidden_filter, opts('Toggle Dotfiles'))
-          vim.keymap.set('n', 'u', api.tree.toggle_custom_filter, opts('Toggle Custom files'))
-          vim.keymap.set('n', 'i', api.node.show_info_popup, opts('Toggle File Info'))
+          vim.keymap.set(
+            'n',
+            'I',
+            api.tree.toggle_gitignore_filter,
+            opts('Toggle Git Ignored')
+          )
+          vim.keymap.set(
+            'n',
+            '.',
+            api.tree.toggle_hidden_filter,
+            opts('Toggle Dotfiles')
+          )
+          vim.keymap.set(
+            'n',
+            'u',
+            api.tree.toggle_custom_filter,
+            opts('Toggle Custom files')
+          )
+          vim.keymap.set(
+            'n',
+            'i',
+            api.node.show_info_popup,
+            opts('Toggle File Info')
+          )
           vim.keymap.set('n', '?', api.tree.toggle_help, opts('Toggle Help'))
 
           vim.keymap.set('n', 'R', api.tree.reload, opts('Refresh'))
           --
           vim.keymap.set('n', 'f', api.live_filter.start, opts('Live Filter'))
-          vim.keymap.set('n', 'F', api.live_filter.clear, opts('Clear Live Filter'))
+          vim.keymap.set(
+            'n',
+            'F',
+            api.live_filter.clear,
+            opts('Clear Live Filter')
+          )
           vim.keymap.set('n', ']', api.tree.change_root_to_node, opts('cd'))
           vim.keymap.set('n', '[', api.node.navigate.parent, opts('Dir Up'))
 
@@ -167,7 +212,12 @@ return {
           vim.keymap.set('n', 'p', api.fs.paste, opts('Paste'))
           vim.keymap.set('n', 'y', api.fs.copy.filename, opts('Copy Name'))
           vim.keymap.set('n', 'Y', api.fs.copy.relative_path, opts('Copy Path'))
-          vim.keymap.set('n', 'gy', api.fs.copy.absolute_path, opts('Copy Abs Path'))
+          vim.keymap.set(
+            'n',
+            'gy',
+            api.fs.copy.absolute_path,
+            opts('Copy Abs Path')
+          )
         end,
       })
     end,
@@ -234,9 +284,9 @@ return {
       },
       -- git
       { '<LEADER>sc', '<CMD>Telescope git_commits<CR>', desc = 'commits' },
-      { '<LEADER>ss', '<CMD>Telescope git_status<CR>',  desc = 'status' },
+      { '<LEADER>ss', '<CMD>Telescope git_status<CR>', desc = 'status' },
       -- search
-      { '<LEADER>s"', '<CMD>Telescope registers<CR>',   desc = 'Registers' },
+      { '<LEADER>s"', '<CMD>Telescope registers<CR>', desc = 'Registers' },
       {
         '<LEADER>sa',
         '<CMD>Telescope autocommands<CR>',
@@ -257,8 +307,8 @@ return {
         '<CMD>Telescope highlights<CR>',
         desc = 'Search Highlight Groups',
       },
-      { '<LEADER>sk', '<CMD>Telescope keymaps<CR>',     desc = 'Key Maps' },
-      { '<LEADER>sm', '<CMD>Telescope marks<CR>',       desc = 'Jump to Mark' },
+      { '<LEADER>sk', '<CMD>Telescope keymaps<CR>', desc = 'Key Maps' },
+      { '<LEADER>sm', '<CMD>Telescope marks<CR>', desc = 'Jump to Mark' },
       { '<LEADER>so', '<CMD>Telescope vim_options<CR>', desc = 'Options' },
       {
         '<LEADER>uC',
@@ -374,7 +424,10 @@ return {
       local function map(key, dir, buffer)
         vim.keymap.set('n', key, function()
           require('illuminate')['goto_' .. dir .. '_reference'](false)
-        end, { desc = dir:sub(1, 1):upper() .. dir:sub(2) .. ' Reference', buffer = buffer })
+        end, {
+          desc = dir:sub(1, 1):upper() .. dir:sub(2) .. ' Reference',
+          buffer = buffer,
+        })
       end
 
       map(']]', 'next')
@@ -403,10 +456,26 @@ return {
     cmd = { 'TroubleToggle', 'Trouble' },
     opts = { use_diagnostic_signs = true },
     keys = {
-      { '<LEADER>xx', '<CMD>TroubleToggle document_diagnostics<CR>',  desc = 'Document Diagnostics (Trouble)' },
-      { '<LEADER>xX', '<CMD>TroubleToggle workspace_diagnostics<CR>', desc = 'Workspace Diagnostics (Trouble)' },
-      { '<LEADER>xl', '<CMD>TroubleToggle loclist<CR>',               desc = 'Location List (Trouble)' },
-      { '<LEADER>xq', '<CMD>TroubleToggle quickfix<CR>',              desc = 'Quickfix List (Trouble)' },
+      {
+        '<LEADER>xx',
+        '<CMD>TroubleToggle document_diagnostics<CR>',
+        desc = 'Document Diagnostics (Trouble)',
+      },
+      {
+        '<LEADER>xX',
+        '<CMD>TroubleToggle workspace_diagnostics<CR>',
+        desc = 'Workspace Diagnostics (Trouble)',
+      },
+      {
+        '<LEADER>xl',
+        '<CMD>TroubleToggle loclist<CR>',
+        desc = 'Location List (Trouble)',
+      },
+      {
+        '<LEADER>xq',
+        '<CMD>TroubleToggle quickfix<CR>',
+        desc = 'Quickfix List (Trouble)',
+      },
       {
         '[q',
         function()
@@ -448,9 +517,21 @@ return {
     opts = {
       keywords = {
         TODO = { icon = Icon.todo_comments.TODO, color = 'info' },
-        NOTE = { icon = Icon.todo_comments.NOTE, color = 'hint', alt = { 'INFO', 'NOTE' } },
-        WARN = { icon = Icon.todo_comments.WARN, color = 'warning', alt = { 'WARNING', 'XXX' } },
-        FIX = { icon = Icon.todo_comments.FIX, color = 'error', alt = { 'FIXME', 'BUG', 'FIXIT', 'ISSUE' } },
+        NOTE = {
+          icon = Icon.todo_comments.NOTE,
+          color = 'hint',
+          alt = { 'INFO', 'NOTE' },
+        },
+        WARN = {
+          icon = Icon.todo_comments.WARN,
+          color = 'warning',
+          alt = { 'WARNING', 'XXX' },
+        },
+        FIX = {
+          icon = Icon.todo_comments.FIX,
+          color = 'error',
+          alt = { 'FIXME', 'BUG', 'FIXIT', 'ISSUE' },
+        },
       },
       highlight = {
         pattern = [[.*<(KEYWORDS)]],
@@ -487,7 +568,17 @@ return {
     opts = {
       manual_mode = true,
       detection_methods = { 'lsp', 'pattern' },
-      patterns = { '.git', '_darcs', '.hg', '.bzr', '.svn', 'Makefile', 'package.json', '.sln', '.vim' },
+      patterns = {
+        '.git',
+        '_darcs',
+        '.hg',
+        '.bzr',
+        '.svn',
+        'Makefile',
+        'package.json',
+        '.sln',
+        '.vim',
+      },
       silent_chdir = true,
     },
     event = 'VeryLazy',
@@ -563,8 +654,20 @@ return {
           vim.cmd('startinsert!')
           local opt = { noremap = true, silent = true }
           -- q / <leader>tg 关闭 terminal
-          vim.api.nvim_buf_set_keymap(term.bufnr, 'n', 'q', '<CMD>close<CR>', opt)
-          vim.api.nvim_buf_set_keymap(term.bufnr, 'n', '<A-g>', '<CMD>close<CR>', opt)
+          vim.api.nvim_buf_set_keymap(
+            term.bufnr,
+            'n',
+            'q',
+            '<CMD>close<CR>',
+            opt
+          )
+          vim.api.nvim_buf_set_keymap(
+            term.bufnr,
+            'n',
+            '<A-g>',
+            '<CMD>close<CR>',
+            opt
+          )
           -- ESC ���取消，留给gitui
           if vim.fn.mapcheck('<Esc>', 't') ~= '' then
             vim.api.nvim_del_keymap('t', '<Esc>')
@@ -592,7 +695,12 @@ return {
         gitui:toggle()
       end
 
-      vim.keymap.set({ 'n', 't' }, 'tg', '<CMD>lua gitui_toggle()<CR>', { desc = 'Toggle GitUI' })
+      vim.keymap.set(
+        { 'n', 't' },
+        'tg',
+        '<CMD>lua gitui_toggle()<CR>',
+        { desc = 'Toggle GitUI' }
+      )
       vim.keymap.set(
         { 'n', 't' },
         'tt',
@@ -611,11 +719,13 @@ return {
 
   -- Outline
   {
-    "simrat39/symbols-outline.nvim",
-    keys = { { "<LEADER>cs", "<CMD>SymbolsOutline<CR>", desc = "Symbols Outline" } },
-    cmd = "SymbolsOutline",
+    'simrat39/symbols-outline.nvim',
+    keys = {
+      { '<LEADER>cs', '<CMD>SymbolsOutline<CR>', desc = 'Symbols Outline' },
+    },
+    cmd = 'SymbolsOutline',
     opts = function()
-      local defaults = require("symbols-outline.config").defaults
+      local defaults = require('symbols-outline.config').defaults
       local opts = {
         show_guides = false,
         relative_width = false,
@@ -624,42 +734,42 @@ return {
         auto_unfold_hover = true,
         fold_markers = { Icon.fillchars.foldclose, Icon.fillchars.foldopen },
         keymaps = {
-          close = { "<ESC>", "q" },
-          goto_location = "<CR>",
-          focus_location = "<TAB>",
-          hover_symbol = "h",
-          rename_symbol = "<LEADER>r",
-          code_actions = "<LEADER>ca",
-          fold = "c",
-          unfold = "o",
-          fold_all = "zM",
-          unfold_all = "zR",
-          fold_reset = "R",
+          close = { '<ESC>', 'q' },
+          goto_location = '<CR>',
+          focus_location = '<TAB>',
+          hover_symbol = 'h',
+          rename_symbol = '<LEADER>r',
+          code_actions = '<LEADER>ca',
+          fold = 'c',
+          unfold = 'o',
+          fold_all = 'zM',
+          unfold_all = 'zR',
+          fold_reset = 'R',
         },
         symbols = {},
         symbol_blacklist = {},
       }
       local filter = {
         default = {
-          "Class",
-          "Constructor",
-          "Enum",
-          "Field",
-          "Function",
-          "Interface",
-          "Method",
-          "Module",
-          "Namespace",
-          "Package",
-          "Property",
-          "Struct",
-          "Trait",
-        }
+          'Class',
+          'Constructor',
+          'Enum',
+          'Field',
+          'Function',
+          'Interface',
+          'Method',
+          'Module',
+          'Namespace',
+          'Package',
+          'Property',
+          'Struct',
+          'Trait',
+        },
       }
 
-      if type(filter) == "table" then
+      if type(filter) == 'table' then
         filter = filter.default
-        if type(filter) == "table" then
+        if type(filter) == 'table' then
           for kind, symbol in pairs(defaults.symbols) do
             opts.symbols[kind] = {
               icon = Icon.navic[kind] or symbol.icon,
@@ -673,5 +783,5 @@ return {
       end
       return opts
     end,
-  }
+  },
 }

@@ -49,18 +49,19 @@ return {
     opts = {
       highlight = { enable = true },
       indent = { enable = true },
+      -- stylua: ignore
       ensure_installed = {
-        "arduino", "bash", "c", "c_sharp", "cmake", "comment", "cpp", "css",
-        "csv", "cuda", "diff", "dockerfile", "dot", "fish", "git_config",
-        "git_rebase", "gitattributes", "gitcommit", "gitignore", "go", "html",
-        "htmldjango", "http", "hurl", "ini", "java", "javascript", "jsdoc",
-        "json", "json5", "JSON", "jsonnet", "julia", "kconfig", "latex", "lua",
-        "luadoc", "lua", "luau", "make", "markdown", "markdown_inline",
-        "matlab", "mermaid", "ninja", "objc", "pascal", "passwd", "pem", "perl",
-        "php", "phpdoc", "psv", "purescript", "python", "r", "regex", "ruby",
-        "rust", "scala", "scfg", "scheme", "sql", "ssh_config", "swift",
-        "systemtap", "todotxt", "toml", "tsv", "tsx", "typescript", "vim",
-        "vimdoc", "vue", "xml", "yaml",
+        'arduino', 'bash', 'c', 'c_sharp', 'cmake', 'comment', 'cpp',
+        'css', 'csv', 'cuda', 'diff', 'dockerfile', 'dot', 'fish', 'git_config',
+        'git_rebase', 'gitattributes', 'gitcommit', 'gitignore', 'go', 'html',
+        'htmldjango', 'http', 'hurl', 'ini', 'java', 'javascript', 'jsdoc',
+        'json', 'json5', 'JSON', 'jsonnet', 'julia', 'kconfig', 'latex', 'lua',
+        'luadoc', 'lua', 'luau', 'make', 'markdown', 'markdown_inline',
+        'matlab', 'mermaid', 'ninja', 'objc', 'pascal', 'passwd', 'pem', 'perl',
+        'php', 'phpdoc', 'psv', 'purescript', 'python', 'r', 'regex', 'ruby',
+        'rust', 'scala', 'scfg', 'scheme', 'sql', 'ssh_config', 'swift',
+        'systemtap', 'todotxt', 'toml', 'tsv', 'tsx', 'typescript', 'vim',
+        'vimdoc', 'vue', 'xml', 'yaml',
       },
 
       incremental_selection = {
@@ -81,17 +82,51 @@ return {
           lookahead = true,
           keymaps = {
             -- You can use the capture groups defined in textobjects.scm
-            ['af'] = { query = '@function.outer', desc = 'Select outer part of a function region' },
-            ['if'] = { query = '@function.inner', desc = 'Select inner part of a function region' },
-            ['ac'] = { query = '@class.outer', desc = 'Select outer part of a class region' },
-            ['ic'] = { query = '@class.inner', desc = 'Select outer part of a class region' },
-            ['ai'] = { query = '@conditional.outer', desc = 'Select outer part of a conditional region' },
-            ['ii'] = { query = '@conditional.inner', desc = 'Select outer part of a conditional region' },
-            ['al'] = { query = '@loop.outer', desc = 'Select outer part of a loop region' },
-            ['il'] = { query = '@loop.inner', desc = 'Select outer part of a loop region' },
-            ['ab'] = { query = '@block.outer', desc = 'Select outer part of a block region' },
-            ['ib'] = { query = '@block.inner', desc = 'Select outer part of a block region' },
-            ['as'] = { query = '@scope', query_group = 'locals', desc = 'Select language scope' },
+            ['af'] = {
+              query = '@function.outer',
+              desc = 'Select outer part of a function region',
+            },
+            ['if'] = {
+              query = '@function.inner',
+              desc = 'Select inner part of a function region',
+            },
+            ['ac'] = {
+              query = '@class.outer',
+              desc = 'Select outer part of a class region',
+            },
+            ['ic'] = {
+              query = '@class.inner',
+              desc = 'Select outer part of a class region',
+            },
+            ['ai'] = {
+              query = '@conditional.outer',
+              desc = 'Select outer part of a conditional region',
+            },
+            ['ii'] = {
+              query = '@conditional.inner',
+              desc = 'Select outer part of a conditional region',
+            },
+            ['al'] = {
+              query = '@loop.outer',
+              desc = 'Select outer part of a loop region',
+            },
+            ['il'] = {
+              query = '@loop.inner',
+              desc = 'Select outer part of a loop region',
+            },
+            ['ab'] = {
+              query = '@block.outer',
+              desc = 'Select outer part of a block region',
+            },
+            ['ib'] = {
+              query = '@block.inner',
+              desc = 'Select outer part of a block region',
+            },
+            ['as'] = {
+              query = '@scope',
+              query_group = 'locals',
+              desc = 'Select language scope',
+            },
           },
 
           -- You can choose the select mode (default is charwise 'v')
@@ -103,7 +138,7 @@ return {
           -- mapping query_strings to modes.
           selection_modes = {
             ['@parameter.outer'] = 'v', -- charwise
-            ['@function.outer'] = 'V',  -- linewise
+            ['@function.outer'] = 'V', -- linewise
             ['@class.outer'] = '<c-v>', -- blockwise
           },
           -- If you set this to `true` (default is `false`) then any textobject is
@@ -119,10 +154,22 @@ return {
         },
         move = {
           enable = true,
-          goto_next_start = { [']f'] = '@function.outer', [']c'] = '@class.outer' },
-          goto_next_end = { [']F'] = '@function.outer', [']C'] = '@class.outer' },
-          goto_previous_start = { ['[f'] = '@function.outer', ['[c'] = '@class.outer' },
-          goto_previous_end = { ['[F'] = '@function.outer', ['[C'] = '@class.outer' },
+          goto_next_start = {
+            [']f'] = '@function.outer',
+            [']c'] = '@class.outer',
+          },
+          goto_next_end = {
+            [']F'] = '@function.outer',
+            [']C'] = '@class.outer',
+          },
+          goto_previous_start = {
+            ['[f'] = '@function.outer',
+            ['[c'] = '@class.outer',
+          },
+          goto_previous_end = {
+            ['[F'] = '@function.outer',
+            ['[C'] = '@class.outer',
+          },
         },
       },
     },

@@ -13,36 +13,56 @@ function M.get()
   end
   M._keys = {
     {
-      "gd",
-      function() require("telescope.builtin").lsp_definitions({ reuse_win = true }) end,
-      desc = "Goto Definition",
-      has = "definition"
+      'gd',
+      function()
+        require('telescope.builtin').lsp_definitions({ reuse_win = true })
+      end,
+      desc = 'Goto Definition',
+      has = 'definition',
     },
     {
-      "gr",
-      function() require('telescope.builtin').lsp_references(require('telescope.themes').get_dropdown()) end,
-      desc = "References"
+      'gr',
+      function()
+        require('telescope.builtin').lsp_references(
+          require('telescope.themes').get_dropdown()
+        )
+      end,
+      desc = 'References',
     },
-    { "gD", vim.lsp.buf.declaration,     desc = "Goto Declaration" },
+    { 'gD', vim.lsp.buf.declaration, desc = 'Goto Declaration' },
     {
-      "gI",
-      function() require("telescope.builtin").lsp_implementations({ reuse_win = true }) end,
-      desc = "Goto Implementation"
+      'gI',
+      function()
+        require('telescope.builtin').lsp_implementations({ reuse_win = true })
+      end,
+      desc = 'Goto Implementation',
     },
     {
-      "gy",
-      function() require("telescope.builtin").lsp_type_definitions({ reuse_win = true }) end,
-      desc = "Goto T[y]pe Definition"
+      'gy',
+      function()
+        require('telescope.builtin').lsp_type_definitions({ reuse_win = true })
+      end,
+      desc = 'Goto T[y]pe Definition',
     },
-    { "gh", vim.lsp.buf.hover,           desc = "Hover" },
-    { "gH", vim.lsp.buf.signature_help,  desc = "Signature Help",  has = "signatureHelp" },
-    { "gt", vim.lsp.buf.type_definition, desc = "Type definition" },
+    { 'gh', vim.lsp.buf.hover, desc = 'Hover' },
     {
-      "gp",
+      'gH',
+      vim.lsp.buf.signature_help,
+      desc = 'Signature Help',
+      has = 'signatureHelp',
+    },
+    { 'gt', vim.lsp.buf.type_definition, desc = 'Type definition' },
+    {
+      'gp',
       function()
         local opts = {
           focusable = false,
-          close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+          close_events = {
+            'BufLeave',
+            'CursorMoved',
+            'InsertEnter',
+            'FocusLost',
+          },
           border = 'rounded',
           source = 'always',
           prefix = ' ',
@@ -50,39 +70,49 @@ function M.get()
         }
         vim.diagnostic.open_float(nil, opts)
       end,
-      desc = "Popup diagnostic info"
+      desc = 'Popup diagnostic info',
     },
     -- { "<LEADER>f",  function() vim.lsp.buf.format({ async = true }) end, desc = "Format" },
-    { "<LEADER>ca", vim.lsp.buf.code_action,                             desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },
     {
-      "<LEADER>cA",
+      '<LEADER>ca',
+      vim.lsp.buf.code_action,
+      desc = 'Code Action',
+      mode = { 'n', 'v' },
+      has = 'codeAction',
+    },
+    {
+      '<LEADER>cA',
       function()
         vim.lsp.buf.code_action({
           context = {
             only = {
-              "source",
+              'source',
             },
             diagnostics = {},
           },
         })
       end,
-      desc = "Source Action",
-      has = "codeAction",
-    }
+      desc = 'Source Action',
+      has = 'codeAction',
+    },
   }
   if require('util').has('inc-rename.nvim') then
     M._keys[#M._keys + 1] = {
       '<LEADER>r',
       function()
         local inc_rename = require('inc_rename')
-        return ':' .. inc_rename.config.cmd_name .. ' ' .. vim.fn.expand('<cword>')
+        return ':'
+          .. inc_rename.config.cmd_name
+          .. ' '
+          .. vim.fn.expand('<cword>')
       end,
       expr = true,
       desc = 'Rename',
       has = 'rename',
     }
   else
-    M._keys[#M._keys + 1] = { '<LEADER>r', vim.lsp.buf.rename, desc = 'Rename', has = 'rename' }
+    M._keys[#M._keys + 1] =
+      { '<LEADER>r', vim.lsp.buf.rename, desc = 'Rename', has = 'rename' }
   end
   return M._keys
 end
@@ -109,7 +139,8 @@ function M.resolve(buffer)
   local opts = require('util').opts('nvim-lspconfig')
   local clients = require('util').lsp.get_clients({ bufnr = buffer })
   for _, client in ipairs(clients) do
-    local maps = opts.servers[client.name] and opts.servers[client.name].keys or {}
+    local maps = opts.servers[client.name] and opts.servers[client.name].keys
+      or {}
     vim.list_extend(spec, maps)
   end
   return Keys.resolve(spec)

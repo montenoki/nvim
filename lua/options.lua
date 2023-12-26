@@ -2,55 +2,56 @@ local Icons = require('icons')
 local opt = vim.opt
 local tab_width = 2
 
-opt.autowrite = true           -- Enable auto write
-opt.clipboard = 'unnamedplus'  -- Sync with system clipboard
-opt.colorcolumn = '81'         -- Line length marker
+opt.autowrite = true -- Enable auto write
+opt.clipboard = 'unnamedplus' -- Sync with system clipboard
+opt.colorcolumn = '81' -- Line length marker
 opt.completeopt = 'menu,menuone,noselect,noinsert'
-opt.conceallevel = 3           -- ? Hide * markup for bold and italic
-opt.confirm = true             -- Confirm to save changes before exiting modified buffer
-opt.cursorline = true          -- Enable highlighting of the current line
-opt.expandtab = true           -- Use spaces instead of tabs
+opt.conceallevel = 3 -- ? Hide * markup for bold and italic
+opt.confirm = true -- Confirm to save changes before exiting modified buffer
+opt.cursorline = true -- Enable highlighting of the current line
+opt.expandtab = true -- Use spaces instead of tabs
 opt.formatoptions = 'jcroqlnt' -- ? tcqj
 opt.grepformat = '%f:%l:%c:%m' -- ?
-opt.grepprg = 'rg --vimgrep'   -- ?
-opt.ignorecase = true          -- Ignore case
-opt.inccommand = 'nosplit'     -- ? preview incremental substitute
-opt.laststatus = 3             -- global statusline
-opt.list = true                -- Show some invisible characters (tabs...
+opt.grepprg = 'rg --vimgrep' -- ?
+opt.ignorecase = true -- Ignore case
+opt.inccommand = 'nosplit' -- ? preview incremental substitute
+opt.laststatus = 3 -- global statusline
+opt.list = true -- Show some invisible characters (tabs...
 opt.listchars = Icons.listchars
-opt.mouse = 'a'            -- Enable mouse mode
-opt.number = true          -- Print line number
-opt.pumblend = 10          -- Popup blend
-opt.pumheight = 5          -- Maximum number of entries in a popup
-opt.relativenumber = true  -- Relative line numbers
-opt.scrolloff = 4          -- Lines of context
-opt.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
-opt.shiftround = true      -- Round indent
+opt.mouse = 'a' -- Enable mouse mode
+opt.number = true -- Print line number
+opt.pumblend = 10 -- Popup blend
+opt.pumheight = 5 -- Maximum number of entries in a popup
+opt.relativenumber = true -- Relative line numbers
+opt.scrolloff = 4 -- Lines of context
+opt.sessionoptions =
+  'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions'
+opt.shiftround = true -- Round indent
 opt.shiftwidth = tab_width -- Size of an indent
 opt.shortmess:append({ W = true, I = true, c = true, C = true })
-opt.showmode = false       -- Dont show mode since we have a statusline
-opt.sidescrolloff = 4      -- Columns of context
-opt.signcolumn = 'yes'     -- Always show the signcolumn, otherwise it would shift the text each time
-opt.smartcase = true       -- Don't ignore case with capitals
-opt.smartindent = true     -- Insert indents automatically
+opt.showmode = false -- Dont show mode since we have a statusline
+opt.sidescrolloff = 4 -- Columns of context
+opt.signcolumn = 'yes' -- Always show the signcolumn, otherwise it would shift the text each time
+opt.smartcase = true -- Don't ignore case with capitals
+opt.smartindent = true -- Insert indents automatically
 opt.spelllang = { 'en' }
-opt.splitbelow = true      -- Put new windows below current
+opt.splitbelow = true -- Put new windows below current
 opt.splitkeep = 'screen'
-opt.splitright = true      -- Put new windows right of current
-opt.tabstop = tab_width    -- Number of spaces tabs count for
-opt.termguicolors = true   -- True color support
-opt.timeout = true         -- Enable timeout
+opt.splitright = true -- Put new windows right of current
+opt.tabstop = tab_width -- Number of spaces tabs count for
+opt.termguicolors = true -- True color support
+opt.timeout = true -- Enable timeout
 opt.timeoutlen = 500
 opt.undofile = true
 opt.undolevels = 10000
-opt.updatetime = 100               -- Save swap file and trigger CursorHold
-opt.virtualedit = 'block'          -- Allow cursor to move where there is no text in visual block mode
-opt.whichwrap = '<,>,[,]'          -- Use arrow key to move next line when cursor at end of line
+opt.updatetime = 100 -- Save swap file and trigger CursorHold
+opt.virtualedit = 'block' -- Allow cursor to move where there is no text in visual block mode
+opt.whichwrap = '<,>,[,]' -- Use arrow key to move next line when cursor at end of line
 opt.wildmode = 'longest:full,full' -- Command-line completion mode
-opt.winminwidth = 5                -- Minimum window width
-opt.wrap = true                    -- Disable line wrap
+opt.winminwidth = 5 -- Minimum window width
+opt.wrap = true -- Disable line wrap
 opt.fillchars = Icons.fillchars
-vim.opt.virtualedit = "onemore"    -- fix the problem that cant see last char when scrollbar on.
+vim.opt.virtualedit = 'onemore' -- fix the problem that cant see last char when scrollbar on.
 
 if vim.fn.has('nvim-0.10') == 1 then
   opt.smoothscroll = true
@@ -84,15 +85,14 @@ vim.g.markdown_recommended_style = 0
 -- Powershell Setting for Windows
 local powershell_options = {
   shell = vim.fn.executable('pwsh') == 1 and 'pwsh' or 'powershell',
-  shellcmdflag =
-  '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;',
+  shellcmdflag = '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;',
   shellredir = '-RedirectStandardOutput %s -NoNewWindow -Wait',
   shellpipe = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode',
   shellquote = '',
   shellxquote = '',
 }
 local os_name = vim.loop.os_uname().sysname
-if string.find(os_name, "Windows") then
+if string.find(os_name, 'Windows') then
   for option, value in pairs(powershell_options) do
     vim.opt[option] = value
   end

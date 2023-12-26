@@ -245,7 +245,7 @@ return {
     cmd = 'Mason',
     build = ':MasonUpdate',
     opts = {
-      ensure_installed = {},
+      ensure_installed = { 'taplo', 'shfmt' },
       ui = { icons = Icon.mason },
     },
     config = function(_, opts)
