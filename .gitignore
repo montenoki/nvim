@@ -1,5 +1,5 @@
 plugin/packer_compiled.lua
 .DS_Store
 lazy-lock.json
-flg/enable/lite_mode.flg
-flg/enable/copilot.flg
+flg/enabled/*
+!flg/enabled/.gitkeep

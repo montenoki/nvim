@@ -21,8 +21,8 @@ return {
           -- window config
           window = {
             style = 'minimal',
-            relative = 'win',
             border = 'rounded',
+            relative = 'win',
             wrap = false,
           },
           mapping = {
@@ -561,7 +561,6 @@ return {
       { "<LEADER>sT", "<CMD>TodoTelescope keywords=TODO,FIX,FIXME<CR>",    desc = "Todo/Fix/Fixme" },
     },
   },
-
   -- project
   {
     'ahmedkhalf/project.nvim',
