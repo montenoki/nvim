@@ -391,6 +391,21 @@ local misc_lite = {
   dots = '..',
 }
 
+local dap_normal = {
+  Stopped = { '󰁕 ', 'DiagnosticWarn', 'DapStoppedLine' },
+  Breakpoint = ' ',
+  BreakpointCondition = ' ',
+  BreakpointRejected = { ' ', 'DiagnosticError' },
+  LogPoint = '.>',
+}
+
+local dap_lite = {
+  Stopped = { '-> ', 'DiagnosticWarn', 'DapStoppedLine' },
+  Breakpoint = 'B:',
+  BreakpointCondition = '?:',
+  BreakpointRejected = { 'E:', 'DiagnosticError' },
+  LogPoint = '.>',
+}
 if vim.g.lite_mode then
   M.bufferline = bufferline_lite
   M.diagnostics = diagnostics_lite
@@ -412,6 +427,7 @@ if vim.g.lite_mode then
   M.noice = noice_lite
   M.lsp = lsp_lite
   M.misc = misc_lite
+  M.dap = dap_lite
 else
   M.bufferline = bufferline_normal
   M.diagnostics = diagnostics_normal
@@ -433,6 +449,7 @@ else
   M.noice = noice_normal
   M.lsp = lsp_normal
   M.misc = misc_normal
+  M.dap = dap_normal
 end
 
 return M

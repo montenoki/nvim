@@ -68,22 +68,22 @@ return {
       },
     },
   },
-  -- {
-  --   "mfussenegger/nvim-dap",
-  --   optional = true,
-  --   dependencies = {
-  --     "mfussenegger/nvim-dap-python",
-  --     -- stylua: ignore
-  --     keys = {
-  --       { "<LEADER>dPt", function() require('dap-python').test_method() end, desc = "Debug Method", ft = "python" },
-  --       { "<LEADER>dPc", function() require('dap-python').test_class() end,  desc = "Debug Class",  ft = "python" },
-  --     },
-  --     config = function()
-  --       local path = require("mason-registry").get_package("debugpy"):get_install_path()
-  --       require("dap-python").setup(path .. "/venv/bin/python")
-  --     end,
-  --   },
-  -- },
+  {
+    "mfussenegger/nvim-dap",
+    optional = true,
+    dependencies = {
+      "mfussenegger/nvim-dap-python",
+      -- stylua: ignore
+      keys = {
+        { "<LEADER>dPt", function() require('dap-python').test_method() end, desc = "Debug Method", ft = "python" },
+        { "<LEADER>dPc", function() require('dap-python').test_class() end,  desc = "Debug Class",  ft = "python" },
+      },
+      config = function()
+        local path = require("mason-registry").get_package("debugpy"):get_install_path()
+        require("dap-python").setup(path .. "/venv/bin/python")
+      end,
+    },
+  },
   {
     'linux-cultist/venv-selector.nvim',
     cmd = 'VenvSelect',
