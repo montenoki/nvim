@@ -1,5 +1,4 @@
 -- Speed up loading Lua modules in Neovim to improve startup time.
-vim.loader.enable()
 require('global')
 require('options')
 require('autocmds')
@@ -28,3 +27,12 @@ else
   require('lazy').setup({ { import = 'plugins.coding' } })
 end
 require('keymaps')
+
+local os_name = vim.loop.os_uname().sysname
+if string.find(string.lower(os_name), 'windows') then
+  require('os.windows')
+elseif os_name == 'Darwin' then
+  require('os.mac')
+else
+  require('os.linux')
+end
