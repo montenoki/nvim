@@ -45,7 +45,6 @@ return {
       { '<CR>', desc = 'Increment selection', mode = 'x' },
       { '<BS>', desc = 'Decrement selection', mode = 'x' },
     },
-    ---@diagnostic disable-next-line: missing-fields
     opts = {
       highlight = { enable = true },
       indent = { enable = true },

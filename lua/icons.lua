@@ -47,6 +47,8 @@ local listchars_normal = {
   precedes = '❮',
   -- space = "␣",
   nbsp = '␣',
+  -- horiz = '─',
+  -- vert = '│',
 }
 local listchars_lite = {
   eol = '',

@@ -58,4 +58,7 @@ return {
       })
     end,
   },
+
+  -- Colorscheme maker
+  { 'rktjmp/lush.nvim', enabled = false },
 }
