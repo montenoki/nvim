@@ -19,20 +19,23 @@ end
 -- Add the path to lazy.nvim to the runtimepath
 vim.opt.rtp:prepend(lazypath)
 
-if vim.g.vscode == nil then
-  require('lazy').setup({ { import = 'plugins' }, { import = 'lang' } })
-  require('colorscheme')
-else
+if vim.g.vscode ~= nil then
   require('vscode')
   require('lazy').setup({ { import = 'plugins.coding' } })
+elseif vim.g.lite_mode == true then
+  require('lazy').setup({ { import = 'plugins.coding' } })
+  -- require('colorscheme')
+else
+  require('lazy').setup({ { import = 'plugins' }, { import = 'lang' } })
+  require('colorscheme')
+
+  local os_name = vim.loop.os_uname().sysname
+  if string.find(string.lower(os_name), 'windows') then
+    require('os.windows')
+  elseif os_name == 'Darwin' then
+    require('os.mac')
+  else
+    require('os.linux')
+  end
 end
 require('keymaps')
-
-local os_name = vim.loop.os_uname().sysname
-if string.find(string.lower(os_name), 'windows') then
-  require('os.windows')
-elseif os_name == 'Darwin' then
-  require('os.mac')
-else
-  require('os.linux')
-end
