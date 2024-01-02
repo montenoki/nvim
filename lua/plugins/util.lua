@@ -8,7 +8,7 @@ return {
     opts = { options = vim.opt.sessionoptions:get() },
     keys = {
       {
-        '<LEADER>qs',
+        '<LEADER>qr',
         function()
           require('persistence').load()
         end,
@@ -27,6 +27,11 @@ return {
           require('persistence').stop()
         end,
         desc = "Don't Save Current Session",
+      },
+      {
+        '<LEADER>qs',
+        '<CMD>SessionSave<CR>',
+        desc = "Save Current Session",
       },
     },
   },

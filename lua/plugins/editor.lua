@@ -70,7 +70,7 @@ return {
           ignore_list = {},
         },
 
-        view = { width = 40 },
+        view = { width = 40, preserve_window_proportions = true },
         renderer = {
           indent_markers = {
             icons = {

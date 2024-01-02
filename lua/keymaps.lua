@@ -121,6 +121,7 @@ map(
 )
 map('n', '<LEADER>-', '<C-W>s', { desc = 'Split window below', remap = true })
 map('n', '<LEADER>|', '<C-W>v', { desc = 'Split window right', remap = true })
+map('n', '<LEADER>w=', '<C-w>=', { desc = 'Equally high and wide', remap = true })
 
 map(
   'n',
