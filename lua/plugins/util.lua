@@ -31,7 +31,7 @@ return {
       {
         '<LEADER>qs',
         '<CMD>SessionSave<CR>',
-        desc = "Save Current Session",
+        desc = 'Save Current Session',
       },
     },
   },
