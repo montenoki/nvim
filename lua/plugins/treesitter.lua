@@ -58,9 +58,9 @@ return {
         'luadoc', 'lua', 'luau', 'make', 'markdown', 'markdown_inline',
         'matlab', 'mermaid', 'ninja', 'objc', 'pascal', 'passwd', 'pem', 'perl',
         'php', 'phpdoc', 'psv', 'purescript', 'python', 'r', 'regex', 'ruby',
-        'rust', 'scala', 'scfg', 'scheme', 'sql', 'ssh_config', 'swift',
-        'systemtap', 'todotxt', 'toml', 'tsv', 'tsx', 'typescript', 'vim',
-        'vimdoc', 'vue', 'xml', 'yaml',
+        'rust', 'scala', 'scheme', 'sql', 'ssh_config', 'swift', 'systemtap',
+        'todotxt', 'toml', 'tsv', 'tsx', 'typescript', 'vim', 'vimdoc', 'vue',
+        'xml', 'yaml',
       },
 
       incremental_selection = {
