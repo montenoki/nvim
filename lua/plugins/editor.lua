@@ -701,7 +701,7 @@ return {
         { desc = 'Toggle GitUI' }
       )
       vim.keymap.set(
-        { 'n', 't' },
+        { 'n' },
         'tt',
         '<CMD>lua term_toggle([[horizontal]])<CR>',
         { desc = 'Toggle Terimal Bottom' }
