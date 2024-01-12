@@ -27,14 +27,14 @@ elseif vim.g.lite_mode == true then
 else
   require('lazy').setup({ { import = 'plugins' }, { import = 'lang' } })
   require('colorscheme')
+end
 
-  local os_name = vim.loop.os_uname().sysname
-  if string.find(string.lower(os_name), 'windows') then
-    require('os.windows')
-  elseif os_name == 'Darwin' then
-    require('os.mac')
-  else
-    require('os.linux')
-  end
+local os_name = vim.loop.os_uname().sysname
+if string.find(string.lower(os_name), 'windows') then
+  require('lazy').setup({ { import = 'os.windows' } })
+elseif os_name == 'Darwin' then
+  require('lazy').setup({ { import = 'os.mac' } })
+else
+  require('lazy').setup({ { import = 'os.linux' } })
 end
 require('keymaps')

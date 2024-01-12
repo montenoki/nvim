@@ -42,6 +42,7 @@ return {
   -- Switch Input Method automatically depends on NeoVim's edit mode.
   {
     'keaising/im-select.nvim',
+    event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' }, -- LazyFile
     config = function()
       require('im_select').setup({
         -- IM will be set to `default_im_select` in `normal` mode
