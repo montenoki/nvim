@@ -18,23 +18,31 @@ end
 -- Add the path to lazy.nvim to the runtimepath
 vim.opt.rtp:prepend(lazypath)
 
+local lazy_imports = {}
 if vim.g.vscode ~= nil then
-  require('vscode')
-  require('lazy').setup({ { import = 'plugins.coding' } })
+  table.insert(lazy_imports, { import = 'plugins.coding' })
 elseif vim.g.lite_mode == true then
-  require('lazy').setup({ { import = 'plugins.coding' } })
-  -- require('colorscheme')
-else
-  require('lazy').setup({ { import = 'plugins' }, { import = 'lang' } })
-  require('colorscheme')
+  table.insert(lazy_imports, { import = 'plugins.coding' })
+else -- Normal Mode
+  table.insert(lazy_imports, { import = 'plugins' })
+  table.insert(lazy_imports, { import = 'lang' })
 end
 
 local os_name = vim.loop.os_uname().sysname
 if string.find(string.lower(os_name), 'windows') then
-  require('lazy').setup({ { import = 'os.windows' } })
+  table.insert(lazy_imports, { import = 'os.windows' })
 elseif os_name == 'Darwin' then
-  require('lazy').setup({ { import = 'os.mac' } })
+  table.insert(lazy_imports, { import = 'os.mac' })
 else
-  require('lazy').setup({ { import = 'os.linux' } })
+  table.insert(lazy_imports, { import = 'os.linux' })
+end
+require('lazy').setup({ lazy_imports })
+
+if vim.g.vscode ~= nil then
+  require('vscode')
+elseif vim.g.lite_mode ~= nil then
+  vim.print('Lite Mode')
+else -- Normal Mode
+  require(('colorscheme'))
 end
 require('keymaps')
