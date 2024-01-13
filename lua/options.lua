@@ -97,3 +97,10 @@ if string.find(os_name, 'Windows') then
     vim.opt[option] = value
   end
 end
+
+-- Add extra filetypes
+vim.filetype.add({
+  filename = {
+    ['.zshrc'] = 'sh',
+  },
+})
