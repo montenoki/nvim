@@ -597,7 +597,13 @@ return {
     'rmagatti/auto-session',
     opts = {
       log_level = vim.log.levels.ERROR,
-      auto_session_suppress_dirs = { '~/', '~/Projects', '~/Downloads', '/', '~/codes' },
+      auto_session_suppress_dirs = {
+        '~/',
+        '~/Projects',
+        '~/Downloads',
+        '/',
+        '~/codes',
+      },
       auto_session_use_git_branch = false,
 
       auto_session_enable_last_session = false,
@@ -695,7 +701,7 @@ return {
       end
 
       vim.keymap.set(
-        { 'n', 't' },
+        { 'n' },
         'tg',
         '<CMD>lua gitui_toggle()<CR>',
         { desc = 'Toggle GitUI' }
@@ -707,7 +713,7 @@ return {
         { desc = 'Toggle Terimal Bottom' }
       )
       vim.keymap.set(
-        { 'n', 't' },
+        { 'n' },
         'tf',
         '<CMD>lua term_toggle([[float]])<CR>',
         { desc = 'Toggle Terimal float' }
@@ -786,15 +792,15 @@ return {
 
   -- Neogit
   {
-    "NeogitOrg/neogit",
+    'NeogitOrg/neogit',
     keys = {
       { '<LEADER>g', '<CMD>Neogit<CR>', desc = 'NeoGit' },
     },
     dependencies = {
-      "nvim-lua/plenary.nvim",         -- required
-      "sindrets/diffview.nvim",        -- optional - Diff integration
-      "nvim-telescope/telescope.nvim", -- optional
+      'nvim-lua/plenary.nvim', -- required
+      'sindrets/diffview.nvim', -- optional - Diff integration
+      'nvim-telescope/telescope.nvim', -- optional
     },
-    config = true
+    config = true,
   },
 }
