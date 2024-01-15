@@ -597,7 +597,7 @@ return {
     'rmagatti/auto-session',
     opts = {
       log_level = vim.log.levels.ERROR,
-      auto_session_suppress_dirs = { '~/', '~/Projects', '~/Downloads', '/' },
+      auto_session_suppress_dirs = { '~/', '~/Projects', '~/Downloads', '/', '~/codes' },
       auto_session_use_git_branch = false,
 
       auto_session_enable_last_session = false,
