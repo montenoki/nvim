@@ -170,7 +170,7 @@ return {
         sources = {
           {
             name = 'buffer',
-            opts = { keyword_pattern = [=[[^[:blank:]].*]=] },
+            option = { keyword_pattern = [=[[^[:blank:]].*]=] },
           },
         },
       })

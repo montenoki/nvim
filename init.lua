@@ -48,5 +48,5 @@ end
 require('keymaps')
 
 if vim.g.neovide then
-  vim.o.guifont = 'Fira Nerd Font Mono'
+  vim.o.guifont = 'FiraCode Nerd Font Mono'
 end
