@@ -43,6 +43,10 @@ if vim.g.vscode ~= nil then
 elseif vim.g.lite_mode ~= nil then
   vim.print('Lite Mode')
 else -- Normal Mode
-  require(('colorscheme'))
+  require('colorscheme')
 end
 require('keymaps')
+
+if vim.g.neovide then
+  vim.o.guifont = 'Fira Nerd Font Mono'
+end
