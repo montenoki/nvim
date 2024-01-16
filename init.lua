@@ -31,10 +31,13 @@ end
 local os_name = vim.loop.os_uname().sysname
 if string.find(string.lower(os_name), 'windows') then
   table.insert(lazy_imports, { import = 'os.windows' })
+  require('os.windows')
 elseif os_name == 'Darwin' then
   table.insert(lazy_imports, { import = 'os.mac' })
+  require('os.mac')
 else
   table.insert(lazy_imports, { import = 'os.linux' })
+  require('os.linux')
 end
 require('lazy').setup({ lazy_imports })
 

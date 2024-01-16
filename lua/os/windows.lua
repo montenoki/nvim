@@ -1,9 +1,9 @@
 -- Powershell Setting for Windows
 local powershell_options = {
-  shell = vim.fn.executable('pwsh') == 1 and 'pwsh' or 'powershell',
-  shellcmdflag = "-NoLogo -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();$PSDefaultParameterValues[''Out-File:Encoding'']=''utf8'';Remove-Alias -Force -ErrorAction SilentlyContinue tee;",
-  shellredir = '2>&1 | %%{ "$_" } | Out-File %s; exit $LastExitCode',
-  shellpipe = '2>&1 | %%{ "$_" } | tee %s; exit $LastExitCode',
+  shell = vim.fn.executable('pwsh') == 1 and 'pwsh -NoLogo' or 'powershell',
+  shellcmdflag = '-ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;',
+  shellredir = '-RedirectStandardOutput %s -NoNewWindow -Wait',
+  shellpipe = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode',
   shellquote = '',
   shellxquote = '',
 }
@@ -16,5 +16,7 @@ return {
   {
     'keaising/im-select.nvim',
     enabled = false,
+    default_im_select = '1033',
+    default_command = '~\\AppData\\Local\\nvim\\im-select.exe',
   },
 }
