@@ -16,7 +16,11 @@ return {
   {
     'keaising/im-select.nvim',
     enabled = false,
-    default_im_select = '1033',
-    default_command = '~\\AppData\\Local\\nvim\\im-select.exe',
+    config = function()
+      require('im_select').setup({
+        default_im_select = '1033',
+        default_command = 'im-select.exe',
+      })
+    end,
   },
 }
