@@ -67,4 +67,13 @@ return {
 
   -- Colorscheme maker
   { 'rktjmp/lush.nvim', enabled = false },
+
+  -- Measure startuptime
+  {
+    'dstein64/vim-startuptime',
+    cmd = 'StartupTime',
+    config = function()
+      vim.g.startuptime_tries = 100
+    end,
+  },
 }
