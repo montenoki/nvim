@@ -267,7 +267,6 @@ return {
             },
           },
           lualine_z = {
-            'filesize',
             'location',
             'progress',
             { 'fileformat', symbols = Icon.lualine.symbols },
