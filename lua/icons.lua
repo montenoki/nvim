@@ -96,7 +96,9 @@ local clock_lite = ''
 
 local lualine_normal = {
   nvim = '',
-  session = '󰭹',
+  session = '󰭹 ',
+  lsp = ' ',
+  python = '',
   symbols = {
     unix = '', -- e712
     dos = '', -- e70f
@@ -107,6 +109,9 @@ local lualine_normal = {
 }
 local lualine_lite = {
   nvim = 'NeoVim',
+  session = 'Session:',
+  lsp = 'LSP:',
+  python = 'Py:',
   symbols = {
     unix = 'LF', -- e712
     dos = 'CRLF', -- e70f
