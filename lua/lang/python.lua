@@ -1,3 +1,5 @@
+local Util = require('util')
+local Icon = require('icons')
 vim.api.nvim_create_autocmd('VimEnter', {
   desc = 'Auto select virtualenv Nvim open',
   pattern = '*',
@@ -20,6 +22,27 @@ return {
           { 'ninja', 'python', 'rst', 'toml' }
         )
       end
+    end,
+  },
+  {
+    'lualine.nvim',
+    opts = function(_, opts)
+      table.insert(opts.sections.lualine_y, {
+        function()
+          local selector = require('venv-selector')
+          local venv = selector
+            .get_active_venv()
+            :gsub(Util.root.cwd() .. '/', '') or 'NO ENV'
+          local version = vim.fn
+            .system(selector.get_active_path() .. ' --version')
+            :gsub('Python ', '')
+            :gsub('[%c%s]', '')
+          return Icon.lualine.python .. venv .. '@' .. version
+        end,
+        cond = function()
+          return vim.bo.filetype == 'python'
+        end,
+      })
     end,
   },
   {
@@ -115,6 +138,7 @@ return {
   {
     'linux-cultist/venv-selector.nvim',
     cmd = 'VenvSelect',
+    event = 'VeryLazy',
     opts = function(_, opts)
       if require('util').has('nvim-dap-python') then
         opts.dap_enabled = true
