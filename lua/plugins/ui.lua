@@ -119,6 +119,8 @@ return {
   },
 
   -- Statusline
+  -- TODO:[2024/01/10] fix this issue
+  -- https://github.com/nvim-lualine/lualine.nvim/issues/225
   {
     'nvim-lualine/lualine.nvim',
     dependencies = {
