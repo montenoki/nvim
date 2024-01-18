@@ -121,6 +121,10 @@ return {
   -- Statusline
   {
     'nvim-lualine/lualine.nvim',
+    dependencies = {
+      { 'AndreM222/copilot-lualine' },
+      { 'arkav/lualine-lsp-progress' },
+    },
     event = 'VeryLazy',
     init = function()
       vim.g.lualine_laststatus = vim.o.laststatus
@@ -168,17 +172,10 @@ return {
           lualine_c = {
             function()
               return Icon.lualine.session
-                .. ' '
                 .. require('auto-session.lib').current_session_name()
             end,
           },
           lualine_x = {
-            {
-              'macro-recording',
-              ---@diagnostic disable-next-line: undefined-field
-              fmt = Util.lualine.show_macro_recording,
-              color = Util.ui.fg('Error'),
-            },
             {
               function()
                 ---@diagnostic disable-next-line: undefined-field
@@ -200,45 +197,29 @@ return {
               end,
               color = Util.ui.fg('Debug'),
             },
+            'copilot',
+          },
+          lualine_y = {
+            'VenvSelectCurrent',
+            -- Show LSP Servers
+            function()
+              local clients = vim.lsp.get_active_clients()
+              local clients_list = {}
+              for _, client in pairs(clients) do
+                table.insert(clients_list, client.name)
+              end
+              return Icon.lualine.lsp .. ':' .. Util.ui.dump(clients_list)
+            end,
             {
-              function()
-                local icon = Icon.cmp.Copilot
-                local status = require('copilot.api').status.data
-                return icon .. (status.message or '')
-              end,
-              cond = function()
-                if not package.loaded['copilot'] then
-                  return
-                end
-                local ok, clients = pcall(
-                  require('util').lsp.get_clients,
-                  { name = 'copilot', bufnr = 0 }
-                )
-                if not ok then
-                  return false
-                end
-                return ok and #clients > 0
-              end,
-              color = function()
-                if not package.loaded['copilot'] then
-                  return
-                end
-                local status = require('copilot.api').status.data
-                local colors = {
-                  [''] = Util.ui.fg('Special'),
-                  ['Normal'] = Util.ui.fg('Special'),
-                  ['Warning'] = Util.ui.fg('DiagnosticError'),
-                  ['InProgress'] = Util.ui.fg('DiagnosticWarn'),
-                }
-                return colors[status.status] or colors['']
-              end,
+              'macro-recording',
+              ---@diagnostic disable-next-line: undefined-field
+              fmt = Util.lualine.show_macro_recording,
+              color = Util.ui.fg('Error'),
             },
           },
-          lualine_y = {},
           lualine_z = {
             'location',
             'progress',
-            { 'fileformat', symbols = Icon.lualine.symbols },
             function()
               return Icon.clock .. os.date('%R')
             end,
@@ -246,12 +227,6 @@ return {
         },
         winbar = {
           lualine_a = {
-            {
-              'filetype',
-              icon_only = true,
-              separator = '',
-              padding = { left = 1, right = 0 },
-            },
             { Util.lualine.pretty_path() },
           },
           lualine_b = {
@@ -274,6 +249,10 @@ return {
                 end
               end,
             },
+          },
+          lualine_c = {},
+          lualine_x = {},
+          lualine_y = {
             {
               'diagnostics',
               symbols = {
@@ -284,9 +263,6 @@ return {
               },
             },
           },
-          lualine_c = {},
-          lualine_x = {},
-          lualine_y = {},
           lualine_z = {},
         },
         inactive_winbar = {
