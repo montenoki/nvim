@@ -61,6 +61,7 @@ return {
             get_bufnrs = function()
               return vim.api.nvim_list_bufs()
             end,
+            keyword_pattern = [=[[^[:blank:]].*]=],
           },
           priority = 70,
         },
@@ -177,9 +178,9 @@ return {
       cmp.setup.cmdline(':', {
         mapping = cmp.mapping.preset.cmdline(),
         sources = cmp.config.sources({
-          { name = 'cmdline_history', priority = 100 },
-          { name = 'cmdline', priority = 90 },
-          { name = 'path', priority = 80 },
+          { name = 'cmdline', priority = 100 },
+          { name = 'path', priority = 50 },
+          { name = 'cmdline_history', priority = 0 },
         }),
       })
     end,

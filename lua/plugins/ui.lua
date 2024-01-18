@@ -56,7 +56,7 @@ return {
     event = 'VeryLazy',
     keys = {
       { '<LEADER>tp', '<CMD>BufferLinePick<CR>', desc = 'Pick tab' },
-      { '<LEADER>tc', '<CMD>BufferLinePickClose<CR>', desc = 'Pick close tab' },
+      { '<LEADER>tP', '<CMD>BufferLinePickClose<CR>', desc = 'Pick close tab' },
     },
     opts = {
       options = {
@@ -75,7 +75,7 @@ return {
         right_trunc_marker = Icon.bufferline.right_trunc_marker,
         show_buffer_icons = Icon.bufferline.show_buffer_icons,
         indicator = {
-          icon = '|', -- this should be omitted if indicator style is not 'icon'
+          icon = '||', -- this should be omitted if indicator style is not 'icon'
           style = 'icon',
         },
         offsets = {
@@ -99,13 +99,6 @@ return {
           },
         },
         diagnostics = 'nvim_lsp',
-        diagnostics_indicator = function(_, _, diag)
-          local ret = (
-            diag.error and Icon.diagnostics.Error .. diag.error .. ' ' or ''
-          )
-            .. (diag.warning and Icon.diagnostics.Warn .. diag.warning or '')
-          return vim.trim(ret)
-        end,
       },
     },
     config = function(_, opts)
@@ -140,7 +133,6 @@ return {
       end
     end,
     opts = function()
-      -- PERF: we don't need this lualine require madness 🤷
       local lualine_require = require('lualine_require')
       lualine_require.require = require
 
@@ -149,15 +141,19 @@ return {
         options = {
           globalstatus = true,
           disabled_filetypes = {
-            statusline = { 'dashboard', 'alpha', 'starter' },
+            winbar = { 'NvimTree', 'dap-repl' },
           },
           component_separators = Icon.lualine.component_separators,
           section_separators = Icon.lualine.section_separators,
         },
-        -- stylua: ignore
         extensions = {
-          'nvim-tree', 'mason', 'quickfix', 'symbols-outline',
-          'lazy', 'toggleterm', 'nvim-dap-ui',
+          'nvim-tree',
+          'mason',
+          'quickfix',
+          'symbols-outline',
+          'lazy',
+          'toggleterm',
+          'nvim-dap-ui',
         },
         sections = {
           lualine_a = {
@@ -168,36 +164,13 @@ return {
           },
           lualine_b = {
             'branch',
-            {
-              'diff',
-              symbols = {
-                added = Icon.git.added,
-                modified = Icon.git.modified,
-                removed = Icon.git.removed,
-              },
-              source = function()
-                ---@diagnostic disable-next-line: undefined-field
-                local gitsigns = vim.b.gitsigns_status_dict
-                if gitsigns then
-                  return {
-                    added = gitsigns.added,
-                    modified = gitsigns.changed,
-                    removed = gitsigns.removed,
-                  }
-                end
-              end,
-            },
           },
           lualine_c = {
-            Util.lualine.root_dir(),
-            {
-              'filetype',
-              icon_only = true,
-              separator = '',
-              padding = { left = 1, right = 0 },
-            },
-            { Util.lualine.pretty_path() },
-            require('auto-session.lib').current_session_name,
+            function()
+              return Icon.lualine.session
+                .. ' '
+                .. require('auto-session.lib').current_session_name()
+            end,
           },
           lualine_x = {
             {
@@ -206,21 +179,27 @@ return {
               fmt = Util.lualine.show_macro_recording,
               color = Util.ui.fg('Error'),
             },
-            -- stylua: ignore
             {
-              ---@diagnostic disable-next-line: undefined-field
-              function() return require('noice').api.status.command.get() end,
-              ---@diagnostic disable-next-line: undefined-field
-              cond = function() return package.loaded['noice'] and require('noice').api.status.command.has() end,
+              function()
+                ---@diagnostic disable-next-line: undefined-field
+                return require('noice').api.status.command.get()
+              end,
+              cond = function()
+                return package.loaded['noice']
+                  ---@diagnostic disable-next-line: undefined-field
+                  and require('noice').api.status.command.has()
+              end,
               color = Util.ui.fg('Comment'),
             },
-            -- TODO[2023/12/12]: config this after dap is fixed.
-            -- -- stylua: ignore
-            -- {
-            --   function() return Icon.bug .. require("dap").status() end,
-            --   cond = function() return package.loaded["dap"] and require("dap").status() ~= "" end,
-            --   color = Util.ui.fg("Debug"),
-            -- },
+            {
+              function()
+                return Icon.bug .. require('dap').status()
+              end,
+              cond = function()
+                return package.loaded['dap'] and require('dap').status() ~= ''
+              end,
+              color = Util.ui.fg('Debug'),
+            },
             {
               function()
                 local icon = Icon.cmp.Copilot
@@ -255,7 +234,46 @@ return {
               end,
             },
           },
-          lualine_y = {
+          lualine_y = {},
+          lualine_z = {
+            'location',
+            'progress',
+            { 'fileformat', symbols = Icon.lualine.symbols },
+            function()
+              return Icon.clock .. os.date('%R')
+            end,
+          },
+        },
+        winbar = {
+          lualine_a = {
+            {
+              'filetype',
+              icon_only = true,
+              separator = '',
+              padding = { left = 1, right = 0 },
+            },
+            { Util.lualine.pretty_path() },
+          },
+          lualine_b = {
+            {
+              'diff',
+              symbols = {
+                added = Icon.git.added,
+                modified = Icon.git.modified,
+                removed = Icon.git.removed,
+              },
+              source = function()
+                ---@diagnostic disable-next-line: undefined-field
+                local gitsigns = vim.b.gitsigns_status_dict
+                if gitsigns then
+                  return {
+                    added = gitsigns.added,
+                    modified = gitsigns.changed,
+                    removed = gitsigns.removed,
+                  }
+                end
+              end,
+            },
             {
               'diagnostics',
               symbols = {
@@ -266,14 +284,26 @@ return {
               },
             },
           },
-          lualine_z = {
-            'location',
-            'progress',
-            { 'fileformat', symbols = Icon.lualine.symbols },
-            function()
-              return Icon.clock .. os.date('%R')
-            end,
+          lualine_c = {},
+          lualine_x = {},
+          lualine_y = {},
+          lualine_z = {},
+        },
+        inactive_winbar = {
+          lualine_a = {},
+          lualine_b = {
+            {
+              'filetype',
+              icon_only = true,
+              separator = '',
+              padding = { left = 1, right = 0 },
+            },
+            { Util.lualine.pretty_path() },
           },
+          lualine_c = {},
+          lualine_x = {},
+          lualine_y = {},
+          lualine_z = {},
         },
       }
     end,
@@ -452,7 +482,6 @@ return {
     },
   },
 
-  -- TODO[2023/12/7]: config this later
   -- Scroll Bar
   {
     'petertriho/nvim-scrollbar',

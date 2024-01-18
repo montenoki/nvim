@@ -45,13 +45,12 @@ opt.timeoutlen = 500
 opt.undofile = true
 opt.undolevels = 10000
 opt.updatetime = 100 -- Save swap file and trigger CursorHold
-opt.virtualedit = 'block' -- Allow cursor to move where there is no text in visual block mode
 opt.whichwrap = '<,>,[,]' -- Use arrow key to move next line when cursor at end of line
 opt.wildmode = 'longest:full,full' -- Command-line completion mode
 opt.winminwidth = 5 -- Minimum window width
 opt.wrap = true -- Disable line wrap
 opt.fillchars = Icons.fillchars
-vim.opt.virtualedit = 'onemore' -- fix the problem that cant see last char when scrollbar on.
+opt.virtualedit = 'onemore' -- fix the problem that cant see last char when scrollbar on.
 
 if vim.fn.has('nvim-0.10') == 1 then
   opt.smoothscroll = true

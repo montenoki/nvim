@@ -74,7 +74,6 @@ return {
       inlay_hints = {
         enabled = true,
       },
-      -- TODO[2023/12/12]:add any global capabilities here
       capabilities = {},
       format = {
         formatting_options = nil,

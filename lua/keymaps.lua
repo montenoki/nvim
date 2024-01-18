@@ -107,9 +107,12 @@ map('v', '<A-k>', ":m '<-2<CR>gv=gv", { desc = 'Move up' })
 
 -- Move Tab
 map('n', '<LEADER>tn', '<CMD>tabnew<CR>', { desc = 'New Tab' })
+map('n', '<LEADER>tc', '<CMD>tabclose<CR>', { desc = 'Close Tab' })
 map('n', '<C-t>', '<CMD>tabnew<CR>', { desc = 'New Tab' })
 map('n', '<C-]>', '<CMD>tabnext<CR>', { desc = 'Next Tab' })
 map('n', '<C-[>', '<CMD>tabprev<CR>', { desc = 'Previous Tab' })
+map('n', '<LEADER>t]', '<CMD>tabnext<CR>', { desc = 'Next Tab' })
+map('n', '<LEADER>t[', '<CMD>tabprev<CR>', { desc = 'Previous Tab' })
 
 -- Windows
 map('n', '<LEADER>wc', '<C-W>c', { desc = 'Close window', remap = true })
@@ -121,7 +124,12 @@ map(
 )
 map('n', '<LEADER>-', '<C-W>s', { desc = 'Split window below', remap = true })
 map('n', '<LEADER>|', '<C-W>v', { desc = 'Split window right', remap = true })
-map('n', '<LEADER>w=', '<C-w>=', { desc = 'Equally high and wide', remap = true })
+map(
+  'n',
+  '<LEADER>w=',
+  '<C-w>=',
+  { desc = 'Equally high and wide', remap = true }
+)
 
 map(
   'n',

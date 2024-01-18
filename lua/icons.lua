@@ -96,6 +96,7 @@ local clock_lite = ''
 
 local lualine_normal = {
   nvim = '',
+  session = '󰭹',
   symbols = {
     unix = '', -- e712
     dos = '', -- e70f
