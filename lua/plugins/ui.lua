@@ -119,8 +119,6 @@ return {
   },
 
   -- Statusline
-  -- TODO:[2024/01/10] fix this issue
-  -- https://github.com/nvim-lualine/lualine.nvim/issues/225
   {
     'nvim-lualine/lualine.nvim',
     dependencies = {
@@ -172,24 +170,15 @@ return {
             'branch',
           },
           lualine_c = {
-            function()
-              return Icon.lualine.session
-                .. require('auto-session.lib').current_session_name()
-            end,
-          },
-          lualine_x = {
             {
               function()
-                ---@diagnostic disable-next-line: undefined-field
-                return require('noice').api.status.command.get()
+                return Icon.lualine.session
+                  .. require('auto-session.lib').current_session_name()
               end,
-              cond = function()
-                return package.loaded['noice']
-                  ---@diagnostic disable-next-line: undefined-field
-                  and require('noice').api.status.command.has()
-              end,
-              color = Util.ui.fg('Comment'),
+              fmt = Util.lualine.trunc(100, 5, 60),
             },
+          },
+          lualine_x = {
             {
               function()
                 return Icon.bug .. require('dap').status()
@@ -203,15 +192,18 @@ return {
           },
           lualine_y = {
             'VenvSelectCurrent',
-            -- Show LSP Servers
-            function()
-              local clients = vim.lsp.get_active_clients()
-              local clients_list = {}
-              for _, client in pairs(clients) do
-                table.insert(clients_list, client.name)
-              end
-              return Icon.lualine.lsp .. ':' .. Util.ui.dump(clients_list)
-            end,
+            {
+              -- Show LSP Servers
+              function()
+                local clients = vim.lsp.get_active_clients()
+                local clients_list = {}
+                for _, client in pairs(clients) do
+                  table.insert(clients_list, client.name)
+                end
+                return Icon.lualine.lsp .. ':' .. Util.ui.dump(clients_list)
+              end,
+              fmt = Util.lualine.trunc(100, 5, 60),
+            },
             {
               'macro-recording',
               ---@diagnostic disable-next-line: undefined-field
