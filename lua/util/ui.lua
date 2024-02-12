@@ -210,7 +210,7 @@ function M.dump(o)
         k = '"' .. k .. '"'
       end
       --s = s .. '[' .. k .. '] = ' .. M.dump(v) .. ','
-      s = s .. M.dump(v) .. ':'
+      s = s .. M.dump(v) .. '|'
     end
     return s
   else

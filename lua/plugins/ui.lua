@@ -175,7 +175,7 @@ return {
                 return Icon.lualine.session
                   .. require('auto-session.lib').current_session_name()
               end,
-              fmt = Util.lualine.trunc(100, 5, 60),
+              fmt = Util.lualine.trunc(80, 10, 60),
             },
           },
           lualine_x = {
@@ -188,10 +188,15 @@ return {
               end,
               color = Util.ui.fg('Debug'),
             },
-            'copilot',
+            {
+              'copilot',
+              fmt = Util.lualine.trunc(80, 5, 80),
+            },
           },
           lualine_y = {
-            'VenvSelectCurrent',
+            { 'VenvSelectCurrent',
+              fmt = Util.lualine.trunc(80, 10, 60),
+            },
             {
               -- Show LSP Servers
               function()
@@ -200,9 +205,9 @@ return {
                 for _, client in pairs(clients) do
                   table.insert(clients_list, client.name)
                 end
-                return Icon.lualine.lsp .. ':' .. Util.ui.dump(clients_list)
+                return '|' .. Util.ui.dump(clients_list)
               end,
-              fmt = Util.lualine.trunc(100, 5, 60),
+              fmt = Util.lualine.trunc(80, 5, 80),
             },
             {
               'macro-recording',
