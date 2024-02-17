@@ -1,8 +1,30 @@
-# Readme.md
+<!-- markdownlint-disable MD033 -->
+<!-- markdownlint-disable MD024 -->
+# README.md
+
+My neovim configs.
 
 ## Installation
 
-### 1. **Setup Python Provider**
+### 1. **Install Requirements**
+
+<details closed>
+  <summary>Make sure following tools be installed.</summary>
+  - unzip
+  - curl
+  - wget
+  - tar
+  - gzip
+  - fd
+  - ripgrep
+  - python
+  - gitui
+  - im-select
+</details>
+
+### 2. **Setup Python Provider**
+
+#### Windows
 
 ``` shell
 mkdir "$HOME\.virtualenvs"
@@ -12,28 +34,27 @@ $HOME\.virtualenvs\neovim\Scripts\python.exe -m pip install neovim
 $HOME\.virtualenvs\debugpy\Scripts\python.exe -m pip install debugpy
 ```
 
-### 2. **Install Requirements**
+#### UNIX-like
 
-<details closed>
-<summary>Make sure install all.</summary>
-
-- unzip, git, curl, wget, tar, gzip, fd, ripgrep
-
-- python, gitui
-
-- im-select
-
-</details>
+``` shell
+mkdir ~\.virtualenvs
+python -m venv ~\.virtualenvs\neovim
+python -m venv ~\.virtualenvs\debugpy
+~\.virtualenvs\neovim\bin\python -m pip install --upgrade pip
+~\.virtualenvs\debugpy\bin\python -m pip install --upgrade pip
+~\.virtualenvs\neovim\bin\python -m pip install neovim
+~\.virtualenvs\debugpy\bin\python -m pip install debugpy
+```
 
 ### 3. Clone
 
-- Windows
+#### Windows
 
 ```powershell
 git clone https://github.com/montenoki/nvim "$env:LOCALAPPDATA\nvim"
 ```
 
-- Linux or Mac
+#### UNIX-like
 
 ```bash
 git clone https://github.com/montenoki/nvim ~/.config/nvim
