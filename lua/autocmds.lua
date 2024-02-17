@@ -28,7 +28,7 @@ vim.api.nvim_create_autocmd('BufEnter', {
 })
 
 -- Resize splits if window got resized
-vim.api.nvim_create_autocmd({ 'VimResized' }, {
+vim.api.nvim_create_autocmd({ 'VimResized', 'WinClosed' }, {
   group = augroup('resize_splits'),
   callback = function()
     local current_tab = vim.fn.tabpagenr()
@@ -88,16 +88,6 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
--- Wrap and check for spell in text filetypes
-vim.api.nvim_create_autocmd('FileType', {
-  group = augroup('wrap_spell'),
-  pattern = { 'gitcommit', 'markdown' },
-  callback = function()
-    vim.opt_local.wrap = true
-    vim.opt_local.spell = true
-  end,
-})
-
 -- Auto create dir when saving a file, in case some intermediate directory does not exist
 vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
   group = augroup('auto_create_dir'),
@@ -112,7 +102,7 @@ vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
 
 -- Display Recording status in statusline
 vim.api.nvim_create_autocmd('RecordingEnter', {
-  group = augroup('record_action'),
+  group = augroup('display_rec_stat_enter'),
   callback = function()
     require('lualine').refresh({
       place = { 'statusline' },
@@ -120,7 +110,7 @@ vim.api.nvim_create_autocmd('RecordingEnter', {
   end,
 })
 vim.api.nvim_create_autocmd('RecordingLeave', {
-  group = augroup('record_action'),
+  group = augroup('display_rec_stat_leave'),
   callback = function()
     -- This is going to seem really weird!
     -- Instead of just calling refresh we need to wait a moment because of the nature of
@@ -138,5 +128,22 @@ vim.api.nvim_create_autocmd('RecordingLeave', {
         })
       end)
     )
+  end,
+})
+
+-- Keep cursor position on yank
+vim.api.nvim_create_autocmd({ 'VimEnter', 'CursorMoved' }, {
+  group = augroup('save_cursor_position'),
+  callback = function()
+    CURSOR_POS = vim.fn.getpos('.')
+  end,
+})
+vim.api.nvim_create_autocmd('TextYankPost', {
+  group = augroup('yank_restore_cursor'),
+  pattern = '*',
+  callback = function()
+    if vim.v.event.operator == 'y' then
+      vim.fn.setpos('.', CURSOR_POS)
+    end
   end,
 })

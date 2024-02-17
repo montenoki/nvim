@@ -144,6 +144,14 @@ function M.root_dir(opts)
     color = opts.color,
   }
 end
+function M.show_macro_recording()
+    local recording_register = vim.fn.reg_recording()
+    if recording_register == "" then
+        return ""
+    else
+        return "Rec @" .. recording_register
+    end
+end
 
 function M.trunc(trunc_width, trunc_len, hide_width, no_ellipsis)
   return function(str)

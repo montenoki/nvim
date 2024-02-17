@@ -143,6 +143,7 @@ return {
       vim.o.laststatus = vim.g.lualine_laststatus
       return {
         options = {
+          theme = 'auto',
           globalstatus = true,
           disabled_filetypes = {
             winbar = { 'NvimTree', 'dap-repl' },
@@ -190,11 +191,15 @@ return {
             },
             {
               'copilot',
+              cond = function()
+                return vim.g.copilot ~= nil
+              end,
               fmt = Util.lualine.trunc(80, 5, 80),
             },
           },
           lualine_y = {
-            { 'VenvSelectCurrent',
+            {
+              'VenvSelectCurrent',
               fmt = Util.lualine.trunc(80, 10, 60),
             },
             {
