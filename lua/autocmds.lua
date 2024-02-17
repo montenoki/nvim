@@ -88,7 +88,8 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
--- Auto create dir when saving a file, in case some intermediate directory does not exist
+-- Auto create dir when saving a file,
+-- in case some intermediate directory does not exist.
 vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
   group = augroup('auto_create_dir'),
   callback = function(event)
@@ -113,11 +114,12 @@ vim.api.nvim_create_autocmd('RecordingLeave', {
   group = augroup('display_rec_stat_leave'),
   callback = function()
     -- This is going to seem really weird!
-    -- Instead of just calling refresh we need to wait a moment because of the nature of
-    -- `vim.fn.reg_recording`. If we tell lualine to refresh right now it actually will
-    -- still show a recording occuring because `vim.fn.reg_recording` hasn't emptied yet.
-    -- So what we need to do is wait a tiny amount of time (in this instance 50 ms) to
-    -- ensure `vim.fn.reg_recording` is purged before asking lualine to refresh.
+    -- Instead of just calling refresh we need to wait a moment because
+    -- of the nature of `vim.fn.reg_recording`. If we tell lualine to refresh
+    -- right now it actually will still show a recording occuring because
+    -- `vim.fn.reg_recording` hasn't emptied yet. So what we need to do is
+    -- wait a tiny amount of time (in this instance 50 ms) to ensure
+    -- `vim.fn.reg_recording` is purged before asking lualine to refresh.
     local timer = vim.loop.new_timer()
     timer:start(
       50,
