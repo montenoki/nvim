@@ -1,26 +1,48 @@
-<!-- markdownlint-disable MD033 -->
+<!-- markdownlint-disable MD013 -->
 <!-- markdownlint-disable MD024 -->
-# README.md
+<!-- markdownlint-disable MD033 -->
+# nvim
 
 My neovim configs.
 
-## Installation
-
-### 1. **Install Requirements**
+## Requirements
 
 <details closed>
-  <summary>Make sure following tools be installed.</summary>
-  - unzip
-  - curl
-  - wget
-  - tar
-  - gzip
-  - fd
-  - ripgrep
-  - python
-  - gitui
-  - im-select
+<summary>Ensure you have the following installed on your system.</summary>
+
+- **curl**: Get a file from an HTTP, HTTPS or FTP server
+
+- **fd**: Simple, fast and user-friendly alternative to find
+
+- **gitui**: Blazing fast terminal-ui for git written in rust
+
+- **gzip**: Popular GNU data compression program
+
+- **im-select**: Switch your input method in shell.
+
+- **node.js**
+
+- **python**
+
+- **ripgrep**: Search tool like grep and The Silver Searcher
+
+- **tar**: GNU version of the tar archiving utility
+
+- **unzip**: Extraction utility for .zip compressed archives
+
+- **wget**: Internet file retriever
+
 </details>
+
+### Mac
+
+```bash
+brew tap daipeihust/tap && brew install curl fd gitui gzip im-select node python ripgrep tar unzip wget
+```
+
+## Installation
+
+### Clone
 
 ### 2. **Setup Python Provider**
 
@@ -34,16 +56,10 @@ $HOME\.virtualenvs\neovim\Scripts\python.exe -m pip install neovim
 $HOME\.virtualenvs\debugpy\Scripts\python.exe -m pip install debugpy
 ```
 
-#### UNIX-like
+#### Mac or Linux
 
 ``` shell
-mkdir ~\.virtualenvs
-python -m venv ~\.virtualenvs\neovim
-python -m venv ~\.virtualenvs\debugpy
-~\.virtualenvs\neovim\bin\python -m pip install --upgrade pip
-~\.virtualenvs\debugpy\bin\python -m pip install --upgrade pip
-~\.virtualenvs\neovim\bin\python -m pip install neovim
-~\.virtualenvs\debugpy\bin\python -m pip install debugpy
+zsh "$HOME/.config/nvim/setup_py_provider.sh"
 ```
 
 ### 3. Clone
