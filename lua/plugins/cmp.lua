@@ -19,9 +19,11 @@ return {
     dependencies = {
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-nvim-lsp-signature-help',
+      'hrsh7th/cmp-nvim-lsp-document-symbol',
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-cmdline',
+      'f3fora/cmp-spell',
       'dmitmel/cmp-cmdline-history',
       'SirVer/ultisnips',
       'quangnguyen30192/cmp-nvim-ultisnips',
@@ -61,9 +63,20 @@ return {
             get_bufnrs = function()
               return vim.api.nvim_list_bufs()
             end,
-            keyword_pattern = [=[[^[:blank:]].*]=],
+            -- keyword_pattern = [=[[^[:blank:]].*]=],
+            keyword_pattern = [[\k\+]],
           },
           priority = 70,
+        },
+        { name = 'nvim_lsp_signature_help', priority = 60 },
+        {
+          name = 'spell',
+          option = {
+            keep_all_entries = false,
+            enable_in_context = function()
+              return true
+            end,
+          },
         },
         { name = 'path', priority = 40 },
       }
@@ -97,7 +110,7 @@ return {
         experimental = { ghost_text = { hl_group = 'CmpGhostText' } },
         sorting = defaults.sorting,
         mapping = {
-          -- TODO[2023/12/19]: fix: noice config - Calculator display.
+          -- TODO[2023/12/19]: fix: Noice config - Calculator display.
           ['<TAB>'] = {
             i = function(fallback)
               if cmp.visible() then
@@ -169,6 +182,7 @@ return {
       cmp.setup.cmdline({ '/', '?' }, {
         mapping = cmp.mapping.preset.cmdline(),
         sources = {
+          { name = 'nvim_lsp_document_symbol' },
           {
             name = 'buffer',
             option = { keyword_pattern = [=[[^[:blank:]].*]=] },
