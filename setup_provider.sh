@@ -20,3 +20,5 @@ fi
 "$HOME/.virtualenvs/neovim/bin/python" -m pip install neovim
 "$HOME/.virtualenvs/debugpy/bin/python" -m pip install --upgrade pip
 "$HOME/.virtualenvs/debugpy/bin/python" -m pip install debugpy
+
+npm install -g neovim
