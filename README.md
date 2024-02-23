@@ -98,7 +98,7 @@ $HOME\.virtualenvs\debugpy\Scripts\python.exe -m pip install debugpy
 #### Mac or Linux
 
 ``` shell
-sh "$HOME/.config/nvim/setup_py_provider.sh"
+sh "$HOME/.config/nvim/setup_provider.sh"
 ```
 ### 3. Install plugins
 
