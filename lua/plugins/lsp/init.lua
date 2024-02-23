@@ -252,7 +252,7 @@ return {
     cmd = 'Mason',
     build = ':MasonUpdate',
     opts = {
-      ensure_installed = { 'taplo', 'shfmt', 'stylua' },
+      ensure_installed = { 'taplo', 'shfmt', 'stylua', 'tree-sitter-cli' },
       ui = { icons = Icon.mason },
     },
     config = function(_, opts)

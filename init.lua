@@ -22,7 +22,8 @@ local lazy_imports = {}
 if vim.g.vscode ~= nil then
   table.insert(lazy_imports, { import = 'plugins.coding' })
 elseif vim.g.lite_mode == true then
-  table.insert(lazy_imports, { import = 'plugins.coding' })
+  table.insert(lazy_imports, { import = 'plugins' })
+  table.insert(lazy_imports, { import = 'lang' })
 else -- Normal Mode
   table.insert(lazy_imports, { import = 'plugins' })
   table.insert(lazy_imports, { import = 'lang' })
@@ -43,9 +44,7 @@ require('lazy').setup({ lazy_imports })
 
 if vim.g.vscode ~= nil then
   require('vscode')
-elseif vim.g.lite_mode ~= nil then
-  vim.print('Lite Mode')
-else -- Normal Mode
+else -- Normal or Lite Mode
   require('colorscheme')
 end
 require('keymaps')

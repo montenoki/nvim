@@ -413,7 +413,7 @@ local dap_normal = {
 }
 
 local dap_lite = {
-  Stopped = { '-> ', 'DiagnosticWarn', 'DapStoppedLine' },
+  Stopped = { '->', 'DiagnosticWarn', 'DapStoppedLine' },
   Breakpoint = 'B:',
   BreakpointCondition = '?:',
   BreakpointRejected = { 'E:', 'DiagnosticError' },
