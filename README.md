@@ -58,7 +58,7 @@ NVIM_APPNAME=montenoki/nvim/ nvim
 ### Arch
 
 ```bash
-sudo pacman -S gitui python ripgrep unzip wget
+sudo pacman -S gitui python python-pip ripgrep unzip wget nodejs npm
 ```
 
 ### Mac
