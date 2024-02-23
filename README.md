@@ -58,7 +58,7 @@ NVIM_APPNAME=montenoki/nvim/ nvim
 ### Arch
 
 ```bash
-sudo pacman -S gitui python ripgrep unzip wget
+sudo pacman -S gitui python ripgrep unzip wget fzf
 ```
 
 ### Mac
@@ -83,13 +83,7 @@ git clone https://github.com/montenoki/nvim "$env:LOCALAPPDATA\nvim"
 git clone git@github.com:montenoki/nvim ~/.config/nvim
 ```
 
-### 2. Install plugins
-
-```bash
-nvim --headless +"Lazy! sync" +qa
-```
-
-### 3. **Setup Python Provider**
+### 2. **Setup Python Provider**
 
 #### Windows
 
@@ -105,6 +99,11 @@ $HOME\.virtualenvs\debugpy\Scripts\python.exe -m pip install debugpy
 
 ``` shell
 sh "$HOME/.config/nvim/setup_py_provider.sh"
+```
+### 3. Install plugins
+
+```bash
+nvim --headless +"Lazy! sync" +qa
 ```
 
 ## Plugins
