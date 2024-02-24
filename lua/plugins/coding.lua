@@ -141,6 +141,13 @@ return {
     end,
   },
 
+  -- More text-objects
+  {
+    'chrisgrieser/nvim-various-textobjs',
+    lazy = false,
+    opts = { useDefaultKeymaps = true },
+  },
+
   -- move cursor between windows
   {
     'ggandor/leap.nvim',
