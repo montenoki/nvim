@@ -123,7 +123,6 @@ return {
     'nvim-lualine/lualine.nvim',
     dependencies = {
       { 'AndreM222/copilot-lualine' },
-      { 'arkav/lualine-lsp-progress' },
     },
     event = 'VeryLazy',
     init = function()
@@ -168,7 +167,7 @@ return {
             'mode',
           },
           lualine_b = {
-            'branch',
+            { 'branch', icon = Icon.lualine.branch },
           },
           lualine_c = {
             {
@@ -334,7 +333,15 @@ return {
   },
 
   -- Dev icons
-  { 'nvim-tree/nvim-web-devicons', lazy = true },
+  {
+    'nvim-tree/nvim-web-devicons',
+    lazy = true,
+    cond = function()
+      if vim.g.lite_mode ~= nil then
+        return false
+      end
+    end,
+  },
 
   -- UI components
   { 'MunifTanjim/nui.nvim', lazy = true },
@@ -466,6 +473,11 @@ return {
   {
     'petertriho/nvim-scrollbar',
     event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' }, -- LazyFile
+    cond = function()
+      if vim.g.lite_mode ~= nil then
+        return false
+      end
+    end,
     opts = {
       show_in_active_only = true,
       handle = {

@@ -99,6 +99,7 @@ local lualine_normal = {
   session = '󰭹 ',
   lsp = ' ',
   python = '',
+  branch = '',
   symbols = {
     unix = '', -- e712
     dos = '', -- e70f
@@ -108,10 +109,11 @@ local lualine_normal = {
   section_separators = { left = '', right = '' },
 }
 local lualine_lite = {
-  nvim = 'NeoVim',
+  nvim = '',
   session = 'Session:',
   lsp = 'LSP:',
   python = 'Py:',
+  branch = '',
   symbols = {
     unix = 'LF', -- e712
     dos = 'CRLF', -- e70f
