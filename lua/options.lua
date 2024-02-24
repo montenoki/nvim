@@ -86,5 +86,6 @@ vim.filetype.add({
   filename = {
     ['.zshrc'] = 'sh',
     ['.zsh'] = 'sh',
+    ['.zlogout'] = 'sh',
   },
 })
