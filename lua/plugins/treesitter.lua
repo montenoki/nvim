@@ -54,7 +54,7 @@ return {
         'css', 'csv', 'cuda', 'diff', 'dockerfile', 'dot', 'fish', 'git_config',
         'git_rebase', 'gitattributes', 'gitcommit', 'gitignore', 'go', 'html',
         'htmldjango', 'http', 'hurl', 'ini', 'java', 'javascript', 'jsdoc',
-        'json', 'jsonc', 'json5', 'JSON', 'jsonnet', 'julia', 'kconfig',
+        'json', 'jsonc', 'json5',  'jsonnet', 'julia', 'kconfig',
         'latex', 'lua', 'luadoc', 'lua', 'luau', 'make', 'markdown',
         'markdown_inline', 'matlab', 'mermaid', 'ninja', 'objc', 'pascal',
         'passwd', 'pem', 'perl', 'php', 'phpdoc', 'psv', 'purescript', 'python',
