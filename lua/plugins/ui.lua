@@ -337,9 +337,7 @@ return {
     'nvim-tree/nvim-web-devicons',
     lazy = true,
     cond = function()
-      if vim.g.lite_mode ~= nil then
-        return false
-      end
+      return vim.g.lite_mode == nil
     end,
   },
 
@@ -474,9 +472,7 @@ return {
     'petertriho/nvim-scrollbar',
     event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' }, -- LazyFile
     cond = function()
-      if vim.g.lite_mode ~= nil then
-        return false
-      end
+      return vim.g.lite_mode == nil
     end,
     opts = {
       show_in_active_only = true,
