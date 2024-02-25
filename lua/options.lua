@@ -16,7 +16,7 @@ opt.grepprg = 'rg --vimgrep' -- ?
 opt.ignorecase = true -- Ignore case
 opt.inccommand = 'nosplit' -- ? preview incremental substitute
 opt.laststatus = 3 -- global statusline
-opt.list = vim.g.lite_mode and false or true -- Show some invisible characters (tabs...
+opt.list = vim.g.lite_mode==nil and true or false -- Show some invisible characters (tabs...
 opt.listchars = vim.g.lite_mode and {} or Icons.listchars
 opt.mouse = 'a' -- Enable mouse mode
 opt.number = true -- Print line number
@@ -39,7 +39,7 @@ opt.splitbelow = true -- Put new windows below current
 opt.splitkeep = 'screen'
 opt.splitright = true -- Put new windows right of current
 opt.tabstop = tab_width -- Number of spaces tabs count for
-opt.termguicolors = true -- True color support
+opt.termguicolors = vim.g.lite_mode==nil and true or false -- True color support
 opt.timeout = true -- Enable timeout
 opt.timeoutlen = 500
 opt.undofile = true
