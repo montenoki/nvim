@@ -83,6 +83,7 @@ return {
       ---@type lspconfig.options
       ---@diagnostic disable-next-line: missing-fields
       servers = {
+        vimls = {},
         lua_ls = {
           ---@type LazyKeysSpec[]
           settings = {
