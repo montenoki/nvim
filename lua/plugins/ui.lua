@@ -180,6 +180,12 @@ return {
           },
           lualine_x = {
             {
+              ---@diagnostic disable-next-line: undefined-field
+              require('noice').api.status.search.get,
+              ---@diagnostic disable-next-line: undefined-field
+              cond = require('noice').api.status.search.has,
+            },
+            {
               function()
                 return Icon.bug .. require('dap').status()
               end,
@@ -202,16 +208,11 @@ return {
               fmt = Util.lualine.trunc(80, 10, 60),
             },
             {
-              -- Show LSP Servers
-              function()
-                local clients = vim.lsp.get_active_clients()
-                local clients_list = {}
-                for _, client in pairs(clients) do
-                  table.insert(clients_list, client.name)
-                end
-                return '|' .. Util.ui.dump(clients_list)
-              end,
-              fmt = Util.lualine.trunc(80, 5, 80),
+              ---@diagnostic disable-next-line: undefined-field
+              require('noice').api.status.command.get,
+              ---@diagnostic disable-next-line: undefined-field
+              cond = require('noice').api.status.command.has,
+              color = Util.ui.fg('String'),
             },
             {
               'macro-recording',
