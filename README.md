@@ -89,8 +89,8 @@ git clone git@github.com:montenoki/nvim ~/.config/nvim
 
 ``` shell
 mkdir "$HOME\.virtualenvs"
-python -m venv "$HOME\.virtualenvs\neovim
-python -m venv "$HOME\.virtualenvs\debugpy
+python -m venv "$HOME\.virtualenvs\neovim"
+python -m venv "$HOME\.virtualenvs\debugpy"
 $HOME\.virtualenvs\neovim\Scripts\python.exe -m pip install neovim
 $HOME\.virtualenvs\debugpy\Scripts\python.exe -m pip install debugpy
 ```
