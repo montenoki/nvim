@@ -204,10 +204,6 @@ return {
           },
           lualine_y = {
             {
-              'VenvSelectCurrent',
-              fmt = Util.lualine.trunc(80, 10, 60),
-            },
-            {
               ---@diagnostic disable-next-line: undefined-field
               require('noice').api.status.command.get,
               ---@diagnostic disable-next-line: undefined-field

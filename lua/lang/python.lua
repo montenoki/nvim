@@ -32,7 +32,7 @@ return {
           local selector = require('venv-selector')
           local venv = selector
             .get_active_venv()
-            :gsub(Util.root.cwd() .. '/', '') or 'NO ENV'
+            :gsub(Util.root.cwd():gsub('%-', '%%-') .. '/', '') or 'NO ENV'
           local version = vim.fn
             .system(selector.get_active_path() .. ' --version')
             :gsub('Python ', '')
@@ -42,6 +42,7 @@ return {
         cond = function()
           return vim.bo.filetype == 'python'
         end,
+        fmt = Util.lualine.trunc(80, 5, 80),
       })
     end,
   },

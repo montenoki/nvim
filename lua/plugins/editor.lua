@@ -693,6 +693,19 @@ return {
         terms[number].direction = style
         terms[number].id = number
         terms[number]:toggle()
+
+        local venv = require('venv-selector').get_active_venv()
+        local os_name = vim.loop.os_uname().sysname
+        if venv ~= nil then
+          local cmd
+          if string.find(os_name, 'Windows') then
+            cmd = venv .. 'Scripts\\activate.ps1'
+            vim.cmd(number .. "TermExec cmd='" .. cmd .. "'")
+          else
+            cmd = 'source ' .. venv .. '/bin/activate;'
+            vim.cmd(number .. [[TermExec cmd=']] .. cmd .. "'")
+          end
+        end
       end
 
       function _G.gitui_toggle()
