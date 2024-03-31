@@ -1,7 +1,3 @@
-require('global')
-require('options')
-require('autocmds')
-
 -- Check if the lazy.nvim plugin is installed
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
@@ -28,6 +24,10 @@ else -- Normal Mode
   table.insert(lazy_imports, { import = 'plugins' })
   table.insert(lazy_imports, { import = 'lang' })
 end
+
+require('global')
+require('options')
+require('autocmds')
 
 local os_name = vim.loop.os_uname().sysname
 if string.find(string.lower(os_name), 'windows') then
