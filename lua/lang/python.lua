@@ -144,6 +144,7 @@ return {
         opts.dap_enabled = true
       end
       return vim.tbl_deep_extend('force', opts, {
+        auto_refresh = true,
         name = {
           'venv',
           '.venv',
