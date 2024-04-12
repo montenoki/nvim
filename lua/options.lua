@@ -1,85 +1,88 @@
-local Icons = require('icons')
-local opt = vim.opt
-local tab_width = 2
+local Ascii_icons = require('util.ascii_icons')
+local opt = vim.o
 
-opt.autowrite = true -- Enable auto write
-opt.clipboard = 'unnamedplus' -- Sync with system clipboard
-opt.colorcolumn = '81' -- Line length marker
-opt.completeopt = 'menu,menuone,noselect,noinsert'
-opt.conceallevel = 3 -- ? Hide * markup for bold and italic
-opt.confirm = true -- Confirm to save changes before exiting modified buffer
-opt.cursorline = true -- Enable highlighting of the current line
-opt.expandtab = true -- Use spaces instead of tabs
-opt.formatoptions = 'jcroqlnt' -- ? tcqj
-opt.grepformat = '%f:%l:%c:%m' -- ?
-opt.grepprg = 'rg --vimgrep' -- ?
-opt.ignorecase = true -- Ignore case
-opt.inccommand = 'nosplit' -- ? preview incremental substitute
-opt.laststatus = 3 -- global statusline
-opt.list = vim.g.lite_mode==nil and true or false -- Show some invisible characters (tabs...
-opt.listchars = vim.g.lite_mode and {} or Icons.listchars
-opt.mouse = 'a' -- Enable mouse mode
-opt.number = true -- Print line number
-opt.pumblend = 10 -- Popup blend
-opt.pumheight = 5 -- Maximum number of entries in a popup
-opt.relativenumber = true -- Relative line numbers
-opt.scrolloff = 4 -- Lines of context
+-- =============================================================================
+--   Basic - 基本設定
+-- =============================================================================
+
+opt.clipboard = 'unnamedplus' -- システムのクリップボードと連携する
+opt.confirm = true -- ファイル保存の確認
+opt.mouse = 'a' -- マウスサポート
 opt.sessionoptions =
   'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions'
-opt.shiftround = true -- Round indent
-opt.shiftwidth = tab_width -- Size of an indent
-opt.shortmess:append({ W = true, I = true, c = true, C = true })
-opt.showmode = false -- Dont show mode since we have a statusline
-opt.sidescrolloff = 4 -- Columns of context
-opt.signcolumn = 'yes' -- Always show the signcolumn, otherwise it would shift the text each time
-opt.smartcase = true -- Don't ignore case with capitals
-opt.smartindent = true -- Insert indents automatically
-opt.spelllang = { 'en' }
-opt.splitbelow = true -- Put new windows below current
-opt.splitkeep = 'screen'
-opt.splitright = true -- Put new windows right of current
-opt.tabstop = tab_width -- Number of spaces tabs count for
-opt.termguicolors = vim.g.lite_mode==nil and true or false -- True color support
-opt.timeout = true -- Enable timeout
-opt.timeoutlen = 500
+opt.timeoutlen = 200
 opt.undofile = true
 opt.undolevels = 10000
-opt.updatetime = 100 -- Save swap file and trigger CursorHold
-opt.whichwrap = '<,>,[,]' -- Use arrow key to move next line when cursor at end of line
-opt.wildmode = 'longest:full,full' -- Command-line completion mode
-opt.winminwidth = 5 -- Minimum window width
-opt.wrap = true -- Disable line wrap
-opt.fillchars = Icons.fillchars
-opt.virtualedit = 'onemore' -- fix the problem that cant see last char when scrollbar on.
+opt.updatetime = 100
 
-if vim.fn.has('nvim-0.10') == 1 then
-  opt.smoothscroll = true
-end
+-- 自動補完
+opt.completeopt = 'menu,menuone,noselect,noinsert' -- 自動補完設定
+opt.wildmode = 'longest:full,full'
 
--- Folding
-opt.foldcolumn = '1'
+-- 検索
+opt.ignorecase = true -- 大文字と小文字を同等に取り扱う
+opt.smartcase = true -- 大文字が入る場合、大文字を無視しない
+
+-- インデント
+opt.expandtab = true -- Tabの代わりにSpaceを使用する
+opt.shiftround = true -- シフト時shiftwidthの値の倍数になるようにスペースを挿入
+opt.smartindent = true -- 自動的にインデントを入力する
+
+-- ウィンドウ
+opt.splitbelow = true -- 新規Windowの方向
+opt.splitright = true
+opt.splitkeep = 'screen'
+
+-- grep 設定
+opt.grepprg = 'rg --vimgrep'
+opt.grepformat = '%f:%l:%c:%m'
+
+-- 折り畳み設定
 opt.foldenable = true
-opt.foldlevel = 99
 opt.foldlevelstart = 99
-opt.foldtext = "v:lua.require'util'.ui.foldtext()" -- todo: check this
--- opt.foldtext = 'v:lua.require("utils.simple_fold").simple_fold()'
+opt.foldlevel = 99
+opt.foldcolumn = '1'
+opt.foldmethod = 'indent'
 
-if vim.fn.has('nvim-0.9.0') == 1 then
-  vim.opt.statuscolumn = [[%!v:lua.require'util'.ui.statuscolumn()]]
-end
+-- UI
+opt.cursorline = true -- 編集行をハイライトする
+opt.laststatus = 1 -- global statusline
+opt.number = true -- Print line number
+opt.pumheight = 5 -- Maximum number of entries in a popup
+opt.showmode = false -- Dont show mode since we have a statusline
+opt.signcolumn = 'yes' -- Always show the signcolumn, otherwise it would shift the text each time
+opt.termguicolors = true
+opt.virtualedit = 'onemore' -- fix the problem that cant see last char when scrollbar on.
+opt.winminwidth = 5 -- Minimum window width
 
--- HACK: causes freezes on <= 0.9, so only enable on >= 0.10 for now
-if vim.fn.has('nvim-0.10') == 1 then
-  opt.foldmethod = 'expr'
-  vim.opt.foldexpr = "v:lua.require'util'.ui.foldexpr()" -- todo: check this
-else
-  opt.foldmethod = 'indent'
-end
+-- =============================================================================
+--   preference.lua - 好み設定
+-- =============================================================================
 
-vim.o.formatexpr = "v:lua.require'util'.format.formatexpr()" -- todo: check this
+local tab_width = 2
 
--- Fix markdown indentation settings
-vim.g.markdown_recommended_style = 0
+opt.formatoptions = 'tcrqlmM' -- https://neovim.io/doc/user/change.html#fo-table
+opt.whichwrap = '<,>,[,]' -- Use arrow key to move next line when cursor at end of line
+opt.scrolloff = 4 -- Lines of context
+opt.sidescrolloff = 4 -- Columns of context
+
+-- Tab
+opt.tabstop = tab_width -- Number of spaces tabs count for
+opt.shiftwidth = tab_width -- Size of an indent
+
+-- UI
+opt.colorcolumn = '81' -- Line length marker
+opt.conceallevel = 3 -- ? Hide * markup for bold and italic
+opt.list = true -- Show some invisible characters (tabs...
+opt.listchars = vim.g.lite == nil
+    and 'eol:↲,tab:<->,trail:~,extends:,precedes:,nbsp:␣'
+  or Ascii_icons.listchars
+opt.relativenumber = false -- Relative line numbers
+opt.wrap = false -- Disable line wrap
+
+-- =============================================================================
+--   その他設定
+-- =============================================================================
 
 -- Add extra filetypes
 vim.filetype.add({
@@ -89,3 +92,21 @@ vim.filetype.add({
     ['.zlogout'] = 'sh',
   },
 })
+
+-- Python Provider
+local executable_path = '/.virtualenvs/neovim/bin/python'
+if string.find(vim.loop.os_uname().sysname, 'Windows') then
+  executable_path = executable_path:gsub('/', '\\')
+end
+vim.g.python3_host_prog = vim.env.HOME .. executable_path
+
+-- TODO:
+-- Disable netrw
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- Set leader key
+vim.g.mapleader = ' '
+
+-- Fix markdown indentation settings
+vim.g.markdown_recommended_style = 0
