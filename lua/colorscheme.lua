@@ -1,4 +1,4 @@
-if vim.g.lite_mode then
+if vim.g.lite then
   vim.cmd('colorscheme baretty')
 else
   require('nightfox').load()
