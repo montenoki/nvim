@@ -14,41 +14,54 @@ end
 -- Add the path to lazy.nvim to the runtimepath
 vim.opt.rtp:prepend(lazypath)
 
-local lazy_imports = {}
-if vim.g.vscode ~= nil then
-  table.insert(lazy_imports, { import = 'plugins.coding' })
-elseif vim.g.lite_mode == true then
-  table.insert(lazy_imports, { import = 'plugins' })
-  table.insert(lazy_imports, { import = 'lang' })
-else -- Normal Mode
-  table.insert(lazy_imports, { import = 'plugins' })
-  table.insert(lazy_imports, { import = 'lang' })
-end
-
 require('global')
 require('options')
-require('autocmds')
+require('keybindings')
 
-local os_name = vim.loop.os_uname().sysname
-if string.find(string.lower(os_name), 'windows') then
-  table.insert(lazy_imports, { import = 'os.windows' })
-  require('os.windows')
-elseif os_name == 'Darwin' then
-  table.insert(lazy_imports, { import = 'os.mac' })
-  require('os.mac')
-else
-  table.insert(lazy_imports, { import = 'os.linux' })
-  require('os.linux')
-end
-require('lazy').setup({ lazy_imports })
+require('lazy').setup({
+  { import = 'plugins' },
+  { import = 'plugins.treesitter' },
+  { import = 'plugins.editor' },
+})
 
-if vim.g.vscode ~= nil then
-  require('vscode')
-else -- Normal or Lite Mode
-  require('colorscheme')
-end
-require('keymaps')
+require('colorscheme')
 
-if vim.g.neovide then
-  vim.o.guifont = 'FiraCode Nerd Font Mono'
-end
+-- TODO:(2024/4/12) delete
+
+-- local lazy_imports = {}
+-- if vim.g.vscode ~= nil then
+--   table.insert(lazy_imports, { import = 'plugins.coding' })
+-- elseif vim.g.lite_mode == true then
+--   table.insert(lazy_imports, { import = 'plugins' })
+--   table.insert(lazy_imports, { import = 'lang' })
+-- else -- Normal Mode
+--   table.insert(lazy_imports, { import = 'plugins' })
+--   table.insert(lazy_imports, { import = 'lang' })
+-- end
+--
+-- require('options')
+-- require('autocmds')
+--
+-- local os_name = vim.loop.os_uname().sysname
+-- if string.find(string.lower(os_name), 'windows') then
+--   table.insert(lazy_imports, { import = 'os.windows' })
+--   require('os.windows')
+-- elseif os_name == 'Darwin' then
+--   table.insert(lazy_imports, { import = 'os.mac' })
+--   require('os.mac')
+-- else
+--   table.insert(lazy_imports, { import = 'os.linux' })
+--   require('os.linux')
+-- end
+-- require('lazy').setup({ lazy_imports })
+--
+-- if vim.g.vscode ~= nil then
+--   require('vscode')
+-- else -- Normal or Lite Mode
+--   require('colorscheme')
+-- end
+-- require('keymaps')
+--
+-- if vim.g.neovide then
+--   vim.o.guifont = 'FiraCode Nerd Font Mono'
+-- end
