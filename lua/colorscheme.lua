@@ -1,6 +1,8 @@
-if vim.g.lite then
-  vim.cmd('colorscheme baretty')
-else
-  require('nightfox').load()
-  vim.cmd('colorscheme carbonfox')
+if vim.g.vscode == nil then
+  if vim.g.lite then
+    vim.cmd('colorscheme baretty')
+  else
+    require('nightfox').load()
+    vim.cmd('colorscheme carbonfox')
+  end
 end

@@ -1,3 +1,3 @@
 return {
-  { 'EdenEast/nightfox.nvim', lazy = true },
+  { 'EdenEast/nightfox.nvim', cond = vim.g.vscode == nil, lazy = true },
 }

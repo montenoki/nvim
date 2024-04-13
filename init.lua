@@ -17,11 +17,13 @@ vim.opt.rtp:prepend(lazypath)
 require('global')
 require('options')
 require('keybindings')
+require('autocmds')
 
 require('lazy').setup({
   { import = 'plugins' },
   { import = 'plugins.treesitter' },
   { import = 'plugins.editor' },
+  { import = 'plugins.lsp' },
 })
 
 require('colorscheme')

@@ -8,9 +8,8 @@ local opt = vim.o
 opt.clipboard = 'unnamedplus' -- システムのクリップボードと連携する
 opt.confirm = true -- ファイル保存の確認
 opt.mouse = 'a' -- マウスサポート
-opt.sessionoptions =
-  'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions'
-opt.timeoutlen = 200
+opt.sessionoptions = 'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions'
+opt.timeoutlen = 50
 opt.undofile = true
 opt.undolevels = 10000
 opt.updatetime = 100
@@ -61,7 +60,6 @@ opt.winminwidth = 5 -- Minimum window width
 
 local tab_width = 2
 
-opt.formatoptions = 'tcrqlmM' -- https://neovim.io/doc/user/change.html#fo-table
 opt.whichwrap = '<,>,[,]' -- Use arrow key to move next line when cursor at end of line
 opt.scrolloff = 4 -- Lines of context
 opt.sidescrolloff = 4 -- Columns of context
@@ -74,8 +72,7 @@ opt.shiftwidth = tab_width -- Size of an indent
 opt.colorcolumn = '81' -- Line length marker
 opt.conceallevel = 3 -- ? Hide * markup for bold and italic
 opt.list = true -- Show some invisible characters (tabs...
-opt.listchars = vim.g.lite == nil
-    and 'eol:↲,tab:<->,trail:~,extends:,precedes:,nbsp:␣'
+opt.listchars = vim.g.lite == nil and 'eol:↲,tab:<->,trail:~,extends:,precedes:,nbsp:␣'
   or Ascii_icons.listchars
 opt.relativenumber = false -- Relative line numbers
 opt.wrap = false -- Disable line wrap

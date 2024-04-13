@@ -8,10 +8,10 @@ M.treesitter = {
     node_decremental = '<BS>',
     scope_incremental = '<TAB>',
   },
-  toggle_tsc = '<leader>ut', 
+  toggle_tsc = '<leader>ut',
 }
 M.whichkey = {
-  toggle_wk = '<LEADER>k'
+  toggle_wk = '<LEADER>k',
 }
 M.window = {
   goto_left = '<C-h>',
@@ -30,8 +30,8 @@ M.window = {
   init_inc_selection = '<CR>',
 }
 M.float_window = {
-  scroll_up = '<>',
-  scroll_down = '<>',
+  scroll_up = '<C-0>',
+  scroll_down = '<C-9>',
 }
 M.line = {
   move_down = '<A-j>',
@@ -42,6 +42,7 @@ M.tab = {
   close = '<LEADER>tc',
 }
 M.nvimtree = {
-  toggle = '<LEADER>e'
+  toggle = '<LEADER>e',
+  toggle_preview = '<TAB>',
 }
 return M

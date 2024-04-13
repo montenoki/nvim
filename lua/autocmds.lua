@@ -16,26 +16,15 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
--- Add new line with 'o' do not continue comments
-vim.api.nvim_create_autocmd('BufEnter', {
-  group = augroup('dont_continue_comments'),
-  pattern = '*',
-  callback = function()
-    vim.opt.formatoptions = vim.opt.formatoptions
-      - 'o' -- O and o, don't continue comments
-      + 'r' -- But do continue when pressing enter.
-  end,
-})
-
 -- Resize splits if window got resized
-vim.api.nvim_create_autocmd({ 'VimResized', 'WinClosed' }, {
-  group = augroup('resize_splits'),
-  callback = function()
-    local current_tab = vim.fn.tabpagenr()
-    vim.cmd('tabdo wincmd =')
-    vim.cmd('tabnext ' .. current_tab)
-  end,
-})
+-- vim.api.nvim_create_autocmd({ 'VimResized', 'WinClosed' }, {
+-- group = augroup('resize_splits'),
+-- callback = function()
+-- local current_tab = vim.fn.tabpagenr()
+-- vim.cmd('tabdo wincmd =')
+-- vim.cmd('tabnext ' .. current_tab)
+-- end,
+-- })
 
 -- Go to last loc when opening a buffer
 vim.api.nvim_create_autocmd('BufReadPost', {
@@ -43,10 +32,7 @@ vim.api.nvim_create_autocmd('BufReadPost', {
   callback = function(event)
     local exclude = { 'gitcommit' }
     local buf = event.buf
-    if
-      vim.tbl_contains(exclude, vim.bo[buf].filetype)
-      or vim.b[buf].lazyvim_last_loc
-    then
+    if vim.tbl_contains(exclude, vim.bo[buf].filetype) or vim.b[buf].lazyvim_last_loc then
       return
     end
     vim.b[buf].lazyvim_last_loc = true
@@ -79,12 +65,7 @@ vim.api.nvim_create_autocmd('FileType', {
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
-    vim.keymap.set(
-      'n',
-      'q',
-      '<CMD>close<CR>',
-      { buffer = event.buf, silent = true }
-    )
+    vim.keymap.set('n', 'q', '<CMD>close<CR>', { buffer = event.buf, silent = true })
   end,
 })
 
@@ -98,6 +79,16 @@ vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
     end
     local file = vim.loop.fs_realpath(event.match) or event.match
     vim.fn.mkdir(vim.fn.fnamemodify(file, ':p:h'), 'p')
+  end,
+})
+
+-- Add new line with 'o' do not continue comments
+vim.api.nvim_create_autocmd('BufEnter', {
+  group = augroup('dont_continue_comments'),
+  pattern = '*',
+  callback = function() --'tcrqlmM'
+    -- https://neovim.io/doc/user/change.html#fo-table
+    vim.opt.formatoptions = vim.opt.formatoptions - 'j' - 'o' + 't' + 'm' + 'M'
   end,
 })
 
@@ -146,6 +137,26 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   callback = function()
     if vim.v.event.operator == 'y' then
       vim.fn.setpos('.', CURSOR_POS)
+    end
+  end,
+})
+
+-- auto close nvim-tree
+vim.api.nvim_create_autocmd({ 'QuitPre' }, {
+  group = augroup('auto_close_nvimtree'),
+  callback = function()
+    vim.cmd('NvimTreeClose')
+  end,
+})
+-- fix nvimtree when using auto-session
+vim.api.nvim_create_autocmd({ 'BufEnter' }, {
+  pattern = 'NvimTree*',
+  callback = function()
+    local api = require('nvim-tree.api')
+    local view = require('nvim-tree.view')
+
+    if not view.is_visible() then
+      api.tree.open()
     end
   end,
 })

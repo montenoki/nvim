@@ -21,9 +21,7 @@ function M.setup(_, opts)
   for _, key in ipairs({ 'format_on_save', 'format_after_save' }) do
     if opts[key] then
       Lazyvim.warn(
-        ("Don't set `opts.%s` for `conform.nvim`.\nWill use the conform formatter automatically"):format(
-          key
-        )
+        ("Don't set `opts.%s` for `conform.nvim`.\nWill use the conform formatter automatically"):format(key)
       )
       opts[key] = nil
     end
@@ -42,9 +40,10 @@ return {
         '<LEADER>f',
         function()
           require('conform').format()
+          Lazyvim.info('File Formatted.')
         end,
         mode = { 'n', 'v' },
-        desc = 'Format Injected Langs',
+        desc = 'Format Langs',
       },
       {
         '<LEADER>cf',
@@ -58,8 +57,8 @@ return {
     init = function()
       vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
       -- Install the conform formatter on VeryLazy
-      require('util').on_very_lazy(function()
-        require('util').format.register({
+      Lazyvim.on_very_lazy(function()
+        Lazyvim.format.register({
           name = 'conform.nvim',
           priority = 100,
           primary = true,
