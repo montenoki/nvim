@@ -83,7 +83,7 @@ return {
 
     view = {
       width = {
-        min = 30,
+        min = 10,
         max = function()
           return view_width_max
         end,

@@ -1,4 +1,5 @@
 local Keys = require('keymaps').whichkey
+
 return {
   'folke/which-key.nvim',
   cond = vim.g.vscode == nil,

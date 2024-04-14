@@ -102,8 +102,5 @@ vim.g.python3_host_prog = vim.env.HOME .. executable_path
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
--- Set leader key
-vim.g.mapleader = ' '
-
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0

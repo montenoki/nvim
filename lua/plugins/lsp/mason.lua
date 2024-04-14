@@ -2,6 +2,7 @@ return  -- cmdline tools and lsp servers
   {
     'williamboman/mason.nvim',
     cmd = 'Mason',
+    cond = vim.g.vscode == nil,
     build = ':MasonUpdate',
     opts = {
       ensure_installed = { 'taplo', 'shfmt', 'stylua', 'tree-sitter-cli' },

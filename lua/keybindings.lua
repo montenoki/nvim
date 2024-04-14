@@ -2,6 +2,9 @@ local map = vim.keymap.set
 local Lazyvim = require('lazyvim')
 local Keys = require('keymaps')
 
+-- Set leader key
+vim.g.mapleader = Keys.leader_key
+
 -- better up/down for wrapped lines
 map({ 'n', 'x' }, '<DOWN>', "v:count == 0 ? 'gj' : 'j'", { desc = 'Down ignore wrapped', expr = true, silent = true })
 map({ 'n', 'x' }, '<UP>', "v:count == 0 ? 'gk' : 'k'", { desc = 'Up ignore wrapped', expr = true, silent = true })
@@ -16,15 +19,15 @@ map('v', 'p', '"_dP')
 -- turn off 'Ctrl+z'
 map({ 'n', 'i', 'v' }, '<C-z>', '')
 -- Clear search with <ESC>
-map( { 'i', 'n' }, '<ESC>', '<CMD>noh<CR><ESC>', { desc = 'Escape and clear hlsearch' })
+map({ 'i', 'n' }, '<ESC>', '<CMD>noh<CR><ESC>', { desc = 'Escape and clear hlsearch' })
 
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
-map( 'n', 'n', "'Nn'[v:searchforward].'zv'", { expr = true, desc = 'Next search result' })
-map( 'x', 'n', "'Nn'[v:searchforward]", { expr = true, desc = 'Next search result' })
-map( 'o', 'n', "'Nn'[v:searchforward]", { expr = true, desc = 'Next search result' })
-map( 'n', 'N', "'nN'[v:searchforward].'zv'", { expr = true, desc = 'Prev search result' })
-map( 'x', 'N', "'nN'[v:searchforward]", { expr = true, desc = 'Prev search result' })
-map( 'o', 'N', "'nN'[v:searchforward]", { expr = true, desc = 'Prev search result' })
+map('n', 'n', "'Nn'[v:searchforward].'zv'", { expr = true, desc = 'Next search result' })
+map('x', 'n', "'Nn'[v:searchforward]", { expr = true, desc = 'Next search result' })
+map('o', 'n', "'Nn'[v:searchforward]", { expr = true, desc = 'Next search result' })
+map('n', 'N', "'nN'[v:searchforward].'zv'", { expr = true, desc = 'Prev search result' })
+map('x', 'N', "'nN'[v:searchforward]", { expr = true, desc = 'Prev search result' })
+map('o', 'N', "'nN'[v:searchforward]", { expr = true, desc = 'Prev search result' })
 
 -- Add undo break-points
 map('i', ',', ',<C-g>u')
@@ -60,13 +63,10 @@ map('v', Keys.line.move_down, ":m '>+1<CR>gv=gv", { desc = 'Move Line down' })
 map('v', Keys.line.move_up, ":m '<-2<CR>gv=gv", { desc = 'Move Line up' })
 
 -- Move Tab
-map('n', '<LEADER>tn', '<CMD>tabnew<CR>', { desc = 'New Tab' })
-map('n', '<LEADER>tc', '<CMD>tabclose<CR>', { desc = 'Close Tab' })
-map('n', '<C-t>', '<CMD>tabnew<CR>', { desc = 'New Tab' })
-map('n', '<C-]>', '<CMD>tabnext<CR>', { desc = 'Next Tab' })
-map('n', '<C-[>', '<CMD>tabprev<CR>', { desc = 'Previous Tab' })
-map('n', '<LEADER>t]', '<CMD>tabnext<CR>', { desc = 'Next Tab' })
-map('n', '<LEADER>t[', '<CMD>tabprev<CR>', { desc = 'Previous Tab' })
+map('n', Keys.tab.new, '<CMD>tabnew<CR>', { desc = 'New Tab' })
+map('n', Keys.tab.close, '<CMD>tabclose<CR>', { desc = 'Close Tab' })
+map('n', Keys.tab.prev, '<CMD>tabprev<CR>', { desc = 'Previous Tab' })
+map('n', Keys.tab.next, '<CMD>tabnext<CR>', { desc = 'Next Tab' })
 
 -- Diagnostic
 local diagnostic_goto = function(next, severity)

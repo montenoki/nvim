@@ -24,6 +24,7 @@ require('lazy').setup({
   { import = 'plugins.treesitter' },
   { import = 'plugins.editor' },
   { import = 'plugins.lsp' },
+  -- { import = 'plugins.ui' },
 })
 
 require('colorscheme')

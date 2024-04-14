@@ -1,4 +1,5 @@
 local Keys = require('keymaps').treesitter
+local Lazyvim = require('lazyvim')
 
 return {
   'nvim-treesitter/nvim-treesitter-context',
@@ -12,9 +13,8 @@ return {
       function()
         local Lazyvim = require('lazyvim')
         local tsc = require('treesitter-context')
-        :qa
         tsc.toggle()
-        if lazyvim.inject.get_upvalue(tsc.toggle, 'enabled') then
+        if Lazyvim.inject.get_upvalue(tsc.toggle, 'enabled') then
           Lazyvim.info('Enabled Treesitter Context', { title = 'Option' })
         else
           Lazyvim.warn('Disabled Treesitter Context', { title = 'Option' })
