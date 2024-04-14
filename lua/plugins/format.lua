@@ -9,7 +9,7 @@ function M.setup(_, opts)
     if type(formatter) == 'table' then
       ---@diagnostic disable-next-line: undefined-field
       if formatter.extra_args then
-        ---@diagnostic disable-next-line: undefined-field
+        ---@diagnostic disable-next-line: undefined-field, inject-field
         formatter.prepend_args = formatter.extra_args
         Lazyvim.deprecate(
           ('opts.formatters.%s.extra_args'):format(name),
@@ -21,6 +21,7 @@ function M.setup(_, opts)
 
   for _, key in ipairs({ 'format_on_save', 'format_after_save' }) do
     if opts[key] then
+      ---@diagnostic disable-next-line: undefined-field
       Lazyvim.warn(
         ("Don't set `opts.%s` for `conform.nvim`.\nWill use the conform formatter automatically"):format(key)
       )
@@ -41,6 +42,7 @@ return {
       Keys.format,
       function()
         require('conform').format()
+        ---@diagnostic disable-next-line: undefined-field
         Lazyvim.info('File Formatted.')
       end,
       mode = { 'n', 'v' },

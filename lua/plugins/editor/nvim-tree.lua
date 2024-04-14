@@ -3,21 +3,6 @@ local Keys = require('keymaps')
 local Ascii_icons = require('util.ascii_icons').nvimtree
 local map = vim.keymap.set
 
--- Toggle Adaptive Width
-local VIEW_WIDTH_FIXED = 30
-local view_width_max = VIEW_WIDTH_FIXED -- fixed to start
-
--- toggle the width and redraw
-local function toggle_width_adaptive()
-  if view_width_max == -1 then
-    view_width_max = VIEW_WIDTH_FIXED
-  else
-    view_width_max = -1
-  end
-
-  require('nvim-tree.api').tree.reload()
-end
-
 return {
   'nvim-tree/nvim-tree.lua',
   cond = vim.g.vscode == nil,
@@ -82,12 +67,7 @@ return {
     },
 
     view = {
-      width = {
-        min = 10,
-        max = function()
-          return view_width_max
-        end,
-      },
+      width = { min = 10, max = -1 },
       preserve_window_proportions = true,
     },
     renderer = {
@@ -154,7 +134,6 @@ return {
       map('n', 'y', api.fs.copy.filename, opts('Copy Name'))
       map('n', 'Y', api.fs.copy.relative_path, opts('Copy Path'))
       map('n', 'gy', api.fs.copy.absolute_path, opts('Copy Abs Path'))
-      map('n', 'A', toggle_width_adaptive, opts('Toggle Adaptive Width'))
     end,
   },
   config = function(_, opts)

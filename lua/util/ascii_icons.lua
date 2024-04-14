@@ -17,6 +17,9 @@ M.diagnostics = {
   Info = 'I',
 }
 M.virtual_text_prefix = '..'
+M.lualine = {
+  section_separators = { left = '', right = '' },
+}
 M.nvimtree = {
   indent_markers = {
     corner = 'L',
@@ -52,7 +55,7 @@ M.nvimtree = {
 M.git = {
   added = '[+]',
   modified = '[M]',
-  removed = '[x]',
+  removed = '[-]',
   deleted = '[x]',
   renamed = '[rn]',
   untracked = '[ ]',

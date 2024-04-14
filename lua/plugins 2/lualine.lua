@@ -53,6 +53,7 @@ return {
           { 'branch', icon = Icon.lualine.branch },
         },
         lualine_c = {
+          -- TODO
           {
             function()
               return Icon.lualine.session .. require('auto-session.lib').current_session_name()
@@ -115,9 +116,9 @@ return {
           {
             'diff',
             symbols = {
-              added = Icon.git.added,
-              modified = Icon.git.modified,
-              removed = Icon.git.removed,
+              added = vim.g.lite == nil and '' or Ascii_icons.git.added,
+              modified = vim.g.lite == nil and '' or Ascii_icons.git.modified,
+              removed = vim.g.lite == nil and '' or Ascii_icons.git.removed,
             },
             source = function()
               ---@diagnostic disable-next-line: undefined-field

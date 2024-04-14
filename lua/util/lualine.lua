@@ -1,4 +1,6 @@
----@class lazyvim.util.lualine
+local Util = require('util')
+
+---@class util.lualine
 local M = {}
 
 function M.cmp_source(name, icon)
@@ -23,14 +25,14 @@ function M.cmp_source(name, icon)
   end
 
   local colors = {
-    ok = require('lazyvim').ui.fg('Special'),
-    error = require('lazyvim').ui.fg('DiagnosticError'),
-    pending = require('lazyvim').ui.fg('DiagnosticWarn'),
+    ok = Util.ui.fg('Special'),
+    error = Util.ui.fg('DiagnosticError'),
+    pending = Util.ui.fg('DiagnosticWarn'),
   }
 
   return {
     function()
-      return icon or require('lazyvim.config').icons.kinds[name:sub(1, 1):upper() .. name:sub(2)]
+      return icon or require('icons').cmp[name:sub(1, 1):upper() .. name:sub(2)]
     end,
     cond = function()
       return status() ~= nil
@@ -46,7 +48,7 @@ end
 ---@param hl_group? string
 ---@return string
 function M.format(component, text, hl_group)
-  if not hl_group or hl_group == '' then
+  if not hl_group then
     return text
   end
   ---@type table<string, string>
@@ -54,31 +56,22 @@ function M.format(component, text, hl_group)
   local lualine_hl_group = component.hl_cache[hl_group]
   if not lualine_hl_group then
     local utils = require('lualine.utils.utils')
-    ---@type string[]
-    local gui = vim.tbl_filter(function(x)
-      return x
-    end, {
-      utils.extract_highlight_colors(hl_group, 'bold') and 'bold',
-      utils.extract_highlight_colors(hl_group, 'italic') and 'italic',
-    })
-
-    lualine_hl_group = component:create_hl({
-      fg = utils.extract_highlight_colors(hl_group, 'fg'),
-      gui = #gui > 0 and table.concat(gui, ',') or nil,
-    }, 'LV_' .. hl_group) --[[@as string]]
+    lualine_hl_group = component:create_hl(
+      { fg = utils.extract_highlight_colors(hl_group, 'fg') },
+      'LV_' .. hl_group
+    )
     component.hl_cache[hl_group] = lualine_hl_group
   end
-  return component:format_hl(lualine_hl_group) .. text .. component:get_default_hl()
+  return component:format_hl(lualine_hl_group)
+    .. text
+    .. component:get_default_hl()
 end
 
----@param opts? {relative: "cwd"|"root", modified_hl: string?, directory_hl: string?, filename_hl: string?}
+---@param opts? {relative: "cwd"|"root", modified_hl: string?}
 function M.pretty_path(opts)
   opts = vim.tbl_extend('force', {
     relative = 'cwd',
-    modified_hl = 'MatchParen',
-    directory_hl = '',
-    filename_hl = 'Bold',
-    modified_sign = '',
+    modified_hl = 'Constant',
   }, opts or {})
 
   return function(self)
@@ -87,9 +80,8 @@ function M.pretty_path(opts)
     if path == '' then
       return ''
     end
-
-    local root = require('lazyvim.root').get({ normalize = true })
-    local cwd = require('lazyvim.root').cwd()
+    local root = Util.root.get({ normalize = true })
+    local cwd = Util.root.cwd()
 
     if opts.relative == 'cwd' and path:find(cwd, 1, true) == 1 then
       path = path:sub(#cwd + 2)
@@ -99,24 +91,15 @@ function M.pretty_path(opts)
 
     local sep = package.config:sub(1, 1)
     local parts = vim.split(path, '[\\/]')
-
     if #parts > 3 then
       parts = { parts[1], '…', parts[#parts - 1], parts[#parts] }
     end
 
     if opts.modified_hl and vim.bo.modified then
-      parts[#parts] = parts[#parts] .. opts.modified_sign
       parts[#parts] = M.format(self, parts[#parts], opts.modified_hl)
-    else
-      parts[#parts] = M.format(self, parts[#parts], opts.filename_hl)
     end
 
-    local dir = ''
-    if #parts > 1 then
-      dir = table.concat({ table.unpack(parts, 1, #parts - 1) }, sep)
-      dir = M.format(self, dir .. sep, opts.directory_hl)
-    end
-    return dir .. parts[#parts]
+    return table.concat(parts, sep)
   end
 end
 
@@ -128,12 +111,12 @@ function M.root_dir(opts)
     parent = true,
     other = true,
     icon = '󱉭 ',
-    color = require('lazyvim').ui.fg('Special'),
+    color = Util.ui.fg('Special'),
   }, opts or {})
 
   local function get()
-    local cwd = require('lazyvim').root.cwd()
-    local root = require('lazyvim').root.get({ normalize = true })
+    local cwd = Util.root.cwd()
+    local root = Util.root.get({ normalize = true })
     local name = vim.fs.basename(root)
 
     if root == cwd then
@@ -161,25 +144,29 @@ function M.root_dir(opts)
     color = opts.color,
   }
 end
+function M.show_macro_recording()
+    local recording_register = vim.fn.reg_recording()
+    if recording_register == "" then
+        return ""
+    else
+        return "Rec @" .. recording_register
+    end
+end
 
 function M.trunc(trunc_width, trunc_len, hide_width, no_ellipsis)
   return function(str)
     local win_width = vim.fn.winwidth(0)
     if hide_width and win_width < hide_width then
       return ''
-    elseif trunc_width and trunc_len and win_width < trunc_width and #str > trunc_len then
+    elseif
+      trunc_width
+      and trunc_len
+      and win_width < trunc_width
+      and #str > trunc_len
+    then
       return str:sub(1, trunc_len) .. (no_ellipsis and '' or '...')
     end
     return str
-  end
-end
-
-function M.show_macro_recording()
-  local recording_register = vim.fn.reg_recording()
-  if recording_register == '' then
-    return ''
-  else
-    return 'Rec @' .. recording_register
   end
 end
 

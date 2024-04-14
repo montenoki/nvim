@@ -61,9 +61,9 @@ local listchars_lite = {
 }
 local git_normal = {
   -- Change type
-  added = ' ',
-  modified = ' ',
-  removed = ' ',
+  added = '',
+  modified = '',
+  removed = '',
   deleted = '✖', -- this can only be used in the git_status source
   renamed = '', -- this can only be used in the git_status source
   -- Status type
