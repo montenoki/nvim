@@ -26,7 +26,7 @@ function M.setup()
 end
 
 function M.welcome()
-  LazyVim.info("Welcome to LazyVim!")
+  require('lazyvim').info("Welcome to LazyVim!")
 end
 
 function M.changelog()
@@ -49,7 +49,7 @@ function M.open(file, opts)
   if opts.plugin then
     local plugin = require("lazy.core.config").plugins[opts.plugin] --[[@as LazyPlugin?]]
     if not plugin then
-      return LazyVim.error("plugin not found: " .. opts.plugin)
+      return require('lazyvim').error("plugin not found: " .. opts.plugin)
     end
     file = plugin.dir .. "/" .. file
   elseif opts.rtp then
@@ -57,7 +57,7 @@ function M.open(file, opts)
   end
 
   if not file then
-    return LazyVim.error("File not found")
+    return require('lazyvim').error("File not found")
   end
 
   if opts.when_changed then
@@ -67,7 +67,7 @@ function M.open(file, opts)
       return
     end
     Config.json.data.news[ref] = hash
-    LazyVim.json.save()
+    require('lazyvim').json.save()
     -- don't open if file has never been opened
     if is_new then
       return

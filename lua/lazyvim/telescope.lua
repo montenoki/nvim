@@ -20,7 +20,7 @@ function M.telescope(builtin, opts)
   return function()
     builtin = params.builtin
     opts = params.opts
-    opts = vim.tbl_deep_extend("force", { cwd = LazyVim.root() }, opts or {}) --[[@as lazyvim.util.telescope.opts]]
+    opts = vim.tbl_deep_extend("force", { cwd = require('lazyvim').root() }, opts or {}) --[[@as lazyvim.util.telescope.opts]]
     if builtin == "files" then
       if
         vim.uv.fs_stat((opts.cwd or vim.uv.cwd()) .. "/.git")
@@ -57,7 +57,7 @@ function M.telescope(builtin, opts)
 end
 
 function M.config_files()
-  return LazyVim.telescope("find_files", { cwd = vim.fn.stdpath("config") })
+  return require('lazyvim').telescope("find_files", { cwd = vim.fn.stdpath("config") })
 end
 
 return M

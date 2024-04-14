@@ -38,9 +38,9 @@ function M.get()
   M.state = M.state or LazyConfig.spec.modules
   local extras = {} ---@type LazyExtra[]
   for _, source in ipairs(M.sources) do
-    local root = LazyVim.find_root(source.module)
+    local root = require('lazyvim').find_root(source.module)
     if root then
-      LazyVim.walk(root, function(path, name, type)
+      require('lazyvim').walk(root, function(path, name, type)
         if (type == "file" or type == "link") and name:match("%.lua$") then
           name = path:sub(#root + 2, -5):gsub("/", ".")
           local ok, extra = pcall(M.get_extra, source, source.module .. "." .. name)
@@ -118,7 +118,7 @@ function X:toggle()
   for _, extra in ipairs(self.extras) do
     if extra.row == pos[1] then
       if not extra.managed then
-        LazyVim.error(
+        require('lazyvim').error(
           "Not managed by LazyExtras. Remove from your config to enable/disable here.",
           { title = "LazyExtras" }
         )
@@ -136,8 +136,8 @@ function X:toggle()
         M.state[#M.state + 1] = extra.module
       end
       table.sort(Config.json.data.extras)
-      LazyVim.json.save()
-      LazyVim.info(
+      require('lazyvim').json.save()
+      require('lazyvim').info(
         "`"
           .. extra.name
           .. "`"

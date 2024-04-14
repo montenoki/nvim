@@ -48,7 +48,7 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 ---@param opts? LazyTermOpts | {args?: string[]}
 function M.open(opts)
   if vim.g.lazygit_theme ~= nil then
-    LazyVim.deprecate("vim.g.lazygit_theme", "vim.g.lazygit_config")
+    require('lazyvim').deprecate("vim.g.lazygit_theme", "vim.g.lazygit_config")
   end
 
   opts = vim.tbl_deep_extend("force", {}, {
@@ -73,7 +73,7 @@ function M.open(opts)
       else
         ---@diagnostic disable-next-line: cast-type-mismatch
         ---@cast lines string
-        LazyVim.error(
+        require('lazyvim').error(
           { "Failed to get **lazygit** config directory.", "Will not apply **lazygit** config.", "", "# Error:", lines },
           { title = "lazygit" }
         )
@@ -81,7 +81,7 @@ function M.open(opts)
     end
   end
 
-  return LazyVim.terminal(cmd, opts)
+  return require('lazyvim').terminal(cmd, opts)
 end
 
 function M.set_ansi_color(idx, color)
@@ -94,9 +94,9 @@ function M.get_color(v)
   ---@type string[]
   local color = {}
   if v.fg then
-    color[1] = LazyVim.ui.color(v.fg)
+    color[1] = require('lazyvim').ui.color(v.fg)
   elseif v.bg then
-    color[1] = LazyVim.ui.color(v.bg, true)
+    color[1] = require('lazyvim').ui.color(v.bg, true)
   end
   if v.bold then
     table.insert(color, "bold")

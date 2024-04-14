@@ -13,7 +13,7 @@ local function encode(value, indent)
   elseif t == "number" or t == "boolean" then
     return tostring(value)
   elseif t == "table" then
-    local is_list = LazyVim.is_list(value)
+    local is_list = require('lazyvim').is_list(value)
     local parts = {}
     local next_indent = indent .. "  "
 
@@ -50,13 +50,13 @@ function M.save()
   local path = vim.fn.stdpath("config") .. "/lazyvim.json"
   local f = io.open(path, "w")
   if f then
-    f:write(LazyVim.json.encode(Config.json.data))
+    f:write(require('lazyvim').json.encode(Config.json.data))
     f:close()
   end
 end
 
 function M.migrate()
-  LazyVim.info("Migrating `lazyvim.json` to version `" .. Config.json.version .. "`")
+  require('lazyvim').info("Migrating `lazyvim.json` to version `" .. Config.json.version .. "`")
   local json = Config.json
 
   -- v0
