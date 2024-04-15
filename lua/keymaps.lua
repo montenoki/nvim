@@ -98,4 +98,12 @@ M.telescope = {
   scroll_down = M.float_window.scroll_down,
   scroll_up = M.float_window.scroll_up,
 }
+M.gitsigns = {
+  next_hunk = ']h',
+  prev_hunk = '[h',
+  preview_hunk = '<LEADER>hp',
+  blame_line = '<LEADER>hb',
+  diff = '<LEADER>hD',
+  diff_tilde = '<LEADER>hd',
+}
 return M

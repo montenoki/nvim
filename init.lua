@@ -22,8 +22,8 @@ require('autocmds')
 require('lazy').setup({
   { import = 'plugins' },
   { import = 'plugins.treesitter' },
-  { import = 'plugins.editor' },
   { import = 'plugins.ui' },
+  { import = 'plugins.editor' },
 })
 
 require('colorscheme')

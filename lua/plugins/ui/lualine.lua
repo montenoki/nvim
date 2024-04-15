@@ -56,27 +56,7 @@ return {
             file_status = false,
           },
         },
-        lualine_x = {
-          {
-            function()
-              return '󰬁'
-            end,
-          },
-          {
-            'tabs',
-            tab_max_length = 40,
-            max_length = vim.o.columns / 3, -- Maximum width of tabs component.
-            mode = 2, -- 0: Shows tab_nr
-            path = 0, -- 0: just shows the filename
-            show_modified_status = false, -- Shows a symbol next to the tab name if the file has been modified.
-            use_mode_colors = true,
-          },
-          {
-            function()
-              return '󰬁'
-            end,
-          },
-        },
+        lualine_x = {},
         lualine_y = {
           {
             'macro-recording',
@@ -84,15 +64,6 @@ return {
             fmt = Lazyvim.lualine.show_macro_recording,
             ---@diagnostic disable-next-line: undefined-field
             color = Lazyvim.ui.fg('Error'),
-          },
-          {
-            function()
-              if vim.opt.iminsert:get() > 0 then
-                vim.print("a")
-                return '⌨' .. vim.o.keymaps_name
-              end
-              return ''
-            end,
           },
         },
         lualine_z = {

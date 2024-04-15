@@ -65,5 +65,16 @@ M.git = {
   conflict = '[!]',
   unmerged = '[!]',
 }
+M.gitsigns = {
+  add = { text = '+|' },
+  change = { text = 'C|' },
+  delete = { text = '>' },
+  topdelete = { text = '>' },
+  changedelete = { text = '>' },
+  untracked = { text = 'U|' },
+}
+M.bufferline = {
+  close = 'x',
+}
 
 return M
