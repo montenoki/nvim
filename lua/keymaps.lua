@@ -38,8 +38,10 @@ M.tab = {
   next = '<C-]>',
 }
 M.float_window = {
-  scroll_up = '<C-0>',
-  scroll_down = '<C-9>',
+  scroll_up = '<C-UP>',
+  scroll_down = '<C-DOWN>',
+  scroll_left = '<C-LEFT>',
+  scroll_right = '<C-RIGHT>', 
 }
 M.line = {
   move_down = '<A-j>',
@@ -52,5 +54,48 @@ M.nvimtree = {
 M.format = {
   format = '<LEADER>f',
   format_injected = '<LEADER>cf',
+}
+M.lsp = {
+  definition = 'gd',
+  declaration = 'gD',
+  show_references = 'gr',
+  implementation = 'gI',
+  type_definition = 'gt',
+  hover = 'gh',
+  signature_help = 'gH',
+  pop_diagnostic = 'gp',
+  code_action = '<LEADER>ca',
+  code_action_source = '<LEADER>cA',
+  rename = '<LEADER>r',
+}
+M.telescope = {
+  switch_buffer = '<LEADER>,',
+  grep = '<LEADER>/',
+  find = '<LEADER>?',
+  commands = '<LEADER>:',
+  commands_history = '<LEADER>;',
+  git_commits = '<LEADER>sc',
+  git_status = '<LEADER>ss',
+  registers = '<LEADER>s"',
+  autocmd = '<LEADER>sa',
+  doc_diagnostics = '<LEADER>sd',
+  workspace_diagnostics = '<LEADER>sD',
+  highlights = '<LEADER>sh',
+  keymaps = '<LEADER>sk',
+  marks = '<LEADER>sm',
+  options = '<LEADER>so',
+  colorscheme = '<LEADER>uC',
+  select_tab = '<C-t>',
+  move_selection_next = '<C-j>',
+  move_selection_previous = '<C-k>',
+  cycle_history_next = '<S-TAB>',
+  cycle_history_prev = '<TAB>',
+  select_vertical = '<C-v>',
+  select_horizontal = '<C-h>',
+  close = 'q',
+  scroll_left = M.float_window.scroll_left,
+  scroll_right = M.float_window.scroll_right,
+  scroll_down = M.float_window.scroll_down,
+  scroll_up = M.float_window.scroll_up,
 }
 return M

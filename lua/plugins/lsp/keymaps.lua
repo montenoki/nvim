@@ -1,19 +1,16 @@
 local M = {}
+local Keys = require('keymaps').lsp
+local Lazyvim = require('lazyvim')
 
----@type LazyKeysLspSpec[]|nil
 M._keys = nil
 
----@alias LazyKeysLspSpec LazyKeysSpec|{has?:string}
----@alias LazyKeysLsp LazyKeys|{has?:string}
-
----@return LazyKeysLspSpec[]
 function M.get()
   if M._keys then
     return M._keys
   end
   M._keys = {
     {
-      'gd',
+      Keys.definition,
       function()
         require('telescope.builtin').lsp_definitions({ reuse_win = true })
       end,
@@ -21,39 +18,36 @@ function M.get()
       has = 'definition',
     },
     {
-      'gr',
+      Keys.show_references,
       function()
-        require('telescope.builtin').lsp_references(
-          require('telescope.themes').get_dropdown()
-        )
+        require('telescope.builtin').lsp_references(require('telescope.themes').get_dropdown())
       end,
-      desc = 'References',
+      desc = 'Show References',
     },
-    { 'gD', vim.lsp.buf.declaration, desc = 'Goto Declaration' },
+    { Keys.declaration, vim.lsp.buf.declaration, desc = 'Goto Declaration' },
     {
-      'gI',
+      Keys.implementation,
       function()
         require('telescope.builtin').lsp_implementations({ reuse_win = true })
       end,
       desc = 'Goto Implementation',
     },
     {
-      'gy',
+      Keys.type_definition,
       function()
         require('telescope.builtin').lsp_type_definitions({ reuse_win = true })
       end,
       desc = 'Goto T[y]pe Definition',
     },
-    { 'gh', vim.lsp.buf.hover, desc = 'Hover' },
+    { Keys.hover, vim.lsp.buf.hover, desc = 'Hover' },
     {
-      'gH',
+      Keys.signature_help,
       vim.lsp.buf.signature_help,
       desc = 'Signature Help',
       has = 'signatureHelp',
     },
-    { 'gt', vim.lsp.buf.type_definition, desc = 'Type definition' },
     {
-      'gp',
+      Keys.pop_diagnostic,
       function()
         local opts = {
           focusable = false,
@@ -72,16 +66,15 @@ function M.get()
       end,
       desc = 'Popup diagnostic info',
     },
-    -- { "<LEADER>f",  function() vim.lsp.buf.format({ async = true }) end, desc = "Format" },
     {
-      '<LEADER>ca',
+      Keys.code_action,
       vim.lsp.buf.code_action,
       desc = 'Code Action',
       mode = { 'n', 'v' },
       has = 'codeAction',
     },
     {
-      '<LEADER>cA',
+      Keys.code_action_source,
       function()
         vim.lsp.buf.code_action({
           context = {
@@ -92,27 +85,23 @@ function M.get()
           },
         })
       end,
-      desc = 'Source Action',
+      desc = 'Source Code Action',
       has = 'codeAction',
     },
   }
-  if require('util').has('inc-rename.nvim') then
+  if Lazyvim.has('inc-rename.nvim') then
     M._keys[#M._keys + 1] = {
-      '<LEADER>r',
+      Keys.rename,
       function()
         local inc_rename = require('inc_rename')
-        return ':'
-          .. inc_rename.config.cmd_name
-          .. ' '
-          .. vim.fn.expand('<cword>')
+        return ':' .. inc_rename.config.cmd_name .. ' ' .. vim.fn.expand('<cword>')
       end,
       expr = true,
       desc = 'Rename',
       has = 'rename',
     }
   else
-    M._keys[#M._keys + 1] =
-      { '<LEADER>r', vim.lsp.buf.rename, desc = 'Rename', has = 'rename' }
+    M._keys[#M._keys + 1] = { Keys.rename, vim.lsp.buf.rename, desc = 'Rename', has = 'rename' }
   end
   return M._keys
 end
@@ -120,7 +109,7 @@ end
 ---@param method string
 function M.has(buffer, method)
   method = method:find('/') and method or 'textDocument/' .. method
-  local clients = require('util').lsp.get_clients({ bufnr = buffer })
+  local clients = Lazyvim.lsp.get_clients({ bufnr = buffer })
   for _, client in ipairs(clients) do
     if client.supports_method(method) then
       return true
@@ -129,18 +118,16 @@ function M.has(buffer, method)
   return false
 end
 
----@return (LazyKeys|{has?:string})[]
 function M.resolve(buffer)
   local Keys = require('lazy.core.handler.keys')
   if not Keys.resolve then
     return {}
   end
   local spec = M.get()
-  local opts = require('util').opts('nvim-lspconfig')
-  local clients = require('util').lsp.get_clients({ bufnr = buffer })
+  local opts = Lazyvim.opts('nvim-lspconfig')
+  local clients = Lazyvim.lsp.get_clients({ bufnr = buffer })
   for _, client in ipairs(clients) do
-    local maps = opts.servers[client.name] and opts.servers[client.name].keys
-      or {}
+    local maps = opts.servers[client.name] and opts.servers[client.name].keys or {}
     vim.list_extend(spec, maps)
   end
   return Keys.resolve(spec)

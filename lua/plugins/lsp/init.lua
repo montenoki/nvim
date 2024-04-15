@@ -1,5 +1,5 @@
 local Lazyvim = require('lazyvim')
-local Icon = require('icons')
+local Ascii_icons = require('util.ascii_icons')
 
 return {
   'neovim/nvim-lspconfig',
@@ -17,7 +17,6 @@ return {
   },
   ---@class PluginLspOpts
   opts = {
-    -- options for vim.diagnostic.config()
     diagnostics = {
       underline = true,
       update_in_insert = false,
@@ -26,10 +25,7 @@ return {
       virtual_text = {
         spacing = 2,
         source = 'if_many',
-        prefix = Icon.lsp.diag_prefix,
-        -- this will set set the prefix to a function that returns the diagnostics icon based on the severity
-        -- this only works on a recent 0.10.0 build. Will be set to "●" when not supported
-        -- prefix = "icons",
+        prefix = vim.g.lite == nil and '󰆈' or '>',
       },
       float = {
         source = 'always',
@@ -39,9 +35,6 @@ return {
       },
       severity_sort = true,
     },
-    -- Enable this to enable the builtin LSP inlay hints on Neovim >= 0.10.0
-    -- Be aware that you also will need to properly configure your LSP server to
-    -- provide the inlay hints.
     inlay_hints = {
       enabled = true,
     },
@@ -51,12 +44,9 @@ return {
       timeout_ms = nil,
     },
     -- LSP Server Settings
-    ---@type lspconfig.options
-    ---@diagnostic disable-next-line: missing-fields
     servers = {
       vimls = {},
       lua_ls = {
-        ---@type LazyKeysSpec[]
         settings = {
           Lua = {
             workspace = {
@@ -68,17 +58,13 @@ return {
           },
         },
       },
-      ---@diagnostic disable-next-line: missing-fields
       bashls = {
         bashIde = {
           globPattern = '**/*@(.sh|.inc|.bash|.command|.zsh|zshrc|zsh_*)',
         },
       },
-      ---@diagnostic disable-next-line: missing-fields
       jsonls = {},
-    }, -- you can do any additional lsp server setup here
-    -- return true if you don't want this server to be setup with lspconfig
-    ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
+    },
     setup = {},
   },
   ---@param opts PluginLspOpts
@@ -106,19 +92,18 @@ return {
 
     local register_capability = vim.lsp.handlers['client/registerCapability']
 
-    ---@diagnostic disable-next-line: duplicate-set-field
     vim.lsp.handlers['client/registerCapability'] = function(err, res, ctx)
       local ret = register_capability(err, res, ctx)
       local client_id = ctx.client_id
-      ---@type lsp.Client
       local client = vim.lsp.get_client_by_id(client_id)
       local buffer = vim.api.nvim_get_current_buf()
       require('plugins.lsp.keymaps').on_attach(client, buffer)
       return ret
     end
-
+    local diagnostic_icon = vim.g.lite == nil and { Error = ' ', Warn = ' ', Hint = '󱩎 ', Info = ' ' }
+      or Ascii_icons.diagnostics
     -- diagnostics
-    for name, icon in pairs(Icon.diagnostics) do
+    for name, icon in pairs(diagnostic_icon) do
       name = 'DiagnosticSign' .. name
       vim.fn.sign_define(name, { text = icon, texthl = name, numhl = '' })
     end
@@ -132,15 +117,7 @@ return {
     end
 
     if type(opts.diagnostics.virtual_text) == 'table' and opts.diagnostics.virtual_text.prefix == 'icons' then
-      opts.diagnostics.virtual_text.prefix = vim.fn.has('nvim-0.10.0') == 0 and Icon.lsp.virtual_text_prefix
-        or function(diagnostic)
-          local icons = require('lazyvim.config').icons.diagnostics
-          for d, icon in pairs(icons) do
-            if diagnostic.severity == vim.diagnostic.severity[d:upper()] then
-              return icon
-            end
-          end
-        end
+      opts.diagnostics.virtual_text.prefix = vim.g.lite == nil and '󰆈' or '>'
     end
 
     vim.diagnostic.config(vim.deepcopy(opts.diagnostics))

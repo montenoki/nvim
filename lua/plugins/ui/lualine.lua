@@ -113,7 +113,8 @@ return {
             symbols = {
               modified = '󰏫',
               readonly = '',
-              unnamed = 'Untitled',
+              unnamed = '[No Name]',
+              newfile = '[New]',
             },
           },
         },
@@ -143,7 +144,7 @@ return {
             symbols = {
               modified = '󰏫',
               readonly = '',
-              unnamed = '[Untitled]',
+              unnamed = '[No Name]',
               newfile = '[New]',
             },
           },

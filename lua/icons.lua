@@ -12,7 +12,7 @@ local indent_lite = {
 local diagnostics_normal = {
   Error = ' ',
   Warn = ' ',
-  Hint = ' ',
+  Hint = '󰌵 ',
   Info = ' ',
 }
 local diagnostics_lite = {
