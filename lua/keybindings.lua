@@ -91,23 +91,23 @@ map('n', '[w', diagnostic_goto(false, 'WARN'), { desc = 'Prev Warning' })
 
 -- stylua: ignore start
 -- toggle options
-map("n", "<LEADER>us", function() Util.toggle("spell") end, { desc = "Toggle Spelling" })
-map("n", "<LEADER>ul", function() Util.toggle.number() end, { desc = "Toggle Line Numbers" })
-map("n", "<LEADER>uL", function() Util.toggle("relativenumber") end, { desc = "Toggle Relative Line Numbers" })
-map("n", "<LEADER>ud", function() Util.toggle.diagnostics() end, { desc = "Toggle Diagnostics" })
+map("n", "<LEADER>us", function() Lazyvim.toggle("spell") end, { desc = "Toggle Spelling" })
+map("n", "<LEADER>ul", function() Lazyvim.toggle.number() end, { desc = "Toggle Line Numbers" })
+map("n", "<LEADER>uL", function() Lazyvim.toggle("relativenumber") end, { desc = "Toggle Relative Line Numbers" })
+map("n", "<LEADER>ud", function() Lazyvim.toggle.diagnostics() end, { desc = "Toggle Diagnostics" })
 local conceallevel = vim.o.conceallevel > 0 and vim.o.conceallevel or 3
-map("n", "<LEADER>uS", function() Util.toggle("conceallevel", false, { 0, conceallevel }) end,
+map("n", "<LEADER>uS", function() Lazyvim.toggle("conceallevel", false, { 0, conceallevel }) end,
   { desc = "Toggle Conceal" })
 if vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint then
-  map("n", "<LEADER>uh", function() Util.toggle.inlay_hints() end, { desc = "Toggle Inlay Hints" })
+  map("n", "<LEADER>uh", function() Lazyvim.toggle.inlay_hints() end, { desc = "Toggle Inlay Hints" })
 end
 map("n", "<LEADER>uT", function()
   if vim.b.ts_highlight then
     vim.treesitter.stop()
-    Util.warn('Disabled Treesitter Highlight', { title = 'Option' })
+    Lazyvim.warn('Disabled Treesitter Highlight', { title = 'Option' })
   else
     vim.treesitter.start()
-    Util.info('Enabled Treesitter Highlight', { title = 'Option' })
+    Lazyvim.info('Enabled Treesitter Highlight', { title = 'Option' })
   end
 end, { desc = "Toggle Treesitter Highlight" })
 
