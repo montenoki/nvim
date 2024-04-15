@@ -1,60 +1,5 @@
 return {
-  -- Fast and feature-rich surround actions. For text that includes
-  -- surrounding characters like brackets or quotes, this allows you
-  -- to select the text inside, change or modify the surrounding characters,
-  -- and more.
-  {
-    'echasnovski/mini.surround',
-    keys = function(_, keys)
-      -- Populate the keys based on the user's options
-      local plugin = require('lazy.core.config').spec.plugins['mini.surround']
-      local opts = require('lazy.core.plugin').values(plugin, 'opts', false)
-      local mappings = {
-        { opts.mappings.add, desc = 'Add surrounding', mode = { 'n', 'v' } },
-        { opts.mappings.delete, desc = 'Delete surrounding' },
-        { opts.mappings.replace, desc = 'Replace surrounding' },
-      }
-      mappings = vim.tbl_filter(function(m)
-        return m[1] and #m[1] > 0
-      end, mappings)
-      return vim.list_extend(mappings, keys)
-    end,
-    opts = {
-      mappings = {
-        add = 'ys', -- Add surrounding in Normal and Visual modes
-        delete = 'ds', -- Delete surrounding
-        replace = 'cs', -- Replace surrounding
-      },
-    },
-  },
-  -- auto pairs
-  {
-    'echasnovski/mini.pairs',
-    event = 'VeryLazy',
-    opts = {},
-    keys = {
-      {
-        '<LEADER>up',
-        function()
-          local Util = require('lazy.core.util')
-          vim.g.minipairs_disable = not vim.g.minipairs_disable
-          if vim.g.minipairs_disable then
-            Util.warn('Disabled auto pairs', { title = 'Option' })
-          else
-            Util.info('Enabled auto pairs', { title = 'Option' })
-          end
-        end,
-        desc = 'Toggle auto pairs',
-      },
-    },
-  },
 
-  -- Comment Toggle
-  {
-    'numToStr/Comment.nvim',
-    lazy = false,
-    opts = {},
-  },
 
   -- Better text-objects
   {
@@ -149,22 +94,5 @@ return {
   },
 
   -- move cursor between windows
-  {
-    'ggandor/leap.nvim',
-    enabled = true,
-    lazy = false,
-    config = function(_, opts)
-      local leap = require('leap')
-      for k, v in pairs(opts) do
-        leap.opts[k] = v
-      end
-      vim.keymap.set({ 'n', 'v' }, '\\', function()
-        leap.leap({
-          target_windows = vim.tbl_filter(function(win)
-            return vim.api.nvim_win_get_config(win).focusable
-          end, vim.api.nvim_tabpage_list_wins(0)),
-        })
-      end)
-    end,
-  },
+
 }

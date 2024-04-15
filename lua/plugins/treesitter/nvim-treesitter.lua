@@ -3,7 +3,6 @@ local Keys = require('keymaps').treesitter.incremental_selection
 return {
   -- nvim-treesitter
   'nvim-treesitter/nvim-treesitter',
-  cond = vim.g.vscode == nil,
   build = ':TSUpdate',
   -- LazyFile
   event = { 'BufReadPost', 'BufNewFile', 'BufWritePre', 'VeryLazy' },

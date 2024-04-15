@@ -18,6 +18,11 @@ map('v', '>', '>gv')
 map('v', 'p', '"_dP')
 -- turn off 'Ctrl+z'
 map({ 'n', 'i', 'v' }, '<C-z>', '')
+
+-- turn off 's'
+map({ 'n', 'v' }, 's', '<NOP>')
+map({ 'n', 'v' }, 'ss', '<NOP>')
+
 -- Clear search with <ESC>
 map({ 'i', 'n' }, '<ESC>', '<CMD>noh<CR><ESC>', { desc = 'Escape and clear hlsearch' })
 

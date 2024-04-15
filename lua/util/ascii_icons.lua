@@ -74,7 +74,12 @@ M.gitsigns = {
   untracked = { text = 'U|' },
 }
 M.bufferline = {
-  close = 'x',
+  left_trunc_marker = '<|',
+  right_trunc_marker = '|>',
+}
+M.indent = {
+  char = '|',
+  tab_char = '|',
 }
 
 return M

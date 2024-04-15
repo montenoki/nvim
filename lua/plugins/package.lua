@@ -42,12 +42,13 @@ return
   -- none-ls
   {
     'nvimtools/none-ls.nvim',
+    cond = vim.g.vscode == nil,
     event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' }, -- LazyFile
     dependencies = { 'mason.nvim' },
     init = function()
       Lazyvim.on_very_lazy(function()
         -- register the formatter with LazyVim
-        require('util').format.register({
+        Lazyvim.format.register({
           name = 'none-ls.nvim',
           priority = 200, -- set higher than conform, the builtin formatter
           primary = true,

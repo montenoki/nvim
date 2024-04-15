@@ -3,6 +3,7 @@ local Ascii_icons = require('util.ascii_icons')
 
 return {
   'neovim/nvim-lspconfig',
+  cond = vim.g.vscode == nil,
   event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' }, -- LazyFile
   dependencies = {
     {

@@ -32,6 +32,7 @@ return {
   },
   {
     'lualine.nvim',
+    cond = vim.g.vscode == nil,
     opts = function(_, opts)
       local function diff_source()
         local gitsigns = vim.b.gitsigns_status_dict

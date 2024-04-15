@@ -41,7 +41,7 @@ M.float_window = {
   scroll_up = '<C-UP>',
   scroll_down = '<C-DOWN>',
   scroll_left = '<C-LEFT>',
-  scroll_right = '<C-RIGHT>', 
+  scroll_right = '<C-RIGHT>',
 }
 M.line = {
   move_down = '<A-j>',
@@ -105,5 +105,34 @@ M.gitsigns = {
   blame_line = '<LEADER>hb',
   diff = '<LEADER>hD',
   diff_tilde = '<LEADER>hd',
+}
+M.surround = {
+  add = 'sa',
+  delete = 'sd',
+  replace = 'sr',
+  find = 'sf',
+  find_left = 'sF',
+  highlight = 'sh',
+}
+M.pairs = {
+  toggle = '<LEADER>up',
+}
+M.comment = {
+  line = 'gcc',
+  block = 'gbc',
+  v_line = 'gc',
+  v_block = 'gb',
+  above = 'gcO',
+  below = 'gco',
+  eol = 'gca',
+}
+M.leap = {
+  toggle = '\\',
+}
+M.indentscope = {
+  obj_scope = 'ii',
+  obj_scope_with_border = 'ai',
+  goto_top = '[i',
+  goto_btm = ']i',
 }
 return M

@@ -31,81 +31,17 @@ return {
     end,
   },
 
-  -- Better vim.ui
-  {
-    'stevearc/dressing.nvim',
-    lazy = true,
-    init = function()
-      ---@diagnostic disable-next-line: duplicate-set-field
-      vim.ui.select = function(...)
-        require('lazy').load({ plugins = { 'dressing.nvim' } })
-        return vim.ui.select(...)
-      end
-      ---@diagnostic disable-next-line: duplicate-set-field
-      vim.ui.input = function(...)
-        require('lazy').load({ plugins = { 'dressing.nvim' } })
-        return vim.ui.input(...)
-      end
-    end,
-  },
-
-  -- This is what powers LazyVim's fancy-looking
-  -- tabs, which include filetype icons and close buttons.
-
-
 
   -- Indent guides for Neovim
-  {
-    'lukas-reineke/indent-blankline.nvim',
-    event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' }, -- LazyFile
-    opts = {
-      indent = Icon.indent,
-      scope = { enabled = false },
-      exclude = {
-        -- stylua: ignore
-        filetypes = {
-          'help', 'alpha', 'dashboard', 'neo-tree', 'Trouble', 'trouble',
-          'lazy', 'mason', 'notify', 'toggleterm', 'lazyterm',
-        },
-      },
-    },
-    main = 'ibl',
-  },
+
 
   -- Active indent guide and indent text objects. When you're browsing
   -- code, this highlights the current level of indentation, and animates
   -- the highlighting.
-  {
-    'echasnovski/mini.indentscope',
-    version = false, -- wait till new 0.7.0 release to put it back on semver
-    event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' }, -- LazyFile
-    opts = {
-      symbol = Icon.indent.char,
-      options = { try_as_border = true },
-    },
-    init = function()
-      vim.api.nvim_create_autocmd('FileType', {
-        -- stylua: ignore
-        pattern = {
-          'help', 'alpha', 'dashboard', 'nvim-tree', 'Trouble', 'trouble',
-          'lazy', 'mason', 'notify', 'toggleterm', 'lazyterm',
-        },
-        callback = function()
-          ---@diagnostic disable-next-line: inject-field
-          vim.b.miniindentscope_disable = true
-        end,
-      })
-    end,
-  },
+
 
   -- Dev icons
-  {
-    'nvim-tree/nvim-web-devicons',
-    lazy = true,
-    cond = function()
-      return vim.g.lite_mode == nil
-    end,
-  },
+
 
   -- UI components
   { 'MunifTanjim/nui.nvim', lazy = true },
