@@ -3,7 +3,7 @@ local Keys = require('keymaps')
 
 return {
   'kevinhwang91/nvim-ufo',
-  cond= vim.g.vscode == nil,
+  cond = vim.g.vscode == nil,
   dependencies = {
     'kevinhwang91/promise-async',
     {
@@ -62,7 +62,7 @@ return {
     ufo.setup({
       fold_virt_text_handler = handler,
       open_fold_hl_timeout = 150,
-      close_fold_kinds = { 'imports', 'comment' },
+      close_fold_kinds_for_ft = { 'imports', 'comment' },
       preview = {
         win_config = {
           border = { '', '─', '', '', '', '─', '', '' },
@@ -80,11 +80,9 @@ return {
       end,
     })
 
-    vim.keymap.set('n', 'zR', ufo.openAllFolds, { desc = 'Open All Folds' })
-    vim.keymap.set('n', 'zM', ufo.closeAllFolds, { desc = 'Close All Folds' })
-    vim.keymap.set('n', 'zr', ufo.openFoldsExceptKinds, { desc = 'Open Folds' })
-    -- vim.keymap.set('n', 'zm', ufo.closeFoldWith, { desc = "Close Fold With" })
-    vim.keymap.set('n', 'K', function()
+    vim.keymap.set('n', Keys.ufo.open_all, ufo.openAllFolds, { desc = 'Open All Folds' })
+    vim.keymap.set('n', Keys.ufo.close_all, ufo.closeAllFolds, { desc = 'Close All Folds' })
+    vim.keymap.set('n', Keys.ufo.peek, function()
       local winid = require('ufo').peekFoldedLinesUnderCursor()
       if not winid then
         vim.lsp.buf.hover()

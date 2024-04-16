@@ -53,6 +53,7 @@ opt.signcolumn = 'yes' -- Always show the signcolumn, otherwise it would shift t
 opt.termguicolors = true
 opt.virtualedit = 'onemore' -- fix the problem that cant see last char when scrollbar on.
 opt.winminwidth = 5 -- Minimum window width
+opt.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 
 -- =============================================================================
 --   preference.lua - 好み設定

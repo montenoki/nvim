@@ -137,13 +137,24 @@ M.indentscope = {
 }
 M.notify = {
   dismiss_all = '<LEADER>un',
-  show_all = '<LEADER>sn',
+  show_all = '<LEADER>sna',
 }
 M.noice = {
   redirect_cmdline = '<C-2>',
   last_msg = '<LEADER>snl',
   history = '<LEADER>snh',
-  all = '<LEADER>sna',
   dismiss_all = '<LEADER>snd',
+}
+M.ufo = {
+  open_all = 'zR',
+  close_all = 'zM',
+  peek = 'K',
+}
+M.cmp = {
+  next_jump = '<TAB>',
+  prev_jump = '<S-TAB>',
+  confirm = '<CR>',
+  toggle = '<C-.>',
+  esc = '<ESC>',
 }
 return M

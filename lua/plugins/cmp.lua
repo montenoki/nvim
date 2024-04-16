@@ -1,4 +1,44 @@
-local Icons = require('plugins 2.icons')
+local cmp_icons = {
+  Array = ' ',
+  Boolean = '󰨙 ',
+  Class = ' ',
+  Codeium = '󰘦 ',
+  Color = ' ',
+  Control = ' ',
+  Collapsed = ' ',
+  Constant = '󰏿 ',
+  Constructor = ' ',
+  Copilot = ' ',
+  Enum = ' ',
+  EnumMember = ' ',
+  Event = ' ',
+  Field = ' ',
+  File = ' ',
+  Folder = ' ',
+  Function = '󰊕 ',
+  Interface = ' ',
+  Key = ' ',
+  Keyword = ' ',
+  Method = '󰊕 ',
+  Module = ' ',
+  Namespace = '󰦮 ',
+  Null = ' ',
+  Number = '󰎠 ',
+  Object = ' ',
+  Operator = ' ',
+  Package = ' ',
+  Property = ' ',
+  Reference = ' ',
+  Snippet = ' ',
+  String = ' ',
+  Struct = '󰆼 ',
+  TabNine = '󰏚 ',
+  Text = ' ',
+  TypeParameter = ' ',
+  Unit = ' ',
+  Value = ' ',
+  Variable = '󰀫 ',
+}
 local Keys = require('keymaps')
 local function t(keys)
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(keys, true, true, true), 'm', true)
@@ -10,6 +50,7 @@ return {
   'hrsh7th/nvim-cmp',
   version = false, -- last release is way too old
   event = { 'InsertEnter', 'CmdlineEnter' },
+  cond = vim.g.vscode == nil,
   dependencies = {
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-nvim-lsp-signature-help',
@@ -22,23 +63,6 @@ return {
     'SirVer/ultisnips',
     'quangnguyen30192/cmp-nvim-ultisnips',
     'montenoki/vim-snippets',
-    {
-      'zbirenbaum/copilot-cmp',
-      enabled = vim.g.copilot and true or false,
-      dependencies = 'copilot.lua',
-      opts = {},
-      config = function(_, opts)
-        local copilot_cmp = require('copilot_cmp')
-        copilot_cmp.setup(opts)
-        -- attach cmp source whenever copilot attaches
-        -- fixes lazy-loading issues with the copilot cmp source
-        require('util').lsp.on_attach(function(client)
-          if client.name == 'copilot' then
-            copilot_cmp._on_insert_enter({})
-          end
-        end)
-      end,
-    },
   },
   opts = function()
     vim.api.nvim_set_hl(0, 'CmpGhostText', { link = 'Comment', default = true })
@@ -70,9 +94,6 @@ return {
       },
       { name = 'path', priority = 40 },
     }
-    if vim.g.copilot then
-      table.insert(sources, { name = 'copilot', priority = 50 })
-    end
     return {
       completion = {
         completeopt = 'menu,menuone,noselect',
@@ -90,9 +111,8 @@ return {
       sources = cmp.config.sources(sources),
       formatting = {
         format = function(_, item)
-          local icons = Icons.cmp
-          if icons[item.kind] then
-            item.kind = icons[item.kind] .. item.kind
+          if cmp_icons[item.kind] and vim.g.lite == nil then
+            item.kind = cmp_icons[item.kind] .. item.kind
           end
           return item
         end,
@@ -100,8 +120,7 @@ return {
       experimental = { ghost_text = { hl_group = 'CmpGhostText' } },
       sorting = defaults.sorting,
       mapping = {
-        -- TODO[2023/12/19]: fix: Noice config - Calculator display.
-        ['<TAB>'] = {
+        [Keys.cmp.next_jump] = {
           i = function(fallback)
             if cmp.visible() then
               cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
@@ -119,7 +138,7 @@ return {
             end
           end,
         },
-        ['<S-TAB>'] = {
+        [Keys.cmp.prev_jump] = {
           i = function(fallback)
             if cmp.visible() then
               cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
@@ -137,11 +156,11 @@ return {
             end
           end,
         },
-        ['<CR>'] = cmp.mapping.confirm({
+        [Keys.cmp.confirm] = cmp.mapping.confirm({
           behavior = cmp.ConfirmBehavior.Insert,
           select = false,
         }),
-        ['<C-.>'] = {
+        [Keys.cmp.toggle] = {
           i = function()
             if cmp.visible() then
               cmp.abort()
@@ -150,7 +169,7 @@ return {
             end
           end,
         },
-        ['<ESC>'] = function(fallback)
+        [Keys.cmp.esc] = function(fallback)
           if cmp.visible() then
             cmp.abort()
           else

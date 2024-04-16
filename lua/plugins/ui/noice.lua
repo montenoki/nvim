@@ -1,4 +1,3 @@
-local Lazyvim = require('lazyvim')
 local Keys = require('keymaps')
 return {
   'folke/noice.nvim',
@@ -30,9 +29,21 @@ return {
             { find = '%d+L, %d+B' },
             { find = '; after #%d+' },
             { find = '; before #%d+' },
+            { find = '%d fewer lines' },
+            { find = '%d more lines' },
+            { find = '--No lines in buffer--' },
           },
         },
         view = 'mini',
+      },
+      {
+        filter = {
+          event = 'msg_show',
+          any = {
+            { find = 'search hit BOTTOM, continuing at TOP' },
+          },
+        },
+        opts = { skip = true },
       },
     },
     presets = {
@@ -51,6 +62,7 @@ return {
         filter = { icon = '󰈲' },
         lua = { icon = '☾' },
         help = { icon = '󰋖' },
+        calculator = { view = 'cmdline' },
       },
     },
     format = {
@@ -64,7 +76,7 @@ return {
       },
     },
     popupmenu = {
-      kind_icons = vim.g.lite_mode and false or {},
+      kind_icons = vim.g.lite ~= nil and {},
     },
     inc_rename = {
       cmdline = {
@@ -79,7 +91,6 @@ return {
       { Keys.noice.redirect_cmdline, function() require("noice").redirect(vim.fn.getcmdline()) end, mode = "c", desc = "Redirect Cmdline" },
       { Keys.noice.last_msg, function() require("noice").cmd("last") end, desc = "Noice Last Message" },
       { Keys.noice.history, function() require("noice").cmd("history") end, desc = "Noice History" },
-      { Keys.noice.all, function() require("noice").cmd("all") end, desc = "Noice All" },
       { Keys.noice.dismiss_all, function() require("noice").cmd("dismiss") end, desc = "Dismiss All Noice" },
       {
         Keys.float_window.scroll_down,
