@@ -135,4 +135,15 @@ M.indentscope = {
   goto_top = '[i',
   goto_btm = ']i',
 }
+M.notify = {
+  dismiss_all = '<LEADER>un',
+  show_all = '<LEADER>sn',
+}
+M.noice = {
+  redirect_cmdline = '<C-2>',
+  last_msg = '<LEADER>snl',
+  history = '<LEADER>snh',
+  all = '<LEADER>sna',
+  dismiss_all = '<LEADER>snd',
+}
 return M

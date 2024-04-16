@@ -82,4 +82,7 @@ M.indent = {
   tab_char = '|',
 }
 
+M.ufo = {
+  suffix = ' <- %d ...',
+}
 return M

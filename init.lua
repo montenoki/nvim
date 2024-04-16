@@ -19,52 +19,32 @@ require('options')
 require('keybindings')
 require('autocmds')
 
-require('lazy').setup({
+if vim.g.vscode ~= nil then
+  require('vscode')
+end
+if vim.g.neovide then
+  vim.o.guifont = 'FiraCode Nerd Font Mono'
+end
+
+local plugins = {
   { import = 'plugins' },
   { import = 'plugins.coding' },
+  { import = 'plugins.util' },
   { import = 'plugins.treesitter' },
   { import = 'plugins.ui' },
   { import = 'plugins.editor' },
-})
+}
+local os_name = vim.loop.os_uname().sysname
+if string.find(string.lower(os_name), 'windows') then
+  table.insert(plugins, { import = 'os.windows' })
+  require('os.windows')
+elseif os_name == 'Darwin' then
+  table.insert(plugins, { import = 'os.mac' })
+  require('os.mac')
+else
+  table.insert(plugins, { import = 'os.linux' })
+  require('os.linux')
+end
+require('lazy').setup(plugins)
 
 require('colorscheme')
-
--- TODO:(2024/4/12) delete
-
--- local lazy_imports = {}
--- if vim.g.vscode ~= nil then
---   table.insert(lazy_imports, { import = 'plugins.coding' })
--- elseif vim.g.lite_mode == true then
---   table.insert(lazy_imports, { import = 'plugins' })
---   table.insert(lazy_imports, { import = 'lang' })
--- else -- Normal Mode
---   table.insert(lazy_imports, { import = 'plugins' })
---   table.insert(lazy_imports, { import = 'lang' })
--- end
---
--- require('options')
--- require('autocmds')
---
--- local os_name = vim.loop.os_uname().sysname
--- if string.find(string.lower(os_name), 'windows') then
---   table.insert(lazy_imports, { import = 'os.windows' })
---   require('os.windows')
--- elseif os_name == 'Darwin' then
---   table.insert(lazy_imports, { import = 'os.mac' })
---   require('os.mac')
--- else
---   table.insert(lazy_imports, { import = 'os.linux' })
---   require('os.linux')
--- end
--- require('lazy').setup({ lazy_imports })
---
--- if vim.g.vscode ~= nil then
---   require('vscode')
--- else -- Normal or Lite Mode
---   require('colorscheme')
--- end
--- require('keymaps')
---
--- if vim.g.neovide then
---   vim.o.guifont = 'FiraCode Nerd Font Mono'
--- end
