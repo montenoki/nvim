@@ -10,8 +10,6 @@ return {
     'LinArcX/telescope-env.nvim',
     'LinArcX/telescope-command-palette.nvim',
     'smartpde/telescope-recent-files',
-    --'rmagatti/session-lens',
-    'nvim-telescope/telescope-project.nvim',
     {
       'nvim-telescope/telescope-fzf-native.nvim',
       build = 'make',
@@ -19,8 +17,6 @@ return {
       config = function()
         local telescope = require('telescope')
         Lazyvim.on_load('telescope.nvim', function()
-          -- telescope.load_extension('session-lens')
-          telescope.load_extension('project')
           telescope.load_extension('fzf')
           telescope.load_extension('env')
           telescope.load_extension('command_palette')

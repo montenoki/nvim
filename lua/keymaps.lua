@@ -158,4 +158,20 @@ M.cmp = {
   esc = '<ESC>',
 }
 M.neogit = { toggle = '<LEADER>g' }
+M.session = {
+  save = '<LEADER>qs',
+  restore = '<LEADER>qr',
+  del = '<LEADER>qd',
+  show_all = '<LEADER>qa',
+}
+M.todo = {
+  show_todo = '<LEADER>st',
+  show_all = '<LEADER>sT',
+}
+M.project = {
+  show = '<LEADER>sp',
+}
+M.colorizer = {
+  toggle = '<LEADER>uc'
+}
 return M

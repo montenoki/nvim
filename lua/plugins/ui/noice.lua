@@ -32,6 +32,16 @@ return {
             { find = '%d fewer lines' },
             { find = '%d more lines' },
             { find = '--No lines in buffer--' },
+            { find = 'File Formatted' },
+          },
+        },
+        view = 'mini',
+      },
+      {
+        filter = {
+          event = 'notify',
+          any = {
+            { find = 'File Formatted.' },
           },
         },
         view = 'mini',

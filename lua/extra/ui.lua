@@ -22,27 +22,7 @@ return {
   
 
   -- Color code display like: #00ffff
-  {
-    'norcalli/nvim-colorizer.lua',
-    enabled = true,
-    event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' }, -- LazyFile
-    keys = {
-      {
-        '<LEADER>uc',
-        function()
-          local colorizer = require('colorizer')
-          if colorizer.is_buffer_attached(0) then
-            colorizer.detach_from_buffer(0)
-            Util.warn('Disabled Colorizer', { title = 'Option' })
-          else
-            colorizer.attach_to_buffer(0)
-            Util.info('Enabled Colorizer', { title = 'Option' })
-          end
-        end,
-        desc = 'Toggle Colorizer',
-      },
-    },
-  },
+  
 
   -- Scroll Bar
   {

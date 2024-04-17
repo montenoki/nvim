@@ -4,7 +4,12 @@ local Lazyvim = require('lazyvim')
 return {
   'echasnovski/mini.pairs',
   event = { 'VeryLazy', 'InsertEnter' },
-  opts = {},
+  opts = {
+    mappings = {
+      ['<'] = { action = 'open', pair = '<>', neigh_pattern = '[^\\].' },
+      ['>'] = { action = 'close', pair = '<>', neigh_pattern = '[^\\].' },
+    },
+  },
   keys = {
     {
       Keys.toggle,

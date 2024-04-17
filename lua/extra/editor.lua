@@ -3,7 +3,6 @@ local keybinds = require('keymaps')
 local Icon = require('icons')
 return {
 
-
   -- better diagnostics list and others
   {
     'folke/trouble.nvim',
@@ -63,124 +62,11 @@ return {
 
   -- Finds and lists all of the TODO, HACK, BUG, etc comment
   -- in your project and loads them into a browsable list.
-  {
-    'folke/todo-comments.nvim',
-    cmd = { 'TodoTrouble', 'TodoTelescope' },
-    event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' }, -- LazyFile
-    config = true,
-    opts = {
-      keywords = {
-        TODO = { icon = Icon.todo_comments.TODO, color = 'info' },
-        NOTE = {
-          icon = Icon.todo_comments.NOTE,
-          color = 'hint',
-          alt = { 'INFO', 'NOTE' },
-        },
-        WARN = {
-          icon = Icon.todo_comments.WARN,
-          color = 'warning',
-          alt = { 'WARNING', 'XXX' },
-        },
-        FIX = {
-          icon = Icon.todo_comments.FIX,
-          color = 'error',
-          alt = { 'FIXME', 'BUG', 'FIXIT', 'ISSUE' },
-        },
-      },
-      highlight = {
-        pattern = [[.*<(KEYWORDS)]],
-      },
-      search = {
-        command = 'rg',
-        args = {
-          '--color=never',
-          '--no-heading',
-          '--with-filename',
-          '--line-number',
-          '--column',
-        },
-        -- regex that will be used to match keywords.
-        -- don't replace the (KEYWORDS) placeholder
-        -- pattern = [[\b(KEYWORDS):]], -- ripgrep regex
-        pattern = [[\b(KEYWORDS)\b]], -- match without the extra colon. You'll likely get false positives
-      },
-    },
-    -- stylua: ignore
-    keys = {
-      { "]t",         function() require("todo-comments").jump_next() end, desc = "Next todo comment" },
-      { "[t",         function() require("todo-comments").jump_prev() end, desc = "Previous todo comment" },
-      { "<LEADER>xt", "<CMD>TodoTrouble<CR>",                              desc = "Todo (Trouble)" },
-      { "<LEADER>xT", "<CMD>TodoTrouble keywords=TODO,FIX,FIXME<CR>",      desc = "Todo/Fix/Fixme (Trouble)" },
-      { "<LEADER>st", "<CMD>TodoTelescope<CR>",                            desc = "Todo" },
-      { "<LEADER>sT", "<CMD>TodoTelescope keywords=TODO,FIX,FIXME<CR>",    desc = "Todo/Fix/Fixme" },
-    },
-  },
+
   -- project
-  {
-    'ahmedkhalf/project.nvim',
-    opts = {
-      manual_mode = true,
-      detection_methods = { 'lsp', 'pattern' },
-      patterns = {
-        '.git',
-        '_darcs',
-        '.hg',
-        '.bzr',
-        '.svn',
-        'Makefile',
-        'package.json',
-        '.sln',
-        '.vim',
-      },
-      silent_chdir = true,
-    },
-    event = 'VeryLazy',
-    config = function(_, opts)
-      require('project_nvim').setup(opts)
-      Util.on_load('telescope.nvim', function()
-        require('telescope').load_extension('projects')
-      end)
-    end,
-    keys = {
-      { '<LEADER>sp', '<CMD>Telescope projects<CR>', desc = 'Projects' },
-    },
-  },
+  
 
   -- Session manager
-  {
-    'rmagatti/auto-session',
-    opts = {
-      log_level = vim.log.levels.ERROR,
-      auto_session_suppress_dirs = {
-        '~/',
-        '~/Projects',
-        '~/Downloads',
-        '/',
-        '~/codes',
-      },
-      auto_session_use_git_branch = false,
-
-      auto_session_enable_last_session = false,
-
-      -- ⚠️ This will only work if Telescope.nvim is installed
-      -- The following are already the default values, no need to provide them if these are already the settings you want.
-      session_lens = {
-        -- If load_on_setup is set to false, one needs to eventually call `require("auto-session").setup_session_lens()` if they want to use session-lens.
-        buftypes_to_ignore = {}, -- list of buffer types what should not be deleted from current session
-        load_on_setup = true,
-        theme_conf = { border = true },
-        previewer = false,
-      },
-
-      cwd_change_handling = {
-        restore_upcoming_session = true,
-        pre_cwd_changed_hook = nil,
-        post_cwd_changed_hook = function()
-          require('lualine').refresh()
-        end,
-      },
-    },
-  },
 
   -- Terminal trigger
   {
@@ -329,5 +215,4 @@ return {
       return opts
     end,
   },
-
 }
