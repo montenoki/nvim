@@ -157,4 +157,5 @@ M.cmp = {
   toggle = '<C-.>',
   esc = '<ESC>',
 }
+M.neogit = { toggle = '<LEADER>g' }
 return M
