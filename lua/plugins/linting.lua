@@ -26,15 +26,14 @@ return {
       },
     },
     config = function(_, opts)
-      local Util = require('util')
+      local Lazyvim = require('lazyvim')
 
       local M = {}
 
       local lint = require('lint')
       for name, linter in pairs(opts.linters) do
         if type(linter) == 'table' and type(lint.linters[name]) == 'table' then
-          lint.linters[name] =
-            vim.tbl_deep_extend('force', lint.linters[name], linter)
+          lint.linters[name] = vim.tbl_deep_extend('force', lint.linters[name], linter)
         else
           lint.linters[name] = linter
         end
@@ -73,14 +72,9 @@ return {
         names = vim.tbl_filter(function(name)
           local linter = lint.linters[name]
           if not linter then
-            Util.warn('Linter not found: ' .. name, { title = 'nvim-lint' })
+            Lazyvim.warn('Linter not found: ' .. name, { title = 'nvim-lint' })
           end
-          return linter
-            and not (
-              type(linter) == 'table'
-              and linter.condition
-              and not linter.condition(ctx)
-            )
+          return linter and not (type(linter) == 'table' and linter.condition and not linter.condition(ctx))
         end, names)
 
         -- Run linters.

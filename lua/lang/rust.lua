@@ -161,7 +161,7 @@ return {
       },
       setup = {
         rust_analyzer = function(_, opts)
-          local rust_tools_opts = require('util').opts('rust-tools.nvim')
+          local rust_tools_opts = require('lazyvim').opts('rust-tools.nvim')
           require('rust-tools').setup(
             vim.tbl_deep_extend(
               'force',

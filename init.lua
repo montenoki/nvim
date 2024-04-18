@@ -34,6 +34,11 @@ local plugins = {
   { import = 'plugins.ui' },
   { import = 'plugins.editor' },
 }
+
+if vim.g.vscode == nil then
+  table.insert(plugins, {import = 'lang'})
+end
+
 local os_name = vim.loop.os_uname().sysname
 if string.find(string.lower(os_name), 'windows') then
   table.insert(plugins, { import = 'os.windows' })

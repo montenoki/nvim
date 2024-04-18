@@ -3,6 +3,12 @@ local Keys = require('keymaps')
 local Ascii_icons = require('util.ascii_icons').nvimtree
 local map = vim.keymap.set
 
+local function open_nvim_tree()
+  -- open the tree
+  require('nvim-tree.api').tree.open()
+end
+vim.api.nvim_create_autocmd({ 'VimEnter' }, { callback = open_nvim_tree })
+
 return {
   'nvim-tree/nvim-tree.lua',
   cond = vim.g.vscode == nil,
@@ -134,6 +140,7 @@ return {
       map('n', 'y', api.fs.copy.filename, opts('Copy Name'))
       map('n', 'Y', api.fs.copy.relative_path, opts('Copy Path'))
       map('n', 'gy', api.fs.copy.absolute_path, opts('Copy Abs Path'))
+      map('n', 'q', api.tree.close,  opts('Close Tree'))
     end,
   },
   config = function(_, opts)

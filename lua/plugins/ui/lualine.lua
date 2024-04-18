@@ -61,7 +61,7 @@ return {
           {
             'macro-recording',
             ---@diagnostic disable-next-line: undefined-field
-            fmt = Lazyvim.lualine.show_macro_recording,
+            fmt = require('util.lualine').show_macro_recording,
             ---@diagnostic disable-next-line: undefined-field
             color = Lazyvim.ui.fg('Error'),
           },

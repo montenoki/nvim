@@ -1,5 +1,6 @@
-local Util = require('util')
-local Icon = require('icons')
+local Lazyvim = require('lazyvim')
+local Icon = require('extra.icons')
+
 vim.api.nvim_create_autocmd('VimEnter', {
   desc = 'Auto select virtualenv Nvim open',
   pattern = '*',
@@ -17,32 +18,19 @@ return {
     'nvim-treesitter/nvim-treesitter',
     opts = function(_, opts)
       if type(opts.ensure_installed) == 'table' then
-        vim.list_extend(
-          opts.ensure_installed,
-          { 'ninja', 'python', 'rst', 'toml' }
-        )
+        vim.list_extend(opts.ensure_installed, { 'ninja', 'python', 'rst', 'toml' })
       end
     end,
   },
   {
     'lualine.nvim',
     opts = function(_, opts)
-      table.insert(opts.sections.lualine_y, {
-        function()
-          local selector = require('venv-selector')
-          local venv = selector
-            .get_active_venv()
-            :gsub(Util.root.cwd():gsub('%-', '%%-') .. '/', '') or 'NO ENV'
-          local version = vim.fn
-            .system(selector.get_active_path() .. ' --version')
-            :gsub('Python ', '')
-            :gsub('[%c%s]', '')
-          return Icon.lualine.python .. venv .. '@' .. version
-        end,
+      table.insert(opts.sections.lualine_x, {
+        require('util.lualine').test,
         cond = function()
           return vim.bo.filetype == 'python'
         end,
-        fmt = Util.lualine.trunc(80, 5, 80),
+        -- fmt = Lazyvim.lualine.trunc(80, 5, 80),
       })
     end,
   },
@@ -78,7 +66,7 @@ return {
       },
       setup = {
         ruff_lsp = function()
-          require('util').lsp.on_attach(function(client, _)
+          Lazyvim.lsp.on_attach(function(client, _)
             if client.name == 'ruff_lsp' then
               -- Disable hover in favor of Pyright
               client.server_capabilities.hoverProvider = false
@@ -118,8 +106,7 @@ return {
         -- local path = require("mason-registry").get_package("debugpy"):get_install_path()
         -- require("dap-python").setup(path .. "/venv/bin/python")
         local os = vim.loop.os_uname().sysname
-        local executable_path = string.find(os, 'Windows')
-            and '\\.virtualenvs\\debugpy\\Scripts\\python.exe'
+        local executable_path = string.find(os, 'Windows') and '\\.virtualenvs\\debugpy\\Scripts\\python.exe'
           or '/.virtualenvs/debugpy/bin/python'
         local path = vim.env.HOME .. executable_path
         require('dap-python').setup(path)
@@ -141,17 +128,12 @@ return {
     cmd = 'VenvSelect',
     event = 'VeryLazy',
     opts = function(_, opts)
-      if require('util').has('nvim-dap-python') then
+      if Lazyvim.has('nvim-dap-python') then
         opts.dap_enabled = true
       end
       return vim.tbl_deep_extend('force', opts, {
         auto_refresh = true,
-        name = {
-          'venv',
-          '.venv',
-          'env',
-          '.env',
-        },
+        name = { 'venv', '.venv', 'env', '.env' },
       })
     end,
     keys = {
@@ -163,8 +145,7 @@ return {
     opts = function(_, opts)
       local python_formater = { python = { 'ruff_format' } }
       if type(opts.formatters_by_ft) == 'table' then
-        opts.formatters_by_ft =
-          vim.tbl_deep_extend('force', opts.formatters_by_ft, python_formater)
+        opts.formatters_by_ft = vim.tbl_deep_extend('force', opts.formatters_by_ft, python_formater)
       end
     end,
   },

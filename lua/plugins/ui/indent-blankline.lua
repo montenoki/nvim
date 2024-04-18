@@ -1,15 +1,14 @@
-local Ascii_icons = require('util.ascii_icons')
 return {
   'lukas-reineke/indent-blankline.nvim',
-  cond = false,
+  cond = vim.g.vscode == nil and vim.g.lite == nil,
   event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' }, -- LazyFile
   opts = {
-    indent = vim.g.lite == nil and { char = '│', tab_char = '▏' } or Ascii_icons.indent,
+    indent = { char = '│', tab_char = '▏' },
     scope = { enabled = false },
     exclude = {
       -- stylua: ignore
       filetypes = {
-        'help', 'alpha', 'dashboard', 'neo-tree', 'Trouble', 'trouble',
+        'help', 'alpha', 'dashboard', 'Trouble', 'trouble',
         'lazy', 'mason', 'notify', 'toggleterm', 'lazyterm',
       },
     },
