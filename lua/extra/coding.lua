@@ -1,6 +1,4 @@
 return {
-
-
   -- Better text-objects
   {
     'echasnovski/mini.ai',
@@ -92,7 +90,4 @@ return {
     lazy = false,
     opts = { useDefaultKeymaps = false },
   },
-
-  -- move cursor between windows
-
 }

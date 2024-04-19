@@ -128,7 +128,8 @@ return {
       table.insert(opts.sections.lualine_y, {
         require('noice').api.status.command.get,
         cond = require('noice').api.status.command.has,
-        color = { fg = '#ff9e64' },
+        color = Lazyvim.ui.fg('Character'),
+        icon = vim.g.lite == nil and '' or '',
       })
     end,
   },

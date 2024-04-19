@@ -172,6 +172,9 @@ M.project = {
   show = '<LEADER>sp',
 }
 M.colorizer = {
-  toggle = '<LEADER>uc'
+  toggle = '<LEADER>uc',
+}
+M.minimap = {
+  toggle = '<LEADER>m',
 }
 return M

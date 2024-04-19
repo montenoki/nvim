@@ -130,25 +130,3 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     end
   end,
 })
-
-if vim.g.vscode == nil then
-  -- auto close nvim-tree
-  vim.api.nvim_create_autocmd({ 'QuitPre' }, {
-    group = augroup('auto_close_nvimtree'),
-    callback = function()
-      vim.cmd('NvimTreeClose')
-    end,
-  })
-  -- fix nvimtree when using auto-session
-  vim.api.nvim_create_autocmd({ 'BufEnter' }, {
-    pattern = 'NvimTree*',
-    callback = function()
-      local api = require('nvim-tree.api')
-      local view = require('nvim-tree.view')
-
-      if not view.is_visible() then
-        api.tree.open()
-      end
-    end,
-  })
-end

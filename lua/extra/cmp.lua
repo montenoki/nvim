@@ -1,14 +1,4 @@
-local Icons = require('icons')
-local keybinds = require('keymaps')
-local function t(keys)
-  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(keys, true, true, true), 'm', true)
-end
-local function can_execute(arg)
-  return vim.fn[arg]() == 1
-end
 return {
-  -- auto completion
-
   -- AI completion
   {
     'zbirenbaum/copilot.lua',

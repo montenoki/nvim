@@ -45,7 +45,7 @@ opt.foldmethod = 'indent'
 
 -- UI
 opt.cursorline = true -- 編集行をハイライトする
-opt.laststatus = 1 -- global statusline
+opt.laststatus = 3 -- global statusline
 opt.number = true -- Print line number
 opt.pumheight = 5 -- Maximum number of entries in a popup
 opt.showmode = false -- Dont show mode since we have a statusline

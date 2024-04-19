@@ -34,21 +34,19 @@ local plugins = {
   { import = 'plugins.ui' },
   { import = 'plugins.editor' },
 }
-
 if vim.g.vscode == nil then
-  table.insert(plugins, {import = 'lang'})
-end
-
-local os_name = vim.loop.os_uname().sysname
-if string.find(string.lower(os_name), 'windows') then
-  table.insert(plugins, { import = 'os.windows' })
-  require('os.windows')
-elseif os_name == 'Darwin' then
-  table.insert(plugins, { import = 'os.mac' })
-  require('os.mac')
-else
-  table.insert(plugins, { import = 'os.linux' })
-  require('os.linux')
+  table.insert(plugins, { import = 'lang' })
+  local os_name = vim.loop.os_uname().sysname
+  if string.find(string.lower(os_name), 'windows') then
+    table.insert(plugins, { import = 'os.windows' })
+    require('os.windows')
+  elseif os_name == 'Darwin' then
+    table.insert(plugins, { import = 'os.mac' })
+    require('os.mac')
+  else
+    table.insert(plugins, { import = 'os.linux' })
+    require('os.linux')
+  end
 end
 require('lazy').setup(plugins)
 
