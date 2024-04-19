@@ -94,7 +94,7 @@ vim.filetype.add({
 -- Python Provider
 local executable_path = '/.virtualenvs/neovim/bin/python'
 if string.find(vim.loop.os_uname().sysname, 'Windows') then
-  executable_path = executable_path:gsub('/', '\\')
+  executable_path = '\\.virtualenvs\\neovim\\Scripts\\python.exe'
 end
 vim.g.python3_host_prog = vim.env.HOME .. executable_path
 
