@@ -63,12 +63,6 @@ return {
         },
         lualine_x = {
           {
-            ---@diagnostic disable-next-line: undefined-field
-            require('noice').api.status.search.get,
-            ---@diagnostic disable-next-line: undefined-field
-            cond = require('noice').api.status.search.has,
-          },
-          {
             function()
               return Icon.bug .. require('dap').status()
             end,

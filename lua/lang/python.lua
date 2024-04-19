@@ -1,5 +1,4 @@
 local Lazyvim = require('lazyvim')
-local Icon = require('extra.icons')
 
 vim.api.nvim_create_autocmd('VimEnter', {
   desc = 'Auto select virtualenv Nvim open',
@@ -26,11 +25,15 @@ return {
     'lualine.nvim',
     opts = function(_, opts)
       table.insert(opts.sections.lualine_x, {
-        require('util.lualine').test,
+        require('util.lualine').show_venv,
         cond = function()
           return vim.bo.filetype == 'python'
         end,
-        -- fmt = Lazyvim.lualine.trunc(80, 5, 80),
+        on_click = function()
+          vim.cmd.VenvSelect()
+        end,
+        color = Lazyvim.ui.fg("character"),
+        fmt = require('util.lualine').trunc(80, 5, 80),
       })
     end,
   },
@@ -132,7 +135,6 @@ return {
         opts.dap_enabled = true
       end
       return vim.tbl_deep_extend('force', opts, {
-        auto_refresh = true,
         name = { 'venv', '.venv', 'env', '.env' },
       })
     end,

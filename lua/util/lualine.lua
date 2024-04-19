@@ -26,14 +26,6 @@ function M.show_venv()
   local selector = require('venv-selector')
   local py_icon = vim.g.lite == nil and '' or ''
   local venv = selector.get_active_venv():gsub(Lazyvim.root.cwd():gsub('%-', '%%-') .. '/', '') or 'NO ENV'
-  local version = vim.fn.system(selector.get_active_path() .. ' --version'):gsub('Python ', ''):gsub('[%c%s]', '')
-  return py_icon .. venv .. '@' .. version
+  return '[' .. py_icon .. ']' .. venv
 end
-function M.test()
-  local selector = require('venv-selector')
-  local py_icon = vim.g.lite == nil and '' or ''
-  local venv = selector.get_active_venv():gsub(Lazyvim.root.cwd():gsub('%-', '%%-') .. '/', '') or 'NO ENV'
-  return 'abc' .. py_icon .. venv
-end
-
 return M
