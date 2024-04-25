@@ -1,9 +1,8 @@
-local Icon = require('icons')
+local Keys = require('keymaps')
+
 ---@param config {args?:string[]|fun():string[]?}
 local function get_args(config)
-  local args = type(config.args) == 'function' and (config.args() or {})
-    or config.args
-    or {}
+  local args = type(config.args) == 'function' and (config.args() or {}) or config.args or {}
   config = vim.deepcopy(config)
   ---@cast args string[]
   config.args = function()
@@ -16,14 +15,27 @@ end
 
 return {
   'mfussenegger/nvim-dap',
+  cond = vim.g.vscode == nil,
   dependencies = {
-    -- fancy UI for the debugger
     {
       'rcarriga/nvim-dap-ui',
-      -- stylua: ignore
+      dependencies = { { 'nvim-neotest/nvim-nio' } },
       keys = {
-        { "<LEADER>du", function() require("dapui").toggle({ }) end, desc = "Dap UI" },
-        { "<LEADER>de", function() require("dapui").eval() end, desc = "Eval", mode = {"n", "v"} },
+        {
+          Keys.dap.ui,
+          function()
+            require('dapui').toggle({})
+          end,
+          desc = 'Dap UI',
+        },
+        {
+          Keys.dap.eval,
+          function()
+            require('dapui').eval()
+          end,
+          desc = 'Dap Eval',
+          mode = { 'n', 'v' },
+        },
       },
       opts = {
         controls = {
@@ -41,7 +53,11 @@ return {
             terminate = '',
           },
         },
-        icons = Icon.dap.icons,
+        icons = {
+          collapsed = '',
+          current_frame = '',
+          expanded = '',
+        },
       },
       config = function(_, opts)
         -- setup dap config by VsCode launch.json file
@@ -139,33 +155,35 @@ return {
 
   -- stylua: ignore
   keys = {
-    { "<LEADER>dB", function() require("dap").set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, desc = "Breakpoint Condition" },
-    { "<LEADER>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint" },
-    { "<LEADER>dc", function() require("dap").continue() end, desc = "Continue" },
-    { "<LEADER>da", function() require("dap").continue({ before = get_args }) end, desc = "Run with Args" },
-    { "<LEADER>dC", function() require("dap").run_to_cursor() end, desc = "Run to Cursor" },
-    { "<LEADER>dg", function() require("dap").goto_() end, desc = "Go to line (no execute)" },
-    { "<LEADER>di", function() require("dap").step_into() end, desc = "Step Into" },
-    { "<LEADER>dj", function() require("dap").down() end, desc = "Down" },
-    { "<LEADER>dk", function() require("dap").up() end, desc = "Up" },
-    { "<LEADER>dl", function() require("dap").run_last() end, desc = "Run Last" },
-    { "<LEADER>do", function() require("dap").step_out() end, desc = "Step Out" },
-    { "<LEADER>dO", function() require("dap").step_over() end, desc = "Step Over" },
-    { "<LEADER>dp", function() require("dap").pause() end, desc = "Pause" },
-    { "<LEADER>dr", function() require("dap").repl.toggle() end, desc = "Toggle REPL" },
-    { "<LEADER>ds", function() require("dap").session() end, desc = "Session" },
-    { "<LEADER>dt", function() require("dap").terminate() end, desc = "Terminate" },
-    { "<LEADER>dw", function() require("dap.ui.widgets").hover() end, desc = "Widgets" },
+    { Keys.dap.breakpoint, function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint" },
+    { Keys.dap.breakpoint_cond, function() require("dap").set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, desc = "Breakpoint Condition" },
+    { Keys.dap.continue, function() require("dap").continue() end, desc = "Continue" },
+    { Keys.dap.run_with_args, function() require("dap").continue({ before = get_args }) end, desc = "Run with Args" },
+    { Keys.dap.run_to_cursor, function() require("dap").run_to_cursor() end, desc = "Run to Cursor" },
+    { Keys.dap.goto_line, function() require("dap").goto_() end, desc = "Go to line (no execute)" },
+    { Keys.dap.step_into, function() require("dap").step_into() end, desc = "Step Into" },
+    { Keys.dap.down, function() require("dap").down() end, desc = "Down" },
+    { Keys.dap.up, function() require("dap").up() end, desc = "Up" },
+    { Keys.dap.run_last, function() require("dap").run_last() end, desc = "Run Last" },
+    { Keys.dap.step_out, function() require("dap").step_out() end, desc = "Step Out" },
+    { Keys.dap.step_over, function() require("dap").step_over() end, desc = "Step Over" },
+    { Keys.dap.pause, function() require("dap").pause() end, desc = "Pause" },
+    { Keys.dap.repl, function() require("dap").repl.toggle() end, desc = "Toggle REPL" },
+    { Keys.dap.session, function() require("dap").session() end, desc = "Session" },
+    { Keys.dap.terminate, function() require("dap").terminate() end, desc = "Terminate" },
+    { Keys.dap.widgets, function() require("dap.ui.widgets").hover() end, desc = "Widgets" },
   },
 
   config = function()
-    vim.api.nvim_set_hl(
-      0,
-      'DapStoppedLine',
-      { default = true, link = 'Visual' }
-    )
-
-    for name, sign in pairs(Icon.dap) do
+    vim.api.nvim_set_hl(0, 'DapStoppedLine', { default = true, link = 'Visual' })
+    local icon = {
+      Stopped = { '󰁕󰏧', 'DiagnosticWarn', 'DapStoppedLine' },
+      Breakpoint = ' ',
+      BreakpointCondition = ' ',
+      BreakpointRejected = { ' ', 'DiagnosticError' },
+      LogPoint = '.>',
+    }
+    for name, sign in pairs(icon) do
       sign = type(sign) == 'table' and sign or { sign }
       vim.fn.sign_define('Dap' .. name, {
         text = sign[1],

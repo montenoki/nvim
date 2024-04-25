@@ -402,7 +402,7 @@ local misc_lite = {
 }
 
 local dap_normal = {
-  Stopped = { '󰁕 ', 'DiagnosticWarn', 'DapStoppedLine' },
+  Stopped = { '󰁕󰏧', 'DiagnosticWarn', 'DapStoppedLine' },
   Breakpoint = ' ',
   BreakpointCondition = ' ',
   BreakpointRejected = { ' ', 'DiagnosticError' },

@@ -177,4 +177,45 @@ M.colorizer = {
 M.minimap = {
   toggle = '<LEADER>m',
 }
+M.dap = {
+  ui = '<LEADER>du',
+  eval = '<LEADER>de',
+  breakpoint_cond = '<LEADER>dB',
+  breakpoint = '<LEADER>db',
+  continue = '<LEADER>dc',
+  run_with_args = '<LEADER>da',
+  run_to_cursor = '<LEADER>dC',
+  goto_line = '<LEADER>dg',
+  step_into = '<LEADER>di',
+  down = '<LEADER>dj',
+  up = '<LEADER>dk',
+  run_last = '<LEADER>dl',
+  step_out = '<LEADER>do',
+  step_over = '<LEADER>dO',
+  pause = '<LEADER>dp',
+  repl = '<LEADER>dr',
+  session = '<LEADER>ds',
+  terminate = '<LEADER>dt',
+  widgets = '<LEADER>dw',
+}
+M.diagnostic = {
+  show_line_diag = '<LEADER>xd',
+  next_diag = ']d',
+  prev_diag = '[d',
+  next_error = ']e',
+  prev_error = '[e',
+  next_warn = ']w',
+  prev_warn = '[w',
+}
+M.toggle = {
+  spelling = '<LEADER>us',
+  line_numbers = '<LEADER>ul',
+  relative_numbers = '<LEADER>uL',
+  diagnostic = '<LEADER>ud',
+  wrap = '<LEADER>uw',
+  conceal = '<LEADER>uS',
+  inlay_hints = '<LEADER>uh',
+  treesitter = '<LEADER>uT',
+  show_hl_info = '<LEADER>ui',
+}
 return M

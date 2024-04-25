@@ -67,7 +67,7 @@ map('i', Keys.line.move_up, '<ESC><CMD>m .-2<CR>==gi', { desc = 'Move Line up' }
 map('v', Keys.line.move_down, ":m '>+1<CR>gv=gv", { desc = 'Move Line down' })
 map('v', Keys.line.move_up, ":m '<-2<CR>gv=gv", { desc = 'Move Line up' })
 
--- Move Tab
+-- Tab
 map('n', Keys.tab.new, '<CMD>tabnew<CR>', { desc = 'New Tab' })
 map('n', Keys.tab.close, '<CMD>tabclose<CR>', { desc = 'Close Tab' })
 map('n', Keys.tab.prev, '<CMD>tabprev<CR>', { desc = 'Previous Tab' })
@@ -81,27 +81,30 @@ local diagnostic_goto = function(next, severity)
     go({ severity = severity })
   end
 end
-map('n', '<LEADER>xd', vim.diagnostic.open_float, { desc = 'Line Diagnostics' })
-map('n', ']d', diagnostic_goto(true), { desc = 'Next Diagnostic' })
-map('n', '[d', diagnostic_goto(false), { desc = 'Prev Diagnostic' })
-map('n', ']e', diagnostic_goto(true, 'ERROR'), { desc = 'Next Error' })
-map('n', '[e', diagnostic_goto(false, 'ERROR'), { desc = 'Prev Error' })
-map('n', ']w', diagnostic_goto(true, 'WARN'), { desc = 'Next Warning' })
-map('n', '[w', diagnostic_goto(false, 'WARN'), { desc = 'Prev Warning' })
+map('n', Keys.diagnostic.show_line_diag, vim.diagnostic.open_float, { desc = 'Line Diagnostics' })
+map('n', Keys.diagnostic.next_diag, diagnostic_goto(true), { desc = 'Next Diagnostic' })
+map('n', Keys.diagnostic.prev_diag, diagnostic_goto(false), { desc = 'Prev Diagnostic' })
+map('n', Keys.diagnostic.next_error, diagnostic_goto(true, 'ERROR'), { desc = 'Next Error' })
+map('n', Keys.diagnostic.prev_error, diagnostic_goto(false, 'ERROR'), { desc = 'Prev Error' })
+map('n', Keys.diagnostic.next_warn, diagnostic_goto(true, 'WARN'), { desc = 'Next Warning' })
+map('n', Keys.diagnostic.prev_warn, diagnostic_goto(false, 'WARN'), { desc = 'Prev Warning' })
 
--- stylua: ignore start
 -- toggle options
-map("n", "<LEADER>us", function() Lazyvim.toggle("spell") end, { desc = "Toggle Spelling" })
-map("n", "<LEADER>ul", function() Lazyvim.toggle.number() end, { desc = "Toggle Line Numbers" })
-map("n", "<LEADER>uL", function() Lazyvim.toggle("relativenumber") end, { desc = "Toggle Relative Line Numbers" })
-map("n", "<LEADER>ud", function() Lazyvim.toggle.diagnostics() end, { desc = "Toggle Diagnostics" })
+-- stylua: ignore start
+map("n", Keys.toggle.spelling, function() Lazyvim.toggle("spell") end, { desc = "Toggle Spelling" })
+map("n", Keys.toggle.line_numbers, function() Lazyvim.toggle.number() end, { desc = "Toggle Line Numbers" })
+map("n", Keys.toggle.relative_numbers, function() Lazyvim.toggle("relativenumber") end, { desc = "Toggle Relative Line Numbers" })
+map("n", Keys.toggle.diagnostic, function() Lazyvim.toggle.diagnostics() end, { desc = "Toggle Diagnostics" })
+map("n", Keys.toggle.wrap, function() require('util.toggle').wrap() end, { desc = "Toggle wrap" })
+
 local conceallevel = vim.o.conceallevel > 0 and vim.o.conceallevel or 3
-map("n", "<LEADER>uS", function() Lazyvim.toggle("conceallevel", false, { 0, conceallevel }) end,
-  { desc = "Toggle Conceal" })
+map("n", Keys.toggle.conceal, function() Lazyvim.toggle("conceallevel", false, { 0, conceallevel }) end, { desc = "Toggle Conceal" })
+
 if vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint then
-  map("n", "<LEADER>uh", function() Lazyvim.toggle.inlay_hints() end, { desc = "Toggle Inlay Hints" })
+  map("n", Keys.toggle.inlay_hints, function() Lazyvim.toggle.inlay_hints() end, { desc = "Toggle Inlay Hints" })
 end
-map("n", "<LEADER>uT", function()
+
+map("n", Keys.toggle.treesitter, function()
   if vim.b.ts_highlight then
     vim.treesitter.stop()
     Lazyvim.warn('Disabled Treesitter Highlight', { title = 'Option' })
@@ -111,13 +114,5 @@ map("n", "<LEADER>uT", function()
   end
 end, { desc = "Toggle Treesitter Highlight" })
 
--- highlights under cursor
-map("n", "<LEADER>ui", vim.show_pos, { desc = "Inspect Pos" })
-
-local M = {}
--- TODO[2023/12/23] configure this later.
-M.scroll_right = '<C-r>'
-M.scroll_left = '<C-l>'
-M.scroll_up = '<C-u>'
-M.scroll_down = '<C-d>'
-return M
+-- highlights info under cursor
+map("n", Keys.toggle.show_hl_info, vim.show_pos, { desc = "Show highlights info" })
