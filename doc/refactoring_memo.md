@@ -1,6 +1,8 @@
-# Plugins Overview
+# OverView
 
-## CODING
+## Plugins
+
+### CODING
 
 | Plugin   | Config | Lazy  | Keymap | Vscode | Toggle | LazyVim | Lite UI |
 | :---     | :---:  | :---: | :---:  | :---:  | :---:  | :---:   | :---:   |
@@ -10,7 +12,7 @@
 | pair     | [x]    | [x]   | [x]    | [ ]    | [ ]    | -       | -       |
 | surround | [x]    | [x]   | [x]    | [ ]    | -      | -       | -       |
 
-## EDITOR
+### EDITOR
 
 | Plugin       | Config | Lazy  | Keymap | Vscode | Toggle | LazyVim | Lite UI |
 | :---         | :---:  | :---: | :---:  | :---:  | :---:  | :---:   | :---:   |
@@ -22,20 +24,27 @@
 | which-key    | [ ]    | [x]   | [x]    | [x]    | -      | -       | -       |
 | winshift     | [x]    | [x]   | [x]    | [x]    | -      | -       | -       |
 
-## LSP
+### LSP
 
 | Plugin       | Config | Lazy  | Keymap | Vscode | Toggle | LazyVim | Lite UI |
 | :---         | :---:  | :---: | :---:  | :---:  | :---:  | :---:   | :---:   |
 | lspconfig    | [ ]    | [ ]   | [x]    | [x]    | [x]    | [ ]     | [ ]     |
 
-## TREESITTER
+### MANAGER
+
+| Plugin  | Config | Lazy  | Keymap | Vscode | Toggle | LazyVim | Lite UI |
+| :---    | :---:  | :---: | :---:  | :---:  | :---:  | :---:   | :---:   |
+| mason   | [x]    | [x]   | -      | [x]    | -      | -       | [ ]     |
+| none-ls | [x]    | [x]   | -      | [x]    | -      | [ ]     | -       |
+
+### TREESITTER
 
 | Plugin        | Config | Lazy  | Keymap | Vscode | Toggle | LazyVim | Lite UI |
 | :---          | :---:  | :---: | :---:  | :---:  | :---:  | :---:   | :---:   |
 | log-highlight | [x]    | [x]   | -      | [x]    | -      | -       | -       |
 | treesitter    | [x]    | [x]   | [x]    | [x]    | [ ]    | -       | -       |
 
-## UI
+### UI
 
 | Plugin        | Config | Lazy  | Keymap | Vscode | Toggle | LazyVim | Lite UI |
 | :---          | :---:  | :---: | :---:  | :---:  | :---:  | :---:   | :---:   |
@@ -51,5 +60,48 @@
 | noice         | [x]    | [x]   | [x]    | [x]    | [ ]    | [ ]     | [ ]     |
 | todo-comments | [x]    | [x]   | [ ]    | [x]    | [ ]    | -       | [ ]     |
 | ts-context    | [x]    | [x]   | -      | [x]    | [ ]    | -       | -       |
-|               | [ ]    | [ ]   | [ ]    | [ ]    | [ ]    | [ ]     | [ ]     |
-|               | [ ]    | [ ]   | [ ]    | [ ]    | [ ]    | [ ]     | [ ]     |
+| ufo           | [x]    | [x]   | [x]    | [x]    | [x]    | -       | [ ]     |
+
+### UTIL
+
+| Plugin    | Config | Lazy  | Keymap | Vscode | Toggle | LazyVim | Lite UI |
+| :---      | :---:  | :---: | :---:  | :---:  | :---:  | :---:   | :---:   |
+| im-select | [x]    | [x]   | -      | [x]    | -      | -       | -       |
+
+### CMP
+
+| Plugin | Config | Lazy  | Keymap | Vscode | Toggle | LazyVim | Lite UI |
+| :---   | :---:  | :---: | :---:  | :---:  | :---:  | :---:   | :---:   |
+|        | [ ]    | [ ]   | [ ]    | [ ]    | [ ]    | [ ]     | [ ]     |
+
+### COLORSCHEME
+
+| Plugin | Config | Lazy  | Keymap | Vscode | Toggle | LazyVim | Lite UI |
+| :---   | :---:  | :---: | :---:  | :---:  | :---:  | :---:   | :---:   |
+|        | [ ]    | [ ]   | [ ]    | [ ]    | [ ]    | [ ]     | [ ]     |
+
+### DAP
+
+| Plugin | Config | Lazy  | Keymap | Vscode | Toggle | LazyVim | Lite UI |
+| :---   | :---:  | :---: | :---:  | :---:  | :---:  | :---:   | :---:   |
+|        | [ ]    | [ ]   | [ ]    | [ ]    | [ ]    | [ ]     | [ ]     |
+
+### FORMAT
+
+| Plugin | Config | Lazy  | Keymap | Vscode | Toggle | LazyVim | Lite UI |
+| :---   | :---:  | :---: | :---:  | :---:  | :---:  | :---:   | :---:   |
+|        | [ ]    | [ ]   | [ ]    | [ ]    | [ ]    | [ ]     | [ ]     |
+
+### LINTING
+
+| Plugin | Config | Lazy  | Keymap | Vscode | Toggle | LazyVim | Lite UI |
+| :---   | :---:  | :---: | :---:  | :---:  | :---:  | :---:   | :---:   |
+|        | [ ]    | [ ]   | [ ]    | [ ]    | [ ]    | [ ]     | [ ]     |
+
+## LANG
+
+| Lang     | Config | Lazy  | Keymap | Vscode | Toggle | LazyVim | Lite UI |
+| :---     | :---:  | :---: | :---:  | :---:  | :---:  | :---:   | :---:   |
+| python   | [ ]    | [ ]   | [ ]    | [ ]    | [ ]    | [ ]     | [ ]     |
+| rust     | [ ]    | [ ]   | [ ]    | [ ]    | [ ]    | [ ]     | [ ]     |
+| markdown | [ ]    | [ ]   | [ ]    | [ ]    | [ ]    | [ ]     | [ ]     |

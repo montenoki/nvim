@@ -4,6 +4,7 @@ local Keys = require('keymaps')
 return {
   'kevinhwang91/nvim-ufo',
   cond = vim.g.vscode == nil,
+  event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' }, -- LazyFile
   dependencies = {
     'kevinhwang91/promise-async',
     {
