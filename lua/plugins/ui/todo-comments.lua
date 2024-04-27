@@ -4,7 +4,6 @@ return {
   cond = vim.g.vscode == nil and vim.g.lite,
   cmd = { 'TodoTrouble', 'TodoTelescope' },
   event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' }, -- LazyFile
-  config = true,
   opts = {
     keywords = {
       TODO = { icon = '󰀡', color = 'info' },
@@ -13,7 +12,7 @@ return {
       FIX = { icon = '', color = 'error', alt = { 'FIXME', 'BUG', 'FIXIT', 'ISSUE' } },
     },
     highlight = {
-      pattern = [[.*<(KEYWORDS)]],
+      pattern = [[\b(KEYWORDS)\b]], -- match without the extra colon. You'll likely get false positives
     },
     search = {
       command = 'rg',
@@ -26,7 +25,6 @@ return {
       },
       -- regex that will be used to match keywords.
       -- don't replace the (KEYWORDS) placeholder
-      -- pattern = [[\b(KEYWORDS):]], -- ripgrep regex
       pattern = [[\b(KEYWORDS)\b]], -- match without the extra colon. You'll likely get false positives
     },
   },

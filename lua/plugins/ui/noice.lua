@@ -5,7 +5,42 @@ return {
     'folke/noice.nvim',
     cond = vim.g.vscode == nil,
     event = 'VeryLazy',
-    dependencies = { 'MunifTanjim/nui.nvim', 'rcarriga/nvim-notify' },
+    dependencies = {
+      'MunifTanjim/nui.nvim',
+      {
+        'rcarriga/nvim-notify',
+        keys = {
+          {
+            Keys.notify.dismiss_all,
+            function()
+              require('notify').dismiss({ silent = true, pending = true })
+            end,
+            desc = 'Dismiss all Notifications',
+          },
+          { Keys.notify.show_all, '<CMD>Telescope notify<CR>', desc = 'Notifications' },
+        },
+        opts = {
+          timeout = 2000,
+          max_height = function()
+            return math.floor(vim.o.lines * 0.75)
+          end,
+          max_width = function()
+            return math.floor(vim.o.columns * 0.75)
+          end,
+          on_open = function(win)
+            vim.api.nvim_win_set_config(win, { zindex = 100 })
+          end,
+        },
+        init = function()
+          -- when noice is not enabled, install notify on VeryLazy
+          if not Lazyvim.has('noice.nvim') then
+            Lazyvim.on_very_lazy(function()
+              vim.notify = require('notify')
+            end)
+          end
+        end,
+      },
+    },
     opts = {
       lsp = {
         progress = {
@@ -126,8 +161,11 @@ return {
     'lualine.nvim',
     opts = function(_, opts)
       table.insert(opts.sections.lualine_y, {
+        ---@diagnostic disable-next-line: undefined-field
         require('noice').api.status.command.get,
+        ---@diagnostic disable-next-line: undefined-field
         cond = require('noice').api.status.command.has,
+        ---@diagnostic disable-next-line: undefined-field
         color = Lazyvim.ui.fg('Character'),
         icon = vim.g.lite == nil and '' or '',
       })

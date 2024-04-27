@@ -3,9 +3,11 @@ local Lazyvim = require('lazyvim')
 
 return {
   'echasnovski/mini.pairs',
-  event = { 'VeryLazy', 'InsertEnter' },
+  cond = vim.g.vscode == nil,
+  event = { 'InsertEnter' },
   opts = {
     mappings = {
+      -- Add < >
       ['<'] = { action = 'open', pair = '<>', neigh_pattern = '[^\\].' },
       ['>'] = { action = 'close', pair = '<>', neigh_pattern = '[^\\].' },
     },

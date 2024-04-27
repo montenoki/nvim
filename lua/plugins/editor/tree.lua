@@ -1,4 +1,3 @@
-local Lazyvim = require('lazyvim')
 local Keys = require('keymaps')
 local Ascii_icons = require('util.ascii_icons').nvimtree
 local map = vim.keymap.set
@@ -10,13 +9,13 @@ if vim.g.vscode == nil then
     callback = function()
       local api = require('nvim-tree.api')
       local view = require('nvim-tree.view')
-
       if not view.is_visible() then
         api.tree.open()
       end
     end,
   })
 end
+
 return {
   'nvim-tree/nvim-tree.lua',
   cond = vim.g.vscode == nil,

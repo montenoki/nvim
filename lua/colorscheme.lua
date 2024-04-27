@@ -4,5 +4,6 @@ if vim.g.vscode == nil then
   else
     require('nightfox').load()
     vim.cmd('colorscheme carbonfox')
+    vim.api.nvim_set_hl(0, 'matchparen', { fg = '#ffe338', bold = true })
   end
 end

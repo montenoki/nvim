@@ -67,7 +67,6 @@ return {
   },
   opts = function()
     local actions = require('telescope.actions')
-
     return {
       defaults = {
         prompt_prefix = vim.g.lite == nil and ' ' or '>',

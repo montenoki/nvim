@@ -32,9 +32,9 @@ return {
   },
   {
     'lualine.nvim',
-    cond = vim.g.vscode == nil,
     opts = function(_, opts)
       local function diff_source()
+        ---@diagnostic disable-next-line: undefined-field
         local gitsigns = vim.b.gitsigns_status_dict
         if gitsigns then
           return {
@@ -44,14 +44,11 @@ return {
           }
         end
       end
-      table.insert(
-        opts.winbar.lualine_x,
-        {
-          'diff',
-          source = diff_source,
-          symbols = vim.g.lite == nil and { added = ' ', modified = ' ', removed = ' ' } or Ascii_icons.git,
-        }
-      )
+      table.insert(opts.winbar.lualine_x, {
+        'diff',
+        source = diff_source,
+        symbols = vim.g.lite == nil and { added = ' ', modified = ' ', removed = ' ' } or Ascii_icons.git,
+      })
     end,
   },
 }

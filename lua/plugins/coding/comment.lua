@@ -1,7 +1,8 @@
 local Keys = require('keymaps').comment
 return {
   'numToStr/Comment.nvim',
-  lazy = false,
+  event = 'VeryLazy',
+  cond = vim.g.vscode == nil,
   opts = {
     ---LHS of toggle mappings in NORMAL mode
     toggler = {

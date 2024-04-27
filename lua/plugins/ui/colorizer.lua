@@ -3,6 +3,7 @@ local Lazyvim = require('lazyvim')
 return {
   'norcalli/nvim-colorizer.lua',
   enabled = true,
+  cond = vim.g.vscode == nil,
   event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' }, -- LazyFile
   keys = {
     {

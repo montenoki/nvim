@@ -47,6 +47,7 @@ return {
         function()
           return ok and ' ON' or ' OFF'
         end,
+        ---@diagnostic disable-next-line: undefined-field
         color = ok and Lazyvim.ui.fg('Character') or Lazyvim.ui.fg('Comment'),
         on_click = function()
           vim.cmd.Telescope('session-lens')

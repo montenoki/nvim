@@ -100,6 +100,7 @@ $HOME\.virtualenvs\debugpy\Scripts\python.exe -m pip install debugpy
 ``` shell
 sh "$HOME/.config/nvim/setup_provider.sh"
 ```
+
 ### 3. Install plugins
 
 ```bash
@@ -117,7 +118,6 @@ nvim --headless +"Lazy! sync" +qa
 ### colorscheme
 
 - [EdenEast/nightfox.nvim](https://dotfyle.com/plugins/EdenEast/nightfox.nvim)
-
 
 ### colorscheme-creation
 

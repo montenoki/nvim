@@ -1,6 +1,6 @@
-return  {
+return {
   'stevearc/dressing.nvim',
-  cond=vim.g.vscode == nil,
+  cond = vim.g.vscode == nil,
   lazy = true,
   init = function()
     ---@diagnostic disable-next-line: duplicate-set-field

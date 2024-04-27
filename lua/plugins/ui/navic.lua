@@ -1,13 +1,14 @@
 local Lazyvim = require('lazyvim')
 local Ascii_icons = require('util.ascii_icons')
-return -- Breadcrumb Bar
+return
 {
   {
     'SmiteshP/nvim-navic',
-    cond=vim.g.vscode == nil,
+    cond = vim.g.vscode == nil,
     lazy = true,
     init = function()
       vim.o.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
+      ---@diagnostic disable-next-line: undefined-field
       Lazyvim.lsp.on_attach(function(client, buffer)
         if client.supports_method('textDocument/documentSymbol') then
           require('nvim-navic').attach(client, buffer)
@@ -62,3 +63,4 @@ return -- Breadcrumb Bar
     end,
   },
 }
+
