@@ -61,6 +61,7 @@ return {
     vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
     -- Install the conform formatter on VeryLazy
     Lazyvim.on_very_lazy(function()
+      ---@diagnostic disable-next-line: undefined-field
       Lazyvim.format.register({
         name = 'conform.nvim',
         priority = 100,
@@ -103,7 +104,7 @@ return {
         lua = { 'stylua' },
         toml = { 'taplo' },
         sh = { 'shfmt' },
-        markdown = { 'marksman'}
+        markdown = { 'marksman' },
       },
       -- The options you set here will be merged with the builtin formatters.
       -- You can also define any custom formatters here.

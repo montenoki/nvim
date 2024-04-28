@@ -32,7 +32,8 @@ return {
         on_click = function()
           vim.cmd.VenvSelect()
         end,
-        color = Lazyvim.ui.fg("character"),
+        ---@diagnostic disable-next-line: undefined-field
+        color = Lazyvim.ui.fg('character'),
         fmt = require('util.lualine').trunc(80, 5, 80),
       })
     end,
@@ -69,6 +70,7 @@ return {
       },
       setup = {
         ruff_lsp = function()
+          ---@diagnostic disable-next-line: undefined-field
           Lazyvim.lsp.on_attach(function(client, _)
             if client.name == 'ruff_lsp' then
               -- Disable hover in favor of Pyright
@@ -76,22 +78,6 @@ return {
             end
           end)
         end,
-      },
-    },
-  },
-  {
-    'nvim-neotest/neotest',
-    optional = true,
-    dependencies = {
-      'nvim-neotest/neotest-python',
-    },
-    opts = {
-      adapters = {
-        ['neotest-python'] = {
-          -- Here you can specify the settings for the adapter, i.e.
-          -- runner = "pytest",
-          -- python = ".venv/bin/python",
-        },
       },
     },
   },
@@ -127,22 +113,6 @@ return {
     },
   },
   {
-    'linux-cultist/venv-selector.nvim',
-    cmd = 'VenvSelect',
-    event = 'VeryLazy',
-    opts = function(_, opts)
-      if Lazyvim.has('nvim-dap-python') then
-        opts.dap_enabled = true
-      end
-      return vim.tbl_deep_extend('force', opts, {
-        name = { 'venv', '.venv', 'env', '.env' },
-      })
-    end,
-    keys = {
-      { '<LEADER>cv', '<CMD>:VenvSelect<CR>', desc = 'Select VirtualEnv' },
-    },
-  },
-  {
     'stevearc/conform.nvim',
     opts = function(_, opts)
       local python_formater = { python = { 'ruff_format' } }
@@ -158,5 +128,37 @@ return {
         vim.list_extend(opts.ensure_installed, { 'ruff' })
       end
     end,
+  },
+  {
+    'nvim-neotest/neotest',
+    optional = true,
+    dependencies = {
+      'nvim-neotest/neotest-python',
+    },
+    opts = {
+      adapters = {
+        ['neotest-python'] = {
+          -- Here you can specify the settings for the adapter, i.e.
+          -- runner = "pytest",
+          -- python = ".venv/bin/python",
+        },
+      },
+    },
+  },
+  {
+    'linux-cultist/venv-selector.nvim',
+    cmd = 'VenvSelect',
+    event = 'VeryLazy',
+    opts = function(_, opts)
+      if Lazyvim.has('nvim-dap-python') then
+        opts.dap_enabled = true
+      end
+      return vim.tbl_deep_extend('force', opts, {
+        name = { 'venv', '.venv', 'env', '.env' },
+      })
+    end,
+    keys = {
+      { '<LEADER>cv', '<CMD>:VenvSelect<CR>', desc = 'Select VirtualEnv' },
+    },
   },
 }

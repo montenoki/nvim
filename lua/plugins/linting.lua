@@ -2,6 +2,7 @@ return {
   {
     'mfussenegger/nvim-lint',
     event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' }, -- LazyFile
+    cond = vim.g.vscode == nil,
     opts = {
       -- Event to trigger linters
       events = { 'BufWritePost', 'BufReadPost', 'InsertLeave' },
@@ -33,6 +34,7 @@ return {
       local lint = require('lint')
       for name, linter in pairs(opts.linters) do
         if type(linter) == 'table' and type(lint.linters[name]) == 'table' then
+          ---@diagnostic disable-next-line: param-type-mismatch
           lint.linters[name] = vim.tbl_deep_extend('force', lint.linters[name], linter)
         else
           lint.linters[name] = linter
@@ -74,6 +76,7 @@ return {
           if not linter then
             Lazyvim.warn('Linter not found: ' .. name, { title = 'nvim-lint' })
           end
+          ---@diagnostic disable-next-line: undefined-field
           return linter and not (type(linter) == 'table' and linter.condition and not linter.condition(ctx))
         end, names)
 

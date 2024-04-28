@@ -16,6 +16,7 @@ end
 return {
   'mfussenegger/nvim-dap',
   cond = vim.g.vscode == nil,
+  lazy = true,
   dependencies = {
     {
       'rcarriga/nvim-dap-ui',

@@ -72,35 +72,44 @@
 
 | Plugin | Config | Lazy  | Keymap | Vscode | Toggle | LazyVim | Lite UI |
 | :---   | :---:  | :---: | :---:  | :---:  | :---:  | :---:   | :---:   |
-|        | [ ]    | [ ]   | [ ]    | [ ]    | [ ]    | [ ]     | [ ]     |
+| cmp    | [x]    | [x]   | [x]    | [x]    | -      | -       | [ ]     |
 
 ### COLORSCHEME
 
 | Plugin | Config | Lazy  | Keymap | Vscode | Toggle | LazyVim | Lite UI |
 | :---   | :---:  | :---: | :---:  | :---:  | :---:  | :---:   | :---:   |
-|        | [ ]    | [ ]   | [ ]    | [ ]    | [ ]    | [ ]     | [ ]     |
+|        | [x]    | [x]   | -      | [x]    | -      | -       | -       |
 
 ### DAP
 
 | Plugin | Config | Lazy  | Keymap | Vscode | Toggle | LazyVim | Lite UI |
 | :---   | :---:  | :---: | :---:  | :---:  | :---:  | :---:   | :---:   |
-|        | [ ]    | [ ]   | [ ]    | [ ]    | [ ]    | [ ]     | [ ]     |
+| dap    | [ ]    | [ ]   | [x]    | [x]    | -      | [ ]     | [ ]     |
 
 ### FORMAT
 
-| Plugin | Config | Lazy  | Keymap | Vscode | Toggle | LazyVim | Lite UI |
-| :---   | :---:  | :---: | :---:  | :---:  | :---:  | :---:   | :---:   |
-|        | [ ]    | [ ]   | [ ]    | [ ]    | [ ]    | [ ]     | [ ]     |
+| Plugin  | Config | Lazy  | Keymap | Vscode | Toggle | LazyVim | Lite UI |
+| :---    | :---:  | :---: | :---:  | :---:  | :---:  | :---:   | :---:   |
+| conform | [ ]    | [ ]   | [ ]    | [ ]    | [ ]    | [ ]     | [ ]     |
 
 ### LINTING
 
 | Plugin | Config | Lazy  | Keymap | Vscode | Toggle | LazyVim | Lite UI |
 | :---   | :---:  | :---: | :---:  | :---:  | :---:  | :---:   | :---:   |
-|        | [ ]    | [ ]   | [ ]    | [ ]    | [ ]    | [ ]     | [ ]     |
+| lint   | [ ]    | [x]   | -      | [x]    | -      | [ ]     | -       |
 
 ## LANG
 
+### Overview
 | Lang     | Config | Lazy  | Keymap | Vscode | Toggle | LazyVim | Lite UI |
+| :---     | :---:  | :---: | :---:  | :---:  | :---:  | :---:   | :---:   |
+| python   | [ ]    | [ ]   | [ ]    | [ ]    | [ ]    | [ ]     | [ ]     |
+| rust     | [ ]    | [ ]   | [ ]    | [ ]    | [ ]    | [ ]     | [ ]     |
+| markdown | [ ]    | [ ]   | [ ]    | [ ]    | [ ]    | [ ]     | [ ]     |
+
+### Configurations
+
+| Lang     | treesitter | lsp | mason | formatter | Toggle | LazyVim | Lite UI |
 | :---     | :---:  | :---: | :---:  | :---:  | :---:  | :---:   | :---:   |
 | python   | [ ]    | [ ]   | [ ]    | [ ]    | [ ]    | [ ]     | [ ]     |
 | rust     | [ ]    | [ ]   | [ ]    | [ ]    | [ ]    | [ ]     | [ ]     |
