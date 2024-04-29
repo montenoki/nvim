@@ -1,5 +1,12 @@
 return {
   {
+    'williamboman/mason.nvim',
+    opts = function(_, opts)
+      opts.ensure_installed = opts.ensure_installed or {}
+      vim.list_extend(opts.ensure_installed, { 'markdownlint', 'marksman', 'prettier' })
+    end,
+  },
+  {
     'nvim-treesitter/nvim-treesitter',
     opts = function(_, opts)
       if type(opts.ensure_installed) == 'table' then
@@ -8,11 +15,21 @@ return {
     end,
   },
   {
-    'williamboman/mason.nvim',
-    opts = function(_, opts)
-      opts.ensure_installed = opts.ensure_installed or {}
-      vim.list_extend(opts.ensure_installed, { 'markdownlint', 'marksman' })
-    end,
+    'neovim/nvim-lspconfig',
+    opts = {
+      servers = {
+        marksman = {},
+      },
+    },
+  },
+  {
+    'mfussenegger/nvim-lint',
+    optional = true,
+    opts = {
+      linters_by_ft = {
+        markdown = { 'markdownlint' },
+      },
+    },
   },
   {
     'nvimtools/none-ls.nvim',
@@ -25,27 +42,19 @@ return {
     end,
   },
   {
-    'mfussenegger/nvim-lint',
-    optional = true,
-    opts = {
-      linters_by_ft = {
-        markdown = { 'markdownlint' },
-      },
-    },
+    'stevearc/conform.nvim',
+    opts = function(_, opts)
+      local markdown_formater = { markdown = { 'prettier' } }
+      if type(opts.formatters_by_ft) == 'table' then
+        opts.formatters_by_ft = vim.tbl_deep_extend('force', opts.formatters_by_ft, markdown_formater)
+      end
+    end,
   },
-  {
-    'neovim/nvim-lspconfig',
-    opts = {
-      servers = {
-        marksman = {},
-      },
-    },
-  },
-
   -- Markdown preview
   {
     'iamcco/markdown-preview.nvim',
     cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
+    ft = { 'markdown' },
     build = function()
       vim.fn['mkdp#util#install']()
     end,

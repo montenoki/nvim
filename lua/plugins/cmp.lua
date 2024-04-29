@@ -58,6 +58,7 @@ return {
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-path',
     'hrsh7th/cmp-cmdline',
+    'hrsh7th/cmp-emoji',
     'f3fora/cmp-spell',
     'dmitmel/cmp-cmdline-history',
     'SirVer/ultisnips',
@@ -93,6 +94,7 @@ return {
         },
       },
       { name = 'path', priority = 40 },
+      { name = 'emoji' },
     }
     return {
       completion = {

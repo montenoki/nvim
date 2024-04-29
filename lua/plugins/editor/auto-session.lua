@@ -43,7 +43,7 @@ return {
     'lualine.nvim',
     opts = function(_, opts)
       local ok, _ = pcall(require('auto-session.lib').current_session_name)
-      table.insert(opts.sections.lualine_c, 1, {
+      table.insert(opts.sections.lualine_c, 2, {
         function()
           return ok and ' ON' or ' OFF'
         end,

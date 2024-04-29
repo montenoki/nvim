@@ -14,6 +14,14 @@ vim.api.nvim_create_autocmd('VimEnter', {
 
 return {
   {
+    'williamboman/mason.nvim',
+    opts = function(_, opts)
+      if type(opts.ensure_installed) == 'table' then
+        vim.list_extend(opts.ensure_installed, { 'ruff' })
+      end
+    end,
+  },
+  {
     'nvim-treesitter/nvim-treesitter',
     opts = function(_, opts)
       if type(opts.ensure_installed) == 'table' then
@@ -22,27 +30,10 @@ return {
     end,
   },
   {
-    'lualine.nvim',
-    opts = function(_, opts)
-      table.insert(opts.sections.lualine_x, {
-        require('util.lualine').show_venv,
-        cond = function()
-          return vim.bo.filetype == 'python'
-        end,
-        on_click = function()
-          vim.cmd.VenvSelect()
-        end,
-        ---@diagnostic disable-next-line: undefined-field
-        color = Lazyvim.ui.fg('character'),
-        fmt = require('util.lualine').trunc(80, 5, 80),
-      })
-    end,
-  },
-  {
     'neovim/nvim-lspconfig',
     opts = {
       servers = {
-        pyright = {
+        basedpyright = {
           python = {
             analysis = {
               autoSearchPaths = true,
@@ -50,10 +41,10 @@ return {
             },
           },
         },
-        ruff_lsp = {
+        ruff = {
           keys = {
             {
-              '<LEADER>co',
+              '<leader>co',
               function()
                 vim.lsp.buf.code_action({
                   apply = true,
@@ -69,10 +60,10 @@ return {
         },
       },
       setup = {
-        ruff_lsp = function()
+        ruff = function()
           ---@diagnostic disable-next-line: undefined-field
           Lazyvim.lsp.on_attach(function(client, _)
-            if client.name == 'ruff_lsp' then
+            if client.name == 'ruff' then
               -- Disable hover in favor of Pyright
               client.server_capabilities.hoverProvider = false
             end
@@ -80,6 +71,15 @@ return {
         end,
       },
     },
+  },
+  {
+    'stevearc/conform.nvim',
+    opts = function(_, opts)
+      local python_formatter = { python = { 'ruff_format' } }
+      if type(opts.formatters_by_ft) == 'table' then
+        opts.formatters_by_ft = vim.tbl_deep_extend('force', opts.formatters_by_ft, python_formatter)
+      end
+    end,
   },
   {
     'mfussenegger/nvim-dap',
@@ -113,23 +113,6 @@ return {
     },
   },
   {
-    'stevearc/conform.nvim',
-    opts = function(_, opts)
-      local python_formater = { python = { 'ruff_format' } }
-      if type(opts.formatters_by_ft) == 'table' then
-        opts.formatters_by_ft = vim.tbl_deep_extend('force', opts.formatters_by_ft, python_formater)
-      end
-    end,
-  },
-  {
-    'williamboman/mason.nvim',
-    opts = function(_, opts)
-      if type(opts.ensure_installed) == 'table' then
-        vim.list_extend(opts.ensure_installed, { 'ruff' })
-      end
-    end,
-  },
-  {
     'nvim-neotest/neotest',
     optional = true,
     dependencies = {
@@ -160,5 +143,22 @@ return {
     keys = {
       { '<LEADER>cv', '<CMD>:VenvSelect<CR>', desc = 'Select VirtualEnv' },
     },
+  },
+  {
+    'lualine.nvim',
+    opts = function(_, opts)
+      table.insert(opts.sections.lualine_x, {
+        require('util.lualine').show_venv,
+        cond = function()
+          return vim.bo.filetype == 'python'
+        end,
+        on_click = function()
+          vim.cmd.VenvSelect()
+        end,
+        ---@diagnostic disable-next-line: undefined-field
+        color = Lazyvim.ui.fg('character'),
+        fmt = require('util.lualine').trunc(80, 5, 80),
+      })
+    end,
   },
 }
