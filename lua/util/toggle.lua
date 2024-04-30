@@ -1,14 +1,25 @@
 local M = {}
+local Lazyvim = require('lazyvim')
 
 function M.wrap()
   -- if this Neovim version supports checking if diagnostics are enabled
   -- then use that for the current state
   if vim.o.wrap then
     vim.cmd('set wrap')
-    require('lazyvim').warn('Disabled diagnostics', { title = 'Diagnostics' })
+    Lazyvim.warn('Disabled diagnostics', { title = 'Diagnostics' })
   else
     vim.cmd('set wrap')
-    require('lazyvim').info('Enabled diagnostics', { title = 'Diagnostics' })
+    Lazyvim.info('Enabled diagnostics', { title = 'Diagnostics' })
+  end
+end
+function M.treesitter()
+  ---@diagnostic disable-next-line: undefined-field
+  if vim.b.ts_highlight then
+    vim.treesitter.stop()
+    Lazyvim.warn('Disabled Treesitter Highlight', { title = 'Option' })
+  else
+    vim.treesitter.start()
+    Lazyvim.info('Enabled Treesitter Highlight', { title = 'Option' })
   end
 end
 return M

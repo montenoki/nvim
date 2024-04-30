@@ -1,6 +1,7 @@
 local map = vim.keymap.set
 local Lazyvim = require('lazyvim')
 local Keys = require('keymaps')
+local Toggle = require('util.toggle')
 
 -- Set leader key
 vim.g.mapleader = Keys.leader_key
@@ -95,7 +96,7 @@ map("n", Keys.toggle.spelling, function() Lazyvim.toggle("spell") end, { desc = 
 map("n", Keys.toggle.line_numbers, function() Lazyvim.toggle.number() end, { desc = "Toggle Line Numbers" })
 map("n", Keys.toggle.relative_numbers, function() Lazyvim.toggle("relativenumber") end, { desc = "Toggle Relative Line Numbers" })
 map("n", Keys.toggle.diagnostic, function() Lazyvim.toggle.diagnostics() end, { desc = "Toggle Diagnostics" })
-map("n", Keys.toggle.wrap, function() require('util.toggle').wrap() end, { desc = "Toggle wrap" })
+map("n", Keys.toggle.wrap, function() Toggle.wrap() end, { desc = "Toggle wrap" })
 
 local conceallevel = vim.o.conceallevel > 0 and vim.o.conceallevel or 3
 map("n", Keys.toggle.conceal, function() Lazyvim.toggle("conceallevel", false, { 0, conceallevel }) end, { desc = "Toggle Conceal" })
@@ -104,15 +105,7 @@ if vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint then
   map("n", Keys.toggle.inlay_hints, function() Lazyvim.toggle.inlay_hints() end, { desc = "Toggle Inlay Hints" })
 end
 
-map("n", Keys.toggle.treesitter, function()
-  if vim.b.ts_highlight then
-    vim.treesitter.stop()
-    Lazyvim.warn('Disabled Treesitter Highlight', { title = 'Option' })
-  else
-    vim.treesitter.start()
-    Lazyvim.info('Enabled Treesitter Highlight', { title = 'Option' })
-  end
-end, { desc = "Toggle Treesitter Highlight" })
+map("n", Keys.toggle.treesitter, function() Toggle.treesitter() end, { desc = "Toggle Treesitter Highlight" })
 
 -- highlights info under cursor
 map("n", Keys.toggle.show_hl_info, vim.show_pos, { desc = "Show highlights info" })

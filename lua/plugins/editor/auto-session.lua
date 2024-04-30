@@ -55,4 +55,13 @@ return {
       })
     end,
   },
+  {
+    'folke/which-key.nvim',
+    optional = true,
+    opts = {
+      defaults = {
+        ['<LEADER>q'] = { name = '+session' },
+      },
+    },
+  },
 }

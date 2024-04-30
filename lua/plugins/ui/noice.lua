@@ -57,6 +57,11 @@ return {
           ['vim.lsp.util.stylize_markdown'] = true,
           ['cmp.entry.get_documentation'] = true,
         },
+        signature = {
+          auto_open = {
+            trigger = false, -- Automatically show signature help when typing a trigger character from the LSP
+          },
+        },
       },
       routes = {
         {

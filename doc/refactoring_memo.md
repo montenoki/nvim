@@ -4,13 +4,12 @@
 
 ### CODING
 
-| Plugin   | Config | Lazy | Keymap | Vscode | Toggle | LazyVim | Lite UI |
-| :------- | :----: | :--: | :----: | :----: | :----: | :-----: | :-----: |
-| align    |  [ ]   | [x]  |  [ ]   |  [ ]   |   -    |    -    |    -    |
-| comment  |  [x]   | [x]  |  [x]   |  [ ]   |   -    |    -    |    -    |
-| leap     |  [ ]   | [x]  |  [x]   |  [x]   |   -    |    -    |    -    |
-| pair     |  [x]   | [x]  |  [x]   |  [ ]   |  [ ]   |    -    |    -    |
-| surround |  [x]   | [x]  |  [x]   |  [ ]   |   -    |    -    |    -    |
+| Plugin   | Config | Lazy | Keymap | Vscode | Toggle |
+| :------- | :----: | :--: | :----: | :----: | :----: |
+| comment  |  [x]   | [x]  |  [x]   |  [ ]   |   -    |
+| leap     |  [ ]   | [x]  |  [x]   |  [x]   |   -    |
+| pair     |  [x]   | [x]  |  [x]   |  [ ]   |  [ ]   |
+| surround |  [x]   | [x]  |  [x]   |  [ ]   |   -    |
 
 ### EDITOR
 
@@ -32,17 +31,17 @@
 
 ### MANAGER
 
-| Plugin  | Config | Lazy | Keymap | Vscode | Toggle | LazyVim | Lite UI |
-| :------ | :----: | :--: | :----: | :----: | :----: | :-----: | :-----: |
-| mason   |  [x]   | [x]  |   -    |  [x]   |   -    |    -    |   [ ]   |
-| none-ls |  [x]   | [x]  |   -    |  [x]   |   -    |   [ ]   |    -    |
+| Plugin  | Config | Lazy | Keymap | Vscode | LazyVim | Lite UI |
+| :------ | :----: | :--: | :----: | :----: | :-----: | :-----: |
+| mason   |  [x]   | [x]  |   -    |  [x]   |    -    |   [ ]   |
+| none-ls |  [x]   | [x]  |   -    |  [x]   |   [ ]   |    -    |
 
 ### TREESITTER
 
-| Plugin        | Config | Lazy | Keymap | Vscode | Toggle | LazyVim | Lite UI |
-| :------------ | :----: | :--: | :----: | :----: | :----: | :-----: | :-----: |
-| log-highlight |  [x]   | [x]  |   -    |  [x]   |   -    |    -    |    -    |
-| treesitter    |  [x]   | [x]  |  [x]   |  [x]   |  [ ]   |    -    |    -    |
+| Plugin        | Config | Lazy | Keymap | Vscode | Toggle |
+| :------------ | :----: | :--: | :----: | :----: | :----: |
+| log-highlight |  [x]   | [x]  |   -    |  [x]   |   -    |
+| treesitter    |  [x]   | [x]  |  [x]   |  [x]   |  [ ]   |
 
 ### UI
 
@@ -90,7 +89,7 @@
 
 | Plugin  | Config | Lazy | Keymap | Vscode | Toggle | LazyVim | Lite UI |
 | :------ | :----: | :--: | :----: | :----: | :----: | :-----: | :-----: |
-| conform |  [ ]   | [ ]  |  [ ]   |  [ ]   |  [ ]   |   [ ]   |   [ ]   |
+| conform |  [ ]   | [x]  |  [x]   |  [x]   |   -    |   [ ]   |    -    |
 
 ### LINTING
 
@@ -108,10 +107,16 @@
 | rust     |  [x]  |    [x]     | [x] |    -    |    [x]    | [ ] |  [ ]   |
 | markdown |  [x]  |    [x]     | [x] |   [x]   |    [x]    |  -  |  [x]   |
 
-### Python
+### Refactoring
 
 | Lang     | Config | Keymap | LazyVim | Lite UI |
 | :------- | :----: | :----: | :-----: | :-----: |
 | python   |  [x]   |  [ ]   |   [ ]   |   [ ]   |
 | rust     |  [ ]   |  [ ]   |   [ ]   |   [ ]   |
 | markdown |  [x]   |  [ ]   |   [ ]   |   [ ]   |
+
+## OS
+
+| OS  | im-select | shell |
+| :-- | :-------: | :---: |
+|     |           |       |

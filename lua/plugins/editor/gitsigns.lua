@@ -51,4 +51,14 @@ return {
       })
     end,
   },
+  {
+    'folke/which-key.nvim',
+    opts = function(_, opts)
+      if type(opts.defaults) == 'table' then
+        vim.list_extend(opts.defaults, {
+          ['<leader>h'] = { name = '+gitsigns' },
+        })
+      end
+    end,
+  },
 }
