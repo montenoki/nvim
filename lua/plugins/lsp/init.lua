@@ -192,7 +192,7 @@ return {
     cond = vim.g.vscode == nil,
     build = ':MasonUpdate',
     opts = {
-      ensure_installed = { 'taplo', 'shfmt', 'stylua', 'tree-sitter-cli' },
+      ensure_installed = { 'taplo', 'shfmt', 'shellcheck', 'stylua', 'tree-sitter-cli' },
       -- ui = { icons = Icon.mason },
     },
     config = function(_, opts)
