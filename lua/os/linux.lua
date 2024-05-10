@@ -3,9 +3,8 @@ return {
   {
     'keaising/im-select.nvim',
     opts = {
-      keep_quiet_on_no_binary = true,
-      default_im_select = 'xkb:us::eng',
-      default_command = 'ibus',
+      default_im_select = 'keyboard-us',
+      default_command = 'fcitx5-remote',
     },
   },
 }
