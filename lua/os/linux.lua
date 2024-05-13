@@ -5,6 +5,7 @@ return {
     opts = {
       default_im_select = 'keyboard-us',
       default_command = 'fcitx5-remote',
+      keep_quiet_on_no_binary = true,
     },
   },
 }
