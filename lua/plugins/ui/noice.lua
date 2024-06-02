@@ -91,9 +91,14 @@ return {
         {
           filter = {
             event = 'msg_show',
-            any = {
-              { find = 'search hit BOTTOM, continuing at TOP' },
-            },
+            any = { { find = 'search hit BOTTOM, continuing at TOP' } },
+          },
+          opts = { skip = true },
+        },
+        {
+          filter = {
+            event = 'notify',
+            any = { { find = 'textDocument/documentHighlight' } },
           },
           opts = { skip = true },
         },
