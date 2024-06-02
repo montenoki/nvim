@@ -38,7 +38,7 @@ return {
         severity_sort = true,
       },
       inlay_hints = {
-        enabled = true,
+        enabled = false,
       },
       capabilities = {},
       format = {
@@ -90,6 +90,22 @@ return {
       -- setup keymaps
       Lazyvim.lsp.on_attach(function(client, buffer)
         require('plugins.lsp.keymaps').on_attach(client, buffer)
+      end)
+
+      -- setup highlight current word
+      Lazyvim.lsp.on_attach(function(client, buffer)
+        if client.server_capabilities.documentHighlightProvider then
+          vim.api.nvim_create_autocmd('CursorHold', {
+            callback = function()
+              vim.lsp.buf.document_highlight()
+            end,
+          })
+          vim.api.nvim_create_autocmd('CursorMoved', {
+            callback = function()
+              vim.lsp.buf.clear_references()
+            end,
+          })
+        end
       end)
 
       local register_capability = vim.lsp.handlers['client/registerCapability']

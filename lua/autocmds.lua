@@ -16,21 +16,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
--- hightlight current word under cursor
---autocmd CursorHold  <buffer> lua vim.lsp.buf.document_highlight()
-vim.api.nvim_create_autocmd('CursorHold', {
-  group = augroup('highlight_cursor_word'),
-  callback = function()
-    vim.lsp.buf.document_highlight()
-  end,
-})
-vim.api.nvim_create_autocmd('CursorMoved', {
-  group = augroup('highlight_cursor_word_clear'),
-  callback = function()
-    vim.lsp.buf.clear_references()
-  end,
-})
-
 -- Go to last loc when opening a buffer
 vim.api.nvim_create_autocmd('BufReadPost', {
   group = augroup('last_loc'),
