@@ -1,5 +1,5 @@
-local Ascii_icons = require('util.ascii_icons')
-local Lazyvim = require('lazyvim')
+local lazyvim = require('lazyvim')
+local ascii = require('util.ascii')
 -- Statusline
 return {
   'nvim-lualine/lualine.nvim',
@@ -30,7 +30,7 @@ return {
         },
         component_separators = { left = '', right = '' },
         section_separators = vim.g.lite == nil and { left = '', right = '' }
-          or Ascii_icons.lualine.section_separators,
+          or ascii.lualine.section_separators,
       },
       extensions = {
         'nvim-tree',
@@ -60,7 +60,7 @@ return {
               local original_bufnr = vim.api.nvim_get_current_buf()
               local buf_clients = vim.lsp.get_active_clients({ bufnr = original_bufnr })
               ---@diagnostic disable-next-line: undefined-field
-              return #vim.tbl_keys(buf_clients) > 0 and Lazyvim.ui.fg('Character') or Lazyvim.ui.fg('Comment')
+              return #vim.tbl_keys(buf_clients) > 0 and lazyvim.ui.fg('Character') or lazyvim.ui.fg('Comment')
             end,
             on_click = function()
               vim.cmd('LspInfo')
@@ -79,7 +79,7 @@ return {
             ---@diagnostic disable-next-line: undefined-field
             fmt = require('util.lualine').show_macro_recording,
             ---@diagnostic disable-next-line: undefined-field
-            color = Lazyvim.ui.fg('Error'),
+            color = lazyvim.ui.fg('Error'),
           },
         },
         lualine_z = {
@@ -112,10 +112,10 @@ return {
           {
             'diagnostics',
             symbols = {
-              error = vim.g.lite == nil and ' ' or Ascii_icons.diagnostics.Error,
-              warn = vim.g.lite == nil and ' ' or Ascii_icons.diagnostics.Warn,
-              info = vim.g.lite == nil and ' ' or Ascii_icons.diagnostics.Info,
-              hint = vim.g.lite == nil and ' ' or Ascii_icons.diagnostics.Hint,
+              error = vim.g.lite == nil and ' ' or ascii.diagnostics.Error,
+              warn = vim.g.lite == nil and ' ' or ascii.diagnostics.Warn,
+              info = vim.g.lite == nil and ' ' or ascii.diagnostics.Info,
+              hint = vim.g.lite == nil and ' ' or ascii.diagnostics.Hint,
             },
           },
         },

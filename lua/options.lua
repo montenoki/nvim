@@ -1,4 +1,4 @@
-local Ascii_icons = require('util.ascii_icons')
+local ascii = require('util.ascii')
 local opt = vim.o
 
 -- =============================================================================
@@ -73,8 +73,7 @@ opt.shiftwidth = tab_width -- Size of an indent
 opt.colorcolumn = '81' -- Line length marker
 opt.conceallevel = 3 -- ? Hide * markup for bold and italic
 opt.list = true -- Show some invisible characters (tabs...
-opt.listchars = vim.g.lite == nil and 'eol:↲,tab:<->,trail:~,extends:,precedes:,nbsp:␣'
-  or Ascii_icons.listchars
+opt.listchars = vim.g.lite == nil and 'eol:↲,tab:<->,trail:~,extends:,precedes:,nbsp:␣' or ascii.listchars
 opt.relativenumber = false -- Relative line numbers
 opt.wrap = false -- Disable line wrap
 

@@ -1,5 +1,5 @@
 local Keys = require('keymaps')
-local Ascii_icons = require('util.ascii_icons').nvimtree
+local ascii = require('util.ascii').nvimtree
 local map = vim.keymap.set
 
 if vim.g.vscode == nil then
@@ -154,10 +154,10 @@ return {
   },
   config = function(_, opts)
     if vim.g.lite ~= nil then
-      opts.renderer.indent_markers = { icons = Ascii_icons.indent_markers }
-      opts.renderer.icons.symlink_arrow = Ascii_icons.symlink_arrow
-      opts.renderer.icons.glyphs = Ascii_icons.glyphs
-      opts.diagnostics.icons = Ascii_icons.diagnostics
+      opts.renderer.indent_markers = { icons = ascii.indent_markers }
+      opts.renderer.icons.symlink_arrow = ascii.symlink_arrow
+      opts.renderer.icons.glyphs = ascii.glyphs
+      opts.diagnostics.icons = ascii.diagnostics
     end
     require('nvim-tree').setup(opts)
   end,

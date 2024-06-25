@@ -1,4 +1,4 @@
-local Ascii_icons = require('util.ascii_icons').bufferline
+local ascii = require('util.ascii').bufferline
 return {
   'akinsho/bufferline.nvim',
   cond = vim.g.vscode == nil,
@@ -13,8 +13,8 @@ return {
       buffer_close_icon = '',
       modified_icon = '',
       close_icon = '',
-      left_trunc_marker = vim.g.lite == nil and '' or Ascii_icons.left_trunc_marker,
-      right_trunc_marker = vim.g.lite == nil and '' or Ascii_icons.right_trunc_marker,
+      left_trunc_marker = vim.g.lite == nil and '' or ascii.left_trunc_marker,
+      right_trunc_marker = vim.g.lite == nil and '' or ascii.right_trunc_marker,
       show_buffer_icons = vim.g.lite == nil,
       always_show_bufferline = false,
       indicator = {

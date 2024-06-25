@@ -1,4 +1,4 @@
-local Ascii_icons = require('util.ascii_icons')
+local ascii = require('util.ascii')
 local Keys = require('keymaps').indentscope
 return {
   'echasnovski/mini.indentscope',
@@ -7,7 +7,7 @@ return {
   version = '*', -- wait till new 0.7.0 release to put it back on semver
   event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' }, -- LazyFile
   opts = {
-    symbol = vim.g.lite == nil and '│' or Ascii_icons.indent.char,
+    symbol = vim.g.lite == nil and '│' or ascii.indent.char,
     options = { try_as_border = true },
     -- Module mappings. Use `''` (empty string) to disable one.
     mappings = {

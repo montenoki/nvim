@@ -1,4 +1,4 @@
-local Ascii_icons = require('util.ascii_icons')
+local ascii = require('util.ascii')
 
 local Keys = require('keymaps').gitsigns
 return {
@@ -14,7 +14,7 @@ return {
         topdelete = { text = '' },
         changedelete = { text = '▎' },
         untracked = { text = 'U▎' },
-      } or Ascii_icons.gitsigns,
+      } or ascii.gitsigns,
       on_attach = function(buffer)
         local gs = package.loaded.gitsigns
         local function map(mode, l, r, desc)
@@ -47,7 +47,7 @@ return {
       table.insert(opts.winbar.lualine_x, {
         'diff',
         source = diff_source,
-        symbols = vim.g.lite == nil and { added = ' ', modified = ' ', removed = ' ' } or Ascii_icons.git,
+        symbols = vim.g.lite == nil and { added = ' ', modified = ' ', removed = ' ' } or ascii.git,
       })
     end,
   },

@@ -1,5 +1,6 @@
-local Icon = require('icons')
-local Util = require('lazyvim')
+local icons = require('icons')
+local lazyvim = require('lazyvim')
+local ascii = require('util.ascii')
 -- Statusline
 return {
   'nvim-lualine/lualine.nvim',
@@ -30,8 +31,8 @@ return {
         disabled_filetypes = {
           winbar = { 'NvimTree', 'dap-repl' },
         },
-        component_separators = Icon.lualine.component_separators,
-        section_separators = Icon.lualine.section_separators,
+        component_separators = icons.lualine.component_separators,
+        section_separators = icons.lualine.section_separators,
       },
       extensions = {
         'nvim-tree',
@@ -45,38 +46,38 @@ return {
       sections = {
         lualine_a = {
           function()
-            return Icon.lualine.nvim
+            return icons.lualine.nvim
           end,
           'mode',
         },
         lualine_b = {
-          { 'branch', icon = Icon.lualine.branch },
+          { 'branch', icon = icons.lualine.branch },
         },
         lualine_c = {
           -- TODO
           {
             function()
-              return Icon.lualine.session .. require('auto-session.lib').current_session_name()
+              return icons.lualine.session .. require('auto-session.lib').current_session_name()
             end,
-            fmt = Util.lualine.trunc(80, 10, 60),
+            fmt = lazyvim.lualine.trunc(80, 10, 60),
           },
         },
         lualine_x = {
           {
             function()
-              return Icon.bug .. require('dap').status()
+              return icons.bug .. require('dap').status()
             end,
             cond = function()
               return package.loaded['dap'] and require('dap').status() ~= ''
             end,
-            color = Util.ui.fg('Debug'),
+            color = lazyvim.ui.fg('Debug'),
           },
           {
             'copilot',
             cond = function()
               return vim.g.copilot ~= nil
             end,
-            fmt = Util.lualine.trunc(80, 5, 80),
+            fmt = lazyvim.lualine.trunc(80, 5, 80),
           },
         },
         lualine_y = {
@@ -85,34 +86,34 @@ return {
             require('noice').api.status.command.get,
             ---@diagnostic disable-next-line: undefined-field
             cond = require('noice').api.status.command.has,
-            color = Util.ui.fg('String'),
+            color = lazyvim.ui.fg('String'),
           },
           {
             'macro-recording',
             ---@diagnostic disable-next-line: undefined-field
-            fmt = Util.lualine.show_macro_recording,
-            color = Util.ui.fg('Error'),
+            fmt = lazyvim.lualine.show_macro_recording,
+            color = lazyvim.ui.fg('Error'),
           },
         },
         lualine_z = {
           'location',
           'progress',
           function()
-            return Icon.clock .. os.date('%R')
+            return icons.clock .. os.date('%R')
           end,
         },
       },
       winbar = {
         lualine_a = {
-          { Util.lualine.pretty_path() },
+          { lazyvim.lualine.pretty_path() },
         },
         lualine_b = {
           {
             'diff',
             symbols = {
-              added = vim.g.lite == nil and '' or Ascii_icons.git.added,
-              modified = vim.g.lite == nil and '' or Ascii_icons.git.modified,
-              removed = vim.g.lite == nil and '' or Ascii_icons.git.removed,
+              added = vim.g.lite == nil and '' or ascii.git.added,
+              modified = vim.g.lite == nil and '' or ascii.git.modified,
+              removed = vim.g.lite == nil and '' or ascii.git.removed,
             },
             source = function()
               ---@diagnostic disable-next-line: undefined-field
@@ -133,10 +134,10 @@ return {
           {
             'diagnostics',
             symbols = {
-              error = Icon.diagnostics.Error,
-              warn = Icon.diagnostics.Warn,
-              info = Icon.diagnostics.Info,
-              hint = Icon.diagnostics.Hint,
+              error = icons.diagnostics.Error,
+              warn = icons.diagnostics.Warn,
+              info = icons.diagnostics.Info,
+              hint = icons.diagnostics.Hint,
             },
           },
         },
@@ -151,7 +152,7 @@ return {
             separator = '',
             padding = { left = 1, right = 0 },
           },
-          { Util.lualine.pretty_path() },
+          { lazyvim.lualine.pretty_path() },
         },
         lualine_c = {},
         lualine_x = {},

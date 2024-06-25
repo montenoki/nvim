@@ -1,5 +1,5 @@
-local Lazyvim = require('lazyvim')
-local Ascii_icons = require('util.ascii_icons')
+local lazyvim = require('lazyvim')
+local ascii = require('util.ascii')
 
 return {
   {
@@ -48,18 +48,6 @@ return {
       -- LSP Server Settings
       servers = {
         vimls = {},
-        lua_ls = {
-          settings = {
-            Lua = {
-              workspace = {
-                checkThirdParty = false,
-              },
-              completion = {
-                callSnippet = 'Replace',
-              },
-            },
-          },
-        },
         bashls = {
           bashIde = {
             globPattern = '**/*@(.sh|.inc|.bash|.command|.zsh|zshrc|zsh_*)',
@@ -71,29 +59,29 @@ return {
     },
     ---@param opts PluginLspOpts
     config = function(_, opts)
-      if Lazyvim.has('neoconf.nvim') then
+      if lazyvim.has('neoconf.nvim') then
         local plugin = require('lazy.core.config').spec.plugins['neoconf.nvim']
         require('neoconf').setup(require('lazy.core.plugin').values(plugin, 'opts', false))
       end
 
       -- setup autoformat
-      Lazyvim.format.register(Lazyvim.lsp.formatter())
+      lazyvim.format.register(lazyvim.lsp.formatter())
 
       -- deprectaed options
       ---@diagnostic disable-next-line: undefined-field
       if opts.autoformat ~= nil then
         ---@diagnostic disable-next-line: undefined-field
         vim.g.autoformat = opts.autoformat
-        Lazyvim.deprecate('nvim-lspconfig.opts.autoformat', 'vim.g.autoformat')
+        lazyvim.deprecate('nvim-lspconfig.opts.autoformat', 'vim.g.autoformat')
       end
 
       -- setup keymaps
-      Lazyvim.lsp.on_attach(function(client, buffer)
+      lazyvim.lsp.on_attach(function(client, buffer)
         require('plugins.lsp.keymaps').on_attach(client, buffer)
       end)
 
       -- setup highlight current word
-      Lazyvim.lsp.on_attach(function(client, buffer)
+      lazyvim.lsp.on_attach(function(client, buffer)
         if client.server_capabilities.documentHighlightProvider then
           vim.api.nvim_create_autocmd('CursorHold', {
             callback = function()
@@ -119,7 +107,7 @@ return {
         return ret
       end
       local diagnostic_icon = vim.g.lite == nil and { Error = ' ', Warn = ' ', Hint = '󱩎 ', Info = ' ' }
-        or Ascii_icons.diagnostics
+        or ascii.diagnostics
       -- diagnostics
       for name, icon in pairs(diagnostic_icon) do
         name = 'DiagnosticSign' .. name
@@ -128,10 +116,10 @@ return {
 
       if opts.inlay_hints.enabled then
         ---@diagnostic disable-next-line: undefined-field
-        Lazyvim.lsp.on_attach(function(client, buffer)
+        lazyvim.lsp.on_attach(function(client, buffer)
           if client.supports_method('textDocument/inlayHint') then
             ---@diagnostic disable-next-line: undefined-field
-            Lazyvim.toggle.inlay_hints(buffer, true)
+            lazyvim.toggle.inlay_hints(buffer, true)
           end
         end)
       end
@@ -193,10 +181,10 @@ return {
         mlsp.setup({ ensure_installed = ensure_installed, handlers = { setup } })
       end
 
-      if Lazyvim.lsp.get_config('denols') and Lazyvim.lsp.get_config('tsserver') then
+      if lazyvim.lsp.get_config('denols') and lazyvim.lsp.get_config('tsserver') then
         local is_deno = require('lspconfig.util').root_pattern('deno.json', 'deno.jsonc')
-        Lazyvim.lsp.disable('tsserver', is_deno)
-        Lazyvim.lsp.disable('denols', function(root_dir)
+        lazyvim.lsp.disable('tsserver', is_deno)
+        lazyvim.lsp.disable('denols', function(root_dir)
           return not is_deno(root_dir)
         end)
       end
@@ -208,7 +196,7 @@ return {
     cond = vim.g.vscode == nil,
     build = ':MasonUpdate',
     opts = {
-      ensure_installed = { 'taplo', 'shfmt', 'shellcheck', 'stylua', 'tree-sitter-cli' },
+      ensure_installed = { 'taplo', 'shfmt', 'shellcheck', 'tree-sitter-cli' },
       -- ui = { icons = Icon.mason },
     },
     config = function(_, opts)

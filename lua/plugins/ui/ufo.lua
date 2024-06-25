@@ -1,4 +1,4 @@
-local Ascii_icons = require('util.ascii_icons').ufo
+local ascii = require('util.ascii').ufo
 local Keys = require('keymaps')
 
 return {
@@ -24,7 +24,7 @@ return {
   },
   config = function()
     local ufo = require('ufo')
-    local icon = vim.g.lite == nil and '  %d ...' or Ascii_icons.suffix
+    local icon = vim.g.lite == nil and '  %d ...' or ascii.suffix
     local handler = function(virtText, lnum, endLnum, width, truncate)
       local newVirtText = {}
       local suffix = (icon):format(endLnum - lnum)

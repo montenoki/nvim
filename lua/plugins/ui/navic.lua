@@ -1,5 +1,5 @@
-local Lazyvim = require('lazyvim')
-local Ascii_icons = require('util.ascii_icons')
+local lazyvim = require('lazyvim')
+local ascii = require('util.ascii')
 return
 {
   {
@@ -9,7 +9,7 @@ return
     init = function()
       vim.o.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
       ---@diagnostic disable-next-line: undefined-field
-      Lazyvim.lsp.on_attach(function(client, buffer)
+      lazyvim.lsp.on_attach(function(client, buffer)
         if client.supports_method('textDocument/documentSymbol') then
           require('nvim-navic').attach(client, buffer)
         end
@@ -44,7 +44,7 @@ return
         Operator = ' ',
         TypeParameter = ' ',
         separator = '> ',
-      } or Ascii_icons.navic,
+      } or ascii.navic,
       lsp = {
         auto_attach = false,
         preference = nil,
