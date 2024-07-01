@@ -1,10 +1,15 @@
-local Keys = require('keymaps').leap
+--- Plugin settings: comment
+-- @author monten (monten.oki@gmail.com)
+-- @license MIT
+-- @copyright monten.oki 2024
+
+local keys = require('keymaps')
 return {
   'ggandor/leap.nvim',
   dependencies = { 'tpope/vim-repeat' },
   keys = {
     {
-      Keys.toggle,
+      keys.leap.toggle,
       function()
         local leap = require('leap')
         leap.leap({
@@ -21,12 +26,6 @@ return {
     for k, v in pairs(opts) do
       leap.opts[k] = v
     end
-    -- Define equivalence classes for brackets and quotes, in addition to the default whitespace group.
     leap.opts.equivalence_classes = { ' \t\r\n', '([{', ')]}', '\'"`' }
-    -- Override some old defaults - use backspace instead of tab (see issue #165).
-    -- leap.opts.special_keys.prev_target = '<backspace>'
-    -- leap.opts.special_keys.prev_group = '<backspace>'
-    -- Use the traversal keys to repeat the previous motion without explicitly invoking Leap.
-    -- require('leap.user').set_repeat_keys('<enter>', '<backspace>')
   end,
 }

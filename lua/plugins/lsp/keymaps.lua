@@ -39,7 +39,7 @@ function M.get()
       end,
       desc = 'Goto T[y]pe Definition',
     },
-    { mode = { 'n', 'i' }, Keys.hover, vim.lsp.buf.hover, desc = 'Hover' },
+    { mode = { 'i' }, Keys.hover, vim.lsp.buf.hover, desc = 'Hover' },
     {
       mode = { 'n', 'i' },
       Keys.signature_help,

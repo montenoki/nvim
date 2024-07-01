@@ -1,3 +1,8 @@
+--- Plugin settings: comment
+-- @author monten (monten.oki@gmail.com)
+-- @license MIT
+-- @copyright monten.oki 2024
+
 local Keys = require('keymaps').surround
 return {
   'echasnovski/mini.surround',

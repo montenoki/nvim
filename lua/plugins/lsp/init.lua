@@ -48,12 +48,6 @@ return {
       -- LSP Server Settings
       servers = {
         vimls = {},
-        bashls = {
-          bashIde = {
-            globPattern = '**/*@(.sh|.inc|.bash|.command|.zsh|zshrc|zsh_*)',
-          },
-        },
-        jsonls = {},
       },
       setup = {},
     },

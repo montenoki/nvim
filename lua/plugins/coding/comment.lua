@@ -1,4 +1,9 @@
-local Keys = require('keymaps').comment
+--- Plugin settings: comment
+-- @author monten (monten.oki@gmail.com)
+-- @license MIT
+-- @copyright monten.oki 2024
+
+local keys = require('keymaps')
 return {
   'numToStr/Comment.nvim',
   event = 'VeryLazy',
@@ -7,25 +12,25 @@ return {
     ---LHS of toggle mappings in NORMAL mode
     toggler = {
       ---Line-comment toggle keymap
-      line = Keys.line,
+      line = keys.comment.line,
       ---Block-comment toggle keymap
-      block = Keys.block,
+      block = keys.comment.block,
     },
     ---LHS of operator-pending mappings in NORMAL and VISUAL mode
     opleader = {
       ---Line-comment keymap
-      line = Keys.v_line,
+      line = keys.comment.v_line,
       ---Block-comment keymap
-      block = Keys.v_block,
+      block = keys.comment.v_block,
     },
     ---LHS of extra mappings
     extra = {
       ---Add comment on the line above
-      above = Keys.above,
+      above = keys.comment.above,
       ---Add comment on the line below
-      below = Keys.below,
+      below = keys.comment.below,
       ---Add comment at the end of line
-      eol = Keys.eol,
+      eol = keys.comment.eol,
     },
   },
 }

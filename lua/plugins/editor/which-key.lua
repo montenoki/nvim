@@ -21,7 +21,7 @@ return {
     },
   },
   keys = {
-    { Keys.toggle_wk, '<CMD>WhichKey<CR>' },
+    { Keys.toggle, '<CMD>WhichKey<CR>' },
   },
   config = function(_, opts)
     local wk = require('which-key')
