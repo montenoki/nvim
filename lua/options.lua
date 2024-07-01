@@ -81,6 +81,7 @@ opt.wrap = false -- Disable line wrap
 --   その他設定
 -- =============================================================================
 
+-- TODO: 移动到lang/sh.lua
 -- Add extra filetypes
 vim.filetype.add({
   filename = {
@@ -90,14 +91,13 @@ vim.filetype.add({
   },
 })
 
--- Python Provider
+-- Setup python provider
 local executable_path = '/.virtualenvs/neovim/bin/python'
-if string.find(vim.loop.os_uname().sysname, 'Windows') then
+if string.find(string.lower(vim.loop.os_uname().sysname), 'windows') then
   executable_path = '\\.virtualenvs\\neovim\\Scripts\\python.exe'
 end
 vim.g.python3_host_prog = vim.env.HOME .. executable_path
 
--- TODO:
 -- Disable netrw
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1

@@ -13,7 +13,6 @@ function M.wrap()
   end
 end
 function M.treesitter()
-  ---@diagnostic disable-next-line: undefined-field
   if vim.b.ts_highlight then
     vim.treesitter.stop()
     Lazyvim.warn('Disabled Treesitter Highlight', { title = 'Option' })

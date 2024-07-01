@@ -1,16 +1,4 @@
-local Lazyvim = require('lazyvim')
-
-vim.api.nvim_create_autocmd('VimEnter', {
-  desc = 'Auto select virtualenv Nvim open',
-  pattern = '*',
-  callback = function()
-    local venv = vim.fn.findfile('pyproject.toml', vim.fn.getcwd() .. ';')
-    if venv ~= '' then
-      require('venv-selector').retrieve_from_cache()
-    end
-  end,
-  once = true,
-})
+local lazyvim = require('lazyvim')
 
 return {
   {
@@ -69,7 +57,7 @@ return {
       setup = {
         ruff = function()
           ---@diagnostic disable-next-line: undefined-field
-          Lazyvim.lsp.on_attach(function(client, _)
+          lazyvim.lsp.on_attach(function(client, _)
             if client.name == 'ruff' then
               -- Disable hover in favor of Pyright
               client.server_capabilities.hoverProvider = false
@@ -137,18 +125,19 @@ return {
   },
   {
     'linux-cultist/venv-selector.nvim',
-    cmd = 'VenvSelect',
-    event = 'VeryLazy',
-    opts = function(_, opts)
-      if Lazyvim.has('nvim-dap-python') then
-        opts.dap_enabled = true
-      end
-      return vim.tbl_deep_extend('force', opts, {
-        name = { 'venv', '.venv', 'env', '.env' },
-      })
+    lazy = false,
+    dependencies = {
+      'neovim/nvim-lspconfig',
+      'mfussenegger/nvim-dap',
+      'mfussenegger/nvim-dap-python',
+      'nvim-telescope/telescope.nvim',
+    },
+    branch = 'regexp',
+    config = function()
+      require('venv-selector').setup()
     end,
     keys = {
-      { '<LEADER>cv', '<CMD>:VenvSelect<CR>', desc = 'Select VirtualEnv' },
+      { '<LEADER>cv', '<CMD>VenvSelect<CR>', desc = 'Select VirtualEnv' },
     },
   },
   {
@@ -163,7 +152,7 @@ return {
           vim.cmd.VenvSelect()
         end,
         ---@diagnostic disable-next-line: undefined-field
-        color = Lazyvim.ui.fg('character'),
+        color = lazyvim.ui.fg('character'),
         fmt = require('util.lualine').trunc(80, 5, 80),
       })
     end,

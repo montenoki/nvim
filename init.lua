@@ -26,14 +26,17 @@ local plugins = {
   { import = 'plugins.ui' },
   { import = 'plugins.editor' },
 }
-if vim.g.vscode ~= nil then
+
+if vim.g.vscode then
   require('vscode')
 else
   require('global')
   require('options')
   require('keybindings')
   require('autocmds')
+
   table.insert(plugins, { import = 'lang' })
+
   local osName = vim.loop.os_uname().sysname
   if string.find(string.lower(osName), 'windows') then
     table.insert(plugins, { import = 'os.windows' })
@@ -45,6 +48,7 @@ else
     table.insert(plugins, { import = 'os.linux' })
     require('os.linux')
   end
+
   require('lazy').setup(plugins)
   require('colorscheme')
 end
