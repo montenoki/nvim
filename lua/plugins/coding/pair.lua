@@ -5,7 +5,7 @@
 
 local function checkSurroundingChars()
   -- 获取光标位置和当前行内容
-  local _, col = unpack(vim.api.nvim_win_get_cursor(0))
+  local _, col = table.unpack(vim.api.nvim_win_get_cursor(0))
   local line = vim.api.nvim_get_current_line()
 
   -- 获取光标前后的字符

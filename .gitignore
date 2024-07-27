@@ -1,5 +1,4 @@
 plugin/packer_compiled.lua
 .DS_Store
-lazy-lock.json
 flg/enabled/*
 !flg/enabled/.gitkeep

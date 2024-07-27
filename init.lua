@@ -20,35 +20,35 @@ vim.opt.rtp:prepend(lazyPath)
 -- =============================================================================
 local plugins = {
   { import = 'plugins' },
-  { import = 'plugins.coding' },
-  { import = 'plugins.util' },
-  { import = 'plugins.treesitter' },
-  { import = 'plugins.ui' },
-  { import = 'plugins.editor' },
+--   { import = 'plugins.coding' },
+--   { import = 'plugins.util' },
+--   { import = 'plugins.treesitter' },
+--   { import = 'plugins.ui' },
+--   { import = 'plugins.editor' },
 }
 
-if vim.g.vscode then
-  require('vscode')
-else
-  require('global')
+-- if vim.g.vscode then
+  -- require('vscode')
+-- else
+  -- require('global')
   require('options')
-  require('keybindings')
-  require('autocmds')
+  -- require('keybindings')
+  -- require('autocmds')
 
-  table.insert(plugins, { import = 'lang' })
-
-  local osName = vim.loop.os_uname().sysname
-  if string.find(string.lower(osName), 'windows') then
-    table.insert(plugins, { import = 'os.windows' })
-    require('os.windows')
-  elseif osName == 'Darwin' then
-    table.insert(plugins, { import = 'os.mac' })
-    require('os.mac')
-  else
-    table.insert(plugins, { import = 'os.linux' })
-    require('os.linux')
-  end
+  -- table.insert(plugins, { import = 'lang' })
+  --
+  -- local osName = vim.loop.os_uname().sysname
+  -- if string.find(string.lower(osName), 'windows') then
+  --   table.insert(plugins, { import = 'os.windows' })
+  --   require('os.windows')
+  -- elseif osName == 'Darwin' then
+  --   table.insert(plugins, { import = 'os.mac' })
+  --   require('os.mac')
+  -- else
+  --   table.insert(plugins, { import = 'os.linux' })
+  --   require('os.linux')
+  -- end
 
   require('lazy').setup(plugins)
   require('colorscheme')
-end
+-- end
