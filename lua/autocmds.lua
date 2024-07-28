@@ -74,13 +74,12 @@ vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
   end,
 })
 
--- Add new line with 'o' do not continue comments
+-- 编写某些文件时加入t选项使FormatOptions应用于所有地方
 vim.api.nvim_create_autocmd('BufEnter', {
-  group = augroup('dont_continue_comments'),
-  pattern = '*',
-  callback = function() --'tcrqlmM'
-    -- https://neovim.io/doc/user/change.html#fo-table
-    vim.opt.formatoptions = vim.opt.formatoptions - 'j' - 'o' + 't' + 'm' + 'M'
+  group = augroup('enableAutoFormat'),
+  pattern = '*.txt',
+  callback = function()
+    vim.opt.formatoptions:append('t')
   end,
 })
 

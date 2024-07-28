@@ -15,6 +15,7 @@ if not vim.loop.fs_stat(lazyPath) then
 end
 -- Add the path to lazy.nvim to the runtimepath
 vim.opt.rtp:prepend(lazyPath)
+
 -- =============================================================================
 -- Load settings
 -- =============================================================================

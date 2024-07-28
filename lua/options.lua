@@ -5,7 +5,7 @@ local tabWidth = 4
 opt.clipboard = 'unnamedplus'
 
 -- Line length ruler
-opt.colorcolumn = '81'
+opt.colorcolumn = '+1'
 
 -- List of options for Insert mode completion
 -- 支持的值有：
@@ -79,6 +79,36 @@ opt.fillchars = { eob = ' ', fold = ' ', foldopen = '', foldsep = ' ', foldcl
 -- 如果启用此选项，文件末尾缺失的<EOL>将被恢复。
 -- 如果您想保留原始文件的情况，请关闭此选项。
 opt.fixendofline = false
+
+-- 影响 Vim 格式化文本的方式
+-- 默认为"cjqt"
+-- t:  使用 'textwidth' 自动换行文本
+-- c:  注释使用'textwidth'自动换行，并自动插入当前注释前缀
+-- r:  在插入模式下按下<Enter>后自动插入当前注释符
+-- o:  在普通模式下按下 'o' 或 'O' 后自动插入当前注释符号
+--     如果在特定位置不需要注释，请使用 CTRL-U 快速删除它。i_CTRL-U
+-- /:  当opt中包含 'o' 时：仅当//在行首时插入注释符号
+-- q:  允许使用“gq”格式化注释
+--     请注意，格式化不会更改空行或仅包含注释前缀的行
+--     新段落在此类行之后或注释前缀更改时开始。
+-- w:  尾随空白符表示段落在下一行继续
+--     具体来说，这意味着当你在一行的末尾添加一个空格时
+--     Neovim 会将该行视为段落的一部分，并在下一行继续该段落，而不是开始一个新的段落。
+-- a:  段落的自动格式化
+--     每次插入或删除文本时，段落将被重新格式化
+--     请参阅自动格式化。当存在“c”标志时，这仅发生在已识别的注释中。
+-- n:  在格式化文本时，识别编号列表
+--     这实际上使用了 'formatlistpat' 选项，因此可以使用任何类型的列表
+--     数字后的文本缩进用于下一行。默认是找到一个数字
+--     后面可以选择跟随 '.', ':', ')', ']' 或 '}'
+--     注意，必须设置 'autoindent'。与 "2" 一起使用效果不佳。
+-- 2:  在格式化文本时，使用段落第二行的缩进作为段落其余部分的缩进，而不是第一行的缩进
+--     这支持第一行缩进与其余部分不同的段落。注意，必须设置 'autoindent'。
+-- m:  也在 255 以上的多字节字符处断开
+--     这对于每个字符都是一个单词的亚洲文本很有用
+-- M:  在连接行时，不要在多字节字符前后插入空格。覆盖 'B' 标志
+-- j:  在合理的情况下，合并行时删除注释符号
+opt.formatoptions = { c = true, r = true, q = true, n = true, m = true, M = true, j = true }
 
 -- 用于 :grep 命令的程序
 -- 此选项可能包含 '%' 和 '#' 字符，这些字符在命令行中使用时会被扩展
@@ -212,6 +242,14 @@ opt.smartindent = true
 -- Number of spaces that a <Tab> in the file counts for.
 opt.tabstop = tabWidth
 
+-- 正在插入文本的最大宽度
+-- 较长的行将在空白处断开以达到此宽度
+-- 零值将禁用此功能
+-- 当 'textwidth' 为零时，可以使用 'wrapmargin'
+-- 另请参见 'formatoptions' 和 ins-textwidth
+-- 当设置了 'formatexpr' 时，它将用于断行
+opt.textwidth = 80
+
 -- 等待映射序列完成的时间（以毫秒为单位）
 opt.timeoutlen = 100
 
@@ -296,7 +334,6 @@ vim.g.python3_host_prog = vim.env.HOME .. executablePath
 --     ['.zlogout'] = 'sh',
 --   },
 -- })
-
 
 -- TODO: 2024/07/28: 移动到nvim-tree设置中
 -- -- Disable netrw
