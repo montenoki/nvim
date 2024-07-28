@@ -77,6 +77,7 @@ return {
       -- setup highlight current word
       lazyvim.lsp.on_attach(function(client, buffer)
         if client.server_capabilities.documentHighlightProvider then
+          vim.opt.updatetime = 100
           vim.api.nvim_create_autocmd('CursorHold', {
             callback = function()
               vim.lsp.buf.document_highlight()

@@ -19,6 +19,8 @@ vim.opt.rtp:prepend(lazyPath)
 -- =============================================================================
 -- Load settings
 -- =============================================================================
+require('options')
+require('autocmds')
 local plugins = {
   { import = 'plugins' },
 --   { import = 'plugins.coding' },
@@ -28,13 +30,11 @@ local plugins = {
 --   { import = 'plugins.editor' },
 }
 
--- if vim.g.vscode then
-  -- require('vscode')
--- else
+if vim.g.vscode then
+  require('vscode')
+else
   -- require('global')
-  require('options')
   -- require('keybindings')
-  require('autocmds')
 
   -- table.insert(plugins, { import = 'lang' })
   --
@@ -52,4 +52,4 @@ local plugins = {
 
   require('lazy').setup(plugins)
   require('colorscheme')
--- end
+end

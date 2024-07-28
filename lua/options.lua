@@ -302,17 +302,13 @@ vim.g.python3_host_prog = vim.env.HOME .. executablePath
 -- opt.splitbelow = true
 -- opt.splitright = true
 -- opt.splitkeep = 'screen'
+
 -- TODO: 2024/07/28: 转移到statusline设置中
 -- opt.showmode = false -- Dont show mode since we have a statusline
 
 -- Nvim 将自动尝试确定主机终端是否
 -- 支持 24 位颜色并将在可能时启用此选项
 -- opt.termguicolors = true
-
--- TODO: 2024/07/28: 移动到自动命令中
--- 如果在这么多毫秒内没有输入内容，交换文件将被写入磁盘（参见崩溃恢复）
--- 也用于 CursorHold 自动命令事件
--- opt.updatetime = 100
 
 -- TODO: 2024/07/28: 移动到scrollbar文件中
 -- fix the problem that cant see last char when scrollbar on.

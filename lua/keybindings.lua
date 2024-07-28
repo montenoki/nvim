@@ -3,27 +3,41 @@ local lazyvim = require('lazyvim')
 local keymaps = require('keymaps')
 local toggle = require('util.toggle')
 -- =============================================================================
--- Set leader key
+-- 添加新的按键映射
 -- =============================================================================
 vim.g.mapleader = keymaps.leader_key
 
 -- =============================================================================
--- Better keybindings
+-- 修改默认的按键映射
 -- =============================================================================
--- better up/down for wrapped lines
-map({ 'n', 'x' }, '<DOWN>', "v:count == 0 ? 'gj' : 'j'", { desc = 'Down ignore wrapped', expr = true})
-map({ 'n', 'x' }, '<UP>', "v:count == 0 ? 'gk' : 'k'", { desc = 'Up ignore wrapped', expr = true})
--- swap g_ and $
+
+-- 改变上下箭头键的行为
+-- 当没有数字前缀时， 向下箭头键会使用 gj，向上箭头键会使用 gk
+-- 这会移动到视觉上的上下行，即使这是一个被折叠的长行。
+-- 当有数字前缀时，向下箭头键会使用 j，向上箭头键会使用 k
+-- 这会移动到文本上的上下行
+map({ 'n', 'x' }, '<DOWN>', "v:count == 0 ? 'gj' : 'j'", { desc = 'Down ignore wrapped', expr = true })
+map({ 'n', 'x' }, '<UP>', "v:count == 0 ? 'gk' : 'k'", { desc = 'Up ignore wrapped', expr = true })
+
+-- 交换 g_ 和 $
+-- 使用 $ 键时，光标停在最后一个非空白字符上，这通常是更有用的位置，特别是在编辑代码时。
+-- 如果确实需要移动到包括尾随空白在内的行尾，可以使用 g_
 map({ 'n', 'v' }, '$', 'g_', { desc = 'Goto last non-blank char' })
 map({ 'n', 'v' }, 'g_', '$', { desc = 'Goto the end of line' })
--- better indenting
+
+-- 允许用户多次缩进同一块文本，而不需要在每次缩进后手动重新选择文本
+-- 在缩进后保持文本的选中状态，以便进行进一步的操作
 map('v', '<', '<gv', { desc = 'Increase indent', remap = true })
 map('v', '>', '>gv', { desc = 'Decrease indent', remap = true })
+
 -- do not copy after paste in visual mode
 map('v', 'p', '"_dP')
 
+-- Clear search with <ESC>
+map({ 'i', 'n' }, '<ESC>', '<CMD>noh<CR><ESC>', { desc = 'Escape and clear hlsearch' })
+
 -- =============================================================================
--- Disable unuse keybindings
+-- 禁用不使用的按键映射
 -- =============================================================================
 -- turn off 'Ctrl+z'
 map({ 'n', 'i', 'v' }, '<C-z>', '<NOP>')
@@ -32,11 +46,6 @@ map({ 'n', 'i', 'v' }, '<C-z>', '<NOP>')
 map({ 'n', 'v' }, 's', '<NOP>')
 map({ 'n', 'v' }, 'ss', '<NOP>')
 
--- =============================================================================
--- Other useful keybindings
--- =============================================================================
--- Clear search with <ESC>
-map({ 'i', 'n' }, '<ESC>', '<CMD>noh<CR><ESC>', { desc = 'Escape and clear hlsearch' })
 
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
 map('n', 'n', "'Nn'[v:searchforward].'zv'", { expr = true, desc = 'Next search result' })
@@ -75,12 +84,12 @@ map('n', keymaps.window.eq_size, '<C-w>=', { desc = 'Equally high and wide', rem
 map('n', keymaps.window.init_inc_selection, 'viw<C-1>', { desc = 'Init Increment selection', remap = true })
 
 -- Move Lines
-map('n', keymaps.line.move_down, '<CMD>m .+1<CR>==', { desc = 'Move Line down'})
-map('n', keymaps.line.move_up, '<CMD>m .-2<CR>==', { desc = 'Move Line up'})
-map('i', keymaps.line.move_down, '<ESC><CMD>m .+1<CR>==gi', { desc = 'Move Line down'})
-map('i', keymaps.line.move_up, '<ESC><CMD>m .-2<CR>==gi', { desc = 'Move Line up'})
-map('v', keymaps.line.move_down, ":m '>+1<CR>gv=gv", { desc = 'Move Line down'})
-map('v', keymaps.line.move_up, ":m '<-2<CR>gv=gv", { desc = 'Move Line up'})
+map('n', keymaps.line.move_down, '<CMD>m .+1<CR>==', { desc = 'Move Line down' })
+map('n', keymaps.line.move_up, '<CMD>m .-2<CR>==', { desc = 'Move Line up' })
+map('i', keymaps.line.move_down, '<ESC><CMD>m .+1<CR>==gi', { desc = 'Move Line down' })
+map('i', keymaps.line.move_up, '<ESC><CMD>m .-2<CR>==gi', { desc = 'Move Line up' })
+map('v', keymaps.line.move_down, ":m '>+1<CR>gv=gv", { desc = 'Move Line down' })
+map('v', keymaps.line.move_up, ":m '<-2<CR>gv=gv", { desc = 'Move Line up' })
 
 -- Tab
 map('n', keymaps.tab.new, '<CMD>tabnew<CR>', { desc = 'New Tab' })
@@ -109,7 +118,9 @@ map('n', keymaps.diagnostic.next_warn, diagnosticGoto(true, 'WARN'), { desc = 'N
 map('n', keymaps.diagnostic.prev_warn, diagnosticGoto(false, 'WARN'), { desc = 'Prev Warning' })
 
 -- toggle options
-map('n', keymaps.toggle.spelling, function() lazyvim.toggle('spell') end, { desc = 'Toggle Spelling' })
+map('n', keymaps.toggle.spelling, function()
+  lazyvim.toggle('spell')
+end, { desc = 'Toggle Spelling' })
 map('n', keymaps.toggle.line_numbers, function()
   lazyvim.toggle.number()
 end, { desc = 'Toggle Line Numbers' })
