@@ -44,12 +44,133 @@ opt.cursorline = true
 -- 要在 'expandtab' 开启时插入一个真实的制表符，请使用 CTRL-V<Tab>。
 opt.expandtab = true
 
+-- 用于填充状态栏、垂直分隔符和窗口中特殊列的字符
+-- 任何被省略的内容将回退到默认值。
+-- "horiz", "horizup", "horizdown", "vertleft", "vertright" and	"verthoriz"
+-- 只在 'laststatus' 为 3 时使用，否则只使用垂直窗口分隔符
+-- 如果 'ambiwidth' 是 "double"，那么
+-- "horiz", "horizup", "horizdown",	"vert",
+-- "vertleft", "vertright", "verthoriz", "foldsep" and "fold" 默认使用单字节替代
+-- 对于“stl”、“stlnc”、“foldopen”、“foldclose”和“foldsep”项目
+-- 支持单字节和多字节字符。但不支持双宽字符
+
+-- item       default     Used for
+-- stl        ' '         statusline of the current window
+-- stlnc      ' '         statusline of the non-current windows
+-- wbr        ' '         window bar
+-- horiz      '─' or '-'  horizontal separators :split
+-- horizup    '┴' or '-'  upwards facing horizontal separator
+-- horizdown  '┬' or '-'  downwards facing horizontal separator
+-- vert       '│' or '|'  vertical separators :vsplit
+-- vertleft   '┤' or '|'  left facing vertical separator
+-- vertright  '├' or '|'  right facing vertical separator
+-- verthoriz  '┼' or '+'  overlapping vertical and horizontal
+-- separator
+-- fold       '·' or '-'  filling 'foldtext'
+-- foldopen   '-'         mark the beginning of a fold
+-- foldclose  '+'         show a closed fold
+-- foldsep    '│' or '|'  open fold middle marker
+-- diff       '-'         deleted lines of the 'diff' option
+-- msgsep     ' '         message separator 'display'
+-- eob        '~'         empty lines at the end of a buffer
+-- lastline   '@'         'display' contains lastline/truncate
+opt.fillchars = { eob = ' ', fold = ' ', foldopen = '', foldsep = ' ', foldclose = '' }
+
+-- 如果启用此选项，文件末尾缺失的<EOL>将被恢复。
+-- 如果您想保留原始文件的情况，请关闭此选项。
+opt.fixendofline = false
+
+-- 用于 :grep 命令的程序
+-- 此选项可能包含 '%' 和 '#' 字符，这些字符在命令行中使用时会被扩展
+-- 允许使用占位符 "$*" 来指定参数将被包含的位置。环境变量会被扩展 :set_env。
+-- 有关包含空格和反斜杠的信息，请参见 option-backslash。
+-- 特殊值：当 'grepprg' 设置为 "internal" 时，
+-- :grep 命令的工作方式类似于 :vimgrep，:lgrep 类似于 :lvimgrep，
+-- :grepadd 类似于 :vimgrepadd，:lgrepadd 类似于 :lvimgrepadd。
+-- 另请参阅 :make_makeprg 部分，因为那里的大多数评论
+-- 同样适用于 'grepprg'。出于安全原因，此选项不能从模式行或沙箱中设置。
+opt.grepprg = 'rg --vimgrep  -uu'
+
+-- 在搜索时忽略大小写
+opt.ignorecase = true
+
+-- 此选项的值会影响最后一个窗口何时会有状态行
+-- 0: never
+-- 1: only if there are at least two windows
+-- 2: always
+-- 3: always and ONLY the last window
+opt.laststatus = 2
+
+-- 如果开启，Vim 将在 'breakat' 中的字符处换行，
+-- 而不是在屏幕上能容纳的最后一个字符处换行。
+-- 与 'wrapmargin' 和 'textwidth' 不同，这不会在文件中插入 <EOL>，
+-- 它只影响文件的显示方式，而不影响其内容。
+-- 如果设置了 'breakindent'，行会在视觉上缩进。
+-- 然后，'showbreak' 的值将用于放在换行前。这选项在 'wrap' 选项关闭时不使用。
+-- 请注意，<EOL> 后的 <Tab> 字符大多不会显示正确数量的空白。
+opt.linebreak = true
+
+-- List mode: By default, show tabs as ">", trailing spaces as "-", and
+-- non-breakable space characters as "+". Useful to see the difference
+-- between tabs and spaces and for trailing blanks.
+opt.list = true
+
+-- eol:c  Character to show at the end of each line.  When
+-- 			  omitted, there is no extra character at the end of the
+-- 			  line.
+-- tab:xy[z]  Two or three characters to be used to show a tab.
+--            The third character is optional.
+-- tab:xy  The 'x' is always used, then 'y' as many times as will
+--         fit.
+-- tab:xyz  The 'z' is always used, then 'x' is prepended, and
+--          then 'y' is used as many times as will fit.
+--          When "tab:" is omitted, a tab is shown as ^I.
+-- space:c	Character to show for a space.  When omitted, spaces are left blank.
+-- multispace:c...  One or more characters to use cyclically to show for
+--                  multiple consecutive spaces.  Overrides the "space"
+--                  setting, except for single spaces.  When omitted, the
+--                  "space" setting is used.
+--lead:c  Character to show for leading spaces.  When omitted,
+--        leading spaces are blank.  Overrides the "space" and
+--        "multispace" settings for leading spaces.  You can
+--        combine it with "tab:", for example: set listchars+=tab:>-,lead:.
+-- leadmultispace:c...  Like the lcs-multispace value, but for leading
+--                      spaces only.  Also overrides lcs-lead for leading
+--                      multiple spaces.
+--                      :set listchars=leadmultispace:---+ shows ten
+--                      consecutive leading spaces as: ---+---+--XXX
+-- trail:c  用于显示尾随空格的字符
+--          省略时，尾随空格为空白。
+--          覆盖“space”和“multispace”设置的尾随空格。
+-- extends:c  当 'wrap' 关闭且行超出屏幕右侧时，在最后一列显示的字符
+-- precedes:c  当第一个列中有字符之前的文本时, 在物理行的第一个可见列中显示的字符
+--conceal:c  当 'conceallevel' 设置为 1 时，用于显示隐藏文本的字符。省略时为空格
+-- nbsp:c  用于显示不间断空格字符（0xA0（十进制 160）和 U+202F）的字符。省略时留空
+opt.listchars = { eol = '↲', tab = '<->', trail = '~', extends = '', precedes = '', nbsp = '␣' }
+
+-- 启用鼠标支持
+-- 要暂时禁用鼠标支持，请在使用时按住 Shift 键
+opt.mouse = 'a'
+
+-- 在每行前打印行号
+opt.number = true
+
+-- 弹出菜单中显示的最大项目数
+-- 0表示“使用可用的屏幕空间”
+opt.pumheight = 0
+
+-- 光标所在行显示相对行号
+opt.relativenumber = true
+
+opt.scrolloff = 4
+
+
 -- -- =============================================================================
 -- --   Basic - 基本設定
 -- -- =============================================================================
 
 --
--- opt.mouse = 'a' -- マウスサポート
+
 -- opt.sessionoptions = 'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions'
 -- opt.timeoutlen = 50
 -- opt.undofile = true
@@ -61,7 +182,6 @@ opt.expandtab = true
 -- opt.wildmode = 'longest:full,full'
 
 -- -- 検索
--- opt.ignorecase = true -- 大文字と小文字を同等に取り扱う
 -- opt.smartcase = true -- 大文字が入る場合、大文字を無視しない
 
 -- -- インデント
@@ -75,8 +195,6 @@ opt.expandtab = true
 -- opt.splitkeep = 'screen'
 
 -- -- grep 設定
--- opt.grepprg = 'rg --vimgrep'
--- opt.grepformat = '%f:%l:%c:%m'
 
 -- -- 折り畳み設定
 -- opt.foldenable = true
@@ -87,15 +205,14 @@ opt.expandtab = true
 
 -- -- UI
 
--- opt.laststatus = 3 -- global statusline
--- opt.number = true -- Print line number
--- opt.pumheight = 5 -- Maximum number of entries in a popup
+
+-- 
 -- opt.showmode = false -- Dont show mode since we have a statusline
 -- opt.signcolumn = 'yes' -- Always show the signcolumn, otherwise it would shift the text each time
 -- opt.termguicolors = true
 -- opt.virtualedit = 'onemore' -- fix the problem that cant see last char when scrollbar on.
+-- opt.scrolloff = 4 -- Lines of context
 -- opt.winminwidth = 5 -- Minimum window width
--- opt.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 
 -- -- =============================================================================
 -- --   preference.lua - 好み設定
@@ -104,7 +221,7 @@ opt.expandtab = true
 -- local tab_width = 2
 
 -- opt.whichwrap = '<,>,[,]' -- Use arrow key to move next line when cursor at end of line
--- opt.scrolloff = 4 -- Lines of context
+
 -- opt.sidescrolloff = 4 -- Columns of context
 
 -- -- Tab
@@ -113,10 +230,8 @@ opt.expandtab = true
 
 -- -- UI
 
+--
 
--- opt.list = true -- Show some invisible characters (tabs...
--- opt.listchars = vim.g.lite == nil and 'eol:↲,tab:<->,trail:~,extends:,precedes:,nbsp:␣' or ascii.listchars
--- opt.relativenumber = false -- Relative line numbers
 -- opt.wrap = false -- Disable line wrap
 
 -- -- =============================================================================
