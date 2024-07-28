@@ -1,11 +1,14 @@
 <!-- markdownlint-disable MD013 -->
+
 <!-- markdownlint-disable MD024 -->
+
 <!-- markdownlint-disable MD033 -->
+
 # nvim
 
-<a href="https://dotfyle.com/montenoki/nvim"><img src="https://dotfyle.com/montenoki/nvim/badges/plugins?style=flat" alt="plugins"/></a>
-<a href="https://dotfyle.com/montenoki/nvim"><img src="https://dotfyle.com/montenoki/nvim/badges/leaderkey?style=flat" alt="leaderkey"/></a>
-<a href="https://dotfyle.com/montenoki/nvim"><img src="https://dotfyle.com/montenoki/nvim/badges/plugin-manager?style=flat" alt="plugin manager"/></a>
+`<a href="https://dotfyle.com/montenoki/nvim"><img src="https://dotfyle.com/montenoki/nvim/badges/plugins?style=flat" alt="plugins"/>``</a>`
+`<a href="https://dotfyle.com/montenoki/nvim"><img src="https://dotfyle.com/montenoki/nvim/badges/leaderkey?style=flat" alt="leaderkey"/>``</a>`
+`<a href="https://dotfyle.com/montenoki/nvim"><img src="https://dotfyle.com/montenoki/nvim/badges/plugin-manager?style=flat" alt="plugin manager"/>``</a>`
 
 My neovim configs.
 
@@ -26,31 +29,21 @@ NVIM_APPNAME=montenoki/nvim/ nvim
 
 ## Requirements
 
- > Install requires Neovim 0.9+. Always review the code before installing a configuration.
+> Install requires Neovim 0.9+. Always review the code before installing a configuration.
 
 <details closed>
 <summary>Ensure you have the following installed on your system.</summary>
 
 - **curl**: Get a file from an HTTP, HTTPS or FTP server
-
 - **fd**: Simple, fast and user-friendly alternative to find
-
 - **gitui**: Blazing fast terminal-ui for git written in rust
-
 - **gzip**: Popular GNU data compression program
-
 - **im-select**: Switch your input method in shell.
-
 - **node.js**
-
 - **python**
-
 - **ripgrep**: Search tool like grep and The Silver Searcher
-
 - **tar**: GNU version of the tar archiving utility
-
 - **unzip**: Extraction utility for .zip compressed archives
-
 - **wget**: Internet file retriever
 
 </details>
@@ -87,17 +80,16 @@ git clone git@github.com:montenoki/nvim ~/.config/nvim
 
 #### Windows
 
-``` shell
+```shell
 mkdir "$HOME\.virtualenvs"
 python -m venv "$HOME\.virtualenvs\neovim"
-python -m venv "$HOME\.virtualenvs\debugpy"
-$HOME\.virtualenvs\neovim\Scripts\python.exe -m pip install neovim
-$HOME\.virtualenvs\debugpy\Scripts\python.exe -m pip install debugpy
+cd $HOME
+.virtualenvs\neovim\Scripts\python.exe -m pip install pynvim debugpy
 ```
 
 #### Mac or Linux
 
-``` shell
+```shell
 sh "$HOME/.config/nvim/setup_provider.sh"
 ```
 
@@ -112,7 +104,6 @@ nvim --headless +"Lazy! sync" +qa
 ### bars-and-lines
 
 - [luukvbaal/statuscol.nvim](https://dotfyle.com/plugins/luukvbaal/statuscol.nvim)
-
 - [SmiteshP/nvim-navic](https://dotfyle.com/plugins/SmiteshP/nvim-navic)
 
 ### colorscheme
@@ -126,15 +117,12 @@ nvim --headless +"Lazy! sync" +qa
 ### comment
 
 - [numToStr/Comment.nvim](https://dotfyle.com/plugins/numToStr/Comment.nvim)
-
 - [folke/todo-comments.nvim](https://dotfyle.com/plugins/folke/todo-comments.nvim)
 
 ### completion
 
 - [zbirenbaum/copilot.lua](https://dotfyle.com/plugins/zbirenbaum/copilot.lua)
-
 - [simrat39/rust-tools.nvim](https://dotfyle.com/plugins/simrat39/rust-tools.nvim)
-
 - [hrsh7th/nvim-cmp](https://dotfyle.com/plugins/hrsh7th/nvim-cmp)
 
 ### cursorline
@@ -144,9 +132,7 @@ nvim --headless +"Lazy! sync" +qa
 ### debugging
 
 - [mfussenegger/nvim-dap](https://dotfyle.com/plugins/mfussenegger/nvim-dap)
-
 - [rcarriga/nvim-dap-ui](https://dotfyle.com/plugins/rcarriga/nvim-dap-ui)
-
 - [theHamsta/nvim-dap-virtual-text](https://dotfyle.com/plugins/theHamsta/nvim-dap-virtual-text)
 
 ### dependency-management
@@ -160,13 +146,9 @@ nvim --headless +"Lazy! sync" +qa
 ### editing-support
 
 - [keaising/im-select.nvim](https://dotfyle.com/plugins/keaising/im-select.nvim)
-
 - [echasnovski/mini.ai](https://dotfyle.com/plugins/echasnovski/mini.ai)
-
 - [HiPhish/rainbow-delimiters.nvim](https://dotfyle.com/plugins/HiPhish/rainbow-delimiters.nvim)
-
 - [echasnovski/mini.pairs](https://dotfyle.com/plugins/echasnovski/mini.pairs)
-
 - [nvim-treesitter/nvim-treesitter-context](https://dotfyle.com/plugins/nvim-treesitter/nvim-treesitter-context)
 
 ### formatting
@@ -180,9 +162,7 @@ nvim --headless +"Lazy! sync" +qa
 ### git
 
 - [NeogitOrg/neogit](https://dotfyle.com/plugins/NeogitOrg/neogit)
-
 - [sindrets/diffview.nvim](https://dotfyle.com/plugins/sindrets/diffview.nvim)
-
 - [lewis6991/gitsigns.nvim](https://dotfyle.com/plugins/lewis6991/gitsigns.nvim)
 
 ### indent
@@ -193,19 +173,14 @@ nvim --headless +"Lazy! sync" +qa
 ### keybinding
 
 - [LinArcX/telescope-command-palette.nvim](https://dotfyle.com/plugins/LinArcX/telescope-command-palette.nvim)
-
 - [folke/which-key.nvim](https://dotfyle.com/plugins/folke/which-key.nvim)
 
 ### lsp
 
 - [jose-elias-alvarez/null-ls.nvim](https://dotfyle.com/plugins/jose-elias-alvarez/null-ls.nvim)
-
 - [simrat39/symbols-outline.nvim](https://dotfyle.com/plugins/simrat39/symbols-outline.nvim)
-
 - [mfussenegger/nvim-lint](https://dotfyle.com/plugins/mfussenegger/nvim-lint)
-
 - [nvimtools/none-ls.nvim](https://dotfyle.com/plugins/nvimtools/none-ls.nvim)
-
 - [neovim/nvim-lspconfig](https://dotfyle.com/plugins/neovim/nvim-lspconfig)
 
 ### lsp-installer
@@ -223,11 +198,8 @@ nvim --headless +"Lazy! sync" +qa
 ### nvim-dev
 
 - [folke/neodev.nvim](https://dotfyle.com/plugins/folke/neodev.nvim)
-
 - [MunifTanjim/nui.nvim](https://dotfyle.com/plugins/MunifTanjim/nui.nvim)
-
 - [nvim-lua/plenary.nvim](https://dotfyle.com/plugins/nvim-lua/plenary.nvim)
-
 - [jbyuki/one-small-step-for-vimkind](https://dotfyle.com/plugins/jbyuki/one-small-step-for-vimkind)
 
 ### plugin-manager
@@ -253,13 +225,11 @@ nvim --headless +"Lazy! sync" +qa
 ### split-and-window
 
 - [sindrets/winshift.nvim](https://dotfyle.com/plugins/sindrets/winshift.nvim)
-
 - [echasnovski/mini.bufremove](https://dotfyle.com/plugins/echasnovski/mini.bufremove)
 
 ### startup
 
 - [glepnir/dashboard-nvim](https://dotfyle.com/plugins/glepnir/dashboard-nvim)
-
 - [nvimdev/dashboard-nvim](https://dotfyle.com/plugins/nvimdev/dashboard-nvim)
 
 ### statusline
@@ -269,9 +239,7 @@ nvim --headless +"Lazy! sync" +qa
 ### syntax
 
 - [nvim-treesitter/nvim-treesitter](https://dotfyle.com/plugins/nvim-treesitter/nvim-treesitter)
-
 - [nvim-treesitter/nvim-treesitter-textobjects](https://dotfyle.com/plugins/nvim-treesitter/nvim-treesitter-textobjects)
-
 - [echasnovski/mini.surround](https://dotfyle.com/plugins/echasnovski/mini.surround)
 
 ### tabline
@@ -285,11 +253,8 @@ nvim --headless +"Lazy! sync" +qa
 ### utility
 
 - [rcarriga/nvim-notify](https://dotfyle.com/plugins/rcarriga/nvim-notify)
-
 - [stevearc/dressing.nvim](https://dotfyle.com/plugins/stevearc/dressing.nvim)
-
 - [folke/noice.nvim](https://dotfyle.com/plugins/folke/noice.nvim)
-
 - [kevinhwang91/nvim-ufo](https://dotfyle.com/plugins/kevinhwang91/nvim-ufo)
 
 ## Language Servers

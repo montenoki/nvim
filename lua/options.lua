@@ -1,5 +1,5 @@
-local ascii = require('util.ascii')
 local opt = vim.opt
+local tabWidth = 4
 
 -- Use system clipboard
 opt.clipboard = 'unnamedplus'
@@ -28,7 +28,7 @@ opt.completeopt = { 'menu', 'menuone', 'popup', 'noselect', 'noinsert' }
 -- 1 每个隐藏文本块都被替换为一个字符。如果语法项没有定义自定义替换字符（参见 :syn-cchar）, 则使用 'listchars' 中定义的字符。
 -- 2 隐藏文本完全隐藏，除非它有定义的自定义替换字符（参见 :syn-cchar）
 -- 3 隐藏文本完全隐藏
-opt.conceallevel = 1
+opt.conceallevel = 2
 
 -- 当confirm开启时，某些操作通常会因为缓冲区中未保存的更改而失败，
 -- 例如“:q”和“:e”，此时会弹出一个对话框询问您是否希望保存当前文件
@@ -162,81 +162,130 @@ opt.pumheight = 0
 -- 光标所在行显示相对行号
 opt.relativenumber = true
 
-opt.scrolloff = 4
+-- 光标上下方要保留的最少屏幕行数这将使您正在工作的地方周围的一些上下文可见
+-- 如果将其设置为一个非常大的值（999），光标行将始终位于窗口的中间（除非在文件的开头或结尾或长行换行时）。
+-- 在使用本地值后，使用以下两种方法之一返回全局值：
+-- setlocal scrolloff<
+-- setlocal scrolloff=-1
+opt.scrolloff = 3
 
+-- 更改 :mksession 命令的效果。它是一个逗号分隔的单词列表
+-- 每个单词都可以启用保存和恢复某物
+opt.sessionoptions:append({ 'winpos', 'localoptions' })
 
--- -- =============================================================================
--- --   Basic - 基本設定
--- -- =============================================================================
+-- 将缩进调整为“shiftwidth”的倍数
+opt.shiftround = true
 
---
+-- （自动）缩进步骤的空格数
+-- 用于 'cindent'、>>、<< 等
+-- 当为0时，将使用 'tabstop' 值。使用 shiftwidth() 函数获取有效的 shiftwidth 值。
+opt.shiftwidth = 0
 
--- opt.sessionoptions = 'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions'
--- opt.timeoutlen = 50
--- opt.undofile = true
--- opt.undolevels = 10000
--- opt.updatetime = 100
+-- 设置了 'nowrap'，则在光标的左侧和右侧保持的最小屏幕列数
+-- 选项设置为大于 0 的值，同时将 'sidescroll' 也设置为非零值
+-- 您在水平滚动的行中看到一些上下文（行首除外）
+-- 选项设置为较大的值（如 999）只要不太接近行首, 会使光标在窗口中水平居中，
+opt.sidescrolloff = 999
 
--- -- 自動補完
+-- 何时以及如何绘制 signcolumn。有效值为：
+-- "auto"  仅当有标志显示时
+-- "auto:[1-9]"  调整大小以容纳多个标志，最多可达给定数量（最多 9 个），例如“auto:4”
+-- "auto:[1-8]-[2-9]"  调整大小以容纳多个标志，最多可达给定的最大数量（最多 9 个）
+--                     同时保持至少给定的最小（最多 8 个）固定空间
+--                     最小数量应始终小于最大数量，例如“auto:2-5”
+-- "no" 从不
+-- "yes" 总是
+-- "yes:[1-9]"  总是，固定空间用于符号最多到给定的数字（最多 9），例如 "yes:3"
+--              “number”在“number”列中显示符号。
+--              如果不存在数字列，则行为类似于“auto”。
+opt.signcolumn = 'auto:2-9'
 
--- opt.wildmode = 'longest:full,full'
+-- 如果搜索模式包含大写字符，则覆盖 'ignorecase' 选项
+-- 仅在输入搜索模式并且 'ignorecase' 选项开启时使用。
+opt.smartcase = true
 
--- -- 検索
--- opt.smartcase = true -- 大文字が入る場合、大文字を無視しない
+-- 在开始新行时进行智能自动缩进
+-- 适用于类 C 程序，但也可用于其他语言
+-- 通常在使用'smartindent'时，'autoindent'也应该开启
+opt.smartindent = true
 
--- -- インデント
+-- Number of spaces that a <Tab> in the file counts for.
+opt.tabstop = tabWidth
 
--- opt.shiftround = true -- シフト時shiftwidthの値の倍数になるようにスペースを挿入
--- opt.smartindent = true -- 自動的にインデントを入力する
+-- 等待映射序列完成的时间（以毫秒为单位）
+opt.timeoutlen = 100
 
--- -- ウィンドウ
--- opt.splitbelow = true -- 新規Windowの方向
+-- 当开启时，Vim 在将缓冲区写入文件时会自动将撤销历史保存到撤销文件中
+-- 并在读取缓冲区时从同一文件中恢复撤销历史。
+opt.undofile = true
+
+-- 最大可撤销的更改次数
+opt.undolevels = 10000
+
+-- 允许指定的键在光标位于行首/行尾字符时
+-- 左右移动光标以移动到上一行/下一行
+-- <  <Left>   Normal and Visual
+-- >  <Right>  Normal and Visual
+-- [  <Left>   Insert and Replace
+-- ]  <Right>  Insert and Replace
+-- Use arrow key to move next line when cursor at end of line
+opt.whichwrap = '<,>,[,]'
+
+-- 用于指定“wildchar”字符的完成模式
+-- 它是一个最多包含四部分的逗号分隔列表
+-- 每一部分指定连续使用“wildchar”时的操作
+-- 第一部分指定第一次使用“wildchar”的行为，第二部分指定第二次使用的行为，依此类推
+-- ""  仅完成第一个匹配。
+-- "full"  完成下一个完整匹配
+--         在最后一个匹配之后，使用原始字符串，然后再次进行第一次匹配
+--         如果启用了 'wildmenu'，也将启动它。
+-- "longest"  完成直到最长公共字符串。如果这没有产生更长的字符串，使用下一部分
+-- "list"  当有多个匹配项时，列出所有匹配项。
+-- "lastused"  在完成缓冲区名称并且有多个缓冲区匹配时，
+--             按上次使用时间排序缓冲区（当前缓冲区除外）
+--             当只有一个匹配时，在所有情况下都完全完成。
+opt.wildmode = { 'longest:full', 'full' }
+
+-- =============================================================================
+--   その他設定
+-- =============================================================================
+
+-- Setup python provider
+local executablePath = '/.virtualenvs/neovim/bin/python'
+if string.find(string.lower(vim.loop.os_uname().sysname), 'windows') then
+  executablePath = '\\.virtualenvs\\neovim\\Scripts\\python.exe'
+end
+vim.g.python3_host_prog = vim.env.HOME .. executablePath
+
+-- =============================================================================
+--   TODO
+-- =============================================================================
+-- TODO: 2024/07/28: 考虑是否需要设置
+-- opt.splitbelow = true
 -- opt.splitright = true
 -- opt.splitkeep = 'screen'
+-- TODO: 2024/07/28: 转移到statusline设置中
+-- opt.showmode = false -- Dont show mode since we have a statusline
 
--- -- grep 設定
+-- Nvim 将自动尝试确定主机终端是否
+-- 支持 24 位颜色并将在可能时启用此选项
+-- opt.termguicolors = true
 
--- -- 折り畳み設定
+-- TODO: 2024/07/28: 移动到自动命令中
+-- 如果在这么多毫秒内没有输入内容，交换文件将被写入磁盘（参见崩溃恢复）
+-- 也用于 CursorHold 自动命令事件
+-- opt.updatetime = 100
+
+-- TODO: 2024/07/28: 移动到scrollbar文件中
+-- fix the problem that cant see last char when scrollbar on.
+-- opt.virtualedit = 'onemore'
+
+-- TODO: 2024/07/28: 移动到fold文件中
 -- opt.foldenable = true
 -- opt.foldlevelstart = 99
 -- opt.foldlevel = 99
 -- opt.foldcolumn = '1'
 -- opt.foldmethod = 'indent'
-
--- -- UI
-
-
--- 
--- opt.showmode = false -- Dont show mode since we have a statusline
--- opt.signcolumn = 'yes' -- Always show the signcolumn, otherwise it would shift the text each time
--- opt.termguicolors = true
--- opt.virtualedit = 'onemore' -- fix the problem that cant see last char when scrollbar on.
--- opt.scrolloff = 4 -- Lines of context
--- opt.winminwidth = 5 -- Minimum window width
-
--- -- =============================================================================
--- --   preference.lua - 好み設定
--- -- =============================================================================
-
--- local tab_width = 2
-
--- opt.whichwrap = '<,>,[,]' -- Use arrow key to move next line when cursor at end of line
-
--- opt.sidescrolloff = 4 -- Columns of context
-
--- -- Tab
--- opt.tabstop = tab_width -- Number of spaces tabs count for
--- opt.shiftwidth = tab_width -- Size of an indent
-
--- -- UI
-
---
-
--- opt.wrap = false -- Disable line wrap
-
--- -- =============================================================================
--- --   その他設定
--- -- =============================================================================
 
 -- -- TODO: 移动到lang/sh.lua
 -- -- Add extra filetypes
@@ -248,16 +297,12 @@ opt.scrolloff = 4
 --   },
 -- })
 
--- -- Setup python provider
--- local executable_path = '/.virtualenvs/neovim/bin/python'
--- if string.find(string.lower(vim.loop.os_uname().sysname), 'windows') then
---   executable_path = '\\.virtualenvs\\neovim\\Scripts\\python.exe'
--- end
--- vim.g.python3_host_prog = vim.env.HOME .. executable_path
 
+-- TODO: 2024/07/28: 移动到nvim-tree设置中
 -- -- Disable netrw
 -- vim.g.loaded_netrw = 1
 -- vim.g.loaded_netrwPlugin = 1
 
+-- TODO: 2024/07/28: 移动到markdown设置中
 -- -- Fix markdown indentation settings
 -- vim.g.markdown_recommended_style = 0

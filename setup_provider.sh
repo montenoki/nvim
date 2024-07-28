@@ -10,13 +10,5 @@ else
   python -m venv "$HOME/.virtualenvs/neovim"
 fi
 
-if [ -x "$HOME/.virtualenvs/debugpy/bin/python" ]; then
-  echo "$HOME/.virtualenvs/debugpy/bin/python exists and executable."
-else
-  python -m venv "$HOME/.virtualenvs/debugpy"
-fi
-
 "$HOME/.virtualenvs/neovim/bin/python" -m pip install --upgrade pip
-"$HOME/.virtualenvs/neovim/bin/python" -m pip install neovim
-"$HOME/.virtualenvs/debugpy/bin/python" -m pip install --upgrade pip
-"$HOME/.virtualenvs/debugpy/bin/python" -m pip install debugpy
+"$HOME/.virtualenvs/neovim/bin/python" -m pip install pynvim debugpy
