@@ -34,7 +34,7 @@ local plugins = {
   -- require('global')
   require('options')
   -- require('keybindings')
-  -- require('autocmds')
+  require('autocmds')
 
   -- table.insert(plugins, { import = 'lang' })
   --
