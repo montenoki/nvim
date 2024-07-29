@@ -12,11 +12,11 @@ map('n', keymaps.window.gotoUpper, '<C-w>k', { desc = 'Go to upper window' })
 map('n', keymaps.window.gotoRight, '<C-w>l', { desc = 'Go to right window' })
 
 -- 窗口操作
-map('n', keymaps.window.close, '<C-W>c', { desc = 'Close window', remap = true })
-map('n', keymaps.window.closeOther, '<C-W>o', { desc = 'Close all other windows', remap = true })
-map('n', keymaps.window.splitBelow, '<C-W>s', { desc = 'Split window below', remap = true })
-map('n', keymaps.window.splitRight, '<C-W>v', { desc = 'Split window right', remap = true })
-map('n', keymaps.window.resize, '<C-w>=', { desc = 'Resize windows Equally', remap = true })
+map('n', keymaps.window.close, '<C-W>c', { desc = 'Close window' })
+map('n', keymaps.window.closeOther, '<C-W>o', { desc = 'Close all other windows' })
+map('n', keymaps.window.splitBelow, '<C-W>s', { desc = 'Split window below' })
+map('n', keymaps.window.splitRight, '<C-W>v', { desc = 'Split window right' })
+map('n', keymaps.window.resize, '<C-w>=', { desc = 'Resize windows Equally' })
 
 -- 移动行
 map('n', keymaps.moveLineDown, '<CMD>m .+1<CR>==', { desc = 'Move Line down' })
@@ -52,8 +52,8 @@ map({ 'n', 'v' }, 'g_', '$', { desc = 'Goto the end of line' })
 
 -- 允许用户多次缩进同一块文本，而不需要在每次缩进后手动重新选择文本
 -- 在缩进后保持文本的选中状态，以便进行进一步的操作
-map('v', '<', '<gv', { desc = 'Increase indent', remap = true })
-map('v', '>', '>gv', { desc = 'Decrease indent', remap = true })
+map('v', '<', '<gv', { desc = 'Increase indent' })
+map('v', '>', '>gv', { desc = 'Decrease indent' })
 
 -- 在可视模式下, 允许你多次粘贴同一内容，保持了原始剪贴板的内容不变
 map('v', 'p', '"_dP')
@@ -62,9 +62,9 @@ map('v', 'p', '"_dP')
 map({ 'i', 'n' }, '<ESC>', '<CMD>noh<CR><ESC>', { desc = 'Escape(clear hlsearch)' })
 
 -- 插入模式下创建新的撤销点：逗号，句号，分号
-map('i', ',', ',<C-g>u', {desc = 'Insert , with undo point'})
-map('i', '.', '.<C-g>u', {desc = 'Insert . with undo point'})
-map('i', ';', ';<C-g>u', {desc = 'Insert ; with undo point'})
+map('i', ',', ',<C-g>u', { desc = 'Insert , with undo point' })
+map('i', '.', '.<C-g>u', { desc = 'Insert . with undo point' })
+map('i', ';', ';<C-g>u', { desc = 'Insert ; with undo point' })
 
 -- 无论搜索方向如何，n 总是移动到下一个匹配项，N 总是移动到上一个匹配项。
 -- 在普通模式下，如果搜索结果位于折叠的文本中，会自动展开折叠。
@@ -78,7 +78,6 @@ map('x', 'N', "'nN'[v:searchforward]", { expr = true, desc = 'Prev search result
 map('o', 'N', "'nN'[v:searchforward]", { expr = true, desc = 'Prev search result' })
 
 -- On/Off 功能
-
 
 -- =============================================================================
 -- 禁用不使用的按键映射
@@ -100,14 +99,6 @@ map('o', 'N', "'nN'[v:searchforward]", { expr = true, desc = 'Prev search result
 -- map('n', keymaps.window.inc_width, '<CMD>vertical resize -2<CR>', { desc = 'Decrease window width' })
 -- map('n', keymaps.window.dec_width, '<CMD>vertical resize +2<CR>', { desc = 'Increase window width' })
 
--- TODO: 移动到surround插件配置中
--- turn off 's' for surround
--- map({ 'n', 'v' }, 's', '<NOP>')
--- map({ 'n', 'v' }, 'ss', '<NOP>')
-
--- -- Tab
-
-
 -- -- Diagnostic
 -- ---@param next boolean
 -- ---@param severity string | integer | nil
@@ -119,6 +110,18 @@ map('o', 'N', "'nN'[v:searchforward]", { expr = true, desc = 'Prev search result
 --     go({ severity = severity })
 --   end
 -- end
+
+-- TODO: Add a toggle to enable/disable autopairs
+-- LazyVim.toggle.map('<leader>up', {
+--   name = 'Mini Pairs',
+--   get = function()
+--     return not vim.g.minipairs_disable
+--   end,
+--   set = function(state)
+--     vim.g.minipairs_disable = not state
+--   end,
+-- })
+
 
 -- map('n', keymaps.diagnostic.show_line_diag, vim.diagnostic.open_float, { desc = 'Line Diagnostics' })
 -- map('n', keymaps.diagnostic.next_diag, diagnosticGoto(true), { desc = 'Next Diagnostic' })

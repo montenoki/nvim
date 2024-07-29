@@ -303,9 +303,6 @@ vim.g.python3_host_prog = vim.env.HOME .. executablePath
 -- opt.splitright = true
 -- opt.splitkeep = 'screen'
 
--- TODO: 2024/07/28: 转移到statusline设置中
--- opt.showmode = false -- Dont show mode since we have a statusline
-
 -- Nvim 将自动尝试确定主机终端是否
 -- 支持 24 位颜色并将在可能时启用此选项
 -- opt.termguicolors = true

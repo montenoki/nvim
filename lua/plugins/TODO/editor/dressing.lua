@@ -1,9 +1,8 @@
 return {
+  -- better UI for telescope
   'stevearc/dressing.nvim',
-  cond = vim.g.vscode == nil,
   lazy = true,
   init = function()
-    ---@diagnostic disable-next-line: duplicate-set-field
     vim.ui.select = function(...)
       require('lazy').load({ plugins = { 'dressing.nvim' } })
       return vim.ui.select(...)

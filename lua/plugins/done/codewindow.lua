@@ -1,13 +1,13 @@
-local Keys = require('keymaps')
+local keymaps = require('keymaps')
 
 return {
   'gorbit99/codewindow.nvim',
+  dependencies = { 'nvim-treesitter/nvim-treesitter' },
   event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' }, -- LazyFile
-  cond = vim.g.vscode == nil,
   opts = {},
   config = function()
     local codewindow = require('codewindow')
-    vim.keymap.set('n', Keys.minimap.toggle, codewindow.toggle_minimap, { desc = 'toggle the minimap' })
     codewindow.setup()
+    vim.keymap.set('n', keymaps.open.miniMap, codewindow.toggle_minimap, { desc = 'Open minimap' })
   end,
 }

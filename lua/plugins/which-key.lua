@@ -6,25 +6,19 @@ return {
   dependencies = { 'echasnovski/mini.icons', 'nvim-tree/nvim-web-devicons' },
   opts = {
     spec = {
-      { '<leader>w', group = 'Windows' },
-      { '<leader>u', group = 'Toggle' },
+      { '<LEADER>t', group = 'Tag' },
+      { '<LEADER>w', group = 'Windows' },
+      { '<LEADER>u', group = 'Toggle' },
     },
   },
   keys = {
     {
       keymaps.whichkey.show,
-      mode = { 'n', 'i' },
+      mode = { 'n', 'i', 'x' },
       function()
         require('which-key').show()
       end,
-      desc = 'Show Keymaps',
-    },
-    {
-      keymaps.whichkey.showLocal,
-      function()
-        require('which-key').show({ global = false })
-      end,
-      desc = 'Show Local Keymaps',
+      desc = 'Show Which-key',
     },
   },
 }

@@ -4,14 +4,6 @@ local M = {}
 -- =============================================================================
 M.leader = ' '
 
--- =============================================================================
---   Plugins
--- =============================================================================
-M.whichkey = {
-  show = '<LEADER>k',
-  showLocal = '<LEADER>K',
-}
-
 M.window = {
   gotoLeft = '<LEADER>wh',
   gotoLower = '<LEADER>wj',
@@ -34,6 +26,20 @@ M.tab = {
   prev = '<LEADER>t,',
   next = '<LEADER>t.',
 }
+-- =============================================================================
+--   Plugins
+-- =============================================================================
+M.open = {
+  miniMap = '<LEADER>m',
+  leap = '\\',
+  moveWindow = '<LEADER>wm',
+}
+
+M.whichkey = {
+  show = '<LEADER>k',
+  showLocal = '<LEADER>K',
+}
+
 M.toggle = {
   -- spelling = '<LEADER>us',
   -- line_numbers = '<LEADER>ul',
@@ -44,8 +50,35 @@ M.toggle = {
   -- inlay_hints = '<LEADER>uh',
   -- treesitter = '<LEADER>uT',
   -- show_hl_info = '<LEADER>ui',
+  -- toggle_tsc = '<LEADER>ut',
 }
 
+M.incrementalSelection = {
+  init = '<CR>',
+  -- a least frequently used key for call it later.
+  initSelection = '<C-7>',
+  nodeIncremental = '<CR>',
+  scopeIncremental = '<TAB>',
+  nodeDecremental = '<BS>',
+}
+M.comment = {
+  line = 'gcc',
+  block = 'gbc',
+  v_line = 'gc',
+  v_block = 'gb',
+  above = 'gcO',
+  below = 'gco',
+  eol = 'gca',
+}
+M.surround = {
+  add = 'gsa',
+  delete = 'gsd',
+  find = 'gsf',
+  find_left = 'gsF',
+  highlight = 'gsh',
+  replace = 'gsr',
+  update_n_lines = 'gsn',
+}
 -- =============================================================================
 --   TODO
 -- =============================================================================
@@ -54,8 +87,8 @@ M.toggle = {
 -- dec_height = '<C-DOWN>',
 -- inc_width = '<C-LEFT>',
 -- dec_width = '<C-RIGHT>',
--- init_inc_selection = '<CR>',
--- move_windows = '<LEADER>wm',
+--
+
 
 -- M.float_window = {
 --   scroll_up = '<C-UP>',
@@ -68,14 +101,7 @@ M.toggle = {
 -- --   Plugins
 -- -- =============================================================================
 -- M.treesitter = {
---   incremental_selection = {
---     -- a least frequently used key for call it later.
---     init_selection = '<C-1>',
---     node_incremental = '<CR>',
---     node_decremental = '<BS>',
---     scope_incremental = '<TAB>',
---   },
---   toggle_tsc = '<LEADER>ut',
+
 -- }
 
 -- M.nvimtree = {
@@ -137,26 +163,7 @@ M.toggle = {
 --   diff = '<LEADER>hD',
 --   diff_tilde = '<LEADER>hd',
 -- }
--- M.surround = {
---   add = 'sa',
---   delete = 'sd',
---   replace = 'sr',
---   find = 'sf',
---   find_left = 'sF',
---   highlight = 'sh',
--- }
--- M.comment = {
---   line = 'gcc',
---   block = 'gbc',
---   v_line = 'gc',
---   v_block = 'gb',
---   above = 'gcO',
---   below = 'gco',
---   eol = 'gca',
--- }
--- M.leap = {
---   toggle = '\\',
--- }
+
 -- M.indentscope = {
 --   obj_scope = 'ii',
 --   obj_scope_with_border = 'ai',
@@ -202,9 +209,7 @@ M.toggle = {
 -- M.colorizer = {
 --   toggle = '<LEADER>uc',
 -- }
--- M.minimap = {
---   toggle = '<LEADER>m',
--- }
+
 -- M.dap = {
 --   ui = '<LEADER>du',
 --   eval = '<LEADER>de',

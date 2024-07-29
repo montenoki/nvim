@@ -1,7 +1,5 @@
-local ascii = require('util.ascii').bufferline
 return {
   'akinsho/bufferline.nvim',
-  cond = vim.g.vscode == nil,
   event = 'VeryLazy',
   opts = {
     options = {
@@ -10,12 +8,8 @@ return {
         require('mini.bufremove').delete(n, false)
       end,
 
-      buffer_close_icon = '',
-      modified_icon = '',
-      close_icon = '',
-      left_trunc_marker = vim.g.lite == nil and '' or ascii.left_trunc_marker,
-      right_trunc_marker = vim.g.lite == nil and '' or ascii.right_trunc_marker,
-      show_buffer_icons = vim.g.lite == nil,
+      left_trunc_marker = '',
+      right_trunc_marker = '',
       always_show_bufferline = false,
       indicator = {
         icon = '||', -- this should be omitted if indicator style is not 'icon'

@@ -24,10 +24,10 @@ require('autocmds')
 require('keybindings')
 local plugins = {
   { import = 'plugins' },
+  -- { import = 'plugins.ui' },
 --   { import = 'plugins.coding' },
 --   { import = 'plugins.util' },
 --   { import = 'plugins.treesitter' },
---   { import = 'plugins.ui' },
 --   { import = 'plugins.editor' },
 }
 

@@ -1,10 +1,8 @@
 local lazyvim = require('lazyvim')
 local ascii = require('util.ascii')
-return
-{
+return {
   {
     'SmiteshP/nvim-navic',
-    cond = vim.g.vscode == nil,
     lazy = true,
     init = function()
       vim.o.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
@@ -63,4 +61,3 @@ return
     end,
   },
 }
-
