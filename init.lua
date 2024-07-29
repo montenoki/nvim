@@ -21,6 +21,7 @@ vim.opt.rtp:prepend(lazyPath)
 -- =============================================================================
 require('options')
 require('autocmds')
+require('keybindings')
 local plugins = {
   { import = 'plugins' },
 --   { import = 'plugins.coding' },
@@ -34,7 +35,6 @@ if vim.g.vscode then
   require('vscode')
 else
   -- require('global')
-  -- require('keybindings')
 
   -- table.insert(plugins, { import = 'lang' })
   --
