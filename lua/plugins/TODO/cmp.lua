@@ -178,8 +178,8 @@ return {
             fallback()
           end
         end,
-        [Keys.float_window.scroll_up] = cmp.mapping.scroll_docs(-4),
-        [Keys.float_window.scroll_down] = cmp.mapping.scroll_docs(4),
+        [Keys.floatWindow.scrollUp] = cmp.mapping.scroll_docs(-4),
+        [Keys.floatWindow.scrollDown] = cmp.mapping.scroll_docs(4),
       },
     }
   end,

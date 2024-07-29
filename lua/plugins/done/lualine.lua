@@ -52,15 +52,12 @@ return {
         component_separators = { left = '', right = '' },
         section_separators = { left = '', right = '' },
         globalstatus = true,
-        -- TODO:移动到Nvimtree 和dap-repl中？
-        -- disabled_filetypes = {
-        --   statusline = {},
-        --   winbar = {'NvimTree', 'dap-repl' },
-        -- },
+        -- TODO:在dap-repl中添加：'dap-repl'
+        disabled_filetypes = { winbar = {} },
       },
       extensions = {
         'lazy',
-        --   'nvim-tree',
+        -- TODO:移动到各自的设置中
         --   'mason',
         --   'quickfix',
         --   'symbols-outline',

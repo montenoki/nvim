@@ -328,11 +328,6 @@ vim.g.python3_host_prog = vim.env.HOME .. executablePath
 --   },
 -- })
 
--- TODO: 2024/07/28: 移动到nvim-tree设置中
--- -- Disable netrw
--- vim.g.loaded_netrw = 1
--- vim.g.loaded_netrwPlugin = 1
-
 -- TODO: 2024/07/28: 移动到markdown设置中
 -- -- Fix markdown indentation settings
 -- vim.g.markdown_recommended_style = 0

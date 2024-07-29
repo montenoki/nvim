@@ -71,8 +71,8 @@ return {
           winblend = 0,
         },
         mappings = {
-          scrollU = Keys.float_window.scroll_up,
-          scrollD = Keys.float_window.scroll_down,
+          scrollU = Keys.floatWindow.scrollUp,
+          scrollD = Keys.floatWindow.scrollDown,
         },
       },
       ---@diagnostic disable-next-line: unused-local

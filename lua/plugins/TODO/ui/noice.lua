@@ -150,7 +150,7 @@ return {
       { Keys.noice.history, function() require("noice").cmd("history") end, desc = "Noice History" },
       { Keys.noice.dismiss_all, function() require("noice").cmd("dismiss") end, desc = "Dismiss All Noice" },
       {
-        Keys.float_window.scroll_down,
+        Keys.floatWindow.scrollDown,
         function() if not require("noice.lsp").scroll(4) then return "<C-f>" end end,
         silent = true,
         expr = true,
@@ -158,7 +158,7 @@ return {
         mode = { "i", "n", "s" },
       },
       {
-        Keys.float_window.scroll_up,
+        Keys.floatWindow.scrollUp,
         function() if not require("noice.lsp").scroll(-4) then return "<C-b>" end end,
         silent = true,
         expr = true,

@@ -10,6 +10,10 @@ map('n', keymaps.window.gotoLeft, '<C-w>h', { desc = 'Go to left window' })
 map('n', keymaps.window.gotoLower, '<C-w>j', { desc = 'Go to lower window' })
 map('n', keymaps.window.gotoUpper, '<C-w>k', { desc = 'Go to upper window' })
 map('n', keymaps.window.gotoRight, '<C-w>l', { desc = 'Go to right window' })
+map({ 'n', 'i' }, keymaps.window.gotoLeftCtrl, '<C-w>h', { desc = 'Go to left window' })
+map({ 'n', 'i' }, keymaps.window.gotoLowerCtrl, '<C-w>j', { desc = 'Go to lower window' })
+map({ 'n', 'i' }, keymaps.window.gotoUpperCtrl, '<C-w>k', { desc = 'Go to upper window' })
+map({ 'n', 'i' }, keymaps.window.gotoRightCtrl, '<C-w>l', { desc = 'Go to right window' })
 
 -- 窗口操作
 map('n', keymaps.window.close, '<C-W>c', { desc = 'Close window' })
@@ -88,11 +92,6 @@ map('o', 'N', "'nN'[v:searchforward]", { expr = true, desc = 'Prev search result
 -- =============================================================================
 
 -- TODO: 是否必要?
--- 禁用'Ctrl+z'
--- map({ 'n', 'i', 'v' }, '<C-z>', '<NOP>')
-
--- map('n', keymaps.window.init_inc_selection, 'viw<C-1>', { desc = 'Init Increment selection', remap = true })
-
 -- -- Resize window using <CTRL> arrow keys
 -- map('n', keymaps.window.inc_height, '<CMD>resize +2<CR>', { desc = 'Increase window height' })
 -- map('n', keymaps.window.dec_height, '<CMD>resize -2<CR>', { desc = 'Decrease window height' })
@@ -121,7 +120,6 @@ map('o', 'N', "'nN'[v:searchforward]", { expr = true, desc = 'Prev search result
 --     vim.g.minipairs_disable = not state
 --   end,
 -- })
-
 
 -- map('n', keymaps.diagnostic.show_line_diag, vim.diagnostic.open_float, { desc = 'Line Diagnostics' })
 -- map('n', keymaps.diagnostic.next_diag, diagnosticGoto(true), { desc = 'Next Diagnostic' })

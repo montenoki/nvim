@@ -10,6 +10,11 @@ M.window = {
   gotoUpper = '<LEADER>wk',
   gotoRight = '<LEADER>wl',
 
+  gotoLeftCtrl = '<C-h>',
+  gotoLowerCtrl = '<C-j>',
+  gotoUpperCtrl = '<c-k>',
+  gotoRightCtrl = '<c-l>',
+
   close = '<LEADER>wc',
   closeOther = '<LEADER>wo',
   splitBelow = '<LEADER>-',
@@ -33,6 +38,8 @@ M.open = {
   miniMap = '<LEADER>m',
   leap = '\\',
   moveWindow = '<LEADER>wm',
+  nvimTree = '<LEADER>e',
+  preview = '<TAB>',
 }
 
 M.whichkey = {
@@ -51,6 +58,13 @@ M.toggle = {
   -- treesitter = '<LEADER>uT',
   -- show_hl_info = '<LEADER>ui',
   -- toggle_tsc = '<LEADER>ut',
+}
+
+M.floatWindow = {
+  scrollUp = '<C-UP>',
+  scrollDown = '<C-DOWN>',
+  scrollLeft = '<C-LEFT>',
+  scrollRight = '<C-RIGHT>',
 }
 
 M.incrementalSelection = {
@@ -79,6 +93,7 @@ M.surround = {
   replace = 'gsr',
   update_n_lines = 'gsn',
 }
+
 -- =============================================================================
 --   TODO
 -- =============================================================================
@@ -89,14 +104,6 @@ M.surround = {
 -- dec_width = '<C-RIGHT>',
 --
 
-
--- M.float_window = {
---   scroll_up = '<C-UP>',
---   scroll_down = '<C-DOWN>',
---   scroll_left = '<C-LEFT>',
---   scroll_right = '<C-RIGHT>',
--- }
-
 -- -- =============================================================================
 -- --   Plugins
 -- -- =============================================================================
@@ -104,10 +111,6 @@ M.surround = {
 
 -- }
 
--- M.nvimtree = {
---   toggle = '<LEADER>e',
---   toggle_preview = '<TAB>',
--- }
 -- M.format = {
 --   format = '<LEADER>f',
 --   format_injected = '<LEADER>cf',

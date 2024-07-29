@@ -24,6 +24,7 @@ require('autocmds')
 require('keybindings')
 local plugins = {
   { import = 'plugins' },
+  -- { import = 'plugins.done' },
   -- { import = 'plugins.ui' },
   -- { import = 'plugins.coding' },
   -- { import = 'plugins.util' },
@@ -41,15 +42,13 @@ else
   -- local osName = vim.loop.os_uname().sysname
   -- if string.find(string.lower(osName), 'windows') then
   --   table.insert(plugins, { import = 'os.windows' })
-  --   require('os.windows')
   -- elseif osName == 'Darwin' then
   --   table.insert(plugins, { import = 'os.mac' })
-  --   require('os.mac')
   -- else
   --   table.insert(plugins, { import = 'os.linux' })
-  --   require('os.linux')
   -- end
 
   require('lazy').setup(plugins)
 end
+
 vim.cmd('colorscheme kanagawa')
