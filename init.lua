@@ -25,10 +25,10 @@ require('keybindings')
 local plugins = {
   { import = 'plugins' },
   -- { import = 'plugins.ui' },
---   { import = 'plugins.coding' },
---   { import = 'plugins.util' },
---   { import = 'plugins.treesitter' },
---   { import = 'plugins.editor' },
+  -- { import = 'plugins.coding' },
+  -- { import = 'plugins.util' },
+  -- { import = 'plugins.treesitter' },
+  -- { import = 'plugins.editor' },
 }
 
 if vim.g.vscode then
@@ -51,5 +51,5 @@ else
   -- end
 
   require('lazy').setup(plugins)
-  require('colorscheme')
 end
+vim.cmd('colorscheme kanagawa')
