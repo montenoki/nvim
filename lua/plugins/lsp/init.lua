@@ -240,7 +240,6 @@ return {
       end)
 
       lspSetup()
-  
       -- 在LSP客户端动态能力变化时,调用 keymaps 模块的 on_attach 函数。
       onDynamicCapability(lspKeymaps.on_attach)
 

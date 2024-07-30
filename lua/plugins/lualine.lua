@@ -1,3 +1,4 @@
+local utils = require("utils")
 local function show_macro_recording()
   local recording_register = vim.fn.reg_recording()
   if recording_register == '' then
@@ -5,26 +6,6 @@ local function show_macro_recording()
   else
     return 'Rec @' .. recording_register
   end
-end
-
-local function color(name, bg)
-  local hl = vim.api.nvim_get_hl and vim.api.nvim_get_hl(0, { name = name, link = false })
-    or vim.api.nvim_get_hl_by_name(name, true)
-
-  local color = nil
-  if hl then
-    if bg then
-      color = hl.bg or hl.background
-    else
-      color = hl.fg or hl.foreground
-    end
-  end
-  return color and string.format('#%06x', color) or nil
-end
-
-local function fg(name)
-  local color = color(name)
-  return color and { fg = color } or nil
 end
 
 return {
@@ -86,7 +67,7 @@ return {
               local original_bufnr = vim.api.nvim_get_current_buf()
               local buf_clients = vim.lsp.get_active_clients({ bufnr = original_bufnr })
               ---@diagnostic disable-next-line: undefined-field
-              return #vim.tbl_keys(buf_clients) > 0 and fg('Character') or fg('Comment')
+              return #vim.tbl_keys(buf_clients) > 0 and utils.fg('Character') or utils.fg('Comment')
             end,
             on_click = function()
               vim.cmd('LspInfo')
@@ -96,7 +77,7 @@ return {
           { 'filename', path = 1, file_status = false },
         },
         lualine_x = {},
-        lualine_y = { { 'macro-recording', fmt = show_macro_recording, color = fg('Error') } },
+        lualine_y = { { utils.showRecording, fmt = show_macro_recording, color = utils.fg('Error') } },
         lualine_z = {
           'location',
           'progress',

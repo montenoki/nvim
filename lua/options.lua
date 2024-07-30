@@ -239,6 +239,9 @@ opt.smartcase = true
 -- 通常在使用'smartindent'时，'autoindent'也应该开启
 opt.smartindent = true
 
+opt.splitbelow = true
+opt.splitright = true
+
 -- Number of spaces that a <Tab> in the file counts for.
 opt.tabstop = tabWidth
 
@@ -301,8 +304,6 @@ vim.g.python3_host_prog = vim.env.HOME .. executablePath
 --   TODO
 -- =============================================================================
 -- TODO: 2024/07/28: 考虑是否需要设置
--- opt.splitbelow = true
--- opt.splitright = true
 -- opt.splitkeep = 'screen'
 
 -- Nvim 将自动尝试确定主机终端是否

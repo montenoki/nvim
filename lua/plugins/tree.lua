@@ -1,5 +1,5 @@
-local keymaps = require('keymaps')
 local map = vim.keymap.set
+local keymaps = require('keymaps')
 local autocmds = require('autocmds')
 
 -- fix nvimtree when using auto-session

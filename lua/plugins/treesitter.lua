@@ -1,16 +1,5 @@
 local keymaps = require('keymaps')
-
-local function removeDuplicates(list)
-  local ret = {}
-  local seen = {}
-  for _, v in ipairs(list) do
-    if not seen[v] then
-      table.insert(ret, v)
-      seen[v] = true
-    end
-  end
-  return ret
-end
+local utils = require('utils')
 
 return {
   'nvim-treesitter/nvim-treesitter',
@@ -45,7 +34,7 @@ return {
   },
   config = function(_, opts)
     if type(opts.ensure_installed) == 'table' then
-      opts.ensure_installed = removeDuplicates(opts.ensure_installed)
+      opts.ensure_installed = utils.removeDuplicates(opts.ensure_installed)
     end
     require('nvim-treesitter.configs').setup(opts)
     -- 隐藏临时映射，并修改映射的描述

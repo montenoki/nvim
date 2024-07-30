@@ -1,35 +1,6 @@
 local M = {}
 local keymaps = require('keymaps')
-
-local function getClients(options)
-  -- 获取活跃的LSP客户端
-  -- 它兼容不同版本的Neovim API，可以根据指定的选项筛选客户端
-  local ret = {}
-  if vim.lsp.get_clients then
-    ret = vim.lsp.get_clients(options)
-  else
-    ret = vim.lsp.get_active_clients(options)
-    if options and options.method then
-      ret = vim.tbl_filter(function(client)
-        return client.supports_method(options.method, { bufnr = options.bufnr })
-      end, ret)
-    end
-  end
-  return options and options.filter and vim.tbl_filter(options.filter, ret) or ret
-end
-
--- 从 lazy.nvim获取插件信息和选项
-local function getPlugin(name)
-  return require('lazy.core.config').spec.plugins[name]
-end
-local function getPluginOpts(name)
-  local plugin = getPlugin(name)
-  if not plugin then
-    return {}
-  end
-  local Plugin = require('lazy.core.plugin')
-  return Plugin.values(plugin, 'opts', false)
-end
+local utils = require('utils')
 
 M._keys = nil
 
@@ -144,7 +115,7 @@ function M.has(buffer, method)
     return false
   end
   method = method:find('/') and method or 'textDocument/' .. method
-  local clients = getClients({ bufnr = buffer })
+  local clients = utils.getClients({ bufnr = buffer })
   for _, client in ipairs(clients) do
     if client.supports_method(method) then
       return true
@@ -159,8 +130,8 @@ function M.resolve(buffer)
     return {}
   end
   local spec = M.get()
-  local opts = getPluginOpts('nvim-lspconfig')
-  local clients = getClients({ bufnr = buffer })
+  local opts = utils.getPluginOpts('nvim-lspconfig')
+  local clients = utils.getClients({ bufnr = buffer })
   for _, client in ipairs(clients) do
     local maps = opts.servers[client.name] and opts.servers[client.name].keys or {}
     vim.list_extend(spec, maps)
