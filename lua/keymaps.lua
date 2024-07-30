@@ -95,16 +95,19 @@ M.surround = {
 }
 M.lsp = {
   definition = 'gd',
-  declaration = 'gD',
   references = 'gr',
   implementation = 'gI',
-  type_definition = 'gT',
-  hover = '<C-;>',
-  signature_help = "<C-'>",
+  type_definition = 'gy',
+  declaration = 'gD',
+  hover = 'K',
+  signature_help = 'gK',
+  signature_help_insert = '<c-k>',
   pop_diagnostic = 'gp',
   code_action = '<LEADER>ca',
-  code_action_source = '<LEADER>cA',
   rename = '<LEADER>r',
+  runCodelensAction = '<LEADER>cc',
+  refreshCodelens = '<LEADER>cC',
+  organize = '<LEADER>co'
 }
 -- =============================================================================
 --   TODO

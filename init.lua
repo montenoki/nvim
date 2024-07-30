@@ -24,6 +24,7 @@ require('autocmds')
 require('keybindings')
 local plugins = {
   { import = 'plugins' },
+  { import = 'plugins.lang' },
   -- { import = 'plugins.done' },
   -- { import = 'plugins.ui' },
   -- { import = 'plugins.coding' },

@@ -31,47 +31,6 @@ local function getPluginOpts(name)
   return Plugin.values(plugin, 'opts', false)
 end
 
--- function M.rename_file()
---   local buf = vim.api.nvim_get_current_buf()
---   local old = assert(LazyVim.root.realpath(vim.api.nvim_buf_get_name(buf)))
---   local root = assert(LazyVim.root.realpath(LazyVim.root.get({ normalize = true })))
---   assert(old:find(root, 1, true) == 1, "File not in project root")
-
---   local extra = old:sub(#root + 2)
-
---   vim.ui.input({
---     prompt = "New File Name: ",
---     default = extra,
---     completion = "file",
---   }, function(new)
---     if not new or new == "" or new == extra then
---       return
---     end
---     new = LazyVim.norm(root .. "/" .. new)
---     vim.fn.mkdir(vim.fs.dirname(new), "p")
---     M.on_rename(old, new, function()
---       vim.fn.rename(old, new)
---       vim.cmd.edit(new)
---       vim.api.nvim_buf_delete(buf, { force = true })
---       vim.fn.delete(old)
---     end)
---   end)
--- end
-
-local action = setmetatable({}, {
-  __index = function(_, action)
-    return function()
-      vim.lsp.buf.code_action({
-        apply = true,
-        context = {
-          only = { action },
-          diagnostics = {},
-        },
-      })
-    end
-  end,
-})
-
 M._keys = nil
 
 function M.get()
@@ -81,31 +40,30 @@ function M.get()
   -- stylua: ignore
   M._keys =  {
     -- 跳转到当前符号（变量、函数、类等）的定义位置
-    { "gd", vim.lsp.buf.definition, desc = "Goto Definition", has = "definition" },
+    { keymaps.lsp.definition, vim.lsp.buf.definition, desc = "Goto Definition", has = "definition" },
     -- 查找当前符号在整个项目中的所有使用位置
-    { "gr", vim.lsp.buf.references, desc = "References", nowait = true },
+    { keymaps.lsp.references, vim.lsp.buf.references, desc = "References", nowait = true },
     -- 从抽象基类或接口跳转到具体实现 例子：在查看一个抽象方法时，可以跳转到所有实现这个方法的子类
-    { "gI", vim.lsp.buf.implementation, desc = "Goto Implementation" },
+    { keymaps.lsp.implementation, vim.lsp.buf.implementation, desc = "Goto Implementation" },
     -- 查看变量的类型定义，特别是对于复杂的自定义类型 例子：当你看到 x: CustomType 时，可以跳转到 CustomType 的定义
-    { "gy", vim.lsp.buf.type_definition, desc = "Goto T[y]pe Definition" },
+    { keymaps.lsp.type_definition, vim.lsp.buf.type_definition, desc = "Goto T[y]pe Definition" },
     -- 跳转到符号的声明位置  在Python中，这个功能通常与Goto Definition相似
-    { "gD", vim.lsp.buf.declaration, desc = "Goto Declaration" },
+    { keymaps.lsp.declaration, vim.lsp.buf.declaration, desc = "Goto Declaration" },
+    -- 查看当前符号的文档信息
+    { keymaps.lsp.hover, vim.lsp.buf.hover, desc = "Hover" },
+    -- 查看当前符号的签名信息
+    { keymaps.lsp.signature_help, vim.lsp.buf.signature_help, desc = "Signature Help", has = "signatureHelp" },
+    -- 插入模式下查看当前符号的签名信息
+    { keymaps.lsp.signature_help_insert, vim.lsp.buf.signature_help, mode = "i", desc = "Signature Help", has = "signatureHelp" },
 
-    { "K", vim.lsp.buf.hover, desc = "Hover" },
+    { keymaps.lsp.code_action, vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },
 
-    { "gK", vim.lsp.buf.signature_help, desc = "Signature Help", has = "signatureHelp" },
+    { keymaps.lsp.runCodelensAction, vim.lsp.codelens.run, desc = "Run Codelens", mode = { "n", "v" }, has = "codeLens" },
 
-    { "<c-k>", vim.lsp.buf.signature_help, mode = "i", desc = "Signature Help", has = "signatureHelp" },
+    { keymaps.lsp.refreshCodelens, vim.lsp.codelens.refresh, desc = "Refresh & Display Codelens", mode = { "n" }, has = "codeLens" },
+  
+    { keymaps.lsp.rename, vim.lsp.buf.rename, desc = "Rename", has = "rename" },
 
-    { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },
-
-    { "<leader>cc", vim.lsp.codelens.run, desc = "Run Codelens", mode = { "n", "v" }, has = "codeLens" },
-
-    { "<leader>cC", vim.lsp.codelens.refresh, desc = "Refresh & Display Codelens", mode = { "n" }, has = "codeLens" },
-    -- TODO: Add support for rename_file
-    -- { "<leader>cR", LazyVim.lsp.rename_file, desc = "Rename File", mode ={"n"}, has = { "workspace/didRenameFiles", "workspace/willRenameFiles" } },
-    { "<leader>cr", vim.lsp.buf.rename, desc = "Rename", has = "rename" },
-    { "<leader>cA", action.source, desc = "Source Action", has = "codeAction" },
     -- { "]]", function() LazyVim.lsp.words.jump(vim.v.count1) end, has = "documentHighlight",
     --   desc = "Next Reference", cond = function() return LazyVim.lsp.words.enabled end },
     -- { "[[", function() LazyVim.lsp.words.jump(-vim.v.count1) end, has = "documentHighlight",
@@ -117,11 +75,11 @@ function M.get()
   }
   -- stylua: ignore
   M._keys_origin = {
-    { keymaps.lsp.definition, function() require('telescope.builtin').lsp_definitions({ reuse_win = true }) end, desc = 'Goto Definition', has = 'definition' },
-    { keymaps.lsp.references, function() require('telescope.builtin').lsp_references(require('telescope.themes').get_dropdown()) end, desc = 'References' },
-    { keymaps.lsp.implementation, function() require('telescope.builtin').lsp_implementations({ reuse_win = true }) end, desc = 'Goto Implementation' },
-    { keymaps.type_definition, function() require('telescope.builtin').lsp_type_definitions({ reuse_win = true }) end, desc = 'Goto T[y]pe Definition' },
-    { keymaps.declaration, vim.lsp.buf.declaration, desc = 'Goto Declaration' },
+    -- { keymaps.lsp.definition, function() require('telescope.builtin').lsp_definitions({ reuse_win = true }) end, desc = 'Goto Definition', has = 'definition' },
+    -- { keymaps.lsp.references, function() require('telescope.builtin').lsp_references(require('telescope.themes').get_dropdown()) end, desc = 'References' },
+    -- { keymaps.lsp.implementation, function() require('telescope.builtin').lsp_implementations({ reuse_win = true }) end, desc = 'Goto Implementation' },
+    -- { keymaps.type_definition, function() require('telescope.builtin').lsp_type_definitions({ reuse_win = true }) end, desc = 'Goto T[y]pe Definition' },
+    -- { keymaps.declaration, vim.lsp.buf.declaration, desc = 'Goto Declaration' },
     -- { mode = { 'i' }, Keys.hover, vim.lsp.buf.hover, desc = 'Hover' },
     -- {
     --   mode = { 'n', 'i' },
@@ -173,20 +131,6 @@ function M.get()
     --   has = 'codeAction',
     -- },
   }
-  -- if Lazyvim.has('inc-rename.nvim') then
-  --   M._keys[#M._keys + 1] = {
-  --     Keys.rename,
-  --     function()
-  --       local inc_rename = require('inc_rename')
-  --       return ':' .. inc_rename.config.cmd_name .. ' ' .. vim.fn.expand('<cword>')
-  --     end,
-  --     expr = true,
-  --     desc = 'Rename',
-  --     has = 'rename',
-  --   }
-  -- else
-  --   M._keys[#M._keys + 1] = { Keys.rename, vim.lsp.buf.rename, desc = 'Rename', has = 'rename' }
-  -- end
   return M._keys
 end
 

@@ -36,7 +36,7 @@ return {
         exclude = {},
       },
       codelens = {
-        enabled = false,
+        enabled = true,
       },
       -- add any global capabilities here
       capabilities = {},
@@ -45,7 +45,7 @@ return {
         formatting_options = nil,
         timeout_ms = nil,
       },
-      servers = {pyright={}},
+      servers = {},
       setup = {},
     },
     config = function(_, opts)
