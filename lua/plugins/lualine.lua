@@ -73,23 +73,26 @@ return {
           { 'branch', icon = '' },
         },
         lualine_c = {
-          -- TODO:移动到LSP中
-          -- {
-          --   function()
-          --     local original_bufnr = vim.api.nvim_get_current_buf()
-          --     local buf_clients = vim.lsp.get_active_clients({ bufnr = original_bufnr })
-          --     return ' :' .. tostring(#vim.tbl_keys(buf_clients))
-          --   end,
-          --   color = function()
-          --     local original_bufnr = vim.api.nvim_get_current_buf()
-          --     local buf_clients = vim.lsp.get_active_clients({ bufnr = original_bufnr })
-          --     ---@diagnostic disable-next-line: undefined-field
-          --     return #vim.tbl_keys(buf_clients) > 0 and lazyvim.ui.fg('Character') or lazyvim.ui.fg('Comment')
-          --   end,
-          --   on_click = function()
-          --     vim.cmd('LspInfo')
-          --   end,
-          -- },
+          {
+            function()
+              local original_bufnr = vim.api.nvim_get_current_buf()
+              local buf_clients = vim.lsp.get_active_clients({ bufnr = original_bufnr })
+              if vim.fn.exists(':LspInfo') == 0 then
+                return ':off'
+              end
+              return ':' .. tostring(#vim.tbl_keys(buf_clients))
+            end,
+            color = function()
+              local original_bufnr = vim.api.nvim_get_current_buf()
+              local buf_clients = vim.lsp.get_active_clients({ bufnr = original_bufnr })
+              ---@diagnostic disable-next-line: undefined-field
+              return #vim.tbl_keys(buf_clients) > 0 and fg('Character') or fg('Comment')
+            end,
+            on_click = function()
+              vim.cmd('LspInfo')
+            end,
+            icon = ' ',
+          },
           { 'filename', path = 1, file_status = false },
         },
         lualine_x = {},

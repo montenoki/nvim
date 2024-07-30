@@ -2,7 +2,7 @@ local opt = vim.opt
 local tabWidth = 4
 
 -- Use system clipboard
-opt.clipboard = 'unnamedplus'
+opt.clipboard = vim.env.SSH_TTY and '' or 'unnamedplus' -- Sync with system clipboard
 
 -- Line length ruler
 opt.colorcolumn = '+1'
@@ -252,6 +252,8 @@ opt.textwidth = 80
 
 -- 等待映射序列完成的时间（以毫秒为单位）
 opt.timeoutlen = 100
+
+opt.updatetime = 100
 
 -- 当开启时，Vim 在将缓冲区写入文件时会自动将撤销历史保存到撤销文件中
 -- 并在读取缓冲区时从同一文件中恢复撤销历史。

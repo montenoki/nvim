@@ -93,7 +93,19 @@ M.surround = {
   replace = 'gsr',
   update_n_lines = 'gsn',
 }
-
+M.lsp = {
+  definition = 'gd',
+  declaration = 'gD',
+  references = 'gr',
+  implementation = 'gI',
+  type_definition = 'gT',
+  hover = '<C-;>',
+  signature_help = "<C-'>",
+  pop_diagnostic = 'gp',
+  code_action = '<LEADER>ca',
+  code_action_source = '<LEADER>cA',
+  rename = '<LEADER>r',
+}
 -- =============================================================================
 --   TODO
 -- =============================================================================
@@ -115,19 +127,7 @@ M.surround = {
 --   format = '<LEADER>f',
 --   format_injected = '<LEADER>cf',
 -- }
--- M.lsp = {
---   definition = 'gd',
---   declaration = 'gD',
---   show_references = 'gr',
---   implementation = 'gI',
---   type_definition = 'gT',
---   hover = '<C-;>',
---   signature_help = "<C-'>",
---   pop_diagnostic = 'gp',
---   code_action = '<LEADER>ca',
---   code_action_source = '<LEADER>cA',
---   rename = '<LEADER>r',
--- }
+
 -- M.telescope = {
 --   switch_buffer = '<LEADER>,',
 --   grep = '<LEADER>/',
