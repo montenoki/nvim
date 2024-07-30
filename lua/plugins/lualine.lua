@@ -1,12 +1,6 @@
-local utils = require("utils")
-local function show_macro_recording()
-  local recording_register = vim.fn.reg_recording()
-  if recording_register == '' then
-    return ''
-  else
-    return 'Rec @' .. recording_register
-  end
-end
+local utils = require('utils')
+local config = require('config')
+local icons = config.icons
 
 return {
   'nvim-lualine/lualine.nvim',
@@ -38,13 +32,15 @@ return {
       },
       extensions = {
         'lazy',
-        -- TODO:移动到各自的设置中
-        --   'mason',
-        --   'quickfix',
-        --   'symbols-outline',
-        --   'toggleterm',
-        --   'nvim-dap-ui',
-        --   'trouble',
+        'mason',
+        'nvim-tree',
+        'man',
+        'toggleterm',
+        'nvim-dap-ui',
+        'symbols-outline',
+        'quickfix',
+        'fzf',
+        'trouble',
       },
       sections = {
         lualine_a = {
@@ -74,10 +70,22 @@ return {
             end,
             icon = ' ',
           },
+          {
+            function()
+              return '󰐅 '
+            end,
+            color = function()
+              return vim.treesitter.highlighter.active[vim.api.nvim_get_current_buf()] ~= nil and utils.fg('Character')
+                or utils.fg('Comment')
+            end,
+            on_click = function()
+              vim.cmd('TSToggle highlight')
+            end,
+          },
           { 'filename', path = 1, file_status = false },
         },
         lualine_x = {},
-        lualine_y = { { utils.showRecording, fmt = show_macro_recording, color = utils.fg('Error') } },
+        lualine_y = { { utils.showRecording, color = utils.fg('Error') } },
         lualine_z = {
           'location',
           'progress',
@@ -105,16 +113,15 @@ return {
         lualine_c = {},
         lualine_x = {},
         lualine_y = {
-          -- TODO:移动到LSP中
-          -- {
-          --   'diagnostics',
-          --   symbols = {
-          --     error = vim.g.lite == nil and ' ' or ascii.diagnostics.Error,
-          --     warn = vim.g.lite == nil and ' ' or ascii.diagnostics.Warn,
-          --     info = vim.g.lite == nil and ' ' or ascii.diagnostics.Info,
-          --     hint = vim.g.lite == nil and ' ' or ascii.diagnostics.Hint,
-          --   },
-          -- },
+          {
+            'diagnostics',
+            symbols = {
+              error = icons.diagnostics.Error,
+              warn = icons.diagnostics.Warn,
+              info = icons.diagnostics.Info,
+              hint = icons.diagnostics.Hint,
+            },
+          },
         },
         lualine_z = {},
       },
