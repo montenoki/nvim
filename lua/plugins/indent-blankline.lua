@@ -3,7 +3,7 @@ return {
     event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' }, -- LazyFile
     opts = {
         indent = { char = '│', tab_char = '▏' },
-        scope = { show_start = false, show_end = false },
+        scope = { enabled = false },
         exclude = {
             -- stylua: ignore
             filetypes = {
