@@ -5,113 +5,113 @@ local M = {}
 M.leader = ' '
 
 M.window = {
-  gotoLeft = '<LEADER>wh',
-  gotoLower = '<LEADER>wj',
-  gotoUpper = '<LEADER>wk',
-  gotoRight = '<LEADER>wl',
+    gotoLeft = '<LEADER>wh',
+    gotoLower = '<LEADER>wj',
+    gotoUpper = '<LEADER>wk',
+    gotoRight = '<LEADER>wl',
 
-  gotoLeftCtrl = '<C-h>',
-  gotoLowerCtrl = '<C-j>',
-  gotoUpperCtrl = '<c-k>',
-  gotoRightCtrl = '<c-l>',
+    gotoLeftCtrl = '<C-h>',
+    gotoLowerCtrl = '<C-j>',
+    gotoUpperCtrl = '<c-k>',
+    gotoRightCtrl = '<c-l>',
 
-  close = '<LEADER>wc',
-  closeOther = '<LEADER>wo',
-  splitBelow = '<LEADER>-',
-  splitRight = '<LEADER>|',
-  resize = '<LEADER>=',
+    close = '<LEADER>wc',
+    closeOther = '<LEADER>wo',
+    splitBelow = '<LEADER>-',
+    splitRight = '<LEADER>|',
+    resize = '<LEADER>=',
 }
 
 M.moveLineDown = '<A-j>'
 M.moveLineUp = '<A-k>'
 
 M.tab = {
-  new = '<LEADER>tn',
-  close = '<LEADER>tc',
-  prev = '<LEADER>t,',
-  next = '<LEADER>t.',
+    new = '<LEADER>tn',
+    close = '<LEADER>tc',
+    prev = '<LEADER>t,',
+    next = '<LEADER>t.',
 }
 -- =============================================================================
 --   Plugins
 -- =============================================================================
 M.open = {
-  miniMap = '<LEADER>cm',
-  leap = '\\',
-  moveWindow = '<LEADER>wm',
-  nvimTree = '<LEADER>e',
-  preview = '<TAB>',
+    miniMap = '<LEADER>cm',
+    leap = '\\',
+    moveWindow = '<LEADER>wm',
+    nvimTree = '<LEADER>e',
+    preview = '<TAB>',
 }
 
 M.whichkey = {
-  show = '<LEADER>k',
-  showLocal = '<LEADER>K',
+    show = '<LEADER>k',
+    showLocal = '<LEADER>K',
 }
 
 M.toggle = {
-  -- spelling = '<LEADER>us',
-  -- line_numbers = '<LEADER>ul',
-  -- relative_numbers = '<LEADER>uL',
-  -- diagnostic = '<LEADER>ud',
-  -- wrap = '<LEADER>uw',
-  -- conceal = '<LEADER>uS',
-  -- inlay_hints = '<LEADER>uh',
-  -- treesitter = '<LEADER>uT',
-  -- show_hl_info = '<LEADER>ui',
-  -- toggle_tsc = '<LEADER>ut',
+    -- spelling = '<LEADER>us',
+    -- line_numbers = '<LEADER>ul',
+    -- relative_numbers = '<LEADER>uL',
+    -- diagnostic = '<LEADER>ud',
+    -- wrap = '<LEADER>uw',
+    -- conceal = '<LEADER>uS',
+    -- inlay_hints = '<LEADER>uh',
+    -- treesitter = '<LEADER>uT',
+    -- show_hl_info = '<LEADER>ui',
+    -- toggle_tsc = '<LEADER>ut',
 }
 
 M.floatWindow = {
-  scrollUp = '<C-UP>',
-  scrollDown = '<C-DOWN>',
-  scrollLeft = '<C-LEFT>',
-  scrollRight = '<C-RIGHT>',
+    scrollUp = '<C-UP>',
+    scrollDown = '<C-DOWN>',
+    scrollLeft = '<C-LEFT>',
+    scrollRight = '<C-RIGHT>',
 }
 
 M.incrementalSelection = {
-  init = '<CR>',
-  -- a least frequently used key for call it later.
-  initSelection = '<C-7>',
-  nodeIncremental = '<CR>',
-  scopeIncremental = '<TAB>',
-  nodeDecremental = '<BS>',
+    init = '<CR>',
+    -- a least frequently used key for call it later.
+    initSelection = '<C-7>',
+    nodeIncremental = '<CR>',
+    scopeIncremental = '<TAB>',
+    nodeDecremental = '<BS>',
 }
 M.comment = {
-  line = 'gcc',
-  block = 'gbc',
-  v_line = 'gc',
-  v_block = 'gb',
-  above = 'gcO',
-  below = 'gco',
-  eol = 'gca',
+    line = 'gcc',
+    block = 'gbc',
+    v_line = 'gc',
+    v_block = 'gb',
+    above = 'gcO',
+    below = 'gco',
+    eol = 'gca',
 }
 M.surround = {
-  add = 'gsa',
-  delete = 'gsd',
-  find = 'gsf',
-  find_left = 'gsF',
-  highlight = 'gsh',
-  replace = 'gsr',
-  update_n_lines = 'gsn',
+    add = 'gsa',
+    delete = 'gsd',
+    find = 'gsf',
+    find_left = 'gsF',
+    highlight = 'gsh',
+    replace = 'gsr',
+    update_n_lines = 'gsn',
 }
 M.lsp = {
-  definition = 'gd',
-  references = 'gr',
-  implementation = 'gI',
-  type_definition = 'gy',
-  declaration = 'gD',
-  hover = 'K',
-  signature_help = 'gK',
-  signature_help_insert = '<c-k>',
-  pop_diagnostic = 'gp',
-  code_action = '<LEADER>ca',
-  rename = '<LEADER>r',
-  runCodelensAction = '<LEADER>cc',
-  refreshCodelens = '<LEADER>cC',
-  organize = '<LEADER>co'
+    definition = 'gd',
+    references = 'gr',
+    implementation = 'gI',
+    type_definition = 'gy',
+    declaration = 'gD',
+    hover = 'K',
+    signature_help = 'gK',
+    signature_help_insert = '<c-k>',
+    pop_diagnostic = 'gp',
+    code_action = '<LEADER>ca',
+    rename = '<LEADER>r',
+    runCodelensAction = '<LEADER>cc',
+    refreshCodelens = '<LEADER>cC',
+    organize = '<LEADER>co',
 }
 M.format = {
-  format = '<LEADER>f',
-  format_injected = '<LEADER>cf',
+    format = '<LEADER>f',
+    format_injected = '<LEADER>cf',
 }
 -- =============================================================================
 --   TODO

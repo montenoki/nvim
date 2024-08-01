@@ -39,8 +39,8 @@ map('n', keymaps.tab.next, '<CMD>tabnext<CR>', { desc = 'Next Tab' })
 
 -- Format
 map({ 'n', 'v' }, keymaps.format.format, function()
-  utils.format({ force = true })
-  utils.info('File Formatted.')
+    utils.format({ force = true })
+    utils.info('File Formatted.')
 end, { desc = 'Format' })
 
 -- =============================================================================

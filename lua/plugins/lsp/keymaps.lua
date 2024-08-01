@@ -5,9 +5,9 @@ local utils = require('utils')
 M._keys = nil
 
 function M.get()
-  if M._keys then
-    return M._keys
-  end
+    if M._keys then
+        return M._keys
+    end
   -- stylua: ignore
   M._keys =  {
     -- 跳转到当前符号（变量、函数、类等）的定义位置
@@ -102,60 +102,60 @@ function M.get()
     --   has = 'codeAction',
     -- },
   }
-  return M._keys
+    return M._keys
 end
 
 function M.has(buffer, method)
-  if type(method) == 'table' then
-    for _, m in ipairs(method) do
-      if M.has(buffer, m) then
-        return true
-      end
+    if type(method) == 'table' then
+        for _, m in ipairs(method) do
+            if M.has(buffer, m) then
+                return true
+            end
+        end
+        return false
+    end
+    method = method:find('/') and method or 'textDocument/' .. method
+    local clients = utils.getClients({ bufnr = buffer })
+    for _, client in ipairs(clients) do
+        if client.supports_method(method) then
+            return true
+        end
     end
     return false
-  end
-  method = method:find('/') and method or 'textDocument/' .. method
-  local clients = utils.getClients({ bufnr = buffer })
-  for _, client in ipairs(clients) do
-    if client.supports_method(method) then
-      return true
-    end
-  end
-  return false
 end
 
 function M.resolve(buffer)
-  local Keys = require('lazy.core.handler.keys')
-  if not Keys.resolve then
-    return {}
-  end
-  local spec = M.get()
-  local opts = utils.getPluginOpts('nvim-lspconfig')
-  local clients = utils.getClients({ bufnr = buffer })
-  for _, client in ipairs(clients) do
-    local maps = opts.servers[client.name] and opts.servers[client.name].keys or {}
-    vim.list_extend(spec, maps)
-  end
-  return Keys.resolve(spec)
+    local Keys = require('lazy.core.handler.keys')
+    if not Keys.resolve then
+        return {}
+    end
+    local spec = M.get()
+    local opts = utils.getPluginOpts('nvim-lspconfig')
+    local clients = utils.getClients({ bufnr = buffer })
+    for _, client in ipairs(clients) do
+        local maps = opts.servers[client.name] and opts.servers[client.name].keys or {}
+        vim.list_extend(spec, maps)
+    end
+    return Keys.resolve(spec)
 end
 
 function M.on_attach(_, buffer)
-  local Keys = require('lazy.core.handler.keys')
-  local currentKeymaps = M.resolve(buffer)
+    local Keys = require('lazy.core.handler.keys')
+    local currentKeymaps = M.resolve(buffer)
 
-  for _, keys in pairs(currentKeymaps) do
-    local has = not keys.has or M.has(buffer, keys.has)
-    local cond = not (keys.cond == false or ((type(keys.cond) == 'function') and not keys.cond()))
+    for _, keys in pairs(currentKeymaps) do
+        local has = not keys.has or M.has(buffer, keys.has)
+        local cond = not (keys.cond == false or ((type(keys.cond) == 'function') and not keys.cond()))
 
-    if has and cond then
-      local opts = Keys.opts(keys)
-      opts.cond = nil
-      opts.has = nil
-      opts.silent = opts.silent ~= false
-      opts.buffer = buffer
-      vim.keymap.set(keys.mode or 'n', keys.lhs, keys.rhs, opts)
+        if has and cond then
+            local opts = Keys.opts(keys)
+            opts.cond = nil
+            opts.has = nil
+            opts.silent = opts.silent ~= false
+            opts.buffer = buffer
+            vim.keymap.set(keys.mode or 'n', keys.lhs, keys.rhs, opts)
+        end
     end
-  end
 end
 
 return M

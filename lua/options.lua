@@ -299,7 +299,7 @@ opt.wildmode = { 'longest:full', 'full' }
 -- Setup python provider
 local executablePath = '/.virtualenvs/neovim/bin/python'
 if string.find(string.lower(vim.loop.os_uname().sysname), 'windows') then
-  executablePath = '\\.virtualenvs\\neovim\\Scripts\\python.exe'
+    executablePath = '\\.virtualenvs\\neovim\\Scripts\\python.exe'
 end
 vim.g.python3_host_prog = vim.env.HOME .. executablePath
 
