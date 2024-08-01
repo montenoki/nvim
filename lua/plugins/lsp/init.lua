@@ -1,5 +1,6 @@
-local config = require('config')
+local icons = require('config').icons
 local lspKeymaps = require('plugins.lsp.keymaps')
+local utils = require('utils')
 
 return {
   {
@@ -24,10 +25,10 @@ return {
         },
         signs = {
           text = {
-            [vim.diagnostic.severity.ERROR] = config.icons.diagnostics.Error,
-            [vim.diagnostic.severity.WARN] = config.icons.diagnostics.Warn,
-            [vim.diagnostic.severity.HINT] = config.icons.diagnostics.Hint,
-            [vim.diagnostic.severity.INFO] = config.icons.diagnostics.Info,
+            [vim.diagnostic.severity.ERROR] = icons.diagnostics.Error,
+            [vim.diagnostic.severity.WARN] = icons.diagnostics.Warn,
+            [vim.diagnostic.severity.HINT] = icons.diagnostics.Hint,
+            [vim.diagnostic.severity.INFO] = icons.diagnostics.Info,
           },
         },
       },
@@ -104,16 +105,6 @@ return {
         return options and options.filter and vim.tbl_filter(options.filter, ret) or ret
       end
 
-      local formatters = {}
-      local function formatRegister(formatter)
-        -- 注册格式化器
-        -- 它将新的格式化器添加到 formatters 表中，并按照优先级排序。
-        formatters[#formatters + 1] = formatter
-        table.sort(formatters, function(a, b)
-          return a.priority > b.priority
-        end)
-      end
-
       local function lspFormatter(options)
         -- 创建一个LSP格式化器对象
         -- 它定义了格式化器的名称、优先级、格式化函数和源获取函数
@@ -128,7 +119,7 @@ return {
           primary = true,
           priority = 1,
           format = function(buf)
-            lspFormat(vim.tbl_deep_extend('force', {}, filter, { bufnr = buf }))
+            lspFormat(utils.merge({}, filter, { bufnr = buf }))
           end,
           sources = function(buf)
             local clients = getClients(vim.tbl_deep_extend('force', {}, filter, { bufnr = buf }))
@@ -146,7 +137,7 @@ return {
       end
 
       -- 创建一个默认的LSP格式化器并注册它
-      formatRegister(lspFormatter())
+      utils.register(lspFormatter())
 
       -- =======================================================================
       -- 配置keymaps
@@ -343,7 +334,7 @@ return {
         opts.diagnostics.virtual_text.prefix = vim.fn.has('nvim-0.10.0') == 0 and '●'
           or function(diagnostic)
             -- 根据诊断严重级别返回相应的图标
-            local icons = config.icons.diagnostics
+            local icons = icons.diagnostics
             for d, icon in pairs(icons) do
               if diagnostic.severity == vim.diagnostic.severity[d:upper()] then
                 return icon

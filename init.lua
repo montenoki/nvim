@@ -52,4 +52,8 @@ else
   require('lazy').setup(plugins)
 end
 
-vim.cmd('colorscheme kanagawa')
+-- vim.cmd('colorscheme kanagawa')
+-- vim.cmd[[colorscheme dracula-soft]]
+vim.cmd[[colorscheme dracula]]
+-- vim.cmd[[colorscheme everforest]]
+-- vim.cmd.colorscheme('gruvbox-material')

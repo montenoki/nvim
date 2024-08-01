@@ -80,6 +80,9 @@ opt.fillchars = { eob = ' ', fold = ' ', foldopen = '', foldsep = ' ', foldcl
 -- 如果您想保留原始文件的情况，请关闭此选项。
 opt.fixendofline = false
 
+-- TODO: 添加注释
+opt.formatexpr = 'v:lua.require("utils").formatexpr()'
+
 -- 影响 Vim 格式化文本的方式
 -- 默认为"cjqt"
 -- t:  使用 'textwidth' 自动换行文本
@@ -143,7 +146,7 @@ opt.linebreak = true
 -- List mode: By default, show tabs as ">", trailing spaces as "-", and
 -- non-breakable space characters as "+". Useful to see the difference
 -- between tabs and spaces and for trailing blanks.
-opt.list = true
+-- opt.list = true
 
 -- eol:c  Character to show at the end of each line.  When
 -- 			  omitted, there is no extra character at the end of the

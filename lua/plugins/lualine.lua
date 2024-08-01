@@ -1,6 +1,5 @@
 local utils = require('utils')
-local config = require('config')
-local icons = config.icons
+local icons = require('config').icons
 
 return {
   'nvim-lualine/lualine.nvim',

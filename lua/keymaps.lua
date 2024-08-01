@@ -35,7 +35,7 @@ M.tab = {
 --   Plugins
 -- =============================================================================
 M.open = {
-  miniMap = '<LEADER>m',
+  miniMap = '<LEADER>cm',
   leap = '\\',
   moveWindow = '<LEADER>wm',
   nvimTree = '<LEADER>e',
@@ -108,6 +108,10 @@ M.lsp = {
   runCodelensAction = '<LEADER>cc',
   refreshCodelens = '<LEADER>cC',
   organize = '<LEADER>co'
+}
+M.format = {
+  format = '<LEADER>f',
+  format_injected = '<LEADER>cf',
 }
 -- =============================================================================
 --   TODO

@@ -1,5 +1,6 @@
 local map = vim.keymap.set
 local keymaps = require('keymaps')
+local utils = require('utils')
 -- =============================================================================
 -- 添加新的按键映射
 -- =============================================================================
@@ -35,6 +36,12 @@ map('n', keymaps.tab.new, '<CMD>tabnew<CR>', { desc = 'New Tab' })
 map('n', keymaps.tab.close, '<CMD>tabclose<CR>', { desc = 'Close Tab' })
 map('n', keymaps.tab.prev, '<CMD>tabprev<CR>', { desc = 'Previous Tab' })
 map('n', keymaps.tab.next, '<CMD>tabnext<CR>', { desc = 'Next Tab' })
+
+-- Format
+map({ 'n', 'v' }, keymaps.format.format, function()
+  utils.format({ force = true })
+  utils.info('File Formatted.')
+end, { desc = 'Format' })
 
 -- =============================================================================
 -- 修改默认的按键映射

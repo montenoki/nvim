@@ -1,51 +1,13 @@
-local cmp_icons = {
-  Array = ' ',
-  Boolean = '󰨙 ',
-  Class = ' ',
-  Codeium = '󰘦 ',
-  Color = ' ',
-  Control = ' ',
-  Collapsed = ' ',
-  Constant = '󰏿 ',
-  Constructor = ' ',
-  Copilot = ' ',
-  Enum = ' ',
-  EnumMember = ' ',
-  Event = ' ',
-  Field = ' ',
-  File = ' ',
-  Folder = ' ',
-  Function = '󰊕 ',
-  Interface = ' ',
-  Key = ' ',
-  Keyword = ' ',
-  Method = '󰊕 ',
-  Module = ' ',
-  Namespace = '󰦮 ',
-  Null = ' ',
-  Number = '󰎠 ',
-  Object = ' ',
-  Operator = ' ',
-  Package = ' ',
-  Property = ' ',
-  Reference = ' ',
-  Snippet = ' ',
-  String = ' ',
-  Struct = '󰆼 ',
-  TabNine = '󰏚 ',
-  Text = ' ',
-  TypeParameter = ' ',
-  Unit = ' ',
-  Value = ' ',
-  Variable = '󰀫 ',
-}
-local Keys = require('keymaps')
+local icons = require('config').icons
+local keymaps = require('keymaps')
+
 local function t(keys)
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(keys, true, true, true), 'm', true)
 end
 local function can_execute(arg)
   return vim.fn[arg]() == 1
 end
+
 return {
   'hrsh7th/nvim-cmp',
   version = false, -- last release is way too old
@@ -113,7 +75,7 @@ return {
       sources = cmp.config.sources(sources),
       formatting = {
         format = function(_, item)
-          if cmp_icons[item.kind] and vim.g.lite == nil then
+          if icons.kinds[item.kind] and vim.g.lite == nil then
             item.kind = cmp_icons[item.kind] .. item.kind
           end
           return item
@@ -122,7 +84,7 @@ return {
       experimental = { ghost_text = { hl_group = 'CmpGhostText' } },
       sorting = defaults.sorting,
       mapping = {
-        [Keys.cmp.next_jump] = {
+        [keymaps.cmp.next_jump] = {
           i = function(fallback)
             if cmp.visible() then
               cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
@@ -140,7 +102,7 @@ return {
             end
           end,
         },
-        [Keys.cmp.prev_jump] = {
+        [keymaps.cmp.prev_jump] = {
           i = function(fallback)
             if cmp.visible() then
               cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
@@ -158,11 +120,11 @@ return {
             end
           end,
         },
-        [Keys.cmp.confirm] = cmp.mapping.confirm({
+        [keymaps.cmp.confirm] = cmp.mapping.confirm({
           behavior = cmp.ConfirmBehavior.Insert,
           select = false,
         }),
-        [Keys.cmp.toggle] = {
+        [keymaps.cmp.toggle] = {
           i = function()
             if cmp.visible() then
               cmp.abort()
@@ -171,15 +133,15 @@ return {
             end
           end,
         },
-        [Keys.cmp.esc] = function(fallback)
+        [keymaps.cmp.esc] = function(fallback)
           if cmp.visible() then
             cmp.abort()
           else
             fallback()
           end
         end,
-        [Keys.floatWindow.scrollUp] = cmp.mapping.scroll_docs(-4),
-        [Keys.floatWindow.scrollDown] = cmp.mapping.scroll_docs(4),
+        [keymaps.floatWindow.scrollUp] = cmp.mapping.scroll_docs(-4),
+        [keymaps.floatWindow.scrollDown] = cmp.mapping.scroll_docs(4),
       },
     }
   end,
