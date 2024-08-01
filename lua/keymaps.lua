@@ -113,6 +113,12 @@ M.format = {
     format = '<LEADER>f',
     format_injected = '<LEADER>cf',
 }
+M.indentscope = {
+  obj_scope = 'ii',
+  obj_scope_with_border = 'ai',
+  goto_top = '[i',
+  goto_btm = ']i',
+}
 -- =============================================================================
 --   TODO
 -- =============================================================================
