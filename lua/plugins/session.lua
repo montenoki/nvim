@@ -47,7 +47,6 @@ return {
             local lualine_require = require('lualine_require')
             lualine_require.require = require
             local ok, _ = pcall(require('auto-session.lib').current_session_name)
-            vim.print(vim.inspect(opts))
             if type(opts.sections.lualine_c) == 'table' then
                 table.insert(opts.sections.lualine_c, 2, {
                     function()
@@ -56,10 +55,10 @@ return {
                     color = ok and utils.fg('Character') or utils.fg('Comment'),
                     -- TODO:check Telescope exists
                     on_click = function()
-                        if package.loaded["plugin_name"] ~= nil then
+                        if package.loaded['plugin_name'] ~= nil then
                             vim.cmd.Telescope('session-lens')
                         else
-                            utils.info('Telescope is not installed')
+                            utils.warn('Telescope is not installed', { title = 'Auto-session' })
                         end
                     end,
                 })

@@ -15,7 +15,7 @@ return {
   -- Switch Input Method automatically depends on NeoVim's edit mode.
   {
     'keaising/im-select.nvim',
-    enabled = false,
+    -- enabled = false,
     opts = {
       default_im_select = '1033',
       default_command = 'im-select.exe',

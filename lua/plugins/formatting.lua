@@ -6,12 +6,14 @@ function M.setup(_, opts)
     for _, key in ipairs({ 'format_on_save', 'format_after_save' }) do
         if opts[key] then
             local msg = "Don't set `opts.%s` for `conform.nvim`"
-            utils.warn(msg:format(key))
+            utils.warn(msg:format(key), { title = 'Formatter' })
             opts[key] = nil
         end
     end
     if opts.format then
-        utils.warn('**conform.nvim** `opts.format` is deprecated. Please use `opts.default_format_opts` instead.')
+        utils.warn('**conform.nvim** `opts.format` is deprecated. Please use `opts.default_format_opts` instead.', {
+            title = 'Formatter',
+        })
     end
     require('conform').setup(opts)
 end
@@ -26,7 +28,7 @@ return {
             keymaps.format.format_injected,
             function()
                 require('conform').format({ formatters = { 'injected' }, timeout_ms = 3000 })
-                utils.info('Injected Codes Formatted.')
+                utils.info('Injected Codes Formatted.', { title = 'Formatter' })
             end,
             mode = { 'n', 'v' },
             desc = 'Format Injected Codes',

@@ -70,6 +70,7 @@ return {
             group = vim.api.nvim_create_augroup('reload_bufferline', { clear = true }),
             callback = function()
                 vim.schedule(function()
+                    ---@diagnostic disable-next-line: undefined-global
                     pcall(nvim_bufferline)
                 end)
             end,

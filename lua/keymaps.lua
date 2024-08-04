@@ -130,8 +130,23 @@ M.cmp = {
   next_item = '<TAB>',
   prev_item = '<S-TAB>',
   confirm = '<CR>',
-  jump_in = '<C-j>',
+  jump_in = '<C-p>',
   esc = '<ESC>',
+}
+M.notify = {
+  dismiss_all = '<LEADER>un',
+  show_all = '<LEADER>sna',
+}
+
+M.noice = {
+  redirect_cmdline = '<C-2>',
+  last_msg = '<LEADER>snl',
+  history = '<LEADER>snh',
+  dismiss_all = '<LEADER>snd',
+}
+M.todo = {
+  show_todo = '<LEADER>st',
+  show_all = '<LEADER>sT',
 }
 -- =============================================================================
 --   TODO
@@ -200,10 +215,7 @@ M.cmp = {
 --   goto_top = '[i',
 --   goto_btm = ']i',
 -- }
--- M.notify = {
---   dismiss_all = '<LEADER>un',
---   show_all = '<LEADER>sna',
--- }
+
 -- M.noice = {
 --   redirect_cmdline = '<C-2>',
 --   last_msg = '<LEADER>snl',
@@ -224,10 +236,7 @@ M.cmp = {
 -- }
 -- M.neogit = { toggle = '<LEADER>g' }
 
--- M.todo = {
---   show_todo = '<LEADER>st',
---   show_all = '<LEADER>sT',
--- }
+
 -- M.project = {
 --   show = '<LEADER>sp',
 -- }

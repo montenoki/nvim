@@ -1,6 +1,5 @@
 return {
   'keaising/im-select.nvim',
-  cond = vim.g.vscode == nil and vim.g.lite == nil,
   event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' }, -- LazyFile
   opts = {
     -- IM will be set to `default_im_select` in `normal` mode

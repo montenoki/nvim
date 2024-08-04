@@ -2,6 +2,7 @@
   "workspace.checkThirdParty": false,
   "diagnostics.globals": [
     "vim",
-    "vscode"
+    "vscode",
+        "nvim_bufferline"
   ]
 }

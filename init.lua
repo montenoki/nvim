@@ -36,18 +36,16 @@ local plugins = {
 if vim.g.vscode then
     require('vscode')
 else
-    -- require('global')
-
     -- table.insert(plugins, { import = 'lang' })
     --
-    -- local osName = vim.loop.os_uname().sysname
-    -- if string.find(string.lower(osName), 'windows') then
-    --   table.insert(plugins, { import = 'os.windows' })
+    local osName = vim.loop.os_uname().sysname
+    if string.find(string.lower(osName), 'windows') then
+      table.insert(plugins, { import = 'plugins.os.windows' })
     -- elseif osName == 'Darwin' then
     --   table.insert(plugins, { import = 'os.mac' })
     -- else
     --   table.insert(plugins, { import = 'os.linux' })
-    -- end
+    end
 
     require('lazy').setup(plugins)
 end
