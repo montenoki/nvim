@@ -4,6 +4,11 @@ return {
     {
         'lewis6991/gitsigns.nvim',
         event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' }, -- LazyFile
+        init = function()
+            require('which-key').add({
+                { '<leader>h', group = '+gitsigns', mode = { 'n', 'v' } },
+            })
+        end,
         opts = {
             signs = {
                 add = { text = '+▎' },
@@ -46,16 +51,6 @@ return {
                 source = diff_source,
                 symbols = { added = ' ', modified = ' ', removed = ' ' },
             })
-        end,
-    },
-    {
-        'folke/which-key.nvim',
-        opts = function(_, opts)
-            if type(opts.defaults) == 'table' then
-                vim.list_extend(opts.defaults, {
-                    ['<leader>h'] = { name = '+gitsigns' },
-                })
-            end
         end,
     },
 }

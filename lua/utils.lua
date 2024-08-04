@@ -414,4 +414,5 @@ function M.bufremove(buf)
         pcall(vim.cmd, 'bdelete! ' .. buf)
     end
 end
+
 return M
