@@ -15,6 +15,16 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 -- =============================================================================
+-- 修复在进入缓冲区时formatoptions被重置的问题
+-- =============================================================================
+vim.api.nvim_create_autocmd('BufEnter', {
+  group = M.augroup('dont_continue_comments'),
+  pattern = '*',
+  callback = function()
+    vim.opt.formatoptions = { c = true, r = true, q = true, n = true, m = true, M = true, j = true }
+  end,
+})
+-- =============================================================================
 -- 检查文件更改时是否需要重新加载
 -- =============================================================================
 vim.api.nvim_create_autocmd({ 'FocusGained', 'TermClose', 'TermLeave' }, {

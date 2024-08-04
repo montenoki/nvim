@@ -32,8 +32,9 @@ function M.get()
     { keymaps.lsp.runCodelensAction, vim.lsp.codelens.run, desc = "Run Codelens", mode = { "n", "v" }, has = "codeLens" },
 
     { keymaps.lsp.refreshCodelens, vim.lsp.codelens.refresh, desc = "Refresh & Display Codelens", mode = { "n" }, has = "codeLens" },
-  
+    -- { keymaps.lsp.rename, ":IncRename ", desc = "Rename", has = "rename" },
     { keymaps.lsp.rename, vim.lsp.buf.rename, desc = "Rename", has = "rename" },
+
 
     -- { "]]", function() LazyVim.lsp.words.jump(vim.v.count1) end, has = "documentHighlight",
     --   desc = "Next Reference", cond = function() return LazyVim.lsp.words.enabled end },

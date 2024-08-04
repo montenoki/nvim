@@ -1,15 +1,43 @@
 local icons = require('config').icons
 local lspKeymaps = require('plugins.lsp.keymaps')
+local keymaps = require('keymaps')
 local utils = require('utils')
 
 return {
     {
         'neovim/nvim-lspconfig',
-        event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' }, -- LazyFile
+        -- event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' }, -- LazyFile
+        lazy = false,
         dependencies = {
             'mason.nvim',
             { 'williamboman/mason-lspconfig.nvim', config = function() end },
+            -- main one
+            { 'ms-jpq/coq_nvim', branch = 'coq' },
+            -- 9000+ Snippets
+            { 'ms-jpq/coq.artifacts', branch = 'artifacts' },
+            -- lua & third party sources -- See https://github.com/ms-jpq/coq.thirdparty
+            -- Need to **configure separately**
+            { 'ms-jpq/coq.thirdparty', branch = '3p' },
+            -- - shell repl
+            -- - nvim lua api
+            -- - scientific calculator
+            -- - comment banner
+            -- - etc
         },
+        init = function()
+            vim.g.coq_settings = {
+                auto_start = true, -- if you want to start COQ at startup
+                -- TODO: fix bug for cmp
+                -- https://github.com/ms-jpq/coq_nvim/issues/589
+                -- Your COQ settings here
+                -- display = { ghost_text = { enabled = false } },
+                keymap = {
+                    manual_complete = 'null',
+                    bigger_preview = 'null',
+                    jump_to_mark = keymaps.cmp.jump_in,
+                },
+            }
+        end,
         opts = {
             document_highlight = {
                 enabled = true,
@@ -388,12 +416,31 @@ return {
             -- =======================================================================
             -- 初始化和能力设置
             local servers = opts.servers
-            local has_cmp, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
+            -- TODO: check if logic is correct
+            -- local has_cmp, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
+            local has_cmp, coq = pcall(require, 'coq')
+            local coq_default_capabilities = {
+                textDocument = {
+                    completion = {
+                        completionItem = {
+                            deprecatedSupport = true,
+                            insertReplaceSupport = true,
+                            insertTextModeSupport = { valueSet = { 1, 2 } },
+                            labelDetailsSupport = true,
+                            preselectSupport = true,
+                            resolveSupport = { properties = {} },
+                            snippetSupport = true,
+                            tagSupport = { valueSet = { 1 } },
+                        },
+                    },
+                },
+            }
             local capabilities = vim.tbl_deep_extend(
                 'force',
                 {},
                 vim.lsp.protocol.make_client_capabilities(),
-                has_cmp and cmp_nvim_lsp.default_capabilities() or {},
+                -- has_cmp and cmp_nvim_lsp.default_capabilities() or {},
+                has_cmp and coq_default_capabilities or {},
                 opts.capabilities or {}
             )
 

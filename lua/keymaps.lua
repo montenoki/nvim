@@ -12,8 +12,8 @@ M.window = {
 
     gotoLeftCtrl = '<C-h>',
     gotoLowerCtrl = '<C-j>',
-    gotoUpperCtrl = '<c-k>',
-    gotoRightCtrl = '<c-l>',
+    gotoUpperCtrl = '<C-k>',
+    gotoRightCtrl = '<C-l>',
 
     close = '<LEADER>wc',
     closeOther = '<LEADER>wo',
@@ -40,6 +40,7 @@ M.open = {
     moveWindow = '<LEADER>wm',
     nvimTree = '<LEADER>e',
     preview = '<TAB>',
+    navbuddy = '<LEADER>n',
 }
 
 M.whichkey = {
@@ -118,6 +119,19 @@ M.indentscope = {
   obj_scope_with_border = 'ai',
   goto_top = '[i',
   goto_btm = ']i',
+}
+M.session = {
+  save = '<LEADER>qs',
+  restore = '<LEADER>qr',
+  del = '<LEADER>qd',
+  show_all = '<LEADER>qa',
+}
+M.cmp = {
+  next_item = '<TAB>',
+  prev_item = '<S-TAB>',
+  confirm = '<CR>',
+  jump_in = '<C-j>',
+  esc = '<ESC>',
 }
 -- =============================================================================
 --   TODO
@@ -209,12 +223,7 @@ M.indentscope = {
 --   esc = '<ESC>',
 -- }
 -- M.neogit = { toggle = '<LEADER>g' }
--- M.session = {
---   save = '<LEADER>qs',
---   restore = '<LEADER>qr',
---   del = '<LEADER>qd',
---   show_all = '<LEADER>qa',
--- }
+
 -- M.todo = {
 --   show_todo = '<LEADER>st',
 --   show_all = '<LEADER>sT',

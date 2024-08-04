@@ -21,6 +21,7 @@ return {
         options = {
             mode = 'tabs',
                 -- stylua: ignore
+                -- TODO: refactor
                 close_command = function(n) utils.bufremove(n) end,
                 -- stylua: ignore
                 right_mouse_command = function(n) utils.bufremove(n) end,

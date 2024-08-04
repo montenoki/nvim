@@ -45,6 +45,7 @@ NVIM_APPNAME=montenoki/nvim/ nvim
 - **tar**: GNU version of the tar archiving utility
 - **unzip**: Extraction utility for .zip compressed archives
 - **wget**: Internet file retriever
+- sqlite: for cmp
 
 </details>
 
