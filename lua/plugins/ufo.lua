@@ -20,7 +20,7 @@ return {
         event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' }, -- LazyFile
         dependencies = { 'kevinhwang91/promise-async', 'luukvbaal/statuscol.nvim' },
         init = function()
-            vim.opt.foldcolumn = '0'
+            vim.opt.foldcolumn = '1'
             vim.opt.foldlevel = 99
             vim.opt.foldlevelstart = 99
             vim.opt.foldenable = true

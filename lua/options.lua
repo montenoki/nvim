@@ -231,7 +231,7 @@ opt.sidescrolloff = 999
 -- "yes:[1-9]"  总是，固定空间用于符号最多到给定的数字（最多 9），例如 "yes:3"
 --              “number”在“number”列中显示符号。
 --              如果不存在数字列，则行为类似于“auto”。
-opt.signcolumn = 'auto:2-9'
+opt.signcolumn = 'auto:1-9'
 
 -- 如果搜索模式包含大写字符，则覆盖 'ignorecase' 选项
 -- 仅在输入搜索模式并且 'ignorecase' 选项开启时使用。
