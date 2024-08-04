@@ -127,11 +127,7 @@ M.session = {
   show_all = '<LEADER>qa',
 }
 M.cmp = {
-  next_item = '<TAB>',
-  prev_item = '<S-TAB>',
-  confirm = '<CR>',
-  jump_in = '<C-p>',
-  esc = '<ESC>',
+  jump_in = '<C-n>',
 }
 M.notify = {
   dismiss_all = '<LEADER>un',

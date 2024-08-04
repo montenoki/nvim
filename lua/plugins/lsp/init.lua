@@ -32,9 +32,8 @@ return {
                 -- Your COQ settings here
                 -- display = { ghost_text = { enabled = false } },
                 keymap = {
-                    manual_complete = 'null',
                     bigger_preview = 'null',
-                    jump_to_mark = keymaps.cmp.jump_in,
+                    jump_to_mark = keymaps.cmp.jump_in
                 },
             }
         end,
