@@ -94,6 +94,11 @@ M.surround = {
     replace = 'gsr',
     update_n_lines = 'gsn',
 }
+M.ufo = {
+  open_all = 'zR',
+  close_all = 'zM',
+  peek = 'K',
+}
 M.lsp = {
     definition = 'gd',
     references = 'gr',
@@ -143,6 +148,14 @@ M.noice = {
 M.todo = {
   show_todo = '<LEADER>st',
   show_all = '<LEADER>sT',
+}
+M.gitsigns = {
+  next_hunk = ']h',
+  prev_hunk = '[h',
+  preview_hunk = '<LEADER>hp',
+  blame_line = '<LEADER>hb',
+  diff = '<LEADER>hD',
+  diff_tilde = '<LEADER>hd',
 }
 -- =============================================================================
 --   TODO
@@ -196,14 +209,6 @@ M.todo = {
 --   scroll_down = M.float_window.scroll_down,
 --   scroll_up = M.float_window.scroll_up,
 -- }
--- M.gitsigns = {
---   next_hunk = ']h',
---   prev_hunk = '[h',
---   preview_hunk = '<LEADER>hp',
---   blame_line = '<LEADER>hb',
---   diff = '<LEADER>hD',
---   diff_tilde = '<LEADER>hd',
--- }
 
 -- M.indentscope = {
 --   obj_scope = 'ii',
@@ -217,11 +222,6 @@ M.todo = {
 --   last_msg = '<LEADER>snl',
 --   history = '<LEADER>snh',
 --   dismiss_all = '<LEADER>snd',
--- }
--- M.ufo = {
---   open_all = 'zR',
---   close_all = 'zM',
---   peek = 'K',
 -- }
 -- M.cmp = {
 --   next_jump = '<TAB>',

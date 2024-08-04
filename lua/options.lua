@@ -317,13 +317,6 @@ vim.g.python3_host_prog = vim.env.HOME .. executablePath
 -- fix the problem that cant see last char when scrollbar on.
 -- opt.virtualedit = 'onemore'
 
--- TODO: 2024/07/28: 移动到fold文件中
--- opt.foldenable = true
--- opt.foldlevelstart = 99
--- opt.foldlevel = 99
--- opt.foldcolumn = '1'
--- opt.foldmethod = 'indent'
-
 -- -- TODO: 移动到lang/sh.lua
 -- -- Add extra filetypes
 -- vim.filetype.add({
