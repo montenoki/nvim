@@ -169,6 +169,7 @@ M.telescope = {
     autocmd = '<LEADER>sa',
     doc_diagnostics = '<LEADER>sd',
     workspace_diagnostics = '<LEADER>sD',
+    quickfix = '<LEADER>sq',
     highlights = '<LEADER>sh',
     keymaps = '<LEADER>sk',
     marks = '<LEADER>sm',

@@ -1,6 +1,9 @@
 local opt = vim.opt
 local tabWidth = 4
 
+-- TODO
+opt.breakindent = true
+
 -- Use system clipboard
 opt.clipboard = vim.env.SSH_TTY and '' or 'unnamedplus' -- Sync with system clipboard
 

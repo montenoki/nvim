@@ -33,7 +33,7 @@ return {
                 -- display = { ghost_text = { enabled = false } },
                 keymap = {
                     bigger_preview = 'null',
-                    jump_to_mark = keymaps.cmp.jump_in
+                    jump_to_mark = keymaps.cmp.jump_in,
                 },
             }
         end,
@@ -138,8 +138,6 @@ return {
                 options = options or {}
                 local filter = options.filter or {}
                 filter = type(filter) == 'string' and { name = filter } or filter
-                ---@cast filter lsp.Client.filter
-                ---@type LazyFormatter
                 local ret = {
                     name = 'LSP',
                     primary = true,
