@@ -47,6 +47,10 @@ function M.trunc(trunc_width, trunc_len, hide_width, no_ellipsis)
     end
 end
 
+function M.is_win()
+    return vim.uv.os_uname().sysname:find('Windows') ~= nil
+end
+
 function M.norm(path)
     if path:sub(1, 1) == '~' then
         local home = vim.uv.os_homedir()
@@ -415,4 +419,30 @@ function M.bufremove(buf)
     end
 end
 
+function M.randomColorscheme(colorschemes)
+    local count = #colorschemes
+    math.randomseed(os.time())
+    local randomIndex = math.random(1, count)
+    local colorscheme = colorschemes[randomIndex]
+    return colorscheme
+end
+function M.is_loaded(name)
+    local Config = require('lazy.core.config')
+    return Config.plugins[name] and Config.plugins[name]._.loaded
+end
+function M.on_load(name, fn)
+    if M.is_loaded(name) then
+        fn(name)
+    else
+        vim.api.nvim_create_autocmd('User', {
+            pattern = 'LazyLoad',
+            callback = function(event)
+                if event.data == name then
+                    fn(name)
+                    return true
+                end
+            end,
+        })
+    end
+end
 return M

@@ -22,36 +22,32 @@ vim.opt.rtp:prepend(lazyPath)
 require('options')
 require('autocmds')
 require('keybindings')
+
 local plugins = {
     { import = 'plugins' },
     { import = 'plugins.lang' },
-    -- { import = 'plugins.done' },
-    -- { import = 'plugins.ui' },
-    -- { import = 'plugins.coding' },
-    -- { import = 'plugins.util' },
-    -- { import = 'plugins.treesitter' },
-    -- { import = 'plugins.editor' },
 }
-
-if vim.g.vscode then
-    require('vscode')
+local osName = vim.loop.os_uname().sysname
+if string.find(string.lower(osName), 'windows') then
+    table.insert(plugins, { import = 'plugins.os.windows' })
+elseif osName == 'Darwin' then
+    table.insert(plugins, { import = 'plugins.os.mac' })
 else
-    -- table.insert(plugins, { import = 'lang' })
-    --
-    local osName = vim.loop.os_uname().sysname
-    if string.find(string.lower(osName), 'windows') then
-      table.insert(plugins, { import = 'plugins.os.windows' })
-    -- elseif osName == 'Darwin' then
-    --   table.insert(plugins, { import = 'os.mac' })
-    -- else
-    --   table.insert(plugins, { import = 'os.linux' })
-    end
-
-    require('lazy').setup(plugins)
+    table.insert(plugins, { import = 'plugins.os.linux' })
 end
+require('lazy').setup(plugins)
 
--- vim.cmd('colorscheme kanagawa')
--- vim.cmd[[colorscheme dracula-soft]]
-vim.cmd([[colorscheme dracula]])
--- vim.cmd[[colorscheme everforest]]
--- vim.cmd.colorscheme('gruvbox-material')
+-- if vim.g.vscode then
+--     require('vscode')
+-- end
+
+local colorSchemes = {
+    'nightfox',
+    'kanagawa',
+    'dracula',
+    'everforest',
+    'gruvbox-material',
+}
+local colorScheme = require('utils').randomColorscheme(colorSchemes)
+
+vim.cmd.colorscheme(colorScheme)

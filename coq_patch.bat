@@ -1,5 +1,5 @@
 :: symlink-workaround.bat
-cd /d "%~dp0"
+cd ~/AppData/Local/nvim-data/lazy/coq_nvim
 copy  coq\clients\buffers\db\sql\create\pragma.sql coq\clients\cache\db\sql\create\pragma.sql 
 copy  coq\clients\buffers\db\sql\create\pragma.sql coq\clients\registers\db\sql\create\pragma.sql 
 copy  coq\clients\snippet\db\sql\create\pragma.sql coq\clients\tags\db\sql\create\pragma.sql 

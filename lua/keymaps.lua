@@ -95,9 +95,9 @@ M.surround = {
     update_n_lines = 'gsn',
 }
 M.ufo = {
-  open_all = 'zR',
-  close_all = 'zM',
-  peek = 'K',
+    open_all = 'zR',
+    close_all = 'zM',
+    peek = 'K',
 }
 M.lsp = {
     definition = 'gd',
@@ -120,42 +120,68 @@ M.format = {
     format_injected = '<LEADER>cf',
 }
 M.indentscope = {
-  obj_scope = 'ii',
-  obj_scope_with_border = 'ai',
-  goto_top = '[i',
-  goto_btm = ']i',
+    obj_scope = 'ii',
+    obj_scope_with_border = 'ai',
+    goto_top = '[i',
+    goto_btm = ']i',
 }
 M.session = {
-  save = '<LEADER>qs',
-  restore = '<LEADER>qr',
-  del = '<LEADER>qd',
-  show_all = '<LEADER>qa',
+    save = '<LEADER>qs',
+    restore = '<LEADER>qr',
+    del = '<LEADER>qd',
+    show_all = '<LEADER>qa',
 }
 M.cmp = {
-  jump_in = '<C-n>',
+    jump_in = '<C-n>',
 }
 M.notify = {
-  dismiss_all = '<LEADER>un',
-  show_all = '<LEADER>sna',
+    dismiss_all = '<LEADER>un',
+    show_all = '<LEADER>sna',
 }
 
 M.noice = {
-  redirect_cmdline = '<C-2>',
-  last_msg = '<LEADER>snl',
-  history = '<LEADER>snh',
-  dismiss_all = '<LEADER>snd',
+    redirect_cmdline = '<C-2>',
+    last_msg = '<LEADER>snl',
+    history = '<LEADER>snh',
+    dismiss_all = '<LEADER>snd',
 }
 M.todo = {
-  show_todo = '<LEADER>st',
-  show_all = '<LEADER>sT',
+    show_todo = '<LEADER>st',
+    show_all = '<LEADER>sT',
 }
 M.gitsigns = {
-  next_hunk = ']h',
-  prev_hunk = '[h',
-  preview_hunk = '<LEADER>hp',
-  blame_line = '<LEADER>hb',
-  diff = '<LEADER>hD',
-  diff_tilde = '<LEADER>hd',
+    next_hunk = ']h',
+    prev_hunk = '[h',
+    preview_hunk = '<LEADER>hp',
+    blame_line = '<LEADER>hb',
+    diff = '<LEADER>hD',
+    diff_tilde = '<LEADER>hd',
+}
+M.telescope = {
+    switch_buffer = '<LEADER>,',
+    grep = '<LEADER>/',
+    find = '<LEADER>?',
+    commands = '<LEADER>:',
+    commands_history = '<LEADER>;',
+    git_commits = '<LEADER>sc',
+    git_status = '<LEADER>ss',
+    registers = '<LEADER>s"',
+    autocmd = '<LEADER>sa',
+    doc_diagnostics = '<LEADER>sd',
+    workspace_diagnostics = '<LEADER>sD',
+    highlights = '<LEADER>sh',
+    keymaps = '<LEADER>sk',
+    marks = '<LEADER>sm',
+    options = '<LEADER>so',
+    colorscheme = '<LEADER>uC',
+    select_tab = '<C-t>',
+    move_selection_next = '<C-j>',
+    move_selection_previous = '<C-k>',
+    cycle_history_next = '<S-TAB>',
+    cycle_history_prev = '<TAB>',
+    select_vertical = '<C-v>',
+    select_horizontal = '<C-h>',
+    close = 'q',
 }
 -- =============================================================================
 --   TODO
@@ -179,37 +205,6 @@ M.gitsigns = {
 --   format_injected = '<LEADER>cf',
 -- }
 
--- M.telescope = {
---   switch_buffer = '<LEADER>,',
---   grep = '<LEADER>/',
---   find = '<LEADER>?',
---   commands = '<LEADER>:',
---   commands_history = '<LEADER>;',
---   git_commits = '<LEADER>sc',
---   git_status = '<LEADER>ss',
---   registers = '<LEADER>s"',
---   autocmd = '<LEADER>sa',
---   doc_diagnostics = '<LEADER>sd',
---   workspace_diagnostics = '<LEADER>sD',
---   highlights = '<LEADER>sh',
---   keymaps = '<LEADER>sk',
---   marks = '<LEADER>sm',
---   options = '<LEADER>so',
---   colorscheme = '<LEADER>uC',
---   select_tab = '<C-t>',
---   move_selection_next = '<C-j>',
---   move_selection_previous = '<C-k>',
---   cycle_history_next = '<S-TAB>',
---   cycle_history_prev = '<TAB>',
---   select_vertical = '<C-v>',
---   select_horizontal = '<C-h>',
---   close = 'q',
---   scroll_left = M.float_window.scroll_left,
---   scroll_right = M.float_window.scroll_right,
---   scroll_down = M.float_window.scroll_down,
---   scroll_up = M.float_window.scroll_up,
--- }
-
 -- M.indentscope = {
 --   obj_scope = 'ii',
 --   obj_scope_with_border = 'ai',
@@ -231,7 +226,6 @@ M.gitsigns = {
 --   esc = '<ESC>',
 -- }
 -- M.neogit = { toggle = '<LEADER>g' }
-
 
 -- M.project = {
 --   show = '<LEADER>sp',
