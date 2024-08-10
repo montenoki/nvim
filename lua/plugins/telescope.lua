@@ -161,8 +161,6 @@ return {
                             [keymaps.telescope.cycle_history_prev] = actions.cycle_history_prev,
                             [keymaps.telescope.select_vertical] = actions.select_vertical,
                             [keymaps.telescope.select_horizontal] = actions.select_horizontal,
-                            -- [keymaps.floatWindow.scrollLeft] = actions.preview_scrolling_left,
-                            -- [keymaps.floatWindow.scrollRight] = actions.preview_scrolling_right,
                             [keymaps.floatWindow.scrollDown] = actions.preview_scrolling_down,
                             [keymaps.floatWindow.scrollUp] = actions.preview_scrolling_up,
                         },

@@ -41,6 +41,7 @@ M.open = {
     nvimTree = '<LEADER>e',
     preview = '<TAB>',
     navbuddy = '<LEADER>n',
+    neogit = '<LEADER>g',
 }
 
 M.whichkey = {
@@ -184,6 +185,31 @@ M.telescope = {
     select_horizontal = '<C-h>',
     close = 'q',
 }
+M.dap = {
+    ui = '<LEADER>du',
+    eval = '<LEADER>de',
+    breakpoint_cond = '<LEADER>dB',
+    breakpoint = '<LEADER>db',
+    continue = '<LEADER>dc',
+    run_with_args = '<LEADER>da',
+    run_to_cursor = '<LEADER>dC',
+    goto_line = '<LEADER>dg',
+    step_into = '<LEADER>di',
+    down = '<LEADER>dj',
+    up = '<LEADER>dk',
+    run_last = '<LEADER>dl',
+    step_out = '<LEADER>do',
+    step_over = '<LEADER>dO',
+    pause = '<LEADER>dp',
+    repl = '<LEADER>dr',
+    session = '<LEADER>ds',
+    terminate = '<LEADER>dt',
+    widgets = '<LEADER>dw',
+}
+M.python = {
+    venv_select = '<LEADER>cv',
+    
+}
 -- =============================================================================
 --   TODO
 -- =============================================================================
@@ -226,7 +252,6 @@ M.telescope = {
 --   toggle = '<C-.>',
 --   esc = '<ESC>',
 -- }
--- M.neogit = { toggle = '<LEADER>g' }
 
 -- M.project = {
 --   show = '<LEADER>sp',
@@ -235,27 +260,6 @@ M.telescope = {
 --   toggle = '<LEADER>uc',
 -- }
 
--- M.dap = {
---   ui = '<LEADER>du',
---   eval = '<LEADER>de',
---   breakpoint_cond = '<LEADER>dB',
---   breakpoint = '<LEADER>db',
---   continue = '<LEADER>dc',
---   run_with_args = '<LEADER>da',
---   run_to_cursor = '<LEADER>dC',
---   goto_line = '<LEADER>dg',
---   step_into = '<LEADER>di',
---   down = '<LEADER>dj',
---   up = '<LEADER>dk',
---   run_last = '<LEADER>dl',
---   step_out = '<LEADER>do',
---   step_over = '<LEADER>dO',
---   pause = '<LEADER>dp',
---   repl = '<LEADER>dr',
---   session = '<LEADER>ds',
---   terminate = '<LEADER>dt',
---   widgets = '<LEADER>dw',
--- }
 -- M.diagnostic = {
 --   show_line_diag = '<LEADER>xd',
 --   next_diag = ']d',

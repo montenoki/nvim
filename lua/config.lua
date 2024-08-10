@@ -9,6 +9,20 @@ M.icons = {
         BreakpointRejected = { ' ', 'DiagnosticError' },
         LogPoint = '.>',
     },
+    dapUI = {
+        controls = {
+            disconnect = '',
+            pause = '',
+            play = '',
+            run_last = '',
+            step_back = '',
+            step_into = '',
+            step_out = '',
+            step_over = '',
+            terminate = '',
+        },
+        status = { collapsed = '', current_frame = '', expanded = '' },
+    },
     diagnostics = { Error = ' ', Warn = ' ', Hint = '󱩎 ', Info = ' ' },
     git = { added = ' ', modified = ' ', removed = ' ' },
     kinds = {

@@ -2,20 +2,53 @@ local lazyvim = require('lazyvim')
 
 return {
   {
-    'williamboman/mason.nvim',
-    opts = function(_, opts)
-      if type(opts.ensure_installed) == 'table' then
-        vim.list_extend(opts.ensure_installed, { 'ruff' })
+    "linux-cultist/venv-selector.nvim",
+    dependencies = {
+      "neovim/nvim-lspconfig",
+      { "nvim-telescope/telescope.nvim", branch = "0.1.x", dependencies = { "nvim-lua/plenary.nvim" } },
+      "mfussenegger/nvim-dap",
+      "mfussenegger/nvim-dap-python",
+    },
+    lazy = false,
+    dev = true,
+    branch = "regexp",
+    config = function()
+      local function on_venv_activate()
+        local command_run = false
+
+        local function run_shell_command()
+          local source = require("venv-selector").source()
+          local python = require("venv-selector").python()
+          
+          if source == "poetry" and command_run == false then
+            local command = "poetry env use " .. python
+            vim.api.nvim_feedkeys(command .. "\n", "n", false)
+            command_run = true
+          end
+          
+        end
+
+        vim.api.nvim_create_augroup("TerminalCommands", { clear = true })
+
+        vim.api.nvim_create_autocmd("TermEnter", {
+          group = "TerminalCommands",
+          pattern = "*",
+          callback = run_shell_command,
+        })
       end
+
+      
+      require("venv-selector").setup {
+        settings = {
+          options = {
+            on_venv_activate_callback = on_venv_activate,
+          },
+        },
+      }
     end,
-  },
-  {
-    'nvim-treesitter/nvim-treesitter',
-    opts = function(_, opts)
-      if type(opts.ensure_installed) == 'table' then
-        vim.list_extend(opts.ensure_installed, { 'python', 'toml' })
-      end
-    end,
+    keys = {
+      { ",v", "<cmd>VenvSelect<cr>" },
+    },
   },
   {
     'neovim/nvim-lspconfig',

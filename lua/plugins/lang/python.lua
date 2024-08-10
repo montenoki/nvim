@@ -6,19 +6,27 @@ return {
         'linux-cultist/venv-selector.nvim',
         branch = 'regexp', -- Use this branch for the new version
         cmd = 'VenvSelect',
-        -- enabled = function()
-        --   return utils.has('telescope.nvim')
-        -- end,
-        opts = {
-            settings = {
-                options = {
-                    notify_user_on_venv_activation = true,
-                },
-            },
-        },
+        lazy = false,
         --  Call config for python files and load the cached venv automatically
         ft = 'python',
-        keys = { { '<leader>cv', '<cmd>:VenvSelect<cr>', desc = 'Select VirtualEnv', ft = 'python' } },
+        keys = { { keymaps.python.venv_select, '<cmd>:VenvSelect<cr>', desc = 'Select VirtualEnv', ft = 'python' } },
+        init = function()
+            vim.g.python_version = ''
+        end,
+        config = function()
+            local function on_venv_activate()
+                local python_exec = require('venv-selector').python()
+                vim.g.python_version = utils.getPythonVersion(python_exec)
+            end
+
+            require('venv-selector').setup({
+                settings = {
+                    options = {
+                        on_venv_activate_callback = on_venv_activate,
+                    },
+                },
+            })
+        end,
     },
     -- ===========================================================================
     -- treesitter
@@ -68,9 +76,9 @@ return {
             },
         },
     },
-    -- ===========================================================================
+    -- =========================================================================
     -- formatter
-    -- ===========================================================================
+    -- =========================================================================
     {
         'stevearc/conform.nvim',
         opts = function(_, opts)
@@ -80,7 +88,37 @@ return {
             end
         end,
     },
-    -- ===========================================================================
+    -- =========================================================================
+    -- dap
+    -- =========================================================================
+    {
+        'mfussenegger/nvim-dap',
+        dependencies = {
+            'mfussenegger/nvim-dap-python',
+            keys = {
+                {
+                    '<leader>dPt',
+                    function()
+                        require('dap-python').test_method()
+                    end,
+                    desc = 'Debug Method',
+                    ft = 'python',
+                },
+                {
+                    '<leader>dPc',
+                    function()
+                        require('dap-python').test_class()
+                    end,
+                    desc = 'Debug Class',
+                    ft = 'python',
+                },
+            },
+            config = function()
+                utils.ensureDebugpy(require('venv-selector').python())
+                require('dap-python').setup(require('venv-selector').python())
+            end,
+        },
+    }, -- ===========================================================================
     -- mason
     -- ===========================================================================
     {
@@ -98,15 +136,17 @@ return {
         'lualine.nvim',
         opts = function(_, opts)
             table.insert(opts.sections.lualine_x, {
-                'venv-selector',
-                -- cond = function()
-                --   return vim.bo.filetype == 'python'
-                -- end,
-                -- on_click = function()
-                --   vim.cmd.VenvSelect()
-                -- end,
-                -- color = utils.fg('character'),
-                -- fmt = utils.trunc(80, 5, 80),
+                function()
+                    return vim.g.python_version
+                end,
+                cond = function()
+                    return vim.bo.filetype == 'python'
+                end,
+                on_click = function()
+                    vim.cmd.VenvSelect()
+                end,
+                icon = '🐍',
+                color = utils.fg('character'),
             })
         end,
     },

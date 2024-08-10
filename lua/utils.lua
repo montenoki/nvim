@@ -458,4 +458,102 @@ function M.find_command()
         return { 'where', '/r', '.', '*' }
     end
 end
+function M.getArgs(config)
+    local args = type(config.args) == 'function' and (config.args() or {}) or config.args or {}
+    config = vim.deepcopy(config)
+
+    config.args = function()
+        ---@diagnostic disable-next-line: param-type-mismatch
+        local new_args = vim.fn.input('Run with args: ', table.concat(args, ' '))
+        return vim.split(vim.fn.expand(new_args), ' ')
+    end
+    return config
+end
+function M.opts(name)
+    local plugin = M.getPlugin(name)
+    if not plugin then
+        return {}
+    end
+    local Plugin = require('lazy.core.plugin')
+    return Plugin.values(plugin, 'opts', false)
+end
+
+function M.ensureDebugpy(python_exec)
+    -- Check if the Python executable exists
+    if vim.fn.executable(python_exec) ~= 1 then
+        M.warn('Python executable not found: ' .. python_exec)
+        return false
+    end
+
+    local check_cmd = python_exec .. ' -c "import debugpy; print(debugpy.__file__)"'
+    local handle = io.popen(check_cmd)
+    local result = nil
+    if handle then
+        result = handle:read('*a')
+        handle:close()
+    else
+        M.warn('Failed to execute the command to check for debugpy.')
+        return false
+    end
+    if result and result:match('debugpy') then
+        M.info('debugpy is ready.')
+        return true
+    else
+        M.info('debugpy is not installed. Attempting to install...')
+        local install_cmd = python_exec .. ' -m pip install debugpy'
+        handle = io.popen(install_cmd)
+        if handle then
+            result = handle:read('*a')
+            handle:close()
+            -- Check if installation was successful
+            if result and result:match('Successfully installed debugpy') then
+                M.info('debugpy has been successfully installed.')
+                return true
+            else
+                M.warn('Failed to install debugpy. Error: ' .. (result or 'Unknown error'))
+                return false
+            end
+        else
+            M.warn('Failed to execute the command to install debugpy.')
+            return false
+        end
+    end
+end
+
+function M.getPythonVersion(python_exec)
+    -- Check if the Python executable exists
+    if vim.fn.executable(python_exec) ~= 1 then
+        M.warn('Python executable not found: ' .. python_exec)
+        return nil
+    end
+
+    -- Construct the command to get Python version
+    local cmd = python_exec .. ' -V'
+
+    -- Execute the command
+    local handle = io.popen(cmd)
+    local result = nil
+    if handle then
+        result = handle:read('*a')
+        handle:close()
+    else
+        M.warn('Failed to execute the command to get Python version.')
+        return nil
+    end
+
+    -- Parse the result
+    if result then
+        local version = result:match('Python (%d+%.%d+%.%d+)')
+        if version then
+            return version
+        else
+            M.warn('Failed to parse Python version information.')
+            return nil
+        end
+    else
+        M.warn('No output received from Python version command.')
+        return nil
+    end
+end
+
 return M
