@@ -135,6 +135,7 @@ M.session = {
 }
 M.cmp = {
     jump_in = '<C-n>',
+    prev_jump = '<S-TAB>',
 }
 M.notify = {
     dismiss_all = '<LEADER>un',
