@@ -119,7 +119,7 @@ M.lsp = {
 M.format = {
     format = '<LEADER>f',
     format_injected = '<LEADER>cf',
-    format_cjk = '<LEADER>cF'
+    format_cjk = '<LEADER>cF',
 }
 M.indentscope = {
     obj_scope = 'ii',
@@ -232,6 +232,9 @@ M.python = {
     venv_select = '<LEADER>cv',
     test_method = '<LEADER>dPt',
     test_class = '<LEADER>dPc',
+}
+M.markdown = {
+    preview = '<LEADER>cp',
 }
 -- =============================================================================
 --   TODO

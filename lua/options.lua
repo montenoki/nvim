@@ -135,7 +135,7 @@ opt.ignorecase = true
 -- 1: only if there are at least two windows
 -- 2: always
 -- 3: always and ONLY the last window
-opt.laststatus = 2
+opt.laststatus = 3
 
 -- 如果开启，Vim 将在 'breakat' 中的字符处换行，
 -- 而不是在屏幕上能容纳的最后一个字符处换行。
@@ -193,7 +193,7 @@ opt.number = true
 
 -- 弹出菜单中显示的最大项目数
 -- 0表示“使用可用的屏幕空间”
-opt.pumheight = 0
+opt.pumheight = 5
 
 -- 光标所在行显示相对行号
 opt.relativenumber = true

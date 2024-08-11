@@ -31,6 +31,10 @@ return {
                 node_decremental = keymaps.incrementalSelection.nodeDecremental,
             },
         },
+        ensure_installed = {
+            'regex',
+            'bash',
+        },
     },
     config = function(_, opts)
         if type(opts.ensure_installed) == 'table' then
