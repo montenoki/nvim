@@ -16,8 +16,8 @@ return {
         end,
         -- stylua: ignore
         keys = {
-            { keymaps.dap.breakpoint, function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint" },
-            { keymaps.dap.breakpoint_cond, function() require("dap").set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, desc = "Breakpoint Condition" },
+            -- { keymaps.dap.breakpoint, function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint" },
+            -- { keymaps.dap.breakpoint_cond, function() require("dap").set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, desc = "Breakpoint Condition" },
             { keymaps.dap.continue, function() require("dap").continue() end, desc = "Continue" },
             { keymaps.dap.run_with_args, function() require("dap").continue({ before = utils.getArgs }) end, desc = "Run with Args" },
             { keymaps.dap.run_to_cursor, function() require("dap").run_to_cursor() end, desc = "Run to Cursor" },
@@ -112,5 +112,23 @@ return {
             ensure_installed = {},
         },
         config = function() end,
+    },
+    {
+        'Weissle/persistent-breakpoints.nvim',
+        opts = {
+            load_breakpoints_event = { 'BufReadPost' },
+        },
+        keys = {
+            {
+                keymaps.dap.breakpoint,
+                "<cmd>lua require('persistent-breakpoints.api').toggle_breakpoint()<cr>",
+                desc = 'Toggle Breakpoint',
+            },
+            {
+                keymaps.dap.breakpoint_cond,
+                "<cmd>lua require('persistent-breakpoints.api').set_conditional_breakpoint()<cr>",
+                desc = 'Breakpoint Condition',
+            },
+        },
     },
 }

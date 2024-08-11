@@ -1,4 +1,5 @@
 local keymaps = require('keymaps')
+local utils = require('utils')
 
 return {
     {
@@ -61,6 +62,7 @@ return {
     {
         'epwalsh/obsidian.nvim',
         version = '*', -- recommended, use latest release instead of latest commit
+        cond = vim.g.obsidian_vault ~= nil and utils.cwd() == vim.g.obsidian_vault,
         lazy = true,
         ft = 'markdown',
         -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
@@ -78,10 +80,12 @@ return {
             -- see below for full list of optional dependencies 👇
         },
         opts = {
+            ui = { enabled = false },
             workspaces = {
                 {
                     name = 'personal',
-                    path = '~/Library/Mobile Documents/iCloud~md~obsidian/Documents/TensNote',
+                    -- path = '~/Library/Mobile Documents/iCloud~md~obsidian/Documents/TensNote',
+                    path = vim.g.obsidian_vault,
                 },
             },
 

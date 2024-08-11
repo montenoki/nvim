@@ -34,6 +34,8 @@ return {
         ensure_installed = {
             'regex',
             'bash',
+            'json',
+            'latex',
         },
     },
     config = function(_, opts)

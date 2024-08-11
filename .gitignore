@@ -1,4 +1,2 @@
-plugin/packer_compiled.lua
+lua/local_config.lua
 .DS_Store
-flg/enabled/*
-!flg/enabled/.gitkeep

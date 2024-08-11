@@ -1,9 +1,3 @@
-<!-- markdownlint-disable MD013 -->
-
-<!-- markdownlint-disable MD024 -->
-
-<!-- markdownlint-disable MD033 -->
-
 # nvim
 
 `<a href="https://dotfyle.com/montenoki/nvim"><img src="https://dotfyle.com/montenoki/nvim/badges/plugins?style=flat" alt="plugins"/>``</a>`
