@@ -97,7 +97,7 @@ return {
             'mfussenegger/nvim-dap-python',
             keys = {
                 {
-                    '<leader>dPt',
+                    keymaps.python.test_method,
                     function()
                         require('dap-python').test_method()
                     end,
@@ -105,7 +105,7 @@ return {
                     ft = 'python',
                 },
                 {
-                    '<leader>dPc',
+                    keymaps.python.test_class,
                     function()
                         require('dap-python').test_class()
                     end,

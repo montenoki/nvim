@@ -37,6 +37,21 @@ map('n', keymaps.tab.close, '<CMD>tabclose<CR>', { desc = 'Close Tab' })
 map('n', keymaps.tab.prev, '<CMD>tabprev<CR>', { desc = 'Previous Tab' })
 map('n', keymaps.tab.next, '<CMD>tabnext<CR>', { desc = 'Next Tab' })
 
+local function diagnosticGoto(next, severity)
+    local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
+    severity = severity and vim.diagnostic.severity[severity] or nil
+    return function()
+        go({ severity = severity })
+    end
+end
+map('n', keymaps.trouble.show_line_diag, vim.diagnostic.open_float, { desc = 'Line Diagnostics' })
+map('n', keymaps.trouble.next_diag, diagnosticGoto(true), { desc = 'Next Diagnostic' })
+map('n', keymaps.trouble.prev_diag, diagnosticGoto(false), { desc = 'Prev Diagnostic' })
+map('n', keymaps.trouble.next_error, diagnosticGoto(true, 'ERROR'), { desc = 'Next Error' })
+map('n', keymaps.trouble.prev_error, diagnosticGoto(false, 'ERROR'), { desc = 'Prev Error' })
+map('n', keymaps.trouble.next_warn, diagnosticGoto(true, 'WARN'), { desc = 'Next Warning' })
+map('n', keymaps.trouble.prev_warn, diagnosticGoto(false, 'WARN'), { desc = 'Prev Warning' })
+
 -- Format
 map({ 'n', 'v' }, keymaps.format.format, function()
     utils.format({ force = true })
@@ -105,18 +120,6 @@ map('o', 'N', "'nN'[v:searchforward]", { expr = true, desc = 'Prev search result
 -- map('n', keymaps.window.inc_width, '<CMD>vertical resize -2<CR>', { desc = 'Decrease window width' })
 -- map('n', keymaps.window.dec_width, '<CMD>vertical resize +2<CR>', { desc = 'Increase window width' })
 
--- -- Diagnostic
--- ---@param next boolean
--- ---@param severity string | integer | nil
--- ---@return function
--- local function diagnosticGoto(next, severity)
---   local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
---   severity = severity and vim.diagnostic.severity[severity] or nil
---   return function()
---     go({ severity = severity })
---   end
--- end
-
 -- TODO: Add a toggle to enable/disable autopairs
 -- LazyVim.toggle.map('<leader>up', {
 --   name = 'Mini Pairs',
@@ -127,14 +130,6 @@ map('o', 'N', "'nN'[v:searchforward]", { expr = true, desc = 'Prev search result
 --     vim.g.minipairs_disable = not state
 --   end,
 -- })
-
--- map('n', keymaps.diagnostic.show_line_diag, vim.diagnostic.open_float, { desc = 'Line Diagnostics' })
--- map('n', keymaps.diagnostic.next_diag, diagnosticGoto(true), { desc = 'Next Diagnostic' })
--- map('n', keymaps.diagnostic.prev_diag, diagnosticGoto(false), { desc = 'Prev Diagnostic' })
--- map('n', keymaps.diagnostic.next_error, diagnosticGoto(true, 'ERROR'), { desc = 'Next Error' })
--- map('n', keymaps.diagnostic.prev_error, diagnosticGoto(false, 'ERROR'), { desc = 'Prev Error' })
--- map('n', keymaps.diagnostic.next_warn, diagnosticGoto(true, 'WARN'), { desc = 'Next Warning' })
--- map('n', keymaps.diagnostic.prev_warn, diagnosticGoto(false, 'WARN'), { desc = 'Prev Warning' })
 
 -- -- toggle options
 -- map('n', keymaps.toggle.spelling, function()

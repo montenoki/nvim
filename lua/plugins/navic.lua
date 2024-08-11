@@ -12,7 +12,7 @@ return {
                 preference = nil,
             },
             highlight = true,
-            depth_limit = 5,
+            depth_limit = 3,
             click = true,
         },
     },

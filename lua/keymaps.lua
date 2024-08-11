@@ -119,6 +119,7 @@ M.lsp = {
 M.format = {
     format = '<LEADER>f',
     format_injected = '<LEADER>cf',
+    format_cjk = '<LEADER>cF'
 }
 M.indentscope = {
     obj_scope = 'ii',
@@ -176,7 +177,9 @@ M.telescope = {
     marks = '<LEADER>sm',
     options = '<LEADER>so',
     colorscheme = '<LEADER>uC',
-    select_tab = '<C-t>',
+    open_with_tab = '<C-t>',
+    open_with_trouble = '<C-x>',
+    add_to_trouble = '<C-a>',
     move_selection_next = '<C-j>',
     move_selection_previous = '<C-k>',
     cycle_history_next = '<S-TAB>',
@@ -206,9 +209,28 @@ M.dap = {
     terminate = '<LEADER>dt',
     widgets = '<LEADER>dw',
 }
+M.trouble = {
+    show_line_diag = '<LEADER>xx',
+    document_trouble = '<LEADER>xd',
+    workspace_trouble = '<LEADER>xw',
+    symbols = '<LEADER>cs',
+    lsp_symbols = '<LEADER>cS',
+    loclist = '<LEADER>xl',
+    quickfix = '<LEADER>xq',
+
+    next_trouble = '[q',
+    prev_trouble = ']q',
+    next_diag = ']d',
+    prev_diag = '[d',
+    next_error = ']e',
+    prev_error = '[e',
+    next_warn = ']w',
+    prev_warn = '[w',
+}
 M.python = {
     venv_select = '<LEADER>cv',
-    
+    test_method = '<LEADER>dPt',
+    test_class = '<LEADER>dPc',
 }
 -- =============================================================================
 --   TODO
@@ -220,18 +242,6 @@ M.python = {
 -- dec_width = '<C-RIGHT>',
 --
 
--- -- =============================================================================
--- --   Plugins
--- -- =============================================================================
--- M.treesitter = {
-
--- }
-
--- M.format = {
---   format = '<LEADER>f',
---   format_injected = '<LEADER>cf',
--- }
-
 -- M.indentscope = {
 --   obj_scope = 'ii',
 --   obj_scope_with_border = 'ai',
@@ -239,35 +249,11 @@ M.python = {
 --   goto_btm = ']i',
 -- }
 
--- M.noice = {
---   redirect_cmdline = '<C-2>',
---   last_msg = '<LEADER>snl',
---   history = '<LEADER>snh',
---   dismiss_all = '<LEADER>snd',
--- }
--- M.cmp = {
---   next_jump = '<TAB>',
---   prev_jump = '<S-TAB>',
---   confirm = '<CR>',
---   toggle = '<C-.>',
---   esc = '<ESC>',
--- }
-
 -- M.project = {
 --   show = '<LEADER>sp',
 -- }
 -- M.colorizer = {
 --   toggle = '<LEADER>uc',
--- }
-
--- M.diagnostic = {
---   show_line_diag = '<LEADER>xd',
---   next_diag = ']d',
---   prev_diag = '[d',
---   next_error = ']e',
---   prev_error = '[e',
---   next_warn = ']w',
---   prev_warn = '[w',
 -- }
 
 return M

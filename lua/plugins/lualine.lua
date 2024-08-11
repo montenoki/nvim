@@ -26,8 +26,7 @@ return {
                 component_separators = { left = '', right = '' },
                 section_separators = { left = '', right = '' },
                 globalstatus = true,
-                -- TODO:在dap-repl中添加：'dap-repl'
-                disabled_filetypes = { winbar = {} },
+                disabled_filetypes = { winbar = { 'dap-repl' } },
             },
             extensions = {
                 'lazy',

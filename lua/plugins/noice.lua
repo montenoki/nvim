@@ -39,7 +39,7 @@ return {
         event = 'VeryLazy',
         dependencies = {
             'rcarriga/nvim-notify',
-            'MunifTanjim/nui.nvim',
+            { 'MunifTanjim/nui.nvim' },
         },
         opts = {
             lsp = {
@@ -75,6 +75,7 @@ return {
                             { find = '%d more lines' },
                             { find = '--No lines in buffer--' },
                             { find = 'File Formatted' },
+                            { find = 'Mark' },
                         },
                     },
                     view = 'mini',
@@ -135,30 +136,37 @@ return {
                     },
                 },
             },
+            views = {
+                popupmenu = {
+                    size = {
+                        height = 5,
+                    },
+                },
+            },
         },
     -- stylua: ignore
-    keys = {
-      { keymaps.noice.redirect_cmdline, function() require("noice").redirect(vim.fn.getcmdline()) end, mode = "c", desc = "Redirect Cmdline" },
-      { keymaps.noice.last_msg, function() require("noice").cmd("last") end, desc = "Noice Last Message" },
-      { keymaps.noice.history, function() require("noice").cmd("history") end, desc = "Noice History" },
-      { keymaps.noice.dismiss_all, function() require("noice").cmd("dismiss") end, desc = "Dismiss All Noice" },
-      {
-        keymaps.floatWindow.scrollDown,
-        function() if not require("noice.lsp").scroll(4) then return "<C-f>" end end,
-        silent = true,
-        expr = true,
-        desc = "Scroll forward",
-        mode = { "i", "n", "s" },
-      },
-      {
-        keymaps.floatWindow.scrollUp,
-        function() if not require("noice.lsp").scroll(-4) then return "<C-b>" end end,
-        silent = true,
-        expr = true,
-        desc = "Scroll backward",
-        mode = { "i", "n", "s" },
-      },
-    },
+        keys = {
+            { keymaps.noice.redirect_cmdline, function() require("noice").redirect(vim.fn.getcmdline()) end, mode = "c", desc = "Redirect Cmdline" },
+            { keymaps.noice.last_msg, function() require("noice").cmd("last") end, desc = "Noice Last Message" },
+            { keymaps.noice.history, function() require("noice").cmd("history") end, desc = "Noice History" },
+            { keymaps.noice.dismiss_all, function() require("noice").cmd("dismiss") end, desc = "Dismiss All Noice" },
+            {
+                keymaps.floatWindow.scrollDown,
+                function() if not require("noice.lsp").scroll(4) then return "<C-f>" end end,
+                silent = true,
+                expr = true,
+                desc = "Scroll forward",
+                mode = { "i", "n", "s" },
+            },
+            {
+                keymaps.floatWindow.scrollUp,
+                function() if not require("noice.lsp").scroll(-4) then return "<C-b>" end end,
+                silent = true,
+                expr = true,
+                desc = "Scroll backward",
+                mode = { "i", "n", "s" },
+            },
+        },
     },
 
     {

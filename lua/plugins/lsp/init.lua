@@ -27,10 +27,16 @@ return {
         init = function()
             vim.g.coq_settings = {
                 auto_start = true, -- if you want to start COQ at startup
-                -- TODO: fix bug for cmp
+                -- fix bug for cmp
                 -- https://github.com/ms-jpq/coq_nvim/issues/589
                 -- Your COQ settings here
-                -- display = { ghost_text = { enabled = false } },
+                display = {
+                    pum = {
+                        y_max_len = 5, --受到 noice poppumenu的影响
+                        y_ratio = 1,
+                    },
+                    statusline = { helo = false },
+                },
                 keymap = {
                     bigger_preview = 'null',
                     jump_to_mark = keymaps.cmp.jump_in,

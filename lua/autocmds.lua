@@ -23,6 +23,7 @@ vim.api.nvim_create_autocmd('BufEnter', {
     callback = function()
         vim.opt.formatoptions = { c = true, r = true, q = true, n = true, m = true, M = true, j = true }
         vim.opt.breakindent = true
+        vim.opt.pumheight = 3
     end,
 })
 -- =============================================================================

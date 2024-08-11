@@ -137,6 +137,8 @@ return {
         end,
         opts = function()
             local actions = require('telescope.actions')
+            local open_with_trouble = require('trouble.sources.telescope').open
+            local add_to_trouble = require("trouble.sources.telescope").add
             return {
                 defaults = {
                     prompt_prefix = ' ',
@@ -154,7 +156,7 @@ return {
                     end,
                     mappings = {
                         i = {
-                            [keymaps.telescope.select_tab] = actions.select_tab,
+                            [keymaps.telescope.open_with_tab] = actions.select_tab,
                             [keymaps.telescope.move_selection_next] = actions.move_selection_next,
                             [keymaps.telescope.move_selection_previous] = actions.move_selection_previous,
                             [keymaps.telescope.cycle_history_next] = actions.cycle_history_next,
@@ -163,8 +165,12 @@ return {
                             [keymaps.telescope.select_horizontal] = actions.select_horizontal,
                             [keymaps.floatWindow.scrollDown] = actions.preview_scrolling_down,
                             [keymaps.floatWindow.scrollUp] = actions.preview_scrolling_up,
+                            [keymaps.telescope.open_with_trouble] = open_with_trouble,
+                            [keymaps.telescope.add_to_trouble] = add_to_trouble,
                         },
                         n = {
+                            [keymaps.telescope.open_with_trouble] = open_with_trouble,
+                            [keymaps.telescope.add_to_trouble] = add_to_trouble,
                             [keymaps.telescope.close] = actions.close,
                         },
                     },
