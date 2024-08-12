@@ -107,7 +107,7 @@ return {
                     {},
                     options or {},
                     getPluginOpts('nvim-lspconfig').format or {},
-                    opts('conform.nvim').format or {}
+                    utils.opts('conform.nvim').format or {}
                 )
                 local ok, conform = pcall(require, 'conform')
                 -- use conform for formatting with LSP when available,

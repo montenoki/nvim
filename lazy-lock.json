@@ -1,5 +1,6 @@
 {
   "Comment.nvim": { "branch": "master", "commit": "e30b7f2008e52442154b66f7c519bfd2f1e32acb" },
+  "SchemaStore.nvim": { "branch": "main", "commit": "d25cb49aa52f8bd459e1b8f3f4efd6c8af5eb7e5" },
   "auto-session": { "branch": "main", "commit": "322d82fa7cb455bc82a30f4e4907af696afdfb45" },
   "bufferline.nvim": { "branch": "main", "commit": "0b2fd861eee7595015b6561dade52fb060be10c4" },
   "cmp-buffer": { "branch": "main", "commit": "3022dbc9166796b644a841a02de8dd1cc1d311fa" },
