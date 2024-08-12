@@ -42,6 +42,7 @@ M.open = {
     preview = '<TAB>',
     navbuddy = '<LEADER>n',
     neogit = '<LEADER>g',
+    yank_history = '<LEADER>p',
 }
 
 M.whichkey = {
@@ -134,7 +135,7 @@ M.session = {
     show_all = '<LEADER>qa',
 }
 M.cmp = {
-    jump_in = '<C-n>',
+    jump_in = '<C-g>',
     prev_jump = '<S-TAB>',
 }
 M.notify = {

@@ -105,6 +105,7 @@ map('o', 'N', "'nN'[v:searchforward]", { expr = true, desc = 'Prev search result
 
 -- On/Off 功能
 
+-- map('i', '<C-i>', '<NOP>')
 -- =============================================================================
 -- 禁用不使用的按键映射
 -- =============================================================================
@@ -112,13 +113,6 @@ map('o', 'N', "'nN'[v:searchforward]", { expr = true, desc = 'Prev search result
 -- =============================================================================
 -- TODO
 -- =============================================================================
-
--- TODO: 是否必要?
--- -- Resize window using <CTRL> arrow keys
--- map('n', keymaps.window.inc_height, '<CMD>resize +2<CR>', { desc = 'Increase window height' })
--- map('n', keymaps.window.dec_height, '<CMD>resize -2<CR>', { desc = 'Decrease window height' })
--- map('n', keymaps.window.inc_width, '<CMD>vertical resize -2<CR>', { desc = 'Decrease window width' })
--- map('n', keymaps.window.dec_width, '<CMD>vertical resize +2<CR>', { desc = 'Increase window width' })
 
 -- TODO: Add a toggle to enable/disable autopairs
 -- LazyVim.toggle.map('<leader>up', {

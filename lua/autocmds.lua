@@ -5,16 +5,6 @@ function M.augroup(name)
     return vim.api.nvim_create_augroup('user_' .. name, { clear = true })
 end
 -- =============================================================================
--- 高亮显示yank的文本
--- =============================================================================
-vim.api.nvim_create_autocmd('TextYankPost', {
-    group = M.augroup('HighlightYank'),
-    callback = function()
-        vim.highlight.on_yank()
-    end,
-})
-
--- =============================================================================
 -- 修复在进入缓冲区时options被重置的问题
 -- =============================================================================
 vim.api.nvim_create_autocmd('BufEnter', {
@@ -26,6 +16,18 @@ vim.api.nvim_create_autocmd('BufEnter', {
         vim.opt.pumheight = 3
     end,
 })
+
+-- =============================================================================
+-- 编写某些文件时加入t选项使FormatOptions应用于所有地方
+-- =============================================================================
+vim.api.nvim_create_autocmd('BufEnter', {
+    group = M.augroup('enableAutoFormat'),
+    pattern = { '*.txt', '*.md' },
+    callback = function()
+        vim.opt.formatoptions:append('t')
+    end,
+})
+
 -- =============================================================================
 -- 检查文件更改时是否需要重新加载
 -- =============================================================================
@@ -88,51 +90,4 @@ vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
     end,
 })
 
--- =============================================================================
--- 编写某些文件时加入t选项使FormatOptions应用于所有地方
--- =============================================================================
-vim.api.nvim_create_autocmd('BufEnter', {
-    group = M.augroup('enableAutoFormat'),
-    pattern = '*.txt',
-    callback = function()
-        vim.opt.formatoptions:append('t')
-    end,
-})
-
--- =============================================================================
--- 在Yank时保持光标位置不变
--- =============================================================================
-vim.api.nvim_create_autocmd({ 'VimEnter', 'CursorMoved' }, {
-    group = M.augroup('saveCursorLocation'),
-    callback = function()
-        CURSOR_POS = vim.fn.getpos('.')
-    end,
-})
-vim.api.nvim_create_autocmd('TextYankPost', {
-    group = M.augroup('RestoreCursorLocationAfterYank'),
-    pattern = '*',
-    callback = function()
-        if vim.v.event.operator == 'y' then
-            vim.fn.setpos('.', CURSOR_POS)
-        end
-    end,
-})
-
--- =============================================================================
--- 以下未完成
--- =============================================================================
--- vim.api.nvim_create_autocmd('TextChanged', {
---   pattern = '*',
---   group = augroup('MoveTOEndOfPastedText'),
---   callback = function()
---     if vim.v.event.operator == 'p' then
---       -- 获取当前光标位置
---       local line, col = unpack(vim.api.nvim_win_get_cursor(0))
---       -- 获取粘贴的文本长度
---       local paste_length = #vim.v.event.text
---       -- 移动光标到粘贴文本的末尾
---       vim.api.nvim_win_set_cursor(0, {line, col + paste_length - 1})
---     end
---   end,
--- })
 return M
