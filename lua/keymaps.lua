@@ -51,16 +51,14 @@ M.whichkey = {
 }
 
 M.toggle = {
-    -- spelling = '<LEADER>us',
-    -- line_numbers = '<LEADER>ul',
-    -- relative_numbers = '<LEADER>uL',
-    -- diagnostic = '<LEADER>ud',
-    -- wrap = '<LEADER>uw',
-    -- conceal = '<LEADER>uS',
-    -- inlay_hints = '<LEADER>uh',
-    -- treesitter = '<LEADER>uT',
-    -- show_hl_info = '<LEADER>ui',
-    -- toggle_tsc = '<LEADER>ut',
+    spelling = '<LEADER>us',
+    relative_numbers = '<LEADER>un',
+    diagnostic = '<LEADER>ud',
+    list = '<LEADER>ul',
+    inlay_hints = '<LEADER>uh',
+    treesitter = '<LEADER>ut',
+    conceal = '<LEADER>uc',
+    code_lens = '<LEADER>uC'
 }
 
 M.floatWindow = {

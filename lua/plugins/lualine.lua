@@ -68,26 +68,90 @@ return {
                         end,
                         icon = ' ',
                     },
-                    {
-                        function()
-                            return '󰐅 '
-                        end,
-                        color = function()
-                            return vim.treesitter.highlighter.active[vim.api.nvim_get_current_buf()] ~= nil
-                                    and utils.fg('Character')
-                                or utils.fg('Comment')
-                        end,
-                        on_click = function()
-                            vim.cmd('TSToggle highlight')
-                        end,
-                    },
                     { 'filename', path = 1, file_status = false },
                 },
                 lualine_x = {},
                 lualine_y = { { utils.showRecording, color = utils.fg('Error') } },
                 lualine_z = {
+                    {
+                        function()
+                            return '󰐅'
+                        end,
+                        cond = function()
+                            return utils.is_loaded('nvim-treesitter') ~= nil
+                        end,
+                        color = function()
+                            return vim.treesitter.highlighter.active[vim.api.nvim_get_current_buf()] ~= nil
+                                    and utils.fg('boolean')
+                                or utils.fg('Comment')
+                        end,
+                        on_click = utils.toggle_treesitter_highlight,
+                    },
+                    {
+                        function()
+                            return ''
+                        end,
+                        color = function()
+                            return vim.diagnostic.is_enabled() and utils.fg('boolean') or utils.fg('Comment')
+                        end,
+                        on_click = utils.toggle_diagnostic,
+                    },
+                    {
+                        function()
+                            return '󰓽'
+                        end,
+                        color = function()
+                            return vim.lsp.inlay_hint.is_enabled() and utils.fg('boolean') or utils.fg('Comment')
+                        end,
+                        on_click = utils.toggle_inlay_hints,
+                    },
+                    {
+                        function()
+                            return '󰦦'
+                        end,
+                        color = function()
+                            ---@diagnostic disable-next-line: undefined-field
+                            return tonumber(vim.opt.conceallevel:get()) > 1 and utils.fg('boolean')
+                                or utils.fg('Comment')
+                        end,
+                        on_click = utils.toggle_conceal,
+                    },
+                    {
+                        function()
+                            return '󰀫'
+                        end,
+                        color = function()
+                            return vim.opt.list:get() and utils.fg('boolean') or utils.fg('Comment')
+                        end,
+                        on_click = utils.toggle_list,
+                    },
+                    {
+                        function()
+                            return ''
+                        end,
+                        on_click = utils.toggle_relative_number,
+                        color = function()
+                            ---@diagnostic disable-next-line: undefined-field
+                            return vim.opt.relativenumber:get() and utils.fg('boolean') or utils.fg('Comment')
+                        end,
+                    },
+                    {
+                        function()
+                            return ''
+                        end,
+                        on_click = utils.toggle_spell,
+                        color = function()
+                            ---@diagnostic disable-next-line: undefined-field
+                            return vim.opt.spell:get() and utils.fg('boolean') or utils.fg('Comment')
+                        end,
+                    },
                     'location',
-                    'progress',
+                    {
+                        'progress',
+                        cond = function()
+                            return utils.is_loaded('scrollbar') == false
+                        end,
+                    },
                     function()
                         local icon = ' '
                         return icon .. os.date('%R')

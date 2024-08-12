@@ -149,7 +149,7 @@ opt.linebreak = true
 -- List mode: By default, show tabs as ">", trailing spaces as "-", and
 -- non-breakable space characters as "+". Useful to see the difference
 -- between tabs and spaces and for trailing blanks.
--- opt.list = true
+opt.list = false
 
 -- eol:c  Character to show at the end of each line.  When
 -- 			  omitted, there is no extra character at the end of the

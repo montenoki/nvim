@@ -419,8 +419,6 @@ return {
             -- =======================================================================
             -- 初始化和能力设置
             local servers = opts.servers
-            -- TODO: check if logic is correct
-            -- local has_cmp, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
             local has_cmp, coq = pcall(require, 'coq')
             local coq_default_capabilities = {
                 textDocument = {

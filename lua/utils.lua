@@ -556,4 +556,79 @@ function M.getPythonVersion(python_exec)
     end
 end
 
+function M.toggle_relative_number()
+    ---@diagnostic disable-next-line: undefined-field
+    if vim.opt.relativenumber:get() then
+        M.info('Relative number off', { title = 'Toggle' })
+        vim.opt.relativenumber = false
+    else
+        M.warn('Relative number on', { title = 'Toggle' })
+        vim.opt.relativenumber = true
+    end
+end
+function M.toggle_treesitter_highlight()
+    if vim.treesitter.highlighter.active[vim.api.nvim_get_current_buf()] ~= nil then
+        M.info('Treesitter highlight off', { title = 'Toggle' })
+        vim.cmd('TSToggle highlight')
+    else
+        M.warn('Treesitter highlight on', { title = 'Toggle' })
+        vim.cmd('TSToggle highlight')
+    end
+end
+function M.toggle_spell()
+    ---@diagnostic disable-next-line: undefined-field
+    if vim.opt.spell:get() then
+        M.info('Spell off', { title = 'Toggle' })
+        vim.opt.spell = false
+    else
+        M.warn('spell on', { title = 'Toggle' })
+        vim.opt.spell = true
+    end
+end
+function M.toggle_diagnostic()
+    local enabled = true
+    if vim.diagnostic.is_disabled then
+        enabled = not vim.diagnostic.is_disabled()
+    end
+    enabled = not enabled
+
+    if enabled then
+        vim.diagnostic.enable()
+        M.info('Diagnostics On', { title = 'Toggle' })
+    else
+        vim.diagnostic.disable()
+        M.warn('Diagnostics off', { title = 'Toggle' })
+    end
+end
+
+function M.toggle_inlay_hints()
+    local state = vim.lsp.inlay_hint.is_enabled()
+    if state then
+        M.warn('Inlay Hint Off', { title = 'Toggle' })
+        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+    else
+        M.info('Inlay Hint On', { title = 'Toggle' })
+        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+    end
+end
+function M.toggle_conceal()
+    ---@diagnostic disable-next-line: undefined-field
+    if tonumber(vim.opt.conceallevel:get()) <= 1 then
+        M.info('Conceal On', { title = 'Toggle' })
+        vim.opt.conceallevel = 3
+    else
+        M.warn('Conceal Off', { title = 'Toggle' })
+        vim.opt.conceallevel = 0
+    end
+end
+function M.toggle_list()
+    ---@diagnostic disable-next-line: undefined-field
+    if vim.opt.list:get() then
+        M.warn('Show List Off', { title = 'Toggle' })
+        vim.opt.list = false
+    else
+        M.info('Show list On', { title = 'Toggle' })
+        vim.opt.list = true
+    end
+end
 return M

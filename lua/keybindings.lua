@@ -104,58 +104,14 @@ map('x', 'N', "'nN'[v:searchforward]", { expr = true, desc = 'Prev search result
 map('o', 'N', "'nN'[v:searchforward]", { expr = true, desc = 'Prev search result' })
 
 -- On/Off 功能
+map('n', keymaps.toggle.spelling, utils.toggle_spell, { desc = 'Toggle Spelling' })
+map('n', keymaps.toggle.relative_numbers, utils.toggle_relative_number, { desc = 'Toggle Line Numbers' })
+map('n', keymaps.toggle.diagnostic, utils.toggle_diagnostic, { desc = 'Toggle Diagnostics' })
+map('n', keymaps.toggle.inlay_hints, utils.toggle_inlay_hints, { desc = 'Toggle Inlay Hints' })
+map('n', keymaps.toggle.treesitter, utils.toggle_treesitter_highlight, { desc = 'Toggle Treesitter Highlight' })
+map('n', keymaps.toggle.conceal, utils.toggle_conceal, { desc = 'Toggle Conceal' })
+map('n', keymaps.toggle.list, utils.toggle_list, { desc = 'Toggle List' })
 
--- map('i', '<C-i>', '<NOP>')
 -- =============================================================================
 -- 禁用不使用的按键映射
 -- =============================================================================
-
--- =============================================================================
--- TODO
--- =============================================================================
-
--- TODO: Add a toggle to enable/disable autopairs
--- LazyVim.toggle.map('<leader>up', {
---   name = 'Mini Pairs',
---   get = function()
---     return not vim.g.minipairs_disable
---   end,
---   set = function(state)
---     vim.g.minipairs_disable = not state
---   end,
--- })
-
--- -- toggle options
--- map('n', keymaps.toggle.spelling, function()
---   lazyvim.toggle('spell')
--- end, { desc = 'Toggle Spelling' })
--- map('n', keymaps.toggle.line_numbers, function()
---   lazyvim.toggle.number()
--- end, { desc = 'Toggle Line Numbers' })
--- map('n', keymaps.toggle.relative_numbers, function()
---   lazyvim.toggle('relativenumber')
--- end, { desc = 'Toggle Relative Line Numbers' })
--- map('n', keymaps.toggle.diagnostic, function()
---   lazyvim.toggle.diagnostics()
--- end, { desc = 'Toggle Diagnostics' })
--- map('n', keymaps.toggle.wrap, function()
---   toggle.wrap()
--- end, { desc = 'Toggle wrap' })
-
--- local conceallevel = vim.o.conceallevel > 0 and vim.o.conceallevel or 3
--- map('n', keymaps.toggle.conceal, function()
---   lazyvim.toggle('conceallevel', false, { 0, conceallevel })
--- end, { desc = 'Toggle Conceal' })
-
--- if vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint then
---   map('n', keymaps.toggle.inlay_hints, function()
---     lazyvim.toggle.inlay_hints()
---   end, { desc = 'Toggle Inlay Hints' })
--- end
-
--- map('n', keymaps.toggle.treesitter, function()
---   toggle.treesitter()
--- end, { desc = 'Toggle Treesitter Highlight' })
-
--- -- highlights info under cursor
--- map('n', keymaps.toggle.show_hl_info, vim.show_pos, { desc = 'Show highlights info' })

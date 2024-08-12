@@ -50,12 +50,11 @@ return {
             if type(opts.sections.lualine_c) == 'table' then
                 table.insert(opts.sections.lualine_c, 2, {
                     function()
-                        return ok and ' ON' or ' OFF'
+                        return ' '
                     end,
                     color = ok and utils.fg('Character') or utils.fg('Comment'),
-                    -- TODO:check Telescope exists
                     on_click = function()
-                        if package.loaded['plugin_name'] ~= nil then
+                        if utils.is_loaded('telescope.nvim') ~= nil then
                             vim.cmd.Telescope('session-lens')
                         else
                             utils.warn('Telescope is not installed', { title = 'Auto-session' })
