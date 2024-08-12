@@ -3,7 +3,6 @@ local sql_ft = { 'sql', 'mysql', 'plsql' }
 return {
     {
         'nvim-treesitter/nvim-treesitter',
-        optional = true,
         opts = { ensure_installed = { 'sql' } },
     },
     {
