@@ -24,10 +24,25 @@ require('autocmds')
 require('keybindings')
 require('local_config')
 
-local plugins = {
-    { import = 'plugins' },
-    { import = 'plugins.lang' },
-}
+local plugins = {}
+if vim.g.vscode then
+    require('vscode_setup')
+    plugins = {
+        { import = 'plugins.init' },
+        { import = 'plugins.leap' },
+        { import = 'plugins.surround' },
+        { import = 'plugins.yanky' },
+        { import = 'plugins.treesitter' },
+        { import = 'plugins.which-key' },
+        { import = 'plugins.im-select' },
+    }
+else
+    plugins = {
+        { import = 'plugins' },
+        { import = 'plugins.lang' },
+    }
+end
+
 local osName = vim.loop.os_uname().sysname
 if string.find(string.lower(osName), 'windows') then
     table.insert(plugins, { import = 'plugins.os.windows' })
@@ -36,19 +51,17 @@ elseif osName == 'Darwin' then
 else
     table.insert(plugins, { import = 'plugins.os.linux' })
 end
+
 require('lazy').setup(plugins)
 
--- if vim.g.vscode then
---     require('vscode')
--- end
-
-local colorSchemes = {
-    'nightfox',
-    'kanagawa',
-    'dracula',
-    'everforest',
-    'gruvbox-material',
-}
-local colorScheme = require('utils').randomColorscheme(colorSchemes)
-
-vim.cmd.colorscheme(colorScheme)
+if vim.g.vscode == nil then
+    local colorSchemes = {
+        'nightfox',
+        'kanagawa',
+        'dracula',
+        'everforest',
+        'gruvbox-material',
+    }
+    local colorScheme = require('utils').randomColorscheme(colorSchemes)
+    vim.cmd.colorscheme(colorScheme)
+end
