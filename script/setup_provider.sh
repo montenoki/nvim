@@ -11,4 +11,4 @@ else
 fi
 
 "$HOME/.virtualenvs/neovim/bin/python" -m pip install --upgrade pip
-"$HOME/.virtualenvs/neovim/bin/python" -m pip install pynvim debugpy
+"$HOME/.virtualenvs/neovim/bin/python" -m pip install pynvim debugpy pylatexenc
