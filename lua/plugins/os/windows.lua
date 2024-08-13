@@ -22,4 +22,15 @@ return {
             keep_quiet_on_no_binary = true,
         },
     },
+    -- ===========================================================================
+    -- treesitter
+    -- ===========================================================================
+    {
+        'nvim-treesitter/nvim-treesitter',
+        opts = function(_, opts)
+            if type(opts.ensure_installed) == 'table' then
+                vim.list_extend(opts.ensure_installed, {'powershell'})
+            end
+        end,
+    },
 }

@@ -8,8 +8,4 @@ return {
             servers = { powershell_es = {} },
         },
     },
-    {
-        'nvim-treesitter/nvim-treesitter',
-        opts = { ensure_installed = { 'powershell' } },
-    },
 }
