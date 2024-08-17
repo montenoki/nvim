@@ -47,6 +47,9 @@ return {
         opts = {
             servers = {
                 basedpyright = {
+                    handlers = {
+                        ['textDocument/publishDiagnostics'] = function() end,
+                    },
                     settings = {
                         basedpyright = {
                             analysis = {
@@ -63,11 +66,43 @@ return {
                         { keymaps.lsp.organize, utils.action['source.organizeImports'], desc = 'Organize Imports' },
                     },
                 },
+                ruff = {
+                    enabled = false,
+                    cmd_env = { RUFF_TRACE = 'messages' },
+                    init_options = {
+                        settings = {
+                            logLevel = 'error',
+                        },
+                    },
+                    keys = {
+                        {
+                            '<leader>co',
+                            utils.action['source.organizeImports'],
+                            desc = 'Organize Imports',
+                        },
+                    },
+                },
             },
             setup = {
+                basedpyright = function()
+                    utils.lspOnAttach(function(client, _)
+                        if client.name == 'basedpyright' then
+                            -- Disable hover in favor of Pyright
+                            -- client.server_capabilities = false
+                        end
+                    end)
+                end,
                 ruff_lsp = function()
                     utils.lspOnAttach(function(client, _)
                         if client.name == 'ruff_lsp' then
+                            -- Disable hover in favor of Pyright
+                            client.server_capabilities.hoverProvider = false
+                        end
+                    end)
+                end,
+                ruff = function()
+                    utils.lspOnAttach(function(client, _)
+                        if client.name == 'ruff' then
                             -- Disable hover in favor of Pyright
                             client.server_capabilities.hoverProvider = false
                         end
