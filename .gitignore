@@ -1,4 +1,8 @@
-plugin/packer_compiled.lua
-.DS_Store
-lazy-lock.json
-lite_mode.flg
+tt.*
+.tests
+doc/tags
+debug
+.repro
+foo.*
+*.log
+data
