@@ -49,6 +49,8 @@ opt.list = false
 
 opt.shiftwidth = 0
 
+opt.spell = true
+
 opt.tabstop = 4
 
 opt.textwidth = 80
