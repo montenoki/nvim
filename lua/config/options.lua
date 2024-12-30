@@ -12,10 +12,11 @@ vim.g.snacks_animate = false
 
 -- Set the python path based on operating system
 vim.g.python3_host_prog = vim.env.HOME
-  .. (
-    vim.fn.has("win32") == 1 and "\\.virtualenvs\\neovim\\Scripts\\python.exe"
-    or "/.virtualenvs/neovim/bin/python"
-  )
+    .. (
+        vim.fn.has("win32") == 1
+            and "\\.virtualenvs\\neovim\\Scripts\\python.exe"
+        or "/.virtualenvs/neovim/bin/python"
+    )
 
 -- Set default for Windows
 LazyVim.terminal.setup("pwsh")
@@ -30,18 +31,18 @@ opt.colorcolumn = "+1"
 opt.completeopt = { "menu", "menuone", "popup", "noselect", "noinsert" }
 
 opt.listchars = {
-  eol = "↲",
-  tab = "→ ",
-  trail = "·",
-  extends = "❯",
-  precedes = "❮",
-  -- space = "␣",
+    eol = "↲",
+    tab = "→ ",
+    trail = "·",
+    extends = "❯",
+    precedes = "❮",
+    -- space = "␣",
 }
 
 opt.fixendofline = false
 
 opt.formatoptions =
-  { c = true, r = true, q = true, n = true, m = true, M = true, j = true }
+    { c = true, r = true, q = true, n = true, m = true, M = true, j = true }
 
 opt.grepprg = "rg --vimgrep  -uu"
 
