@@ -3,7 +3,7 @@ local keymapping = require("keymapping")
 return {
     {
         "luukvbaal/statuscol.nvim",
-        enable = false,
+        enabled = false,
         opts = function()
             local builtin = require("statuscol.builtin")
             return {
@@ -18,7 +18,7 @@ return {
     },
     {
         "kevinhwang91/nvim-ufo",
-        enable = false,
+        enabled = false,
         event = "LazyFile",
         dependencies = {
             "kevinhwang91/promise-async",

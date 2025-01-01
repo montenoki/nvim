@@ -18,8 +18,17 @@ return {
             default_component_configs = {
                 git_status = {
                     symbols = {
-                        unstaged = "󰄱",
-                        staged = "󰱒",
+                        -- Change type
+                        added = "",
+                        deleted = "",
+                        modified = "",
+                        renamed = "",
+                        -- Status type
+                        untracked = "",
+                        ignored = "",
+                        unstaged = "󰢤",
+                        staged = "",
+                        conflict = "",
                     },
                 },
             },
