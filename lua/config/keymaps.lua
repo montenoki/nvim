@@ -17,7 +17,8 @@ map({ "n", "v" }, "$", "g_", { desc = "Goto last non-blank char" })
 map({ "n", "v" }, "g_", "$", { desc = "Goto the end of line" })
 
 -- 在可视模式下, 允许你多次粘贴同一内容，保持了原始剪贴板的内容不变
-map("v", "p", '"_dP')
+map("v", "p", '"_dp')
+map("v", "P", '"_dP')
 
 -- 取消默认的Resize window快捷键
 del("n", "<C-Up>")
