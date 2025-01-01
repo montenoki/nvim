@@ -72,6 +72,51 @@ return {
             lualine_z = {
                 {
                     function()
+                        return ""
+                    end,
+                    color = function()
+                        return vim.diagnostic.is_enabled() and {}
+                            or { fg = "normal" }
+                    end,
+                    on_click = utils.toggle_diagnostic,
+                },
+                {
+                    function()
+                        return "󰓽"
+                    end,
+                    color = function()
+                        return vim.lsp.inlay_hint.is_enabled() and {}
+                            or { fg = "normal" }
+                    end,
+                    on_click = utils.toggle_inlay_hints,
+                },
+                {
+                    function()
+                        return ""
+                    end,
+                    color = function()
+                        local bufnr = 0
+                        local lenses = vim.lsp.codelens.get(bufnr)
+
+                        return lenses and #lenses > 0 and {}
+                            or { fg = "normal" }
+                    end,
+                    on_click = function()
+                        utils.toggle_codelens()
+                    end,
+                },
+                {
+                    function()
+                        return "󰦦"
+                    end,
+                    color = function()
+                        return tonumber(vim.opt.conceallevel:get()) > 1 and {}
+                            or { fg = "normal" }
+                    end,
+                    on_click = utils.toggle_conceal,
+                },
+                {
+                    function()
                         return ""
                     end,
                     on_click = function()
