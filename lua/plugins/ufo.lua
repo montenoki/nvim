@@ -1,9 +1,7 @@
 local keymapping = require("keymapping")
-
 return {
     {
         "luukvbaal/statuscol.nvim",
-        enabled = false,
         opts = function()
             local builtin = require("statuscol.builtin")
             return {
@@ -18,18 +16,35 @@ return {
     },
     {
         "kevinhwang91/nvim-ufo",
-        enabled = false,
         event = "LazyFile",
-        dependencies = {
-            "kevinhwang91/promise-async",
-            "luukvbaal/statuscol.nvim",
-        },
+        dependencies = { "kevinhwang91/promise-async" },
         init = function()
             vim.opt.foldcolumn = "1"
             vim.opt.foldlevel = 99
             vim.opt.foldlevelstart = 99
             vim.opt.foldenable = true
+
+            local capabilities = vim.lsp.protocol.make_client_capabilities()
+            capabilities.textDocument.foldingRange =
+                { dynamicRegistration = false, lineFoldingOnly = true }
+            local language_servers =
+                require("lspconfig").util.available_servers() -- or list servers manually like {'gopls', 'clangd'}
+            for _, ls in ipairs(language_servers) do
+                require("lspconfig")[ls].setup({ capabilities = capabilities })
+            end
         end,
+        keys = {
+            {
+                keymapping.ufo.peek,
+                function()
+                    local winid = require("ufo").peekFoldedLinesUnderCursor()
+                    if not winid then
+                        vim.lsp.buf.hover()
+                    end
+                end,
+                desc = "Peek Folded Lines",
+            },
+        },
         opts = {
             -- 折叠文本处理
             fold_virt_text_handler = function(
@@ -102,18 +117,6 @@ return {
                 }
                 return ftMap[filetype]
             end,
-        },
-        keys = {
-            {
-                keymapping.ufo.peek,
-                function()
-                    local winid = require("ufo").peekFoldedLinesUnderCursor()
-                    if not winid then
-                        vim.lsp.buf.hover()
-                    end
-                end,
-                desc = "Peek Folded Lines",
-            },
         },
     },
 }
