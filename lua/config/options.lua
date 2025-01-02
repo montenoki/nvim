@@ -52,6 +52,8 @@ opt.grepprg = "rg --vimgrep  -uu"
 
 opt.list = false
 
+opt.laststatus = 3
+
 opt.shiftwidth = 0
 
 opt.spell = true
