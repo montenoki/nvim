@@ -149,6 +149,17 @@ return {
                             or { fg = "normal" }
                     end,
                 },
+                {
+                    function()
+                        return "󰁨"
+                    end,
+                    on_click = function()
+                        utils.toggle_global("autoformat")
+                    end,
+                    color = function()
+                        return vim.g.autoformat and {} or { fg = "normal" }
+                    end,
+                },
                 function()
                     local icon = " "
                     return icon .. os.date("%R")
