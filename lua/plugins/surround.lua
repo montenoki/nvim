@@ -15,7 +15,6 @@ return {
             { opts.mappings.find_left, desc = "Find Left Surrounding" },
             { opts.mappings.highlight, desc = "Highlight Surrounding" },
             { opts.mappings.replace, desc = "Replace Surrounding" },
-            { opts.mappings.replace, desc = "Replace Surrounding" },
             {
                 opts.mappings.update_n_lines,
                 desc = "Update `MiniSurround.config.n_lines`",

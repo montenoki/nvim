@@ -10,5 +10,9 @@ M.float_window = {
 M.ufo = {
     peek = "zK",
 }
+M.navbuddy = "<LEADER>m"
+M.neogit = "<LEADER>gn"
+M.winshift = "<LEADER>wm"
+M.format_cjk = "<LEADER>cz"
 
 return M

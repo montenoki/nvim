@@ -6,8 +6,6 @@
 
 vim.g.maplocalleader = " "
 
-vim.g.autoformat = false
-
 vim.g.snacks_animate = false
 
 -- Set the python path based on operating system

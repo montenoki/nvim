@@ -1,10 +1,4 @@
 return {
-    {
-        "SmiteshP/nvim-navic",
-        opts = {
-            click = true,
-        },
-    },
     -- lualine integration
     {
         "nvim-lualine/lualine.nvim",
