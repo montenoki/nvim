@@ -50,6 +50,15 @@ function M.toggle_codelens()
     notify_toggle(not enabled, "Toggle", "Codelens")
 end
 
+function M.toggle_autoformat()
+    -- Get current state from vim global variable
+    local state = not (vim.g.autoformat_enabled or false)
+    -- Update the state
+    vim.g.autoformat_enabled = state
+    -- Notify the user about the state change
+    notify_toggle(state, "Toggle", "Autoformat")
+end
+
 local PYTHON_VERSION_PATTERN = "Python (%d+%.%d+%.%d+)"
 
 local function execute_command(cmd)
