@@ -1,3 +1,5 @@
+---@diagnostic disable: undefined-field
+
 local M = {}
 
 local function notify_toggle(state, title, option)
