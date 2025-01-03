@@ -1,8 +1,11 @@
-local keymaps = require('keymaps')
-
+local keymapping = require("keymapping")
 return {
-    'sindrets/winshift.nvim',
+    "sindrets/winshift.nvim",
     keys = {
-        { keymaps.open.moveWindow, '<CMD>WinShift<CR>', desc = 'Move window' },
+        {
+            keymapping.winshift,
+            "<CMD>WinShift<CR>",
+            desc = "Window Manager",
+        },
     },
 }
