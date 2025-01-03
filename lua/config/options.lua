@@ -23,7 +23,9 @@ vim.g.lazyvim_python_lsp = "pyright"
 vim.g.lazyvim_python_ruff = "ruff"
 
 -- Set default for Windows
-LazyVim.terminal.setup("pwsh")
+if vim.fn.has("win32") == 1 then
+    LazyVim.terminal.setup("pwsh")
+end
 
 -- vim.opt Settings
 
