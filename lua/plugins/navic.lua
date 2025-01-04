@@ -1,5 +1,4 @@
 return {
-    -- lualine integration
     {
         "nvim-lualine/lualine.nvim",
         opts = function(_, opts)
