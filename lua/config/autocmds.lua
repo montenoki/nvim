@@ -76,3 +76,10 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
         vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
     end,
 })
+
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = 'Avante',
+    callback = function()
+        vim.keymap.set({'n', 'o'}, '<ESC>', '<Nop>', { buffer = true })
+    end
+})
