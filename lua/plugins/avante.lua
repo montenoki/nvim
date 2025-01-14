@@ -4,7 +4,7 @@ return {
         event = "VeryLazy",
         lazy = false,
         version = false, -- set this if you want to always pull the latest change
-        opts = { provider = "claude" },
+        opts = { provider = "claude", behaviour = { auto_suggestions = true } },
         -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
         build = function()
             return vim.fn.has("win32") == 1
