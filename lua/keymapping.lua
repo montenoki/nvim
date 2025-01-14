@@ -14,5 +14,6 @@ M.navbuddy = "<LEADER>m"
 M.neogit = "<LEADER>gn"
 M.winshift = "<LEADER>wm"
 M.format_cjk = "<LEADER>cz"
+M.window_picker = "<LEADER>wp"
 
 return M

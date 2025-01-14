@@ -1,9 +1,21 @@
+# Temporary and test files
 tt.*
 .tests
-doc/tags
-debug
-.repro
 foo.*
+.repro
+
+# Build and debug
+debug
 *.log
 data
+
+# Documentation
+doc/tags
+
+# OS specific
 .DS_Store
+
+# Local files
+lua/local/*
+!lua/local/defaults.lua
+!lua/local/.gitkeep
