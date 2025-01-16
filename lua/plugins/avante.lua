@@ -4,7 +4,15 @@ return {
         event = "VeryLazy",
         lazy = false,
         version = false, -- set this if you want to always pull the latest change
-        opts = { provider = "claude", behaviour = { auto_suggestions = true } },
+        opts = {
+            provider = "claude",
+            auto_suggestions_provider = "copilot",
+            suggestion = {
+                debounce = 100,
+                throttle = 600,
+            },
+            behaviour = { auto_suggestions = true },
+        },
         -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
         build = function()
             return vim.fn.has("win32") == 1
