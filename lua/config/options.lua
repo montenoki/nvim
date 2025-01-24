@@ -58,7 +58,7 @@ opt.laststatus = 3
 
 opt.shiftwidth = 0
 
-opt.spell = true
+opt.spell = false
 
 opt.tabstop = 4
 
@@ -73,5 +73,11 @@ opt.wrap = true
 -- opt.virtualedit = "onemore"
 
 -- Example for configuring Neovim to load user-installed installed Lua rocks:
-package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua;"
-package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua;"
+package.path = package.path
+    .. ";"
+    .. vim.fn.expand("$HOME")
+    .. "/.luarocks/share/lua/5.1/?/init.lua;"
+package.path = package.path
+    .. ";"
+    .. vim.fn.expand("$HOME")
+    .. "/.luarocks/share/lua/5.1/?.lua;"
