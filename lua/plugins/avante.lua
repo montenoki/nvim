@@ -6,12 +6,13 @@ return {
         version = false, -- set this if you want to always pull the latest change
         opts = {
             provider = "claude",
-            auto_suggestions_provider = "copilot",
+            -- auto_suggestions_provider = "copilot",
+            auto_suggestions_provider = "claude",
             suggestion = {
                 debounce = 100,
                 throttle = 600,
             },
-            behaviour = { auto_suggestions = true },
+            behaviour = { auto_suggestions = false },
         },
         -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
         build = function()

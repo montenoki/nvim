@@ -12,6 +12,14 @@ end
 
 return {
     {
+        "williamboman/mason.nvim",
+        opts = {
+            ensure_installed = {
+                "debugpy",
+            },
+        },
+    },
+    {
         "linux-cultist/venv-selector.nvim",
         dependencies = {
             "neovim/nvim-lspconfig",
