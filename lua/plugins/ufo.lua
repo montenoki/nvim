@@ -28,7 +28,9 @@ return {
             capabilities.textDocument.foldingRange =
                 { dynamicRegistration = false, lineFoldingOnly = true }
             local language_servers =
-                require("lspconfig").util._available_servers() -- or list servers manually like {'gopls', 'clangd'}
+                require("lspconfig").util.available_servers() -- or list servers manually like {'gopls', 'clangd'}
+            -- vim.lsp.config.util.available_servers()
+
             for _, ls in ipairs(language_servers) do
                 require("lspconfig")[ls].setup({ capabilities = capabilities })
             end
