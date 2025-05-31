@@ -8,14 +8,6 @@ vim.g.maplocalleader = " "
 
 vim.g.snacks_animate = false
 
--- Set the python path based on operating system
-vim.g.python3_host_prog = vim.env.HOME
-    .. (
-        vim.fn.has("win32") == 1
-            and "\\.virtualenvs\\neovim\\Scripts\\python.exe"
-        or "/.virtualenvs/neovim/bin/python"
-    )
-
 -- Set to "basedpyright" to use basedpyright instead of pyright.
 vim.g.lazyvim_python_lsp = "pyright"
 
