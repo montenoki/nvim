@@ -46,7 +46,7 @@ return {
         end,
     },
     {
-        "echasnovski/mini.surround",
+        "nvim-mini/mini.surround",
         optional = false,
         opts = {
             mappings = {
