@@ -15,7 +15,7 @@ return {
     },
     { "tpope/vim-repeat", event = "VeryLazy" },
     {
-        "ggandor/leap.nvim",
+        "https://codeberg.org/andyg/leap.nvim.git",
         keys = {
             {
                 keymapping.leap,
