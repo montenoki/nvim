@@ -12,14 +12,6 @@ end
 
 return {
     {
-        "mason-org/mason.nvim",
-        opts = {
-            ensure_installed = {
-                "debugpy",
-            },
-        },
-    },
-    {
         "linux-cultist/venv-selector.nvim",
         dependencies = {
             "neovim/nvim-lspconfig",
