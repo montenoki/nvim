@@ -61,6 +61,10 @@ local opts = {
 
 local platform = require("config.platform")
 if platform.nix_managed_config then
+    -- Nix-managed environments must not bootstrap a second Lua package manager.
+    -- No currently locked plugin requires LuaRocks.
+    opts.rocks = { enabled = false }
+
     local source_lockfile = vim.fn.stdpath("config") .. "/lazy-lock.json"
     local state_dir = vim.fn.stdpath("state") .. "/lazy"
     local state_lockfile = state_dir .. "/lazy-lock.json"
