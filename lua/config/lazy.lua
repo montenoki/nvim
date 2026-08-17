@@ -21,7 +21,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup({
+local opts = {
     spec = {
         -- add LazyVim and import its plugins
         { "LazyVim/LazyVim", import = "lazyvim.plugins" },
@@ -57,4 +57,27 @@ require("lazy").setup({
             },
         },
     },
-})
+}
+
+local platform = require("config.platform")
+if platform.nix_managed_config then
+    local source_lockfile = vim.fn.stdpath("config") .. "/lazy-lock.json"
+    local state_dir = vim.fn.stdpath("state") .. "/lazy"
+    local state_lockfile = state_dir .. "/lazy-lock.json"
+
+    vim.fn.mkdir(state_dir, "p")
+
+    -- The Nix store is read-only, but lazy.nvim updates its lockfile after an
+    -- install. Keep a writable runtime copy synchronized from the locked config.
+    local source_lines = vim.fn.readfile(source_lockfile)
+    local state_lines = vim.fn.filereadable(state_lockfile) == 1
+            and vim.fn.readfile(state_lockfile)
+        or {}
+    if table.concat(source_lines, "\n") ~= table.concat(state_lines, "\n") then
+        vim.fn.writefile(source_lines, state_lockfile)
+    end
+
+    opts.lockfile = state_lockfile
+end
+
+require("lazy").setup(opts)
