@@ -85,3 +85,10 @@ if platform.nix_managed_config then
 end
 
 require("lazy").setup(opts)
+
+if platform.nix_managed_config then
+    local parser_rtp = vim.env.NVIM_NIX_PARSER_RTP
+    if parser_rtp and parser_rtp ~= "" then
+        vim.opt.runtimepath:append(parser_rtp)
+    end
+end
