@@ -114,6 +114,7 @@ return {
             provider_selector = function(_, filetype, _)
                 local ftMap = {
                     lua = "treesitter",
+                    nix = { "treesitter", "indent" },
                     python = { "treesitter", "indent" },
                     git = "",
                 }
