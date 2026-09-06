@@ -114,10 +114,8 @@ return {
                         return ""
                     end,
                     color = function()
-                        local bufnr = 0
-                        local lenses = vim.lsp.codelens.get(bufnr)
-
-                        return lenses and #lenses > 0 and {}
+                        return require("config.toggles").enabled("codelens")
+                                and {}
                             or { fg = "normal" }
                     end,
                     on_click = function()
@@ -129,7 +127,8 @@ return {
                         return "󰦦"
                     end,
                     color = function()
-                        return tonumber(vim.opt.conceallevel:get()) > 1 and {}
+                        return require("config.toggles").enabled("conceal")
+                                and {}
                             or { fg = "normal" }
                     end,
                     on_click = utils.toggle_conceal,
@@ -176,7 +175,9 @@ return {
                         utils.toggle_global("autoformat")
                     end,
                     color = function()
-                        return vim.g.autoformat and {} or { fg = "normal" }
+                        return require("config.toggles").enabled("autoformat")
+                                and {}
+                            or { fg = "normal" }
                     end,
                 },
                 function()
