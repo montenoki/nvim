@@ -16,7 +16,7 @@
 | winshift.nvim | 窗口管理 | 移动和交换分屏窗口，调整窗口布局。 |
 | nvim-window-picker | 窗口管理 | 通过窗口标签选择目标窗口。 |
 | neogit | Git | 在编辑器内查看变更、暂存和提交代码。 |
-| obsidian.nvim | 笔记管理 | 集成 Obsidian，辅助编辑和导航 Markdown 笔记。 |
+| obsidian.nvim（社区维护版） | 笔记管理 | 自动发现 ~/obsidian 下的笔记库，支持多库切换、笔记链接、搜索及补全。 |
 | nvim-navic | 代码导航 | 显示当前光标所在的代码符号路径。 |
 | nvim-ufo | 代码折叠 | 增强代码折叠，显示折叠摘要并预览折叠内容。 |
 | statuscol.nvim | 界面 | 定制行号、标记和折叠列，支持鼠标交互。 |

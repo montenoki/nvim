@@ -2,6 +2,17 @@ return {
     {
         "folke/which-key.nvim",
         opts = {
+            -- Ignore LazyVim's old virtual Zoom hint; wm belongs to WinShift.
+            filter = function(mapping)
+                if
+                    mapping.real
+                    and mapping.mode == "n"
+                    and mapping.lhs == "<leader>wm"
+                then
+                    return false
+                end
+                return true
+            end,
             spec = {
                 {
                     mode = { "n", "v" },
@@ -10,8 +21,8 @@ return {
                         group = "AI",
                         icon = { icon = "󰧑", color = "brue" },
                     },
-                    { "<LEADER>wm", desc = "Windows Manager", icon = "" },
                 },
+                { "<leader>wm", mode = "n", desc = "WinShift", icon = "" },
             },
         },
     },

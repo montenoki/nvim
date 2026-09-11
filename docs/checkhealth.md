@@ -1,7 +1,7 @@
 # Neovim checkhealth 问题清单
 
-检查日期：2026-09-12。本轮只采集、调查、记录，不修改插件配置或安装依赖。
-本文主清单以工作区最新配置为准；同时保留日常 Nix 部署配置的结果。
+基线检查日期：2026-09-12。首次检查只采集、调查、记录；后续经用户确认的修复记录如下。
+本文主清单保留修复前工作区配置的结果；同时保留当时日常 Nix 部署配置的结果。
 
 ## 检查范围与可信边界
 
@@ -28,6 +28,104 @@ PTY 仍不能完整验证图片协议、真实项目的 LSP attach 或模型请�
 
 完整原文：[工作区报告](checkhealth-workspace.md)、[部署报告](checkhealth-deployed.md)。
 
+## 已确认的处理决策
+
+Python 的 Pyright、Ruff 等开发工具由项目 devShell 提供，不在 Neovim 的全局
+工具环境中补装。使用时从对应 devShell 启动 Neovim，使其继承项目的 PATH。
+已运行的 Neovim 不会因为另一个终端进入 devShell 而自动更新环境。
+
+因此，devShell 外的工具缺失警告不单独认定为 Neovim 配置故障。
+这项目前为“策略已确认，项目验证待完成”，不是“已修复”：还需指定 Python
+项目，检查其 devShell 是否提供工具，并验证 Python 文件中的 Pyright 实际连接。
+当前 nvim 仓库没有 devShell 配置，本次没有修改运行配置或安装工具。
+
+### 后续决策与 Avante 构建
+
+- H10–H12：用户需要公式渲染，`latex` parser 和 `latex2text` 由用户在 Nix 中配置，本仓库未代为安装，待复测。
+- H34：Snacks.picker 未启用，SQLite 回退警告按用户决定跳过。
+- H08 / H47：按用户决定跳过。进一步在隔离目录复现 Catppuccin 自动适配调用
+  `vim.pack.get()` 后创建空 `site/pack/core/opt`；仅清空目录并非持久修复，保留自动适配。
+- H04–H06：用户暂不配置 fzf-lua 图片预览；Snacks.image 未启用，其图片相关诊断暂不处理。
+- H07：ast-grep 可选功能暂未决定，普通搜索替换继续使用 ripgrep。
+
+Avante 构建曾被 Lazy 默认 120 秒时限中止；经用户确认设置 `git.timeout = 1200`。
+该时限也影响其他 Lazy 子进程。用户重建后，`nvim-test` 四个原生模块加载检查通过，
+随后用户确认重启后 Avante 可用。此项不是原始 health 诊断，不计入基线数量。
+
+### H13：Markdown / Obsidian 初始化异常已修复
+
+经用户同意，迁移到社区维护版 `obsidian-nvim/obsidian.nvim` 稳定发行 `v3.16.7`。
+用标准 `opts` 初始化，配置 `~/obsidian/test` workspace，关闭 Obsidian 自身 UI，
+由 render-markdown 负责渲染。移除未生效的 `opt` 本地配置加载逻辑。
+
+随后经用户确认改为启动时自动发现 `~/obsidian` 下含 `.obsidian/` 的直接子目录，
+每个子目录注册为独立 workspace；现有 `test` 库由扫描发现。无库时不启用插件。
+
+测试库包含两篇互相链接的笔记。完整配置验证通过：workspace 初始化、
+obsidian-ls 连接、双向链接跳转，以及两插件健康检查中的兼容性校验。
+H13 不再出现；H10–H12 的 LaTeX 警告仍保留。
+原始报告作为基线不重写，具体使用方式见 [Obsidian 测试库](obsidian.md)。
+状态为“工作区已修复并验证，Nix 部署未执行”。
+
+新增记录 H55：社区版 `checkhealth obsidian` 提示缺少可选录音工具
+`rec` / `sox` / `arecord`；不影响本次验证的文本笔记与链接功能，尚未决定是否需要录音。
+
+### H31：输入框接管冲突已修复
+
+关闭 Dressing 的 `input`，保留其 `select`。当前 Dressing 即使禁用 input，
+仍保留 `vim.ui.input` 转发包装；因此在其 setup 后调用 `snacks.input.enable()`，
+将输入接口恢复为 Snacks 的实现。
+
+使用 `nvim-test` 插件目录和工作区配置，在终端 UI 启动后复测：
+`vim.ui.input == require("snacks.input").input` 通过，Dressing select 仍启用，
+`checkhealth dressing snacks` 确认 Snacks.input 为 OK，H31 消失。
+Dressing 新出现的 `vim.ui.input not enabled` WARNING 是主动关闭功能的状态提示。
+其余图片、回收站等诊断仍待处理；未执行 Nix 部署。
+
+### H54：窗口快捷键冲突已修复
+
+按用户选择，`<leader>wm` 保留 WinShift，`<leader>wM` 切换窗口缩放。
+在用户 keymaps 中覆盖默认映射，并过滤 which-key 中旧的 wm Zoom 虚拟提示，
+保留 WinShift 提示；窗口缩放原有的 `<leader>uZ` 仍可使用。
+终端 UI 验证两键映射、Zoom 开启/恢复及 WinShift 命令加载通过，
+which-key 健康检查不再报告重复映射。未执行 Nix 部署。
+
+### H02：移除未使用的 Copilot
+
+用户确认不需要 Copilot，移除 Avante 的 `copilot.lua` 可选依赖及对应锁文件条目。
+Avante 继续使用 OpenRouter。此项按“移除不用的功能”处理，不代表完成了 Copilot 认证。
+本地已下载的插件目录留给 Lazy 的清理流程处理；未执行 Nix 部署。
+
+### H03：图标插件启动加载后警告消失
+
+用户确认将 `nvim-web-devicons` 设置为 `lazy = false`，并用 `opts = {}` 初始化。
+在 `nvim-test` 终端 UI 中验证启动后模块已加载，运行 `checkhealth fzf_lua`，
+原图标警告变为 `OK nvim-web-devicons found`。格式检查通过，未执行 Nix 部署。
+本次检查仍有可选图片工具警告，以及受限测试环境的 serverstart/runtime 目录错误；
+仅将 H03 标为已解决，不视为 fzf-lua 全部功能验证通过。
+
+### H09：用户配置 GIO 后验证通过
+
+用户在 Nix 中提供 GIO 后，终端和 Neovim 均找到
+`/etc/profiles/per-user/ten/bin/gio`，版本为 2.88.3。
+在 `nvim-test` 中调用 Neo-tree 的 GIO 后端，用主目录文件系统上的唯一临时文件
+验证移入回收站、恢复及内容一致性，全部通过，测试文件已清理。
+`checkhealth neo-tree` 显示 `OK gio is executable`，H09 消失。
+
+范围限制：`/tmp` 上的测试失败，GIO 明确返回
+`Trashing on system internal mounts is not supported`；不代表所有挂载点都支持回收站。
+本次未改动 Neo-tree 键位，`d` 仍为 delete，`T` 为 trash。
+
+### H39 / H44：补充 Docker Compose 文件类型识别
+
+完整 `nvim-test` 配置实测四种标准 Compose 文件名原先均识别为 `yaml`，
+而已启用的 `docker_compose_language_service` 仅匹配 `yaml.docker-compose`。
+经用户确认，在启动入口用 `vim.filetype.add` 注册 `docker-compose.yml`、
+`docker-compose.yaml`、`compose.yml`、`compose.yaml`。
+复测四种文件均识别为 `yaml.docker-compose`，普通 `.yml` / `.yaml` 仍为 `yaml`。
+当前测试环境没有 `docker-compose-langserver`，服务由项目 devShell 提供；
+本次仅验证识别规则，实际 LSP 连接待在对应 devShell 中验证。GitLab / Helm 类型未改。
+
 ## 已调查的主要问题
 
 | 问题组 | 已确认的事实与影响 | 仍未确认的部分 |
@@ -37,7 +135,7 @@ PTY 仍不能完整验证图片协议、真实项目的 LSP attach 或模型请�
 | Markdown LaTeX | latex parser 不存在，ABI unknown 是伴随结果；utftex、latex2text 也未安装。 | 用户是否需要公式渲染，尚未确定。 |
 | 输入框实现冲突 | Dressing health 显示它接管了 vim.ui.input；Snacks.input 已启用但检测到实现不属于自己。 | 真实交互中是否出现功能异常，需要用户场景复现。 |
 | 窗口快捷键重复 | `lua/keymapping.lua` 和 `lua/plugins/which_key.lua` 使用 `<leader>wm` 表示 WinShift；LazyVim 同时给 Zoom 使用该键。 | 当前每种加载顺序下最终执行哪个动作，需要交互验证。 |
-| Copilot | 报告没有环境 token / 本地凭据，LSP client 不可用；它由 Avante 的可选依赖引入。 | 是否打算使用 Copilot；该错误不是 OpenRouter 密钥错误。 |
+| Copilot | 基线报告中客户端不可用，由 Avante 的可选依赖引入；用户确认不需要，现已移除依赖与锁文件条目。 | 不再配置或验证 Copilot 认证；该错误不是 OpenRouter 密钥错误。 |
 | 图片和图表预览 | 转换工具、部分 parser 和终端协议检查未通过；Snacks.image 当前禁用。 | 是否需要图片/PDF/公式/Mermaid；PTY 中的终端协议结果不能代替真实终端验证。 |
 | 回收站 | 外部 trash/gio/KDE 命令不存在；Snacks.explorer 当前禁用。Neo-tree 明确提供自身 XDG trash 回退。 | 实际删除是否经过 Neo-tree 的回退实现，尚未做文件操作实验。 |
 | SQLite | Snacks 通过 LuaJIT FFI 加载 sqlite3 动态库，不是仅检查 sqlite3 命令；失败后改用文件存储。 | 动态库究竟未安装还是 Nix 链接搜索路径不可见，尚未进一步定位。 |
@@ -50,7 +148,8 @@ PTY 仍不能完整验证图片协议、真实项目的 LSP attach 或模型请�
 
 ## 全部 ERROR / WARNING
 
-下表逐条列出工作区报告的每一次 ERROR / WARNING，不合并重复项。状态均为记录/待处理，未实施修复。
+下表逐条列出基线工作区报告的每一次 ERROR / WARNING，不合并重复项。
+H03、H09、H13、H31、H54 已修复，H02 已通过移除不用的功能处理，其余仍为待处理或待验证；H55 为迁移后新增的可选功能提示，不计入基线 54 条。
 
 | 编号 | 级别 | 检查项 | 原始问题 | 调查结论 |
 | --- | --- | --- | --- | --- |
@@ -141,7 +240,7 @@ PTY 仍不能完整验证图片协议、真实项目的 LSP attach 或模型请�
 - crates 的报告明确写明 setup 未调用而跳过；不能把绿色标题理解为 Rust 全功能已验证。
 - Rust 调试依赖、Neo-tree 文件操作 LSP 集成等以普通信息或可选项显示，未全部启用；未归入 ERROR/WARNING 计数。
 - 未打开具体项目，因此没有验证全部语言的真实诊断、补全、格式化和调试。
-- 本轮不提供修改命令，也不修改配置。逐项处理前，应先确定要保留哪些可选功能，再对对应问题做专项复现。
+- 每项修改前先确认要保留的功能及方案；用户决策后才修复，并单独复测。
 
 ## 核验
 

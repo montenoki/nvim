@@ -8,4 +8,14 @@ if platform.nix_managed_config then
     vim.g.loaded_ruby_provider = 0
 end
 
+-- Match the filetype expected by the Docker Compose language server.
+vim.filetype.add({
+    filename = {
+        ["docker-compose.yml"] = "yaml.docker-compose",
+        ["docker-compose.yaml"] = "yaml.docker-compose",
+        ["compose.yml"] = "yaml.docker-compose",
+        ["compose.yaml"] = "yaml.docker-compose",
+    },
+})
+
 require("config.lazy")

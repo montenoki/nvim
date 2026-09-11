@@ -5,6 +5,13 @@
 local map = vim.keymap.set
 local del = vim.keymap.del
 
+-- Keep lowercase wm for WinShift and uppercase wM for window zoom.
+Snacks.toggle.zoom():map("<leader>wM")
+map("n", require("keymapping").winshift, function()
+    require("lazy").load({ plugins = { "winshift.nvim" } })
+    vim.cmd("WinShift")
+end, { desc = "WinShift" })
+
 -- j、k在[实际行]中移动
 -- 方向键在[视觉行]中移动
 del({ "n", "x" }, "j")

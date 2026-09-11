@@ -39,10 +39,22 @@ return {
             "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
             "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
             "ibhagwan/fzf-lua", -- for file_selector provider fzf
-            "stevearc/dressing.nvim", -- for input provider dressing
+            {
+                "stevearc/dressing.nvim",
+                -- Let Snacks handle input prompts; keep Dressing's selection UI.
+                opts = { input = { enabled = false } },
+                config = function(_, opts)
+                    require("dressing").setup(opts)
+                    -- Dressing keeps a forwarding wrapper even when input is disabled.
+                    require("snacks.input").enable()
+                end,
+            },
             "folke/snacks.nvim", -- for input provider snacks
-            "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-            "zbirenbaum/copilot.lua", -- for providers='copilot'
+            {
+                "nvim-tree/nvim-web-devicons",
+                lazy = false,
+                opts = {},
+            },
             {
                 -- support for image pasting
                 "HakonHarnes/img-clip.nvim",
