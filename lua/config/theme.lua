@@ -59,6 +59,9 @@ local function preference(value)
         local light = value.name == "tokyonight-day"
             or value.name == "kanagawa-lotus"
             or value.name == "catppuccin-latte"
+            or value.name == "flexoki-light"
+            or value.name == "rose-pine-dawn"
+            or value.name == "white"
         background = light and "light" or "dark"
     end
     return { name = value.name, background = background }

@@ -8,8 +8,10 @@ return {
             or "make",
         event = "VeryLazy",
         version = false, -- Never set this value to "*"! Never!
+        -- Avante merges these overrides with its default configuration.
         ---@module 'avante'
         ---@type avante.Config
+        ---@diagnostic disable-next-line: missing-fields
         opts = {
             instructions_file = "avante.md",
 
@@ -20,7 +22,7 @@ return {
                     __inherited_from = "openai",
                     api_key_name = "OPENROUTER_API_KEY",
                     endpoint = "https://openrouter.ai/api/v1",
-                    model = "anthropic/claude-4.5-sonnet",
+                    model = "anthropic/claude-sonnet-4.5",
                     timeout = 30000,
                     extra_request_body = {
                         temperature = 0.75,

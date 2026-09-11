@@ -33,6 +33,38 @@ Nord 和 Retro 82 没有浅色变体时，继续跟随系统实际采用的深�
 颜色由各插件管理，系统仅提供主题名称。变体或插件版本之间可能存在配色差异。
 Gruvbox 使用 Material 色板，对应当前 TenOS 的暖白与柔和蓝绿色。
 
+补充的主题按 Omarchy 的配色风格选择 Neovim 插件，不追求插件来源或版本一致。
+原有 Nord、Gruvbox 和 Catppuccin 继续复用。以下主题可以通过
+`:colorscheme <名称>` 或主题选择器使用，不改变现有 TenOS 同步映射。
+
+| 配色 | Neovim 插件 | colorscheme |
+| --- | --- | --- |
+| Ethereal | bjarneo/ethereal.nvim | ethereal |
+| Everforest | neanias/everforest-nvim | everforest |
+| Flexoki Light | kepano/flexoki-neovim | flexoki-light |
+| Hackerman | bjarneo/hackerman.nvim | hackerman |
+| Lumon | omacom-io/lumon.nvim | lumon |
+| Matte Black | tahayvr/matteblack.nvim | matteblack |
+| Miasma | OldJobobo/miasma.nvim | miasma |
+| Osaka Jade | ribru17/bamboo.nvim | bamboo |
+| Ristretto | loctvl842/monokai-pro.nvim | monokai-pro-ristretto |
+| Rosé Pine | rose-pine/neovim | rose-pine-dawn（另有 rose-pine-main、rose-pine-moon） |
+| Solitude | ficcdaf/ashen.nvim | ashen |
+| Vantablack | bjarneo/vantablack.nvim | vantablack |
+| White | bjarneo/white.nvim | white |
+
+仅使用现成主题插件，不在本仓库自行维护颜色主题。
+Aether 仅作为 Hackerman 的依赖保留。
+
+参考：[Omarchy 主题目录](https://github.com/omacom/omarchy/tree/quattro/themes)、
+[Monokai Pro 配色滤镜](https://github.com/loctvl842/monokai-pro.nvim)。
+
+新增配色的按需加载及正反向切换验证：
+
+```sh
+XDG_STATE_HOME="$(mktemp -d)" XDG_CACHE_HOME="$(mktemp -d)" nvim --headless -u NONE -i NONE -l tests/themes_catalog.lua
+```
+
 通过 `:colorscheme tokyonight-night` 或 LazyVim 的主题选择器切换，
 会保存到 `stdpath("state")/preferences.json`，通常是
 `~/.local/state/nvim/preferences.json`。Snacks 选择器预览不会保存，确认后才保存。
