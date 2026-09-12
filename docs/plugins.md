@@ -48,4 +48,4 @@
 | white.nvim | 主题 | 提供 White 浅色配色。 |
 | ashen.nvim | 主题 | 提供与 Solitude 对应的 Ashen 配色。 |
 
-Showkeys：右下角显示最近按键；底栏 `󰌌` 或 `:ShowkeysToggle` 切换并记住选择，首次默认关闭。配置见 [showkeys.lua](../lua/plugins/showkeys.lua)。
+Showkeys：右下角显示最近按键；底栏 `󰌌` 或 `:ShowkeysToggle` 切换并记住选择，首次默认关闭。配置见 [showkeys.lua](../lua/plugins/ui/showkeys.lua)。

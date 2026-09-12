@@ -5,7 +5,7 @@ local plugins = vim.env.NVIM_TEST_PLUGIN_ROOT
     or (vim.fn.stdpath("data") .. "/lazy")
 vim.opt.rtp:prepend(root)
 vim.opt.rtp:prepend(plugins .. "/lazy.nvim")
-require("config.jieba")
+require("config.languages.jieba")
 vim.go.loadplugins = true
 _G.LazyVim = {
     opts = function(name)
@@ -20,9 +20,9 @@ local extras = plugins .. "/LazyVim/lua/lazyvim/plugins/extras/"
 require("lazy").setup({
     dofile(extras .. "coding/mini-surround.lua"),
     dofile(extras .. "editor/leap.lua"),
-    dofile(root .. "/lua/plugins/leap.lua"),
-    dofile(root .. "/lua/plugins/jieba.lua"),
-    dofile(root .. "/lua/plugins/surround.lua"),
+    dofile(root .. "/lua/plugins/editor/leap.lua"),
+    dofile(root .. "/lua/plugins/editor/jieba.lua"),
+    dofile(root .. "/lua/plugins/editor/surround.lua"),
 }, {
     root = plugins,
     lockfile = vim.fn.tempname(),
@@ -89,7 +89,7 @@ check(
 assert(vim.fn.maparg("iw", "o", false, true).buffer == 1)
 
 -- 每种支持的文件类型都有局部映射，并能完成中文包围和英文编辑。
-for _, ft in ipairs(require("config.jieba").filetypes) do
+for _, ft in ipairs(require("config.languages.jieba").filetypes) do
     vim.cmd("enew!")
     vim.bo.filetype = ft
     assert(vim.fn.maparg("iw", "o", false, true).buffer == 1, ft)

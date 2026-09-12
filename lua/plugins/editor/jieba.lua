@@ -1,4 +1,4 @@
-local filetypes = require("config.jieba").filetypes
+local filetypes = require("config.languages.jieba").filetypes
 
 return {
     {
@@ -27,7 +27,7 @@ return {
                 keys[#keys + 1] = {
                     motion,
                     function()
-                        return require("config.jieba").operator_textobject(
+                        return require("config.languages.jieba").operator_textobject(
                             motion
                         )
                     end,

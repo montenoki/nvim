@@ -1,5 +1,3 @@
-local keymapping = require("keymapping")
-
 return {
     {
         "s1n7ax/nvim-window-picker",
@@ -8,7 +6,7 @@ return {
         opts = { hint = "floating-big-letter" },
         keys = {
             {
-                keymapping.window_picker,
+                "<leader>wp",
                 function()
                     local picked_window_id =
                         require("window-picker").pick_window()

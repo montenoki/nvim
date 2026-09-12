@@ -1,4 +1,33 @@
-local keymapping = require("keymapping")
+-- 统一接住同步异常和异步失败，只对“来源不可用”进行回退。
+-- LSP 返回空范围也是有效结果；两种来源都不可用时返回空范围，不使用 indent。
+local function folding_ranges(bufnr)
+    local promise = require("promise")
+    local function request(provider)
+        return promise(function(resolve)
+            resolve(require("ufo").getFolds(bufnr, provider))
+        end)
+    end
+    local function unavailable(reason)
+        return type(reason) == "string"
+            and reason:find("UfoFallbackException", 1, true) ~= nil
+    end
+
+    return request("lsp")
+        :catch(function(reason)
+            if unavailable(reason) then
+                return request("treesitter")
+            end
+            return promise.reject(reason)
+        end)
+        :catch(function(reason)
+            if unavailable(reason) then
+                return {}
+            end
+            -- 解析器损坏等真正的错误仍需报告，不能当作“没有折叠”忽略。
+            return promise.reject(reason)
+        end)
+end
+
 return {
     {
         "kevinhwang91/nvim-ufo",
@@ -29,7 +58,7 @@ return {
                 desc = "关闭全部折叠",
             },
             {
-                keymapping.ufo.peek,
+                "zK",
                 function()
                     local winid = require("ufo").peekFoldedLinesUnderCursor()
                     if not winid then
@@ -109,8 +138,8 @@ return {
                     winblend = 0,
                 },
                 mappings = {
-                    scrollU = keymapping.float_window.scroll_up,
-                    scrollD = keymapping.float_window.scroll_down,
+                    scrollU = "<C-Up>",
+                    scrollD = "<C-Down>",
                 },
             },
 
@@ -121,7 +150,7 @@ return {
                 end
                 -- 普通文件优先使用 LSP；来源不可用时尝试 Tree-sitter，不按缩进猜测。
                 -- LSP 正常返回空结果时不会回退；两者均不可用时不生成自动折叠。
-                return { "lsp", "treesitter" }
+                return folding_ranges
             end,
         },
     },

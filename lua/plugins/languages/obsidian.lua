@@ -1,5 +1,6 @@
-local workspaces =
-    require("config.obsidian").workspaces(vim.fn.expand("~/obsidian"))
+local workspaces = require("config.languages.obsidian_workspaces").workspaces(
+    vim.fn.expand("~/obsidian")
+)
 
 return {
     "obsidian-nvim/obsidian.nvim",

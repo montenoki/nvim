@@ -1,4 +1,13 @@
+-- 配色插件及系统主题接线；主题选择和监听由 config.ui.theme 负责。
 return {
+    {
+        "LazyVim/LazyVim",
+        opts = {
+            colorscheme = function()
+                require("config.ui.theme").setup()
+            end,
+        },
+    },
     { "folke/tokyonight.nvim", opts = { style = "night" } },
     { "rebelot/kanagawa.nvim", lazy = true, opts = {} },
     { "OldJobobo/retro-82.nvim", lazy = true },

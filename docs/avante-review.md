@@ -15,9 +15,9 @@
 - 图片绝对路径仅用于 `AvanteInput`；普通 Markdown 使用相对路径。
 - 保留图片粘贴和 Markdown 渲染，移除冗余图标加载配置及英文示例注释。
 
-验证：`tests/avante.lua` 检查依赖、四个原生模块、Blink 的 /、@、# 候选、
-@file 接受动作和图片路径边界；`tests/avante_ui.lua` 检查实际侧栏、补全路由、
-Snacks 输入框和选择器。均不发送模型请求，未验证真实回复和图片上传。
+验证：`tests/avante_completion.lua` 检查四个原生模块、Blink 的 /、@、# 候选和
+@file 接受动作，不发送模型请求。
+此前侧栏、Snacks 输入框和选择器的一次性验收脚本已清理；未验证真实回复和图片上传。
 
 
 检查日期：2026-09-12。以下初次检查以当时锁定的 Avante 提交

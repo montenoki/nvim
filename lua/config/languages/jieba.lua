@@ -1,11 +1,18 @@
+-- 维护中文按词操作的文件类型范围，以及 Jieba 与 mini.surround 的适配。
+-- 插件加载、安装和按键注册由 lua/plugins/editor/jieba.lua 负责。
 local M = {}
 
--- 仅在这些正文和代码文件中启用；不接管文件树、终端、帮助等插件窗口。
+-- 按文件类型筛选，不直接检查窗口性质；常见文件树、终端和帮助类型不在清单中。
+-- 声明为 markdown 等受支持类型的预览缓冲区仍可能启用这些映射。
 -- 映射作用于整个文件，中文注释和字符串都能按词编辑。
+---@type string[]
 M.filetypes = {
+    -- 正文与提交说明。
     "markdown",
     "text",
     "gitcommit",
+
+    -- 编程语言与脚本。
     "lua",
     "vim",
     "python",
@@ -18,16 +25,23 @@ M.filetypes = {
     "javascriptreact",
     "typescript",
     "typescriptreact",
+    "sql",
+
+    -- 网页组件、标记与样式。
     "vue",
     "svelte",
     "html",
     "css",
     "scss",
-    "sql",
+    "xml",
+
+    -- Shell。
     "sh",
     "bash",
     "zsh",
     "fish",
+
+    -- 系统、项目与数据配置。
     "nix",
     "terraform",
     "terraform-vars",
@@ -38,26 +52,32 @@ M.filetypes = {
     "json",
     "jsonc",
     "toml",
-    "xml",
+
+    -- 构建文件。
     "dockerfile",
     "make",
     "cmake",
 }
 
 -- 只为 Surround 的添加操作分流，复制、删除等操作继续调用 Jieba。
+---@param motion "iw"|"aw" 词内或含周围空白的词语文本对象
+---@return string 映射待执行的按键序列
 function M.operator_textobject(motion)
     if
         vim.v.operator == "g@"
         and vim.o.operatorfunc == "v:lua.MiniSurround.add"
     then
         -- 保留 Surround 发起的操作，只借助 Jieba 确定中文词语范围。
-        return '<Cmd>lua require("config.jieba").select_for_surround("'
+        return '<Cmd>lua require("config.languages.jieba").select_for_surround("'
             .. motion
             .. '")<CR>'
     end
     return "<Plug>(Jieba_" .. motion .. ")"
 end
 
+-- 依赖 JiebaModelOmap 的范围字段和 MiniSurround.add 的操作约定。
+-- 升级相关插件后运行 tests/jieba_surround.lua，验证选区、计数和点号重复。
+---@param motion "iw"|"aw"
 function M.select_for_surround(motion)
     -- 获取词语的起止位置，保留 iw/aw 的计数和空白选择规则。
     local region =

@@ -1,4 +1,4 @@
-local display = require("config.statusline")
+local display = require("config.ui.statusline")
 local toggles = require("config.toggles")
 
 -- 底栏只显示和接收点击，状态与保存交给开关模块。

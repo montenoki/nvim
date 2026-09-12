@@ -1,5 +1,3 @@
-local keymapping = require("keymapping")
-
 return {
     {
         "https://codeberg.org/andyg/leap.nvim.git",
@@ -7,7 +5,7 @@ return {
         keys = function()
             local keys = {
                 {
-                    keymapping.leap,
+                    "\\",
                     function()
                         require("leap").leap({
                             windows = require("leap.user").get_focusable_windows(),

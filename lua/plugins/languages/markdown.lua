@@ -1,4 +1,4 @@
-local obsidian = require("config.obsidian")
+local obsidian = require("config.languages.obsidian_workspaces")
 
 -- 解析真实目录，避免通过符号链接打开笔记时绕过笔记库排除。
 -- 新文件尚不存在时，先解析父目录。

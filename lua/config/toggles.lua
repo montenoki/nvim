@@ -3,22 +3,24 @@
 local M = {}
 local state = require("config.state")
 local values = {}
+-- 开关名称集中维护，供状态校验、启动恢复、提示和快捷键描述共用。
+local names = {
+    diagnostics = "诊断",
+    inlay_hints = "行内提示",
+    codelens = "CodeLens",
+    conceal = "文本隐藏",
+    spell = "拼写检查",
+    list = "空白字符",
+    relativenumber = "相对行号",
+    autoformat = "自动格式化",
+    showkeys = "按键浮窗",
+}
+-- 使用窗口选项实现的开关，其余开关通过插件或 Neovim API 应用。
 local options = {
     conceal = "conceallevel",
     spell = "spell",
     list = "list",
     relativenumber = "relativenumber",
-}
-local keys = {
-    "diagnostics", -- 诊断
-    "inlay_hints", -- 行内提示
-    "codelens", -- CodeLens
-    "conceal", -- 文本隐藏
-    "spell", -- 拼写检查
-    "list", -- 空白字符
-    "relativenumber", -- 相对行号
-    "autoformat", -- 自动格式化
-    "showkeys", -- 按键浮窗
 }
 local started = false
 
@@ -27,7 +29,11 @@ local function restore_window(win)
         return
     end
     local buf = vim.api.nvim_win_get_buf(win)
-    if vim.bo[buf].buftype ~= "" then
+    if
+        vim.api.nvim_win_get_config(win).relative ~= ""
+        or vim.bo[buf].buftype ~= ""
+        or not vim.bo[buf].buflisted
+    then
         return
     end
     for key, option in pairs(options) do
@@ -91,6 +97,7 @@ local function apply(key, enabled)
     end
 end
 
+-- 读取当前实际状态，供底栏显示和切换操作使用。
 function M.enabled(key)
     if options[key] then
         local value = vim.wo[options[key]]
@@ -121,49 +128,35 @@ end
 
 -- 主动设置才保存；启动恢复只应用，避免重复写盘。
 function M.set(key, enabled)
-    M.enabled(key) -- 校验名称。
+    assert(names[key], "Unknown toggle: " .. key)
     assert(type(enabled) == "boolean", "Toggle value must be boolean")
     if key == "showkeys" and not package.loaded["showkeys"] then
         require("lazy").load({ plugins = { "showkeys" } })
     end
     values[key] = enabled
     apply(key, enabled)
-    state.set("toggle." .. key, enabled)
+    local saved = state.set("toggle." .. key, enabled)
     vim.notify(
-        key .. (enabled and " on" or " off"),
-        vim.log.levels.INFO,
-        { title = "Toggle" }
+        names[key]
+            .. (enabled and "已开启" or "已关闭")
+            .. (saved and "" or "，但未保存"),
+        saved and vim.log.levels.INFO or vim.log.levels.WARN,
+        { title = "开关" }
     )
+    return saved
 end
 
 function M.toggle(key)
     M.set(key, not M.enabled(key))
 end
 
--- 在 LazyVim 默认映射之后绑定；格式化只保留全局入口。
-function M.map_keys()
-    local mappings = {
-        { "<leader>ud", "diagnostics", "诊断" },
-        { "<leader>uh", "inlay_hints", "行内提示" },
-        { "<leader>uc", "conceal", "文本隐藏" },
-        { "<leader>us", "spell", "拼写检查" },
-        { "<leader>uL", "relativenumber", "相对行号" },
-        { "<leader>uf", "autoformat", "自动格式化" },
-    }
-    for _, mapping in ipairs(mappings) do
-        local key = mapping[2]
-        vim.keymap.set("n", mapping[1], function()
-            M.toggle(key)
-        end, { desc = "切换" .. mapping[3] .. "（记住选择）" })
-    end
-end
-
+-- 启动恢复与窗口生命周期：只应用已有偏好，不写入状态文件。
 function M.setup()
     if started then
         return
     end
     started = true
-    for _, key in ipairs(keys) do
+    for key in pairs(names) do
         local saved = state.get("toggle." .. key)
         if type(saved) == "boolean" then
             values[key] = saved
@@ -201,6 +194,7 @@ function M.restore_showkeys()
     apply("showkeys", values.showkeys == true)
 end
 
+-- LSP 接线：后连接的服务器也遵循同一份全局偏好。
 function M.configure_lsp(opts)
     local hints = vim.deepcopy(
         opts.inlay_hints or { enabled = true, exclude = { "vue" } }
@@ -228,6 +222,24 @@ function M.configure_lsp(opts)
     end)
     if not vim.lsp.codelens.enable then
         Snacks.util.lsp.on({ method = "textDocument/codeLens" }, lenses)
+    end
+end
+
+-- 快捷键入口放在默认映射之后调用；格式化只保留全局入口。
+function M.map_keys()
+    local mappings = {
+        { "<leader>ud", "diagnostics" },
+        { "<leader>uh", "inlay_hints" },
+        { "<leader>uc", "conceal" },
+        { "<leader>us", "spell" },
+        { "<leader>uL", "relativenumber" },
+        { "<leader>uf", "autoformat" },
+    }
+    for _, mapping in ipairs(mappings) do
+        local key = mapping[2]
+        vim.keymap.set("n", mapping[1], function()
+            M.toggle(key)
+        end, { desc = "切换" .. names[key] .. "（记住选择）" })
     end
 end
 

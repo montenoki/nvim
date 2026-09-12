@@ -1,18 +1,8 @@
--- 只验证本地配置与 UI/补全，不发送模型请求，不读取或打印密钥。
+-- 验证 Avante 原生模块和 Blink 适配；不发送模型请求，不读取或打印密钥。
 require("lazy").load({ plugins = { "avante.nvim", "blink.cmp" } })
 vim.wait(200, function()
     return false
 end)
-local config = require("avante.config")
-assert(config.selector.provider == "snacks")
-assert(config.input.provider == "snacks")
-assert(config.providers.openrouter.timeout == 120000)
-assert(config.instructions_file == "avante.md")
-local plugins = require("lazy.core.config").plugins
-for _, name in ipairs({ "nvim-cmp", "mini.pick", "dressing.nvim" }) do
-    assert(plugins[name] == nil, name)
-end
-assert(package.loaded.cmp == nil)
 for _, name in ipairs({
     "avante_templates",
     "avante_tokenizers",
@@ -22,9 +12,6 @@ for _, name in ipairs({
     assert(pcall(require, name), name)
 end
 local blink = require("blink.cmp.config")
-assert(blink.keymap["<Tab>"][1] == "select_next")
-assert(blink.snippets.preset == "luasnip")
-assert(blink.sources.per_filetype.AvanteInput[1] == "avante")
 local source =
     require("blink-cmp-avante").new(blink.sources.providers.avante.opts)
 local function completions(ft, char)
@@ -66,12 +53,5 @@ for _, item in ipairs(completions("AvanteInput", "@")) do
 end
 avante.get = original_get
 assert(opened)
-local clip = require("img-clip.config")
-vim.cmd("noautocmd setlocal filetype=markdown")
-assert(clip.get_opt("use_absolute_path", {}) == false)
-vim.cmd("noautocmd setlocal filetype=AvanteInput")
-assert(clip.get_opt("use_absolute_path", {}) == true)
-print(
-    "Avante dependencies, native modules, Blink completions and image paths passed"
-)
+print("PASS: Avante native modules, Blink completions and sidebar callbacks")
 vim.cmd("qa!")

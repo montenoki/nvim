@@ -1,5 +1,3 @@
-local keymapping = require("keymapping")
-
 return {
     {
         "hotoo/pangu.vim",
@@ -8,13 +6,13 @@ return {
         cmd = { "Pangu", "PanguAll", "PanguEnable", "PanguDisable" },
         keys = {
             {
-                keymapping.format_cjk,
+                "<leader>cz",
                 "<Cmd>PanguAll<CR>",
                 mode = "n",
                 desc = "中文排版：全文",
             },
             {
-                keymapping.format_cjk,
+                "<leader>cz",
                 -- 保留可视选区的行范围；即使只选中部分字符，也处理整行。
                 ":Pangu<CR>",
                 mode = "x",

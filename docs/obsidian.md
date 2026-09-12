@@ -62,12 +62,8 @@ Obsidian 的 `ui.enable` 设为 `false`，保留笔记、链接和搜索功能�
 - 两项 health 合计 0 ERROR、4 WARNING：3 条原有 LaTeX 警告，1 条可选录音工具缺失。
 - 临时多库测试通过：按名称排序、过滤普通/隐藏/嵌套目录、正确解析笔记所属库、命令切换库。
 
-测试脚本为 `tests/obsidian.lua`，不保存或修改示例笔记内容。
-自动发现和多库切换的独立测试为 `tests/obsidian_workspaces.lua`，只在临时目录创建测试库：
-
-```sh
-XDG_STATE_HOME="$(mktemp -d)" XDG_CACHE_HOME="$(mktemp -d)" nvim --headless -u NONE -i NONE -l tests/obsidian_workspaces.lua
-```
+以上是当时的验收记录；依赖个人示例库和临时工作区的验收脚本已清理。
+日常复查可使用上面的 workspace 命令和 health 检查；它们不代表后续版本已自动验证。
 
 本次没有验证桌面应用打开、真实补全菜单交互、录音或云同步。
 云同步默认关闭，不需要配置账号。
