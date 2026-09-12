@@ -45,7 +45,10 @@ local function check(lines, keys, expected, cursor)
     vim.api.nvim_win_set_cursor(0, cursor or { 1, 0 })
     feed(keys)
     local actual = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-    assert(vim.deep_equal(actual, expected), keys .. ": " .. vim.inspect(actual))
+    assert(
+        vim.deep_equal(actual, expected),
+        keys .. ": " .. vim.inspect(actual)
+    )
 end
 
 vim.bo.filetype = vim.env.JIEBA_TEST_FIRST_FT or "markdown"
@@ -78,7 +81,11 @@ check({ "中国人民欢迎你" }, "dw.", { "欢迎你" })
 check({ "中国人民欢迎你" }, "diw.", { "欢迎你" })
 check({ "中国人民欢迎你" }, "yiw", { "中国人民欢迎你" })
 assert(vim.fn.getreg('"') == "中国")
-check({ "中国人民欢迎你" }, "ciw你好<Esc>", { "你好人民欢迎你" })
+check(
+    { "中国人民欢迎你" },
+    "ciw你好<Esc>",
+    { "你好人民欢迎你" }
+)
 assert(vim.fn.maparg("iw", "o", false, true).buffer == 1)
 
 -- 每种支持的文件类型都有局部映射，并能完成中文包围和英文编辑。
@@ -95,10 +102,22 @@ end
 -- 代码里的中文注释也能直接选词；前面的注释符号不受影响。
 vim.cmd("enew!")
 vim.bo.filetype = "lua"
-check({ "-- 中国人民欢迎你" }, 'gzaiw"', { '-- "中国"人民欢迎你' }, { 1, 3 })
+check(
+    { "-- 中国人民欢迎你" },
+    'gzaiw"',
+    { '-- "中国"人民欢迎你' },
+    { 1, 3 }
+)
 
 -- 未列入白名单的插件窗口不应出现 Jieba 的局部映射。
-for _, ft in ipairs({ "neo-tree", "lazy", "help", "qf", "terminal", "snacks_dashboard" }) do
+for _, ft in ipairs({
+    "neo-tree",
+    "lazy",
+    "help",
+    "qf",
+    "terminal",
+    "snacks_dashboard",
+}) do
     vim.cmd("enew!")
     vim.bo.buftype = "nofile"
     vim.bo.filetype = ft
@@ -108,4 +127,6 @@ for _, ft in ipairs({ "neo-tree", "lazy", "help", "qf", "terminal", "snacks_dash
         end
     end
 end
-print("PASS: Jieba/Surround compatibility, code comments, supported filetypes and special-window isolation")
+print(
+    "PASS: Jieba/Surround compatibility, code comments, supported filetypes and special-window isolation"
+)

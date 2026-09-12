@@ -15,7 +15,9 @@ else
     assert(toggles.enabled("showkeys"))
     assert(state.get("toggle.showkeys") == true)
     vim.api.nvim_feedkeys("l", "xt", false)
-    assert(vim.wait(500, function() return plugin_state.win ~= nil end))
+    assert(vim.wait(500, function()
+        return plugin_state.win ~= nil
+    end))
     assert(vim.api.nvim_win_get_config(plugin_state.win).relative == "editor")
     assert(vim.api.nvim_win_get_config(plugin_state.win).focusable == false)
     assert(#plugin_state.keys > 0, "浮窗没有捕获按键")

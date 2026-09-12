@@ -27,7 +27,9 @@ return {
                 keys[#keys + 1] = {
                     motion,
                     function()
-                        return require("config.jieba").operator_textobject(motion)
+                        return require("config.jieba").operator_textobject(
+                            motion
+                        )
                     end,
                     mode = "o",
                     ft = filetypes,

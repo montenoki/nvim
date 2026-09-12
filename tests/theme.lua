@@ -1,7 +1,29 @@
 -- 用隔离的 XDG_STATE_HOME 运行，不读取或修改真实系统主题。
 vim.opt.rtp:prepend(vim.fn.getcwd())
-local root = vim.env.THEME_PLUGIN_ROOT or vim.fn.expand("~/.local/share/nvim-test/lazy")
-for _, name in ipairs({ "kanagawa.nvim", "catppuccin", "retro-82.nvim", "nord.nvim", "gruvbox-material", "tokyonight.nvim", "ethereal.nvim", "everforest-nvim", "flexoki-neovim", "hackerman.nvim", "aether.nvim", "lumon.nvim", "matteblack.nvim", "miasma.nvim", "bamboo.nvim", "monokai-pro.nvim", "rose-pine", "ashen.nvim", "vantablack.nvim", "white.nvim" }) do
+local root = vim.env.THEME_PLUGIN_ROOT
+    or vim.fn.expand("~/.local/share/nvim-test/lazy")
+for _, name in ipairs({
+    "kanagawa.nvim",
+    "catppuccin",
+    "retro-82.nvim",
+    "nord.nvim",
+    "gruvbox-material",
+    "tokyonight.nvim",
+    "ethereal.nvim",
+    "everforest-nvim",
+    "flexoki-neovim",
+    "hackerman.nvim",
+    "aether.nvim",
+    "lumon.nvim",
+    "matteblack.nvim",
+    "miasma.nvim",
+    "bamboo.nvim",
+    "monokai-pro.nvim",
+    "rose-pine",
+    "ashen.nvim",
+    "vantablack.nvim",
+    "white.nvim",
+}) do
     vim.opt.rtp:append(root .. "/" .. name)
 end
 vim.o.termguicolors = true
@@ -19,7 +41,10 @@ end
 for name, config in pairs(theme.system_themes) do
     select(name)
     if config[1]:match("^kanagawa") then
-        assert(require("kanagawa")._CURRENT_THEME == config[1]:match("kanagawa%-(.*)"))
+        assert(
+            require("kanagawa")._CURRENT_THEME
+                == config[1]:match("kanagawa%-(.*)")
+        )
     elseif config[1] == "flexoki-light" then
         assert(vim.g.colors_name == "flexoki" and vim.o.background == "light")
     elseif config[1] == "rose-pine-dawn" then
@@ -35,7 +60,9 @@ end
 -- 真实文件监听：不触发 FocusGained，也应跟随系统切换。
 select("tokyo-night")
 vim.fn.writefile({ "tokyo-day" }, theme.system_path)
-assert(vim.wait(1000, function() return vim.g.colors_name == "tokyonight-day" end, 10))
+assert(vim.wait(1000, function()
+    return vim.g.colors_name == "tokyonight-day"
+end, 10))
 assert(vim.o.background == "light")
 -- 模拟插件缺失，分别验证黑底和白底兜底。
 theme.system_themes.missing_dark = { "nonexistent-ten-theme" }

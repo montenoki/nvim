@@ -50,4 +50,6 @@ for pass = 1, 2 do
         assert(normal.fg ~= normal.bg, item[1] .. ": unreadable Normal colors")
     end
 end
-print("PASS: " .. #schemes .. " theme palettes, forward and reverse lazy loading")
+print(
+    "PASS: " .. #schemes .. " theme palettes, forward and reverse lazy loading"
+)

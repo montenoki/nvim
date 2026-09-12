@@ -3,8 +3,19 @@ vim.notify = function() end
 local state = require("config.state")
 local toggles = require("config.toggles")
 local actions = {}
-for _, key in ipairs({ "diagnostics", "inlay_hints", "codelens", "conceal", "spell", "list", "relativenumber", "autoformat" }) do
-    actions[key] = function() toggles.toggle(key) end
+for _, key in ipairs({
+    "diagnostics",
+    "inlay_hints",
+    "codelens",
+    "conceal",
+    "spell",
+    "list",
+    "relativenumber",
+    "autoformat",
+}) do
+    actions[key] = function()
+        toggles.toggle(key)
+    end
 end
 local enabled = vim.env.TOGGLE_TEST_MODE == "on"
 toggles.setup()
