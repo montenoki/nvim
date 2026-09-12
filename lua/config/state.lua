@@ -1,4 +1,5 @@
--- Runtime preferences live outside the config (which may be in the Nix store).
+-- 只负责 JSON 读写，不解释字段、不操作编辑器；业务规则由调用者决定。
+-- 使用可写的 state 目录，兼容只读 Nix 配置。
 local M = {}
 
 M.path = vim.fn.stdpath("state") .. "/preferences.json"
@@ -17,7 +18,8 @@ function M.get(key)
 end
 
 function M.set(key, value)
-    -- Re-read so unrelated preferences written by another instance survive.
+    -- 写入前重新读取，保留其他模块或实例已保存的字段。
+    -- 临时文件再重命名避免半写文件；这不是跨进程事务锁。
     local data = read()
     data[key] = value
     local temporary = M.path .. "." .. vim.fn.getpid() .. ".tmp"

@@ -1,6 +1,8 @@
 return {
     "gbprod/yanky.nvim",
-    opt = {
-        preserve_cursor_position = { enabled = true },
+    keys = {
+        -- 可视模式使用原生替换，普通模式仍由 Yanky 提供粘贴和历史切换。
+        { "p", false, mode = "x" },
+        { "P", false, mode = "x" },
     },
 }

@@ -1,134 +1,54 @@
--- Run with an isolated XDG_STATE_HOME; THEME_PLUGIN_ROOT may point to test clones.
+-- 用隔离的 XDG_STATE_HOME 运行，不读取或修改真实系统主题。
 vim.opt.rtp:prepend(vim.fn.getcwd())
-local root = vim.env.THEME_PLUGIN_ROOT or vim.fn.stdpath("data") .. "/lazy"
-for _, name in ipairs({
-    "kanagawa.nvim",
-    "catppuccin",
-    "retro-82.nvim",
-    "nord.nvim",
-    "gruvbox-material",
-}) do
+local root = vim.env.THEME_PLUGIN_ROOT or vim.fn.expand("~/.local/share/nvim-test/lazy")
+for _, name in ipairs({ "kanagawa.nvim", "catppuccin", "retro-82.nvim", "nord.nvim", "gruvbox-material", "tokyonight.nvim", "ethereal.nvim", "everforest-nvim", "flexoki-neovim", "hackerman.nvim", "aether.nvim", "lumon.nvim", "matteblack.nvim", "miasma.nvim", "bamboo.nvim", "monokai-pro.nvim", "rose-pine", "ashen.nvim", "vantablack.nvim", "white.nvim" }) do
     vim.opt.rtp:append(root .. "/" .. name)
 end
-vim.opt.rtp:append(vim.fn.expand("~/.local/share/nvim/lazy/tokyonight.nvim"))
 vim.o.termguicolors = true
-vim.o.background = "dark"
-vim.g.gruvbox_material_foreground = "material"
-vim.g.gruvbox_material_background = "medium"
-
-local state = require("config.state")
 local theme = require("config.theme")
-local function equal(actual, expected)
-    if actual == "kanagawa" and expected:match("^kanagawa%-%w+$") then
-        equal(
-            require("kanagawa")._CURRENT_THEME,
-            expected:match("^kanagawa%-(%w+)$")
-        )
-        return
-    end
-    assert(
-        vim.deep_equal(actual, expected),
-        vim.inspect({ actual = actual, expected = expected })
-    )
-end
-local function settle()
-    vim.wait(300, function()
-        return false
-    end, 10)
-end
+local state = require("config.state")
+state.set("theme", "nord") -- 旧偏好不再参与主题选择，也不应被主题同步改写。
+state.set("toggle.spell", true)
+theme.setup()
+assert(vim.g.colors_name == "default" and vim.o.background == "dark")
+vim.fn.mkdir(vim.fn.fnamemodify(theme.system_path, ":h"), "p")
 local function select(name)
     vim.fn.writefile({ name }, theme.system_path)
-    settle()
+    vim.api.nvim_exec_autocmds("FocusGained", {})
 end
-
-equal(state.get("theme"), nil)
-state.set("future_toggle", true)
-state.set("theme", "nord")
-equal(state.get("future_toggle"), true)
-theme.setup()
-equal(vim.g.colors_name, "nord") -- Local preference, absent system state.
-
-vim.fn.mkdir(vim.fn.fnamemodify(theme.system_path, ":h"), "p")
-select("kanagawa")
-vim.api.nvim_exec_autocmds("FocusGained", {}) -- Discover a newly created directory.
-equal(vim.g.colors_name, "kanagawa-wave")
-equal(state.get("theme"), "nord") -- System sync never overwrites local preference.
-
-for name, scheme in pairs(theme.system_themes) do
+for name, config in pairs(theme.system_themes) do
     select(name)
-    equal(vim.g.colors_name, scheme) -- Actual filesystem notifications + plugin loading.
-    local light = name == "tokyo-day"
-        or name == "kanagawa-lotus"
-        or name == "catppuccin-latte"
-        or name == "gruvbox-light"
-    equal(vim.o.background, light and "light" or "dark")
+    if config[1]:match("^kanagawa") then
+        assert(require("kanagawa")._CURRENT_THEME == config[1]:match("kanagawa%-(.*)"))
+    elseif config[1] == "flexoki-light" then
+        assert(vim.g.colors_name == "flexoki" and vim.o.background == "light")
+    elseif config[1] == "rose-pine-dawn" then
+        assert(vim.g.colors_name == "rose-pine" and vim.o.background == "light")
+    elseif config[1] == "monokai-pro-ristretto" then
+        assert(vim.g.colors_name == "monokai-pro")
+        assert(require("monokai-pro.config").get().filter == "ristretto")
+    else
+        assert(vim.g.colors_name == config[1], name)
+    end
+    assert(vim.o.background == (config[2] or "dark"), name)
 end
+-- 真实文件监听：不触发 FocusGained，也应跟随系统切换。
+select("tokyo-night")
+vim.fn.writefile({ "tokyo-day" }, theme.system_path)
+assert(vim.wait(1000, function() return vim.g.colors_name == "tokyonight-day" end, 10))
+assert(vim.o.background == "light")
+-- 模拟插件缺失，分别验证黑底和白底兜底。
+theme.system_themes.missing_dark = { "nonexistent-ten-theme" }
+theme.system_themes.missing_light = { "nonexistent-ten-theme", "light" }
+select("missing_dark")
+assert(vim.g.colors_name == "default" and vim.o.background == "dark")
+select("missing_light")
+assert(vim.g.colors_name == "default" and vim.o.background == "light")
 select("unknown")
-equal(vim.g.colors_name, "nord")
-
-vim.o.background = "light"
-select("gruvbox")
-equal(vim.o.background, "dark")
-equal(vim.g.colors_name, "gruvbox-material")
-
-vim.cmd.colorscheme("tokyonight-night")
-settle()
-equal(state.get("theme"), { name = "tokyonight-night", background = "dark" })
-equal(state.get("future_toggle"), true)
-
--- A picker preview must not save; cancel restores the original theme.
-_G.Snacks = { picker = {
-    get = function()
-        return { {} }
-    end,
-} }
-vim.cmd.colorscheme("nord")
-settle()
-equal(state.get("theme"), { name = "tokyonight-night", background = "dark" })
-vim.cmd.colorscheme("tokyonight-night")
-_G.Snacks = nil
-
-select("kanagawa")
-equal(vim.g.colors_name, "kanagawa-wave")
+assert(vim.g.colors_name == "default" and vim.o.background == "dark")
 vim.fn.delete(theme.system_path)
-settle()
-equal(vim.g.colors_name, "tokyonight-night")
-
-vim.fn.writefile({ "broken json" }, state.path)
-select("nord")
-vim.fn.delete(theme.system_path)
-settle()
-equal(vim.g.colors_name, theme.default)
-
-state.set("theme", "missing-theme")
-select("kanagawa")
-vim.fn.delete(theme.system_path)
-settle()
-equal(vim.g.colors_name, theme.default)
-
--- A same-name light scheme must survive system overrides and restoration.
-vim.o.background = "light"
-vim.cmd.colorscheme("gruvbox-material")
-settle()
-equal(state.get("theme"), { name = "gruvbox-material", background = "light" })
-select("gruvbox")
-equal(vim.o.background, "dark")
-equal(state.get("theme"), { name = "gruvbox-material", background = "light" })
-vim.fn.delete(theme.system_path)
-settle()
-equal(vim.g.colors_name, "gruvbox-material")
-equal(vim.o.background, "light")
-
--- Invalid background values use the named variant's default.
-state.set("theme", { name = "tokyonight-day", background = "invalid" })
-select("nord")
-vim.fn.delete(theme.system_path)
-settle()
-equal(vim.g.colors_name, "tokyonight-day")
-equal(vim.o.background, "light")
-
--- Flush a selection even when exiting before the debounce expires.
-vim.cmd.colorscheme("nord")
+vim.api.nvim_exec_autocmds("FocusGained", {})
+assert(vim.g.colors_name == "default" and vim.o.background == "dark")
+assert(state.get("theme") == "nord" and state.get("toggle.spell") == true)
 vim.api.nvim_exec_autocmds("VimLeavePre", {})
-equal(state.get("theme"), { name = "nord", background = vim.o.background })
-print("theme tests passed")
+print("system theme tests passed")

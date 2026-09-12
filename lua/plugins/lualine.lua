@@ -1,245 +1,95 @@
----@diagnostic disable: undefined-field
-local utils = require("utils")
-local icons = LazyVim.config.icons
+local display = require("config.statusline")
+local toggles = require("config.toggles")
+
+-- 底栏只显示和接收点击，状态与保存交给开关模块。
+local function toggle_component(key, icon)
+    return {
+        function()
+            return icon
+        end,
+        color = function()
+            -- 开启时继承所在色块的前景色，避免强调色与色块背景重合。
+            return toggles.enabled(key) and {}
+                or { fg = display.color("Comment") }
+        end,
+        on_click = function()
+            toggles.toggle(key)
+        end,
+        padding = { left = 0, right = 1 },
+    }
+end
 
 return {
     "nvim-lualine/lualine.nvim",
-    opts = {
-        options = {
-            globalstatus = true,
-            disabled_filetypes = { winbar = { "dap-repl" } },
-            component_separators = { left = "", right = "" },
-        },
-        sections = {
-            lualine_a = {
-                { "mode", icon = "" },
-            },
-            lualine_b = {
-                { "branch", icon = "" },
-            },
-            lualine_c = {
-                {
-                    function()
-                        local clients = vim.lsp.get_clients({
-                            bufnr = vim.api.nvim_get_current_buf(),
-                        })
-                        if vim.fn.exists(":LspInfo") == 0 then
-                            return ":off"
-                        end
-                        return ":" .. tostring(#vim.tbl_keys(clients))
-                    end,
-                    color = function()
-                        local clients = vim.lsp.get_clients({
-                            bufnr = vim.api.nvim_get_current_buf(),
-                        })
-                        return #vim.tbl_keys(clients) > 0 and "DiagnosticInfo"
-                            or "DiagnosticUnnecessary"
-                    end,
-                    on_click = function()
-                        vim.cmd("LspInfo")
-                    end,
-                    icon = " ",
-                },
-                { "filename", path = 1, file_status = false },
-            },
-            lualine_x = {
-                require("snacks").profiler.status(),
-                {
-                    function()
-                        return require("noice").api.status.command.get()
-                    end,
-                    cond = function()
-                        return package.loaded["noice"]
-                            and require("noice").api.status.command.has()
-                    end,
-                    color = function()
-                        return { fg = Snacks.util.color("Statement") }
-                    end,
-                },
-                {
-                    function()
-                        return require("noice").api.status.mode.get()
-                    end,
-                    cond = function()
-                        return package.loaded["noice"]
-                            and require("noice").api.status.mode.has()
-                    end,
-                    color = function()
-                        return { fg = Snacks.util.color("Constant") }
-                    end,
-                },
-                {
-                    function()
-                        return "  " .. require("dap").status()
-                    end,
-                    cond = function()
-                        return package.loaded["dap"]
-                            and require("dap").status() ~= ""
-                    end,
-                    color = function()
-                        return { fg = Snacks.util.color("Debug") }
-                    end,
-                },
-                {
-                    require("lazy.status").updates,
-                    cond = require("lazy.status").has_updates,
-                    color = function()
-                        return { fg = Snacks.util.color("Special") }
-                    end,
-                },
-            },
-            lualine_z = {
-                {
-                    function()
-                        return ""
-                    end,
-                    color = function()
-                        return vim.diagnostic.is_enabled() and {}
-                            or { fg = "normal" }
-                    end,
-                    on_click = utils.toggle_diagnostic,
-                },
-                {
-                    function()
-                        return "󰓽"
-                    end,
-                    color = function()
-                        return vim.lsp.inlay_hint.is_enabled() and {}
-                            or { fg = "normal" }
-                    end,
-                    on_click = utils.toggle_inlay_hints,
-                },
-                {
-                    function()
-                        return ""
-                    end,
-                    color = function()
-                        return require("config.toggles").enabled("codelens")
-                                and {}
-                            or { fg = "normal" }
-                    end,
-                    on_click = function()
-                        utils.toggle_codelens()
-                    end,
-                },
-                {
-                    function()
-                        return "󰦦"
-                    end,
-                    color = function()
-                        return require("config.toggles").enabled("conceal")
-                                and {}
-                            or { fg = "normal" }
-                    end,
-                    on_click = utils.toggle_conceal,
-                },
-                {
-                    function()
-                        return ""
-                    end,
-                    on_click = function()
-                        utils.toggle_option("spell")
-                    end,
-                    color = function()
-                        return vim.opt.spell:get() and {} or { fg = "normal" }
-                    end,
-                },
-                {
-                    function()
-                        return "󰀫"
-                    end,
-                    on_click = function()
-                        utils.toggle_option("list")
-                    end,
-                    color = function()
-                        return vim.opt.list:get() and {} or { fg = "normal" }
-                    end,
-                },
-                {
-                    function()
-                        return ""
-                    end,
-                    on_click = function()
-                        utils.toggle_option("relativenumber")
-                    end,
-                    color = function()
-                        return vim.opt.relativenumber:get() and {}
-                            or { fg = "normal" }
-                    end,
-                },
-                {
-                    function()
-                        return "󰁨"
-                    end,
-                    on_click = function()
-                        utils.toggle_global("autoformat")
-                    end,
-                    color = function()
-                        return require("config.toggles").enabled("autoformat")
-                                and {}
-                            or { fg = "normal" }
-                    end,
-                },
-                function()
-                    local icon = " "
-                    return icon .. os.date("%R")
-                end,
-            },
-        },
-        winbar = {
-            lualine_a = {
-                {
-                    "filename",
-                    file_status = true,
-                    newfile_status = true,
-                    symbols = {
-                        modified = "󰏫",
-                        readonly = "",
-                        unnamed = "[No Name]",
-                        newfile = "[New]",
-                    },
-                },
-            },
-            lualine_c = {},
-            lualine_x = {
-                {
-                    "diff",
-                    symbols = {
-                        added = icons.git.added,
-                        modified = icons.git.modified,
-                        removed = icons.git.removed,
-                    },
-                    source = function()
-                        local gitsigns = vim.b.gitsigns_status_dict
-                        if gitsigns then
-                            return {
-                                added = gitsigns.added,
-                                modified = gitsigns.changed,
-                                removed = gitsigns.removed,
-                            }
-                        end
-                    end,
-                },
-            },
-            lualine_y = {
-                "diagnostics",
-            },
-        },
-        inactive_winbar = {
+    opts = function(_, opts)
+        -- 使用主题自带的 a/z、b/y、c/x 三层色块，不再统一背景。
+        opts.options.theme = "auto"
+        opts.options.disabled_filetypes.winbar = { "dap-repl" }
+        opts.options.component_separators = { left = "", right = "" }
+        opts.options.section_separators = { left = "", right = "" }
 
-            lualine_b = {
-                {
-                    "filename",
-                    file_status = true,
-                    newfile_status = true,
-                    symbols = {
-                        modified = "󰏫",
-                        readonly = "",
-                        unnamed = "[No Name]",
-                        newfile = "[New]",
-                    },
-                },
+        -- 继承录制、调试及更新提示，把默认 Git 统计移到顶部。
+        -- LazyVim 默认 x 栏第 2 项是 Noice showcmd（未完成的按键组合），不再显示。
+        local diff
+        local status = {}
+        for index, component in ipairs(opts.sections.lualine_x) do
+            if type(component) == "table" and component[1] == "diff" then
+                diff = component
+            elseif index ~= 2 then
+                status[#status + 1] = component
+            end
+        end
+        opts.sections.lualine_a = { { "mode", icon = "" } }
+        opts.sections.lualine_b =
+            { { display.project, icon = "󱉭" }, { "branch", icon = "" } }
+        -- 左侧由外向内：模式 → 项目/分支/环境 → 临时运行提示。
+        opts.sections.lualine_c = status
+        -- 右侧由内向外：选区/特殊格式 → LSP → 文件属性/位置 → 全局开关。
+        opts.sections.lualine_x = {
+            { display.selection },
+            { display.encoding },
+            { display.fileformat },
+            {
+                display.lsp,
+                color = function()
+                    return {
+                        fg = display.color(
+                            #vim.lsp.get_clients({ bufnr = 0 }) == 0
+                                    and "Comment"
+                                or "Function"
+                        ),
+                    }
+                end,
+                on_click = display.lsp_info,
             },
-        },
-    },
+        }
+        -- 保留默认位置组件，前面放文件属性；行列号最靠近固定开关。
+        local position = opts.sections.lualine_y
+        opts.sections.lualine_y = {
+            { "filetype", colored = false },
+            { display.indent },
+        }
+        vim.list_extend(opts.sections.lualine_y, position or {})
+        -- 开关固定在最右端，便于形成点击习惯。
+        opts.sections.lualine_z = {
+            toggle_component("diagnostics", ""),
+            toggle_component("inlay_hints", "󰓽"),
+            toggle_component("codelens", ""),
+            toggle_component("conceal", "󰦦"),
+            toggle_component("spell", ""),
+            toggle_component("list", "󰀫"),
+            toggle_component("relativenumber", ""),
+            toggle_component("autoformat", "󰁨"),
+            toggle_component("showkeys", "󰌌"),
+        }
+        -- 顶部同样两端稳定：左侧文件路径，右侧诊断，符号路径与 Git 变化靠中间。
+        local path = { display.path, on_click = display.show_path }
+        opts.winbar = {
+            lualine_b = { vim.deepcopy(path) },
+            lualine_c = {}, -- navic.lua 在这里追加符号路径。
+            lualine_x = diff and { diff } or {},
+            lualine_y = { "diagnostics" },
+        }
+        opts.inactive_winbar = { lualine_c = { vim.deepcopy(path) } }
+    end,
 }

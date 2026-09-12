@@ -1,107 +1,53 @@
+-- 主题只跟随系统，不读取或保存 Neovim 自己的主题偏好。
 local M = {}
-local state = require("config.state")
 
-M.default = "tokyonight-night"
+-- 系统文件记录实际生效的明暗变体；未指定明暗的条目均为深色。
 M.system_themes = {
-    ["tokyo-night"] = "tokyonight-night",
-    kanagawa = "kanagawa-wave",
-    ["retro-82"] = "retro-82",
-    nord = "nord",
-    gruvbox = "gruvbox-material",
-    ["gruvbox-light"] = "gruvbox-material",
-    ["tokyo-day"] = "tokyonight-day",
-    ["kanagawa-lotus"] = "kanagawa-lotus",
-    ["catppuccin-mocha"] = "catppuccin-mocha",
-    ["catppuccin-latte"] = "catppuccin-latte",
+    ["tokyo-night"] = { "tokyonight-night" },
+    kanagawa = { "kanagawa-wave" },
+    ["retro-82"] = { "retro-82" },
+    nord = { "nord" },
+    gruvbox = { "gruvbox-material" },
+    ["gruvbox-light"] = { "gruvbox-material", "light" },
+    ["tokyo-day"] = { "tokyonight-day", "light" },
+    ["kanagawa-lotus"] = { "kanagawa-lotus", "light" },
+    ["catppuccin-mocha"] = { "catppuccin-mocha" },
+    ["catppuccin-latte"] = { "catppuccin-latte", "light" },
+    -- 预留系统主题名称；系统侧添加这些名称后即可直接同步。
+    ethereal = { "ethereal" },
+    everforest = { "everforest" },
+    ["flexoki-light"] = { "flexoki-light", "light" },
+    hackerman = { "hackerman" },
+    lumon = { "lumon" },
+    ["matte-black"] = { "matteblack" },
+    miasma = { "miasma" },
+    ["osaka-jade"] = { "bamboo" },
+    ristretto = { "monokai-pro-ristretto" },
+    ["rose-pine"] = { "rose-pine-dawn", "light" },
+    solitude = { "ashen" },
+    vantablack = { "vantablack" },
+    white = { "white", "light" },
 }
-
 local state_home = vim.env.XDG_STATE_HOME
 if not state_home or state_home == "" then
     state_home = vim.fn.expand("~/.local/state")
 end
 M.system_path = state_home .. "/ten-theme/name"
-
-local applying = false
-local started = false
-local last_system
-local watcher
-local generation = 0
-local pending
-local active_name
-
-local function save_pending()
-    if pending then
-        state.set("theme", pending)
-        pending = nil
-    end
-end
-
-local function system_theme()
-    local ok, lines = pcall(vim.fn.readfile, M.system_path)
-    local id = ok and vim.trim(table.concat(lines, "")) or nil
-    return id and M.system_themes[id] and id or nil
-end
-
-local function valid(name)
-    return type(name) == "string" and name:match("^[%w_%-%.]+$") ~= nil
-end
-
-local function preference(value)
-    -- Older preferences stored only the colorscheme name.
-    if type(value) == "string" then
-        value = { name = value }
-    end
-    if type(value) ~= "table" or not valid(value.name) then
-        return nil
-    end
-    local background = value.background
-    if background ~= "light" and background ~= "dark" then
-        local light = value.name == "tokyonight-day"
-            or value.name == "kanagawa-lotus"
-            or value.name == "catppuccin-latte"
-            or value.name == "flexoki-light"
-            or value.name == "rose-pine-dawn"
-            or value.name == "white"
-        background = light and "light" or "dark"
-    end
-    return { name = value.name, background = background }
-end
-
-local function apply(system)
-    applying = true
-    local candidates = {}
-    local selected = preference(M.system_themes[system])
-    if selected then
-        if system == "gruvbox-light" then
-            selected.background = "light"
-        end
-        candidates[#candidates + 1] = selected
-    end
-    local saved = preference(state.get("theme"))
-    if saved then
-        candidates[#candidates + 1] = saved
-    end
-    candidates[#candidates + 1] = preference(M.default)
-    candidates[#candidates + 1] = preference("habamax")
-    for _, candidate in ipairs(candidates) do
-        local ok = pcall(function()
-            vim.o.background = candidate.background
-            vim.cmd.colorscheme(candidate.name)
-        end)
-        if ok then
-            active_name = candidate.name
-            break
-        end
-    end
-    applying = false
-end
+local started, watcher
 
 local function sync()
-    local current = system_theme()
-    if current ~= last_system then
-        last_system = current
-        apply(current)
+    local ok, lines = pcall(vim.fn.readfile, M.system_path)
+    local name = ok and vim.trim(table.concat(lines, "")) or ""
+    local theme = M.system_themes[name]
+    local background = theme and theme[2] or "dark"
+    vim.o.background = background
+    if theme and pcall(vim.cmd.colorscheme, theme[1]) then
+        return
     end
+    -- 插件不可用时使用内置配色的黑底/白底版本，不再依赖额外插件。
+    -- 系统信息缺失或无法识别时固定退回深色。
+    vim.o.background = background
+    vim.cmd.colorscheme("default")
 end
 
 function M.setup()
@@ -109,48 +55,8 @@ function M.setup()
         return
     end
     started = true
+    sync()
     local group = vim.api.nvim_create_augroup("TEN_theme", { clear = true })
-    local function remember(name)
-        generation = generation + 1
-        pending = nil
-        if applying then
-            return
-        end
-        -- Browsing a picker is not a committed preference.
-        if _G.Snacks and Snacks.picker then
-            if #Snacks.picker.get({ source = "colorschemes" }) > 0 then
-                return
-            end
-        end
-        -- Some plugins set colors_name to their family, losing the variant.
-        local ticket = generation
-        pending = valid(name) and { name = name, background = vim.o.background }
-            or nil
-        vim.defer_fn(function()
-            if ticket == generation and valid(name) then
-                save_pending()
-            end
-        end, 150)
-    end
-    vim.api.nvim_create_autocmd("ColorScheme", {
-        group = group,
-        callback = function(event)
-            active_name = event.match
-            remember(active_name)
-        end,
-    })
-    vim.api.nvim_create_autocmd("OptionSet", {
-        group = group,
-        pattern = "background",
-        callback = function()
-            remember(active_name)
-        end,
-    })
-    last_system = system_theme()
-    apply(last_system)
-
-    -- Watch the stable parent directory, including creation/replacement of name.
-    -- FocusGained also handles a missing directory or a suspended editor.
     local function watch()
         if watcher then
             return
@@ -159,12 +65,13 @@ function M.setup()
         if not handle then
             return
         end
+        -- 监听父目录，兼容系统通过重命名替换主题文件。
         local ok = handle:start(
             vim.fn.fnamemodify(M.system_path, ":h"),
             {},
             function(err)
                 if not err then
-                    vim.defer_fn(sync, 75)
+                    vim.schedule(sync)
                 end
             end
         )
@@ -177,7 +84,10 @@ function M.setup()
     watch()
     vim.api.nvim_create_autocmd("FocusGained", {
         group = group,
+        -- 允许 colorscheme 触发 lazy.nvim 的 ColorSchemePre 按需加载。
+        nested = true,
         callback = function()
+            -- 目录可能在启动后才创建；恢复焦点时也重新确认系统配色。
             watch()
             sync()
         end,
@@ -185,7 +95,6 @@ function M.setup()
     vim.api.nvim_create_autocmd("VimLeavePre", {
         group = group,
         callback = function()
-            save_pending()
             if watcher then
                 watcher:stop()
                 watcher:close()

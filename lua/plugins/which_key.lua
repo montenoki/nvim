@@ -2,27 +2,15 @@ return {
     {
         "folke/which-key.nvim",
         opts = {
-            -- Ignore LazyVim's old virtual Zoom hint; wm belongs to WinShift.
-            filter = function(mapping)
-                if
-                    mapping.real
-                    and mapping.mode == "n"
-                    and mapping.lhs == "<leader>wm"
-                then
-                    return false
-                end
-                return true
-            end,
             spec = {
+                -- 只定义菜单分组及图标，具体快捷键和执行动作由各插件管理。
+                -- 普通模式和可视/选择模式都显示 AI 分组。
                 {
+                    "<leader>a",
                     mode = { "n", "v" },
-                    {
-                        "<LEADER>a",
-                        group = "AI",
-                        icon = { icon = "󰧑", color = "brue" },
-                    },
+                    group = "AI",
+                    icon = { icon = "󰧑", color = "blue" },
                 },
-                { "<leader>wm", mode = "n", desc = "WinShift", icon = "" },
             },
         },
     },
