@@ -5,6 +5,32 @@
 
 ## 检查范围与可信边界
 
+### 最新复查（2026-09-12，配置提交 2c0e101）
+
+当前 `nvim-test` 使用已部署的 parser 路径后，完整检查为 **42 条诊断：8 ERROR、34 WARNING**，
+原始基线为 54 条（12 ERROR、42 WARNING）。插件目录和工具环境与基线不同，
+数量变化不能全部归因于配置修复。完整原文及本次逐条清单见
+[更正后的复查报告](checkhealth-current-parser.md)。上一轮 44 条诊断的报告继承了旧会话 parser 路径，
+其中 H10 / H11 是过期环境造成的提示。以下原始报告及 H 编号继续保留。
+
+| 状态 | 项目 | 本次证据或后续处理 |
+| --- | --- | --- |
+| 已消失 | H02 Copilot | 不再列入已启用插件，不代表已完成认证。 |
+| 已通过 | H03 图标、H31 输入框、H54 重复映射 | devicons found、Snacks.input 接管、无重复映射。Dressing input disabled 为主动禁用状态。 |
+| 已通过 | H07 ast-grep、H09 / H16 / H17 回收站工具、H12 公式转换器 | ast-grep 0.42.1、gio 2.88.3、latex2text 已识别。未验证 ast-grep 实际搜索替换。 |
+| 异常未再出现 | H13 Obsidian / Markdown | 冲突检查通过；本次未打开笔记，Obsidian setup 未调用，功能验证仍参考此前测试。 |
+| 识别已通过 | H39 / H44 Compose 类型 | 未再报告未知 Compose 类型；实际 LSP 连接仍待项目 devShell 验证。 |
+| 已通过 | H10 / H11 latex parser | NixOS 提交 a7dc107 已补充；按当前 Home Manager 环境变量复测，parser installed、ABI 15。无需重复安装。 |
+| 待项目验证 | H14 / H37 / H38 / H40–H43 语言工具 | Rust、Ansible、Compose、Dockerfile、Python、Terraform 工具统一由各项目 devShell 提供。 |
+| 尚未决定 | H45 / H46 GitLab、Helm 类型 | 本次仍报告未知类型，未修改识别规则，需结合实际项目确认需求。 |
+| 按用户决定跳过 | H04–H06、H08 / H47、H34、H48–H53、H55 | 图片预览、空包目录、SQLite、前缀重叠、录音保留现状。 |
+| 状态提示 / 未启用模块 | H01、H15、H18–H30、H32 / H33、H35、H36 | 含动态补全源、禁用模块与版本提示；不以消除全部提示为目标。 |
+
+8 条 ERROR 中，7 条来自未启用的 Snacks.image，1 条来自 rust-analyzer 缺失。
+本次未执行 Nix 部署或业务项目验证；没有据此宣称全部功能正常。
+
+### 初始基线环境
+
 | 项目 | 本次环境 |
 | --- | --- |
 | Neovim | 0.12.4，Nix 包装的 nvim；工具 PATH 以 Neovim 内部为准 |
