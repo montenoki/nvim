@@ -14,6 +14,8 @@ local names = {
     relativenumber = "相对行号",
     autoformat = "自动格式化",
     showkeys = "按键浮窗",
+    ai_selection = "AI 选区提示",
+    ai_suggestion = "AI 行内建议",
 }
 -- 使用窗口选项实现的开关，其余开关通过插件或 Neovim API 应用。
 local options = {
@@ -59,7 +61,9 @@ local function lenses(buf)
 end
 
 local function apply(key, enabled)
-    if options[key] then
+    if key == "ai_selection" or key == "ai_suggestion" then
+        require("config.avante").apply(key, enabled)
+    elseif options[key] then
         vim.opt_global[options[key]] = key == "conceal" and (enabled and 2 or 0)
             or enabled
         for _, win in ipairs(vim.api.nvim_list_wins()) do
@@ -99,7 +103,9 @@ end
 
 -- 读取当前实际状态，供底栏显示和切换操作使用。
 function M.enabled(key)
-    if options[key] then
+    if key == "ai_selection" or key == "ai_suggestion" then
+        return require("config.avante").enabled(key)
+    elseif options[key] then
         local value = vim.wo[options[key]]
         return key == "conceal" and value > 0 or (key ~= "conceal" and value)
     elseif key == "diagnostics" then
@@ -130,6 +136,12 @@ end
 function M.set(key, enabled)
     assert(names[key], "Unknown toggle: " .. key)
     assert(type(enabled) == "boolean", "Toggle value must be boolean")
+    if
+        (key == "ai_selection" or key == "ai_suggestion")
+        and not package.loaded["avante"]
+    then
+        require("lazy").load({ plugins = { "avante.nvim" } })
+    end
     if key == "showkeys" and not package.loaded["showkeys"] then
         require("lazy").load({ plugins = { "showkeys" } })
     end
@@ -234,6 +246,8 @@ function M.map_keys()
         { "<leader>us", "spell" },
         { "<leader>uL", "relativenumber" },
         { "<leader>uf", "autoformat" },
+        { "<leader>uv", "ai_selection" },
+        { "<leader>uV", "ai_suggestion" },
     }
     for _, mapping in ipairs(mappings) do
         local key = mapping[2]

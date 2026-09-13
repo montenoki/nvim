@@ -1,5 +1,6 @@
 -- 状态栏的显示逻辑；开关状态及保存仍由 config.toggles 管理。
 local M = {}
+local windows = require("config.ui.windows")
 
 -- 颜色辅助：读取主题的实际前景色，缺失时回退到普通文本颜色。
 local function hl(name)
@@ -52,7 +53,15 @@ function M.shorten(path, width)
         or prefix .. "…/" .. tail
 end
 
+-- 功能窗口名与文件路径分别交给顶部栏的 a、b 区域。
+function M.window_name()
+    return (windows.name() or ""):gsub("%%", "%%%%")
+end
+
 function M.path()
+    if windows.name() then
+        return ""
+    end
     local name = vim.api.nvim_buf_get_name(0)
     local path = "[未命名]"
     if name ~= "" then
@@ -82,10 +91,14 @@ end
 function M.show_path()
     -- 点击非活动窗口的顶部路径时，读取被点击窗口，不改变当前焦点。
     local win = vim.fn.getmousepos().winid
-    local buf = win ~= 0
-            and vim.api.nvim_win_is_valid(win)
-            and vim.api.nvim_win_get_buf(win)
-        or vim.api.nvim_get_current_buf()
+    win = win ~= 0 and vim.api.nvim_win_is_valid(win) and win
+        or vim.api.nvim_get_current_win()
+    local title = windows.name(win)
+    if title then
+        vim.notify(title, vim.log.levels.INFO, { title = "功能窗口" })
+        return
+    end
+    local buf = vim.api.nvim_win_get_buf(win)
     local path = vim.api.nvim_buf_get_name(buf)
     vim.notify(
         path ~= "" and path or "[未命名]",

@@ -5,6 +5,12 @@ return {
         "neovim/nvim-lspconfig",
         opts = function(_, opts)
             require("config.toggles").configure_lsp(opts)
+            vim.list_extend(opts.servers["*"].keys, {
+                { "gK", false },
+                { "<leader>cC", false },
+                { "<leader>cR", false },
+                { "<leader>cA", false },
+            })
         end,
     },
 }

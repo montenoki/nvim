@@ -13,12 +13,12 @@
 | Nix、普通   | `gd` / `K`                  | 请求跳转定义 / 查看文档。 |
 | Nix、普通   | `<leader>ca`                | 查看可用代码操作。        |
 | Nix、普通   | `<leader>cf`                | 用 nixfmt 格式化。        |
-| Nix、普通   | `<leader>cd` / `<leader>xX` | 看当前行 / 当前文件诊断。 |
+| Nix、普通   | `<leader>xd` / `<leader>xx` | 看当前行 / 全部已收集诊断。 |
 | 命令        | `:ConformInfo`              | 确认 nixfmt 是否可用。    |
 
 ## 跟着做一次
 
-打开一个 `.nix` 文件，修改属性后用 `<leader>cf` 排版，再看 `<leader>xX` 中有没有诊断。需要判断整个配置能否构建，回到项目原来的 Nix 检查或构建流程。
+打开一个 `.nix` 文件，修改属性后用 `<leader>cf` 排版，再看 `<leader>xx` 中有没有诊断。需要判断整个配置能否构建，回到项目原来的 Nix 检查或构建流程。
 
 ## 在你的配置里
 

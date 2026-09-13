@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Neovim 全能力筛查总表</title>
+<style>
+:root{color-scheme:light;--ink:#1c302d;--muted:#536662;--line:#d5ded7;--paper:#f4f5ef;--accent:#206752;--wash:#e2eee5;font-family:system-ui,-apple-system,"Noto Sans CJK SC",sans-serif;font-size:14px}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink)}header,main,footer{max-width:1800px;margin:auto;padding:24px 30px}header{padding-bottom:14px}h1{font-size:30px;letter-spacing:-.04em;margin:7px 0 12px}p{line-height:1.75;margin:8px 0}.eyebrow{font-size:12px;color:var(--accent);font-weight:700;letter-spacing:.16em}a{color:var(--accent);text-underline-offset:3px}button,select,input,textarea{font:inherit;border:1px solid var(--line);border-radius:6px;background:white;color:var(--ink)}button{padding:8px 13px;cursor:pointer}button:hover{background:var(--wash)}button[aria-pressed=true]{background:var(--accent);color:white;border-color:var(--accent)}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid #b58e31;outline-offset:2px}input,select{padding:8px}textarea{padding:9px;min-width:160px;width:100%;resize:vertical;line-height:1.5}small,.muted{color:var(--muted)}code{font-family:ui-monospace,"Noto Sans Mono",monospace;overflow-wrap:anywhere}.actions,nav,.filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.actions{margin:14px 0}.primary{background:var(--accent);color:white}.notice{background:var(--wash);border-left:3px solid var(--accent);padding:10px 14px;border-radius:3px}details{margin:12px 0}summary{cursor:pointer;font-weight:600}.boundaries{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-top:12px}.boundaries p{background:white;border:1px solid var(--line);border-radius:6px;padding:12px;margin:0}.workspace{padding-top:0}.controls{position:sticky;top:0;z-index:3;background:var(--paper);padding:12px 0;border-bottom:1px solid var(--line)}nav button{border-radius:20px}.filters{margin:12px 0}.filters label{display:flex;align-items:center;gap:6px}.filters .search{flex:1;min-width:210px}.search input{width:100%}.progress-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}.progress-row progress{accent-color:var(--accent);height:12px;width:150px}.progress-row strong{font-size:16px}.stats{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px}.stat{font-size:12px;padding:4px 9px;border:1px solid var(--line);border-radius:4px;background:white}.table-scroll{overflow:auto;margin-top:12px;max-height:72vh;border:1px solid var(--line);border-radius:8px;background:white}table{border-collapse:separate;border-spacing:0;width:100%;min-width:1250px;table-layout:fixed}th{position:sticky;top:0;z-index:2;background:#e8ede7;text-align:left;font-size:12px;padding:12px;border-bottom:1px solid var(--line)}td{vertical-align:top;padding:12px;border-bottom:1px solid #e5ebe5;line-height:1.7;overflow-wrap:anywhere}tbody tr:last-child td{border-bottom:0}tbody tr:hover{background:#fafbf6}.cell-id{width:105px;font-size:12px}.cell-review{width:155px}.cell-notes{width:195px}.cell-review select{width:100%;margin:3px 0;padding:6px;font-size:12px}.cell-review label{display:block;font-size:11px;color:var(--muted)}.row-title{font-weight:650;font-size:15px;margin-bottom:5px}.tag{display:inline-block;padding:1px 6px;border-radius:4px;background:var(--wash);font-size:11px;margin:3px 3px 4px 0}.detail{font-size:12px;color:var(--muted);margin-top:6px}.source-links{font-size:11px;line-height:1.7;margin-top:5px}.source-links a{display:block}.empty{text-align:center;padding:40px}.import-input{display:none}footer{padding-top:8px;color:var(--muted);font-size:12px}#message{min-height:24px;font-size:12px}noscript{display:block;padding:20px;background:#fff3d1}
+@media(max-width:800px){header,main,footer{padding-left:14px;padding-right:14px}h1{font-size:25px}.controls{position:relative}.table-scroll{max-height:70vh}.filters label{flex:1;min-width:160px}.filters select{max-width:200px}nav{gap:6px}nav button{font-size:12px;padding:7px 10px}}
+@media print{.actions,.filters,nav,footer,.cell-review select{display:none}.controls{position:static}.table-scroll{max-height:none;overflow:visible}table{min-width:0;font-size:9px}th{position:static}header,main{padding:8px}textarea{border:0}}
+</style>
+</head>
+<body>
+<header>
+<div class="eyebrow">NEOVIM / CAPABILITY REVIEW</div>
+<h1>全能力筛查总表</h1>
+<p id="snapshot" class="muted"></p>
+<p>按任务、实现、窗口、入口和工具链逐项判断。先确定边界，再决定合并哪些入口、移除哪些实现。</p>
+<div class="notice">已知决定：<strong>Lazygit 与 Neogit 有意并存</strong>。其他条目仍待你筛查；同键不同作用域、同数据不同视图均保留区别。</div>
+<details><summary>怎样切分边界与记录进度</summary>
+<div class="boundaries">
+<p><strong>任务 → 数据</strong><br>先说清要做什么，再确定 LSP、lint、Git、DAP 等数据或动作由谁提供。</p>
+<p><strong>数据 → 视图</strong><br>临时搜索、常驻列表、内联提示各自是否必要？一个插件可以提供多项能力。</p>
+<p><strong>视图 → 入口</strong><br>选主键、清别名；保留根目录/cwd、文档/工作区、普通/局部模式的区别。</p>
+<p><strong>决定 → 验收</strong><br>待筛查 → 待试用 → 已决定 → 待实施 → 已验收。备注写目标行为及实测结果。</p>
+</div>
+<p>各维度状态独立记录，不自动连带完成。先看“边界比较”，再按能力 ID 关联检查实现和键位。<code>&lt;leader&gt;</code> 与 <code>&lt;localleader&gt;</code> 都是空格；<code>&lt;Plug&gt;</code> 为插件内部映射。</p>
+<ul id="limits"></ul>
+</details>
+<div class="actions"><button class="primary" id="export-json">导出 JSON（保存进度）</button><button id="import-json">导入 JSON 进度</button><input class="import-input" type="file" id="import-file" accept=".json,application/json"><a href="nvim-capabilities.md">Markdown 全表</a><a href="tools/README.md">维护说明</a></div>
+<p class="muted">修改先存入当前浏览器；不会直接写仓库。导出后替换 <code>docs/nvim-capabilities.json</code> 并重新生成，即可随 Git 保存。换浏览器前请导出。</p>
+<div id="message" role="status" aria-live="polite"></div>
+</header>
+<main class="workspace">
+<div class="controls">
+<nav id="tabs" aria-label="表格维度"></nav>
+<div class="filters">
+<label class="search"><input id="search" type="search" placeholder="搜索能力、插件、按键、窗口名或 ID…" aria-label="搜索当前维度全部字段"></label>
+<label>类别<select id="category" aria-label="类别筛选"></select></label>
+<label>状态<select id="status-filter" aria-label="筛查状态筛选"></select></label>
+<label>决定<select id="decision-filter" aria-label="处理决定筛选"></select></label>
+<label>条件<select id="availability" aria-label="启用条件筛选"></select></label>
+<button id="clear-filters">清除筛选</button>
+</div>
+<div class="progress-row"><strong id="count"></strong><progress id="progress" max="1" value="0" aria-label="当前维度已作决定比例"></progress><span id="progress-text"></span><span id="all-progress" class="muted"></span></div>
+<div class="stats" id="stats"></div>
+</div>
+<div class="table-scroll" tabindex="0" aria-label="表格，可横向滚动"><table><thead id="table-head"></thead><tbody id="table-body"></tbody></table></div>
+<noscript>此视图需要 JavaScript。你也可以打开同目录的 nvim-capabilities.md 查看完整表格。</noscript>
+</main>
+<footer>这是当前工作区的配置审计快照。“配置启用”不等于已部署或已实测；状态栏记录你的逐项筛查进度。</footer>
+<!-- DATA -->
+<!-- VIEWER -->
+</body>
+</html>

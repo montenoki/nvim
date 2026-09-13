@@ -10,10 +10,9 @@
 
 | 模式 / 场景 | 键位或命令                  | 会发生什么                                     |
 | ----------- | --------------------------- | ---------------------------------------------- |
-| 普通        | `<leader>xq`                | 打开或关闭原生 Quickfix 列表。                 |
-| 普通        | `<leader>xl`                | 打开或关闭当前窗口的位置列表。                 |
-| 普通        | `<leader>xQ` / `<leader>xL` | 用 Trouble 查看 Quickfix / 位置列表。          |
+| 普通        | `<leader>xq`                | 通过 Trouble 打开或关闭 Quickfix 列表。                 |
 | 普通        | `]q` / `[q`                 | Trouble 打开时跳其条目，否则跳 Quickfix 条目。 |
+| 命令 | `:copen` / `:lopen` | 原生 Quickfix / 位置列表窗口。 |
 | 命令        | `:cnext` / `:cprev`         | 明确跳 Quickfix 的下一 / 上一项。              |
 | 列表窗口    | `Enter`                     | 跳到这一项的文件与行号。                       |
 

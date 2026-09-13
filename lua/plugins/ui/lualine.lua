@@ -24,7 +24,8 @@ return {
     opts = function(_, opts)
         -- 使用主题自带的 a/z、b/y、c/x 三层色块，不再统一背景。
         opts.options.theme = "auto"
-        opts.options.disabled_filetypes.winbar = { "dap-repl" }
+        -- 不按 filetype 禁用顶部栏，包括 dap-repl 在内的功能窗口也能显示名称。
+        opts.options.disabled_filetypes.winbar = {}
         opts.options.component_separators = { left = "", right = "" }
         opts.options.section_separators = { left = "", right = "" }
 
@@ -81,15 +82,29 @@ return {
             toggle_component("relativenumber", ""),
             toggle_component("autoformat", "󰁨"),
             toggle_component("showkeys", "󰌌"),
+            toggle_component("ai_selection", "󰛕"),
+            toggle_component("ai_suggestion", "󰧑"),
         }
-        -- 顶部同样两端稳定：左侧文件路径，右侧诊断，符号路径与 Git 变化靠中间。
+        -- 顶部左侧：a 显示功能窗口名，b 显示文件路径，各自无内容时隐藏。
+        local window_name =
+            { display.window_name, on_click = display.show_path }
         local path = { display.path, on_click = display.show_path }
         opts.winbar = {
+            lualine_a = { vim.deepcopy(window_name) },
             lualine_b = { vim.deepcopy(path) },
             lualine_c = {}, -- navic.lua 在这里追加符号路径。
             lualine_x = diff and { diff } or {},
             lualine_y = { "diagnostics" },
         }
-        opts.inactive_winbar = { lualine_c = { vim.deepcopy(path) } }
+        -- 非活动窗口名沿用当前模式下活动 a 区域的颜色，随主题和模式变化。
+        local inactive_window_name = vim.deepcopy(window_name)
+        inactive_window_name.color = function()
+            local highlight = require("lualine.highlight")
+            return highlight.format_highlight("a", true):match("%%#(.-)#")
+        end
+        opts.inactive_winbar = {
+            lualine_a = { inactive_window_name },
+            lualine_c = { vim.deepcopy(path) },
+        }
     end,
 }

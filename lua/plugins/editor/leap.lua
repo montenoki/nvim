@@ -36,7 +36,7 @@ return {
                                 -- 保持 Flit 的 labeled_modes = "nx" 行为：仅普通和可视模式显示标签。
                                 safe_labels = vim.fn.mode(1):match("o") and ""
                                     or nil,
-                                case_sensitive = true,
+                                vim_opts = { ["go.ignorecase"] = false },
                             },
                         }, motion[3]))
                     end,

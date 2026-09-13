@@ -12,7 +12,7 @@
 | ------------------------ | --------------------------- | ---------------------------------------------------- |
 | Dockerfile/Compose、普通 | `K`                         | 查看服务器能提供的说明。                             |
 | 普通                     | `<leader>ca`                | 查看可用代码操作。                                   |
-| 普通                     | `<leader>cd` / `<leader>xX` | 查看诊断。                                           |
+| 普通                     | `<leader>xd` / `<leader>xx` | 查看诊断。                                           |
 | 命令                     | `:set filetype?`            | 确认文件类型，Compose 应识别为 yaml.docker-compose。 |
 | 命令                     | `:checkhealth vim.lsp`      | 检查 Docker/Compose 服务。                           |
 

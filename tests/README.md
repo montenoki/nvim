@@ -8,24 +8,28 @@
 | `jieba_surround.lua`    | jieba.vim、mini.surround、Leap  | 中文 `iw/aw` 的范围、重复操作、操作符接线                                 |
 | `ufo_provider.lua`      | nvim-ufo、promise-async         | LSP → Tree-sitter → 空结果；真实错误继续报出，真实 UFO 无解析器时正常返回 |
 | `avante_completion.lua` | Avante、blink-cmp-avante、Blink | 原生模块能加载，候选接口和侧栏动作回调仍兼容                              |
+| `avante_preferences.lua` | Avante、状态读写适配 | 聊天选模重启恢复、旧状态不覆盖、建议模型隔离、两个开关保存 |
+| `git_history.lua` | Snacks picker、Git 历史适配 | 文件/行历史对比、改名前路径、未保存内容、只读快照与工作区不变 |
 | `luasnip_nesting.lua`   | LuaSnip、Blink                  | 嵌套片段前后跳转，并返回外层填写位置                                      |
+| `utility_windows.lua` | Trouble、lualine、nvim-window-picker | 真实 Trouble 模式识别、功能窗口排除、单窗口自动选择与顶部栏渲染 |
+| `neotree_window_picker.lua` | Neo-tree、nvim-window-picker、Trouble、Snacks | Enter 映射无冲突、多窗口选择、启动页复用、无目标时新建，以及保留功能面板 |
 
-在仓库根目录运行。下面使用现有 `nvim-test` 插件目录；后两项还要求
+在仓库根目录运行。下面使用现有 `nvim-test` 插件目录；第二组还要求
 `~/.config/nvim-test` 指向本仓库。测试状态和缓存使用临时目录。
-后两项启动完整配置，沿用其插件加载策略，运行前应已安装所需插件。
+第二组启动完整配置，沿用其插件加载策略，运行前应已安装所需插件。
 
 ```sh
 NVIM_TEST_PLUGIN_ROOT="${XDG_DATA_HOME:-$HOME/.local/share}/nvim-test/lazy"
 export NVIM_TEST_PLUGIN_ROOT
 
-for test in jieba_surround ufo_provider; do
+for test in jieba_surround ufo_provider utility_windows; do
     test_tmp=$(mktemp -d)
     XDG_DATA_HOME="$test_tmp/data" XDG_STATE_HOME="$test_tmp/state" \
         XDG_CACHE_HOME="$test_tmp/cache" \
         nvim --headless -u NONE -i NONE -l "tests/$test.lua" || break
 done
 
-for test in avante_completion luasnip_nesting; do
+for test in avante_completion luasnip_nesting neotree_window_picker git_history; do
     test_tmp=$(mktemp -d)
     NVIM_APPNAME=nvim-test XDG_STATE_HOME="$test_tmp/state" \
         XDG_CACHE_HOME="$test_tmp/cache" NVIM_TEST_FILE="tests/$test.lua" \
@@ -35,3 +39,15 @@ done
 ```
 
 缺少插件或 Avante 原生库会直接失败，应先修复依赖再重跑；不将缺依赖视作通过。
+
+模型偏好测试分两次启动，共用一份临时状态目录；不发送模型请求：
+
+```sh
+test_tmp=$(mktemp -d)
+for phase in write read; do
+    NVIM_APPNAME=nvim-test NVIM_TEST_PHASE="$phase" \
+        XDG_STATE_HOME="$test_tmp/state" XDG_CACHE_HOME="$test_tmp/cache" \
+        nvim --headless -i NONE \
+        '+lua local ok, err = xpcall(function() dofile("tests/avante_preferences.lua") end, debug.traceback); if not ok then print(err); vim.cmd("cquit") end' || break
+done
+```

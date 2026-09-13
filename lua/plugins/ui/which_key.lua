@@ -4,6 +4,10 @@ return {
     {
         "folke/which-key.nvim",
         keys = function(_, keys)
+            -- 取消 Ctrl-w Space：原为可连续执行窗口操作的 Which-key 提示入口。
+            keys = vim.tbl_filter(function(key)
+                return key[1] ~= "<c-w><space>"
+            end, keys)
             -- 直接修改继承条目的 desc，保留函数；仅追加同名键会覆盖原动作。
             for _, key in ipairs(keys) do
                 if type(key.desc) == "string" then
@@ -16,6 +20,15 @@ return {
             -- 就地翻译继承的分组，保留 buffer 的 expand 和 windows 的 proxy。
             -- 不重复声明同一组，避免覆盖动态列表或产生重复分组警告。
             local function translate_groups(spec)
+                -- 删除 leader Tab 的标签页操作分组；具体快捷键已在 keymaps.lua 取消。
+                for i = #spec, 1, -1 do
+                    if
+                        type(spec[i]) == "table"
+                        and spec[i][1] == "<leader><tab>"
+                    then
+                        table.remove(spec, i)
+                    end
+                end
                 -- Leap Extra 已把 mini.surround 从 gs 移到 gz，菜单跟随实际前缀。
                 if spec[1] == "gs" and spec.group == "surround" then
                     spec[1] = "gz"

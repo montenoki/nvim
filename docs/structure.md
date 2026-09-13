@@ -11,8 +11,10 @@
 | `lua/config/keymaps.lua`  | 不归属特定插件的快捷键                               |
 | `lua/config/platform.lua` | 环境标记                                             |
 | `lua/config/state.lua`    | 偏好读写，不操作编辑器开关                           |
+| `lua/config/avante.lua`   | AI 模型偏好适配、旧状态迁移、选区与建议开关接线       |
+| `lua/config/git_history.lua` | Git 历史与当前缓冲区快照的只读分屏对比             |
 | `lua/config/toggles.lua`  | 全局开关、恢复保存偏好、对接快捷键和底栏             |
-| `lua/config/ui/`          | 系统主题同步、状态栏内容计算、Which-key 继承说明翻译 |
+| `lua/config/ui/`          | 系统主题同步、状态栏内容计算、功能窗口分类、Which-key 继承说明翻译 |
 | `lua/config/languages/`   | 中文文本对象适配、笔记库发现等辅助逻辑               |
 | `lua/plugins/coding/`     | 补全、格式化、LSP、解析器、工具安装、Git 和 AI       |
 | `lua/plugins/editor/`     | 移动、包围、折叠、复制、中文编辑和输入法             |
@@ -29,6 +31,13 @@
 
 LazyVim 约定的 `config/options.lua`、`autocmds.lua`、`keymaps.lua` 保持原位置。
 其他模块移动后同步更新 `require`，如 `require("config.ui.theme")`。
+
+功能窗口的名称和文件打开目标共用 `config/ui/windows.lua`，完整清单见
+[功能窗口名称与文件打开目标](utility-windows.md)。
+
+重新划分能力边界、清理重复入口和整理快捷键时，使用
+[全能力筛查总表](nvim-capabilities.md) 或 [交互筛查视图](nvim-capabilities.html)。
+其 JSON 数据保存逐项状态、处理决定与备注，维护方式见 [生成说明](tools/README.md)。
 
 lazy.nvim 不会递归扫描任意深度的目录：四个插件分类在 `config/lazy.lua` 中显式
 `import`。向已有分类增加 `.lua` 文件会自动加载；新增分类时再登记一个 `import`。
