@@ -12,14 +12,18 @@ return {
                         })
                     end,
                     mode = { "n", "x", "o" },
-                    desc = "Leap",
+                    desc = "跨窗口跳转（Leap）",
                 },
             }
             for _, motion in ipairs({
-                { "f", "Find forward", {} },
-                { "F", "Find backward", { backward = true } },
-                { "t", "Till forward", { offset = -1 } },
-                { "T", "Till backward", { backward = true, offset = 1 } },
+                { "f", "向前查找字符", {} },
+                { "F", "向后查找字符", { backward = true } },
+                { "t", "向前查找到目标字符之前", { offset = -1 } },
+                {
+                    "T",
+                    "向后查找到目标字符之后",
+                    { backward = true, offset = 1 },
+                },
             }) do
                 keys[#keys + 1] = {
                     motion[1],

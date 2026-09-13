@@ -1,4 +1,12 @@
 local filetypes = require("config.languages.jieba").filetypes
+local descriptions = {
+    w = "下一个词首（中文分词）",
+    b = "上一个词首（中文分词）",
+    e = "下一个词尾（中文分词）",
+    ge = "上一个词尾（中文分词）",
+    iw = "词语内部（中文分词）",
+    aw = "词语及周围空白（中文分词）",
+}
 
 return {
     {
@@ -19,7 +27,7 @@ return {
                     mode = #motion == 2 and motion ~= "ge" and { "x" }
                         or { "n", "x", "o" },
                     ft = filetypes,
-                    desc = "Chinese word " .. motion,
+                    desc = descriptions[motion],
                 }
             end
             -- 操作符等待模式中的 iw/aw 单独处理，以兼容 mini.surround。
@@ -34,7 +42,7 @@ return {
                     mode = "o",
                     ft = filetypes,
                     expr = true,
-                    desc = "Chinese word " .. motion,
+                    desc = descriptions[motion],
                 }
             end
             return keys

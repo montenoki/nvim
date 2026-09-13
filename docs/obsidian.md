@@ -25,13 +25,13 @@ Obsidian 的 `ui.enable` 设为 `false`，保留笔记、链接和搜索功能�
 配置生效后，打开 `~/obsidian/test/Welcome.md` 即会加载插件。
 光标放在笔记链接上按 Enter，或使用 `:Obsidian follow_link` 跳转。
 
-| 命令 | 用途 |
-| --- | --- |
-| `:Obsidian quick_switch` | 搜索并切换笔记，使用现有 Telescope |
-| `:Obsidian new 标题` | 创建笔记 |
-| `:Obsidian backlinks` | 查看当前笔记的反向链接 |
-| `:Obsidian workspace test` | 切换到测试库 |
-| `:checkhealth obsidian render-markdown` | 检查初始化和渲染兼容性 |
+| 命令                                    | 用途                               |
+| --------------------------------------- | ---------------------------------- |
+| `:Obsidian quick_switch`                | 搜索并切换笔记，使用现有 Telescope |
+| `:Obsidian new 标题`                    | 创建笔记                           |
+| `:Obsidian backlinks`                   | 查看当前笔记的反向链接             |
+| `:Obsidian workspace test`              | 切换到测试库                       |
+| `:checkhealth obsidian render-markdown` | 检查初始化和渲染兼容性             |
 
 使用社区版的 `:Obsidian 子命令`，不再启用旧式 `:ObsidianQuickSwitch` 等命令。
 该版本通过内置 `obsidian-ls` 提供语言服务，可由已有 Blink 的 LSP source 获取补全，

@@ -33,10 +33,19 @@ return {
             window = {
                 mappings = {
                     -- 先选择目标窗口，再打开文件或创建分屏。
-                    ["v"] = "vsplit_with_window_picker",
-                    ["s"] = "split_with_window_picker",
+                    ["v"] = {
+                        "vsplit_with_window_picker",
+                        desc = "选择窗口并垂直分屏",
+                    },
+                    ["s"] = {
+                        "split_with_window_picker",
+                        desc = "选择窗口并水平分屏",
+                    },
                     ["S"] = "none",
-                    ["<CR>"] = "open_with_window_picker",
+                    ["<CR>"] = {
+                        "open_with_window_picker",
+                        desc = "选择窗口并打开文件",
+                    },
                 },
             },
             default_component_configs = {

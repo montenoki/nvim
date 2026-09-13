@@ -1,105 +1,2934 @@
 <!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TenOS · 可恢复的 AI 项目工作区</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500&amp;family=Instrument+Serif&amp;family=Noto+Sans+SC:wght@400;500;600&amp;family=Noto+Serif+SC:wght@400&amp;display=swap"><style>
-:root{--paper:#faf8f2;--paper-2:#f0eee7;--ink:#263343;--muted:#536174;--rule:#d5d9dd;--accent:#c74725;--accent-tint:#fff0e7;--blue:#315c9b;--blue-tint:#edf2ff;--green:#286c57;--green-tint:#eaf4ed;--violet:#715493;--violet-tint:#f1edf8;--gold:#806017;--gold-tint:#faf1d9;--sans:'Geist','Noto Sans SC','Microsoft YaHei',sans-serif;--serif:'Instrument Serif','Noto Serif SC',serif;--mono:'Geist Mono',monospace}
-*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:88px}body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.75}a{color:var(--blue);text-underline-offset:4px}a:hover{text-decoration-thickness:2px}a:focus-visible,summary:focus-visible{outline:3px solid var(--blue);outline-offset:4px}code,pre,.eyebrow{font-family:var(--mono)}code{font-size:.9em;overflow-wrap:anywhere}pre{padding:20px;background:#f0f2f4;border-left:4px solid var(--blue);font-size:12px;overflow:auto;line-height:1.9}h1,h2,h3,p{margin-top:0}h1{font-family:var(--serif);font-weight:400;font-size:clamp(36px,5vw,64px);line-height:1.25;letter-spacing:-1px;margin-bottom:24px}h2{font-size:28px;line-height:1.4;margin-bottom:12px}h3{font-size:20px;margin-bottom:8px}p{margin-bottom:16px}.muted,.caption{color:var(--muted)}.caption{font-size:12px}.eyebrow{font-size:12px;letter-spacing:.12em;color:var(--muted);margin-bottom:16px}.wrap{max-width:1280px;padding:0 40px;margin:auto}.top{border-bottom:1px solid var(--rule);background:var(--paper);position:sticky;top:0;z-index:5}.top .wrap{display:flex;gap:24px;align-items:center;padding-top:12px;padding-bottom:12px}.brand{font-weight:600;white-space:nowrap}.top nav{display:flex;gap:24px;overflow:auto;white-space:nowrap;font-size:12px}.top a{text-decoration:none}.hero{padding-top:72px;padding-bottom:48px;display:grid;grid-template-columns:1.25fr 1fr;gap:48px;align-items:center}.lede{max-width:640px;font-size:20px}.pill{display:inline-block;padding:4px 8px;border:1px solid currentColor;border-radius:4px;font-size:12px;line-height:1.6;margin:0 8px 8px 0}.good{color:var(--green);background:var(--green-tint)}.pending{color:var(--accent);background:var(--accent-tint)}.later{color:var(--violet);background:var(--violet-tint)}.callout{padding:20px 24px;background:var(--gold-tint);border-left:4px solid var(--gold)}section{padding:48px 0;border-top:1px solid var(--rule)}.section-head{display:flex;gap:24px;align-items:baseline}.index{font-family:var(--serif);color:var(--accent);font-size:32px}.section-intro{max-width:880px;color:var(--muted)}.grid{display:grid;grid-template-columns:1.1fr 1fr;gap:24px}.card{padding:24px;border:1px solid var(--rule);border-radius:8px;background:#fff}.card.green{border-top:4px solid var(--green)}.card.blue{border-top:4px solid var(--blue)}.card.violet{border-top:4px solid var(--violet)}.card.orange{border-top:4px solid var(--accent)}.chart{overflow-x:auto}svg{width:100%;min-width:800px;display:block}svg text{font-family:var(--sans);fill:var(--ink)}.node rect{stroke:#9da7b2;stroke-width:1;fill:#fff}.node rect.focal{fill:var(--accent-tint);stroke:var(--accent)}.node rect.store{fill:#eef0f1;stroke:var(--muted)}.node rect.blue{fill:var(--blue-tint);stroke:var(--blue)}.node rect.green{fill:var(--green-tint);stroke:var(--green)}.node:hover rect,.node:focus rect{stroke-width:3}.node-name{font-size:20px;font-weight:600}.node-sub{font-size:12px;fill:var(--muted);font-family:var(--mono)}.note-text{font-size:16px;fill:var(--muted)}.edge-label{font-size:12px;fill:var(--muted)}.aside-num{font-size:40px;fill:var(--accent);font-family:var(--serif)}details{border-bottom:1px solid var(--rule);padding:16px 0}summary{cursor:pointer;font-weight:600;padding-right:16px}summary::marker{color:var(--accent)}.detail-body{padding:16px 0 0 24px}.detail-body p:last-child{margin-bottom:0}ul,ol{padding-left:24px;margin:12px 0}li{margin:8px 0}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;text-align:left;font-size:16px}th{font-size:12px;letter-spacing:.04em;background:var(--paper-2);color:var(--muted)}th,td{padding:16px;border-bottom:1px solid var(--rule);vertical-align:top}td:first-child{font-weight:600;min-width:144px}.stage-row{display:grid;grid-template-columns:80px 1fr 1fr;gap:24px;padding:24px 0;border-bottom:1px solid var(--rule)}.stage-no{font-family:var(--serif);font-size:32px;color:var(--blue)}.stage-row p{margin:0}.source-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.source-item{padding:16px;border:1px solid var(--rule);border-radius:4px;background:#fff}.source-item p{font-size:12px;color:var(--muted);margin:8px 0 0}.tip{position:relative;border-bottom:1px dotted var(--muted);cursor:help}.tip .tip-body{display:none;position:absolute;top:100%;left:0;width:280px;padding:12px;background:var(--ink);color:#fff;border-radius:4px;font-size:12px;z-index:4}.tip:hover .tip-body,.tip:focus .tip-body{display:block}.demo{background:#fff;border:1px solid var(--rule);border-radius:8px;padding:24px}.demo .eyebrow{margin-bottom:12px}.demo-bar{background:var(--paper-2);border:1px solid var(--rule);border-radius:4px;padding:12px;display:flex;gap:12px;align-items:center;font-size:12px}.workspace{padding:4px 8px;border:1px solid transparent;border-radius:4px}.workspace.active{border-color:var(--blue);color:var(--blue);background:var(--blue-tint)}.badge{color:var(--accent);visibility:hidden;font-weight:700}.terminals{display:grid;grid-template-columns:1.15fr 1fr;gap:12px;margin:16px 0}.terminal{padding:16px 12px;border:1px solid var(--rule);border-top:4px solid var(--green);background:var(--green-tint);font-size:12px;min-height:148px}.terminal.ai{border-top-color:var(--blue);background:var(--blue-tint)}.terminal strong{display:block;margin-bottom:20px}.terminal code{font-size:12px}.ime{float:right;color:var(--muted)}.demo input{accent-color:var(--accent)}.demo label{font-size:12px;cursor:pointer;margin-right:8px}.demo-scene{margin-top:16px}.demo .done-text,.demo .read-text{display:none}.demo:has(#demo-done:checked) .badge{visibility:visible}.demo:has(#demo-done:checked) .run-text,.demo:has(#demo-read:checked) .run-text{display:none}.demo:has(#demo-done:checked) .done-text,.demo:has(#demo-read:checked) .read-text{display:block}.demo:has(#demo-read:checked) .terminal.ai{border-color:var(--blue)}footer{padding:32px 0 48px;color:var(--muted);font-size:12px;border-top:1px solid var(--rule)}.key{font-size:12px;padding:2px 4px;border:1px solid var(--rule);border-radius:4px;white-space:nowrap}.action-strip{padding:24px;border-left:4px solid var(--accent);background:var(--accent-tint);margin:24px 0}.checklist{columns:2;column-gap:40px}.checklist li{break-inside:avoid}
-.grid>*{min-width:0}.demo:has(#demo-read:checked) .workspace.active{border-color:transparent;color:var(--ink);background:transparent}.demo:has(#demo-read:checked) .workspace:nth-child(3){border-color:var(--blue);color:var(--blue);background:var(--blue-tint)}
-@media(max-width:800px){.wrap{padding:0 20px}.hero{grid-template-columns:1fr;padding-top:40px;gap:24px}.grid,.source-grid{grid-template-columns:1fr}.top .wrap{gap:16px}.brand{font-size:12px}.top nav{gap:16px}.stage-row{grid-template-columns:48px 1fr;gap:12px}.stage-row>p{grid-column:2}.checklist{columns:1}section{padding:32px 0}h2{font-size:24px}.lede{font-size:16px}.hero h1{font-size:40px}.tip .tip-body{width:220px}.chart svg{min-width:800px}.demo{padding:16px}.demo-bar{gap:4px}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-@media print{.chart svg{min-width:0}.top{position:static}.top nav,.demo input,.demo label{display:none}.wrap{padding:0}.hero{padding-top:24px}section{padding:24px 0}.chart{overflow:visible}svg{min-width:0}details::details-content{content-visibility:visible;height:auto}details .detail-body{display:block}.grid,.source-grid{break-inside:avoid}a{color:var(--ink)}body{font-size:12px}.demo{break-inside:avoid}.checklist{columns:1}}
-</style></head><body>
-<header class="top"><div class="wrap"><a class="brand" href="#top">TenOS / 工作现场</a><nav aria-label="章节导航"><a href="#scope">范围</a><a href="#architecture">分工</a><a href="#gaps">现状缺口</a><a href="#restore">恢复深度</a><a href="#events">完成提示</a><a href="#entry">入口</a><a href="#herdr">Herdr</a><a href="#roadmap">实施</a><a href="#sources">证据</a></nav></div></header>
-<main class="wrap" id="top"><div class="hero"><div><p class="eyebrow">SYSTEM × EDITOR × AI · 2026.09.09</p><h1>回到项目，<br>接着做。</h1><p class="lede">让桌面恢复两扇窗口，让应用接回自己的内容；AI 回复后，在工作区上留一个安静的标记。</p><p><span class="pill good">已有项目启动骨架</span><span class="pill pending">恢复与提示尚未闭环</span><a class="pill later" href="#herdr">Herdr 后台待验证</a></p><p class="caption">调查与设计稿 · 不修改系统配置 · 所有示意交互只作用于本页面</p></div>
-<div class="demo" aria-label="顶栏完成标记交互示意"><p class="eyebrow">交互示意 / 点击切换场景</p><input type="radio" name="demo" id="demo-run" checked><label for="demo-run">① 工作中</label><input type="radio" name="demo" id="demo-done"><label for="demo-done">② AI 回复</label><input type="radio" name="demo" id="demo-read"><label for="demo-read">③ 查看 AI</label><div class="demo-scene"><div class="demo-bar"><span>TenOS</span><span class="workspace active">1 · nvim</span><span class="workspace">2 · nixos <span class="badge">●</span></span><span class="workspace">3</span></div><div class="terminals"><div class="terminal"><strong>Neovim <span class="ime">EN</span></strong><code>~/codes/nixos<br>home/commands/<br>default.nix</code></div><div class="terminal ai"><strong>Codex <span class="ime">中</span></strong><code class="run-text">正在处理…</code><code class="done-text">回复已完成。<br>等待你查看。</code><code class="read-text">已查看 ✓<br>继续下一轮。</code></div></div><p class="caption">下方展示项目 2 的窗口组合。你在项目 1 工作，也能获知项目 2 有回复；查看对应 AI 后清除角标。</p></div></div></div>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>TenOS · 可恢复的 AI 项目工作区</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500&amp;family=Instrument+Serif&amp;family=Noto+Sans+SC:wght@400;500;600&amp;family=Noto+Serif+SC:wght@400&amp;display=swap"
+    />
+    <style>
+      :root {
+        --paper: #faf8f2;
+        --paper-2: #f0eee7;
+        --ink: #263343;
+        --muted: #536174;
+        --rule: #d5d9dd;
+        --accent: #c74725;
+        --accent-tint: #fff0e7;
+        --blue: #315c9b;
+        --blue-tint: #edf2ff;
+        --green: #286c57;
+        --green-tint: #eaf4ed;
+        --violet: #715493;
+        --violet-tint: #f1edf8;
+        --gold: #806017;
+        --gold-tint: #faf1d9;
+        --sans: "Geist", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+        --serif: "Instrument Serif", "Noto Serif SC", serif;
+        --mono: "Geist Mono", monospace;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 88px;
+      }
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: var(--sans);
+        font-size: 16px;
+        line-height: 1.75;
+      }
+      a {
+        color: var(--blue);
+        text-underline-offset: 4px;
+      }
+      a:hover {
+        text-decoration-thickness: 2px;
+      }
+      a:focus-visible,
+      summary:focus-visible {
+        outline: 3px solid var(--blue);
+        outline-offset: 4px;
+      }
+      code,
+      pre,
+      .eyebrow {
+        font-family: var(--mono);
+      }
+      code {
+        font-size: 0.9em;
+        overflow-wrap: anywhere;
+      }
+      pre {
+        padding: 20px;
+        background: #f0f2f4;
+        border-left: 4px solid var(--blue);
+        font-size: 12px;
+        overflow: auto;
+        line-height: 1.9;
+      }
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+      h1 {
+        font-family: var(--serif);
+        font-weight: 400;
+        font-size: clamp(36px, 5vw, 64px);
+        line-height: 1.25;
+        letter-spacing: -1px;
+        margin-bottom: 24px;
+      }
+      h2 {
+        font-size: 28px;
+        line-height: 1.4;
+        margin-bottom: 12px;
+      }
+      h3 {
+        font-size: 20px;
+        margin-bottom: 8px;
+      }
+      p {
+        margin-bottom: 16px;
+      }
+      .muted,
+      .caption {
+        color: var(--muted);
+      }
+      .caption {
+        font-size: 12px;
+      }
+      .eyebrow {
+        font-size: 12px;
+        letter-spacing: 0.12em;
+        color: var(--muted);
+        margin-bottom: 16px;
+      }
+      .wrap {
+        max-width: 1280px;
+        padding: 0 40px;
+        margin: auto;
+      }
+      .top {
+        border-bottom: 1px solid var(--rule);
+        background: var(--paper);
+        position: sticky;
+        top: 0;
+        z-index: 5;
+      }
+      .top .wrap {
+        display: flex;
+        gap: 24px;
+        align-items: center;
+        padding-top: 12px;
+        padding-bottom: 12px;
+      }
+      .brand {
+        font-weight: 600;
+        white-space: nowrap;
+      }
+      .top nav {
+        display: flex;
+        gap: 24px;
+        overflow: auto;
+        white-space: nowrap;
+        font-size: 12px;
+      }
+      .top a {
+        text-decoration: none;
+      }
+      .hero {
+        padding-top: 72px;
+        padding-bottom: 48px;
+        display: grid;
+        grid-template-columns: 1.25fr 1fr;
+        gap: 48px;
+        align-items: center;
+      }
+      .lede {
+        max-width: 640px;
+        font-size: 20px;
+      }
+      .pill {
+        display: inline-block;
+        padding: 4px 8px;
+        border: 1px solid currentColor;
+        border-radius: 4px;
+        font-size: 12px;
+        line-height: 1.6;
+        margin: 0 8px 8px 0;
+      }
+      .good {
+        color: var(--green);
+        background: var(--green-tint);
+      }
+      .pending {
+        color: var(--accent);
+        background: var(--accent-tint);
+      }
+      .later {
+        color: var(--violet);
+        background: var(--violet-tint);
+      }
+      .callout {
+        padding: 20px 24px;
+        background: var(--gold-tint);
+        border-left: 4px solid var(--gold);
+      }
+      section {
+        padding: 48px 0;
+        border-top: 1px solid var(--rule);
+      }
+      .section-head {
+        display: flex;
+        gap: 24px;
+        align-items: baseline;
+      }
+      .index {
+        font-family: var(--serif);
+        color: var(--accent);
+        font-size: 32px;
+      }
+      .section-intro {
+        max-width: 880px;
+        color: var(--muted);
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 1.1fr 1fr;
+        gap: 24px;
+      }
+      .card {
+        padding: 24px;
+        border: 1px solid var(--rule);
+        border-radius: 8px;
+        background: #fff;
+      }
+      .card.green {
+        border-top: 4px solid var(--green);
+      }
+      .card.blue {
+        border-top: 4px solid var(--blue);
+      }
+      .card.violet {
+        border-top: 4px solid var(--violet);
+      }
+      .card.orange {
+        border-top: 4px solid var(--accent);
+      }
+      .chart {
+        overflow-x: auto;
+      }
+      svg {
+        width: 100%;
+        min-width: 800px;
+        display: block;
+      }
+      svg text {
+        font-family: var(--sans);
+        fill: var(--ink);
+      }
+      .node rect {
+        stroke: #9da7b2;
+        stroke-width: 1;
+        fill: #fff;
+      }
+      .node rect.focal {
+        fill: var(--accent-tint);
+        stroke: var(--accent);
+      }
+      .node rect.store {
+        fill: #eef0f1;
+        stroke: var(--muted);
+      }
+      .node rect.blue {
+        fill: var(--blue-tint);
+        stroke: var(--blue);
+      }
+      .node rect.green {
+        fill: var(--green-tint);
+        stroke: var(--green);
+      }
+      .node:hover rect,
+      .node:focus rect {
+        stroke-width: 3;
+      }
+      .node-name {
+        font-size: 20px;
+        font-weight: 600;
+      }
+      .node-sub {
+        font-size: 12px;
+        fill: var(--muted);
+        font-family: var(--mono);
+      }
+      .note-text {
+        font-size: 16px;
+        fill: var(--muted);
+      }
+      .edge-label {
+        font-size: 12px;
+        fill: var(--muted);
+      }
+      .aside-num {
+        font-size: 40px;
+        fill: var(--accent);
+        font-family: var(--serif);
+      }
+      details {
+        border-bottom: 1px solid var(--rule);
+        padding: 16px 0;
+      }
+      summary {
+        cursor: pointer;
+        font-weight: 600;
+        padding-right: 16px;
+      }
+      summary::marker {
+        color: var(--accent);
+      }
+      .detail-body {
+        padding: 16px 0 0 24px;
+      }
+      .detail-body p:last-child {
+        margin-bottom: 0;
+      }
+      ul,
+      ol {
+        padding-left: 24px;
+        margin: 12px 0;
+      }
+      li {
+        margin: 8px 0;
+      }
+      .table-wrap {
+        overflow: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: left;
+        font-size: 16px;
+      }
+      th {
+        font-size: 12px;
+        letter-spacing: 0.04em;
+        background: var(--paper-2);
+        color: var(--muted);
+      }
+      th,
+      td {
+        padding: 16px;
+        border-bottom: 1px solid var(--rule);
+        vertical-align: top;
+      }
+      td:first-child {
+        font-weight: 600;
+        min-width: 144px;
+      }
+      .stage-row {
+        display: grid;
+        grid-template-columns: 80px 1fr 1fr;
+        gap: 24px;
+        padding: 24px 0;
+        border-bottom: 1px solid var(--rule);
+      }
+      .stage-no {
+        font-family: var(--serif);
+        font-size: 32px;
+        color: var(--blue);
+      }
+      .stage-row p {
+        margin: 0;
+      }
+      .source-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      .source-item {
+        padding: 16px;
+        border: 1px solid var(--rule);
+        border-radius: 4px;
+        background: #fff;
+      }
+      .source-item p {
+        font-size: 12px;
+        color: var(--muted);
+        margin: 8px 0 0;
+      }
+      .tip {
+        position: relative;
+        border-bottom: 1px dotted var(--muted);
+        cursor: help;
+      }
+      .tip .tip-body {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 280px;
+        padding: 12px;
+        background: var(--ink);
+        color: #fff;
+        border-radius: 4px;
+        font-size: 12px;
+        z-index: 4;
+      }
+      .tip:hover .tip-body,
+      .tip:focus .tip-body {
+        display: block;
+      }
+      .demo {
+        background: #fff;
+        border: 1px solid var(--rule);
+        border-radius: 8px;
+        padding: 24px;
+      }
+      .demo .eyebrow {
+        margin-bottom: 12px;
+      }
+      .demo-bar {
+        background: var(--paper-2);
+        border: 1px solid var(--rule);
+        border-radius: 4px;
+        padding: 12px;
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        font-size: 12px;
+      }
+      .workspace {
+        padding: 4px 8px;
+        border: 1px solid transparent;
+        border-radius: 4px;
+      }
+      .workspace.active {
+        border-color: var(--blue);
+        color: var(--blue);
+        background: var(--blue-tint);
+      }
+      .badge {
+        color: var(--accent);
+        visibility: hidden;
+        font-weight: 700;
+      }
+      .terminals {
+        display: grid;
+        grid-template-columns: 1.15fr 1fr;
+        gap: 12px;
+        margin: 16px 0;
+      }
+      .terminal {
+        padding: 16px 12px;
+        border: 1px solid var(--rule);
+        border-top: 4px solid var(--green);
+        background: var(--green-tint);
+        font-size: 12px;
+        min-height: 148px;
+      }
+      .terminal.ai {
+        border-top-color: var(--blue);
+        background: var(--blue-tint);
+      }
+      .terminal strong {
+        display: block;
+        margin-bottom: 20px;
+      }
+      .terminal code {
+        font-size: 12px;
+      }
+      .ime {
+        float: right;
+        color: var(--muted);
+      }
+      .demo input {
+        accent-color: var(--accent);
+      }
+      .demo label {
+        font-size: 12px;
+        cursor: pointer;
+        margin-right: 8px;
+      }
+      .demo-scene {
+        margin-top: 16px;
+      }
+      .demo .done-text,
+      .demo .read-text {
+        display: none;
+      }
+      .demo:has(#demo-done:checked) .badge {
+        visibility: visible;
+      }
+      .demo:has(#demo-done:checked) .run-text,
+      .demo:has(#demo-read:checked) .run-text {
+        display: none;
+      }
+      .demo:has(#demo-done:checked) .done-text,
+      .demo:has(#demo-read:checked) .read-text {
+        display: block;
+      }
+      .demo:has(#demo-read:checked) .terminal.ai {
+        border-color: var(--blue);
+      }
+      footer {
+        padding: 32px 0 48px;
+        color: var(--muted);
+        font-size: 12px;
+        border-top: 1px solid var(--rule);
+      }
+      .key {
+        font-size: 12px;
+        padding: 2px 4px;
+        border: 1px solid var(--rule);
+        border-radius: 4px;
+        white-space: nowrap;
+      }
+      .action-strip {
+        padding: 24px;
+        border-left: 4px solid var(--accent);
+        background: var(--accent-tint);
+        margin: 24px 0;
+      }
+      .checklist {
+        columns: 2;
+        column-gap: 40px;
+      }
+      .checklist li {
+        break-inside: avoid;
+      }
+      .grid > * {
+        min-width: 0;
+      }
+      .demo:has(#demo-read:checked) .workspace.active {
+        border-color: transparent;
+        color: var(--ink);
+        background: transparent;
+      }
+      .demo:has(#demo-read:checked) .workspace:nth-child(3) {
+        border-color: var(--blue);
+        color: var(--blue);
+        background: var(--blue-tint);
+      }
+      @media (max-width: 800px) {
+        .wrap {
+          padding: 0 20px;
+        }
+        .hero {
+          grid-template-columns: 1fr;
+          padding-top: 40px;
+          gap: 24px;
+        }
+        .grid,
+        .source-grid {
+          grid-template-columns: 1fr;
+        }
+        .top .wrap {
+          gap: 16px;
+        }
+        .brand {
+          font-size: 12px;
+        }
+        .top nav {
+          gap: 16px;
+        }
+        .stage-row {
+          grid-template-columns: 48px 1fr;
+          gap: 12px;
+        }
+        .stage-row > p {
+          grid-column: 2;
+        }
+        .checklist {
+          columns: 1;
+        }
+        section {
+          padding: 32px 0;
+        }
+        h2 {
+          font-size: 24px;
+        }
+        .lede {
+          font-size: 16px;
+        }
+        .hero h1 {
+          font-size: 40px;
+        }
+        .tip .tip-body {
+          width: 220px;
+        }
+        .chart svg {
+          min-width: 800px;
+        }
+        .demo {
+          padding: 16px;
+        }
+        .demo-bar {
+          gap: 4px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+      }
+      @media print {
+        .chart svg {
+          min-width: 0;
+        }
+        .top {
+          position: static;
+        }
+        .top nav,
+        .demo input,
+        .demo label {
+          display: none;
+        }
+        .wrap {
+          padding: 0;
+        }
+        .hero {
+          padding-top: 24px;
+        }
+        section {
+          padding: 24px 0;
+        }
+        .chart {
+          overflow: visible;
+        }
+        svg {
+          min-width: 0;
+        }
+        details::details-content {
+          content-visibility: visible;
+          height: auto;
+        }
+        details .detail-body {
+          display: block;
+        }
+        .grid,
+        .source-grid {
+          break-inside: avoid;
+        }
+        a {
+          color: var(--ink);
+        }
+        body {
+          font-size: 12px;
+        }
+        .demo {
+          break-inside: avoid;
+        }
+        .checklist {
+          columns: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="top">
+      <div class="wrap">
+        <a class="brand" href="#top">TenOS / 工作现场</a>
+        <nav aria-label="章节导航">
+          <a href="#scope">范围</a><a href="#architecture">分工</a
+          ><a href="#gaps">现状缺口</a><a href="#restore">恢复深度</a
+          ><a href="#events">完成提示</a><a href="#entry">入口</a
+          ><a href="#herdr">Herdr</a><a href="#roadmap">实施</a
+          ><a href="#sources">证据</a>
+        </nav>
+      </div>
+    </header>
+    <main class="wrap" id="top">
+      <div class="hero">
+        <div>
+          <p class="eyebrow">SYSTEM × EDITOR × AI · 2026.09.09</p>
+          <h1>回到项目，<br />接着做。</h1>
+          <p class="lede">
+            让桌面恢复两扇窗口，让应用接回自己的内容；AI
+            回复后，在工作区上留一个安静的标记。
+          </p>
+          <p>
+            <span class="pill good">已有项目启动骨架</span
+            ><span class="pill pending">恢复与提示尚未闭环</span
+            ><a class="pill later" href="#herdr">Herdr 后台待验证</a>
+          </p>
+          <p class="caption">
+            调查与设计稿 · 不修改系统配置 · 所有示意交互只作用于本页面
+          </p>
+        </div>
+        <div class="demo" aria-label="顶栏完成标记交互示意">
+          <p class="eyebrow">交互示意 / 点击切换场景</p>
+          <input type="radio" name="demo" id="demo-run" checked /><label
+            for="demo-run"
+            >① 工作中</label
+          ><input type="radio" name="demo" id="demo-done" /><label
+            for="demo-done"
+            >② AI 回复</label
+          ><input type="radio" name="demo" id="demo-read" /><label
+            for="demo-read"
+            >③ 查看 AI</label
+          >
+          <div class="demo-scene">
+            <div class="demo-bar">
+              <span>TenOS</span><span class="workspace active">1 · nvim</span
+              ><span class="workspace"
+                >2 · nixos <span class="badge">●</span></span
+              ><span class="workspace">3</span>
+            </div>
+            <div class="terminals">
+              <div class="terminal">
+                <strong>Neovim <span class="ime">EN</span></strong
+                ><code>~/codes/nixos<br />home/commands/<br />default.nix</code>
+              </div>
+              <div class="terminal ai">
+                <strong>Codex <span class="ime">中</span></strong
+                ><code class="run-text">正在处理…</code
+                ><code class="done-text">回复已完成。<br />等待你查看。</code
+                ><code class="read-text">已查看 ✓<br />继续下一轮。</code>
+              </div>
+            </div>
+            <p class="caption">
+              下方展示项目 2 的窗口组合。你在项目 1 工作，也能获知项目 2
+              有回复；查看对应 AI 后清除角标。
+            </p>
+          </div>
+        </div>
+      </div>
 
-<section id="scope"><div class="section-head"><span class="index">01</span><h2>第一版，恢复到能开始工作的程度</h2></div><p class="section-intro">依据你的补充：启动到正确目录就是首轮目标；恢复上次文件与 AI 历史可以后补。完成角标仍属于核心需求。</p><div class="grid"><div class="card green"><h3>必须成立</h3><ul><li>项目对应一个逻辑工作区组；左 Neovim、右一个 AI CLI。</li><li>两个独立 foot，切换时各自记忆输入法状态。</li><li>重启后按需打开项目，程序与工作目录正确。</li><li>反复打开同一项目，不重复创建窗口。</li><li>AI 主回复结束，顶栏对应工作区显示待查看标记。</li></ul></div><div class="card violet"><h3>允许后补</h3><ul><li>Neovim 文件集合、光标、编辑器内部布局。</li><li>Codex / Claude 精确续接上次会话。</li><li>临时终端、终端滚屏和更复杂的桌面布局。</li><li>未保存文本、意外断电后的恢复。</li></ul><p class="caption">重启后的初始中英文状态不纳入第一版；已运行窗口之间的独立状态必须回归验证。</p></div></div></section>
+      <section id="scope">
+        <div class="section-head">
+          <span class="index">01</span>
+          <h2>第一版，恢复到能开始工作的程度</h2>
+        </div>
+        <p class="section-intro">
+          依据你的补充：启动到正确目录就是首轮目标；恢复上次文件与 AI
+          历史可以后补。完成角标仍属于核心需求。
+        </p>
+        <div class="grid">
+          <div class="card green">
+            <h3>必须成立</h3>
+            <ul>
+              <li>项目对应一个逻辑工作区组；左 Neovim、右一个 AI CLI。</li>
+              <li>两个独立 foot，切换时各自记忆输入法状态。</li>
+              <li>重启后按需打开项目，程序与工作目录正确。</li>
+              <li>反复打开同一项目，不重复创建窗口。</li>
+              <li>AI 主回复结束，顶栏对应工作区显示待查看标记。</li>
+            </ul>
+          </div>
+          <div class="card violet">
+            <h3>允许后补</h3>
+            <ul>
+              <li>Neovim 文件集合、光标、编辑器内部布局。</li>
+              <li>Codex / Claude 精确续接上次会话。</li>
+              <li>临时终端、终端滚屏和更复杂的桌面布局。</li>
+              <li>未保存文本、意外断电后的恢复。</li>
+            </ul>
+            <p class="caption">
+              重启后的初始中英文状态不纳入第一版；已运行窗口之间的独立状态必须回归验证。
+            </p>
+          </div>
+        </div>
+      </section>
 
-<section id="architecture"><div class="section-head"><span class="index">02</span><h2>沿用现有结构，把责任接清楚</h2></div><p class="section-intro">保留两扇独立 foot，桌面负责左右分屏。编辑器沿用 tmux；AI 后台可沿用 tmux，或验证后接入 <a href="#herdr-fit">Herdr direct attach</a>。重启后由项目配方协调恢复，各后台负责自己的应用。</p><div class="chart"><svg viewBox="0 0 1280 720" role="img" aria-labelledby="arch-title arch-desc"><title id="arch-title">项目恢复的责任分工</title><desc id="arch-desc">项目入口通过协调器读取登记册，打开两个独立 foot，分别连接编辑器 tmux 和可选择的 AI 后台。</desc><defs><marker id="arch-arrow" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8Z" fill="#536174"/></marker><marker id="arch-arrow-accent" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8Z" fill="#c74725"/></marker><marker id="arch-arrow-link" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8Z" fill="#315c9b"/></marker></defs><path d="M344 144 H448" fill="none" stroke="#536174" stroke-width="1.2" marker-end="url(#arch-arrow)"/><path d="M896 144 H768" fill="none" stroke="#536174" stroke-width="1.2" marker-end="url(#arch-arrow)"/><path d="M528 192 V320" fill="none" stroke="#536174" stroke-width="1.2" marker-end="url(#arch-arrow)"/><path d="M704 192 V232 A8 8 0 0 0 712 240 H1048 A8 8 0 0 1 1056 248 V320" fill="none" stroke="#536174" stroke-width="1.2" marker-end="url(#arch-arrow)"/><path d="M608 416 V496" fill="none" stroke="#536174" stroke-width="1.2" marker-end="url(#arch-arrow)"/><path d="M1056 416 V496" fill="none" stroke="#536174" stroke-width="1.2" marker-end="url(#arch-arrow)"/><rect x="352" y="112" width="88" height="16" fill="#faf8f2"/><text x="396" y="124" text-anchor="middle" class="edge-label">打开 / 聚焦</text><rect x="784" y="112" width="96" height="16" fill="#faf8f2"/><text x="832" y="124" text-anchor="middle" class="edge-label">读取 / 登记</text><a href="#entry" class="node" tabindex="0"><title>目录命令和项目列表调用同一协调器。图形项目入口待补。</title><rect x="64" y="96" width="280" height="96" rx="8" class="blue"/><text x="88" y="136" class="node-name">项目入口</text><text x="88" y="164" class="node-sub">CLI / Overview</text></a><a href="#gaps" class="node" tabindex="0"><title>扩展现有命令：两个窗口都在就聚焦；缺哪侧补哪侧。</title><rect x="448" y="96" width="320" height="96" rx="8" class="focal"/><text x="472" y="136" class="node-name">coding-workspace</text><text x="472" y="164" class="node-sub">project + role → window</text></a><a href="#identity" class="node" tabindex="0"><title>跨重启保存项目配方；现有文件只记录组号。</title><rect x="896" y="96" width="320" height="96" rx="8" class="store"/><text x="920" y="136" class="node-name">项目登记册 · 待补</text><text x="920" y="164" class="node-sub">id / root / agent / layout</text></a><a href="#ime" class="node" tabindex="0"><title>这个 foot 拥有独立输入法上下文，桌面负责分屏。</title><rect x="448" y="320" width="320" height="96" rx="8" class="green"/><text x="472" y="360" class="node-name">左侧独立 foot</text><text x="472" y="388" class="node-sub">ten-coding-editor-&lt;hash&gt;</text></a><a href="#ime" class="node" tabindex="0"><title>通常运行一个 Codex 或 Claude CLI。</title><rect x="896" y="320" width="320" height="96" rx="8" class="blue"/><text x="920" y="360" class="node-name">右侧独立 foot</text><text x="920" y="388" class="node-sub">ten-coding-agent-&lt;hash&gt;</text></a><a href="#restore" class="node" tabindex="0"><title>保活由 tmux 负责；内容恢复将复用 persistence.nvim。</title><rect x="448" y="496" width="320" height="96" rx="8" class="plain"/><text x="472" y="536" class="node-name">编辑器 session</text><text x="472" y="564" class="node-sub">tmux → nvim</text></a><a href="#restore" class="node" tabindex="0"><title>AI 可沿用 tmux，或接入 Herdr；内容续接依赖 CLI 自身的会话记录。</title><rect x="896" y="496" width="320" height="96" rx="8" class="plain"/><text x="920" y="536" class="node-name">AI session</text><text x="920" y="564" class="node-sub">tmux / Herdr → AI CLI</text></a><text x="64" y="336" class="aside-num">01</text><text x="64" y="372" class="node-name">桌面分屏</text><text x="64" y="404" class="note-text">两个 foot 保留输入法边界</text><text x="64" y="480" class="aside-num">02</text><text x="64" y="516" class="node-name">应用各管自己的内容</text><text x="64" y="548" class="note-text">tmux 不充当完整桌面快照</text><line x1="64" y1="648" x2="1216" y2="648" stroke="#d5d9dd"/><text x="64" y="680" class="note-text">橙：协调核心　蓝 / 绿：入口与窗口角色　灰：持久记录　箭头：启动或读取依赖　点击节点查看细节</text></svg></div><div class="grid"><div id="ime" class="card green"><h3>输入法边界就是 foot 窗口</h3><p>现有 Fcitx5 设置 <code>ShareInputState=No</code> 与 <code>resetStateWhenFocusIn=No</code>，符合你已验证的体验。两个 tmux pane 放进同一 foot，不能自然提供两个桌面输入上下文。</p><p>Neovim 的 <code>im-select.nvim</code> 还有模式切换行为；恢复后需检查 Normal / Insert / 焦点切换是否符合原习惯。</p><p class="caption"><a href="/home/ten/codes/nixos/home/desktop/input-method.nix">Fcitx5 配置 ↗</a> · <a href="/home/ten/codes/nvim/lua/plugins/editor/im_select.lua">Neovim 输入法 ↗</a></p></div><div class="card blue"><h3>“session”实际有四种</h3><p><span class="tip" tabindex="0">桌面 session<span class="tip-body">当前 Hyprland 实例、显示器与窗口；重启会重新创建。</span></span> → 工作区与窗口位置。</p><p><span class="tip" tabindex="0">tmux session<span class="tip-body">服务器活着时，终端程序可以继续运行；不是进程跨重启存活。</span></span> → 终端进程与重连。</p><p><span class="tip" tabindex="0">Neovim session<span class="tip-body">文件、窗口布局等编辑器状态；不是未保存文本的完整备份。</span></span> → 编辑现场。</p><p><span class="tip" tabindex="0">AI session<span class="tip-body">CLI 自己维护的对话与会话 ID；恢复历史不代表恢复中途运行的工具进程。</span></span> → 对话上下文。</p><p class="caption">悬停或用 Tab 聚焦术语，可查看边界说明。</p></div></div></section>
+      <section id="architecture">
+        <div class="section-head">
+          <span class="index">02</span>
+          <h2>沿用现有结构，把责任接清楚</h2>
+        </div>
+        <p class="section-intro">
+          保留两扇独立 foot，桌面负责左右分屏。编辑器沿用 tmux；AI 后台可沿用
+          tmux，或验证后接入
+          <a href="#herdr-fit">Herdr direct attach</a
+          >。重启后由项目配方协调恢复，各后台负责自己的应用。
+        </p>
+        <div class="chart">
+          <svg
+            viewBox="0 0 1280 720"
+            role="img"
+            aria-labelledby="arch-title arch-desc"
+          >
+            <title id="arch-title">项目恢复的责任分工</title>
+            <desc id="arch-desc">
+              项目入口通过协调器读取登记册，打开两个独立 foot，分别连接编辑器
+              tmux 和可选择的 AI 后台。
+            </desc>
+            <defs>
+              <marker
+                id="arch-arrow"
+                markerWidth="8"
+                markerHeight="8"
+                refX="8"
+                refY="4"
+                orient="auto"
+              >
+                <path d="M0 0 L8 4 L0 8Z" fill="#536174" />
+              </marker>
+              <marker
+                id="arch-arrow-accent"
+                markerWidth="8"
+                markerHeight="8"
+                refX="8"
+                refY="4"
+                orient="auto"
+              >
+                <path d="M0 0 L8 4 L0 8Z" fill="#c74725" />
+              </marker>
+              <marker
+                id="arch-arrow-link"
+                markerWidth="8"
+                markerHeight="8"
+                refX="8"
+                refY="4"
+                orient="auto"
+              >
+                <path d="M0 0 L8 4 L0 8Z" fill="#315c9b" />
+              </marker>
+            </defs>
+            <path
+              d="M344 144 H448"
+              fill="none"
+              stroke="#536174"
+              stroke-width="1.2"
+              marker-end="url(#arch-arrow)"
+            />
+            <path
+              d="M896 144 H768"
+              fill="none"
+              stroke="#536174"
+              stroke-width="1.2"
+              marker-end="url(#arch-arrow)"
+            />
+            <path
+              d="M528 192 V320"
+              fill="none"
+              stroke="#536174"
+              stroke-width="1.2"
+              marker-end="url(#arch-arrow)"
+            />
+            <path
+              d="M704 192 V232 A8 8 0 0 0 712 240 H1048 A8 8 0 0 1 1056 248 V320"
+              fill="none"
+              stroke="#536174"
+              stroke-width="1.2"
+              marker-end="url(#arch-arrow)"
+            />
+            <path
+              d="M608 416 V496"
+              fill="none"
+              stroke="#536174"
+              stroke-width="1.2"
+              marker-end="url(#arch-arrow)"
+            />
+            <path
+              d="M1056 416 V496"
+              fill="none"
+              stroke="#536174"
+              stroke-width="1.2"
+              marker-end="url(#arch-arrow)"
+            />
+            <rect x="352" y="112" width="88" height="16" fill="#faf8f2" />
+            <text x="396" y="124" text-anchor="middle" class="edge-label">
+              打开 / 聚焦
+            </text>
+            <rect x="784" y="112" width="96" height="16" fill="#faf8f2" />
+            <text x="832" y="124" text-anchor="middle" class="edge-label">
+              读取 / 登记
+            </text>
+            <a href="#entry" class="node" tabindex="0">
+              <title>
+                目录命令和项目列表调用同一协调器。图形项目入口待补。
+              </title>
+              <rect x="64" y="96" width="280" height="96" rx="8" class="blue" />
+              <text x="88" y="136" class="node-name">项目入口</text>
+              <text x="88" y="164" class="node-sub">CLI / Overview</text>
+            </a>
+            <a href="#gaps" class="node" tabindex="0">
+              <title>扩展现有命令：两个窗口都在就聚焦；缺哪侧补哪侧。</title>
+              <rect
+                x="448"
+                y="96"
+                width="320"
+                height="96"
+                rx="8"
+                class="focal"
+              />
+              <text x="472" y="136" class="node-name">coding-workspace</text>
+              <text x="472" y="164" class="node-sub">
+                project + role → window
+              </text>
+            </a>
+            <a href="#identity" class="node" tabindex="0">
+              <title>跨重启保存项目配方；现有文件只记录组号。</title>
+              <rect
+                x="896"
+                y="96"
+                width="320"
+                height="96"
+                rx="8"
+                class="store"
+              />
+              <text x="920" y="136" class="node-name">项目登记册 · 待补</text>
+              <text x="920" y="164" class="node-sub">
+                id / root / agent / layout
+              </text>
+            </a>
+            <a href="#ime" class="node" tabindex="0">
+              <title>这个 foot 拥有独立输入法上下文，桌面负责分屏。</title>
+              <rect
+                x="448"
+                y="320"
+                width="320"
+                height="96"
+                rx="8"
+                class="green"
+              />
+              <text x="472" y="360" class="node-name">左侧独立 foot</text>
+              <text x="472" y="388" class="node-sub">
+                ten-coding-editor-&lt;hash&gt;
+              </text>
+            </a>
+            <a href="#ime" class="node" tabindex="0">
+              <title>通常运行一个 Codex 或 Claude CLI。</title>
+              <rect
+                x="896"
+                y="320"
+                width="320"
+                height="96"
+                rx="8"
+                class="blue"
+              />
+              <text x="920" y="360" class="node-name">右侧独立 foot</text>
+              <text x="920" y="388" class="node-sub">
+                ten-coding-agent-&lt;hash&gt;
+              </text>
+            </a>
+            <a href="#restore" class="node" tabindex="0">
+              <title>保活由 tmux 负责；内容恢复将复用 persistence.nvim。</title>
+              <rect
+                x="448"
+                y="496"
+                width="320"
+                height="96"
+                rx="8"
+                class="plain"
+              />
+              <text x="472" y="536" class="node-name">编辑器 session</text>
+              <text x="472" y="564" class="node-sub">tmux → nvim</text>
+            </a>
+            <a href="#restore" class="node" tabindex="0">
+              <title>
+                AI 可沿用 tmux，或接入 Herdr；内容续接依赖 CLI 自身的会话记录。
+              </title>
+              <rect
+                x="896"
+                y="496"
+                width="320"
+                height="96"
+                rx="8"
+                class="plain"
+              />
+              <text x="920" y="536" class="node-name">AI session</text>
+              <text x="920" y="564" class="node-sub">
+                tmux / Herdr → AI CLI
+              </text>
+            </a>
+            <text x="64" y="336" class="aside-num">01</text>
+            <text x="64" y="372" class="node-name">桌面分屏</text>
+            <text x="64" y="404" class="note-text">
+              两个 foot 保留输入法边界
+            </text>
+            <text x="64" y="480" class="aside-num">02</text>
+            <text x="64" y="516" class="node-name">应用各管自己的内容</text>
+            <text x="64" y="548" class="note-text">
+              tmux 不充当完整桌面快照
+            </text>
+            <line x1="64" y1="648" x2="1216" y2="648" stroke="#d5d9dd" />
+            <text x="64" y="680" class="note-text">
+              橙：协调核心　蓝 /
+              绿：入口与窗口角色　灰：持久记录　箭头：启动或读取依赖　点击节点查看细节
+            </text>
+          </svg>
+        </div>
+        <div class="grid">
+          <div id="ime" class="card green">
+            <h3>输入法边界就是 foot 窗口</h3>
+            <p>
+              现有 Fcitx5 设置 <code>ShareInputState=No</code> 与
+              <code>resetStateWhenFocusIn=No</code>，符合你已验证的体验。两个
+              tmux pane 放进同一 foot，不能自然提供两个桌面输入上下文。
+            </p>
+            <p>
+              Neovim 的
+              <code>im-select.nvim</code> 还有模式切换行为；恢复后需检查 Normal
+              / Insert / 焦点切换是否符合原习惯。
+            </p>
+            <p class="caption">
+              <a href="/home/ten/codes/nixos/home/desktop/input-method.nix"
+                >Fcitx5 配置 ↗</a
+              >
+              ·
+              <a href="/home/ten/codes/nvim/lua/plugins/editor/im_select.lua"
+                >Neovim 输入法 ↗</a
+              >
+            </p>
+          </div>
+          <div class="card blue">
+            <h3>“session”实际有四种</h3>
+            <p>
+              <span class="tip" tabindex="0"
+                >桌面 session<span class="tip-body"
+                  >当前 Hyprland 实例、显示器与窗口；重启会重新创建。</span
+                ></span
+              >
+              → 工作区与窗口位置。
+            </p>
+            <p>
+              <span class="tip" tabindex="0"
+                >tmux session<span class="tip-body"
+                  >服务器活着时，终端程序可以继续运行；不是进程跨重启存活。</span
+                ></span
+              >
+              → 终端进程与重连。
+            </p>
+            <p>
+              <span class="tip" tabindex="0"
+                >Neovim session<span class="tip-body"
+                  >文件、窗口布局等编辑器状态；不是未保存文本的完整备份。</span
+                ></span
+              >
+              → 编辑现场。
+            </p>
+            <p>
+              <span class="tip" tabindex="0"
+                >AI session<span class="tip-body"
+                  >CLI 自己维护的对话与会话
+                  ID；恢复历史不代表恢复中途运行的工具进程。</span
+                ></span
+              >
+              → 对话上下文。
+            </p>
+            <p class="caption">悬停或用 Tab 聚焦术语，可查看边界说明。</p>
+          </div>
+        </div>
+      </section>
 
-<section id="gaps"><div class="section-head"><span class="index">03</span><h2>半成品已经做到哪里</h2></div><p class="section-intro">“已有”来自仓库与已安装文件；“缺口”是静态代码推导。本次没有切换你的桌面或启动新的 AI 会话。</p><div class="table-wrap"><table><thead><tr><th>部分</th><th>已有能力</th><th>还缺什么</th></tr></thead><tbody>
-<tr><td>项目启动</td><td><code>coding-workspace [目录]</code> 已安装；规范化路径、派生 hash / app ID、加锁、识别已有窗口、打开两个 foot。</td><td>持久文件仅有组号；没有可浏览的项目目录清单，也没有项目级 AI 选择。</td></tr>
-<tr><td>工作区组</td><td><code>ten_workspaces</code> 跨显示器切换、移动、热插拔；Quickshell 已有总览。</td><td>显示器 slot 只在当前 compositor 会话内稳定，不能把 native workspace ID 当永久项目身份。</td></tr>
-<tr><td>终端保活</td><td>项目两侧分别进入 tmux；普通 <code>ten-terminal</code> 仍是裸 shell。resurrect / continuum 已启用。</td><td>自动恢复与显式启动可能竞争；AI 不在默认恢复程序清单中。</td></tr>
-<tr><td>Neovim</td><td>LazyVim 已带 <code>persistence.nvim</code>，锁文件与本机代码均可确认。</td><td>入口启动 <code>nvim .</code>；未发现项目启动自动加载 persistence 的接线。</td></tr>
-<tr><td>AI / 顶栏</td><td><code>default-agent</code> 固定转发 Codex；顶栏展示工作区占用与焦点。</td><td>没有完成事件到顶栏的通道，也没有自动 resume。</td></tr>
-</tbody></table></div>
-<details><summary>优先修正：窗口与工作区之间的五处协调问题</summary><div class="detail-body"><ol><li><strong>左右窗口可能分居两屏：</strong><code>place_new()</code> 将新 tiled 窗口分配到负载较小的显示器。为受管的 <code>ten-coding-*</code> 提供例外，由项目协调器指定同一显示器。</li><li><strong>重复调用还会重排：</strong>末尾无条件向左 swap 与设置 splitratio。两侧都存在时只聚焦；初次成对创建或显式“重排”时再布局。</li><li><strong>空组占位被视为占用：</strong>默认 1–5 等 persistent 组出现在 workspace 列表中，入口按“存在”排除。应结合项目登记与实际窗口判断，而非跳过所有空占位。</li><li><strong>自定义 app ID 影响快捷键：</strong>复制粘贴只识别 <code>window.class == "foot"</code>，项目却使用 <code>ten-coding-*</code>。应一并识别，避免 Super+C 被转发为 Ctrl+C 中断程序。</li><li><strong>异步启动竞态：</strong>启动时先登记目标并显式路由，不依赖当前工作区一直不变。AI 映射超时应报部分失败；锁文件 FD 是否传给长寿命子进程需核实并显式关闭。</li></ol><p class="caption"><a href="/home/ten/codes/nixos/home/commands/default.nix">项目入口 ↗</a> · <a href="/home/ten/codes/nixos/home/desktop/hyprland/workspaces.lua">工作区逻辑 ↗</a> · <a href="/home/ten/codes/nixos/home/desktop/keybinds.nix">快捷键 ↗</a></p></div></details>
-<details><summary>恢复插件为什么没有自然接上</summary><div class="detail-body"><p>resurrect 的 <code>@resurrect-strategy-nvim 'session'</code> 在本机检查项目里的 <code>Session.vim</code>；persistence 则默认保存到 <code>stdpath("state")/sessions/</code>，并按 cwd / 分支区分。两者不共享恢复入口。</p><p>本机 resurrect 默认程序清单有 nvim，没有 codex / claude。恢复的 AI pane 可能只剩 shell；<code>tmux new-session -A</code> 会连接已有 session，不会因附带启动命令就自动重跑 AI。</p><p><strong>tmux 基线路径：</strong>项目专用 tmux server / 配置使用独立 socket，例如 <code>-L ten-coding</code>，先不启用自动 resurrect / continuum；普通 tmux 保持现状。项目冷启动由协调器统一负责。若选用 Herdr，AI 的恢复交给 Herdr，协调器只负责调用与桌面绑定，避免两套恢复逻辑竞争。</p><p class="caption"><a href="/home/ten/codes/nixos/home/cli/multiplexer.nix">现有 tmux 配置 ↗</a> · <a href="https://github.com/tmux-plugins/tmux-resurrect" target="_blank" rel="noopener noreferrer">resurrect 上游 ↗</a></p></div></details>
-</section>
+      <section id="gaps">
+        <div class="section-head">
+          <span class="index">03</span>
+          <h2>半成品已经做到哪里</h2>
+        </div>
+        <p class="section-intro">
+          “已有”来自仓库与已安装文件；“缺口”是静态代码推导。本次没有切换你的桌面或启动新的
+          AI 会话。
+        </p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>部分</th>
+                <th>已有能力</th>
+                <th>还缺什么</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>项目启动</td>
+                <td>
+                  <code>coding-workspace [目录]</code> 已安装；规范化路径、派生
+                  hash / app ID、加锁、识别已有窗口、打开两个 foot。
+                </td>
+                <td>
+                  持久文件仅有组号；没有可浏览的项目目录清单，也没有项目级 AI
+                  选择。
+                </td>
+              </tr>
+              <tr>
+                <td>工作区组</td>
+                <td>
+                  <code>ten_workspaces</code>
+                  跨显示器切换、移动、热插拔；Quickshell 已有总览。
+                </td>
+                <td>
+                  显示器 slot 只在当前 compositor 会话内稳定，不能把 native
+                  workspace ID 当永久项目身份。
+                </td>
+              </tr>
+              <tr>
+                <td>终端保活</td>
+                <td>
+                  项目两侧分别进入 tmux；普通 <code>ten-terminal</code> 仍是裸
+                  shell。resurrect / continuum 已启用。
+                </td>
+                <td>自动恢复与显式启动可能竞争；AI 不在默认恢复程序清单中。</td>
+              </tr>
+              <tr>
+                <td>Neovim</td>
+                <td>
+                  LazyVim 已带
+                  <code>persistence.nvim</code>，锁文件与本机代码均可确认。
+                </td>
+                <td>
+                  入口启动 <code>nvim .</code>；未发现项目启动自动加载
+                  persistence 的接线。
+                </td>
+              </tr>
+              <tr>
+                <td>AI / 顶栏</td>
+                <td>
+                  <code>default-agent</code> 固定转发
+                  Codex；顶栏展示工作区占用与焦点。
+                </td>
+                <td>没有完成事件到顶栏的通道，也没有自动 resume。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <details>
+          <summary>优先修正：窗口与工作区之间的五处协调问题</summary>
+          <div class="detail-body">
+            <ol>
+              <li>
+                <strong>左右窗口可能分居两屏：</strong
+                ><code>place_new()</code> 将新 tiled
+                窗口分配到负载较小的显示器。为受管的
+                <code>ten-coding-*</code> 提供例外，由项目协调器指定同一显示器。
+              </li>
+              <li>
+                <strong>重复调用还会重排：</strong>末尾无条件向左 swap 与设置
+                splitratio。两侧都存在时只聚焦；初次成对创建或显式“重排”时再布局。
+              </li>
+              <li>
+                <strong>空组占位被视为占用：</strong>默认 1–5 等 persistent
+                组出现在 workspace
+                列表中，入口按“存在”排除。应结合项目登记与实际窗口判断，而非跳过所有空占位。
+              </li>
+              <li>
+                <strong>自定义 app ID 影响快捷键：</strong>复制粘贴只识别
+                <code>window.class == "foot"</code>，项目却使用
+                <code>ten-coding-*</code>。应一并识别，避免 Super+C 被转发为
+                Ctrl+C 中断程序。
+              </li>
+              <li>
+                <strong>异步启动竞态：</strong
+                >启动时先登记目标并显式路由，不依赖当前工作区一直不变。AI
+                映射超时应报部分失败；锁文件 FD
+                是否传给长寿命子进程需核实并显式关闭。
+              </li>
+            </ol>
+            <p class="caption">
+              <a href="/home/ten/codes/nixos/home/commands/default.nix"
+                >项目入口 ↗</a
+              >
+              ·
+              <a
+                href="/home/ten/codes/nixos/home/desktop/hyprland/workspaces.lua"
+                >工作区逻辑 ↗</a
+              >
+              ·
+              <a href="/home/ten/codes/nixos/home/desktop/keybinds.nix"
+                >快捷键 ↗</a
+              >
+            </p>
+          </div>
+        </details>
+        <details>
+          <summary>恢复插件为什么没有自然接上</summary>
+          <div class="detail-body">
+            <p>
+              resurrect 的
+              <code>@resurrect-strategy-nvim 'session'</code> 在本机检查项目里的
+              <code>Session.vim</code>；persistence 则默认保存到
+              <code>stdpath("state")/sessions/</code>，并按 cwd /
+              分支区分。两者不共享恢复入口。
+            </p>
+            <p>
+              本机 resurrect 默认程序清单有 nvim，没有 codex / claude。恢复的 AI
+              pane 可能只剩 shell；<code>tmux new-session -A</code> 会连接已有
+              session，不会因附带启动命令就自动重跑 AI。
+            </p>
+            <p>
+              <strong>tmux 基线路径：</strong>项目专用 tmux server /
+              配置使用独立 socket，例如 <code>-L ten-coding</code>，先不启用自动
+              resurrect / continuum；普通 tmux
+              保持现状。项目冷启动由协调器统一负责。若选用 Herdr，AI 的恢复交给
+              Herdr，协调器只负责调用与桌面绑定，避免两套恢复逻辑竞争。
+            </p>
+            <p class="caption">
+              <a href="/home/ten/codes/nixos/home/cli/multiplexer.nix"
+                >现有 tmux 配置 ↗</a
+              >
+              ·
+              <a
+                href="https://github.com/tmux-plugins/tmux-resurrect"
+                target="_blank"
+                rel="noopener noreferrer"
+                >resurrect 上游 ↗</a
+              >
+            </p>
+          </div>
+        </details>
+      </section>
 
-<section id="restore"><div class="section-head"><span class="index">04</span><h2>恢复深度，按收益逐层加</h2></div><div class="table-wrap"><table><thead><tr><th>层级</th><th>恢复什么</th><th>负责者 / 相对难度</th><th>建议</th></tr></thead><tbody>
-<tr><td>A · 重新打开</td><td>工作区、两个 foot、cwd、nvim / AI</td><td>项目协调器 · 低至中</td><td><span class="pill good">第一版验收</span></td></tr>
-<tr><td>B · 本次开机重连</td><td>重新连接仍然存活的程序</td><td>编辑器 tmux；AI tmux / Herdr</td><td>验证后台与 UWSM 生命周期</td></tr>
-<tr><td>C · 内容续接</td><td>编辑文件 / 布局、AI 历史</td><td>persistence + CLI resume / Herdr · 中</td><td><span class="pill later">紧随其后</span></td></tr>
-<tr><td>D · 更多现场</td><td>临时窗口、滚屏、任意布局、未保存文本</td><td>多个保存器与策略 · 高</td><td>单独增量</td></tr></tbody></table></div><p class="caption">难度为结合当前仓库的判断，非工时承诺。这里的重启指冷启动，程序需要重新启动。</p>
-<div class="grid"><div class="card green"><h3>Neovim：先用已有 persistence</h3><p>当前可在正确目录启动后按 <span class="key">&lt;leader&gt;qs</span> 恢复该目录 session。第一版继续正常打开 nvim；后续仅对项目入口启用自动 load。</p><p>先保证 cwd 正确、插件已加载；无存档则正常打开项目。按 cwd / 分支恢复，避免 <code>load({ last = true })</code> 接到其他项目。</p><p class="caption">默认正常退出时保存，需至少一个具名文件 buffer；未保存文本和崩溃另行处理。内嵌 Claude 插件可保留，但不承担两个桌面窗口的管理。</p></div><div class="card blue"><h3>AI：先启动，再续接</h3><p>以下参数已用本机 CLI 帮助核对：</p><pre># 都先进入项目根目录
+      <section id="restore">
+        <div class="section-head">
+          <span class="index">04</span>
+          <h2>恢复深度，按收益逐层加</h2>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>层级</th>
+                <th>恢复什么</th>
+                <th>负责者 / 相对难度</th>
+                <th>建议</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>A · 重新打开</td>
+                <td>工作区、两个 foot、cwd、nvim / AI</td>
+                <td>项目协调器 · 低至中</td>
+                <td><span class="pill good">第一版验收</span></td>
+              </tr>
+              <tr>
+                <td>B · 本次开机重连</td>
+                <td>重新连接仍然存活的程序</td>
+                <td>编辑器 tmux；AI tmux / Herdr</td>
+                <td>验证后台与 UWSM 生命周期</td>
+              </tr>
+              <tr>
+                <td>C · 内容续接</td>
+                <td>编辑文件 / 布局、AI 历史</td>
+                <td>persistence + CLI resume / Herdr · 中</td>
+                <td><span class="pill later">紧随其后</span></td>
+              </tr>
+              <tr>
+                <td>D · 更多现场</td>
+                <td>临时窗口、滚屏、任意布局、未保存文本</td>
+                <td>多个保存器与策略 · 高</td>
+                <td>单独增量</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="caption">
+          难度为结合当前仓库的判断，非工时承诺。这里的重启指冷启动，程序需要重新启动。
+        </p>
+        <div class="grid">
+          <div class="card green">
+            <h3>Neovim：先用已有 persistence</h3>
+            <p>
+              当前可在正确目录启动后按
+              <span class="key">&lt;leader&gt;qs</span> 恢复该目录
+              session。第一版继续正常打开 nvim；后续仅对项目入口启用自动 load。
+            </p>
+            <p>
+              先保证 cwd 正确、插件已加载；无存档则正常打开项目。按 cwd /
+              分支恢复，避免 <code>load({ last = true })</code> 接到其他项目。
+            </p>
+            <p class="caption">
+              默认正常退出时保存，需至少一个具名文件
+              buffer；未保存文本和崩溃另行处理。内嵌 Claude
+              插件可保留，但不承担两个桌面窗口的管理。
+            </p>
+          </div>
+          <div class="card blue">
+            <h3>AI：先启动，再续接</h3>
+            <p>以下参数已用本机 CLI 帮助核对：</p>
+            <pre>
+# 都先进入项目根目录
 codex resume              # 选择会话
 codex resume --last       # 当前目录最近会话
 codex resume SESSION_ID   # 精确恢复
 
 claude --continue        # 当前目录最近会话
-claude --resume SESSION_ID</pre><p class="caption">首次无历史直接启动；精确恢复失败时提供选择 / 新建，不无限重试。应用自己维护记录，项目登记册只引用 ID。</p></div></div>
-<details><summary>tmux 的适用范围与生命周期</summary><div class="detail-body"><p>沿用 tmux 的基线路径适合“一侧一个 session，每个 session 一个主要 pane”。Herdr 路径仅编辑器保留 tmux，AI 使用 <a href="#herdr-fit">direct attach</a>。两扇 foot 不要连接同一 session 后再切 pane，否则视图与焦点会耦合。<a href="https://github.com/tmux/tmux/wiki" target="_blank" rel="noopener noreferrer">tmux 上游 ↗</a></p><p>服务器与进程活着时能重连；重启会结束进程。resurrect 是重建布局与重新启动支持的程序，不是保存进程内存。如果只验收第一版 A 层，直接 foot 启动程序也可行；保留 tmux 是为了复用已有代码并获得 B 层收益。</p><p>项目专用配置保留 TERM / truecolor / focus-events，只简化状态栏与自动恢复。每个进程显式绑定项目身份，不能反复改 tmux 全局环境来代表不同项目。桌面实例变化后刷新 Wayland 等环境，并重新绑定窗口。</p><p>首次 server 由 <code>uwsm app</code> 下的 foot 派生，关闭 scope 时是否一并结束需实测；若会被清理，再交给独立用户服务。第一版不承诺跨注销保活。</p></div></details>
-</section>
+claude --resume SESSION_ID</pre
+            >
+            <p class="caption">
+              首次无历史直接启动；精确恢复失败时提供选择 /
+              新建，不无限重试。应用自己维护记录，项目登记册只引用 ID。
+            </p>
+          </div>
+        </div>
+        <details>
+          <summary>tmux 的适用范围与生命周期</summary>
+          <div class="detail-body">
+            <p>
+              沿用 tmux 的基线路径适合“一侧一个 session，每个 session 一个主要
+              pane”。Herdr 路径仅编辑器保留 tmux，AI 使用
+              <a href="#herdr-fit">direct attach</a>。两扇 foot 不要连接同一
+              session 后再切 pane，否则视图与焦点会耦合。<a
+                href="https://github.com/tmux/tmux/wiki"
+                target="_blank"
+                rel="noopener noreferrer"
+                >tmux 上游 ↗</a
+              >
+            </p>
+            <p>
+              服务器与进程活着时能重连；重启会结束进程。resurrect
+              是重建布局与重新启动支持的程序，不是保存进程内存。如果只验收第一版
+              A 层，直接 foot 启动程序也可行；保留 tmux 是为了复用已有代码并获得
+              B 层收益。
+            </p>
+            <p>
+              项目专用配置保留 TERM / truecolor /
+              focus-events，只简化状态栏与自动恢复。每个进程显式绑定项目身份，不能反复改
+              tmux 全局环境来代表不同项目。桌面实例变化后刷新 Wayland
+              等环境，并重新绑定窗口。
+            </p>
+            <p>
+              首次 server 由 <code>uwsm app</code> 下的 foot 派生，关闭 scope
+              时是否一并结束需实测；若会被清理，再交给独立用户服务。第一版不承诺跨注销保活。
+            </p>
+          </div>
+        </details>
+      </section>
 
-<section id="events"><div class="section-head"><span class="index">05</span><h2>“回复好了”是一条事件</h2></div><p class="section-intro">把 CLI 的明确完成事件转成项目未读状态。持续输出、shell 退出、终端标题和 bell 都不能准确代表“一轮回复结束”。</p><div class="chart"><svg viewBox="0 0 1120 296" role="img" aria-labelledby="event-title event-desc"><title id="event-title">从完成事件到工作区角标</title><desc id="event-desc">CLI 完成事件经过适配器写入未读记录，由 Quickshell 读取并映射到当前工作区组。</desc><defs><marker id="event-arrow" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8Z" fill="#536174"/></marker><marker id="event-arrow-accent" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8Z" fill="#c74725"/></marker><marker id="event-arrow-link" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8Z" fill="#315c9b"/></marker></defs><path d="M256 128 H320" fill="none" stroke="#536174" stroke-width="1.2" marker-end="url(#event-arrow)"/><path d="M512 128 H576" fill="none" stroke="#536174" stroke-width="1.2" marker-end="url(#event-arrow)"/><path d="M768 128 H832" fill="none" stroke="#536174" stroke-width="1.2" marker-end="url(#event-arrow)"/><a href="#events" class="node" tabindex="0"><title>CLI 完成事件</title><rect x="64" y="80" width="192" height="96" rx="8" class="blue"/><text x="88" y="120" class="node-name">CLI 完成事件</text><text x="88" y="148" class="node-sub">notify / Stop</text></a><a href="#events" class="node" tabindex="0"><title>事件适配器</title><rect x="320" y="80" width="192" height="96" rx="8" class="focal"/><text x="344" y="120" class="node-name">事件适配器</text><text x="344" y="148" class="node-sub">project + event</text></a><a href="#read-state" class="node" tabindex="0"><title>未读记录</title><rect x="576" y="80" width="192" height="96" rx="8" class="store"/><text x="600" y="120" class="node-name">未读记录</text><text x="600" y="148" class="node-sub">runtime JSON</text></a><a href="#read-state" class="node" tabindex="0"><title>顶栏工作区标记</title><rect x="832" y="80" width="224" height="96" rx="8" class="green"/><text x="856" y="120" class="node-name">顶栏工作区标记</text><text x="856" y="148" class="node-sub">Quickshell</text></a><line x1="64" y1="224" x2="1056" y2="224" stroke="#d5d9dd"/><text x="64" y="256" class="note-text">蓝：来源　橙：格式归一　灰：状态　绿：展示　箭头：事件传递；无需系统通知</text></svg></div><div class="grid"><div class="card blue"><h3>Codex · 最小事件通道</h3><p>使用 <code>notify</code> 的 <code>agent-turn-complete</code>。脚本从一个 JSON 参数读取 <code>thread-id</code>、<code>turn-id</code>、<code>cwd</code>，登记主回复完成。</p><pre># 配置草案；ten-ai-event 尚未实现
+      <section id="events">
+        <div class="section-head">
+          <span class="index">05</span>
+          <h2>“回复好了”是一条事件</h2>
+        </div>
+        <p class="section-intro">
+          把 CLI 的明确完成事件转成项目未读状态。持续输出、shell
+          退出、终端标题和 bell 都不能准确代表“一轮回复结束”。
+        </p>
+        <div class="chart">
+          <svg
+            viewBox="0 0 1120 296"
+            role="img"
+            aria-labelledby="event-title event-desc"
+          >
+            <title id="event-title">从完成事件到工作区角标</title>
+            <desc id="event-desc">
+              CLI 完成事件经过适配器写入未读记录，由 Quickshell
+              读取并映射到当前工作区组。
+            </desc>
+            <defs>
+              <marker
+                id="event-arrow"
+                markerWidth="8"
+                markerHeight="8"
+                refX="8"
+                refY="4"
+                orient="auto"
+              >
+                <path d="M0 0 L8 4 L0 8Z" fill="#536174" />
+              </marker>
+              <marker
+                id="event-arrow-accent"
+                markerWidth="8"
+                markerHeight="8"
+                refX="8"
+                refY="4"
+                orient="auto"
+              >
+                <path d="M0 0 L8 4 L0 8Z" fill="#c74725" />
+              </marker>
+              <marker
+                id="event-arrow-link"
+                markerWidth="8"
+                markerHeight="8"
+                refX="8"
+                refY="4"
+                orient="auto"
+              >
+                <path d="M0 0 L8 4 L0 8Z" fill="#315c9b" />
+              </marker>
+            </defs>
+            <path
+              d="M256 128 H320"
+              fill="none"
+              stroke="#536174"
+              stroke-width="1.2"
+              marker-end="url(#event-arrow)"
+            />
+            <path
+              d="M512 128 H576"
+              fill="none"
+              stroke="#536174"
+              stroke-width="1.2"
+              marker-end="url(#event-arrow)"
+            />
+            <path
+              d="M768 128 H832"
+              fill="none"
+              stroke="#536174"
+              stroke-width="1.2"
+              marker-end="url(#event-arrow)"
+            />
+            <a href="#events" class="node" tabindex="0">
+              <title>CLI 完成事件</title>
+              <rect x="64" y="80" width="192" height="96" rx="8" class="blue" />
+              <text x="88" y="120" class="node-name">CLI 完成事件</text>
+              <text x="88" y="148" class="node-sub">notify / Stop</text>
+            </a>
+            <a href="#events" class="node" tabindex="0">
+              <title>事件适配器</title>
+              <rect
+                x="320"
+                y="80"
+                width="192"
+                height="96"
+                rx="8"
+                class="focal"
+              />
+              <text x="344" y="120" class="node-name">事件适配器</text>
+              <text x="344" y="148" class="node-sub">project + event</text>
+            </a>
+            <a href="#read-state" class="node" tabindex="0">
+              <title>未读记录</title>
+              <rect
+                x="576"
+                y="80"
+                width="192"
+                height="96"
+                rx="8"
+                class="store"
+              />
+              <text x="600" y="120" class="node-name">未读记录</text>
+              <text x="600" y="148" class="node-sub">runtime JSON</text>
+            </a>
+            <a href="#read-state" class="node" tabindex="0">
+              <title>顶栏工作区标记</title>
+              <rect
+                x="832"
+                y="80"
+                width="224"
+                height="96"
+                rx="8"
+                class="green"
+              />
+              <text x="856" y="120" class="node-name">顶栏工作区标记</text>
+              <text x="856" y="148" class="node-sub">Quickshell</text>
+            </a>
+            <line x1="64" y1="224" x2="1056" y2="224" stroke="#d5d9dd" />
+            <text x="64" y="256" class="note-text">
+              蓝：来源　橙：格式归一　灰：状态　绿：展示　箭头：事件传递；无需系统通知
+            </text>
+          </svg>
+        </div>
+        <div class="grid">
+          <div class="card blue">
+            <h3>Codex · 最小事件通道</h3>
+            <p>
+              使用 <code>notify</code> 的
+              <code>agent-turn-complete</code>。脚本从一个 JSON 参数读取
+              <code>thread-id</code
+              >、<code>turn-id</code>、<code>cwd</code>，登记主回复完成。
+            </p>
+            <pre>
+# 配置草案；ten-ai-event 尚未实现
 # 用户级 ~/.codex/config.toml
-notify = ["ten-ai-event", "codex"]</pre><p class="caption">项目级配置不能覆盖 notify。外部回调不要求弹系统通知；TUI 通知是另一条通道，关闭前要保留权限等待的可见性。</p><p class="caption"><a href="https://learn.chatgpt.com/docs/config-file/config-advanced#notifications" target="_blank" rel="noopener noreferrer">notify 文档 ↗</a> · <a href="https://learn.chatgpt.com/docs/config-file/config-reference" target="_blank" rel="noopener noreferrer">配置作用域 ↗</a></p></div><div class="card violet"><h3>Claude · Stop hook</h3><p>使用主 agent 的 <code>Stop</code>，从 stdin JSON 读取 <code>session_id</code> / <code>cwd</code>。不用 <code>PostToolUse</code> 或 <code>SubagentStop</code> 代替。</p><pre>{ "hooks": { "Stop": [{ "hooks": [{
+notify = ["ten-ai-event", "codex"]</pre
+            >
+            <p class="caption">
+              项目级配置不能覆盖 notify。外部回调不要求弹系统通知；TUI
+              通知是另一条通道，关闭前要保留权限等待的可见性。
+            </p>
+            <p class="caption">
+              <a
+                href="https://learn.chatgpt.com/docs/config-file/config-advanced#notifications"
+                target="_blank"
+                rel="noopener noreferrer"
+                >notify 文档 ↗</a
+              >
+              ·
+              <a
+                href="https://learn.chatgpt.com/docs/config-file/config-reference"
+                target="_blank"
+                rel="noopener noreferrer"
+                >配置作用域 ↗</a
+              >
+            </p>
+          </div>
+          <div class="card violet">
+            <h3>Claude · Stop hook</h3>
+            <p>
+              使用主 agent 的 <code>Stop</code>，从 stdin JSON 读取
+              <code>session_id</code> / <code>cwd</code>。不用
+              <code>PostToolUse</code> 或 <code>SubagentStop</code> 代替。
+            </p>
+            <pre>
+{ "hooks": { "Stop": [{ "hooks": [{
   "type": "command",
   "command": "ten-ai-event claude"
-}]}]}}</pre><p class="caption">草案需合并现有 settings，保留其他 hooks。Stop 不覆盖用户中断；错误另有事件。观察脚本不输出控制指令，不阻塞 AI。</p><p class="caption"><a href="https://code.claude.com/docs/en/hooks#stop" target="_blank" rel="noopener noreferrer">Claude Stop 文档 ↗</a></p></div></div>
-<div id="read-state" class="chart"><svg viewBox="0 0 1152 332" role="img" aria-labelledby="state-title state-desc"><title id="state-title">未读标记何时出现和消失</title><desc id="state-desc">主回复结束时置未读，聚焦对应 AI 窗口后清除，后续回复可以再次产生未读。</desc><defs><marker id="state-arrow" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8Z" fill="#536174"/></marker><marker id="state-arrow-accent" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8Z" fill="#c74725"/></marker><marker id="state-arrow-link" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8Z" fill="#315c9b"/></marker></defs><path d="M320 128 H448" fill="none" stroke="#536174" stroke-width="1.2" marker-end="url(#state-arrow)"/><path d="M704 128 H832" fill="none" stroke="#536174" stroke-width="1.2" marker-end="url(#state-arrow)"/><rect x="336" y="96" width="96" height="16" fill="#faf8f2"/><text x="384" y="108" text-anchor="middle" class="edge-label">主回复结束</text><rect x="720" y="96" width="96" height="16" fill="#faf8f2"/><text x="768" y="108" text-anchor="middle" class="edge-label">聚焦 AI 窗口</text><a href="#read-state" class="node" tabindex="0"><title>○ 无未读</title><rect x="64" y="80" width="256" height="96" rx="8" class="plain"/><text x="88" y="120" class="node-name">○ 无未读</text><text x="88" y="148" class="node-sub">unread = false</text></a><a href="#read-state" class="node" tabindex="0"><title>● 待查看</title><rect x="448" y="80" width="256" height="96" rx="8" class="focal"/><text x="472" y="120" class="node-name">● 待查看</text><text x="472" y="148" class="node-sub">unread = true</text></a><a href="#read-state" class="node" tabindex="0"><title>✓ 已查看</title><rect x="832" y="80" width="256" height="96" rx="8" class="green"/><text x="856" y="120" class="node-name">✓ 已查看</text><text x="856" y="148" class="node-sub">unread = false</text></a><text x="64" y="228" class="note-text">下一轮回复再次进入「待查看」。AI 已获焦点时可直接已读；仅切到左侧 Neovim 不清除。</text><line x1="64" y1="260" x2="1088" y2="260" stroke="#d5d9dd"/><text x="64" y="292" class="note-text">符号与文字共同表达状态；橙色突出待查看。建议规则，尚未接入真实桌面。</text></svg></div>
-<details><summary>完成、已读、等待审批：三种语义分开处理</summary><div class="detail-body"><p><strong>完成只指主回复结束：</strong>不是测试通过、代码提交或全部后台工作结束。已有 Stop hooks 若强制续跑，需验证是否提前亮标记；不能按 <code>stop_hook_active=true</code> 一概丢弃，否则可能漏最终回复。</p><p><strong>已读跟随 AI 窗口：</strong>只到同组 Neovim 不清除。组号仍切换工作区；未读标记可单独点击，聚焦 AI 后清除。AI 已获焦点时可直接视为已读。多屏“可见”不等于“已读”。</p><p><strong>审批等待另行扩展：</strong>用琥珀色“待操作”，不冒充完成。Codex notify 只有完成事件；当前 hooks 支持 PermissionRequest / UserPromptSubmit / Interrupt 等，可后续补齐。第一版可以没有“运行中”状态，不能把上次完成标记当作当前运行状态。</p><p class="caption">当前 Codex 已支持 hooks，不能再以“没有 hooks”为前提。新或变更的非托管 hook 需在 CLI <code>/hooks</code> 中信任；事件行为仍应以安装版本验收。<a href="https://learn.chatgpt.com/docs/hooks" target="_blank" rel="noopener noreferrer">Codex hooks ↗</a></p></div></details>
-<details><summary>事件如何找到正确工作区，而不误标你当前的项目</summary><div class="detail-body"><p>启动时绑定 <code>project_id</code>，附工具类型、AI session ID、启动世代与事件 ID。由项目对应的 AI app ID 找 live window，再查询其当前 workspace，折叠为逻辑 group。不要使用“收到事件时的 active workspace”。</p><p>拖动 AI 窗口后标记跟随新组，同组多个未读聚合。窗口关闭而 tmux / Herdr 后台仍活着时，未读挂在项目上，项目列表继续显示；重新打开后绑定顶栏。</p><p>Codex 用 <code>thread-id + turn-id</code> 去重；Claude 若无稳定 turn ID，先做布尔未读，不显示精确条数。后续在 session / 启动世代内序列化事件，避免重复、迟到事件覆盖新的已读状态。</p><p>一个写入端带锁更新小型 JSON，使用临时文件原子替换；启动时先建空状态文件。Quickshell 用 <code>FileView.watchChanges</code> 与 <code>onFileChanged: reload()</code> 读取，不持续扫描 CLI 对话日志。<a href="https://quickshell.org/docs/v0.2.0/types/Quickshell.Io/FileView/" target="_blank" rel="noopener noreferrer">FileView 文档 ↗</a></p><p>未读放在 <code>$XDG_RUNTIME_DIR/ten-coding/</code>：Quickshell 重启可重读，整机重启清空。只记录事件元信息，不复制提问或 AI 正文；无项目绑定的普通 CLI 默认忽略。</p></div></details>
-</section>
-<div class="callout"><strong>若改用 Herdr：</strong><p>以上是直接接 CLI 完成事件的基线。Herdr 可提供统一状态订阅，但 Codex / Claude 的屏幕状态检测不等于精确的回复完成事件。顶栏仍需 TenOS 自己维护未读与窗口映射；实现时选定状态来源，精确完成提示可继续使用 CLI hooks。<a href="#herdr-desktop">查看接入边界 →</a></p></div>
-<section id="entry"><div class="section-head"><span class="index">06</span><h2>一个入口，两个入口位置</h2></div><p class="section-intro">先补好现有命令，再给 Quickshell 总览增加“项目”列表。运行中的工作区与未打开的项目是两种对象；重启后列表不能依赖当前桌面窗口。</p><div class="grid"><div class="card orange"><h3>目录里打开</h3><pre># 现有命令名；当前实现仍有上述缺口
+}]}]}}</pre
+            >
+            <p class="caption">
+              草案需合并现有 settings，保留其他 hooks。Stop
+              不覆盖用户中断；错误另有事件。观察脚本不输出控制指令，不阻塞 AI。
+            </p>
+            <p class="caption">
+              <a
+                href="https://code.claude.com/docs/en/hooks#stop"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Claude Stop 文档 ↗</a
+              >
+            </p>
+          </div>
+        </div>
+        <div id="read-state" class="chart">
+          <svg
+            viewBox="0 0 1152 332"
+            role="img"
+            aria-labelledby="state-title state-desc"
+          >
+            <title id="state-title">未读标记何时出现和消失</title>
+            <desc id="state-desc">
+              主回复结束时置未读，聚焦对应 AI
+              窗口后清除，后续回复可以再次产生未读。
+            </desc>
+            <defs>
+              <marker
+                id="state-arrow"
+                markerWidth="8"
+                markerHeight="8"
+                refX="8"
+                refY="4"
+                orient="auto"
+              >
+                <path d="M0 0 L8 4 L0 8Z" fill="#536174" />
+              </marker>
+              <marker
+                id="state-arrow-accent"
+                markerWidth="8"
+                markerHeight="8"
+                refX="8"
+                refY="4"
+                orient="auto"
+              >
+                <path d="M0 0 L8 4 L0 8Z" fill="#c74725" />
+              </marker>
+              <marker
+                id="state-arrow-link"
+                markerWidth="8"
+                markerHeight="8"
+                refX="8"
+                refY="4"
+                orient="auto"
+              >
+                <path d="M0 0 L8 4 L0 8Z" fill="#315c9b" />
+              </marker>
+            </defs>
+            <path
+              d="M320 128 H448"
+              fill="none"
+              stroke="#536174"
+              stroke-width="1.2"
+              marker-end="url(#state-arrow)"
+            />
+            <path
+              d="M704 128 H832"
+              fill="none"
+              stroke="#536174"
+              stroke-width="1.2"
+              marker-end="url(#state-arrow)"
+            />
+            <rect x="336" y="96" width="96" height="16" fill="#faf8f2" />
+            <text x="384" y="108" text-anchor="middle" class="edge-label">
+              主回复结束
+            </text>
+            <rect x="720" y="96" width="96" height="16" fill="#faf8f2" />
+            <text x="768" y="108" text-anchor="middle" class="edge-label">
+              聚焦 AI 窗口
+            </text>
+            <a href="#read-state" class="node" tabindex="0">
+              <title>○ 无未读</title>
+              <rect
+                x="64"
+                y="80"
+                width="256"
+                height="96"
+                rx="8"
+                class="plain"
+              />
+              <text x="88" y="120" class="node-name">○ 无未读</text>
+              <text x="88" y="148" class="node-sub">unread = false</text>
+            </a>
+            <a href="#read-state" class="node" tabindex="0">
+              <title>● 待查看</title>
+              <rect
+                x="448"
+                y="80"
+                width="256"
+                height="96"
+                rx="8"
+                class="focal"
+              />
+              <text x="472" y="120" class="node-name">● 待查看</text>
+              <text x="472" y="148" class="node-sub">unread = true</text>
+            </a>
+            <a href="#read-state" class="node" tabindex="0">
+              <title>✓ 已查看</title>
+              <rect
+                x="832"
+                y="80"
+                width="256"
+                height="96"
+                rx="8"
+                class="green"
+              />
+              <text x="856" y="120" class="node-name">✓ 已查看</text>
+              <text x="856" y="148" class="node-sub">unread = false</text>
+            </a>
+            <text x="64" y="228" class="note-text">
+              下一轮回复再次进入「待查看」。AI 已获焦点时可直接已读；仅切到左侧
+              Neovim 不清除。
+            </text>
+            <line x1="64" y1="260" x2="1088" y2="260" stroke="#d5d9dd" />
+            <text x="64" y="292" class="note-text">
+              符号与文字共同表达状态；橙色突出待查看。建议规则，尚未接入真实桌面。
+            </text>
+          </svg>
+        </div>
+        <details>
+          <summary>完成、已读、等待审批：三种语义分开处理</summary>
+          <div class="detail-body">
+            <p>
+              <strong>完成只指主回复结束：</strong
+              >不是测试通过、代码提交或全部后台工作结束。已有 Stop hooks
+              若强制续跑，需验证是否提前亮标记；不能按
+              <code>stop_hook_active=true</code> 一概丢弃，否则可能漏最终回复。
+            </p>
+            <p>
+              <strong>已读跟随 AI 窗口：</strong>只到同组 Neovim
+              不清除。组号仍切换工作区；未读标记可单独点击，聚焦 AI 后清除。AI
+              已获焦点时可直接视为已读。多屏“可见”不等于“已读”。
+            </p>
+            <p>
+              <strong>审批等待另行扩展：</strong
+              >用琥珀色“待操作”，不冒充完成。Codex notify 只有完成事件；当前
+              hooks 支持 PermissionRequest / UserPromptSubmit / Interrupt
+              等，可后续补齐。第一版可以没有“运行中”状态，不能把上次完成标记当作当前运行状态。
+            </p>
+            <p class="caption">
+              当前 Codex 已支持 hooks，不能再以“没有
+              hooks”为前提。新或变更的非托管 hook 需在 CLI
+              <code>/hooks</code> 中信任；事件行为仍应以安装版本验收。<a
+                href="https://learn.chatgpt.com/docs/hooks"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Codex hooks ↗</a
+              >
+            </p>
+          </div>
+        </details>
+        <details>
+          <summary>事件如何找到正确工作区，而不误标你当前的项目</summary>
+          <div class="detail-body">
+            <p>
+              启动时绑定 <code>project_id</code>，附工具类型、AI session
+              ID、启动世代与事件 ID。由项目对应的 AI app ID 找 live
+              window，再查询其当前 workspace，折叠为逻辑
+              group。不要使用“收到事件时的 active workspace”。
+            </p>
+            <p>
+              拖动 AI 窗口后标记跟随新组，同组多个未读聚合。窗口关闭而 tmux /
+              Herdr
+              后台仍活着时，未读挂在项目上，项目列表继续显示；重新打开后绑定顶栏。
+            </p>
+            <p>
+              Codex 用 <code>thread-id + turn-id</code> 去重；Claude 若无稳定
+              turn ID，先做布尔未读，不显示精确条数。后续在 session /
+              启动世代内序列化事件，避免重复、迟到事件覆盖新的已读状态。
+            </p>
+            <p>
+              一个写入端带锁更新小型
+              JSON，使用临时文件原子替换；启动时先建空状态文件。Quickshell 用
+              <code>FileView.watchChanges</code> 与
+              <code>onFileChanged: reload()</code> 读取，不持续扫描 CLI
+              对话日志。<a
+                href="https://quickshell.org/docs/v0.2.0/types/Quickshell.Io/FileView/"
+                target="_blank"
+                rel="noopener noreferrer"
+                >FileView 文档 ↗</a
+              >
+            </p>
+            <p>
+              未读放在 <code>$XDG_RUNTIME_DIR/ten-coding/</code>：Quickshell
+              重启可重读，整机重启清空。只记录事件元信息，不复制提问或 AI
+              正文；无项目绑定的普通 CLI 默认忽略。
+            </p>
+          </div>
+        </details>
+      </section>
+      <div class="callout">
+        <strong>若改用 Herdr：</strong>
+        <p>
+          以上是直接接 CLI 完成事件的基线。Herdr 可提供统一状态订阅，但 Codex /
+          Claude 的屏幕状态检测不等于精确的回复完成事件。顶栏仍需 TenOS
+          自己维护未读与窗口映射；实现时选定状态来源，精确完成提示可继续使用 CLI
+          hooks。<a href="#herdr-desktop">查看接入边界 →</a>
+        </p>
+      </div>
+      <section id="entry">
+        <div class="section-head">
+          <span class="index">06</span>
+          <h2>一个入口，两个入口位置</h2>
+        </div>
+        <p class="section-intro">
+          先补好现有命令，再给 Quickshell
+          总览增加“项目”列表。运行中的工作区与未打开的项目是两种对象；重启后列表不能依赖当前桌面窗口。
+        </p>
+        <div class="grid">
+          <div class="card orange">
+            <h3>目录里打开</h3>
+            <pre>
+# 现有命令名；当前实现仍有上述缺口
 coding-workspace ~/codes/nixos
 
 # 建议扩展，尚不可用
 coding-workspace open --agent claude .
-coding-workspace list --json</pre><p>保留 <code>coding-workspace [目录]</code> 兼容入口。默认按目录对应项目打开；AI 选择写入记录，后续沿用。</p></div><div class="card blue"><h3>桌面里打开</h3><p><strong>项目列表：</strong>名称、路径、AI 类型、运行 / 未打开 / 待查看状态。点击未打开项目调用同一命令，运行项目则聚焦。</p><p><strong>现有总览：</strong>继续管理运行中的窗口；新增项目入口不要求先有空工作区。从用户明确打开过的项目登记，不扫描整个磁盘。</p><p class="caption">沿用 <a href="/home/ten/codes/nixos/home/desktop/quickshell/overview/WorkspaceOverview.qml">WorkspaceOverview ↗</a> 的视觉和 IPC 模式，补项目列表与空状态。</p></div></div>
-<div id="identity" class="action-strip"><h3>项目身份稳定，工作区位置可变</h3><p>沿用规范化路径 hash，同时保存绝对目录以检测冲突。不同 worktree 默认算不同项目；普通分支切换不新建桌面项目。目录改名暂视为新项目，迁移功能后补。</p></div><div class="table-wrap"><table><thead><tr><th>保存内容</th><th>建议位置 / 字段</th><th>生命周期</th></tr></thead><tbody><tr><td>项目配方</td><td><code>$XDG_STATE_HOME/ten-coding-workspaces/projects.json</code><br>schema、id、root、label、agent、ai_backend、Herdr namespace / 引用（可选）、preferred_group、monitor_policy、layout</td><td>跨重启；工作区和显示器是偏好，按实际占用重新分配</td></tr><tr><td>运行绑定 / 未读</td><td><code>$XDG_RUNTIME_DIR/ten-coding/</code><br>项目 ↔ 窗口地址 / group / 启动世代 / 未读</td><td>重启后重建；PID / window address 不能当永久身份</td></tr><tr><td>应用内容</td><td>Neovim state + Codex / Claude 自己的记录<br>未来项目配方只引用 AI session ID</td><td>各应用拥有；不进 Nix store，不由 Nix 覆写历史</td></tr></tbody></table></div>
-<details><summary>打开项目的确定性规则</summary><div class="detail-body"><ol><li>规范化目录并检查存在；读取或新建项目配方，按项目加锁。</li><li>两侧窗口都在就聚焦；只缺一侧就补；都没有才分配组。不同项目分配组还需短暂的全局分配锁。</li><li>默认当前显示器，同屏左右；偏好屏缺失则回退当前屏。组号冲突时改选空闲组。</li><li>按角色选择 tmux 或 Herdr：后台 session 活着就重接，缺失就用正确 cwd 启动应用。存在但应用退出时，显示明确重启操作，不能盲目向仍有任务的 pane 发命令。</li><li>确认窗口映射与初始左右布局；已有临时窗口不改。部分失败保留成功一侧，再次执行可补齐。</li><li>成功后更新项目登记与运行绑定，释放锁。失效目录保留条目并说明原因，不反复启动。</li></ol><p>临时窗口第一版不登记、不恢复，同次开机已经存在的仍保留。以后可显式提升为“第三个受管角色”，比自动推断任意程序更可控。</p></div></details>
-</section>
+coding-workspace list --json</pre
+            >
+            <p>
+              保留
+              <code>coding-workspace [目录]</code>
+              兼容入口。默认按目录对应项目打开；AI 选择写入记录，后续沿用。
+            </p>
+          </div>
+          <div class="card blue">
+            <h3>桌面里打开</h3>
+            <p>
+              <strong>项目列表：</strong>名称、路径、AI 类型、运行 / 未打开 /
+              待查看状态。点击未打开项目调用同一命令，运行项目则聚焦。
+            </p>
+            <p>
+              <strong>现有总览：</strong
+              >继续管理运行中的窗口；新增项目入口不要求先有空工作区。从用户明确打开过的项目登记，不扫描整个磁盘。
+            </p>
+            <p class="caption">
+              沿用
+              <a
+                href="/home/ten/codes/nixos/home/desktop/quickshell/overview/WorkspaceOverview.qml"
+                >WorkspaceOverview ↗</a
+              >
+              的视觉和 IPC 模式，补项目列表与空状态。
+            </p>
+          </div>
+        </div>
+        <div id="identity" class="action-strip">
+          <h3>项目身份稳定，工作区位置可变</h3>
+          <p>
+            沿用规范化路径 hash，同时保存绝对目录以检测冲突。不同 worktree
+            默认算不同项目；普通分支切换不新建桌面项目。目录改名暂视为新项目，迁移功能后补。
+          </p>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>保存内容</th>
+                <th>建议位置 / 字段</th>
+                <th>生命周期</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>项目配方</td>
+                <td>
+                  <code
+                    >$XDG_STATE_HOME/ten-coding-workspaces/projects.json</code
+                  ><br />schema、id、root、label、agent、ai_backend、Herdr
+                  namespace /
+                  引用（可选）、preferred_group、monitor_policy、layout
+                </td>
+                <td>跨重启；工作区和显示器是偏好，按实际占用重新分配</td>
+              </tr>
+              <tr>
+                <td>运行绑定 / 未读</td>
+                <td>
+                  <code>$XDG_RUNTIME_DIR/ten-coding/</code><br />项目 ↔ 窗口地址
+                  / group / 启动世代 / 未读
+                </td>
+                <td>重启后重建；PID / window address 不能当永久身份</td>
+              </tr>
+              <tr>
+                <td>应用内容</td>
+                <td>
+                  Neovim state + Codex / Claude 自己的记录<br />未来项目配方只引用
+                  AI session ID
+                </td>
+                <td>各应用拥有；不进 Nix store，不由 Nix 覆写历史</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <details>
+          <summary>打开项目的确定性规则</summary>
+          <div class="detail-body">
+            <ol>
+              <li>规范化目录并检查存在；读取或新建项目配方，按项目加锁。</li>
+              <li>
+                两侧窗口都在就聚焦；只缺一侧就补；都没有才分配组。不同项目分配组还需短暂的全局分配锁。
+              </li>
+              <li>
+                默认当前显示器，同屏左右；偏好屏缺失则回退当前屏。组号冲突时改选空闲组。
+              </li>
+              <li>
+                按角色选择 tmux 或 Herdr：后台 session 活着就重接，缺失就用正确
+                cwd
+                启动应用。存在但应用退出时，显示明确重启操作，不能盲目向仍有任务的
+                pane 发命令。
+              </li>
+              <li>
+                确认窗口映射与初始左右布局；已有临时窗口不改。部分失败保留成功一侧，再次执行可补齐。
+              </li>
+              <li>
+                成功后更新项目登记与运行绑定，释放锁。失效目录保留条目并说明原因，不反复启动。
+              </li>
+            </ol>
+            <p>
+              临时窗口第一版不登记、不恢复，同次开机已经存在的仍保留。以后可显式提升为“第三个受管角色”，比自动推断任意程序更可控。
+            </p>
+          </div>
+        </details>
+      </section>
 
-
-<section id="herdr"><div class="section-head"><span class="index">07</span><h2>Herdr：可借用的 AI 后台</h2></div>
-<p class="section-intro">调查对象为 <a href="https://github.com/herdrdev/herdr" target="_blank" rel="noopener noreferrer">herdrdev/herdr ↗</a>；本次查看的源码标注 0.9.0。它把真实 AI 终端、状态检测与控制接口放进一个后台服务。下面区分已文档化能力、TenOS 接入设计和仍需实测的部分。</p>
-<div class="action-strip"><h3>更新后的选择：先验证 Herdr direct attach</h3><p>只做项目恢复与完成角标，现有 tmux 仍可承担。若还要 Claude ↔ Codex 协作、统一状态与远程管理，优先验证 <strong>Herdr 管 AI，Hyprland 管窗口</strong>。多 agent 协作属于扩展能力，不扩大第一版“每项目通常一个 AI”的最低要求。</p></div>
-<div id="herdr-protocol"><h3>“agent 对话”到底做了什么</h3><p>主 agent 调用 Herdr，给另一个 agent 输入提示词、等待并读取输出。双方各有自己的上下文；分工、任务关联和是否继续追问，需要指令或脚本约定。<a href="https://herdr.dev/docs/agent-automation/" target="_blank" rel="noopener noreferrer">自动化接口 ↗</a></p>
-<div class="chart"><svg viewBox="0 0 1152 648" role="img" aria-labelledby="herdr-talk-title herdr-talk-desc"><title id="herdr-talk-title">agent 之间如何传话</title><desc id="herdr-talk-desc">主 agent 经 Herdr 提交提示词到另一 agent 的终端，等待状态后读取结果；双方保留独立上下文。</desc><defs><marker id="herdr-talk-arrow" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8Z" fill="#536174"/></marker><marker id="herdr-talk-arrow-accent" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8Z" fill="#c74725"/></marker><marker id="herdr-talk-arrow-link" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8Z" fill="#315c9b"/></marker></defs><line x1="184" y1="160" x2="184" y2="544" stroke="#b7bec5" stroke-dasharray="4,4"/><line x1="568" y1="160" x2="568" y2="544" stroke="#b7bec5" stroke-dasharray="4,4"/><line x1="952" y1="160" x2="952" y2="544" stroke="#b7bec5" stroke-dasharray="4,4"/><path d="M184 232 H568" fill="none" stroke="#536174" stroke-width="1.2"  marker-end="url(#herdr-talk-arrow)"/><path d="M568 296 H952" fill="none" stroke="#536174" stroke-width="1.2"  marker-end="url(#herdr-talk-arrow)"/><path d="M952 360 H568" fill="none" stroke="#536174" stroke-width="1.2" stroke-dasharray="4,4" marker-end="url(#herdr-talk-arrow)"/><path d="M184 424 H568" fill="none" stroke="#536174" stroke-width="1.2"  marker-end="url(#herdr-talk-arrow)"/><path d="M568 488 H184" fill="none" stroke="#536174" stroke-width="1.2" stroke-dasharray="4,4" marker-end="url(#herdr-talk-arrow)"/><rect x="272" y="208" width="208" height="16" fill="#faf8f2"/><text x="376" y="220" text-anchor="middle" class="edge-label">① prompt：请审查任务 T42</text><rect x="664" y="272" width="192" height="16" fill="#faf8f2"/><text x="760" y="284" text-anchor="middle" class="edge-label">② 粘贴提示词并提交</text><rect x="664" y="336" width="192" height="16" fill="#faf8f2"/><text x="760" y="348" text-anchor="middle" class="edge-label">③ 输出 / 状态满足等待</text><rect x="272" y="400" width="208" height="16" fill="#faf8f2"/><text x="376" y="412" text-anchor="middle" class="edge-label">④ read：读取回复或结果路径</text><rect x="272" y="464" width="208" height="16" fill="#faf8f2"/><text x="376" y="476" text-anchor="middle" class="edge-label">⑤ 返回终端文本，继续判断</text><a href="#herdr-protocol" class="node" tabindex="0"><title>拥有自己的上下文，决定如何分工与是否追问。</title><rect x="64" y="64" width="240" height="96" rx="8" class="blue"/><text x="88" y="104" class="node-name">主 agent · Claude</text><text x="88" y="132" class="node-sub">caller</text></a><a href="#herdr-protocol" class="node" tabindex="0"><title>传递终端输入，等待状态并读取输出，不制定协作目标。</title><rect x="448" y="64" width="240" height="96" rx="8" class="focal"/><text x="472" y="104" class="node-name">Herdr server</text><text x="472" y="132" class="node-sub">CLI / Unix socket</text></a><a href="#herdr-protocol" class="node" tabindex="0"><title>独立上下文；终端输入由 Herdr 传入。</title><rect x="832" y="64" width="240" height="96" rx="8" class="green"/><text x="856" y="104" class="node-name">审查 agent · Codex</text><text x="856" y="132" class="node-sub">reviewer</text></a><line x1="64" y1="576" x2="1072" y2="576" stroke="#d5d9dd"/><text x="64" y="608" class="note-text">实线：调用　虚线：返回 / 生命周期　时间向下；T42 是建议的任务约定，Herdr 不自动追踪该任务。</text></svg></div></div>
-<details><summary>示例与边界：能传话，不代表已完成可靠编排</summary><div class="detail-body"><pre># 示例：假设 reviewer 已启动并可接收任务
+      <section id="herdr">
+        <div class="section-head">
+          <span class="index">07</span>
+          <h2>Herdr：可借用的 AI 后台</h2>
+        </div>
+        <p class="section-intro">
+          调查对象为
+          <a
+            href="https://github.com/herdrdev/herdr"
+            target="_blank"
+            rel="noopener noreferrer"
+            >herdrdev/herdr ↗</a
+          >；本次查看的源码标注 0.9.0。它把真实 AI
+          终端、状态检测与控制接口放进一个后台服务。下面区分已文档化能力、TenOS
+          接入设计和仍需实测的部分。
+        </p>
+        <div class="action-strip">
+          <h3>更新后的选择：先验证 Herdr direct attach</h3>
+          <p>
+            只做项目恢复与完成角标，现有 tmux 仍可承担。若还要 Claude ↔ Codex
+            协作、统一状态与远程管理，优先验证
+            <strong>Herdr 管 AI，Hyprland 管窗口</strong>。多 agent
+            协作属于扩展能力，不扩大第一版“每项目通常一个 AI”的最低要求。
+          </p>
+        </div>
+        <div id="herdr-protocol">
+          <h3>“agent 对话”到底做了什么</h3>
+          <p>
+            主 agent 调用 Herdr，给另一个 agent
+            输入提示词、等待并读取输出。双方各有自己的上下文；分工、任务关联和是否继续追问，需要指令或脚本约定。<a
+              href="https://herdr.dev/docs/agent-automation/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >自动化接口 ↗</a
+            >
+          </p>
+          <div class="chart">
+            <svg
+              viewBox="0 0 1152 648"
+              role="img"
+              aria-labelledby="herdr-talk-title herdr-talk-desc"
+            >
+              <title id="herdr-talk-title">agent 之间如何传话</title>
+              <desc id="herdr-talk-desc">
+                主 agent 经 Herdr 提交提示词到另一 agent
+                的终端，等待状态后读取结果；双方保留独立上下文。
+              </desc>
+              <defs>
+                <marker
+                  id="herdr-talk-arrow"
+                  markerWidth="8"
+                  markerHeight="8"
+                  refX="8"
+                  refY="4"
+                  orient="auto"
+                >
+                  <path d="M0 0 L8 4 L0 8Z" fill="#536174" />
+                </marker>
+                <marker
+                  id="herdr-talk-arrow-accent"
+                  markerWidth="8"
+                  markerHeight="8"
+                  refX="8"
+                  refY="4"
+                  orient="auto"
+                >
+                  <path d="M0 0 L8 4 L0 8Z" fill="#c74725" />
+                </marker>
+                <marker
+                  id="herdr-talk-arrow-link"
+                  markerWidth="8"
+                  markerHeight="8"
+                  refX="8"
+                  refY="4"
+                  orient="auto"
+                >
+                  <path d="M0 0 L8 4 L0 8Z" fill="#315c9b" />
+                </marker>
+              </defs>
+              <line
+                x1="184"
+                y1="160"
+                x2="184"
+                y2="544"
+                stroke="#b7bec5"
+                stroke-dasharray="4,4"
+              />
+              <line
+                x1="568"
+                y1="160"
+                x2="568"
+                y2="544"
+                stroke="#b7bec5"
+                stroke-dasharray="4,4"
+              />
+              <line
+                x1="952"
+                y1="160"
+                x2="952"
+                y2="544"
+                stroke="#b7bec5"
+                stroke-dasharray="4,4"
+              />
+              <path
+                d="M184 232 H568"
+                fill="none"
+                stroke="#536174"
+                stroke-width="1.2"
+                marker-end="url(#herdr-talk-arrow)"
+              />
+              <path
+                d="M568 296 H952"
+                fill="none"
+                stroke="#536174"
+                stroke-width="1.2"
+                marker-end="url(#herdr-talk-arrow)"
+              />
+              <path
+                d="M952 360 H568"
+                fill="none"
+                stroke="#536174"
+                stroke-width="1.2"
+                stroke-dasharray="4,4"
+                marker-end="url(#herdr-talk-arrow)"
+              />
+              <path
+                d="M184 424 H568"
+                fill="none"
+                stroke="#536174"
+                stroke-width="1.2"
+                marker-end="url(#herdr-talk-arrow)"
+              />
+              <path
+                d="M568 488 H184"
+                fill="none"
+                stroke="#536174"
+                stroke-width="1.2"
+                stroke-dasharray="4,4"
+                marker-end="url(#herdr-talk-arrow)"
+              />
+              <rect x="272" y="208" width="208" height="16" fill="#faf8f2" />
+              <text x="376" y="220" text-anchor="middle" class="edge-label">
+                ① prompt：请审查任务 T42
+              </text>
+              <rect x="664" y="272" width="192" height="16" fill="#faf8f2" />
+              <text x="760" y="284" text-anchor="middle" class="edge-label">
+                ② 粘贴提示词并提交
+              </text>
+              <rect x="664" y="336" width="192" height="16" fill="#faf8f2" />
+              <text x="760" y="348" text-anchor="middle" class="edge-label">
+                ③ 输出 / 状态满足等待
+              </text>
+              <rect x="272" y="400" width="208" height="16" fill="#faf8f2" />
+              <text x="376" y="412" text-anchor="middle" class="edge-label">
+                ④ read：读取回复或结果路径
+              </text>
+              <rect x="272" y="464" width="208" height="16" fill="#faf8f2" />
+              <text x="376" y="476" text-anchor="middle" class="edge-label">
+                ⑤ 返回终端文本，继续判断
+              </text>
+              <a href="#herdr-protocol" class="node" tabindex="0">
+                <title>拥有自己的上下文，决定如何分工与是否追问。</title>
+                <rect
+                  x="64"
+                  y="64"
+                  width="240"
+                  height="96"
+                  rx="8"
+                  class="blue"
+                />
+                <text x="88" y="104" class="node-name">主 agent · Claude</text>
+                <text x="88" y="132" class="node-sub">caller</text>
+              </a>
+              <a href="#herdr-protocol" class="node" tabindex="0">
+                <title>
+                  传递终端输入，等待状态并读取输出，不制定协作目标。
+                </title>
+                <rect
+                  x="448"
+                  y="64"
+                  width="240"
+                  height="96"
+                  rx="8"
+                  class="focal"
+                />
+                <text x="472" y="104" class="node-name">Herdr server</text>
+                <text x="472" y="132" class="node-sub">CLI / Unix socket</text>
+              </a>
+              <a href="#herdr-protocol" class="node" tabindex="0">
+                <title>独立上下文；终端输入由 Herdr 传入。</title>
+                <rect
+                  x="832"
+                  y="64"
+                  width="240"
+                  height="96"
+                  rx="8"
+                  class="green"
+                />
+                <text x="856" y="104" class="node-name">
+                  审查 agent · Codex
+                </text>
+                <text x="856" y="132" class="node-sub">reviewer</text>
+              </a>
+              <line x1="64" y1="576" x2="1072" y2="576" stroke="#d5d9dd" />
+              <text x="64" y="608" class="note-text">
+                实线：调用　虚线：返回 / 生命周期　时间向下；T42
+                是建议的任务约定，Herdr 不自动追踪该任务。
+              </text>
+            </svg>
+          </div>
+        </div>
+        <details>
+          <summary>示例与边界：能传话，不代表已完成可靠编排</summary>
+          <div class="detail-body">
+            <pre>
+# 示例：假设 reviewer 已启动并可接收任务
 herdr agent prompt reviewer \
   "审查任务 T42 的 diff；结果写入约定文件" \
   --wait --timeout 120000
 
-herdr agent read reviewer --source recent-unwrapped --lines 120</pre><p><code>agent prompt</code> 处理 bracketed paste 与 Enter；对已 blocked 的 agent 返回错误，不把普通提示词塞进审批对话。需先读取界面，再决定如何响应。</p><p><strong>等待不绑定精确 turn：</strong>对方若原本在工作，当前那轮结束可能满足等待。超时也不证明没收到输入；重试前先核对，避免重复派单。长回复可写 Markdown 文件，再回报文件路径，避免只读到终端最后几行。</p><p>建议一项目保留主 agent，审查者按需启动。一次任务带 task ID、输入文件、结果文件与成功条件；审查者默认只读，修改型并行工作用独立 worktree，最终整合由一个角色负责。限制讨论轮数；Herdr 不自动解决共享文件冲突或无限讨论。</p><p class="caption"><a href="https://herdr.dev/docs/agent-automation/#choose-the-control-surface" target="_blank" rel="noopener noreferrer">prompt / wait / read 语义 ↗</a></p></div></details>
-<div id="herdr-features" class="table-wrap"><table><thead><tr><th>功能</th><th>如何实现</th><th>对你的价值与限制</th></tr></thead><tbody>
-<tr><td>终端保活</td><td>后台 server 持有 PTY 与进程，客户端可 detach / attach。</td><td>关闭显示窗口后仍可重连；需要验证 NixOS 用户服务的生命周期。</td></tr>
-<tr><td>状态与未读汇总</td><td>识别前台进程，使用画面规则或完整生命周期集成。</td><td>找等待审批 / 工作中 / 完成未读的 agent；当前 Claude、Codex 仍以画面检测为状态依据。</td></tr>
-<tr><td>冷启动恢复</td><td>保存目录与布局；官方集成报告 session ID，再执行原生 resume。</td><td>可接回支持的 AI；原进程已结束，普通程序可能只恢复为新 shell。Neovim 仍需独立恢复。</td></tr>
-<tr><td>单 agent 连接</td><td><code>herdr agent attach</code> 或 <code>terminal attach</code>。</td><td>保留独立 foot 的关键能力；一终端只有一个可写 direct attach 客户端掌握输入与尺寸。</td></tr>
-<tr><td>SSH / 多机器</td><td>远程 server 执行，本地客户端显示；可管理多个远程目标。</td><td>以后可接服务器上的 agent；网络断开与进程结束分开处理。</td></tr>
-<tr><td>插件与布局自动化</td><td>命令、事件钩子、布局与 worktree API；插件清单声明入口。</td><td>可复用项目模板、审查流程、辅助面板；插件是本机可执行代码，不是独立隔离环境。</td></tr>
-</tbody></table></div>
-<p class="caption"><a href="https://herdr.dev/docs/agents/" target="_blank" rel="noopener noreferrer">状态检测 ↗</a> · <a href="https://herdr.dev/docs/session-state/" target="_blank" rel="noopener noreferrer">持久化边界 ↗</a> · <a href="https://herdr.dev/docs/persistence-remote/" target="_blank" rel="noopener noreferrer">直接连接与 SSH ↗</a> · <a href="https://herdr.dev/docs/plugins/" target="_blank" rel="noopener noreferrer">插件 ↗</a></p>
-<details><summary>实现拆解：终端运行时、控制协议、状态与存档</summary><div class="detail-body"><div class="grid"><div class="card blue"><h3>运行时与通信</h3><p>Rust server 持有真实终端；源码依赖 <code>portable-pty</code>，TUI 使用 <code>ratatui</code> / <code>crossterm</code>。客户端是显示与输入入口。</p><p>Linux 上 Unix socket 传递逐行 JSON，CLI 封装同一控制面。它能启动 agent、写输入、读终端、等待状态，也能持续订阅事件。</p><p class="caption"><a href="https://github.com/herdrdev/herdr/blob/master/Cargo.toml" target="_blank" rel="noopener noreferrer">Cargo.toml ↗</a> · <a href="https://herdr.dev/docs/socket-api/" target="_blank" rel="noopener noreferrer">Socket API ↗</a></p></div><div class="card violet"><h3>检测与原生恢复</h3><p>画面检测读取实时底部 buffer，用 TOML manifests 匹配状态，可通过 <code>herdr agent explain</code> 查看命中证据；新 CLI 界面可能需要新规则。</p><p>当前 Claude / Codex 集成主要上报恢复用的 session 身份，不是完整状态源。支持的会话才会原生 resume；缺失、无效或过期引用回退为目录 shell。</p><p class="caption"><a href="https://herdr.dev/docs/integrations/" target="_blank" rel="noopener noreferrer">各工具集成 ↗</a> · <a href="https://herdr.dev/docs/session-state/" target="_blank" rel="noopener noreferrer">恢复策略 ↗</a></p></div></div><p>普通 server 重启后的快照恢复不会复活进程内存。实验性的 live handoff 尝试在替换运行中 server 时转移 PTY；仍可能中断等待和订阅，不等于跨机器重启存活。Nix 安装通过包管理更新，不使用 Herdr 自更新的 handoff 流程。</p></div></details>
-<div id="herdr-fit"><h3 style="margin-top:32px">与你的桌面怎样结合</h3><p class="section-intro">独立 foot 的边界保持不变；右侧从“tmux 内的 AI”改为“直接连接 Herdr 管理的 AI 终端”。这是一条候选接入路径，当前尚未安装或验证。</p><div class="chart"><svg viewBox="0 0 1152 712" role="img" aria-labelledby="herdr-fit-title herdr-fit-desc"><title id="herdr-fit-title">Herdr 作为 AI 后台接入 TenOS</title><desc id="herdr-fit-desc">左侧 foot 继续使用 tmux 和 Neovim，右侧 foot 直接连接 Herdr 管理的 AI 终端，桥接服务把状态映射到 Quickshell。</desc><defs><marker id="herdr-fit-arrow" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8Z" fill="#536174"/></marker><marker id="herdr-fit-arrow-accent" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8Z" fill="#c74725"/></marker><marker id="herdr-fit-arrow-link" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8Z" fill="#315c9b"/></marker></defs><path d="M592 176 V288" fill="none" stroke="#536174" stroke-width="1.2"  marker-end="url(#herdr-fit-arrow)"/><path d="M736 336 H832" fill="none" stroke="#536174" stroke-width="1.2"  marker-end="url(#herdr-fit-arrow)"/><path d="M448 336 H352" fill="none" stroke="#536174" stroke-width="1.2"  marker-end="url(#herdr-fit-arrow)"/><path d="M208 384 V496" fill="none" stroke="#536174" stroke-width="1.2"  marker-end="url(#herdr-fit-arrow)"/><a href="#restore" class="node" tabindex="0"><title>保留现有编辑器路径与 persistence 增强恢复。</title><rect x="64" y="80" width="288" height="96" rx="8" class="green"/><text x="88" y="120" class="node-name">左侧独立 foot</text><text x="88" y="148" class="node-sub">tmux → Neovim</text></a><a href="#herdr-fit" class="node" tabindex="0"><title>只连接一个 agent 的终端，不显示整个 Herdr 工作区界面。</title><rect x="448" y="80" width="288" height="96" rx="8" class="blue"/><text x="472" y="120" class="node-name">右侧独立 foot</text><text x="472" y="148" class="node-sub">herdr agent attach</text></a><a href="#herdr-features" class="node" tabindex="0"><title>直接持有 AI 终端，负责保活、检测与支持的会话恢复。</title><rect x="448" y="288" width="288" height="96" rx="8" class="focal"/><text x="472" y="328" class="node-name">Herdr 后台</text><text x="472" y="356" class="node-sub">PTY / state / restore</text></a><a href="#herdr-protocol" class="node" tabindex="0"><title>不要在此 pane 内再用 tmux 包住 AI。</title><rect x="832" y="288" width="224" height="96" rx="8" class="plain"/><text x="856" y="328" class="node-name">Codex / Claude</text><text x="856" y="356" class="node-sub">native CLI</text></a><a href="#herdr-desktop" class="node" tabindex="0"><title>订阅状态，关联实际 foot 和当前工作区，单独维护桌面已读。</title><rect x="64" y="288" width="288" height="96" rx="8" class="focal"/><text x="88" y="328" class="node-name">TenOS 桌面桥接</text><text x="88" y="356" class="node-sub">project ↔ terminal</text></a><a href="#herdr-desktop" class="node" tabindex="0"><title>你的工作区角标，需要实现桥接，并非 Herdr 开箱自带。</title><rect x="64" y="496" width="288" height="96" rx="8" class="blue"/><text x="88" y="536" class="node-name">Quickshell 顶栏</text><text x="88" y="564" class="node-sub">group → badge</text></a><text x="832" y="112" class="node-name">Hyprland 保持分屏</text><text x="832" y="148" class="note-text">每个 foot 独立输入法上下文</text><text x="448" y="528" class="node-name">推荐先做兼容性验证</text><text x="448" y="564" class="note-text">输入法 · 焦点 · 状态检测 · 关闭 / 重连</text><line x1="64" y1="640" x2="1072" y2="640" stroke="#d5d9dd"/><text x="64" y="672" class="note-text">蓝 / 绿：桌面窗口与显示　橙：后台与待补桥接　箭头：连接、管理或状态传递；设计待实测</text></svg></div></div>
-<div class="table-wrap"><table><thead><tr><th>路径</th><th>需要补什么</th><th>决策</th></tr></thead><tbody>
-<tr><td>现有 tmux 上补</td><td>项目恢复、hooks 角标；若要协作，再补注册、传话、读取、等待与任务协议。</td><td>适合最小需求；可靠终端控制的维护成本逐步增加。</td></tr>
-<tr><td>Herdr 管 AI 后台</td><td>direct attach 启动适配、身份映射、Quickshell 事件桥接。</td><td><span class="pill good">优先验证</span> 扩展协作 / 远程能力时更有价值。</td></tr>
-<tr><td>全部放进 Herdr UI</td><td>使用其内部工作区、tab 与 pane。</td><td>与桌面分屏及窗口级输入法偏好不完全匹配；本方案不优先选。</td></tr>
-</tbody></table></div>
-<details><summary>桌面桥接仍需自己做：身份、未读、恢复与并发</summary><div class="detail-body"><div id="herdr-desktop"><p><strong>身份：</strong>登记项目、Herdr server 命名空间、terminal / agent、foot app ID 的对应关系，再查 Hyprland 当前组。agent 名是活跃别名，进程退出后可能失效；跨重启不能仅存这个名字当恢复身份。不同 server 的 ID 需带命名空间。</p><p><strong>状态与已读：</strong>订阅 <code>pane.agent_status_changed</code> 等事件，映射到顶栏。Herdr CLI 与每个 TUI 客户端的已读视角可能不同；TenOS 应维护自己的未读，并由实际 AI foot 焦点确认。不能把 Herdr 内部当前 pane 当成桌面当前窗口。</p><p><strong>重新连接：</strong>先建立事件订阅，再读取 <code>session.snapshot</code> 并应用暂存事件；断线后重新取快照，避免漏掉启动期间的变化。Herdr 检测状态与 CLI 完成 hooks 若并存，分别表达“运行状态”和“明确完成事件”，不能同时争写同一个状态字段。</p><p><strong>恢复与保活：</strong><code>coding-workspace</code> 负责找回或创建 AI、打开 direct attach；Neovim 侧保持现有路径。Herdr 的全会话恢复可能重开多个项目，需要确认是否符合“只打开选中项目”，必要时选好命名 session 边界或调整自动恢复策略。</p><p><strong>并发输入：</strong>一个可写 direct attach 不等于自动获得任务级互斥。人在输入时，其他 agent 的 prompt 仍需协调；避免人和 agent 同时编辑同一输入行。</p><p class="caption"><a href="https://herdr.dev/docs/socket-api/#event-subscriptions" target="_blank" rel="noopener noreferrer">事件与快照 ↗</a> · <a href="https://herdr.dev/docs/persistence-remote/#direct-terminal-attach" target="_blank" rel="noopener noreferrer">direct attach 边界 ↗</a></p></div></div></details>
-<details><summary>先验证这些，再决定接入；不扩大第一版范围</summary><div class="detail-body"><ol><li><strong>foot 兼容：</strong>两个窗口中英文独立、焦点、中文预编辑、复制粘贴与尺寸变化；关闭并重连不丢活进程。</li><li><strong>真实 CLI 检测：</strong>针对本机 Codex / Claude，测试回复、审批、取消、中断、空闲与完成；用 explain 诊断误判。</li><li><strong>最小协作：</strong>主 agent 派只读审查，审查者写结果文件，主 agent 核对 task ID 后读取；验证超时不重复派单。</li><li><strong>桌面映射：</strong>多项目、移动窗口、后台完成、关闭 AI foot 后完成、Quickshell 重启，角标不能串项目。</li><li><strong>冷启动：</strong>原生 session 恢复成功／失败及按需项目打开；编辑器通过自己的 session 恢复。</li></ol><p>Herdr pane 内不要再套 tmux 包住 AI，官方检测不会穿透这个 tmux。编辑器侧可以继续使用 tmux。</p><p>Nix flake 已提供 x86_64-linux 与 aarch64-linux 包；接入时固定版本，由 Nix 管二进制。集成会修改 Claude settings / Codex hooks，须与现有合并逻辑协调并核对安装版本，不能照抄配置开关或覆写用户 hooks。</p><p class="caption"><a href="https://github.com/herdrdev/herdr/blob/master/flake.nix" target="_blank" rel="noopener noreferrer">Nix flake ↗</a> · <a href="https://herdr.dev/docs/agents/#detection-manifests" target="_blank" rel="noopener noreferrer">检测限制 ↗</a> · <a href="https://herdr.dev/docs/integrations/" target="_blank" rel="noopener noreferrer">集成修改范围 ↗</a></p></div></details>
-</section>
+herdr agent read reviewer --source recent-unwrapped --lines 120</pre
+            >
+            <p>
+              <code>agent prompt</code> 处理 bracketed paste 与 Enter；对已
+              blocked 的 agent
+              返回错误，不把普通提示词塞进审批对话。需先读取界面，再决定如何响应。
+            </p>
+            <p>
+              <strong>等待不绑定精确 turn：</strong
+              >对方若原本在工作，当前那轮结束可能满足等待。超时也不证明没收到输入；重试前先核对，避免重复派单。长回复可写
+              Markdown 文件，再回报文件路径，避免只读到终端最后几行。
+            </p>
+            <p>
+              建议一项目保留主 agent，审查者按需启动。一次任务带 task
+              ID、输入文件、结果文件与成功条件；审查者默认只读，修改型并行工作用独立
+              worktree，最终整合由一个角色负责。限制讨论轮数；Herdr
+              不自动解决共享文件冲突或无限讨论。
+            </p>
+            <p class="caption">
+              <a
+                href="https://herdr.dev/docs/agent-automation/#choose-the-control-surface"
+                target="_blank"
+                rel="noopener noreferrer"
+                >prompt / wait / read 语义 ↗</a
+              >
+            </p>
+          </div>
+        </details>
+        <div id="herdr-features" class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>功能</th>
+                <th>如何实现</th>
+                <th>对你的价值与限制</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>终端保活</td>
+                <td>后台 server 持有 PTY 与进程，客户端可 detach / attach。</td>
+                <td>
+                  关闭显示窗口后仍可重连；需要验证 NixOS 用户服务的生命周期。
+                </td>
+              </tr>
+              <tr>
+                <td>状态与未读汇总</td>
+                <td>识别前台进程，使用画面规则或完整生命周期集成。</td>
+                <td>
+                  找等待审批 / 工作中 / 完成未读的 agent；当前 Claude、Codex
+                  仍以画面检测为状态依据。
+                </td>
+              </tr>
+              <tr>
+                <td>冷启动恢复</td>
+                <td>
+                  保存目录与布局；官方集成报告 session ID，再执行原生 resume。
+                </td>
+                <td>
+                  可接回支持的 AI；原进程已结束，普通程序可能只恢复为新
+                  shell。Neovim 仍需独立恢复。
+                </td>
+              </tr>
+              <tr>
+                <td>单 agent 连接</td>
+                <td>
+                  <code>herdr agent attach</code> 或
+                  <code>terminal attach</code>。
+                </td>
+                <td>
+                  保留独立 foot 的关键能力；一终端只有一个可写 direct attach
+                  客户端掌握输入与尺寸。
+                </td>
+              </tr>
+              <tr>
+                <td>SSH / 多机器</td>
+                <td>远程 server 执行，本地客户端显示；可管理多个远程目标。</td>
+                <td>以后可接服务器上的 agent；网络断开与进程结束分开处理。</td>
+              </tr>
+              <tr>
+                <td>插件与布局自动化</td>
+                <td>命令、事件钩子、布局与 worktree API；插件清单声明入口。</td>
+                <td>
+                  可复用项目模板、审查流程、辅助面板；插件是本机可执行代码，不是独立隔离环境。
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="caption">
+          <a
+            href="https://herdr.dev/docs/agents/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >状态检测 ↗</a
+          >
+          ·
+          <a
+            href="https://herdr.dev/docs/session-state/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >持久化边界 ↗</a
+          >
+          ·
+          <a
+            href="https://herdr.dev/docs/persistence-remote/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >直接连接与 SSH ↗</a
+          >
+          ·
+          <a
+            href="https://herdr.dev/docs/plugins/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >插件 ↗</a
+          >
+        </p>
+        <details>
+          <summary>实现拆解：终端运行时、控制协议、状态与存档</summary>
+          <div class="detail-body">
+            <div class="grid">
+              <div class="card blue">
+                <h3>运行时与通信</h3>
+                <p>
+                  Rust server 持有真实终端；源码依赖
+                  <code>portable-pty</code>，TUI 使用 <code>ratatui</code> /
+                  <code>crossterm</code>。客户端是显示与输入入口。
+                </p>
+                <p>
+                  Linux 上 Unix socket 传递逐行 JSON，CLI
+                  封装同一控制面。它能启动
+                  agent、写输入、读终端、等待状态，也能持续订阅事件。
+                </p>
+                <p class="caption">
+                  <a
+                    href="https://github.com/herdrdev/herdr/blob/master/Cargo.toml"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Cargo.toml ↗</a
+                  >
+                  ·
+                  <a
+                    href="https://herdr.dev/docs/socket-api/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Socket API ↗</a
+                  >
+                </p>
+              </div>
+              <div class="card violet">
+                <h3>检测与原生恢复</h3>
+                <p>
+                  画面检测读取实时底部 buffer，用 TOML manifests
+                  匹配状态，可通过
+                  <code>herdr agent explain</code> 查看命中证据；新 CLI
+                  界面可能需要新规则。
+                </p>
+                <p>
+                  当前 Claude / Codex 集成主要上报恢复用的 session
+                  身份，不是完整状态源。支持的会话才会原生
+                  resume；缺失、无效或过期引用回退为目录 shell。
+                </p>
+                <p class="caption">
+                  <a
+                    href="https://herdr.dev/docs/integrations/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >各工具集成 ↗</a
+                  >
+                  ·
+                  <a
+                    href="https://herdr.dev/docs/session-state/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >恢复策略 ↗</a
+                  >
+                </p>
+              </div>
+            </div>
+            <p>
+              普通 server 重启后的快照恢复不会复活进程内存。实验性的 live
+              handoff 尝试在替换运行中 server 时转移
+              PTY；仍可能中断等待和订阅，不等于跨机器重启存活。Nix
+              安装通过包管理更新，不使用 Herdr 自更新的 handoff 流程。
+            </p>
+          </div>
+        </details>
+        <div id="herdr-fit">
+          <h3 style="margin-top: 32px">与你的桌面怎样结合</h3>
+          <p class="section-intro">
+            独立 foot 的边界保持不变；右侧从“tmux 内的 AI”改为“直接连接 Herdr
+            管理的 AI 终端”。这是一条候选接入路径，当前尚未安装或验证。
+          </p>
+          <div class="chart">
+            <svg
+              viewBox="0 0 1152 712"
+              role="img"
+              aria-labelledby="herdr-fit-title herdr-fit-desc"
+            >
+              <title id="herdr-fit-title">Herdr 作为 AI 后台接入 TenOS</title>
+              <desc id="herdr-fit-desc">
+                左侧 foot 继续使用 tmux 和 Neovim，右侧 foot 直接连接 Herdr
+                管理的 AI 终端，桥接服务把状态映射到 Quickshell。
+              </desc>
+              <defs>
+                <marker
+                  id="herdr-fit-arrow"
+                  markerWidth="8"
+                  markerHeight="8"
+                  refX="8"
+                  refY="4"
+                  orient="auto"
+                >
+                  <path d="M0 0 L8 4 L0 8Z" fill="#536174" />
+                </marker>
+                <marker
+                  id="herdr-fit-arrow-accent"
+                  markerWidth="8"
+                  markerHeight="8"
+                  refX="8"
+                  refY="4"
+                  orient="auto"
+                >
+                  <path d="M0 0 L8 4 L0 8Z" fill="#c74725" />
+                </marker>
+                <marker
+                  id="herdr-fit-arrow-link"
+                  markerWidth="8"
+                  markerHeight="8"
+                  refX="8"
+                  refY="4"
+                  orient="auto"
+                >
+                  <path d="M0 0 L8 4 L0 8Z" fill="#315c9b" />
+                </marker>
+              </defs>
+              <path
+                d="M592 176 V288"
+                fill="none"
+                stroke="#536174"
+                stroke-width="1.2"
+                marker-end="url(#herdr-fit-arrow)"
+              />
+              <path
+                d="M736 336 H832"
+                fill="none"
+                stroke="#536174"
+                stroke-width="1.2"
+                marker-end="url(#herdr-fit-arrow)"
+              />
+              <path
+                d="M448 336 H352"
+                fill="none"
+                stroke="#536174"
+                stroke-width="1.2"
+                marker-end="url(#herdr-fit-arrow)"
+              />
+              <path
+                d="M208 384 V496"
+                fill="none"
+                stroke="#536174"
+                stroke-width="1.2"
+                marker-end="url(#herdr-fit-arrow)"
+              />
+              <a href="#restore" class="node" tabindex="0">
+                <title>保留现有编辑器路径与 persistence 增强恢复。</title>
+                <rect
+                  x="64"
+                  y="80"
+                  width="288"
+                  height="96"
+                  rx="8"
+                  class="green"
+                />
+                <text x="88" y="120" class="node-name">左侧独立 foot</text>
+                <text x="88" y="148" class="node-sub">tmux → Neovim</text>
+              </a>
+              <a href="#herdr-fit" class="node" tabindex="0">
+                <title>
+                  只连接一个 agent 的终端，不显示整个 Herdr 工作区界面。
+                </title>
+                <rect
+                  x="448"
+                  y="80"
+                  width="288"
+                  height="96"
+                  rx="8"
+                  class="blue"
+                />
+                <text x="472" y="120" class="node-name">右侧独立 foot</text>
+                <text x="472" y="148" class="node-sub">herdr agent attach</text>
+              </a>
+              <a href="#herdr-features" class="node" tabindex="0">
+                <title>
+                  直接持有 AI 终端，负责保活、检测与支持的会话恢复。
+                </title>
+                <rect
+                  x="448"
+                  y="288"
+                  width="288"
+                  height="96"
+                  rx="8"
+                  class="focal"
+                />
+                <text x="472" y="328" class="node-name">Herdr 后台</text>
+                <text x="472" y="356" class="node-sub">
+                  PTY / state / restore
+                </text>
+              </a>
+              <a href="#herdr-protocol" class="node" tabindex="0">
+                <title>不要在此 pane 内再用 tmux 包住 AI。</title>
+                <rect
+                  x="832"
+                  y="288"
+                  width="224"
+                  height="96"
+                  rx="8"
+                  class="plain"
+                />
+                <text x="856" y="328" class="node-name">Codex / Claude</text>
+                <text x="856" y="356" class="node-sub">native CLI</text>
+              </a>
+              <a href="#herdr-desktop" class="node" tabindex="0">
+                <title>
+                  订阅状态，关联实际 foot 和当前工作区，单独维护桌面已读。
+                </title>
+                <rect
+                  x="64"
+                  y="288"
+                  width="288"
+                  height="96"
+                  rx="8"
+                  class="focal"
+                />
+                <text x="88" y="328" class="node-name">TenOS 桌面桥接</text>
+                <text x="88" y="356" class="node-sub">project ↔ terminal</text>
+              </a>
+              <a href="#herdr-desktop" class="node" tabindex="0">
+                <title>
+                  你的工作区角标，需要实现桥接，并非 Herdr 开箱自带。
+                </title>
+                <rect
+                  x="64"
+                  y="496"
+                  width="288"
+                  height="96"
+                  rx="8"
+                  class="blue"
+                />
+                <text x="88" y="536" class="node-name">Quickshell 顶栏</text>
+                <text x="88" y="564" class="node-sub">group → badge</text>
+              </a>
+              <text x="832" y="112" class="node-name">Hyprland 保持分屏</text>
+              <text x="832" y="148" class="note-text">
+                每个 foot 独立输入法上下文
+              </text>
+              <text x="448" y="528" class="node-name">推荐先做兼容性验证</text>
+              <text x="448" y="564" class="note-text">
+                输入法 · 焦点 · 状态检测 · 关闭 / 重连
+              </text>
+              <line x1="64" y1="640" x2="1072" y2="640" stroke="#d5d9dd" />
+              <text x="64" y="672" class="note-text">
+                蓝 /
+                绿：桌面窗口与显示　橙：后台与待补桥接　箭头：连接、管理或状态传递；设计待实测
+              </text>
+            </svg>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>路径</th>
+                <th>需要补什么</th>
+                <th>决策</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>现有 tmux 上补</td>
+                <td>
+                  项目恢复、hooks
+                  角标；若要协作，再补注册、传话、读取、等待与任务协议。
+                </td>
+                <td>适合最小需求；可靠终端控制的维护成本逐步增加。</td>
+              </tr>
+              <tr>
+                <td>Herdr 管 AI 后台</td>
+                <td>direct attach 启动适配、身份映射、Quickshell 事件桥接。</td>
+                <td>
+                  <span class="pill good">优先验证</span> 扩展协作 /
+                  远程能力时更有价值。
+                </td>
+              </tr>
+              <tr>
+                <td>全部放进 Herdr UI</td>
+                <td>使用其内部工作区、tab 与 pane。</td>
+                <td>
+                  与桌面分屏及窗口级输入法偏好不完全匹配；本方案不优先选。
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <details>
+          <summary>桌面桥接仍需自己做：身份、未读、恢复与并发</summary>
+          <div class="detail-body">
+            <div id="herdr-desktop">
+              <p>
+                <strong>身份：</strong>登记项目、Herdr server 命名空间、terminal
+                / agent、foot app ID 的对应关系，再查 Hyprland 当前组。agent
+                名是活跃别名，进程退出后可能失效；跨重启不能仅存这个名字当恢复身份。不同
+                server 的 ID 需带命名空间。
+              </p>
+              <p>
+                <strong>状态与已读：</strong>订阅
+                <code>pane.agent_status_changed</code> 等事件，映射到顶栏。Herdr
+                CLI 与每个 TUI 客户端的已读视角可能不同；TenOS
+                应维护自己的未读，并由实际 AI foot 焦点确认。不能把 Herdr
+                内部当前 pane 当成桌面当前窗口。
+              </p>
+              <p>
+                <strong>重新连接：</strong>先建立事件订阅，再读取
+                <code>session.snapshot</code>
+                并应用暂存事件；断线后重新取快照，避免漏掉启动期间的变化。Herdr
+                检测状态与 CLI 完成 hooks
+                若并存，分别表达“运行状态”和“明确完成事件”，不能同时争写同一个状态字段。
+              </p>
+              <p>
+                <strong>恢复与保活：</strong
+                ><code>coding-workspace</code> 负责找回或创建 AI、打开 direct
+                attach；Neovim 侧保持现有路径。Herdr
+                的全会话恢复可能重开多个项目，需要确认是否符合“只打开选中项目”，必要时选好命名
+                session 边界或调整自动恢复策略。
+              </p>
+              <p>
+                <strong>并发输入：</strong>一个可写 direct attach
+                不等于自动获得任务级互斥。人在输入时，其他 agent 的 prompt
+                仍需协调；避免人和 agent 同时编辑同一输入行。
+              </p>
+              <p class="caption">
+                <a
+                  href="https://herdr.dev/docs/socket-api/#event-subscriptions"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >事件与快照 ↗</a
+                >
+                ·
+                <a
+                  href="https://herdr.dev/docs/persistence-remote/#direct-terminal-attach"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >direct attach 边界 ↗</a
+                >
+              </p>
+            </div>
+          </div>
+        </details>
+        <details>
+          <summary>先验证这些，再决定接入；不扩大第一版范围</summary>
+          <div class="detail-body">
+            <ol>
+              <li>
+                <strong>foot 兼容：</strong
+                >两个窗口中英文独立、焦点、中文预编辑、复制粘贴与尺寸变化；关闭并重连不丢活进程。
+              </li>
+              <li>
+                <strong>真实 CLI 检测：</strong>针对本机 Codex /
+                Claude，测试回复、审批、取消、中断、空闲与完成；用 explain
+                诊断误判。
+              </li>
+              <li>
+                <strong>最小协作：</strong>主 agent
+                派只读审查，审查者写结果文件，主 agent 核对 task ID
+                后读取；验证超时不重复派单。
+              </li>
+              <li>
+                <strong>桌面映射：</strong>多项目、移动窗口、后台完成、关闭 AI
+                foot 后完成、Quickshell 重启，角标不能串项目。
+              </li>
+              <li>
+                <strong>冷启动：</strong>原生 session
+                恢复成功／失败及按需项目打开；编辑器通过自己的 session 恢复。
+              </li>
+            </ol>
+            <p>
+              Herdr pane 内不要再套 tmux 包住 AI，官方检测不会穿透这个
+              tmux。编辑器侧可以继续使用 tmux。
+            </p>
+            <p>
+              Nix flake 已提供 x86_64-linux 与 aarch64-linux
+              包；接入时固定版本，由 Nix 管二进制。集成会修改 Claude settings /
+              Codex
+              hooks，须与现有合并逻辑协调并核对安装版本，不能照抄配置开关或覆写用户
+              hooks。
+            </p>
+            <p class="caption">
+              <a
+                href="https://github.com/herdrdev/herdr/blob/master/flake.nix"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Nix flake ↗</a
+              >
+              ·
+              <a
+                href="https://herdr.dev/docs/agents/#detection-manifests"
+                target="_blank"
+                rel="noopener noreferrer"
+                >检测限制 ↗</a
+              >
+              ·
+              <a
+                href="https://herdr.dev/docs/integrations/"
+                target="_blank"
+                rel="noopener noreferrer"
+                >集成修改范围 ↗</a
+              >
+            </p>
+          </div>
+        </details>
+      </section>
 
-<section id="roadmap"><div class="section-head"><span class="index">08</span><h2>先验证后台，再分三阶段落地</h2></div><div class="stage-row"><div class="stage-no">0</div><div><h3>小范围验证 Herdr</h3><p>单项目验证独立 foot attach、输入法、重连与状态检测；确认按需恢复及 Nix 配置兼容。</p></div><p><span class="pill pending">选定 AI 后台</span><br>验证通过再接入；不满足时沿用 tmux，第一版不依赖多 agent。</p></div><div class="stage-row"><div class="stage-no">A</div><div><h3>稳定打开项目</h3><p>补登记与 AI 选择；修布局幂等、组分配、foot 快捷键。明确 tmux / Herdr 各自的恢复责任。</p></div><p><span class="pill good">最小恢复闭环</span><br>重启后两个 foot 同屏左右，nvim / AI cwd 正确；重复执行不多开窗口。</p></div><div class="stage-row"><div class="stage-no">B</div><div><h3>顶栏与项目列表</h3><p>按选定后台新增事件适配器和未读存储；顶栏显示角标，总览增加可重新打开的项目条目。</p></div><p><span class="pill pending">核心体验完成</span><br>在另一项目也能知道回复完成；只清除已查看 AI 的标记。</p></div><div class="stage-row"><div class="stage-no">C</div><div><h3>内容自然衔接</h3><p>入口触发 persistence，保存 / 恢复 AI session ID，或调用 Herdr 原生续接；再考虑按需协作、临时终端与更深恢复。</p></div><p><span class="pill later">增强恢复</span><br>首次、无历史、目录迁移与恢复失败都有清楚退路。</p></div>
-<details><summary>配置落点：沿用现有模块边界</summary><div class="detail-body"><div class="table-wrap"><table><thead><tr><th>所在层</th><th>落点与职责</th></tr></thead><tbody><tr><td>Home Manager 命令</td><td><code>home/commands/default.nix</code> 保留导出；协调逻辑拆为独立脚本，方便测试。</td></tr><tr><td>Hyprland</td><td><code>home/desktop/hyprland/workspaces.lua</code> 管组与受管窗口路由；<code>keybinds.nix</code> 识别项目 foot。</td></tr><tr><td>tmux</td><td><code>home/cli/multiplexer.nix</code> 提供项目专用配置与 socket；普通终端仍可裸进。</td></tr><tr><td>Herdr（若采用）</td><td>Nix 固定包版本；用户后台服务与 namespace / socket；命令层提供 attach 和状态桥接。运行状态留在可写目录，安装集成 hooks 与现有配置合并协调。</td></tr><tr><td>Quickshell</td><td><code>services/</code> 新增项目状态；<code>bar/TopBar.qml</code> 角标；<code>overview/</code> 项目入口。</td></tr><tr><td>AI 配置</td><td><code>home/cli/ai-tools/settings.nix</code> 声明配置。<code>configure.py</code> 对 Claude 目前是顶层浅合并，新增 hooks 需逐事件合并以保留用户设置。Codex 默认值在 <code>/etc/codex/config.toml</code>，核对用户级覆盖。</td></tr><tr><td>Neovim 仓库</td><td>小型 persistence 启动接线；不另装一套 session 插件，内嵌 AI 不承担右侧桌面窗口。</td></tr></tbody></table></div></div></details>
-<h3 style="margin-top:32px">实施后的验收清单</h3><ul class="checklist"><li>两侧 foot 中英文不同，切换保持；Neovim 模式切换符合原习惯。</li><li>连续 / 并发打开同项目只得一对窗口；只关一侧可补齐。</li><li>同名不同目录、空格路径、不同 worktree 不串项目。</li><li>单屏、双屏、拔屏后仍可找回项目；默认同屏，空占位不误占槽位。</li><li>AI 只标所属项目；到 Neovim 不清，聚焦 AI 清，拖动后跟随。</li><li>重复 / 延迟 / 并发事件不误清新未读；中断与错误不冒充完成。</li><li>重启后未读清空、项目列表仍在；目录与桌面入口均可重开。</li><li>关闭 foot 后核实所选 tmux / Herdr 后台存活；只有 shell 时有明确重启入口。</li><li>Super+C / V 仍使用终端复制粘贴语义。</li><li>内容恢复启用后不串 Neovim / AI 会话；无历史也能新建。</li></ul>
-</section>
+      <section id="roadmap">
+        <div class="section-head">
+          <span class="index">08</span>
+          <h2>先验证后台，再分三阶段落地</h2>
+        </div>
+        <div class="stage-row">
+          <div class="stage-no">0</div>
+          <div>
+            <h3>小范围验证 Herdr</h3>
+            <p>
+              单项目验证独立 foot attach、输入法、重连与状态检测；确认按需恢复及
+              Nix 配置兼容。
+            </p>
+          </div>
+          <p>
+            <span class="pill pending">选定 AI 后台</span
+            ><br />验证通过再接入；不满足时沿用 tmux，第一版不依赖多 agent。
+          </p>
+        </div>
+        <div class="stage-row">
+          <div class="stage-no">A</div>
+          <div>
+            <h3>稳定打开项目</h3>
+            <p>
+              补登记与 AI 选择；修布局幂等、组分配、foot 快捷键。明确 tmux /
+              Herdr 各自的恢复责任。
+            </p>
+          </div>
+          <p>
+            <span class="pill good">最小恢复闭环</span><br />重启后两个 foot
+            同屏左右，nvim / AI cwd 正确；重复执行不多开窗口。
+          </p>
+        </div>
+        <div class="stage-row">
+          <div class="stage-no">B</div>
+          <div>
+            <h3>顶栏与项目列表</h3>
+            <p>
+              按选定后台新增事件适配器和未读存储；顶栏显示角标，总览增加可重新打开的项目条目。
+            </p>
+          </div>
+          <p>
+            <span class="pill pending">核心体验完成</span
+            ><br />在另一项目也能知道回复完成；只清除已查看 AI 的标记。
+          </p>
+        </div>
+        <div class="stage-row">
+          <div class="stage-no">C</div>
+          <div>
+            <h3>内容自然衔接</h3>
+            <p>
+              入口触发 persistence，保存 / 恢复 AI session ID，或调用 Herdr
+              原生续接；再考虑按需协作、临时终端与更深恢复。
+            </p>
+          </div>
+          <p>
+            <span class="pill later">增强恢复</span
+            ><br />首次、无历史、目录迁移与恢复失败都有清楚退路。
+          </p>
+        </div>
+        <details>
+          <summary>配置落点：沿用现有模块边界</summary>
+          <div class="detail-body">
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>所在层</th>
+                    <th>落点与职责</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Home Manager 命令</td>
+                    <td>
+                      <code>home/commands/default.nix</code>
+                      保留导出；协调逻辑拆为独立脚本，方便测试。
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Hyprland</td>
+                    <td>
+                      <code>home/desktop/hyprland/workspaces.lua</code>
+                      管组与受管窗口路由；<code>keybinds.nix</code> 识别项目
+                      foot。
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>tmux</td>
+                    <td>
+                      <code>home/cli/multiplexer.nix</code> 提供项目专用配置与
+                      socket；普通终端仍可裸进。
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Herdr（若采用）</td>
+                    <td>
+                      Nix 固定包版本；用户后台服务与 namespace /
+                      socket；命令层提供 attach
+                      和状态桥接。运行状态留在可写目录，安装集成 hooks
+                      与现有配置合并协调。
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Quickshell</td>
+                    <td>
+                      <code>services/</code> 新增项目状态；<code
+                        >bar/TopBar.qml</code
+                      >
+                      角标；<code>overview/</code> 项目入口。
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>AI 配置</td>
+                    <td>
+                      <code>home/cli/ai-tools/settings.nix</code>
+                      声明配置。<code>configure.py</code> 对 Claude
+                      目前是顶层浅合并，新增 hooks
+                      需逐事件合并以保留用户设置。Codex 默认值在
+                      <code>/etc/codex/config.toml</code>，核对用户级覆盖。
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Neovim 仓库</td>
+                    <td>
+                      小型 persistence 启动接线；不另装一套 session 插件，内嵌
+                      AI 不承担右侧桌面窗口。
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </details>
+        <h3 style="margin-top: 32px">实施后的验收清单</h3>
+        <ul class="checklist">
+          <li>两侧 foot 中英文不同，切换保持；Neovim 模式切换符合原习惯。</li>
+          <li>连续 / 并发打开同项目只得一对窗口；只关一侧可补齐。</li>
+          <li>同名不同目录、空格路径、不同 worktree 不串项目。</li>
+          <li>单屏、双屏、拔屏后仍可找回项目；默认同屏，空占位不误占槽位。</li>
+          <li>AI 只标所属项目；到 Neovim 不清，聚焦 AI 清，拖动后跟随。</li>
+          <li>重复 / 延迟 / 并发事件不误清新未读；中断与错误不冒充完成。</li>
+          <li>重启后未读清空、项目列表仍在；目录与桌面入口均可重开。</li>
+          <li>
+            关闭 foot 后核实所选 tmux / Herdr 后台存活；只有 shell
+            时有明确重启入口。
+          </li>
+          <li>Super+C / V 仍使用终端复制粘贴语义。</li>
+          <li>内容恢复启用后不串 Neovim / AI 会话；无历史也能新建。</li>
+        </ul>
+      </section>
 
-<section id="sources"><div class="section-head"><span class="index">09</span><h2>证据、边界与待验证项</h2></div><p class="section-intro">本地快照：NixOS <code>feature/macbook-touch-bar · adf8014</code>；Neovim <code>master · b5a17d7</code>。开始时两仓库均无未提交文件改动。CLI 帮助核对：Codex 0.153.4、Claude Code 2.1.263、foot 1.27.0。</p><div class="source-grid">
-<div class="source-item"><a href="/home/ten/codes/nixos/home/commands/default.nix">01 · coding-workspace ↗</a><p>启动、锁、app ID、session 名、组号持久文件与重复布局调整。</p></div><div class="source-item"><a href="/home/ten/codes/nixos/home/desktop/hyprland/workspaces.lua">02 · 工作区组实现 ↗</a><p>native ID = slot × 1000 + group；slot 仅会话内稳定；新窗口负载分配。</p></div><div class="source-item"><a href="/home/ten/codes/nixos/home/desktop/quickshell/bar/TopBar.qml">03 · 顶栏与总览 ↗</a><p>当前顶栏只有焦点与占用；总览已具备运行中窗口入口。</p></div><div class="source-item"><a href="/home/ten/codes/nixos/home/cli/multiplexer.nix">04 · tmux 配置 ↗</a><p>已启用 resurrect / continuum；本机策略另核对 Session.vim 与默认程序清单。</p></div><div class="source-item"><a href="/home/ten/codes/nvim/lazy-lock.json">05 · Neovim 锁文件 ↗</a><p>persistence 已存在；本机源码确认保存目录、时机与 LazyVim 快捷键。</p></div><div class="source-item"><a href="/home/ten/codes/nixos/home/cli/ai-tools/configure.py">06 · AI 配置合并 ↗</a><p>设置保持可写；新增 hooks 需避免顶层浅合并替换已有事件。</p></div><div class="source-item"><a href="https://learn.chatgpt.com/docs/config-file/config-advanced#notifications" target="_blank" rel="noopener noreferrer">07 · Codex notifications ↗</a><p>notify 的 JSON 参数与完成事件；TUI 通知单独配置。</p></div><div class="source-item"><a href="https://learn.chatgpt.com/docs/hooks" target="_blank" rel="noopener noreferrer">08 · Codex hooks ↗</a><p>当前事件与信任机制；主分支 schema 可能领先安装版本。</p></div><div class="source-item"><a href="https://code.claude.com/docs/en/hooks#stop" target="_blank" rel="noopener noreferrer">09 · Claude hooks ↗</a><p>Stop 表示主回复结束；中断和错误分别处理。</p></div><div class="source-item"><a href="https://code.claude.com/docs/en/common-workflows" target="_blank" rel="noopener noreferrer">10 · Claude 工作流 ↗</a><p>会话续接参考；命令参数同时以本机 --help 核对。</p></div><div class="source-item"><a href="https://github.com/tmux-plugins/tmux-resurrect" target="_blank" rel="noopener noreferrer">11 · tmux-resurrect ↗</a><p>重建环境与重启有限清单中的程序，不是任意进程快照。</p></div><div class="source-item"><a href="https://github.com/folke/persistence.nvim" target="_blank" rel="noopener noreferrer">12 · persistence.nvim ↗</a><p>复用已有编辑器会话插件，各应用自己维护内容。</p></div><div class="source-item"><a href="https://quickshell.org/docs/v0.2.0/types/Quickshell.Io/FileView/" target="_blank" rel="noopener noreferrer">13 · Quickshell FileView ↗</a><p>事件驱动读取小型 JSON；实施时核对锁定的 Quickshell 版本。</p></div><div class="source-item"><a href="/home/ten/codes/nixos/docs/desktop-product-spec.md">14 · 桌面产品规格 ↗</a><p>已有独立 foot / tmux 的工作区方向；本设计沿用命名和边界。</p></div>
-<div class="source-item"><a href="https://herdr.dev/docs/agent-automation/" target="_blank" rel="noopener noreferrer">15 · Herdr Agent automation ↗</a><p>跨 agent 提示词、等待与读取；等待不绑定单次 turn。</p></div><div class="source-item"><a href="https://herdr.dev/docs/agents/" target="_blank" rel="noopener noreferrer">16 · Herdr Agent states ↗</a><p>Codex / Claude 以屏幕规则判状态，注意版本变化。</p></div><div class="source-item"><a href="https://herdr.dev/docs/persistence-remote/#direct-terminal-attach" target="_blank" rel="noopener noreferrer">17 · Herdr Direct attach / remote ↗</a><p>独立终端连接后台 PTY；单写入端与远程访问。</p></div><div class="source-item"><a href="https://herdr.dev/docs/session-state/" target="_blank" rel="noopener noreferrer">18 · Herdr Session state ↗</a><p>冷启动续接、恢复触发范围与实验性 history / handoff。</p></div><div class="source-item"><a href="https://herdr.dev/docs/socket-api/" target="_blank" rel="noopener noreferrer">19 · Herdr Socket API ↗</a><p>Unix socket、事件订阅与快照同步。</p></div><div class="source-item"><a href="https://herdr.dev/docs/integrations/" target="_blank" rel="noopener noreferrer">20 · Herdr Integrations ↗</a><p>原生会话 ID 获取与 Claude / Codex hooks 配置。</p></div><div class="source-item"><a href="https://herdr.dev/docs/plugins/" target="_blank" rel="noopener noreferrer">21 · Herdr Plugins ↗</a><p>可执行扩展、启动与事件动作。</p></div><div class="source-item"><a href="https://github.com/herdrdev/herdr/blob/master/flake.nix" target="_blank" rel="noopener noreferrer">22 · Herdr Nix flake / source ↗</a><p>Linux 构建入口；源码版本及实现可追溯。</p></div></div><div class="callout" style="margin-top:24px"><strong>结论的适用范围</strong><p><strong>本文件验证：</strong>1440px 桌面与 390px 手机布局无页面横向溢出；三种角标场景与折叠交互通过，页内锚点和 14 处本地源码链接有效；SVG 无文字越界，几何检查零发现，打印可展开全部说明。技能自检仅对用户要求的外部证据链接保留例外，其余检查通过。</p><p>现状与缺口经过代码阅读和本机 CLI 参数核对；当前执行环境的 <code>hyprctl version</code> 无法连接桌面 socket，因此没有验证 live clients、实际分屏、输入法行为与 UWSM scope 生命周期。</p><p>Herdr 能力依据本次官方文档与源码调查，尚未在本机安装验证；版本升级后需复核。事件适配器、项目列表与恢复协调仍是待实施设计。本文不是已部署功能说明，文档检查不替代系统重启和 AI 事件集成测试。</p></div></section></main>
-<footer><div class="wrap"><p>TenOS · AI 项目工作区调查 / 2026-09-09 · 单文件 HTML，内联 CSS / SVG，无脚本依赖。</p><p>采用 diagram-design 的 full editorial 结构；架构图 doc-wide，其余按内容 fit。自定浅色语义配色已获同意，未改写已安装技能或全局样式。字体为 Geist / Instrument Serif 与 Noto SC；Google Fonts 不可用时使用本机回退；本次中文网页字体未全部确认加载，中文显示使用可用的本机回退。此配色以后可保存为独立 profile。</p><p>本地源码链接适合在本机打开本文件时使用，共享到其他设备可能不可用。悬停节点看说明，点击节点跳到细节，折叠项支持键盘操作；打印显示完整说明。</p></div></footer></body></html>
+      <section id="sources">
+        <div class="section-head">
+          <span class="index">09</span>
+          <h2>证据、边界与待验证项</h2>
+        </div>
+        <p class="section-intro">
+          本地快照：NixOS
+          <code>feature/macbook-touch-bar · adf8014</code>；Neovim
+          <code>master · b5a17d7</code>。开始时两仓库均无未提交文件改动。CLI
+          帮助核对：Codex 0.153.4、Claude Code 2.1.263、foot 1.27.0。
+        </p>
+        <div class="source-grid">
+          <div class="source-item">
+            <a href="/home/ten/codes/nixos/home/commands/default.nix"
+              >01 · coding-workspace ↗</a
+            >
+            <p>启动、锁、app ID、session 名、组号持久文件与重复布局调整。</p>
+          </div>
+          <div class="source-item">
+            <a href="/home/ten/codes/nixos/home/desktop/hyprland/workspaces.lua"
+              >02 · 工作区组实现 ↗</a
+            >
+            <p>
+              native ID = slot × 1000 + group；slot
+              仅会话内稳定；新窗口负载分配。
+            </p>
+          </div>
+          <div class="source-item">
+            <a
+              href="/home/ten/codes/nixos/home/desktop/quickshell/bar/TopBar.qml"
+              >03 · 顶栏与总览 ↗</a
+            >
+            <p>当前顶栏只有焦点与占用；总览已具备运行中窗口入口。</p>
+          </div>
+          <div class="source-item">
+            <a href="/home/ten/codes/nixos/home/cli/multiplexer.nix"
+              >04 · tmux 配置 ↗</a
+            >
+            <p>
+              已启用 resurrect / continuum；本机策略另核对 Session.vim
+              与默认程序清单。
+            </p>
+          </div>
+          <div class="source-item">
+            <a href="/home/ten/codes/nvim/lazy-lock.json"
+              >05 · Neovim 锁文件 ↗</a
+            >
+            <p>
+              persistence 已存在；本机源码确认保存目录、时机与 LazyVim 快捷键。
+            </p>
+          </div>
+          <div class="source-item">
+            <a href="/home/ten/codes/nixos/home/cli/ai-tools/configure.py"
+              >06 · AI 配置合并 ↗</a
+            >
+            <p>设置保持可写；新增 hooks 需避免顶层浅合并替换已有事件。</p>
+          </div>
+          <div class="source-item">
+            <a
+              href="https://learn.chatgpt.com/docs/config-file/config-advanced#notifications"
+              target="_blank"
+              rel="noopener noreferrer"
+              >07 · Codex notifications ↗</a
+            >
+            <p>notify 的 JSON 参数与完成事件；TUI 通知单独配置。</p>
+          </div>
+          <div class="source-item">
+            <a
+              href="https://learn.chatgpt.com/docs/hooks"
+              target="_blank"
+              rel="noopener noreferrer"
+              >08 · Codex hooks ↗</a
+            >
+            <p>当前事件与信任机制；主分支 schema 可能领先安装版本。</p>
+          </div>
+          <div class="source-item">
+            <a
+              href="https://code.claude.com/docs/en/hooks#stop"
+              target="_blank"
+              rel="noopener noreferrer"
+              >09 · Claude hooks ↗</a
+            >
+            <p>Stop 表示主回复结束；中断和错误分别处理。</p>
+          </div>
+          <div class="source-item">
+            <a
+              href="https://code.claude.com/docs/en/common-workflows"
+              target="_blank"
+              rel="noopener noreferrer"
+              >10 · Claude 工作流 ↗</a
+            >
+            <p>会话续接参考；命令参数同时以本机 --help 核对。</p>
+          </div>
+          <div class="source-item">
+            <a
+              href="https://github.com/tmux-plugins/tmux-resurrect"
+              target="_blank"
+              rel="noopener noreferrer"
+              >11 · tmux-resurrect ↗</a
+            >
+            <p>重建环境与重启有限清单中的程序，不是任意进程快照。</p>
+          </div>
+          <div class="source-item">
+            <a
+              href="https://github.com/folke/persistence.nvim"
+              target="_blank"
+              rel="noopener noreferrer"
+              >12 · persistence.nvim ↗</a
+            >
+            <p>复用已有编辑器会话插件，各应用自己维护内容。</p>
+          </div>
+          <div class="source-item">
+            <a
+              href="https://quickshell.org/docs/v0.2.0/types/Quickshell.Io/FileView/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >13 · Quickshell FileView ↗</a
+            >
+            <p>事件驱动读取小型 JSON；实施时核对锁定的 Quickshell 版本。</p>
+          </div>
+          <div class="source-item">
+            <a href="/home/ten/codes/nixos/docs/desktop-product-spec.md"
+              >14 · 桌面产品规格 ↗</a
+            >
+            <p>已有独立 foot / tmux 的工作区方向；本设计沿用命名和边界。</p>
+          </div>
+          <div class="source-item">
+            <a
+              href="https://herdr.dev/docs/agent-automation/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >15 · Herdr Agent automation ↗</a
+            >
+            <p>跨 agent 提示词、等待与读取；等待不绑定单次 turn。</p>
+          </div>
+          <div class="source-item">
+            <a
+              href="https://herdr.dev/docs/agents/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >16 · Herdr Agent states ↗</a
+            >
+            <p>Codex / Claude 以屏幕规则判状态，注意版本变化。</p>
+          </div>
+          <div class="source-item">
+            <a
+              href="https://herdr.dev/docs/persistence-remote/#direct-terminal-attach"
+              target="_blank"
+              rel="noopener noreferrer"
+              >17 · Herdr Direct attach / remote ↗</a
+            >
+            <p>独立终端连接后台 PTY；单写入端与远程访问。</p>
+          </div>
+          <div class="source-item">
+            <a
+              href="https://herdr.dev/docs/session-state/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >18 · Herdr Session state ↗</a
+            >
+            <p>冷启动续接、恢复触发范围与实验性 history / handoff。</p>
+          </div>
+          <div class="source-item">
+            <a
+              href="https://herdr.dev/docs/socket-api/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >19 · Herdr Socket API ↗</a
+            >
+            <p>Unix socket、事件订阅与快照同步。</p>
+          </div>
+          <div class="source-item">
+            <a
+              href="https://herdr.dev/docs/integrations/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >20 · Herdr Integrations ↗</a
+            >
+            <p>原生会话 ID 获取与 Claude / Codex hooks 配置。</p>
+          </div>
+          <div class="source-item">
+            <a
+              href="https://herdr.dev/docs/plugins/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >21 · Herdr Plugins ↗</a
+            >
+            <p>可执行扩展、启动与事件动作。</p>
+          </div>
+          <div class="source-item">
+            <a
+              href="https://github.com/herdrdev/herdr/blob/master/flake.nix"
+              target="_blank"
+              rel="noopener noreferrer"
+              >22 · Herdr Nix flake / source ↗</a
+            >
+            <p>Linux 构建入口；源码版本及实现可追溯。</p>
+          </div>
+        </div>
+        <div class="callout" style="margin-top: 24px">
+          <strong>结论的适用范围</strong>
+          <p>
+            <strong>本文件验证：</strong>1440px 桌面与 390px
+            手机布局无页面横向溢出；三种角标场景与折叠交互通过，页内锚点和 14
+            处本地源码链接有效；SVG
+            无文字越界，几何检查零发现，打印可展开全部说明。技能自检仅对用户要求的外部证据链接保留例外，其余检查通过。
+          </p>
+          <p>
+            现状与缺口经过代码阅读和本机 CLI 参数核对；当前执行环境的
+            <code>hyprctl version</code> 无法连接桌面 socket，因此没有验证 live
+            clients、实际分屏、输入法行为与 UWSM scope 生命周期。
+          </p>
+          <p>
+            Herdr
+            能力依据本次官方文档与源码调查，尚未在本机安装验证；版本升级后需复核。事件适配器、项目列表与恢复协调仍是待实施设计。本文不是已部署功能说明，文档检查不替代系统重启和
+            AI 事件集成测试。
+          </p>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <div class="wrap">
+        <p>
+          TenOS · AI 项目工作区调查 / 2026-09-09 · 单文件 HTML，内联 CSS /
+          SVG，无脚本依赖。
+        </p>
+        <p>
+          采用 diagram-design 的 full editorial 结构；架构图
+          doc-wide，其余按内容
+          fit。自定浅色语义配色已获同意，未改写已安装技能或全局样式。字体为
+          Geist / Instrument Serif 与 Noto SC；Google Fonts
+          不可用时使用本机回退；本次中文网页字体未全部确认加载，中文显示使用可用的本机回退。此配色以后可保存为独立
+          profile。
+        </p>
+        <p>
+          本地源码链接适合在本机打开本文件时使用，共享到其他设备可能不可用。悬停节点看说明，点击节点跳到细节，折叠项支持键盘操作；打印显示完整说明。
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

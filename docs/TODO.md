@@ -6,11 +6,13 @@
 
 ## 快捷键中文说明与 Which-key 分组
 
-- [ ] 重配快捷键后，统一梳理中文 `desc` 和 `group`。
-- 自定义映射的中文描述与映射放在一起，避免重复维护。
-- 在 [which_key.lua](../lua/plugins/ui/which_key.lua) 集中整理中文分组；按需补充默认映射的中文展示名。
-- 区分 Which-key 菜单描述与原始映射描述，核对快捷键搜索等入口的显示结果。
-- 当前仅保留 AI 分组，已简化结构、补充中文注释，并使用有效的 `blue` 图标颜色。
+- [x] 按现有键位整理中文 `desc` 和 `group`，保留按键及执行动作（2026-09-13）。
+- 自定义说明与映射放在一起；Which-key 分组保留动态窗口、缓冲区列表。
+- 继承说明通过 [key_descriptions.lua](../lua/config/ui/key_descriptions.lua) 翻译菜单显示，
+  不复制上游映射；`:map` 和其他快捷键搜索仍可能显示上游原文。
+- 完整现状与后续调整意见见 [键位清单](keymaps.md)。
+- [ ] 统一 Neo-tree 的 `<CR>` / `<cr>` 配置，明确 Enter 的窗口选择行为。
+- [ ] 决定窗口最大化别名、Git 界面入口，以及 Avante 的 Select 模式和发送键是否需要调整。
 
 ## Notebook 工作流
 

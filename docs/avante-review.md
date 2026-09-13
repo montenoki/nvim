@@ -19,22 +19,21 @@
 @file 接受动作，不发送模型请求。
 此前侧栏、Snacks 输入框和选择器的一次性验收脚本已清理；未验证真实回复和图片上传。
 
-
 检查日期：2026-09-12。以下初次检查以当时锁定的 Avante 提交
 `1a36a37b1a96c9acbbc863205c3b0e2c5b2f1e18` 的源码为准。
 
-| 检查项 | 结论 |
-| --- | --- |
-| 模型名称 | 原来的 `anthropic/claude-4.5-sonnet` 顺序错误，已改为 `anthropic/claude-sonnet-4.5`。 |
-| Provider | `provider = "openrouter"` 配合 `__inherited_from = "openai"` 是有效的自定义 Provider 配置。 |
-| API 地址 | `https://openrouter.ai/api/v1` 正确；插件会拼接 Chat Completions 路径，无需自行追加。 |
-| API 密钥 | `api_key_name = "OPENROUTER_API_KEY"` 正确。检查进程中未设置该变量；运行 Neovim 的终端需要提供密钥。其他终端是否设置未验证。 |
-| 请求参数 | `temperature` 和 `max_tokens` 放在 `extra_request_body` 内正确。已验证合并后的请求保留 `max_tokens = 20480`，移除继承的 `max_completion_tokens` 和不适用的 `reasoning_effort`。 |
-| 指令文件 | `instructions_file = "avante.md"` 有效，也是默认值。项目指令应放在对应项目根目录。 |
-| 构建配置 | Windows 的 `Build.ps1` 和其他平台的 `make` 与上游示例一致；`make` 默认获取预编译库，不代表一定从源码构建。 |
-| 本地构建状态 | 在干净的 headless Neovim 中，已安装插件的 `avante_templates`、`avante_tokenizers` 原生模块均无法加载。配置语法正确不等于原生组件已准备好。 |
-| 超时 | `30000` 毫秒有效，但长输出可能超时。若实际出现超时，可提高到 `120000` 或更高；本次保留原值。 |
-| 可选依赖 | 同时声明 mini.pick、Telescope、fzf-lua、Dressing、Snacks，以及 nvim-cmp、Copilot，属于上游示例中的多个可选集成，不是 OpenRouter 的全部必需项。 |
+| 检查项       | 结论                                                                                                                                                                            |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 模型名称     | 原来的 `anthropic/claude-4.5-sonnet` 顺序错误，已改为 `anthropic/claude-sonnet-4.5`。                                                                                           |
+| Provider     | `provider = "openrouter"` 配合 `__inherited_from = "openai"` 是有效的自定义 Provider 配置。                                                                                     |
+| API 地址     | `https://openrouter.ai/api/v1` 正确；插件会拼接 Chat Completions 路径，无需自行追加。                                                                                           |
+| API 密钥     | `api_key_name = "OPENROUTER_API_KEY"` 正确。检查进程中未设置该变量；运行 Neovim 的终端需要提供密钥。其他终端是否设置未验证。                                                    |
+| 请求参数     | `temperature` 和 `max_tokens` 放在 `extra_request_body` 内正确。已验证合并后的请求保留 `max_tokens = 20480`，移除继承的 `max_completion_tokens` 和不适用的 `reasoning_effort`。 |
+| 指令文件     | `instructions_file = "avante.md"` 有效，也是默认值。项目指令应放在对应项目根目录。                                                                                              |
+| 构建配置     | Windows 的 `Build.ps1` 和其他平台的 `make` 与上游示例一致；`make` 默认获取预编译库，不代表一定从源码构建。                                                                      |
+| 本地构建状态 | 在干净的 headless Neovim 中，已安装插件的 `avante_templates`、`avante_tokenizers` 原生模块均无法加载。配置语法正确不等于原生组件已准备好。                                      |
+| 超时         | `30000` 毫秒有效，但长输出可能超时。若实际出现超时，可提高到 `120000` 或更高；本次保留原值。                                                                                    |
+| 可选依赖     | 同时声明 mini.pick、Telescope、fzf-lua、Dressing、Snacks，以及 nvim-cmp、Copilot，属于上游示例中的多个可选集成，不是 OpenRouter 的全部必需项。                                  |
 
 已修复确定的模型名称错误。其余配置保持原有选择。
 
