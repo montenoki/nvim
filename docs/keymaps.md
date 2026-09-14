@@ -1,6 +1,6 @@
 # 当前键位清单
 
-按本机已安装插件和配置在 2026-09-14 的最终配置整理，本轮 53 项修改已由用户审阅验收。
+按当前工作区配置整理；2026-09-15 的入口与调试边界调整等待用户验收。
 `<leader>` 和 `<localleader>` 都是空格；`M`/`A` 都表示 Alt。
 模式：`n` 普通、`x` 可视、`s` Select（如片段占位符）、`o` 操作等待、`i` 插入、`t` 终端、`c` 命令行。
 
@@ -24,7 +24,8 @@
 | `<leader>b`             | 缓冲区                        |
 | `<leader>c`                               | 代码                                   |
 | `<leader>dp` | 性能分析 |
-| `<leader>f` / `<leader>s`                 | 文件与查找 / 搜索                      |
+| `<leader>f` | 文件与查找 |
+| `<leader>h` | 历史记录 |
 | `<leader>g` / `<leader>gh`                | Git / 改动块                           |
 | `<leader>q`                               | 退出与会话                             |
 | `<leader>t`                               | 任务                                   |
@@ -34,6 +35,10 @@
 | `g` / `gz` / `z`                          | 跳转与文本操作 / 包围符号 / 折叠与拼写 |
 | `[` / `]`                                 | 上一个 / 下一个                        |
 | `a` / `i`（操作等待、可视模式）           | 包含边界 / 内部文本                    |
+
+`<leader>m`、`<leader>"`、`<leader>:` 查看当前标记、寄存器和可执行命令；
+`<leader>r` 恢复上次 fzf-lua 选择器，`<leader>n` 直接查看全部消息，均不是子分组。
+Extras 与 LSP 信息分别使用 `:LazyExtras`、`:checkhealth vim.lsp`；底栏 LSP 连接数只显示，不接收点击。
 
 ## AI
 
@@ -92,7 +97,6 @@
 | <code>&lt;leader&gt;cc</code> | nx   | 执行 CodeLens                  | LSP 支持时 | LSP                |
 | <code>&lt;leader&gt;xd</code> | n    | 当前行诊断详情 | 通用       | 运行时映射         |
 | <code>&lt;leader&gt;cf</code> | nx   | 格式化                         | 通用       | 运行时映射         |
-| <code>&lt;leader&gt;cl</code> | n    | LSP 信息                       | LSP 支持时 | LSP                |
 | <code>&lt;leader&gt;co</code> | n    | 整理导入                       | LSP 支持时 | LSP                |
 | <code>&lt;leader&gt;cr</code> | n    | 重命名符号                     | LSP 支持时 | LSP                |
 | <code>&lt;leader&gt;cv</code> | n    | 选择 Python 虚拟环境           | python     | venv-selector.nvim |

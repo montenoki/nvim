@@ -30,7 +30,7 @@
 
 ## 继续查
 
-排查：`:checkhealth vim.lsp`；已连接时 `<leader>cl` 可查看 LSP 配置。
+排查使用 `:checkhealth vim.lsp`；底栏保留连接数显示，已取消 `<leader>cl` 和 LSP 点击入口。
 配置：[LSP 接线](../../../lua/plugins/coding/lsp.lua)。
 
 [返回卡片目录](../README.md)

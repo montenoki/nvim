@@ -6,6 +6,7 @@ return {
         opts = function(_, opts)
             require("config.toggles").configure_lsp(opts)
             vim.list_extend(opts.servers["*"].keys, {
+                { "<leader>cl", false }, -- LSP 信息保留命令入口。
                 { "gK", false },
                 { "<leader>cC", false },
                 { "<leader>cR", false },

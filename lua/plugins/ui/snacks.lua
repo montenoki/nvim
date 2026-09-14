@@ -63,7 +63,8 @@ return {
                         })
                     end
                 end
-                return key.key ~= "c"
+                -- Extras 只保留 :LazyExtras 命令入口。
+                return key.key ~= "c" and key.key ~= "x"
             end, opts.dashboard.preset.keys or keys)
             -- Enter 对比当前编辑内容与选中提交中的文件版本。
             local function detail(picker, item)

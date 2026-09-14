@@ -78,7 +78,6 @@ return {
                         ),
                     }
                 end,
-                on_click = display.lsp_info,
             },
         }
         -- 保留默认位置组件，前面放文件属性；行列号最靠近固定开关。

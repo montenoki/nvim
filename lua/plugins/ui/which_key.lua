@@ -20,13 +20,15 @@ return {
             -- 就地翻译继承的分组，保留 buffer 的 expand 和 windows 的 proxy。
             -- 不重复声明同一组，避免覆盖动态列表或产生重复分组警告。
             local function translate_groups(spec)
-                -- 删除已取消的标签页和 DAP 调试分组；dp 性能分析仍保留。
+                -- 删除已取消入口的分组；dp 性能分析仍保留。
                 for i = #spec, 1, -1 do
                     if
                         type(spec[i]) == "table"
                         and (
                             spec[i][1] == "<leader><tab>"
                             or spec[i][1] == "<leader>d"
+                            or spec[i][1] == "<leader>s"
+                            or spec[i][1] == "<leader>sn"
                         )
                     then
                         table.remove(spec, i)
@@ -56,6 +58,7 @@ return {
                     icon = { icon = "󰧑", color = "blue" },
                 },
                 { "<leader>t", group = "任务", mode = "n" },
+                { "<leader>h", group = "历史记录", mode = { "n", "x" } },
             })
         end,
         config = function(_, opts)

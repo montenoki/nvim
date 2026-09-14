@@ -107,13 +107,10 @@ function M.show_path()
     )
 end
 
--- LSP：显示当前文件连接数，点击查看原生健康检查。
+-- LSP：显示当前文件连接数；详细信息通过 :checkhealth vim.lsp 查看。
 function M.lsp()
     local count = #vim.lsp.get_clients({ bufnr = 0 })
     return " " .. (count > 0 and tostring(count) or "—")
-end
-function M.lsp_info()
-    vim.cmd("checkhealth vim.lsp")
 end
 
 -- 文件属性：常见的 UTF-8、LF 留空，只提示需要注意的格式差异。
