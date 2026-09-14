@@ -59,31 +59,22 @@
 | <code>&lt;leader&gt;fn</code>            | n    | 新建缓冲区                         | 通用 | 运行时映射 |
 | <code>&lt;leader&gt;fr</code>            | n    | 最近文件（当前目录） | 通用 | 运行时映射 |
 | <code>&lt;leader&gt;fy</code>            | n    | 复制项目相对路径                   | 通用 | 运行时映射 |
-| <code>&lt;leader&gt;s"</code>            | n    | 寄存器                             | 通用 | 运行时映射 |
-| <code>&lt;leader&gt;s/</code>            | n    | 搜索历史                           | 通用 | 运行时映射 |
-| <code>&lt;leader&gt;sC</code>            | n    | 命令列表                           | 通用 | 运行时映射 |
-| <code>&lt;leader&gt;sG</code>            | n    | 搜索文件内容（当前工作目录）       | 通用 | 运行时映射 |
-| <code>&lt;leader&gt;sH</code>            | n    | 搜索高亮组                         | 通用 | 运行时映射 |
-| <code>&lt;leader&gt;sM</code>            | n    | Man 手册                           | 通用 | 运行时映射 |
-| <code>&lt;leader&gt;sR</code>            | n    | 恢复上次搜索                       | 通用 | 运行时映射 |
-| <code>&lt;leader&gt;sW</code>            | n    | 搜索光标处单词（当前工作目录）     | 通用 | 运行时映射 |
-| <code>&lt;leader&gt;sW</code>            | x    | 搜索选中文字（当前工作目录）       | 通用 | 运行时映射 |
-| <code>&lt;leader&gt;sa</code>            | n    | 自动命令                           | 通用 | 运行时映射 |
-| <code>&lt;leader&gt;sb</code>            | n    | 当前文件内容                       | 通用 | 运行时映射 |
-| <code>&lt;leader&gt;sc</code>            | n    | 命令历史                           | 通用 | 运行时映射 |
-| <code>&lt;leader&gt;sg</code>            | n    | 搜索文件内容（项目根目录）         | 通用 | 运行时映射 |
-| <code>&lt;leader&gt;sh</code>            | n    | 帮助文档                           | 通用 | 运行时映射 |
-| <code>&lt;leader&gt;sj</code>            | n    | 跳转历史                           | 通用 | 运行时映射 |
-| <code>&lt;leader&gt;sk</code>            | n    | 快捷键列表                         | 通用 | 运行时映射 |
-| <code>&lt;leader&gt;sm</code>            | n    | 跳转到标记                         | 通用 | 运行时映射 |
+| <code>&lt;leader&gt;"</code>            | n    | 寄存器                             | 通用 | 运行时映射 |
+| <code>&lt;leader&gt;h/</code>            | n    | 搜索历史                           | 通用 | 运行时映射 |
+| <code>&lt;leader&gt;:</code>            | n    | 命令列表                           | 通用 | 运行时映射 |
+| <code>&lt;leader&gt;r</code>            | n    | 恢复上次 fzf-lua 选择器                       | 通用 | 运行时映射 |
+| <code>&lt;leader&gt;h:</code>            | n    | 命令历史                           | 通用 | 运行时映射 |
+| <code>&lt;leader&gt;hj</code>            | n    | 跳转历史                           | 通用 | 运行时映射 |
+| <code>&lt;leader&gt;m</code>            | n    | 跳转到标记                         | 通用 | 运行时映射 |
 | <code>&lt;leader&gt;sna</code>           | n    | 全部消息（Noice）                  | 通用 | 运行时映射 |
 | <code>&lt;leader&gt;snd</code>           | n    | 清除全部消息                       | 通用 | 运行时映射 |
 | <code>&lt;leader&gt;snh</code>           | n    | 消息历史（Noice）                  | 通用 | 运行时映射 |
 | <code>&lt;leader&gt;snl</code>           | n    | 最近一条消息（Noice）              | 通用 | 运行时映射 |
 | <code>&lt;leader&gt;snt</code>           | n    | 搜索消息（Noice）                  | 通用 | 运行时映射 |
-| <code>&lt;leader&gt;sr</code>            | nx   | 搜索并替换                         | 通用 | 运行时映射 |
-| <code>&lt;leader&gt;sw</code>            | n    | 搜索光标处单词（项目根目录）       | 通用 | 运行时映射 |
-| <code>&lt;leader&gt;sw</code>            | x    | 搜索选中文字（项目根目录）         | 通用 | 运行时映射 |
+
+内容搜索与启动页 `g` 共用项目根目录；原生 `/` 用于文件内搜索。
+`<leader>r` 恢复最近一次 fzf-lua 选择器，不是搜索历史列表。
+跨文件替换不再提供快捷键；原生 `:s`、`:%s` 和 `:GrugFar` 命令仍可使用。
 
 ## 缓冲区与标签页
 
@@ -357,7 +348,7 @@
 | <code>&lt;leader&gt;e</code> | n    | 文件树（当前目录，开关） | 通用       | 运行时映射 |
 | <code>&lt;leader&gt;l</code> | n    | 插件管理（Lazy）                   | 通用       | 运行时映射 |
 | <code>&lt;leader&gt;n</code> | n    | 通知历史                           | 通用       | 运行时映射 |
-| <code>&lt;leader&gt;p</code> | nx   | 打开复制历史                       | 通用       | 运行时映射 |
+| <code>&lt;leader&gt;hy</code> | nx   | 打开复制历史                       | 通用       | 运行时映射 |
 | <code>&lt;lt&gt;P</code>     | n    | 粘贴到前方并向左缩进               | 通用       | 运行时映射 |
 | <code>&lt;lt&gt;p</code>     | n    | 粘贴并向左缩进                     | 通用       | 运行时映射 |
 

@@ -24,7 +24,7 @@ return {
                     icon = " ",
                     key = "g",
                     desc = "搜索内容",
-                    action = ":lua Snacks.dashboard.pick('live_grep')",
+                    action = LazyVim.pick("live_grep"),
                 },
                 { icon = " ", key = "r", desc = "最近文件" },
                 {
@@ -49,6 +49,9 @@ return {
                     key.action = function()
                         require("fzf-lua").files({ cwd = vim.fn.getcwd() })
                     end
+                elseif key.key == "g" then
+                    -- 与 leader / 共用项目根目录解析，避免启动页默认使用 cwd。
+                    key.action = LazyVim.pick("live_grep")
                 elseif key.key == "r" then
                     key.desc = "最近文件"
                     key.action = function()
