@@ -66,15 +66,13 @@
 | <code>&lt;leader&gt;h:</code>            | n    | 命令历史                           | 通用 | 运行时映射 |
 | <code>&lt;leader&gt;hj</code>            | n    | 跳转历史                           | 通用 | 运行时映射 |
 | <code>&lt;leader&gt;m</code>            | n    | 跳转到标记                         | 通用 | 运行时映射 |
-| <code>&lt;leader&gt;sna</code>           | n    | 全部消息（Noice）                  | 通用 | 运行时映射 |
-| <code>&lt;leader&gt;snd</code>           | n    | 清除全部消息                       | 通用 | 运行时映射 |
-| <code>&lt;leader&gt;snh</code>           | n    | 消息历史（Noice）                  | 通用 | 运行时映射 |
-| <code>&lt;leader&gt;snl</code>           | n    | 最近一条消息（Noice）              | 通用 | 运行时映射 |
-| <code>&lt;leader&gt;snt</code>           | n    | 搜索消息（Noice）                  | 通用 | 运行时映射 |
 
 内容搜索与启动页 `g` 共用项目根目录；原生 `/` 用于文件内搜索。
 `<leader>r` 恢复最近一次 fzf-lua 选择器，不是搜索历史列表。
 跨文件替换不再提供快捷键；原生 `:s`、`:%s` 和 `:GrugFar` 命令仍可使用。
+
+`<leader>n` 查看 Noice 收集的全部消息并进入文本分屏，可搜索、选择并复制多行报错。
+普通消息、错误和通知允许混排；通知仍正常弹出，终端等独立输出不在此列表。
 
 ## 缓冲区与标签页
 
@@ -174,7 +172,6 @@
 | <code>&lt;leader&gt;uh</code> | n    | 切换行内提示（记住选择）      | 通用 | 运行时映射 |
 | <code>&lt;leader&gt;ui</code> | n    | 检查光标处高亮与语法          | 通用 | 运行时映射 |
 | <code>&lt;leader&gt;ul</code> | n    | 切换行号                      | 通用 | 运行时映射 |
-| <code>&lt;leader&gt;un</code> | n    | 清除全部通知                  | 通用 | 运行时映射 |
 | <code>&lt;leader&gt;ur</code> | n    | 重绘、清除搜索高亮并更新 Diff | 通用 | 运行时映射 |
 | <code>&lt;leader&gt;us</code> | n    | 切换拼写检查（记住选择）      | 通用 | 运行时映射 |
 | <code>&lt;leader&gt;uw</code> | n    | 切换自动换行显示              | 通用 | 运行时映射 |
@@ -341,13 +338,12 @@
 | <code>&lt;Tab&gt;</code>     | si   | 片段下一位置，否则使用 Tab         | 通用       | 运行时映射 |
 | <code>&lt;Up&gt;</code>      | nx   | 向上移动                           | 通用       | 运行时映射 |
 | <code>&lt;leader&gt;.</code> | n    | 切换临时缓冲区                     | 通用       | 运行时映射 |
-| <code>&lt;leader&gt;:</code> | n    | 命令历史                           | 通用       | 运行时映射 |
 | <code>&lt;leader&gt;?</code> | n    | 当前缓冲区键位（Which-key）        | 通用       | 运行时映射 |
 | <code>&lt;leader&gt;K</code> | n    | 使用关键字查询程序                 | 通用       | 运行时映射 |
 | <code>&lt;leader&gt;L</code> | n    | LazyVim 更新记录                   | 通用       | 运行时映射 |
 | <code>&lt;leader&gt;e</code> | n    | 文件树（当前目录，开关） | 通用       | 运行时映射 |
 | <code>&lt;leader&gt;l</code> | n    | 插件管理（Lazy）                   | 通用       | 运行时映射 |
-| <code>&lt;leader&gt;n</code> | n    | 通知历史                           | 通用       | 运行时映射 |
+| <code>&lt;leader&gt;n</code> | n    | 全部消息（Noice 文本分屏）                           | 通用       | 运行时映射 |
 | <code>&lt;leader&gt;hy</code> | nx   | 打开复制历史                       | 通用       | 运行时映射 |
 | <code>&lt;lt&gt;P</code>     | n    | 粘贴到前方并向左缩进               | 通用       | 运行时映射 |
 | <code>&lt;lt&gt;p</code>     | n    | 粘贴并向左缩进                     | 通用       | 运行时映射 |
