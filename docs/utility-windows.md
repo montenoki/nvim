@@ -12,7 +12,6 @@
 | Trouble | 诊断列表、符号树、LSP 导航、引用、定义、声明、实现、类型定义、Quickfix 列表、位置列表、待办事项；附带 `（Trouble）` |
 | Neo-tree | 文件树、文件树操作 |
 | Avante | AI 对话、AI 输入、AI 编辑指令、AI 选中代码、AI 上下文文件、AI 任务、AI 操作确认 |
-| DAP / DAP UI | 调试变量、调用栈、断点、监视表达式、调试输出、调试交互终端、调试详情 |
 | Neogit | Git 状态、提交历史、提交详情、提交选择、差异、引用、引用历史、暂存记录、命令输出、命令历史、操作 |
 | Noice / Snacks notifier | 消息、通知、通知历史 |
 | FzfLua / Telescope / Snacks picker | 搜索、搜索输入、搜索结果、搜索预览；FzfLua 是主选择器，Snacks 供 Avante 使用，Telescope 是 Obsidian 的条件依赖，当前未启用 |
@@ -33,7 +32,7 @@ filetype 的中文类别名称回退，其他特殊缓冲区显示“工具窗�
 `lua/plugins/ui/neotree.lua` 的 `nvim-window-picker` 配置使用上述统一分类。
 Neo-tree 的 Enter、`v`、`s` 和 `<leader>wp` 共用过滤规则：
 
-- 排除 Trouble、AI、调试等功能面板、浮窗、预览窗口和设置了 `winfixbuf` 的窗口。
+- 排除 Trouble、AI、消息等功能面板、浮窗、预览窗口和设置了 `winfixbuf` 的窗口。
 - 启动页（`snacks_dashboard`）是例外：可作为打开文件的目标；只有启动页可用时直接复用它。
 - 保留上游对当前窗口、不可聚焦窗口等的排除规则。
 - 只有一个可选目标（文件窗口或启动页）时自动选中；多个目标时显示字母。

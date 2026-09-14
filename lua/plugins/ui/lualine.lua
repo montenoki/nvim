@@ -24,27 +24,44 @@ return {
     opts = function(_, opts)
         -- 使用主题自带的 a/z、b/y、c/x 三层色块，不再统一背景。
         opts.options.theme = "auto"
-        -- 不按 filetype 禁用顶部栏，包括 dap-repl 在内的功能窗口也能显示名称。
+        -- 不按 filetype 禁用顶部栏，功能窗口也能显示名称。
         opts.options.disabled_filetypes.winbar = {}
         opts.options.component_separators = { left = "", right = "" }
         opts.options.section_separators = { left = "", right = "" }
 
-        -- 继承录制、调试及更新提示，把默认 Git 统计移到顶部。
-        -- LazyVim 默认 x 栏第 2 项是 Noice showcmd（未完成的按键组合），不再显示。
+        -- 把默认 Git 统计移到顶部；中央提示在下面明确选择，避免依赖上游组件顺序。
         local diff
-        local status = {}
-        for index, component in ipairs(opts.sections.lualine_x) do
+        for _, component in ipairs(opts.sections.lualine_x) do
             if type(component) == "table" and component[1] == "diff" then
                 diff = component
-            elseif index ~= 2 then
-                status[#status + 1] = component
             end
         end
         opts.sections.lualine_a = { { "mode", icon = "" } }
         opts.sections.lualine_b =
             { { display.project, icon = "󱉭" }, { "branch", icon = "" } }
         -- 左侧由外向内：模式 → 项目/分支/环境 → 临时运行提示。
-        opts.sections.lualine_c = status
+        opts.sections.lualine_c = {
+            Snacks.profiler.status(),
+            {
+                function()
+                    return require("noice").api.status.mode.get()
+                end,
+                cond = function()
+                    return package.loaded["noice"]
+                        and require("noice").api.status.mode.has()
+                end,
+                color = function()
+                    return { fg = display.color("Constant") }
+                end,
+            },
+            {
+                require("lazy.status").updates,
+                cond = require("lazy.status").has_updates,
+                color = function()
+                    return { fg = display.color("Special") }
+                end,
+            },
+        }
         -- 右侧由内向外：选区/特殊格式 → LSP → 文件属性/位置 → 全局开关。
         opts.sections.lualine_x = {
             { display.selection },

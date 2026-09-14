@@ -7,6 +7,8 @@ for _, plugin in ipairs({
     "trouble.nvim",
     "nvim-window-picker",
     "lualine.nvim",
+    "lazy.nvim",
+    "snacks.nvim",
 }) do
     vim.opt.rtp:append(plugins .. "/" .. plugin)
 end
@@ -43,7 +45,7 @@ local function split(ft, bt)
     return vim.api.nvim_get_current_win()
 end
 local tree = split("neo-tree")
-split("dapui_scopes")
+split("noice")
 split("AvanteInput")
 -- 搜索替换面板即使使用普通 buftype，也不能作为文件打开目标。
 split("grug-far", "")
@@ -83,6 +85,7 @@ local opts = {
     options = { disabled_filetypes = {} },
     sections = { lualine_x = {} },
 }
+_G.Snacks = require("snacks")
 dofile(root .. "/lua/plugins/ui/lualine.lua").opts(nil, opts)
 opts.options.theme = "onedark"
 require("lualine").setup(opts)

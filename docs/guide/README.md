@@ -23,7 +23,7 @@
 | 多文件对照工作       | [缓冲区](lazyvim/buffers.md)、[窗口](lazyvim/windows.md)                   |
 | 写代码、填模板       | [补全](plugins/completion.md)、[片段](plugins/snippets.md)                 |
 | 修报错、统一格式     | [诊断](lazyvim/diagnostics.md)、[格式化](lazyvim/formatting.md)            |
-| 运行和调试 Python    | [环境](plugins/python-environment.md)、[断点调试](plugins/python-debug.md) |
+| 编辑和运行 Python    | [环境](plugins/python-environment.md)、[终端](lazyvim/terminal.md) |
 | 编辑文档或笔记       | [项目 Markdown](plugins/markdown.md)、[Obsidian](plugins/obsidian.md)      |
 | 检查本次修改、提交   | [改动块](plugins/git-hunks.md)、[Neogit](plugins/neogit.md)                |
 | 让 AI 解释或修改代码 | [AI 提问](plugins/ai-chat.md)、[AI 编辑](plugins/ai-edit.md)               |
@@ -78,7 +78,6 @@
 - [带着代码上下文向 AI 提问](plugins/ai-chat.md)
 - [让 AI 修改选区，并决定是否应用](plugins/ai-edit.md)
 - [选择项目的 Python 环境](plugins/python-environment.md)
-- [在断点处看变量、逐行运行](plugins/python-debug.md)
 - [编辑项目里的 Markdown](plugins/markdown.md)
 - [在笔记库里创建、查找和连接笔记](plugins/obsidian.md)
 - [编辑 Nix 配置和模块](plugins/nix.md)

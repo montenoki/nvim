@@ -25,8 +25,6 @@
 | nvim-ufo                            | 代码折叠 | 增强代码折叠，显示折叠摘要并预览折叠内容。                                                           |
 | statuscol.nvim                      | 界面     | 定制行号、标记和折叠列，支持鼠标交互。                                                               |
 | venv-selector.nvim                  | Python   | 查找和切换 Python 虚拟环境，状态栏显示当前环境名。                                                   |
-| nvim-dap / nvim-dap-python          | 调试     | 断点、单步和 Python 调试；debugpy 由项目 devShell 提供。                                             |
-| nvim-dap-ui / nvim-dap-virtual-text | 调试     | 显示调试面板、变量和行内调试信息。                                                                   |
 | nvim-ansible                        | Ansible  | 提供 Ansible 专用编辑辅助。                                                                          |
 | rustaceanvim                        | Rust     | 集成 Rust 语言服务和开发操作。                                                                       |
 | crates.nvim                         | Rust     | 查看和管理 Cargo 依赖，提供版本信息与补全。                                                          |
@@ -49,3 +47,5 @@
 | ashen.nvim                          | 主题     | 提供与 Solitude 对应的 Ashen 配色。                                                                  |
 
 Showkeys：右下角显示最近按键；底栏 `󰌌` 或 `:ShowkeysToggle` 切换并记住选择，首次默认关闭。配置见 [showkeys.lua](../lua/plugins/ui/showkeys.lua)。
+
+程序调试使用其他编辑器；Neovim 不再启用 DAP 或安装专用适配器。Rust/Python 语言服务及普通运行保留。

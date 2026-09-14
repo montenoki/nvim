@@ -13,7 +13,6 @@
 | Rust、普通       | `gd` / `K` / `gr`  | 定义 / 类型文档 / 引用。       |
 | Rust、普通       | `<leader>cr`       | 重命名符号。                   |
 | Rust、普通       | `<leader>cR`       | Rust 专用代码操作。            |
-| Rust、普通       | `<leader>dr`       | 列出 Rust 可调试目标。         |
 | Cargo.toml、插入 | 补全依赖名或版本   | 使用 crates.nvim 提供的候选。  |
 | Cargo.toml、普通 | `K` / `<leader>ca` | 在支持的位置看依赖说明或操作。 |
 
@@ -23,7 +22,7 @@
 
 ## 在你的配置里
 
-Rust 文件里 `cR` 是代码操作，`dr` 是可调试目标，覆盖了通用语境下同名按键的含义。调试依赖额外适配器（如 codelldb）；已启用 DAP 并不保证当前 devShell 已提供 Rust 调试器。
+Rust 文件里 `<leader>cR` 是代码操作。保留 `:RustLsp runnables` 等非调试运行，DAP 集成、`<leader>dr` 和 CodeLLDB 接线已移除；程序调试使用其他编辑器。
 
 ## 继续查
 

@@ -23,7 +23,7 @@
 | `<leader>a`                               | AI 助手                                |
 | `<leader>b`             | 缓冲区                        |
 | `<leader>c`                               | 代码                                   |
-| `<leader>d` / `<leader>dP` / `<leader>dp` | 调试 / Python 调试 / 性能分析          |
+| `<leader>dp` | 性能分析 |
 | `<leader>f` / `<leader>s`                 | 文件与查找 / 搜索                      |
 | `<leader>g` / `<leader>gh`                | Git / 改动块                           |
 | `<leader>q`                               | 退出与会话                             |
@@ -102,34 +102,15 @@
 | <code>&lt;leader&gt;xt</code> | n    | TODO 列表（当前目录） | 通用       | 运行时映射         |
 | <code>&lt;leader&gt;xx</code> | n    | 诊断列表（打开后聚焦） | 通用       | 运行时映射         |
 
-## 调试与任务
+## 性能分析与任务
+
+Neovim 内的 DAP 调试已移除，程序调试使用其他编辑器。Snacks 性能分析和普通任务运行保留。
 
 | 按键                           | 模式 | 说明                       | 范围         | 来源            |
 | ------------------------------ | ---- | -------------------------- | ------------ | --------------- |
-| <code>&lt;leader&gt;dB</code>  | n    | 设置条件断点               | 通用         | 运行时映射      |
-| <code>&lt;leader&gt;dC</code>  | n    | 运行到光标                 | 通用         | 运行时映射      |
-| <code>&lt;leader&gt;dO</code>  | n    | 单步跳过                   | 通用         | 运行时映射      |
-| <code>&lt;leader&gt;dP</code>  | n    | 暂停调试                   | 通用         | 运行时映射      |
-| <code>&lt;leader&gt;dPc</code> | n    | 调试测试类                 | python       | nvim-dap-python |
-| <code>&lt;leader&gt;dPt</code> | n    | 调试测试方法               | python       | nvim-dap-python |
-| <code>&lt;leader&gt;da</code>  | n    | 带参数运行                 | 通用         | 运行时映射      |
-| <code>&lt;leader&gt;db</code>  | n    | 切换断点                   | 通用         | 运行时映射      |
-| <code>&lt;leader&gt;dc</code>  | n    | 启动或继续调试             | 通用         | 运行时映射      |
-| <code>&lt;leader&gt;de</code>  | nx   | 求值                       | 通用         | 运行时映射      |
-| <code>&lt;leader&gt;dg</code>  | n    | 移动调试位置（不执行）     | 通用         | 运行时映射      |
-| <code>&lt;leader&gt;di</code>  | n    | 单步进入                   | 通用         | 运行时映射      |
-| <code>&lt;leader&gt;dj</code>  | n    | 向下移动                   | 通用         | 运行时映射      |
-| <code>&lt;leader&gt;dk</code>  | n    | 向上移动                   | 通用         | 运行时映射      |
-| <code>&lt;leader&gt;dl</code>  | n    | 再次运行上次调试           | 通用         | 运行时映射      |
-| <code>&lt;leader&gt;do</code>  | n    | 单步跳出                   | 通用         | 运行时映射      |
 | <code>&lt;leader&gt;dph</code> | n    | 切换性能分析高亮           | 通用         | 运行时映射      |
 | <code>&lt;leader&gt;dpp</code> | n    | 切换性能分析               | 通用         | 运行时映射      |
 | <code>&lt;leader&gt;dps</code> | n    | 性能分析临时缓冲区         | 通用         | 运行时映射      |
-| <code>&lt;leader&gt;dr</code>  | n    | 切换调试 REPL              | 通用         | 运行时映射      |
-| <code>&lt;leader&gt;ds</code>  | n    | 会话                       | 通用         | 运行时映射      |
-| <code>&lt;leader&gt;dt</code>  | n    | 终止调试                   | 通用         | 运行时映射      |
-| <code>&lt;leader&gt;du</code>  | n    | 调试界面（DAP）            | 通用         | 运行时映射      |
-| <code>&lt;leader&gt;dw</code>  | n    | 调试组件                   | 通用         | 运行时映射      |
 | <code>&lt;leader&gt;ta</code>  | n    | 运行 Ansible Playbook/Role | yaml.ansible | nvim-ansible    |
 
 ## Git
@@ -380,7 +361,7 @@
 
 中文分词的具体文件类型见 [jieba.lua](../lua/config/languages/jieba.lua)。
 Obsidian 没有在本地配置额外分配一套全局键位；进入笔记库后还会启用它的局部默认行为。
-Neogit、DAP、Telescope 等界面也有插件自己的局部帮助；此次未重写这些界面的内部按键布局。
+Neogit、Telescope 等界面也有插件自己的局部帮助；此次未重写这些界面的内部按键布局。
 
 ## 本轮调整边界
 

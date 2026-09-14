@@ -31,14 +31,6 @@ local names = {
     AvanteSelectedFiles = "AI 上下文文件",
     AvanteTodos = "AI 任务",
     AvanteConfirm = "AI 操作确认",
-    ["dap-repl"] = "调试交互终端",
-    ["dap-float"] = "调试详情",
-    dapui_scopes = "调试变量",
-    dapui_stacks = "调用栈",
-    dapui_breakpoints = "断点",
-    dapui_watches = "监视表达式",
-    dapui_console = "调试输出",
-    dapui_hover = "调试悬浮详情",
     NeogitStatus = "Git 状态",
     NeogitLogView = "Git 提交历史",
     NeogitCommitView = "Git 提交详情",
@@ -93,7 +85,6 @@ function M.name(win)
     for prefix, label in pairs({
         Avante = "AI 面板",
         Neogit = "Git 面板",
-        dapui_ = "调试面板",
         snacks_ = "工具面板",
         Telescope = "搜索面板",
     }) do

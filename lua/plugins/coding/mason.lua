@@ -2,25 +2,23 @@ local platform = require("config.platform")
 
 return {
     {
-        "jay-babu/mason-nvim-dap.nvim",
-        -- Nix 环境的调试器由项目 devShell 提供。
-        enabled = not platform.nix_managed_tools,
-    },
-    {
         "mason-org/mason.nvim",
         enabled = not platform.nix_managed_tools,
-        opts = {
-            ensure_installed = {
+        opts = function(_, opts)
+            -- Rust Extra 会追加 codelldb；Neovim 不再安装专用调试器。
+            opts.ensure_installed = vim.tbl_filter(function(tool)
+                return tool ~= "codelldb" and tool ~= "debugpy"
+            end, opts.ensure_installed or {})
+            vim.list_extend(opts.ensure_installed, {
                 "bash-language-server",
                 "prettier",
                 "shellcheck",
-                "debugpy",
                 "taplo",
                 "nil",
                 "nixfmt",
                 "statix",
-            },
-        },
+            })
+        end,
     },
     {
         "mason-org/mason-lspconfig.nvim",
