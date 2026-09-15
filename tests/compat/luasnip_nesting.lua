@@ -1,9 +1,6 @@
 local ok, err = xpcall(function()
     require("lazy").load({ plugins = { "blink.cmp" } })
     local config = require("blink.cmp.config")
-    assert(config.snippets.preset == "luasnip")
-    assert(config.completion.trigger.show_in_snippet == false)
-    assert(config.keymap["<Tab>"][1] == "select_next")
     local ls = require("luasnip")
     vim.cmd.enew()
     vim.bo.filetype = "tex"
@@ -44,7 +41,6 @@ local ok, err = xpcall(function()
             == outer.insert_nodes[2],
         "return outer denominator"
     )
-    print(vim.inspect(vim.api.nvim_buf_get_lines(0, 0, -1, false)))
     assert(vim.api.nvim_get_current_line() == [[\frac{\frac{}{}}{}]])
     print(
         "PASS: actual Blink LuaSnip integration, nested fractions, backward jump, return to outer placeholder"

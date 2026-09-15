@@ -76,7 +76,7 @@ function M.operator_textobject(motion)
 end
 
 -- 依赖 JiebaModelOmap 的范围字段和 MiniSurround.add 的操作约定。
--- 升级相关插件后运行 tests/jieba_surround.lua，验证选区、计数和点号重复。
+-- 升级相关插件后运行 tests/compat/jieba_surround.lua，验证选区、计数和点号重复。
 ---@param motion "iw"|"aw"
 function M.select_for_surround(motion)
     -- 获取词语的起止位置，保留 iw/aw 的计数和空白选择规则。

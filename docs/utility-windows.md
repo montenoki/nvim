@@ -42,7 +42,7 @@ Neo-tree 的 Enter、`v`、`s` 和 `<leader>wp` 共用过滤规则：
 Enter 的配置键名使用上游默认的 `<cr>`。当前 Neo-tree 版本未正确归一化
 用户映射的键名；写成 `<CR>` 会与默认 `<cr>` 并存，两者注册到同一个 Enter
 时可能被普通 `open` 覆盖，绕过选择器。完整配置回归测试
-`tests/neotree_window_picker.lua` 检查合并后的映射唯一性及实际打开行为。
+`tests/compat/neotree_window_picker.lua` 检查合并后的映射唯一性及实际打开行为。
 
 ## 顶部栏的颜色与三角分隔
 
@@ -57,4 +57,4 @@ Enter 的配置键名使用上游默认的 `<cr>`。当前 Neo-tree 版本未正
 三角分隔；现在按窗口名与文件路径分别使用 a、b。`e27436a` 只移动文件并修改模块引用，
 `9405731` 的中文说明改动未修改 lualine。
 
-跨插件适配检查见 `tests/utility_windows.lua` 和 [运行说明](../tests/README.md)。
+跨插件适配检查见 `tests/compat/neotree_window_picker.lua` 和 [运行说明](../tests/README.md)。

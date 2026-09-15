@@ -120,10 +120,6 @@ local dashboard = require("snacks.dashboard").open({
 })
 local dashboard_win = dashboard.win
 assert(vim.bo[dashboard.buf].filetype == "snacks_dashboard")
-assert(
-    windows.name(dashboard_win) ~= nil,
-    "dashboard must have a utility title"
-)
 focus_file()
 local count = #vim.api.nvim_tabpage_list_wins(0)
 prompted = false

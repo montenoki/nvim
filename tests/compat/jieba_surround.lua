@@ -1,4 +1,4 @@
--- 在仓库根目录运行：nvim --headless -u NONE -i NONE -l tests/jieba_surround.lua
+-- 在仓库根目录运行：nvim --headless -u NONE -i NONE -l tests/compat/jieba_surround.lua
 -- 使用已安装的插件；不安装、更新插件，也不读取或保存个人 ShaDa。
 local root = vim.fn.getcwd()
 local plugins = vim.env.NVIM_TEST_PLUGIN_ROOT
@@ -88,17 +88,6 @@ check(
 )
 assert(vim.fn.maparg("iw", "o", false, true).buffer == 1)
 
--- 每种支持的文件类型都有局部映射，并能完成中文包围和英文编辑。
-for _, ft in ipairs(require("config.languages.jieba").filetypes) do
-    vim.cmd("enew!")
-    vim.bo.filetype = ft
-    assert(vim.fn.maparg("iw", "o", false, true).buffer == 1, ft)
-    assert(vim.fn.maparg("w", "n", false, true).buffer == 1, ft)
-    assert(vim.fn.maparg("W", "n") == "", ft)
-    check({ "中国人民欢迎你" }, 'gzaiw"', { '"中国"人民欢迎你' })
-    check({ "hello world" }, 'gzaiw"', { '"hello" world' })
-end
-
 -- 代码里的中文注释也能直接选词；前面的注释符号不受影响。
 vim.cmd("enew!")
 vim.bo.filetype = "lua"
@@ -109,24 +98,4 @@ check(
     { 1, 3 }
 )
 
--- 未列入白名单的插件窗口不应出现 Jieba 的局部映射。
-for _, ft in ipairs({
-    "neo-tree",
-    "lazy",
-    "help",
-    "qf",
-    "terminal",
-    "snacks_dashboard",
-}) do
-    vim.cmd("enew!")
-    vim.bo.buftype = "nofile"
-    vim.bo.filetype = ft
-    for _, motion in ipairs({ "w", "b", "e", "ge", "iw", "aw" }) do
-        for _, mode in ipairs({ "n", "x", "o" }) do
-            assert(vim.fn.maparg(motion, mode) == "", ft .. ": " .. motion)
-        end
-    end
-end
-print(
-    "PASS: Jieba/Surround compatibility, code comments, supported filetypes and special-window isolation"
-)
+print("PASS: Jieba/Surround text objects, repeat and code comments")

@@ -602,7 +602,7 @@
 ## 实施后的统一验收检查
 
 - 启动和懒加载无错误；普通文件、LSP attach、Neo-tree、Trouble、Avante 各场景分别核对实际键位及中文菜单，检查新键可用、旧入口不回生。
-- 文件树执行 tests/neotree_window_picker.lua、tests/utility_windows.lua，保护启动页、无编辑窗口、两个编辑窗口选择及功能面板排除；状态栏原有样式不回退。
+- 文件树执行 tests/compat/neotree_window_picker.lua，保护启动页、无编辑窗口、两个编辑窗口选择及功能面板排除；状态栏原有样式不回退。
 - Python 测试项目验证 ca/co/cf、符号重命名、文档和签名；使用临时文件或内存修改，不覆盖测试项目现有内容。
 - Trouble 验证跨 buffer 诊断、Quickfix 数据兼容、cwd TODO 和列表跳转。
 - 临时 Git 仓库验证 Alt+j/k、历史查看不改工作区、两个客户端回编辑器；远程链接分别核对单行和选区。
