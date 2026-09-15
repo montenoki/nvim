@@ -5,13 +5,21 @@ return {
             { "<leader>dps", false }, -- 取消性能分析临时缓冲区。
             { "<leader>n", false }, -- 全部消息统一由 Noice 提供文本分屏。
             { "<leader>un", false }, -- 取消一次性隐藏通知入口，保留正常通知显示。
-            { "<leader>S", false }, -- 选择已保存的草稿；迁到 leader qn，leader . 仍用于打开草稿。
+            { "<leader>.", false }, -- 打开便笺迁到 leader p。
+            { "<leader>S", false }, -- 便笺列表迁到 leader P。
             {
-                "<leader>qn",
+                "<leader>p",
+                function()
+                    Snacks.scratch()
+                end,
+                desc = "打开或关闭便笺",
+            },
+            {
+                "<leader>P",
                 function()
                     Snacks.scratch.select()
                 end,
-                desc = "选择已保存草稿",
+                desc = "便笺列表",
             },
         },
         opts = function(_, opts)
@@ -71,8 +79,23 @@ return {
                 require("config.git_history").compare(picker, item)
             end
             return vim.tbl_deep_extend("force", opts, {
+                -- 新便笺固定为 Markdown；从列表打开的已有便笺保留原文件类型。
+                scratch = { ft = "markdown" },
                 picker = {
                     sources = {
+                        scratch = {
+                            win = {
+                                input = {
+                                    footer_keys = { "<CR>", "<C-n>", "<C-x>", "?" },
+                                    keys = {
+                                        ["<CR>"] = { "confirm", mode = { "n", "i" }, desc = "打开" },
+                                        ["<C-n>"] = { "scratch_new", mode = { "n", "i" }, desc = "新建" },
+                                        ["<C-x>"] = { "scratch_delete", mode = { "n", "i" }, desc = "直接删除" },
+                                        ["?"] = { "toggle_help_input", desc = "帮助" },
+                                    },
+                                },
+                            },
+                        },
                         git_log_file = { confirm = detail },
                         git_log_line = { confirm = detail },
                     },
