@@ -4,7 +4,8 @@
 
 | 目录 / 文件               | 职责                                                 |
 | ------------------------- | ---------------------------------------------------- |
-| `init.lua`                | 启动入口、provider 和文件类型预设                    |
+| `init.lua`                | 启动入口、provider 设置及模块加载顺序                |
+| `lua/config/filetypes.lua` | Compose 文件名到专属文件类型的映射                  |
 | `lua/config/lazy.lua`     | 引导 lazy.nvim、登记插件分类、Nix 加载规则           |
 | `lua/config/options.lua`  | 通用编辑器选项                                       |
 | `lua/config/autocmds.lua` | 通用自动命令                                         |
@@ -18,7 +19,7 @@
 | `lua/config/languages/`   | 中文文本对象适配、笔记库发现等辅助逻辑               |
 | `lua/plugins/coding/`     | 补全、格式化、LSP、解析器、工具安装、Git 和 AI       |
 | `lua/plugins/editor/`     | 移动、包围、折叠、复制、中文编辑和输入法             |
-| `lua/plugins/languages/`  | Bash、Python、Markdown、Obsidian 的插件配置          |
+| `lua/plugins/languages/`  | 通用配置文件、Shell、Web、QML、CSV、SQL、XML 及项目语言的插件配置 |
 | `lua/plugins/ui/`         | 主题、状态栏、文件树、提示及图像显示                 |
 | `tests/`                  | 升级后需要复查的跨插件适配，见其中的 README          |
 
@@ -28,6 +29,8 @@
 例如：`config/languages/obsidian_workspaces.lua` 只发现笔记库，同时供 Obsidian
 配置和 Marksman 排除规则使用；`plugins/languages/obsidian.lua` 负责插件设置。
 `plugins/coding/lsp.lua` 只把全局偏好接到 LSP，开关逻辑仍在 `config/toggles.lua`。
+
+语言工具、高亮资源及项目依赖的边界见 [语言能力与依赖归属](languages.md)。
 
 LazyVim 约定的 `config/options.lua`、`autocmds.lua`、`keymaps.lua` 保持原位置。
 其他模块移动后同步更新 `require`，如 `require("config.ui.theme")`。

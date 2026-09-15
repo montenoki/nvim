@@ -22,10 +22,16 @@
 
 ## 在你的配置里
 
-`docker-compose.yml`、`docker-compose.yaml`、`compose.yml`、`compose.yaml` 四个名字已显式识别。Dockerfile、Compose 使用不同服务器；编辑支持不代表 Docker daemon 已运行，也不会自动构建镜像或启动服务。
+识别 `docker-compose.yml/.yaml`、`compose.yml/.yaml`，以及带环境或用途后缀的
+`docker-compose.<后缀>.yml/.yaml`、`compose.<后缀>.yml/.yaml`，例如
+`docker-compose.dev.yml`、`compose.override.yaml`。Dockerfile、Compose 使用不同服务器；
+编辑支持不代表 Docker daemon 已运行，也不会自动构建镜像或启动服务。
+
+两个语言服务器和 Hadolint 由 Nix 全局安装；Compose 使用 Prettier 格式化。
+无需进入项目 devShell，完整边界见 [语言能力清单](../../languages.md)。
 
 ## 继续查
 
-配置：[文件类型入口](../../../init.lua)、[语言 Extras](../../../lazyvim.json)。
+配置：[文件类型规则](../../../lua/config/filetypes.lua)、[语言 Extras](../../../lazyvim.json)。
 
 [返回卡片目录](../README.md)

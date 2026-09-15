@@ -3644,31 +3644,27 @@
     {
       "id": "L06",
       "category": "语言",
-      "capability": "Shell 与 Fish 支持",
+      "capability": "Bash、Fish 与 Zsh 编辑",
       "providers": [
         "nvim-lspconfig",
         "conform.nvim",
         "nvim-lint"
       ],
       "scope": "sh/bash/fish",
-      "entries": "bashls；shfmt/fish_indent；fish 检查；共用 cf/诊断",
+      "entries": "bashls/ShellCheck/shfmt；fish_lsp/fish_indent/fish；zsh --no-exec",
       "windows": [
         "补全/诊断"
       ],
       "overlap": "语言诊断",
-      "question": "ShellCheck 等外部链路按 bashls/项目实际环境复查，不据安装清单认定启用",
-      "availability": "依赖对应工具",
+      "question": "Zsh 不使用 Bash LS 或 shfmt；PowerShell 未新增",
+      "availability": "Nix 全局依赖",
       "sources": [
-        "lazyvim.json",
-        "lua/plugins/coding/lsp.lua",
         "lua/plugins/languages/bash.lua",
-        "lua/plugins/languages/markdown.lua",
-        "lua/plugins/languages/python.lua",
-        "lua/plugins/coding/formatting.lua"
+        "docs/languages.md"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待试用",
+      "decision": "保留",
+      "notes": "2026-09-16：x86_64 通用语言重构；工具由 Nix 全局提供，ARM 与项目 devShell 保持现状。运行时基础验证通过，交互体验待试用。"
     },
     {
       "id": "L07",
@@ -3715,43 +3711,42 @@
       ],
       "overlap": "语言底座",
       "question": "Schema 数据源与语言服务器不是两份补全引擎",
-      "availability": "依赖 yamlls/prettier",
+      "availability": "Nix 全局依赖，零散 YAML 可用",
       "sources": [
         "lazyvim.json",
-        "lua/plugins/coding/lsp.lua",
-        "lua/plugins/languages/bash.lua",
-        "lua/plugins/languages/markdown.lua",
-        "lua/plugins/languages/python.lua",
-        "lua/plugins/coding/formatting.lua"
+        "lua/plugins/languages/config_files.lua",
+        "docs/languages.md"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待试用",
+      "decision": "保留",
+      "notes": "2026-09-16：x86_64 通用语言重构；工具由 Nix 全局提供，ARM 与项目 devShell 保持现状。运行时基础验证通过，交互体验待试用。"
     },
     {
       "id": "L09",
       "category": "语言",
-      "capability": "JSON/JSONC 格式与语法",
+      "capability": "JSON/JSONC 语言服务与格式化",
       "providers": [
+        "nvim-lspconfig",
+        "SchemaStore.nvim",
         "conform.nvim",
         "nvim-treesitter"
       ],
       "scope": "JSON/JSONC",
-      "entries": "prettier；Tree-sitter；共用 cf",
+      "entries": "jsonls；SchemaStore；Prettier；共用 cf/诊断",
       "windows": [
         "编辑窗口"
       ],
       "overlap": "语言底座",
-      "question": "当前未启用 JSON Extra/jsonls；不能把锁定的 SchemaStore 当作 JSON LSP 已接入",
-      "availability": "格式/解析已配置，JSON LSP 未配置",
+      "question": "Schema 补全依赖匹配规则，远程 Schema 可能需要联网",
+      "availability": "Nix 全局依赖，零散文件可用",
       "sources": [
         "lazyvim.json",
-        "lua/plugins/coding/formatting.lua",
-        "lua/plugins/coding/treesitter.lua"
+        "lua/plugins/languages/config_files.lua",
+        "docs/languages.md"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待试用",
+      "decision": "保留",
+      "notes": "2026-09-16：x86_64 通用语言重构；工具由 Nix 全局提供，ARM 与项目 devShell 保持现状。运行时基础验证通过，交互体验待试用。"
     },
     {
       "id": "L10",
@@ -3767,18 +3762,17 @@
         "补全/诊断"
       ],
       "overlap": "语言诊断",
-      "question": "Compose 特殊文件类型与普通 YAML 的服务分工按实际 attach 复核",
-      "availability": "依赖对应工具",
+      "question": "编辑能力不启动 Docker daemon 或构建镜像",
+      "availability": "Nix 全局依赖，无需项目 devShell",
       "sources": [
         "lazyvim.json",
-        "lua/plugins/coding/lsp.lua",
-        "lua/plugins/languages/bash.lua",
-        "lua/plugins/languages/markdown.lua",
-        "lua/plugins/languages/python.lua"
+        "lua/config/filetypes.lua",
+        "lua/plugins/languages/config_files.lua",
+        "docs/languages.md"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待试用",
+      "decision": "保留",
+      "notes": "2026-09-16：x86_64 通用语言重构；工具由 Nix 全局提供，ARM 与项目 devShell 保持现状。运行时基础验证通过，交互体验待试用。 Compose 文件识别覆盖基础名称及 dev/prod/override 等非空后缀，支持 yml/yaml。"
     },
     {
       "id": "L11",
@@ -3865,28 +3859,28 @@
     {
       "id": "L14",
       "category": "语言",
-      "capability": "更多语法与语言支持范围",
+      "capability": "全局高亮与项目工具边界",
       "providers": [
         "nvim-treesitter",
         "nvim-ts-autotag",
         "jieba.vim"
       ],
       "scope": "Go/C/JS/TS/HTML/CSS 等",
-      "entries": "解析器/对象/中文区域规则；并非均配置 LSP",
+      "entries": "x86_64 全部 Nix parser/query；通用编辑全局安装；Python/Rust/Ansible/Terraform 保留项目工具",
       "windows": [
         "编辑窗口"
       ],
       "overlap": "语言底座",
-      "question": "文件类型出现在 jieba/Tree-sitter 清单不表示完整语言工具链可用",
-      "availability": "仅部分语法支持，LSP 未逐项配置",
+      "question": "全局 parser 不等于全局安装所有语言开发工具",
+      "availability": "x86_64 实施，ARM 后续处理",
       "sources": [
-        "lazyvim.json",
         "lua/plugins/coding/treesitter.lua",
-        "lua/plugins/editor/jieba.lua"
+        "lua/config/lazy.lua",
+        "docs/languages.md"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待试用",
+      "decision": "保留",
+      "notes": "2026-09-16：x86_64 通用语言重构；工具由 Nix 全局提供，ARM 与项目 devShell 保持现状。运行时基础验证通过，交互体验待试用。"
     },
     {
       "id": "O01",
@@ -4613,21 +4607,21 @@
         "nvim-treesitter"
       ],
       "scope": "语法功能底座",
-      "entries": "Nix 提供 runtimepath；TSUpdate 在 Nix 分支禁用",
+      "entries": "NVIM_NIX_PARSER_RTP；锁定 Nixpkgs 当前 326 种 parser",
       "windows": [
         "无"
       ],
       "overlap": "依赖边界",
       "question": "高亮、文本对象、折叠、中文区域识别共用底座",
-      "availability": "依赖已安装解析器",
+      "availability": "Nix 全局 parser/query；禁用自动安装",
       "sources": [
-        "lua/config/lazy.lua",
         "lua/plugins/coding/treesitter.lua",
-        "lazyvim.json"
+        "lua/config/lazy.lua",
+        "docs/languages.md"
       ],
-      "status": "已决定",
+      "status": "待试用",
       "decision": "保留",
-      "notes": ""
+      "notes": "2026-09-16：x86_64 通用语言重构；工具由 Nix 全局提供，ARM 与项目 devShell 保持现状。运行时基础验证通过，交互体验待试用。"
     },
     {
       "id": "I02",
@@ -4656,6 +4650,220 @@
       "status": "已决定",
       "decision": "保留",
       "notes": ""
+    },
+    {
+      "id": "L15",
+      "category": "语言",
+      "capability": "普通 TOML 编辑",
+      "providers": [
+        "Neovim",
+        "Nix"
+      ],
+      "scope": "TOML",
+      "entries": "taplo；格式化与诊断",
+      "windows": [
+        "编辑窗口"
+      ],
+      "overlap": "语言底座",
+      "question": "能力和依赖边界见 docs/languages.md",
+      "availability": "全局能力；x86_64",
+      "sources": [
+        "docs/languages.md",
+        "lua/plugins/languages/config_files.lua"
+      ],
+      "status": "待试用",
+      "decision": "保留",
+      "notes": "2026-09-16：x86_64 通用语言重构；工具由 Nix 全局提供，ARM 与项目 devShell 保持现状。运行时基础验证通过，交互体验待试用。"
+    },
+    {
+      "id": "L16",
+      "category": "语言",
+      "capability": "CSV/TSV 表格显示",
+      "providers": [
+        "csvview.nvim"
+      ],
+      "scope": "CSV/TSV",
+      "entries": "CsvViewToggle；CsvViewInfo；]v/[v 字段导航，虚拟对齐不改写数据",
+      "windows": [
+        "编辑窗口"
+      ],
+      "overlap": "语言底座",
+      "question": "能力和依赖边界见 docs/languages.md",
+      "availability": "全局能力；x86_64",
+      "sources": [
+        "docs/languages.md",
+        "lua/plugins/languages/csv.lua"
+      ],
+      "status": "待试用",
+      "decision": "保留",
+      "notes": "2026-09-16：x86_64 通用语言重构；工具由 Nix 全局提供，ARM 与项目 devShell 保持现状。运行时基础验证通过，交互体验待试用。"
+    },
+    {
+      "id": "L17",
+      "category": "语言",
+      "capability": "XML 与 Schema",
+      "providers": [
+        "Neovim",
+        "Nix"
+      ],
+      "scope": "XML/XSD/XSL/SVG",
+      "entries": "lemminx；LSP 格式化和 Schema 校验",
+      "windows": [
+        "编辑窗口"
+      ],
+      "overlap": "语言底座",
+      "question": "能力和依赖边界见 docs/languages.md",
+      "availability": "全局能力；x86_64",
+      "sources": [
+        "docs/languages.md",
+        "lua/plugins/languages/xml.lua"
+      ],
+      "status": "待试用",
+      "decision": "保留",
+      "notes": "2026-09-16：x86_64 通用语言重构；工具由 Nix 全局提供，ARM 与项目 devShell 保持现状。运行时基础验证通过，交互体验待试用。"
+    },
+    {
+      "id": "L18",
+      "category": "语言",
+      "capability": "HTML/CSS 编辑",
+      "providers": [
+        "Neovim",
+        "Nix"
+      ],
+      "scope": "HTML/CSS/SCSS/Less",
+      "entries": "html/cssls；Prettier",
+      "windows": [
+        "编辑窗口"
+      ],
+      "overlap": "语言底座",
+      "question": "能力和依赖边界见 docs/languages.md",
+      "availability": "全局能力；x86_64",
+      "sources": [
+        "docs/languages.md",
+        "lua/plugins/languages/web.lua"
+      ],
+      "status": "待试用",
+      "decision": "保留",
+      "notes": "2026-09-16：x86_64 通用语言重构；工具由 Nix 全局提供，ARM 与项目 devShell 保持现状。运行时基础验证通过，交互体验待试用。"
+    },
+    {
+      "id": "L19",
+      "category": "语言",
+      "capability": "JavaScript/TypeScript 编辑",
+      "providers": [
+        "Neovim",
+        "Nix"
+      ],
+      "scope": "JS/TS/JSX/TSX/MJS/CJS",
+      "entries": "ts_ls；Prettier，项目运行依赖另行管理",
+      "windows": [
+        "编辑窗口"
+      ],
+      "overlap": "语言底座",
+      "question": "能力和依赖边界见 docs/languages.md",
+      "availability": "全局能力；x86_64",
+      "sources": [
+        "docs/languages.md",
+        "lua/plugins/languages/web.lua"
+      ],
+      "status": "待试用",
+      "decision": "保留",
+      "notes": "2026-09-16：x86_64 通用语言重构；工具由 Nix 全局提供，ARM 与项目 devShell 保持现状。运行时基础验证通过，交互体验待试用。"
+    },
+    {
+      "id": "L20",
+      "category": "语言",
+      "capability": "QML/Quickshell 编辑",
+      "providers": [
+        "Neovim",
+        "Nix"
+      ],
+      "scope": "QML",
+      "entries": "qmlls；qmlformat；Nix 提供 Qt/Quickshell 模块路径",
+      "windows": [
+        "编辑窗口"
+      ],
+      "overlap": "语言底座",
+      "question": "能力和依赖边界见 docs/languages.md",
+      "availability": "全局能力；x86_64",
+      "sources": [
+        "docs/languages.md",
+        "lua/plugins/languages/qml.lua"
+      ],
+      "status": "待试用",
+      "decision": "保留",
+      "notes": "2026-09-16：x86_64 通用语言重构；工具由 Nix 全局提供，ARM 与项目 devShell 保持现状。运行时基础验证通过，交互体验待试用。 Qt JS 全局内容识别已移除；保留显式 javascript.qml 的 qmlformat 配置。NixOS 项目的文件类型声明留到维护 Quickshell 时添加，当前独立 .js 仍按普通 JS 处理。"
+    },
+    {
+      "id": "L21",
+      "category": "语言",
+      "capability": "SQL 通用格式化",
+      "providers": [
+        "Neovim",
+        "Nix"
+      ],
+      "scope": "SQL",
+      "entries": "sql-formatter 默认 SQL；不连接数据库",
+      "windows": [
+        "编辑窗口"
+      ],
+      "overlap": "语言底座",
+      "question": "能力和依赖边界见 docs/languages.md",
+      "availability": "全局能力；x86_64",
+      "sources": [
+        "docs/languages.md",
+        "lua/plugins/languages/sql.lua"
+      ],
+      "status": "待试用",
+      "decision": "保留",
+      "notes": "2026-09-16：x86_64 通用语言重构；工具由 Nix 全局提供，ARM 与项目 devShell 保持现状。运行时基础验证通过，交互体验待试用。"
+    },
+    {
+      "id": "L23",
+      "category": "语言",
+      "capability": "Vimscript 配置编辑",
+      "providers": [
+        "Neovim",
+        "Nix"
+      ],
+      "scope": "Vimscript",
+      "entries": "vimls；高亮与语言服务器诊断",
+      "windows": [
+        "编辑窗口"
+      ],
+      "overlap": "语言底座",
+      "question": "能力和依赖边界见 docs/languages.md",
+      "availability": "全局能力；x86_64",
+      "sources": [
+        "docs/languages.md",
+        "lua/plugins/languages/config_files.lua"
+      ],
+      "status": "待试用",
+      "decision": "保留",
+      "notes": "2026-09-16：x86_64 通用语言重构；工具由 Nix 全局提供，ARM 与项目 devShell 保持现状。运行时基础验证通过，交互体验待试用。"
+    },
+    {
+      "id": "L24",
+      "category": "语言",
+      "capability": "INI/conf/env 基础编辑",
+      "providers": [
+        "Neovim",
+        "Nix"
+      ],
+      "scope": "INI/conf/.env",
+      "entries": "Neovim 文件识别、syntax、注释；不推断所有应用字段规则",
+      "windows": [
+        "编辑窗口"
+      ],
+      "overlap": "语言底座",
+      "question": "能力和依赖边界见 docs/languages.md",
+      "availability": "全局能力；x86_64",
+      "sources": [
+        "docs/languages.md"
+      ],
+      "status": "待试用",
+      "decision": "保留",
+      "notes": "2026-09-16：x86_64 通用语言重构；工具由 Nix 全局提供，ARM 与项目 devShell 保持现状。运行时基础验证通过，交互体验待试用。"
     }
   ],
   "plugins": [
@@ -7145,6 +7353,39 @@
         "events": "LazyFile",
         "commands": [],
         "filetypes": []
+      }
+    },
+    {
+      "id": "PL-csvview.nvim",
+      "category": "插件",
+      "plugin": "csvview.nvim",
+      "role": "CSV/TSV 虚拟表格显示",
+      "availability": "有效声明／新增锁定",
+      "capabilities": [
+        "L16"
+      ],
+      "condition": "CSV/TSV 文件或 CsvView 命令",
+      "commit": "2466bdda54047f525d4faca53040fe657c9c33db",
+      "sources": [
+        "lua/plugins/languages/csv.lua"
+      ],
+      "status": "待试用",
+      "decision": "保留",
+      "notes": "2026-09-16：x86_64 通用语言重构；工具由 Nix 全局提供，ARM 与项目 devShell 保持现状。运行时基础验证通过，交互体验待试用。",
+      "dependencies": [],
+      "loading": {
+        "lazy": true,
+        "events": [],
+        "commands": [
+          "CsvViewEnable",
+          "CsvViewDisable",
+          "CsvViewToggle",
+          "CsvViewInfo"
+        ],
+        "filetypes": [
+          "csv",
+          "tsv"
+        ]
       }
     }
   ],
@@ -19001,6 +19242,42 @@
       "status": "待筛查",
       "decision": "未决定",
       "notes": ""
+    },
+    {
+      "id": "K-csv-next",
+      "category": "快捷键",
+      "key": "]v",
+      "mode": "n/x",
+      "scope": "CSV/TSV 视图内",
+      "description": "下一字段末尾",
+      "providers": [
+        "csvview.nvim"
+      ],
+      "rhs": "csvview field navigation",
+      "evidence": [
+        "lua/plugins/languages/csv.lua"
+      ],
+      "status": "待试用",
+      "decision": "保留",
+      "notes": "仅在 CSV 视图内生效，避免覆盖 Gitsigns 的 ]c/[c。"
+    },
+    {
+      "id": "K-csv-prev",
+      "category": "快捷键",
+      "key": "[v",
+      "mode": "n/x",
+      "scope": "CSV/TSV 视图内",
+      "description": "上一字段末尾",
+      "providers": [
+        "csvview.nvim"
+      ],
+      "rhs": "csvview field navigation",
+      "evidence": [
+        "lua/plugins/languages/csv.lua"
+      ],
+      "status": "待试用",
+      "decision": "保留",
+      "notes": "仅在 CSV 视图内生效，避免覆盖 Gitsigns 的 ]c/[c。"
     }
   ],
   "groups": [
@@ -19365,16 +19642,16 @@
       "tool": "bashls",
       "scope": "L06",
       "provider": "nvim-lspconfig",
-      "availability": "配置启用／需外部程序与项目",
+      "availability": "Nix 全局依赖",
       "config": [],
       "question": "检查实际 attach 和诊断来源，避免同语言重复实例",
       "sources": [
         "lua/plugins/coding/lsp.lua",
         "lazyvim.json"
       ],
-      "status": "待筛查",
+      "status": "待试用",
       "decision": "未决定",
-      "notes": ""
+      "notes": "2026-09-16：x86_64 通用语言重构；工具由 Nix 全局提供，ARM 与项目 devShell 保持现状。运行时基础验证通过，交互体验待试用。"
     },
     {
       "id": "TOOL-lsp-docker_compose_language_service",
@@ -19382,16 +19659,16 @@
       "tool": "docker_compose_language_service",
       "scope": "L10",
       "provider": "nvim-lspconfig",
-      "availability": "配置启用／需外部程序与项目",
+      "availability": "Nix 全局依赖",
       "config": [],
       "question": "检查实际 attach 和诊断来源，避免同语言重复实例",
       "sources": [
         "lua/plugins/coding/lsp.lua",
         "lazyvim.json"
       ],
-      "status": "待筛查",
+      "status": "待试用",
       "decision": "未决定",
-      "notes": ""
+      "notes": "2026-09-16：x86_64 通用语言重构；工具由 Nix 全局提供，ARM 与项目 devShell 保持现状。运行时基础验证通过，交互体验待试用。"
     },
     {
       "id": "TOOL-lsp-dockerls",
@@ -19399,16 +19676,16 @@
       "tool": "dockerls",
       "scope": "L10",
       "provider": "nvim-lspconfig",
-      "availability": "配置启用／需外部程序与项目",
+      "availability": "Nix 全局依赖",
       "config": [],
       "question": "检查实际 attach 和诊断来源，避免同语言重复实例",
       "sources": [
         "lua/plugins/coding/lsp.lua",
         "lazyvim.json"
       ],
-      "status": "待筛查",
+      "status": "待试用",
       "decision": "未决定",
-      "notes": ""
+      "notes": "2026-09-16：x86_64 通用语言重构；工具由 Nix 全局提供，ARM 与项目 devShell 保持现状。运行时基础验证通过，交互体验待试用。"
     },
     {
       "id": "TOOL-lsp-lua_ls",
@@ -19608,16 +19885,16 @@
       "tool": "yamlls",
       "scope": "L08",
       "provider": "nvim-lspconfig",
-      "availability": "配置启用／需外部程序与项目",
+      "availability": "Nix 全局依赖",
       "config": "configured (functions)",
       "question": "检查实际 attach 和诊断来源，避免同语言重复实例",
       "sources": [
         "lua/plugins/coding/lsp.lua",
         "lazyvim.json"
       ],
-      "status": "待筛查",
+      "status": "待试用",
       "decision": "未决定",
-      "notes": ""
+      "notes": "2026-09-16：x86_64 通用语言重构；工具由 Nix 全局提供，ARM 与项目 devShell 保持现状。运行时基础验证通过，交互体验待试用。"
     },
     {
       "id": "TOOL-format-fish",
@@ -19965,7 +20242,7 @@
       "tool": "debugpy",
       "scope": "Python",
       "provider": "nvim-dap-python",
-      "availability": "依赖外部环境／按项目复核",
+      "availability": "已移出 Neovim 专用 Nix 依赖",
       "config": "Nix 或项目 devShell 提供",
       "question": "验证与所选 venv 的目标解释器分工",
       "sources": [
@@ -19974,7 +20251,7 @@
       ],
       "status": "待实施",
       "decision": "移除",
-      "notes": "2026-09-15 决定：移除 Neovim 内的 DAP 程序调试能力，需要调试时使用其他编辑器。移除 Neovim 的适配器配置和专用安装需求；外部编辑器或项目共享的工具不据此卸载。"
+      "notes": "2026-09-15 决定：移除 Neovim 内的 DAP 程序调试能力，需要调试时使用其他编辑器。移除 Neovim 的适配器配置和专用安装需求；外部编辑器或项目共享的工具不据此卸载。\n2026-09-16：移除 editor.nix 中的 debugpy；尚未部署系统。"
     },
     {
       "id": "TOOL-external-codelldb",
@@ -20026,6 +20303,159 @@
       "status": "待筛查",
       "decision": "未决定",
       "notes": ""
+    },
+    {
+      "id": "TOOL-lsp-jsonls",
+      "category": "语言服务器",
+      "tool": "jsonls",
+      "scope": "L09",
+      "provider": "nvim-lspconfig",
+      "availability": "Nix 全局依赖",
+      "config": "configured",
+      "question": "检查真实连接、格式化及诊断",
+      "sources": [
+        "docs/languages.md",
+        "lua/plugins/coding/lsp.lua"
+      ],
+      "status": "待试用",
+      "decision": "保留",
+      "notes": "2026-09-16：x86_64 通用语言重构；工具由 Nix 全局提供，ARM 与项目 devShell 保持现状。运行时基础验证通过，交互体验待试用。"
+    },
+    {
+      "id": "TOOL-lsp-taplo",
+      "category": "语言服务器",
+      "tool": "taplo",
+      "scope": "L15",
+      "provider": "nvim-lspconfig",
+      "availability": "Nix 全局依赖",
+      "config": "configured",
+      "question": "检查真实连接、格式化及诊断",
+      "sources": [
+        "docs/languages.md",
+        "lua/plugins/coding/lsp.lua"
+      ],
+      "status": "待试用",
+      "decision": "保留",
+      "notes": "2026-09-16：x86_64 通用语言重构；工具由 Nix 全局提供，ARM 与项目 devShell 保持现状。运行时基础验证通过，交互体验待试用。"
+    },
+    {
+      "id": "TOOL-lsp-lemminx",
+      "category": "语言服务器",
+      "tool": "lemminx",
+      "scope": "L17",
+      "provider": "nvim-lspconfig",
+      "availability": "Nix 全局依赖",
+      "config": "configured",
+      "question": "检查真实连接、格式化及诊断",
+      "sources": [
+        "docs/languages.md",
+        "lua/plugins/coding/lsp.lua"
+      ],
+      "status": "待试用",
+      "decision": "保留",
+      "notes": "2026-09-16：x86_64 通用语言重构；工具由 Nix 全局提供，ARM 与项目 devShell 保持现状。运行时基础验证通过，交互体验待试用。"
+    },
+    {
+      "id": "TOOL-lsp-html",
+      "category": "语言服务器",
+      "tool": "html",
+      "scope": "L18",
+      "provider": "nvim-lspconfig",
+      "availability": "Nix 全局依赖",
+      "config": "configured",
+      "question": "检查真实连接、格式化及诊断",
+      "sources": [
+        "docs/languages.md",
+        "lua/plugins/coding/lsp.lua"
+      ],
+      "status": "待试用",
+      "decision": "保留",
+      "notes": "2026-09-16：x86_64 通用语言重构；工具由 Nix 全局提供，ARM 与项目 devShell 保持现状。运行时基础验证通过，交互体验待试用。"
+    },
+    {
+      "id": "TOOL-lsp-cssls",
+      "category": "语言服务器",
+      "tool": "cssls",
+      "scope": "L18",
+      "provider": "nvim-lspconfig",
+      "availability": "Nix 全局依赖",
+      "config": "configured",
+      "question": "检查真实连接、格式化及诊断",
+      "sources": [
+        "docs/languages.md",
+        "lua/plugins/coding/lsp.lua"
+      ],
+      "status": "待试用",
+      "decision": "保留",
+      "notes": "2026-09-16：x86_64 通用语言重构；工具由 Nix 全局提供，ARM 与项目 devShell 保持现状。运行时基础验证通过，交互体验待试用。"
+    },
+    {
+      "id": "TOOL-lsp-ts_ls",
+      "category": "语言服务器",
+      "tool": "ts_ls",
+      "scope": "L19",
+      "provider": "nvim-lspconfig",
+      "availability": "Nix 全局依赖",
+      "config": "configured",
+      "question": "检查真实连接、格式化及诊断",
+      "sources": [
+        "docs/languages.md",
+        "lua/plugins/coding/lsp.lua"
+      ],
+      "status": "待试用",
+      "decision": "保留",
+      "notes": "2026-09-16：x86_64 通用语言重构；工具由 Nix 全局提供，ARM 与项目 devShell 保持现状。运行时基础验证通过，交互体验待试用。"
+    },
+    {
+      "id": "TOOL-lsp-qmlls",
+      "category": "语言服务器",
+      "tool": "qmlls",
+      "scope": "L20",
+      "provider": "nvim-lspconfig",
+      "availability": "Nix 全局依赖",
+      "config": "configured",
+      "question": "检查真实连接、格式化及诊断",
+      "sources": [
+        "docs/languages.md",
+        "lua/plugins/coding/lsp.lua"
+      ],
+      "status": "待试用",
+      "decision": "保留",
+      "notes": "2026-09-16：x86_64 通用语言重构；工具由 Nix 全局提供，ARM 与项目 devShell 保持现状。运行时基础验证通过，交互体验待试用。"
+    },
+    {
+      "id": "TOOL-lsp-vimls",
+      "category": "语言服务器",
+      "tool": "vimls",
+      "scope": "L23",
+      "provider": "nvim-lspconfig",
+      "availability": "Nix 全局依赖",
+      "config": "configured",
+      "question": "检查真实连接、格式化及诊断",
+      "sources": [
+        "docs/languages.md",
+        "lua/plugins/coding/lsp.lua"
+      ],
+      "status": "待试用",
+      "decision": "保留",
+      "notes": "2026-09-16：x86_64 通用语言重构；工具由 Nix 全局提供，ARM 与项目 devShell 保持现状。运行时基础验证通过，交互体验待试用。"
+    },
+    {
+      "id": "TOOL-lsp-fish_lsp",
+      "category": "语言服务器",
+      "tool": "fish_lsp",
+      "scope": "L06",
+      "provider": "nvim-lspconfig",
+      "availability": "Nix 全局依赖",
+      "config": "configured",
+      "question": "检查真实连接、格式化及诊断",
+      "sources": [
+        "docs/languages.md",
+        "lua/plugins/coding/lsp.lua"
+      ],
+      "status": "待试用",
+      "decision": "保留",
+      "notes": "2026-09-16：x86_64 通用语言重构；工具由 Nix 全局提供，ARM 与项目 devShell 保持现状。运行时基础验证通过，交互体验待试用。"
     }
   ]
 }

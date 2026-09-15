@@ -1,6 +1,6 @@
 # 编辑 Bash 和 Shell 脚本
 
-> 来源：本地 bashls + LazyVim 的通用 LSP 支持。
+> 来源：bashls、fish_lsp、Shell 专属格式化和语法检查。
 
 ## 什么时候用
 
@@ -23,7 +23,9 @@
 
 ## 在你的配置里
 
-Bash 语言服务不是所有 Shell 的通用解释器。`.ps1` 的 PowerShell 支持没有在这里新增，Zsh/Fish 的语法也不能一概按 Bash 判定。能否执行脚本还取决于它的解释器、可执行权限和运行环境。
+Bash/sh 使用 bashls、ShellCheck、shfmt；Fish 使用 fish_lsp、fish_indent 和 fish
+语法检查；Zsh 使用自己的解析器检查语法，不接入 Bash LS 或 shfmt。
+这些工具由 Nix 全局提供。`.ps1` 的 PowerShell 支持没有新增，脚本执行环境仍由原工作流决定。
 
 ## 继续查
 

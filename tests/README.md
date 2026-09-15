@@ -10,6 +10,8 @@
 | 测试                    | 更新哪些插件后运行              | 保护的行为                                                                |
 | ----------------------- | ------------------------------- | ------------------------------------------------------------------------- |
 | `compat/jieba_surround.lua`    | jieba.vim、mini.surround、Leap  | 中文 `iw/aw` 的范围、重复操作、操作符接线                                 |
+| `compat/csv_view.lua` | csvview.nvim | CSV/TSV 自动附着、字段导航、带引号和多行数据渲染后原文不变 |
+| `compat/zsh_lint.lua` | nvim-lint、Zsh | libuv stdin 接线、未保存内容的语法诊断和修正后清理；需要 PATH 中有 Zsh |
 | `compat/ufo_provider.lua`      | nvim-ufo、promise-async         | 真实 UFO / Promise 接口、无 LSP 和解析器时返回空折叠 |
 | `compat/avante_completion.lua` | Avante、blink-cmp-avante、Blink | 原生模块能加载，候选接口和侧栏动作回调仍兼容                              |
 | `compat/avante_preferences.lua` | Avante | config.override、选模保存回调、toggle 接口及重启恢复 |
@@ -25,7 +27,7 @@
 NVIM_TEST_PLUGIN_ROOT="${XDG_DATA_HOME:-$HOME/.local/share}/nvim-test/lazy"
 export NVIM_TEST_PLUGIN_ROOT
 
-for test in jieba_surround ufo_provider; do
+for test in jieba_surround ufo_provider csv_view zsh_lint; do
     test_tmp=$(mktemp -d)
     XDG_DATA_HOME="$test_tmp/data" XDG_STATE_HOME="$test_tmp/state" \
         XDG_CACHE_HOME="$test_tmp/cache" \

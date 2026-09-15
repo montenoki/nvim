@@ -1,6 +1,6 @@
 # 编辑 YAML 与 JSON 配置
 
-> 来源：YAML：yamlls + SchemaStore；格式化：本地 Prettier 声明。
+> 来源：JSON / YAML Extra：jsonls、yamlls + SchemaStore；格式化：Prettier。
 
 ## 什么时候用
 
@@ -22,10 +22,13 @@
 
 ## 在你的配置里
 
-Schema 是字段规则，不是所有 YAML 都有对应规则。当前明确启用了 YAML Extra，但没有启用 JSON Extra；JSON/JSONC 有 Prettier 格式化，不应据此推断已经有完整 JSON LSP 或 Schema 补全。
+JSON/JSONC 和 YAML 都接入了语言服务器与 SchemaStore，工具由 Nix 全局提供。
+Schema 是字段规则，不是所有文件都有对应规则；远程 Schema 可能需要联网。
+普通 TOML 也通过 TOML Extra 接入 Taplo，无需 Cargo 项目。
 
 ## 继续查
 
-配置：[格式化](../../../lua/plugins/coding/formatting.lua)、[Extras](../../../lazyvim.json)。
+配置：[配置文件编辑](../../../lua/plugins/languages/config_files.lua)、[Extras](../../../lazyvim.json)。
+完整清单：[语言能力与依赖归属](../../languages.md)。
 
 [返回卡片目录](../README.md)

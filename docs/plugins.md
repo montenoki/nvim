@@ -16,6 +16,7 @@
 | mini.surround                       | 文本编辑 | 添加、删除和替换括号、引号等包围符号。                                                               |
 | LuaSnip                             | 代码片段 | 为 Blink 提供片段展开、嵌套填写和前后跳转，复用 friendly-snippets。                                  |
 | vim-repeat                          | 文本编辑 | 使用 . 重复插件提供的编辑操作。                                                                      |
+| csvview.nvim                        | 表格编辑 | CSV/TSV 虚拟对齐、按列着色、字段导航和行列统计，显示不改写数据。                                      |
 | yanky.nvim                          | 剪贴板   | 管理复制历史，增强粘贴和历史切换。                                                                   |
 | nvim-window-picker                  | 窗口管理 | 通过窗口标签选择目标窗口。                                                                           |
 | neogit                              | Git      | 在编辑器内查看变更、暂存和提交代码。                                                                 |
@@ -49,3 +50,5 @@
 Showkeys：右下角显示最近按键；底栏 `󰌌` 或 `:ShowkeysToggle` 切换并记住选择，首次默认关闭。配置见 [showkeys.lua](../lua/plugins/ui/showkeys.lua)。
 
 程序调试使用其他编辑器；Neovim 不再启用 DAP 或安装专用适配器。Rust/Python 语言服务及普通运行保留。
+
+全局语言工具和高亮资源的归属见 [语言能力清单](languages.md)。
