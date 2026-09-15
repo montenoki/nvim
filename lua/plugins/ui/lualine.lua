@@ -41,7 +41,6 @@ return {
             { { display.project, icon = "󱉭" }, { "branch", icon = "" } }
         -- 左侧由外向内：模式 → 项目/分支/环境 → 临时运行提示。
         opts.sections.lualine_c = {
-            Snacks.profiler.status(),
             {
                 function()
                     return require("noice").api.status.mode.get()

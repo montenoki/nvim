@@ -3496,21 +3496,22 @@
         "snacks.nvim"
       ],
       "scope": "n／配置维护",
-      "entries": "<leader>dpp; dph; dps",
+      "entries": "无日常入口",
       "windows": [
         "profiler/scratch"
       ],
       "overlap": "管理前缀",
       "question": "这是 Neovim 性能分析，不是业务程序调试；dp 前缀归属待定",
-      "availability": "已声明",
+      "availability": "日常入口已停用",
       "sources": [
-        "lazyvim.json",
-        "lua/plugins/coding/avante.lua",
-        "lua/plugins/ui/snacks.lua"
+        "lua/config/keymaps.lua",
+        "lua/plugins/ui/snacks.lua",
+        "lua/plugins/ui/which_key.lua",
+        "lua/plugins/ui/lualine.lua"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待试用",
+      "decision": "停用",
+      "notes": "2026-09-15：取消 Snacks profiler 的 dpp/dph/dps 快捷键、dp 菜单与状态栏组件；不配置自动启动。Snacks 其他功能保留，手动 Lua API 与 Lazy 内置 profile 未移除。"
     },
     {
       "id": "L01",
@@ -12300,13 +12301,11 @@
       "scope": "全局（局部可覆盖）",
       "description": "Toggle Profiler Highlights",
       "providers": [],
-      "rhs": "Lua 回调",
-      "evidence": [
-        "VeryLazy 后全局运行时映射"
-      ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "rhs": "已移除",
+      "evidence": "本地配置取消映射",
+      "status": "待试用",
+      "decision": "停用",
+      "notes": "2026-09-15：取消 Snacks profiler 的 dpp/dph/dps 快捷键、dp 菜单与状态栏组件；不配置自动启动。Snacks 其他功能保留，手动 Lua API 与 Lazy 内置 profile 未移除。"
     },
     {
       "id": "K-084fda5aa1",
@@ -12316,13 +12315,11 @@
       "scope": "全局（局部可覆盖）",
       "description": "Toggle Profiler",
       "providers": [],
-      "rhs": "Lua 回调",
-      "evidence": [
-        "VeryLazy 后全局运行时映射"
-      ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "rhs": "已移除",
+      "evidence": "本地配置取消映射",
+      "status": "待试用",
+      "decision": "停用",
+      "notes": "2026-09-15：取消 Snacks profiler 的 dpp/dph/dps 快捷键、dp 菜单与状态栏组件；不配置自动启动。Snacks 其他功能保留，手动 Lua API 与 Lazy 内置 profile 未移除。"
     },
     {
       "id": "K-09d3e813f8",
@@ -12334,14 +12331,11 @@
       "providers": [
         "snacks.nvim"
       ],
-      "rhs": "function",
-      "evidence": [
-        "lazy 最终插件键位声明",
-        "VeryLazy 后全局运行时映射"
-      ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "rhs": "已移除",
+      "evidence": "本地配置取消映射",
+      "status": "待试用",
+      "decision": "停用",
+      "notes": "2026-09-15：取消 Snacks profiler 的 dpp/dph/dps 快捷键、dp 菜单与状态栏组件；不配置自动启动。Snacks 其他功能保留，手动 Lua API 与 Lazy 内置 profile 未移除。"
     },
     {
       "id": "K-e5defc6b4d",

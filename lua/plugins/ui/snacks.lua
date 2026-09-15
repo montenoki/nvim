@@ -2,6 +2,7 @@ return {
     {
         "snacks.nvim",
         keys = {
+            { "<leader>dps", false }, -- 取消性能分析临时缓冲区。
             { "<leader>n", false }, -- 全部消息统一由 Noice 提供文本分屏。
             { "<leader>un", false }, -- 取消一次性隐藏通知入口，保留正常通知显示。
             { "<leader>S", false }, -- 选择已保存的草稿；迁到 leader qn，leader . 仍用于打开草稿。

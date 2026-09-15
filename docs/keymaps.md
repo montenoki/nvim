@@ -23,7 +23,6 @@
 | `<leader>a`                               | AI 助手                                |
 | `<leader>b`             | 缓冲区                        |
 | `<leader>c`                               | 代码                                   |
-| `<leader>dp` | 性能分析 |
 | `<leader>f` | 文件与查找 |
 | `<leader>h` | 历史记录 |
 | `<leader>g` / `<leader>gh`                | Git / 改动块                           |
@@ -106,15 +105,12 @@ Extras 与 LSP 信息分别使用 `:LazyExtras`、`:checkhealth vim.lsp`；底�
 | <code>&lt;leader&gt;xt</code> | n    | TODO 列表（当前目录） | 通用       | 运行时映射         |
 | <code>&lt;leader&gt;xx</code> | n    | 诊断列表（打开后聚焦） | 通用       | 运行时映射         |
 
-## 性能分析与任务
+## 任务
 
-Neovim 内的 DAP 调试已移除，程序调试使用其他编辑器。Snacks 性能分析和普通任务运行保留。
+Neovim 内的 DAP 调试已移除，程序调试使用其他编辑器。Snacks 性能分析的快捷键、菜单和状态栏提示已取消，普通任务运行保留。
 
 | 按键                           | 模式 | 说明                       | 范围         | 来源            |
 | ------------------------------ | ---- | -------------------------- | ------------ | --------------- |
-| <code>&lt;leader&gt;dph</code> | n    | 切换性能分析高亮           | 通用         | 运行时映射      |
-| <code>&lt;leader&gt;dpp</code> | n    | 切换性能分析               | 通用         | 运行时映射      |
-| <code>&lt;leader&gt;dps</code> | n    | 性能分析临时缓冲区         | 通用         | 运行时映射      |
 | <code>&lt;leader&gt;ta</code>  | n    | 运行 Ansible Playbook/Role | yaml.ansible | nvim-ansible    |
 
 ## Git

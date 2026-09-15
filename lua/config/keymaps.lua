@@ -5,6 +5,10 @@
 local map = vim.keymap.set
 local del = vim.keymap.del
 
+-- 取消 Snacks 性能分析及源码耗时高亮；这两项由 LazyVim 全局映射注册。
+del("n", "<leader>dpp")
+del("n", "<leader>dph")
+
 -- 移动：普通和可视模式下，j/k 始终按实际行移动。
 -- 保留默认方向键映射：无次数时按屏幕显示行移动，带次数时按实际行移动。
 del({ "n", "x" }, "j")
