@@ -320,7 +320,6 @@ Neovim 内的 DAP 调试已移除，程序调试使用其他编辑器。Snacks �
 | <code>&lt;Up&gt;</code>      | nx   | 向上移动                           | 通用       | 运行时映射 |
 | <code>&lt;leader&gt;.</code> | n    | 切换临时缓冲区                     | 通用       | 运行时映射 |
 | <code>&lt;leader&gt;?</code> | n    | 当前缓冲区键位（Which-key）        | 通用       | 运行时映射 |
-| <code>&lt;leader&gt;K</code> | n    | 使用关键字查询程序                 | 通用       | 运行时映射 |
 | <code>&lt;leader&gt;L</code> | n    | LazyVim 更新记录                   | 通用       | 运行时映射 |
 | <code>&lt;leader&gt;e</code> | n    | 文件树（当前目录，开关） | 通用       | 运行时映射 |
 | <code>&lt;leader&gt;l</code> | n    | 插件管理（Lazy）                   | 通用       | 运行时映射 |

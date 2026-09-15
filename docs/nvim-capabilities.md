@@ -703,7 +703,7 @@
 | K-b9327bfe76 | &lt;leader&gt;gS | n | 全局（局部可覆盖） | 【本轮已移除入口】Git Stash | fzf-lua | 无映射（原入口已清理；插件命令或原生机制可能仍可用） | 2026-09-13 按临时实施清单移除；历史行保留供对照 | 待筛查 | 未决定 |  |
 | K-9727cbdd1b | &lt;leader&gt;gY | n | 全局（局部可覆盖） | 【迁移至 &lt;leader&gt;gy】Git Browse (copy) |  | 旧入口已移除 | 2026-09-13 入口迁移，见新键行 | 待筛查 | 未决定 |  |
 | K-26358d1a2c | &lt;leader&gt;gY | x | 全局（局部可覆盖） | 【迁移至 &lt;leader&gt;gy】Git Browse (copy) |  | 旧入口已移除 | 2026-09-13 入口迁移，见新键行 | 待筛查 | 未决定 |  |
-| K-30572f4e86 | &lt;leader&gt;K | n | 全局（局部可覆盖） | Keywordprg |  | &lt;Cmd&gt;norm! K&lt;CR&gt; | VeryLazy 后全局运行时映射 | 待筛查 | 未决定 |  |
+| K-30572f4e86 | &lt;leader&gt;K | n | 全局（局部可覆盖） | Keywordprg |  | 已移除 | lua/config/keymaps.lua 删除 LazyVim 默认映射 | 待试用 | 停用 | 2026-09-15：取消 keywordprg 关键字手册查询快捷键；LSP 的 K 悬浮帮助保留。 |
 | K-ed204a9ec6 | &lt;leader&gt;l | n | 全局（局部可覆盖） | Lazy |  | &lt;Cmd&gt;Lazy&lt;CR&gt; | VeryLazy 后全局运行时映射 | 待筛查 | 未决定 |  |
 | K-6caa8e547e | &lt;leader&gt;L | n | 全局（局部可覆盖） | LazyVim Changelog |  | Lua 回调 | VeryLazy 后全局运行时映射 | 待筛查 | 未决定 |  |
 | K-d620b382ed | &lt;leader&gt;n | n | 全局（局部可覆盖） | Notification History | snacks.nvim | function | lazy 最终插件键位声明；VeryLazy 后全局运行时映射 | 待筛查 | 未决定 |  |

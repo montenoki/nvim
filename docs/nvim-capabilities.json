@@ -13258,13 +13258,11 @@
       "scope": "全局（局部可覆盖）",
       "description": "Keywordprg",
       "providers": [],
-      "rhs": "<Cmd>norm! K<CR>",
-      "evidence": [
-        "VeryLazy 后全局运行时映射"
-      ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "rhs": "已移除",
+      "evidence": "lua/config/keymaps.lua 删除 LazyVim 默认映射",
+      "status": "待试用",
+      "decision": "停用",
+      "notes": "2026-09-15：取消 keywordprg 关键字手册查询快捷键；LSP 的 K 悬浮帮助保留。"
     },
     {
       "id": "K-ed204a9ec6",
