@@ -15,12 +15,12 @@ return {
             {
                 "<leader>o",
                 "<cmd>Trouble symbols toggle<cr>",
-                desc = "文件大纲",
+                desc = "大纲",
             },
             {
                 "<leader>k",
                 "<cmd>Trouble lsp toggle<cr>",
-                desc = "当前符号导航（定义／引用等）",
+                desc = "查看当前符号相关代码",
             },
         },
     },
@@ -38,7 +38,7 @@ return {
                     -- todo-comments 的 Trouble source 在每次搜索时读取 cwd。
                     require("trouble").toggle("todo")
                 end,
-                desc = "TODO 列表（当前目录）",
+                desc = "TODO 列表",
             },
         },
     },

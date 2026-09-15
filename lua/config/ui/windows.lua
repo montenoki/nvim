@@ -2,10 +2,10 @@
 local M = {}
 
 local names = {
-    ["neo-tree"] = "文件树",
-    ["neo-tree-popup"] = "文件树操作",
-    lazy = "插件管理",
-    mason = "开发工具管理",
+    ["neo-tree"] = "资源管理器",
+    ["neo-tree-popup"] = "操作",
+    lazy = "Lazy",
+    mason = "Mason",
     noice = "消息",
     notify = "通知",
     snacks_notif = "通知",
@@ -24,25 +24,25 @@ local names = {
     ["grug-far"] = "搜索与替换",
     ["grug-far-history"] = "替换历史",
     ["grug-far-help"] = "替换帮助",
-    Avante = "AI 对话",
-    AvanteInput = "AI 输入",
+    Avante = "Avante",
+    AvanteInput = "Prompt",
     AvantePromptInput = "AI 编辑指令",
     AvanteSelectedCode = "AI 选中代码",
-    AvanteSelectedFiles = "AI 上下文文件",
+    AvanteSelectedFiles = "附件",
     AvanteTodos = "AI 任务",
     AvanteConfirm = "AI 操作确认",
-    NeogitStatus = "Git 状态",
-    NeogitLogView = "Git 提交历史",
-    NeogitCommitView = "Git 提交详情",
-    NeogitCommitSelectView = "Git 提交选择",
-    NeogitDiffView = "Git 差异",
-    NeogitRefsView = "Git 引用",
-    NeogitReflogView = "Git 引用历史",
-    NeogitStashView = "Git 暂存记录",
-    NeogitConsole = "Git 命令输出",
-    NeogitGitCommandHistory = "Git 命令历史",
-    NeogitPopup = "Git 操作",
-    help = "帮助",
+    NeogitStatus = "状态",
+    NeogitLogView = "提交历史",
+    NeogitCommitView = "提交详情",
+    NeogitCommitSelectView = "提交选择",
+    NeogitDiffView = "差异",
+    NeogitRefsView = "引用",
+    NeogitReflogView = "引用历史",
+    NeogitStashView = "暂存记录",
+    NeogitConsole = "命令输出",
+    NeogitGitCommandHistory = "命令历史",
+    NeogitPopup = "操作",
+    help = "Neovim 帮助",
     man = "Man 手册",
     checkhealth = "健康检查",
     ["which-key"] = "快捷键提示",
@@ -50,15 +50,15 @@ local names = {
 
 local trouble_modes = {
     diagnostics = "诊断列表",
-    symbols = "符号树",
-    lsp = "LSP 导航",
-    lsp_document_symbols = "符号树",
+    symbols = "大纲",
+    lsp = "相关代码",
+    lsp_document_symbols = "大纲",
     lsp_references = "引用",
     lsp_definitions = "定义",
     lsp_declarations = "声明",
     lsp_implementations = "实现",
     lsp_type_definitions = "类型定义",
-    qflist = "Quickfix 列表",
+    qflist = "Quickfix",
     loclist = "位置列表",
     todo = "待办事项",
     telescope = "搜索结果",
@@ -68,15 +68,18 @@ function M.name(win)
     win = win and win ~= 0 and win or vim.api.nvim_get_current_win()
     local buf = vim.api.nvim_win_get_buf(win)
     local ft, bt = vim.bo[buf].filetype, vim.bo[buf].buftype
+    -- checkhealth 在检查全部完成后才设置 filetype；运行期间也识别专用缓冲区。
+    if vim.api.nvim_buf_get_name(buf) == "health://" then
+        return "健康检查"
+    end
     if ft:lower() == "trouble" then
         local mode = (vim.w[win].trouble or {}).mode
-        return (trouble_modes[mode] or mode or "问题列表")
-            .. "（Trouble）"
+        return trouble_modes[mode] or mode or "问题列表"
     end
     if ft == "qf" then
         local info = vim.fn.getwininfo(win)[1]
         return info and info.loclist == 1 and "位置列表"
-            or "Quickfix 列表"
+            or "Quickfix"
     end
     if names[ft] then
         return names[ft]
@@ -84,7 +87,7 @@ function M.name(win)
     -- 插件新增的面板也保留可识别的名称，不落到“未命名”。
     for prefix, label in pairs({
         Avante = "AI 面板",
-        Neogit = "Git 面板",
+        Neogit = "面板",
         snacks_ = "工具面板",
         Telescope = "搜索面板",
     }) do

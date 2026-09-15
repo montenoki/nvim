@@ -107,7 +107,7 @@ function M.show_path()
     )
 end
 
--- LSP：显示当前文件连接数；详细信息通过 :checkhealth vim.lsp 查看。
+-- LSP：显示当前文件连接数
 function M.lsp()
     local count = #vim.lsp.get_clients({ bufnr = 0 })
     return " " .. (count > 0 and tostring(count) or "—")

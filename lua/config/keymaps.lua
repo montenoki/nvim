@@ -8,6 +8,9 @@ local del = vim.keymap.del
 -- 取消通过 keywordprg 查询光标单词手册的入口。
 del("n", "<leader>K")
 
+-- 取消 LazyVim 更新记录入口。
+del("n", "<leader>L")
+
 -- 取消 Snacks 性能分析及源码耗时高亮；这两项由 LazyVim 全局映射注册。
 del("n", "<leader>dpp")
 del("n", "<leader>dph")

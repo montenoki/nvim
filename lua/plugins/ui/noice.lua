@@ -5,7 +5,7 @@ return {
         notify = { enabled = true },
         commands = {
             all = {
-                view = "split",
+                view = "popup",
                 opts = { enter = true, format = "details" },
                 filter = {},
             },

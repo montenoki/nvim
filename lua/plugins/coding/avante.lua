@@ -36,7 +36,7 @@ return {
                     require("avante.api").ask()
                 end,
                 mode = { "n", "v" },
-                desc = "AI 提问／侧栏",
+                desc = "AI 提问",
             },
             {
                 "<leader>an",
@@ -44,7 +44,7 @@ return {
                     require("avante.api").ask({ new_chat = true })
                 end,
                 mode = { "n", "v" },
-                desc = "AI 新对话",
+                desc = "新对话",
             },
             {
                 "<leader>ae",
@@ -52,28 +52,28 @@ return {
                     require("avante.api").edit()
                 end,
                 mode = "v",
-                desc = "AI 编辑选区",
+                desc = "编辑选区",
             },
             {
                 "<leader>ah",
                 function()
                     require("avante.api").select_history()
                 end,
-                desc = "AI 对话历史",
+                desc = "对话历史",
             },
             {
                 "<leader>am",
                 function()
                     require("avante.api").select_model()
                 end,
-                desc = "选择 AI 聊天模型",
+                desc = "选择模型",
             },
             {
                 "<leader>aS",
                 function()
                     require("avante.api").stop()
                 end,
-                desc = "停止 AI 请求",
+                desc = "停止",
             },
             {
                 "<leader>ac",
@@ -90,7 +90,7 @@ return {
                         )
                     end
                 end,
-                desc = "添加当前文件到 AI 上下文",
+                desc = "添加当前文件",
             },
             -- A04 尚未进入实施范围，保留已有的全部缓冲区添加入口。
             {
@@ -98,7 +98,7 @@ return {
                 function()
                     require("avante.api").add_buffer_files()
                 end,
-                desc = "添加全部缓冲区到 AI 上下文",
+                desc = "添加全部缓冲区",
             },
         },
         config = function(_, opts)

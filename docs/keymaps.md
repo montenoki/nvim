@@ -163,7 +163,8 @@ Neovim 内的 DAP 调试已移除，程序调试使用其他编辑器。Snacks �
 | ------------------------------------- | ---- | ------------------------- | ---- | ---------- |
 | <code>&lt;C-W&gt;</code>              | i    | help i_CTRL-W-default     | 通用 | 运行时映射 |
 | <code>&lt;leader&gt;qq</code>         | n    | 退出全部窗口              | 通用 | 运行时映射 |
-| <code>&lt;leader&gt;qs</code>         | n    | 恢复当前目录会话          | 通用 | 运行时映射 |
+| <code>&lt;leader&gt;qr</code>         | n    | 恢复当前目录会话          | 通用 | 本地配置 |
+| <code>&lt;leader&gt;qs</code>         | n    | 保存当前会话              | 通用 | 本地配置 |
 | <code>&lt;leader&gt;wd</code>         | n    | 关闭窗口                  | 通用 | 运行时映射 |
 | <code>&lt;leader&gt;wp</code>         | n    | 选择窗口                  | 通用 | 运行时映射 |
 
@@ -287,7 +288,7 @@ Neovim 内的 DAP 调试已移除，程序调试使用其他编辑器。Snacks �
 | --- | --- | --- | --- | --- |
 | `<leader>ws` | n | 上下分屏 | 通用 | 本地配置 |
 | `<leader>wv` | n | 左右分屏 | 通用 | 本地配置 |
-| `<leader>qn` | n | 选择已保存草稿 | 通用 | 本地配置 |
+| `<leader>P` | n | 便笺列表 | 通用 | 本地配置 |
 | `<leader>o` | n | 文件大纲（Trouble） | 通用 | 本地配置 |
 | `<leader>k` | n | 当前符号导航（定义／引用等） | 通用 | 本地配置 |
 | `<leader>uv` | n | 切换 AI 选区提示（记住选择） | 通用 | 本地配置 |
@@ -318,9 +319,8 @@ Neovim 内的 DAP 调试已移除，程序调试使用其他编辑器。Snacks �
 | <code>&lt;S-Tab&gt;</code>   | si   | 片段上一位置，否则使用 Shift-Tab   | 通用       | 运行时映射 |
 | <code>&lt;Tab&gt;</code>     | si   | 片段下一位置，否则使用 Tab         | 通用       | 运行时映射 |
 | <code>&lt;Up&gt;</code>      | nx   | 向上移动                           | 通用       | 运行时映射 |
-| <code>&lt;leader&gt;.</code> | n    | 切换临时缓冲区                     | 通用       | 运行时映射 |
+| <code>&lt;leader&gt;p</code> | n    | 打开或关闭便笺                     | 通用       | 本地配置 |
 | <code>&lt;leader&gt;?</code> | n    | 当前缓冲区键位（Which-key）        | 通用       | 运行时映射 |
-| <code>&lt;leader&gt;L</code> | n    | LazyVim 更新记录                   | 通用       | 运行时映射 |
 | <code>&lt;leader&gt;e</code> | n    | 文件树（当前目录，开关） | 通用       | 运行时映射 |
 | <code>&lt;leader&gt;l</code> | n    | 插件管理（Lazy）                   | 通用       | 运行时映射 |
 | <code>&lt;leader&gt;n</code> | n    | 全部消息（Noice 文本分屏）                           | 通用       | 运行时映射 |

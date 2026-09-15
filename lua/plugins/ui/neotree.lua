@@ -38,7 +38,7 @@ return {
                         dir = vim.fn.getcwd(),
                     })
                 end,
-                desc = "文件树（当前目录）",
+                desc = "资源管理器",
             },
         },
         opts = function(_, inherited)

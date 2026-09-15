@@ -35,8 +35,8 @@ assert(
     end),
     "Trouble windows did not open"
 )
-assert(windows.name(diagnostic.win.win) == "诊断列表（Trouble）")
-assert(windows.name(symbols.win.win) == "符号树（Trouble）")
+assert(windows.name(diagnostic.win.win) == "诊断列表")
+assert(windows.name(symbols.win.win) == "大纲")
 
 local function split(ft, bt)
     vim.cmd("vnew")
@@ -95,10 +95,10 @@ local function rendered(win, focused)
     end)
 end
 local active = rendered(diagnostic.win.win, true)
-assert(active:find("诊断列表（Trouble）", 1, true), active)
+assert(active:find("诊断列表", 1, true), active)
 assert(active:find("", 1, true), active)
 local inactive = rendered(symbols.win.win, false)
-assert(inactive:find("符号树（Trouble）", 1, true), inactive)
+assert(inactive:find("大纲", 1, true), inactive)
 assert(inactive:find("", 1, true), inactive)
 assert(not inactive:find("未命名", 1, true), inactive)
 local function title_color(bar)

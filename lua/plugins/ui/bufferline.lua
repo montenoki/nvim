@@ -13,7 +13,7 @@ return {
             {
                 "<leader>bp",
                 "<cmd>BufferLinePick<cr>",
-                desc = "按字母选择缓冲区",
+                desc = "字母选择",
             },
         },
         opts = {

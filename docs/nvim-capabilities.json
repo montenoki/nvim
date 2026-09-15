@@ -460,8 +460,8 @@
       "sources": [
         "lua/config/keymaps.lua"
       ],
-      "status": "待筛查",
-      "decision": "合并入口",
+      "status": "已决定",
+      "decision": "保留",
       "notes": ""
     },
     {
@@ -485,8 +485,8 @@
         "lua/config/keymaps.lua",
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
+      "status": "已决定",
+      "decision": "保留",
       "notes": ""
     },
     {
@@ -508,8 +508,8 @@
       "sources": [
         "lua/config/keymaps.lua"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
+      "status": "已决定",
+      "decision": "保留",
       "notes": ""
     },
     {
@@ -530,8 +530,8 @@
       "sources": [
         "lua/config/keymaps.lua"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
+      "status": "已决定",
+      "decision": "保留",
       "notes": ""
     },
     {
@@ -552,8 +552,8 @@
       "sources": [
         "lua/config/keymaps.lua"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
+      "status": "已决定",
+      "decision": "保留",
       "notes": ""
     },
     {
@@ -577,8 +577,8 @@
         "lua/plugins/editor/yanky.lua",
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
+      "status": "已决定",
+      "decision": "保留",
       "notes": ""
     },
     {
@@ -601,9 +601,9 @@
         "lua/config/keymaps.lua",
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "调整边界",
+      "notes": "寄存器列表从 leader s\" 迁到 leader \"，继续使用 FzfLua registers。保留原生寄存器及系统剪贴板操作。寄存器列表展示各寄存器当前内容，与复制历史分开。"
     },
     {
       "id": "E08",
@@ -626,9 +626,9 @@
         "lua/plugins/editor/yanky.lua",
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "调整边界",
+      "notes": "复制历史从 leader p 迁到 leader hy，保留原有普通、可视模式适用范围。仅调整历史列表入口；p/P、[y/]y 及其他粘贴变体不在本轮修改范围。"
     },
     {
       "id": "E09",
@@ -649,8 +649,8 @@
         "lua/config/keymaps.lua",
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
+      "status": "已决定",
+      "decision": "保留",
       "notes": ""
     },
     {
@@ -676,8 +676,8 @@
         "lua/plugins/ui/which_key.lua",
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
+      "status": "已决定",
+      "decision": "保留",
       "notes": ""
     },
     {
@@ -699,8 +699,8 @@
         "lua/config/keymaps.lua",
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
+      "status": "已决定",
+      "decision": "保留",
       "notes": ""
     },
     {
@@ -722,8 +722,8 @@
         "lua/config/keymaps.lua",
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
+      "status": "已决定",
+      "decision": "保留",
       "notes": ""
     },
     {
@@ -746,8 +746,8 @@
         "lua/config/keymaps.lua",
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
+      "status": "已决定",
+      "decision": "保留",
       "notes": ""
     },
     {
@@ -781,8 +781,8 @@
         "lua/plugins/ui/themes.lua",
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
+      "status": "已决定",
+      "decision": "保留",
       "notes": ""
     },
     {
@@ -806,8 +806,8 @@
         "lua/plugins/editor/jieba.lua",
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
+      "status": "已决定",
+      "decision": "保留",
       "notes": ""
     },
     {
@@ -828,8 +828,8 @@
       "sources": [
         "lua/config/keymaps.lua"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
+      "status": "已决定",
+      "decision": "保留",
       "notes": ""
     },
     {
@@ -852,8 +852,8 @@
         "lua/plugins/editor/jieba.lua",
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
+      "status": "已决定",
+      "decision": "保留",
       "notes": ""
     },
     {
@@ -876,8 +876,8 @@
         "lua/plugins/editor/chinese.lua",
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
+      "status": "已决定",
+      "decision": "保留",
       "notes": ""
     },
     {
@@ -900,8 +900,8 @@
         "lua/plugins/editor/im_select.lua",
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
+      "status": "已决定",
+      "decision": "保留",
       "notes": ""
     },
     {
@@ -923,8 +923,8 @@
       "sources": [
         "lua/config/keymaps.lua"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
+      "status": "已决定",
+      "decision": "保留",
       "notes": ""
     },
     {
@@ -993,7 +993,7 @@
       ],
       "status": "已决定",
       "decision": "保留",
-      "notes": ""
+      "notes": "保留原生 /、?、n、N 和 :substitute。:%s/旧/新/g 替换当前文件全部行，:s/旧/新/g 默认替换当前行；取消 S06 不影响原生替换。"
     },
     {
       "id": "N04",
@@ -1015,9 +1015,9 @@
         "lua/plugins/editor/leap.lua",
         "lazyvim.json"
       ],
-      "status": "已决定",
-      "decision": "保留",
-      "notes": ""
+      "status": "待实施",
+      "decision": "调整边界",
+      "notes": "标记列表从 leader sm 迁到 leader m；跳转历史从 leader sj 迁到 leader hj。标记属于当前信息，跳转记录属于历史。保留原生设置标记、跳转标记及 Ctrl-o/Ctrl-i。"
     },
     {
       "id": "N05",
@@ -1074,9 +1074,9 @@
         "lua/plugins/ui/themes.lua",
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "合并入口",
+      "notes": "保留 leader / 和启动页 g，统一使用自动识别的项目根目录，不改为 cwd。取消重复入口 leader sg。两处继续使用 fzf-lua 内容搜索。"
     },
     {
       "id": "S02",
@@ -1097,9 +1097,9 @@
         "docs/keymaps.md",
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "移除",
+      "notes": "取消独立 cwd 内容搜索入口 leader sG；日常内容搜索统一使用 S01 的项目根目录范围。"
     },
     {
       "id": "S03",
@@ -1120,9 +1120,9 @@
         "docs/keymaps.md",
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "移除",
+      "notes": "不需要专门搜索光标词或选中文字。取消 leader sw/sW 在普通、可视模式下的入口；需要时手动使用 leader / 输入查询。原生文件内搜索不受影响。"
     },
     {
       "id": "S04",
@@ -1143,9 +1143,9 @@
         "docs/keymaps.md",
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "移除",
+      "notes": "取消 leader sb，不需要独立的缓冲区文本行选择器。纠正原描述：当前调用 FzfLua lines，默认搜索多个缓冲区，并非仅当前文件。文件内搜索继续使用原生 /。"
     },
     {
       "id": "S05",
@@ -1166,9 +1166,9 @@
         "docs/keymaps.md",
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "调整边界",
+      "notes": "leader s/ 迁到 leader h/，用于查看并选择原生搜索历史；leader sR 迁到 leader r，用于恢复最近一次 fzf-lua 选择器，包括内容搜索、文件名搜索等，不限于内容搜索。它不是选择器历史列表，也不恢复其他插件界面。"
     },
     {
       "id": "S06",
@@ -1178,20 +1178,20 @@
         "grug-far.nvim"
       ],
       "scope": "n/x",
-      "entries": "<leader>sr; :GrugFar; :GrugFarWithin",
+      "entries": "无（插件已禁用）",
       "windows": [
         "grug-far"
       ],
       "overlap": "搜索替换",
       "question": "与内容搜索分离还是统一入口后切换替换模式待定",
-      "availability": "已启用／依赖 rg",
+      "availability": "已禁用／不再提供",
       "sources": [
         "docs/keymaps.md",
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待试用",
+      "decision": "移除",
+      "notes": "2026-09-15：用户决定彻底移除跨文件搜索替换。已通过 enabled=false 禁用 LazyVim 默认插件，移除锁记录、专用窗口适配及命令/快捷键；项目搜索保留 fzf-lua，文件内替换使用 :s 或 :%s。"
     },
     {
       "id": "S07",
@@ -1201,21 +1201,21 @@
         "grug-far.nvim"
       ],
       "scope": "Grug-far 局部 n",
-      "entries": "<localleader>t 历史; g? 帮助; <localleader>r 执行替换",
+      "entries": "无（插件已禁用）",
       "windows": [
         "grug-far-history",
         "grug-far-help"
       ],
       "overlap": "局部键位",
       "question": "局部空格前缀与全局任务 t 的区别需要明确",
-      "availability": "已启用",
+      "availability": "已禁用／不再提供",
       "sources": [
         "docs/keymaps.md",
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待试用",
+      "decision": "移除",
+      "notes": "2026-09-15：用户决定彻底移除跨文件搜索替换。已通过 enabled=false 禁用 LazyVim 默认插件，移除锁记录、专用窗口适配及命令/快捷键；项目搜索保留 fzf-lua，文件内替换使用 :s 或 :%s。"
     },
     {
       "id": "S08",
@@ -1236,8 +1236,8 @@
         "docs/keymaps.md",
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
+      "status": "已决定",
+      "decision": "保留",
       "notes": ""
     },
     {
@@ -1263,8 +1263,8 @@
         "lua/plugins/ui/snacks.lua",
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
+      "status": "已决定",
+      "decision": "保留",
       "notes": ""
     },
     {
@@ -1288,7 +1288,7 @@
         "docs/keymaps.md",
         "lua/plugins/languages/obsidian.lua"
       ],
-      "status": "待筛查",
+      "status": "待试用",
       "decision": "未决定",
       "notes": ""
     },
@@ -1313,9 +1313,9 @@
         "docs/keymaps.md",
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "调整边界",
+      "notes": "命令历史统一使用 leader h:，取消 leader sc；leader : 改为可执行命令列表，替代 leader sC。区分当前可用命令与过去执行记录。"
     },
     {
       "id": "S12",
@@ -1339,9 +1339,9 @@
         "docs/keymaps.md",
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "移除",
+      "notes": "不需要帮助和 Man 手册的专用快捷键，取消 leader sh/sM，不新增 leader H/M。保留 :help、:Man 等命令。"
     },
     {
       "id": "S13",
@@ -1365,9 +1365,9 @@
         "lua/plugins/ui/which_key.lua",
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "合并入口",
+      "notes": "使用 Which-key：保留 leader ? 的当前缓冲区局部键位展示及前缀等待提示，取消 leader sk 的 FzfLua 映射列表入口。不把 leader ? 改成 FzfLua。"
     },
     {
       "id": "S14",
@@ -1390,9 +1390,9 @@
         "docs/keymaps.md",
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "移除",
+      "notes": "取消 leader sa/sH 的列表快捷键；需要时使用 :FzfLua autocmds 和 :FzfLua highlights。不新增替代键，不改动现有 leader ui/uI。"
     },
     {
       "id": "B01",
@@ -2580,8 +2580,8 @@
         "lua/plugins/ui/themes.lua",
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
+      "status": "已决定",
+      "decision": "保留",
       "notes": ""
     },
     {
@@ -2603,8 +2603,8 @@
         "lua/plugins/coding/formatting.lua",
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
+      "status": "已决定",
+      "decision": "保留",
       "notes": ""
     },
     {
@@ -2628,8 +2628,8 @@
         "lua/plugins/coding/formatting.lua",
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
+      "status": "已决定",
+      "decision": "保留",
       "notes": ""
     },
     {
@@ -2652,8 +2652,8 @@
         "lua/plugins/coding/avante.lua",
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
+      "status": "已决定",
+      "decision": "保留",
       "notes": ""
     },
     {
@@ -2678,8 +2678,8 @@
         "lua/plugins/coding/avante.lua",
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
+      "status": "已决定",
+      "decision": "保留",
       "notes": ""
     },
     {
@@ -2704,8 +2704,8 @@
         "lua/plugins/coding/avante.lua",
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
+      "status": "已决定",
+      "decision": "保留",
       "notes": ""
     },
     {
@@ -2732,8 +2732,8 @@
         "lua/plugins/languages/python.lua",
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
+      "status": "已决定",
+      "decision": "保留",
       "notes": ""
     },
     {
@@ -2755,8 +2755,8 @@
         "lua/plugins/coding/blink.lua",
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
+      "status": "已决定",
+      "decision": "保留",
       "notes": ""
     },
     {
@@ -3315,9 +3315,9 @@
         "lazyvim.json",
         "lua/plugins/coding/mason.lua"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "移除",
+      "notes": "2026-09-15 决定：移除 Neovim 内的 DAP 程序调试能力，需要调试时使用其他编辑器。移除 DAP 启动、继续、暂停、停止、重跑、运行到光标和跳转执行位置等入口。"
     },
     {
       "id": "T02",
@@ -3340,9 +3340,9 @@
         "lazyvim.json",
         "lua/plugins/coding/mason.lua"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "移除",
+      "notes": "2026-09-15 决定：移除 Neovim 内的 DAP 程序调试能力，需要调试时使用其他编辑器。移除普通断点、条件断点及断点面板；不新增断点持久化插件或本地保存逻辑。"
     },
     {
       "id": "T03",
@@ -3365,9 +3365,9 @@
         "lazyvim.json",
         "lua/plugins/coding/mason.lua"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "移除",
+      "notes": "2026-09-15 决定：移除 Neovim 内的 DAP 程序调试能力，需要调试时使用其他编辑器。移除单步进入、跳过、跳出及调用帧切换的快捷键和调试控件。"
     },
     {
       "id": "T04",
@@ -3390,9 +3390,9 @@
       "sources": [
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "移除",
+      "notes": "2026-09-15 决定：移除 Neovim 内的 DAP 程序调试能力，需要调试时使用其他编辑器。移除 DAP UI 布局、变量、监视、调用栈与断点面板，以及调试开始/结束时自动开关面板的接线。"
     },
     {
       "id": "T05",
@@ -3415,9 +3415,9 @@
         "lazyvim.json",
         "lua/plugins/coding/mason.lua"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "移除",
+      "notes": "2026-09-15 决定：移除 Neovim 内的 DAP 程序调试能力，需要调试时使用其他编辑器。移除调试 REPL、Console 和相关入口；普通终端运行不受影响。"
     },
     {
       "id": "T06",
@@ -3440,9 +3440,9 @@
         "lazyvim.json",
         "lua/plugins/coding/mason.lua"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "移除",
+      "notes": "2026-09-15 决定：移除 Neovim 内的 DAP 程序调试能力，需要调试时使用其他编辑器。移除 dw/de 两套调试求值浮窗及普通、可视模式映射；LSP 文档悬浮不受影响。"
     },
     {
       "id": "T07",
@@ -3462,9 +3462,9 @@
       "sources": [
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "移除",
+      "notes": "2026-09-15 决定：移除 Neovim 内的 DAP 程序调试能力，需要调试时使用其他编辑器。移除 nvim-dap-virtual-text 行内运行时变量值；LSP 行内提示不受影响。"
     },
     {
       "id": "T08",
@@ -3484,9 +3484,9 @@
       "sources": [
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "移除",
+      "notes": "2026-09-15 决定：移除 Neovim 内的 DAP 程序调试能力，需要调试时使用其他编辑器。移除 nvim-dap-python、Python 测试调试 dPt/dPc 和 DAP 专用 debugpy 接线；保留 Python 编辑与语言服务。"
     },
     {
       "id": "T09",
@@ -3583,9 +3583,9 @@
       "sources": [
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "调整边界",
+      "notes": "2026-09-15 决定：移除 Neovim 内的 DAP 程序调试能力，需要调试时使用其他编辑器。取消 Rust DAP 集成、debuggables 调试入口（包括 Rust 局部 leader dr）及 CodeLLDB 接线；保留 rustaceanvim 的语言服务、代码操作与非调试运行。"
     },
     {
       "id": "L04",
@@ -4006,8 +4006,8 @@
         "lua/plugins/languages/obsidian.lua",
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
+      "status": "已决定",
+      "decision": "保留",
       "notes": ""
     },
     {
@@ -4030,8 +4030,8 @@
         "lua/plugins/ui/image.lua",
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
+      "status": "已决定",
+      "decision": "保留",
       "notes": ""
     },
     {
@@ -4054,8 +4054,8 @@
         "lua/plugins/editor/ufo.lua",
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
+      "status": "已决定",
+      "decision": "保留",
       "notes": ""
     },
     {
@@ -4079,8 +4079,8 @@
         "lua/plugins/editor/ufo.lua",
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
+      "status": "已决定",
+      "decision": "保留",
       "notes": ""
     },
     {
@@ -4104,8 +4104,8 @@
         "lua/plugins/ui/statuscol.lua",
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
+      "status": "已决定",
+      "decision": "保留",
       "notes": ""
     },
     {
@@ -4130,8 +4130,8 @@
         "lua/plugins/ui/navic.lua",
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
+      "status": "待试用",
+      "decision": "保留",
       "notes": ""
     },
     {
@@ -4153,8 +4153,8 @@
       "sources": [
         "lua/plugins/ui/lualine.lua"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
+      "status": "已决定",
+      "decision": "保留",
       "notes": ""
     },
     {
@@ -4175,8 +4175,8 @@
       "sources": [
         "lua/plugins/ui/lualine.lua"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
+      "status": "待试用",
+      "decision": "调整边界",
       "notes": ""
     },
     {
@@ -4212,8 +4212,8 @@
         "lua/plugins/ui/themes.lua",
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
+      "status": "待试用",
+      "decision": "合并入口",
       "notes": ""
     },
     {
@@ -4238,8 +4238,8 @@
         "lua/plugins/ui/showkeys.lua",
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
+      "status": "待试用",
+      "decision": "保留",
       "notes": ""
     },
     {
@@ -4261,9 +4261,9 @@
         "lua/plugins/ui/lualine.lua",
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "合并入口",
+      "notes": "只保留 leader n 打开 Noice all 全部消息文本分屏，进入窗口，便于查找、选择并复制完整报错到浏览器或 AI。取消 snl/snh/sna/snt/snd 及 sn 分组，不建立 n 子分组。普通消息与错误允许混排。验证多行报错、普通消息、vim.notify 通知的收集和复制；“全部”仅指 Noice 收集的消息，不含终端或 DAP 等独立输出。"
     },
     {
       "id": "V12",
@@ -4287,9 +4287,9 @@
         "lua/plugins/ui/snacks.lua",
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "调整边界",
+      "notes": "leader n 不再打开 Snacks 通知历史，统一交给 V11 的 Noice all。取消通知历史专用快捷键，不新增 nn/nf 等入口；取消一次性隐藏入口 leader un，不添加底栏隐藏按钮，也不新增免打扰开关。保留正常通知显示。"
     },
     {
       "id": "V13",
@@ -4312,9 +4312,9 @@
         "lua/plugins/ui/which_key.lua",
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "调整边界",
+      "notes": "更新分组和中文说明以匹配本轮入口：h 用于已选定的历史记录；m、\"、: 为单键查看；r 恢复上次 fzf-lua；n 直接打开全部消息，不作为分组。清理失效 s/sn 菜单，保留 leader ? 和前缀等待提示。"
     },
     {
       "id": "V14",
@@ -4337,8 +4337,8 @@
         "lua/plugins/coding/avante.lua",
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
+      "status": "已决定",
+      "decision": "保留",
       "notes": ""
     },
     {
@@ -4362,8 +4362,8 @@
         "lua/plugins/ui/snacks.lua",
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
+      "status": "待试用",
+      "decision": "调整边界",
       "notes": ""
     },
     {
@@ -4398,8 +4398,8 @@
         "lua/plugins/ui/themes.lua",
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
+      "status": "已决定",
+      "decision": "保留",
       "notes": ""
     },
     {
@@ -4432,9 +4432,9 @@
         "lua/plugins/ui/themes.lua",
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "移除",
+      "notes": "保留 :LazyExtras 命令即可，不必新增全局快捷键和启动页快捷键"
     },
     {
       "id": "Z03",
@@ -4462,9 +4462,9 @@
         "lua/plugins/languages/python.lua",
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "移除",
+      "notes": "去掉快捷键和点击入口：<leader>cl、 底栏 LSP 点击\n保留命令即可"
     },
     {
       "id": "Z04",
@@ -4487,9 +4487,9 @@
         "lua/config/lazy.lua",
         "lua/plugins/coding/mason.lua"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "调整边界",
+      "notes": "2026-09-15 决定：移除 Neovim 内的 DAP 程序调试能力，需要调试时使用其他编辑器。移除 mason-nvim-dap.nvim 及 DAP 专用适配器安装配置；保留此前已决定的非 Nix Mason 工具管理能力。"
     },
     {
       "id": "Z05",
@@ -4510,8 +4510,8 @@
       "sources": [
         "lua/config/lazy.lua"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
+      "status": "已决定",
+      "decision": "保留",
       "notes": ""
     },
     {
@@ -4532,8 +4532,8 @@
       "sources": [
         "lua/config/lazy.lua"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
+      "status": "已决定",
+      "decision": "保留",
       "notes": ""
     },
     {
@@ -4567,8 +4567,8 @@
         "lua/plugins/ui/themes.lua",
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
+      "status": "已决定",
+      "decision": "保留",
       "notes": ""
     },
     {
@@ -4601,8 +4601,8 @@
         "lua/plugins/ui/themes.lua",
         "lazyvim.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
+      "status": "待试用",
+      "decision": "保留",
       "notes": ""
     },
     {
@@ -5248,28 +5248,24 @@
       "category": "插件",
       "plugin": "grug-far.nvim",
       "role": "能力实现/集成",
-      "availability": "有效声明／本机已安装",
+      "availability": "已禁用／不再提供",
       "capabilities": [
         "S06",
         "S07"
       ],
       "condition": "",
-      "commit": "11595bf747edc270bce2069d1020502ad4ae56cf",
+      "commit": "",
       "sources": [
-        "lazyvim.json",
-        "lazy-lock.json"
+        "lua/plugins/editor/grug_far.lua"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": "",
+      "status": "待试用",
+      "decision": "移除",
+      "notes": "2026-09-15：用户决定彻底移除跨文件搜索替换。已通过 enabled=false 禁用 LazyVim 默认插件，移除锁记录、专用窗口适配及命令/快捷键；项目搜索保留 fzf-lua，文件内替换使用 :s 或 :%s。",
       "dependencies": [],
       "loading": {
         "lazy": true,
         "events": [],
-        "commands": [
-          "GrugFar",
-          "GrugFarWithin"
-        ],
+        "commands": [],
         "filetypes": []
       }
     },
@@ -5665,9 +5661,9 @@
       "sources": [
         "lua/plugins/coding/mason.lua"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": "",
+      "status": "待实施",
+      "decision": "移除",
+      "notes": "2026-09-15 决定：移除 Neovim 内的 DAP 程序调试能力，需要调试时使用其他编辑器。移除本插件的声明、依赖接线和专用入口；移除 lazyvim.plugins.extras.dap.core，阻止 Python/Rust Extra 再引入 DAP。按最终有效依赖清理锁文件和专用状态栏、Which-key 配置。",
       "dependencies": [],
       "loading": {}
     },
@@ -6074,9 +6070,9 @@
       "sources": [
         "lua/plugins/coding/mason.lua"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": "",
+      "status": "待实施",
+      "decision": "移除",
+      "notes": "2026-09-15 决定：移除 Neovim 内的 DAP 程序调试能力，需要调试时使用其他编辑器。移除本插件的声明、依赖接线和专用入口；移除 lazyvim.plugins.extras.dap.core，阻止 Python/Rust Extra 再引入 DAP。按最终有效依赖清理锁文件和专用状态栏、Which-key 配置。",
       "dependencies": [
         "nvim-dap-ui",
         "nvim-dap-virtual-text",
@@ -6104,9 +6100,9 @@
         "lazyvim.json",
         "lazy-lock.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": "",
+      "status": "待实施",
+      "decision": "移除",
+      "notes": "2026-09-15 决定：移除 Neovim 内的 DAP 程序调试能力，需要调试时使用其他编辑器。移除本插件的声明、依赖接线和专用入口；移除 lazyvim.plugins.extras.dap.core，阻止 Python/Rust Extra 再引入 DAP。按最终有效依赖清理锁文件和专用状态栏、Which-key 配置。",
       "dependencies": [],
       "loading": {
         "lazy": true,
@@ -6134,9 +6130,9 @@
         "lazyvim.json",
         "lazy-lock.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": "",
+      "status": "待实施",
+      "decision": "移除",
+      "notes": "2026-09-15 决定：移除 Neovim 内的 DAP 程序调试能力，需要调试时使用其他编辑器。移除本插件的声明、依赖接线和专用入口；移除 lazyvim.plugins.extras.dap.core，阻止 Python/Rust Extra 再引入 DAP。按最终有效依赖清理锁文件和专用状态栏、Which-key 配置。",
       "dependencies": [
         "nvim-nio"
       ],
@@ -6162,9 +6158,9 @@
         "lazyvim.json",
         "lazy-lock.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": "",
+      "status": "待实施",
+      "decision": "移除",
+      "notes": "2026-09-15 决定：移除 Neovim 内的 DAP 程序调试能力，需要调试时使用其他编辑器。移除本插件的声明、依赖接线和专用入口；移除 lazyvim.plugins.extras.dap.core，阻止 Python/Rust Extra 再引入 DAP。按最终有效依赖清理锁文件和专用状态栏、Which-key 配置。",
       "dependencies": [],
       "loading": {
         "lazy": true,
@@ -6293,9 +6289,9 @@
         "lazyvim.json",
         "lazy-lock.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": "",
+      "status": "待实施",
+      "decision": "调整边界",
+      "notes": "2026-09-15 决定：移除 DAP UI 后复核反向依赖；仅在没有其他消费者时移除 nvim-nio，不误删共享依赖。",
       "dependencies": [],
       "loading": {
         "lazy": true,
@@ -6716,9 +6712,9 @@
         "lazyvim.json",
         "lazy-lock.json"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": "",
+      "status": "待实施",
+      "decision": "调整边界",
+      "notes": "2026-09-15 决定：移除 Neovim 内的 DAP 程序调试能力，需要调试时使用其他编辑器。保留 Rust 语言服务及非调试功能，关闭 DAP 集成与调试入口，不移除整个 Rust 插件。",
       "dependencies": [],
       "loading": {
         "lazy": true,
@@ -7568,8 +7564,8 @@
       "filetype": "grug-far",
       "title": "搜索与替换",
       "provider": "grug-far.nvim",
-      "availability": "按流程出现",
-      "open": ":GrugFar；<leader>sr",
+      "availability": "已禁用／不再提供",
+      "open": "无（插件已禁用）",
       "target": "排除：功能面板/浮窗",
       "capabilities": [
         "S06",
@@ -7579,9 +7575,9 @@
         "lua/config/ui/windows.lua",
         "docs/utility-windows.md"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待试用",
+      "decision": "移除",
+      "notes": "2026-09-15：用户决定彻底移除跨文件搜索替换。已通过 enabled=false 禁用 LazyVim 默认插件，移除锁记录、专用窗口适配及命令/快捷键；项目搜索保留 fzf-lua，文件内替换使用 :s 或 :%s。"
     },
     {
       "id": "WIN-grug-far-history",
@@ -7589,8 +7585,8 @@
       "filetype": "grug-far-history",
       "title": "替换历史",
       "provider": "grug-far.nvim",
-      "availability": "按流程出现",
-      "open": ":GrugFar 内 <localleader>t",
+      "availability": "已禁用／不再提供",
+      "open": "无（插件已禁用）",
       "target": "排除：功能面板/浮窗",
       "capabilities": [
         "S07"
@@ -7599,9 +7595,9 @@
         "lua/config/ui/windows.lua",
         "docs/utility-windows.md"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待试用",
+      "decision": "移除",
+      "notes": "2026-09-15：用户决定彻底移除跨文件搜索替换。已通过 enabled=false 禁用 LazyVim 默认插件，移除锁记录、专用窗口适配及命令/快捷键；项目搜索保留 fzf-lua，文件内替换使用 :s 或 :%s。"
     },
     {
       "id": "WIN-grug-far-help",
@@ -7609,8 +7605,8 @@
       "filetype": "grug-far-help",
       "title": "替换帮助",
       "provider": "grug-far.nvim",
-      "availability": "按流程出现",
-      "open": ":GrugFar 内 g?",
+      "availability": "已禁用／不再提供",
+      "open": "无（插件已禁用）",
       "target": "排除：功能面板/浮窗",
       "capabilities": [
         "S07"
@@ -7619,9 +7615,9 @@
         "lua/config/ui/windows.lua",
         "docs/utility-windows.md"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待试用",
+      "decision": "移除",
+      "notes": "2026-09-15：用户决定彻底移除跨文件搜索替换。已通过 enabled=false 禁用 LazyVim 默认插件，移除锁记录、专用窗口适配及命令/快捷键；项目搜索保留 fzf-lua，文件内替换使用 :s 或 :%s。"
     },
     {
       "id": "WIN-Avante",
@@ -7789,9 +7785,9 @@
         "lua/config/ui/windows.lua",
         "docs/utility-windows.md"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "移除",
+      "notes": "2026-09-15 决定：移除 Neovim 内的 DAP 程序调试能力，需要调试时使用其他编辑器。移除该调试窗口的打开入口、自动布局接线及不再需要的窗口适配。"
     },
     {
       "id": "WIN-dap-float",
@@ -7809,9 +7805,9 @@
         "lua/config/ui/windows.lua",
         "docs/utility-windows.md"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "移除",
+      "notes": "2026-09-15 决定：移除 Neovim 内的 DAP 程序调试能力，需要调试时使用其他编辑器。移除该调试窗口的打开入口、自动布局接线及不再需要的窗口适配。"
     },
     {
       "id": "WIN-dapui_scopes",
@@ -7829,9 +7825,9 @@
         "lua/config/ui/windows.lua",
         "docs/utility-windows.md"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "移除",
+      "notes": "2026-09-15 决定：移除 Neovim 内的 DAP 程序调试能力，需要调试时使用其他编辑器。移除该调试窗口的打开入口、自动布局接线及不再需要的窗口适配。"
     },
     {
       "id": "WIN-dapui_stacks",
@@ -7850,9 +7846,9 @@
         "lua/config/ui/windows.lua",
         "docs/utility-windows.md"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "移除",
+      "notes": "2026-09-15 决定：移除 Neovim 内的 DAP 程序调试能力，需要调试时使用其他编辑器。移除该调试窗口的打开入口、自动布局接线及不再需要的窗口适配。"
     },
     {
       "id": "WIN-dapui_breakpoints",
@@ -7871,9 +7867,9 @@
         "lua/config/ui/windows.lua",
         "docs/utility-windows.md"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "移除",
+      "notes": "2026-09-15 决定：移除 Neovim 内的 DAP 程序调试能力，需要调试时使用其他编辑器。移除该调试窗口的打开入口、自动布局接线及不再需要的窗口适配。"
     },
     {
       "id": "WIN-dapui_watches",
@@ -7891,9 +7887,9 @@
         "lua/config/ui/windows.lua",
         "docs/utility-windows.md"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "移除",
+      "notes": "2026-09-15 决定：移除 Neovim 内的 DAP 程序调试能力，需要调试时使用其他编辑器。移除该调试窗口的打开入口、自动布局接线及不再需要的窗口适配。"
     },
     {
       "id": "WIN-dapui_console",
@@ -7911,9 +7907,9 @@
         "lua/config/ui/windows.lua",
         "docs/utility-windows.md"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "移除",
+      "notes": "2026-09-15 决定：移除 Neovim 内的 DAP 程序调试能力，需要调试时使用其他编辑器。移除该调试窗口的打开入口、自动布局接线及不再需要的窗口适配。"
     },
     {
       "id": "WIN-dapui_hover",
@@ -7931,9 +7927,9 @@
         "lua/config/ui/windows.lua",
         "docs/utility-windows.md"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "移除",
+      "notes": "2026-09-15 决定：移除 Neovim 内的 DAP 程序调试能力，需要调试时使用其他编辑器。移除该调试窗口的打开入口、自动布局接线及不再需要的窗口适配。"
     },
     {
       "id": "WIN-NeogitStatus",
@@ -12004,9 +12000,9 @@
         "lazy 最终插件键位声明",
         "VeryLazy 后全局运行时映射"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "移除",
+      "notes": "2026-09-15 决定：移除 Neovim 内的 DAP 程序调试能力，需要调试时使用其他编辑器。取消此 DAP 专用映射或局部菜单，不迁移为其他快捷键。"
     },
     {
       "id": "K-1b0521f3bb",
@@ -12023,9 +12019,9 @@
         "lazy 最终插件键位声明",
         "VeryLazy 后全局运行时映射"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "移除",
+      "notes": "2026-09-15 决定：移除 Neovim 内的 DAP 程序调试能力，需要调试时使用其他编辑器。取消此 DAP 专用映射或局部菜单，不迁移为其他快捷键。"
     },
     {
       "id": "K-aea50897f0",
@@ -12042,9 +12038,9 @@
         "lazy 最终插件键位声明",
         "VeryLazy 后全局运行时映射"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "移除",
+      "notes": "2026-09-15 决定：移除 Neovim 内的 DAP 程序调试能力，需要调试时使用其他编辑器。取消此 DAP 专用映射或局部菜单，不迁移为其他快捷键。"
     },
     {
       "id": "K-9f3fce0e3a",
@@ -12061,9 +12057,9 @@
         "lazy 最终插件键位声明",
         "VeryLazy 后全局运行时映射"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "移除",
+      "notes": "2026-09-15 决定：移除 Neovim 内的 DAP 程序调试能力，需要调试时使用其他编辑器。取消此 DAP 专用映射或局部菜单，不迁移为其他快捷键。"
     },
     {
       "id": "K-b85c48a0c0",
@@ -12080,9 +12076,9 @@
         "lazy 最终插件键位声明",
         "VeryLazy 后全局运行时映射"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "移除",
+      "notes": "2026-09-15 决定：移除 Neovim 内的 DAP 程序调试能力，需要调试时使用其他编辑器。取消此 DAP 专用映射或局部菜单，不迁移为其他快捷键。"
     },
     {
       "id": "K-60762076de",
@@ -12099,9 +12095,9 @@
         "lazy 最终插件键位声明",
         "VeryLazy 后全局运行时映射"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "移除",
+      "notes": "2026-09-15 决定：移除 Neovim 内的 DAP 程序调试能力，需要调试时使用其他编辑器。取消此 DAP 专用映射或局部菜单，不迁移为其他快捷键。"
     },
     {
       "id": "K-2b4cd3772a",
@@ -12118,9 +12114,9 @@
         "lazy 最终插件键位声明",
         "VeryLazy 后全局运行时映射"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "移除",
+      "notes": "2026-09-15 决定：移除 Neovim 内的 DAP 程序调试能力，需要调试时使用其他编辑器。取消此 DAP 专用映射或局部菜单，不迁移为其他快捷键。"
     },
     {
       "id": "K-b29d25f1eb",
@@ -12137,9 +12133,9 @@
         "lazy 最终插件键位声明",
         "VeryLazy 后全局运行时映射"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "移除",
+      "notes": "2026-09-15 决定：移除 Neovim 内的 DAP 程序调试能力，需要调试时使用其他编辑器。取消此 DAP 专用映射或局部菜单，不迁移为其他快捷键。"
     },
     {
       "id": "K-3069e91890",
@@ -12156,9 +12152,9 @@
         "lazy 最终插件键位声明",
         "VeryLazy 后全局运行时映射"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "移除",
+      "notes": "2026-09-15 决定：移除 Neovim 内的 DAP 程序调试能力，需要调试时使用其他编辑器。取消此 DAP 专用映射或局部菜单，不迁移为其他快捷键。"
     },
     {
       "id": "K-8dd7d08f38",
@@ -12175,9 +12171,9 @@
         "lazy 最终插件键位声明",
         "VeryLazy 后全局运行时映射"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "移除",
+      "notes": "2026-09-15 决定：移除 Neovim 内的 DAP 程序调试能力，需要调试时使用其他编辑器。取消此 DAP 专用映射或局部菜单，不迁移为其他快捷键。"
     },
     {
       "id": "K-82985c24cd",
@@ -12194,9 +12190,9 @@
         "lazy 最终插件键位声明",
         "VeryLazy 后全局运行时映射"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "移除",
+      "notes": "2026-09-15 决定：移除 Neovim 内的 DAP 程序调试能力，需要调试时使用其他编辑器。取消此 DAP 专用映射或局部菜单，不迁移为其他快捷键。"
     },
     {
       "id": "K-eb36b291c3",
@@ -12213,9 +12209,9 @@
         "lazy 最终插件键位声明",
         "VeryLazy 后全局运行时映射"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "移除",
+      "notes": "2026-09-15 决定：移除 Neovim 内的 DAP 程序调试能力，需要调试时使用其他编辑器。取消此 DAP 专用映射或局部菜单，不迁移为其他快捷键。"
     },
     {
       "id": "K-cc5faea0ab",
@@ -12232,9 +12228,9 @@
         "lazy 最终插件键位声明",
         "VeryLazy 后全局运行时映射"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "移除",
+      "notes": "2026-09-15 决定：移除 Neovim 内的 DAP 程序调试能力，需要调试时使用其他编辑器。取消此 DAP 专用映射或局部菜单，不迁移为其他快捷键。"
     },
     {
       "id": "K-ccd3ef8a9f",
@@ -12251,9 +12247,9 @@
         "lazy 最终插件键位声明",
         "VeryLazy 后全局运行时映射"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "移除",
+      "notes": "2026-09-15 决定：移除 Neovim 内的 DAP 程序调试能力，需要调试时使用其他编辑器。取消此 DAP 专用映射或局部菜单，不迁移为其他快捷键。"
     },
     {
       "id": "K-8308681570",
@@ -12270,9 +12266,9 @@
         "lazy 最终插件键位声明",
         "VeryLazy 后全局运行时映射"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "移除",
+      "notes": "2026-09-15 决定：移除 Neovim 内的 DAP 程序调试能力，需要调试时使用其他编辑器。取消此 DAP 专用映射或局部菜单，不迁移为其他快捷键。"
     },
     {
       "id": "K-fd11e2215e",
@@ -12289,9 +12285,9 @@
         "lazy 最终插件键位声明",
         "docs/keymaps.md 场景补充，需进入对应 buffer 复核"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "移除",
+      "notes": "2026-09-15 决定：移除 Neovim 内的 DAP 程序调试能力，需要调试时使用其他编辑器。取消此 DAP 专用映射或局部菜单，不迁移为其他快捷键。"
     },
     {
       "id": "K-33cb55783f",
@@ -12352,9 +12348,9 @@
         "lazy 最终插件键位声明",
         "docs/keymaps.md 场景补充，需进入对应 buffer 复核"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "移除",
+      "notes": "2026-09-15 决定：移除 Neovim 内的 DAP 程序调试能力，需要调试时使用其他编辑器。取消此 DAP 专用映射或局部菜单，不迁移为其他快捷键。"
     },
     {
       "id": "K-8127b1aedb",
@@ -12371,9 +12367,9 @@
         "lazy 最终插件键位声明",
         "VeryLazy 后全局运行时映射"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "移除",
+      "notes": "2026-09-15 决定：移除 Neovim 内的 DAP 程序调试能力，需要调试时使用其他编辑器。取消此 DAP 专用映射或局部菜单，不迁移为其他快捷键。"
     },
     {
       "id": "K-44c7572c16",
@@ -12390,9 +12386,9 @@
         "lazy 最终插件键位声明",
         "VeryLazy 后全局运行时映射"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "移除",
+      "notes": "2026-09-15 决定：移除 Neovim 内的 DAP 程序调试能力，需要调试时使用其他编辑器。取消此 DAP 专用映射或局部菜单，不迁移为其他快捷键。"
     },
     {
       "id": "K-08b3f43bb6",
@@ -12409,9 +12405,9 @@
         "lazy 最终插件键位声明",
         "VeryLazy 后全局运行时映射"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "移除",
+      "notes": "2026-09-15 决定：移除 Neovim 内的 DAP 程序调试能力，需要调试时使用其他编辑器。取消此 DAP 专用映射或局部菜单，不迁移为其他快捷键。"
     },
     {
       "id": "K-e344feef22",
@@ -12428,9 +12424,9 @@
         "lazy 最终插件键位声明",
         "VeryLazy 后全局运行时映射"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "移除",
+      "notes": "2026-09-15 决定：移除 Neovim 内的 DAP 程序调试能力，需要调试时使用其他编辑器。取消此 DAP 专用映射或局部菜单，不迁移为其他快捷键。"
     },
     {
       "id": "K-df1b581525",
@@ -12447,9 +12443,9 @@
         "lazy 最终插件键位声明",
         "VeryLazy 后全局运行时映射"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "移除",
+      "notes": "2026-09-15 决定：移除 Neovim 内的 DAP 程序调试能力，需要调试时使用其他编辑器。取消此 DAP 专用映射或局部菜单，不迁移为其他快捷键。"
     },
     {
       "id": "K-2b2178fb18",
@@ -13288,13 +13284,11 @@
       "scope": "全局（局部可覆盖）",
       "description": "LazyVim Changelog",
       "providers": [],
-      "rhs": "Lua 回调",
-      "evidence": [
-        "VeryLazy 后全局运行时映射"
-      ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "rhs": "已移除",
+      "evidence": "lua/config/keymaps.lua 删除 LazyVim 默认映射",
+      "status": "待试用",
+      "decision": "停用",
+      "notes": "2026-09-15：取消 leader L 的 LazyVim 更新记录入口。"
     },
     {
       "id": "K-d620b382ed",
@@ -13927,9 +13921,9 @@
         "lazy 最终插件键位声明",
         "VeryLazy 后全局运行时映射"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待试用",
+      "decision": "移除",
+      "notes": "2026-09-15：用户决定彻底移除跨文件搜索替换。已通过 enabled=false 禁用 LazyVim 默认插件，移除锁记录、专用窗口适配及命令/快捷键；项目搜索保留 fzf-lua，文件内替换使用 :s 或 :%s。"
     },
     {
       "id": "K-77e047d8cd",
@@ -13946,9 +13940,9 @@
         "lazy 最终插件键位声明",
         "VeryLazy 后全局运行时映射"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待试用",
+      "decision": "移除",
+      "notes": "2026-09-15：用户决定彻底移除跨文件搜索替换。已通过 enabled=false 禁用 LazyVim 默认插件，移除锁记录、专用窗口适配及命令/快捷键；项目搜索保留 fzf-lua，文件内替换使用 :s 或 :%s。"
     },
     {
       "id": "K-79e58a95d7",
@@ -18634,9 +18628,9 @@
       "evidence": [
         "当前配置/上游局部默认；不是全局键位冲突"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待试用",
+      "decision": "移除",
+      "notes": "2026-09-15：用户决定彻底移除跨文件搜索替换。已通过 enabled=false 禁用 LazyVim 默认插件，移除锁记录、专用窗口适配及命令/快捷键；项目搜索保留 fzf-lua，文件内替换使用 :s 或 :%s。"
     },
     {
       "id": "KL-10",
@@ -18688,9 +18682,9 @@
       "evidence": [
         "当前配置/上游局部默认；不是全局键位冲突"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "移除",
+      "notes": "2026-09-15 决定：移除 Neovim 内的 DAP 程序调试能力，需要调试时使用其他编辑器。取消此 DAP 专用映射或局部菜单，不迁移为其他快捷键。"
     },
     {
       "id": "KL-13",
@@ -19978,9 +19972,9 @@
         "lazyvim.json",
         "docs/plugins.md"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "移除",
+      "notes": "2026-09-15 决定：移除 Neovim 内的 DAP 程序调试能力，需要调试时使用其他编辑器。移除 Neovim 的适配器配置和专用安装需求；外部编辑器或项目共享的工具不据此卸载。"
     },
     {
       "id": "TOOL-external-codelldb",
@@ -19995,9 +19989,9 @@
         "lazyvim.json",
         "docs/plugins.md"
       ],
-      "status": "待筛查",
-      "decision": "未决定",
-      "notes": ""
+      "status": "待实施",
+      "decision": "移除",
+      "notes": "2026-09-15 决定：移除 Neovim 内的 DAP 程序调试能力，需要调试时使用其他编辑器。移除 Neovim 的适配器配置和专用安装需求；外部编辑器或项目共享的工具不据此卸载。"
     },
     {
       "id": "TOOL-external-lazygit",

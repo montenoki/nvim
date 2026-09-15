@@ -9,14 +9,14 @@ return {
                 "<leader>cz",
                 "<Cmd>PanguAll<CR>",
                 mode = "n",
-                desc = "中文排版：全文",
+                desc = "中文排版",
             },
             {
                 "<leader>cz",
                 -- 保留可视选区的行范围；即使只选中部分字符，也处理整行。
                 ":Pangu<CR>",
                 mode = "x",
-                desc = "中文排版：选中行",
+                desc = "中文排版",
             },
         },
         -- 仅手动执行；Pangu 不会自动避开 Markdown 代码块和行内代码。

@@ -27,7 +27,7 @@ return {
             {
                 "<leader>/",
                 LazyVim.pick("live_grep"),
-                desc = "搜索项目内容",
+                desc = "检索",
             },
             {
                 '<leader>"',
@@ -49,13 +49,13 @@ return {
             {
                 "<leader>:",
                 "<cmd>FzfLua commands<cr>",
-                desc = "可执行命令",
+                desc = "Command 列表",
             },
             -- resume 恢复最近一次 fzf-lua 选择器，不限于内容搜索。
             {
                 "<leader>r",
                 "<cmd>FzfLua resume<cr>",
-                desc = "恢复上次选择器",
+                desc = "恢复搜索结果",
             },
             { "<leader>,", false }, -- 按最近使用查找缓冲区；统一使用 leader fb。
             { "<leader>fB", false }, -- 缓冲区列表的另一入口；统一使用 leader fb。

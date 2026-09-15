@@ -86,11 +86,11 @@ return {
                         scratch = {
                             win = {
                                 input = {
-                                    footer_keys = { "<CR>", "<C-n>", "<C-x>", "?" },
+                                    footer_keys = { "<C-x>" },
                                     keys = {
                                         ["<CR>"] = { "confirm", mode = { "n", "i" }, desc = "打开" },
                                         ["<C-n>"] = { "scratch_new", mode = { "n", "i" }, desc = "新建" },
-                                        ["<C-x>"] = { "scratch_delete", mode = { "n", "i" }, desc = "直接删除" },
+                                        ["<C-x>"] = { "scratch_delete", mode = { "n", "i" }, desc = "删除" },
                                         ["?"] = { "toggle_help_input", desc = "帮助" },
                                     },
                                 },
