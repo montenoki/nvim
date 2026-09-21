@@ -70,6 +70,14 @@ return {
             end
             inherited.window.mappings.O = nil
             return vim.tbl_deep_extend("force", inherited, {
+                filesystem = {
+                    filtered_items = {
+                        -- 默认显示点文件，只隐藏 Git 忽略的文件。
+                        hide_dotfiles = false,
+                        hide_gitignored = true,
+                        hide_ignored = false,
+                    },
+                },
                 event_handlers = {
                     {
                         event = "file_open_requested",
