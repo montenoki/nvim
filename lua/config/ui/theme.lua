@@ -20,12 +20,21 @@ M.system_themes = {
     ["nord"]             = { colorscheme = "nord"                 , background = "dark"  },
     ["retro-82"]         = { colorscheme = "retro-82"             , background = "dark"  },
 
+    ["rose-pine-main"]   = { colorscheme = "rose-pine-main"       , background = "dark"  },
+    ["rose-pine-dawn"]   = { colorscheme = "rose-pine-dawn"       , background = "light" },
+
     ["everforest"]       = { colorscheme = "everforest"           , background = "dark"  },
+    ["everforest-light"] = { colorscheme = "everforest"           , background = "light" },
+
+    ["flexoki-dark"]     = { colorscheme = "flexoki-dark"         , background = "dark"  },
     ["flexoki-light"]    = { colorscheme = "flexoki-light"        , background = "light" },
-    ["matte-black"]      = { colorscheme = "matteblack"           , background = "dark"  },
+
+    -- bamboo 在浅色背景下自动使用 light 风格。
     ["osaka-jade"]       = { colorscheme = "bamboo"               , background = "dark"  },
+    ["osaka-jade-light"] = { colorscheme = "bamboo"               , background = "light" },
+
+    ["matte-black"]      = { colorscheme = "matteblack"           , background = "dark"  },
     ["ristretto"]        = { colorscheme = "monokai-pro-ristretto", background = "dark"  },
-    ["rose-pine"]        = { colorscheme = "rose-pine-dawn"       , background = "light" },
 
     -- Vantablack 与 White 组成系统的 Mono 系列。
     ["vantablack"]       = { colorscheme = "vantablack"           , background = "dark"  },

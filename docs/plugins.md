@@ -33,12 +33,12 @@
 | retro-82.nvim                       | 主题     | 提供 Retro 82 配色。                                                                                 |
 | nord.nvim                           | 主题     | 提供 Nord 配色。                                                                                     |
 | gruvbox-material                    | 主题     | 提供 Gruvbox Material 配色。                                                                         |
-| everforest-nvim                     | 主题     | 提供 Everforest 森林绿配色。                                                                         |
-| flexoki-neovim                      | 主题     | 提供 Flexoki 配色，含 flexoki-light 浅色版本。                                                       |
+| everforest-nvim                     | 主题     | 提供 Everforest 森林绿配色，含浅色背景。                                                             |
+| flexoki-neovim                      | 主题     | 提供 Flexoki 配色，含 flexoki-dark 与 flexoki-light。                                                   |
 | matteblack.nvim                     | 主题     | 提供 Matte Black 配色。                                                                              |
-| bamboo.nvim                         | 主题     | 提供与 Osaka Jade 对应的竹绿配色。                                                                   |
+| bamboo.nvim                         | 主题     | 提供与 Osaka Jade 对应的竹绿配色，浅色背景下使用 light 风格。                                        |
 | monokai-pro.nvim                    | 主题     | 提供 Monokai Pro 配色，通过 monokai-pro-ristretto 使用 Ristretto。                                   |
-| rose-pine                           | 主题     | 提供 Rosé Pine 配色，含 rose-pine-dawn 浅色版本。                                                    |
+| rose-pine                           | 主题     | 提供 Rosé Pine 配色，系统使用 rose-pine-main 与 rose-pine-dawn。                                     |
 | vantablack.nvim                     | 主题     | 提供 Vantablack 配色。                                                                               |
 | white.nvim                          | 主题     | 提供 White 浅色配色。                                                                                |
 
