@@ -33,19 +33,14 @@
 | retro-82.nvim                       | 主题     | 提供 Retro 82 配色。                                                                                 |
 | nord.nvim                           | 主题     | 提供 Nord 配色。                                                                                     |
 | gruvbox-material                    | 主题     | 提供 Gruvbox Material 配色。                                                                         |
-| ethereal.nvim                       | 主题     | 提供 Ethereal 配色。                                                                                 |
 | everforest-nvim                     | 主题     | 提供 Everforest 森林绿配色。                                                                         |
 | flexoki-neovim                      | 主题     | 提供 Flexoki 配色，含 flexoki-light 浅色版本。                                                       |
-| hackerman.nvim                      | 主题     | 提供 Hackerman 荧光绿配色。                                                                          |
-| lumon.nvim                          | 主题     | 提供 Lumon 配色。                                                                                    |
 | matteblack.nvim                     | 主题     | 提供 Matte Black 配色。                                                                              |
-| miasma.nvim                         | 主题     | 提供 Miasma 配色。                                                                                   |
 | bamboo.nvim                         | 主题     | 提供与 Osaka Jade 对应的竹绿配色。                                                                   |
 | monokai-pro.nvim                    | 主题     | 提供 Monokai Pro 配色，通过 monokai-pro-ristretto 使用 Ristretto。                                   |
 | rose-pine                           | 主题     | 提供 Rosé Pine 配色，含 rose-pine-dawn 浅色版本。                                                    |
 | vantablack.nvim                     | 主题     | 提供 Vantablack 配色。                                                                               |
 | white.nvim                          | 主题     | 提供 White 浅色配色。                                                                                |
-| ashen.nvim                          | 主题     | 提供与 Solitude 对应的 Ashen 配色。                                                                  |
 
 Showkeys：右下角显示最近按键；底栏 `󰌌` 或 `:ShowkeysToggle` 切换并记住选择，首次默认关闭。配置见 [showkeys.lua](../lua/plugins/ui/showkeys.lua)。
 

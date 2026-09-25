@@ -12,7 +12,6 @@ return {
     { "rebelot/kanagawa.nvim", lazy = true, opts = {} },
     { "OldJobobo/retro-82.nvim", lazy = true },
     { "shaunsingh/nord.nvim", lazy = true },
-    { "bjarneo/ethereal.nvim", lazy = true },
     {
         "neanias/everforest-nvim",
         lazy = true,
@@ -20,14 +19,7 @@ return {
         opts = { background = "soft" },
     },
     { "kepano/flexoki-neovim", lazy = true },
-    {
-        "bjarneo/hackerman.nvim",
-        lazy = true,
-        dependencies = { "bjarneo/aether.nvim" },
-    },
-    { "omacom-io/lumon.nvim", lazy = true },
     { "tahayvr/matteblack.nvim", lazy = true },
-    { "OldJobobo/miasma.nvim", lazy = true },
     { "ribru17/bamboo.nvim", lazy = true, opts = {} },
     {
         "loctvl842/monokai-pro.nvim",
@@ -37,7 +29,6 @@ return {
     { "rose-pine/neovim", name = "rose-pine", lazy = true },
     { "bjarneo/vantablack.nvim", lazy = true },
     { "bjarneo/white.nvim", lazy = true },
-    { "ficcdaf/ashen.nvim", lazy = true },
     {
         "sainnhe/gruvbox-material",
         lazy = true,

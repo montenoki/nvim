@@ -5,7 +5,6 @@ local M = {}
 ---@type table<string, { colorscheme: string, background: "dark"|"light" }>
 -- stylua: ignore
 M.system_themes = {
-    -- 已接入系统的主题。
     ["tokyo-night"]      = { colorscheme = "tokyonight-night"     , background = "dark"  },
     ["tokyo-day"]        = { colorscheme = "tokyonight-day"       , background = "light" },
 
@@ -21,18 +20,14 @@ M.system_themes = {
     ["nord"]             = { colorscheme = "nord"                 , background = "dark"  },
     ["retro-82"]         = { colorscheme = "retro-82"             , background = "dark"  },
 
-    -- 预留映射：Neovim 已有配色，系统侧尚未接入这些名称。
-    ["ethereal"]         = { colorscheme = "ethereal"             , background = "dark"  },
     ["everforest"]       = { colorscheme = "everforest"           , background = "dark"  },
     ["flexoki-light"]    = { colorscheme = "flexoki-light"        , background = "light" },
-    ["hackerman"]        = { colorscheme = "hackerman"            , background = "dark"  },
-    ["lumon"]            = { colorscheme = "lumon"                , background = "dark"  },
     ["matte-black"]      = { colorscheme = "matteblack"           , background = "dark"  },
-    ["miasma"]           = { colorscheme = "miasma"               , background = "dark"  },
     ["osaka-jade"]       = { colorscheme = "bamboo"               , background = "dark"  },
     ["ristretto"]        = { colorscheme = "monokai-pro-ristretto", background = "dark"  },
     ["rose-pine"]        = { colorscheme = "rose-pine-dawn"       , background = "light" },
-    ["solitude"]         = { colorscheme = "ashen"                , background = "dark"  },
+
+    -- Vantablack 与 White 组成系统的 Mono 系列。
     ["vantablack"]       = { colorscheme = "vantablack"           , background = "dark"  },
     ["white"]            = { colorscheme = "white"                , background = "light" },
 }
