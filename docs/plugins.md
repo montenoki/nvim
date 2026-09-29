@@ -25,6 +25,7 @@
 | nvim-navic                          | 代码导航 | 显示当前光标所在的代码符号路径。                                                                     |
 | nvim-ufo                            | 代码折叠 | 增强代码折叠，显示折叠摘要并预览折叠内容。                                                           |
 | statuscol.nvim                      | 界面     | 定制行号、标记和折叠列，支持鼠标交互。                                                               |
+| nvim-scrollview                     | 界面     | 在编辑窗口右侧显示可用鼠标拖动的滚动条，按折叠后的内容定位。                                           |
 | venv-selector.nvim                  | Python   | 查找和切换 Python 虚拟环境，状态栏显示当前环境名。                                                   |
 | nvim-ansible                        | Ansible  | 提供 Ansible 专用编辑辅助。                                                                          |
 | rustaceanvim                        | Rust     | 集成 Rust 语言服务和开发操作。                                                                       |
