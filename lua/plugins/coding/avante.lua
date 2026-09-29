@@ -141,6 +141,11 @@ return {
         dependencies = {
             "nvim-lua/plenary.nvim",
             "MunifTanjim/nui.nvim",
+            -- Avante 用它解析 :Avante 子命令。
+            {
+                "ColinKennedy/mega.cmdparse",
+                dependencies = { "ColinKennedy/mega.logging" },
+            },
             "folke/snacks.nvim",
             "nvim-tree/nvim-web-devicons",
             {

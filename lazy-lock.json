@@ -30,6 +30,8 @@
   "mason-lspconfig.nvim": { "branch": "main", "commit": "25f609e7fca78af7cede4f9fa3af8a94b1c4950b" },
   "mason.nvim": { "branch": "main", "commit": "44d1e90e1f66e077268191e3ee9d2ac97cc18e65" },
   "matteblack.nvim": { "branch": "main", "commit": "a8a039f5d6189b28d76fa0221e64965efec7e996" },
+  "mega.cmdparse": { "branch": "main", "commit": "47ea5b1b23059fbb79a8e262002f32e7cd8aed90" },
+  "mega.logging": { "branch": "main", "commit": "194ad8c300186e73c3eb1ebeb3ede42eb219be3b" },
   "mini.ai": { "branch": "main", "commit": "6c39ae7b11abe479fbe1bc81bf00ac6bca7afa07" },
   "mini.icons": { "branch": "main", "commit": "f642e3ba8c12afbc8f32f6d77ef6597eac56786f" },
   "mini.pairs": { "branch": "main", "commit": "b1c5a726921b7a8c9321e9a7a208aa0571de5810" },
