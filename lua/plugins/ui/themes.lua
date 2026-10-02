@@ -29,6 +29,7 @@ return {
     { "rose-pine/neovim", name = "rose-pine", lazy = true },
     { "bjarneo/vantablack.nvim", lazy = true },
     { "bjarneo/white.nvim", lazy = true },
+    { "Mofiqul/dracula.nvim", lazy = true, opts = {} },
     {
         "sainnhe/gruvbox-material",
         lazy = true,

@@ -35,6 +35,7 @@ M.system_themes = {
 
     ["matte-black"]      = { colorscheme = "matteblack"           , background = "dark"  },
     ["ristretto"]        = { colorscheme = "monokai-pro-ristretto", background = "dark"  },
+    ["dracula"]          = { colorscheme = "dracula"              , background = "dark"  },
 
     -- Vantablack 与 White 组成系统的 Mono 系列。
     ["vantablack"]       = { colorscheme = "vantablack"           , background = "dark"  },
