@@ -96,3 +96,47 @@ vim.api.nvim_create_autocmd(
     }
 )
 vim.schedule(update_cursorline)
+
+-- 桌面划词（Super+R）读取 Wayland primary selection，但鼠标拖选由 Neovim 接管，
+-- visual 选区不会进入 primary。选区变化时写入 primary，相当于 Vim 的 autoselect；
+-- 防抖 100ms，避免移动光标时频繁启动 wl-copy。
+local primary_group =
+    vim.api.nvim_create_augroup("TEN_primary_selection", { clear = true })
+if vim.env.WAYLAND_DISPLAY and vim.fn.executable("wl-copy") == 1 then
+    local visual = "^[vV\22]"
+    local timer = assert(vim.uv.new_timer())
+    local function sync_primary()
+        local mode = vim.fn.mode()
+        if not mode:find(visual) then
+            return
+        end
+        local lines = vim.fn.getregion(
+            vim.fn.getpos("v"),
+            vim.fn.getpos("."),
+            { type = mode }
+        )
+        -- wl-copy 会转入后台常驻提供选区，不接管它的输出，免得句柄一直挂着。
+        vim.system({ "wl-copy", "--primary", "--type", "text/plain" }, {
+            stdin = table.concat(lines, "\n"),
+            stdout = false,
+            stderr = false,
+        })
+    end
+    local function schedule_sync()
+        timer:stop()
+        timer:start(100, 0, vim.schedule_wrap(sync_primary))
+    end
+    vim.api.nvim_create_autocmd("ModeChanged", {
+        group = primary_group,
+        pattern = "*:[vV\22]*",
+        callback = schedule_sync,
+    })
+    vim.api.nvim_create_autocmd("CursorMoved", {
+        group = primary_group,
+        callback = function()
+            if vim.fn.mode():find(visual) then
+                schedule_sync()
+            end
+        end,
+    })
+end
